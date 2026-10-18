@@ -3,76 +3,129 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>AGENDA DE SHOWS PROFISSIONAL</title>
+<title>AGENDA DO DIA</title>
 <link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#3A3A3A">
 <link rel="apple-touch-icon" href="./icon-192.png">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
-body{background:#f5f5f5;color:#222}
-.topo{background:#fff;padding:16px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,.06);position:sticky;top:0;z-index:10}
-.topo h1{font-size:12px;color:#3A3A3A;font-weight:800}
-.container{padding:16px;max-width:600px;margin:0 auto}
-.card{background:#fff;border-radius:16px;padding:16px;margin-bottom:16px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
-.card-titulo{font-weight:700;margin-bottom:12px;font-size:13px;color:#3A3A3A;display:flex;justify-content:space-between}
-.item{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid #eee}
-.item-valor{font-weight:800;color:#3A3A3A;background:#f0f0f0;padding:6px 10px;border-radius:20px}
-.btn{width:100%;background:#3A3A3A;color:#fff;border:none;padding:14px;border-radius:10px;font-weight:700;margin-top:10px}
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Inter',Segoe UI,sans-serif}
+body{background:#E9E9E9;color:#222}
+.topo{background:#D9D9D9;padding:14px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:5}
+.topo .hamb{font-size:22px;cursor:pointer}
+.topo h1{font-size:20px;font-weight:800;letter-spacing:-.5px}
+.fundo{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.15);z-index:10;display:none}
+.menu{position:fixed;top:12px;left:12px;width:300px;background:#fff;border-radius:18px;box-shadow:0 10px 40px rgba(0,0,0,.15);z-index:20;padding:16px 12px;transform:translateX(-110%);transition:.35s cubic-bezier(.2,.8,.2,1);max-height:calc(100% - 24px);overflow:auto}
+.menu.aberto{transform:translateX(0)}
+.user{display:flex;align-items:center;gap:12px;padding:8px 8px 16px;border-bottom:1px solid #eee;margin-bottom:8px}
+.user .avatar{width:48px;height:48px;background:#E9E9E9;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:#888;font-size:18px}
+.user b{display:block;font-size:14px} .user span{font-size:12px;color:#888}
+.menu-item{display:flex;align-items:center;gap:14px;padding:13px 10px;border-radius:10px;font-size:13px;font-weight:700;color:#222;cursor:pointer;margin-bottom:2px;letter-spacing:.2px}
+.menu-item.ativo{background:#F2F2F2}
+.menu-item svg{width:22px;height:22px;stroke:#444;flex-shrink:0}
+.menu-item small{font-weight:400;color:#666;font-size:11px}
+.divider{height:1px;background:#eee;margin:12px 0}
+.container{padding:16px;max-width:500px;margin:0 auto}
+.card{background:#fff;border-radius:20px;padding:18px;margin-bottom:14px;box-shadow:0 4px 12px rgba(0,0,0,.06)}
+.card-titulo{font-size:15px;font-weight:700}
+.card-sub{font-size:13px;color:#666;margin-top:8px;display:flex;justify-content:space-between;align-items:center}
+.badge{background:#F2F2F2;padding:7px 14px;border-radius:20px;display:inline-block;font-size:12px;font-weight:600}
+.btn-plus{position:fixed;bottom:24px;right:24px;width:60px;height:60px;background:#3A3A3A;color:#fff;border-radius:50%;border:none;font-size:32px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(0,0,0,.25);z-index:6;cursor:pointer}
+.status{padding:8px 12px;border-radius:20px;font-size:11px;font-weight:700;display:inline-block;margin:10px 16px}
+.offline{background:#ffe0e0;color:#c00}.online{background:#e0ffe0;color:#067a00}
+.item-valor{font-weight:800;color:#3A3A3A;background:#f0f0f0;padding:6px 10px;border-radius:20px;font-size:13px}
+.btn{width:100%;background:#3A3A3A;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:700;margin-top:10px;cursor:pointer}
 .btn-green{background:#25D366}
-.btn-instalar{background:#3A3A3A;color:#fff;padding:16px;border-radius:12px;width:100%;font-weight:800;border:none;margin-bottom:16px;display:none}
-.status{padding:8px 12px;border-radius:20px;font-size:11px;font-weight:700;display:inline-block;margin-bottom:12px}
-.offline{background:#ffe0e0;color:#c00} .online{background:#e0ffe0;color:#067a00}
-input,select{width:100%;padding:12px;border:1.5px solid #ddd;border-radius:8px;margin:6px 0 12px}
+input,select{width:100%;padding:12px;border:1.5px solid #ddd;border-radius:10px;margin-top:6px;margin-bottom:12px;font-size:14px}
 label{font-size:11px;font-weight:700;color:#555;text-transform:uppercase}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.menu-lateral{position:fixed;top:0;right:-280px;width:280px;height:100%;background:#fff;box-shadow:-5px 0 20px rgba(0,0,0,.15);z-index:20;transition:.3s;padding:24px}
-.menu-lateral.aberto{right:0}
-.menu-item{padding:14px 0;border-bottom:1px solid #eee;font-size:13px;cursor:pointer;font-weight:600}
-.fundo-escuro{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.4);display:none;z-index:15}
 </style>
 </head>
 <body>
-<div class="topo"><h1>AGENDA DE SHOWS • NAO APAGA</h1><button onclick="abrirMenu()" style="font-size:24px;background:none;border:none">☰</button></div>
-<div class="fundo-escuro" id="fundo" onclick="fecharMenu()"></div>
-<div class="menu-lateral" id="menu">
-<h3 style="margin-bottom:20px">MENU</h3>
-<div class="menu-item" onclick="mostrarTela('inicio');fecharMenu()">🏠 INICIO - AGENDA DO DIA (COM VALOR)</div>
-<div class="menu-item" style="color:#25D366" onclick="mostrarTela('enviar');fecharMenu()">📤 ENVIAR CRONOGRAMA P/ MUSICO (SEM VALOR)</div>
-<div class="menu-item" onclick="mostrarTela('adicionar');fecharMenu()">➕ ADICIONAR NOVO SHOW</div>
+<div class="topo"><span class="hamb" onclick="abrirMenu()">☰</span><h1>AGENDA DO DIA</h1></div>
+<div id="statusConexao" class="status online">🟢 ONLINE - Dados salvos localmente</div>
+
+<div class="fundo" id="fundo" onclick="fecharMenu()"></div>
+<div class="menu" id="menu">
+  <div class="user"><div class="avatar">UM</div><div><b>Usuário</b><span>Administrador</span></div></div>
+  <div class="menu-item" onclick="mostrar('inicio');fecharMenu()"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 10L12 3l9 7v10a1 1 0 0 1-1 1h-5v-5H9v5H4a1 1 0 0 1-1-1V10z"/></svg>INICIO</div>
+  <div class="menu-item ativo" onclick="mostrar('inicio');fecharMenu()"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>AGENDA DO DIA</div>
+  <div class="menu-item" onclick="mostrar('enviar');fecharMenu()" style="line-height:1.2"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg><div>ENVIAR CRONOGRAMA<br>P/ MUSICO<br><small>(SEM VALOR)</small></div></div>
+  <div class="menu-item" onclick="mostrar('restaurantes');fecharMenu()"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 3v6M7 3v6M3 6h4M10 3v6M13 3v6M12 6h-2"/><path d="M18 7l-2 3v7h4v-7l-2-3z"/></svg>RESTAURANTES</div>
+  <div class="menu-item" onclick="mostrar('musicos');fecharMenu()"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-7 7m0 0a7 7 0 0 1-7-7v-2"/></svg>MUSICOS</div>
+  <div class="menu-item" onclick="mostrar('financeiro');fecharMenu()"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><div>RELATORIOS<br>FINANCEIROS</div></div>
+  <div class="divider"></div>
+  <div class="menu-item" onclick="mostrar('config');fecharMenu()"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 9 15a1.65 1.65 0 0 0-1-1.51V13a2 2 0 0 1 0-4"/></svg>CONFIGURAÇÕES</div>
+  <div class="menu-item" style="color:#999"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>SAIR</div>
 </div>
-<div class="container">
-<button id="btnInstalar" class="btn-instalar">📲 INSTALAR APP NO CELULAR - 1 CLIQUE</button>
-<div id="statusConexao" class="status offline">🔴 OFFLINE - Dados salvos localmente</div>
-<div id="tela-inicio"><div class="card"><div class="card-titulo"><span id="tituloDia"></span><span id="totalDia"></span></div><div id="listaHoje"></div></div><div class="card" style="background:#3A3A3A;color:#fff"><div style="font-size:12px;opacity:.8">TOTAL DO DIA</div><div style="font-size:22px;font-weight:800;margin-top:4px" id="totalGrande"></div></div></div>
-<div id="tela-enviar" style="display:none"><div class="card"><div class="card-titulo">📤 CRONOGRAMA SEM VALOR</div>
-<label>Filtrar por Musico</label><select id="filtroMusico" onchange="gerarTextoSemValor()"></select>
-<label>Data</label><input type="date" id="filtroData" onchange="gerarTextoSemValor()">
-<div style="background:#f9f9f9;padding:14px;border-radius:8px;margin:12px 0;white-space:pre-wrap;font-size:13px;border:1px dashed #ccc" id="textoSemValor"></div>
-<button class="btn btn-green" onclick="enviarWhats()">📱 ENVIAR NO WHATSAPP</button>
-<button class="btn" style="background:#fff;color:#3A3A3A;border:1.5px solid #ddd" onclick="copiarTexto()">📋 COPIAR TEXTO</button></div></div>
-<div id="tela-adicionar" style="display:none"><div class="card"><div class="card-titulo">+ Adicionar Novo Show</div>
-<label>Restaurante</label><input id="rest" placeholder="Cantina Italiana">
-<label>Musico</label><input id="musico" placeholder="Andre Taki">
-<div class="grid2"><div><label>Data</label><input id="data" type="date"></div><div><label>Cache R$</label><input id="cache" type="number" placeholder="350"></div></div>
-<div class="grid2"><div><label>Hora Inicio</label><input id="hIni" type="time" value="19:00"></div><div><label>Hora Fim</label><input id="hFim" type="time" value="22:00"></div></div>
-<button class="btn" onclick="adicionar()">ADICIONAR SHOW</button></div></div>
+
+<div class="container" id="tela-inicio">
+  <div style="font-size:13px;font-weight:700;margin:6px 0 12px">Hoje • <span id="dataHoje"></span></div>
+  <div id="lista"></div>
 </div>
+
+<div class="container" id="tela-enviar" style="display:none">
+  <div class="card"><b>📤 ENVIAR CRONOGRAMA P/ MUSICO (SEM VALOR)</b><br><small style="color:#666">Lista sem R$ lateral - igual combinamos</small><br><br>
+  <label>Filtrar por Musico</label><select id="filtroMusico" onchange="gerar()"></select>
+  <label>Data</label><input type="date" id="filtroData" onchange="gerar()">
+  <div id="textoSemValor" style="background:#f9f9f9;padding:12px;border-radius:10px;white-space:pre-wrap;font-size:13px;border:1px dashed #ccc;margin:12px 0"></div>
+  <button class="btn btn-green" onclick="enviarZap()">📱 ENVIAR NO WHATSAPP</button>
+  <button class="btn" style="background:#fff;color:#3A3A3A;border:1.5px solid #ddd" onclick="copiar()">📋 COPIAR TEXTO</button></div>
+</div>
+
+<div class="container" id="tela-adicionar" style="display:none">
+  <div class="card"><b>+ Adicionar Novo Show</b><br><br><label>Nome do Restaurante</label><input id="rest" placeholder="Cantina Italiana"><label>Músico</label><input id="musico" placeholder="Andre Taki"><label>Data</label><input id="data" type="date"><label>Cachê R$ (só aparece na HOME, não vai pro músico)</label><input id="cache" type="number" placeholder="350"><div style="display:flex;gap:8px"><div style="flex:1"><label>Hora Início</label><input id="hIni" type="time" value="19:00"></div><div style="flex:1"><label>Hora Fim</label><input id="hFim" type="time" value="22:00"></div></div><button class="btn" onclick="adicionar()">ADICIONAR</button></div>
+</div>
+
+<div class="container" id="tela-restaurantes" style="display:none"><div class="card"><b>🍽️ MEUS RESTAURANTES</b><div id="listaRest" style="margin-top:12px"></div></div></div>
+<div class="container" id="tela-musicos" style="display:none"><div class="card"><b>🎤 MEUS MÚSICOS</b><div id="listaMusicos" style="margin-top:12px"></div></div></div>
+<div class="container" id="tela-financeiro" style="display:none"><div class="card"><b>💰 RELATÓRIOS FINANCEIROS</b><div id="totalFinanceiro" style="font-size:22px;font-weight:800;margin-top:12px"></div><div id="detalheFinanceiro" style="margin-top:12px;font-size:13px"></div></div></div>
+
+<button class="btn-plus" onclick="mostrar('adicionar')">+</button>
+
 <script>
-let shows=JSON.parse(localStorage.getItem('shows_v2_final')||'[]');
-if(shows.length==0){const hoje=new Date().toISOString().slice(0,10);shows=[{rest:'Cantina Italiana - RESTAURANTE 1',musico:'Andre Taki',data:hoje,hIni:'19:00',hFim:'22:00',cache:350},{rest:'Bar do Centro - RESTAURANTE 2',musico:'Joao Silva',data:hoje,hIni:'20:00',hFim:'23:00',cache:300},{rest:'Sabor da Praia - RESTAURANTE 3',musico:'Maria Voz',data:hoje,hIni:'18:00',hFim:'21:00',cache:400}];salvar();}
-function salvar(){localStorage.setItem('shows_v2_final',JSON.stringify(shows));render();}
-function adicionar(){const r=rest.value.trim(),m=musico.value.trim(),d=data.value,hi=hIni.value,hf=hFim.value,c=parseInt(cache.value||0);if(!r||!m||!d){alert('Preencha Restaurante, Musico e Data');return}shows.push({rest:r,musico:m,data:d,hIni:hi,hFim:hf,cache:c});salvar();rest.value='';musico.value='';mostrarTela('inicio');}
+let shows=JSON.parse(localStorage.getItem('shows_v3_final')||'[]');
+if(shows.length==0){
+ const hoje=new Date().toISOString().slice(0,10);
+ shows=[
+  {rest:'Reunião Banda',local:'Estúdio Central • Sala 2',musico:'Banda Completa',data:'2024-09-12',hIni:'10:00',hFim:'12:00',cache:0,status:'Confirmado'},
+  {rest:'Soundcheck',local:'Palco Principal • Check de som',musico:'Técnico',data:'2024-09-12',hIni:'14:30',hFim:'16:00',cache:0,status:'Pendente'},
+  {rest:'Cantina Italiana - RESTAURANTE 1',local:'Restaurante 1',musico:'Andre Taki',data:hoje,hIni:'19:00',hFim:'22:00',cache:350,status:'Confirmado'},
+  {rest:'Bar do Centro - RESTAURANTE 2',local:'Restaurante 2',musico:'Joao Silva',data:hoje,hIni:'19:00',hFim:'22:00',cache:300,status:'Confirmado'},
+  {rest:'Sabor da Praia - RESTAURANTE 3',local:'Restaurante 3',musico:'Maria Voz',data:hoje,hIni:'19:30',hFim:'21:30',cache:400,status:'Pendente'}
+ ];
+}
+function salvar(){localStorage.setItem('shows_v3_final',JSON.stringify(shows));render();}
+function render(){
+ document.getElementById('dataHoje').innerText=new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});
+ const div=document.getElementById('lista');let html='';
+ shows.forEach((s,i)=>{
+  html+=`<div class="card"><div class="card-titulo">${s.rest} — ${s.hIni}</div><div class="card-sub"><span>${s.local||s.musico} ${s.cache>0?'<span class=item-valor>R$ '+s.cache+'</span>':''}</span></div><div style="margin-top:12px;text-align:right"><span class="badge">${s.status||'Confirmado'}</span></div><div style="margin-top:8px"><button onclick="apagar(${i})" style="font-size:11px;background:none;border:none;color:#999;cursor:pointer">🗑️ Apagar</button></div></div>`;
+ });
+ div.innerHTML=html;
+ const sel=document.getElementById('filtroMusico');if(sel){const mus=[...new Set(shows.map(s=>s.musico))];sel.innerHTML='<option value="">Todos</option>';mus.forEach(m=>{if(m)sel.innerHTML+=`<option>${m}</option>`});}
+ document.getElementById('listaRest').innerHTML=[...new Set(shows.map(s=>s.rest))].map(r=>`<div style="padding:8px 0;border-bottom:1px solid #eee">${r}</div>`).join('');
+ document.getElementById('listaMusicos').innerHTML=[...new Set(shows.map(s=>s.musico))].map(m=>`<div style="padding:8px 0;border-bottom:1px solid #eee">${m}</div>`).join('');
+ let total=shows.reduce((a,b)=>a+(b.cache||0),0);document.getElementById('totalFinanceiro').innerText='Total geral: R$ '+total.toLocaleString('pt-BR');document.getElementById('detalheFinanceiro').innerHTML=shows.map(s=>s.cache>0?`${s.rest}: R$ ${s.cache}<br>`:'').join('');
+ gerar();
+}
+function gerar(){const fm=document.getElementById('filtroMusico')?.value,fd=document.getElementById('filtroData')?.value;let f=shows;if(fm)f=f.filter(s=>s.musico===fm);if(fd)f=f.filter(s=>s.data===fd);f.sort((a,b)=>a.data.localeCompare(b.data));let txt='*AGENDA DE SHOWS*\n\n';f.forEach(s=>{if(s.cache>0){const d=s.data.split('-');txt+=`${d[2]}/${d[1]} - ${s.rest} - ${s.hIni} as ${s.hFim} - ${s.musico}\n`;}});const el=document.getElementById('textoSemValor');if(el)el.innerText=txt;}
+function enviarZap(){window.open('https://wa.me/?text='+encodeURIComponent(document.getElementById('textoSemValor').innerText),'_blank');}
+function copiar(){navigator.clipboard.writeText(document.getElementById('textoSemValor').innerText).then(()=>alert('Copiado!'));}
+function adicionar(){const r=rest.value.trim(),m=musico.value.trim(),d=data.value,hi=hIni.value,hf=hFim.value,c=parseInt(cache.value||0);if(!r||!m||!d){alert('Preencha');return}shows.push({rest:r,local:m,musico:m,data:d,hIni:hi,hFim:hf,cache:c,status:'Confirmado'});salvar();rest.value='';musico.value='';mostrar('inicio');}
 function apagar(i){if(confirm('Apagar?')){shows.splice(i,1);salvar();}}
-function render(){const hoje=new Date().toISOString().slice(0,10);tituloDia.innerText='AGENDA DO DIA - '+new Date().toLocaleDateString('pt-BR');let lista=shows.filter(s=>s.data===hoje);if(lista.length==0)lista=shows.slice(0,10);let html='',total=0;lista.forEach(s=>{const gi=shows.indexOf(s);total+=s.cache;html+=`<div class="item"><div><div style="font-weight:600">${s.rest}</div><div style="font-size:12px;color:#666">${s.musico} • ${s.hIni} às ${s.hFim} • ${s.data.split('-').reverse().join('/')}</div><button onclick="apagar(${gi})" style="font-size:10px">🗑️ Apagar</button></div><div class="item-valor">R$ ${s.cache}</div></div>`});totalDia.innerText=lista.length+' shows';totalGrande.innerText='R$ '+total.toLocaleString('pt-BR')+',00';listaHoje.innerHTML=html;const mus=[...new Set(shows.map(s=>s.musico))];filtroMusico.innerHTML='<option value="">Todos</option>';mus.forEach(mm=>filtroMusico.innerHTML+=`<option value="${mm}">${mm}</option>`);gerarTextoSemValor();}
-function gerarTextoSemValor(){let f=shows;if(filtroMusico.value)f=f.filter(s=>s.musico===filtroMusico.value);if(filtroData.value)f=f.filter(s=>s.data===filtroData.value);f.sort((a,b)=>a.data.localeCompare(b.data));let txt='*AGENDA DE SHOWS*\\n\\n';if(f.length==0)txt='Nenhum show.';else f.forEach(s=>{const d=s.data.split('-');txt+=`${new Date(s.data+'T12:00:00').toLocaleDateString('pt-BR',{weekday:'short'})} ${d[2]}/${d[1]} - ${s.rest} - ${s.hIni} as ${s.hFim} - ${s.musico}\\n`});textoSemValor.innerText=txt;}
-function enviarWhats(){window.open('https://wa.me/?text='+encodeURIComponent(textoSemValor.innerText),'_blank');}
-function copiarTexto(){navigator.clipboard.writeText(textoSemValor.innerText).then(()=>alert('Copiado!'))}
-function mostrarTela(t){document.getElementById('tela-inicio').style.display=t==='inicio'?'block':'none';document.getElementById('tela-enviar').style.display=t==='enviar'?'block':'none';document.getElementById('tela-adicionar').style.display=t==='adicionar'?'block':'none';}
-function abrirMenu(){menu.classList.add('aberto');fundo.style.display='block'} function fecharMenu(){menu.classList.remove('aberto');fundo.style.display='none'}
-function atualizarStatus(){const el=statusConexao;if(navigator.onLine){el.className='status online';el.innerText='🟢 ONLINE'}else{el.className='status offline';el.innerText='🔴 OFFLINE - Dados salvos localmente';}}
+function mostrar(t){
+ ['inicio','enviar','adicionar','restaurantes','musicos','financeiro','config'].forEach(id=>{
+  const el=document.getElementById('tela-'+id); if(el) el.style.display=(id===t?'block':'none');
+ });
+ if(t==='config') alert('Configurações em breve - logo, nome do estabelecimento');
+ if(t==='restaurantes'||t==='musicos'||t==='financeiro'){document.getElementById('tela-'+t).style.display='block';document.getElementById('tela-inicio').style.display='none';}
+ if(t==='inicio') document.getElementById('tela-inicio').style.display='block';
+}
+function abrirMenu(){document.getElementById('menu').classList.add('aberto');document.getElementById('fundo').style.display='block';}
+function fecharMenu(){document.getElementById('menu').classList.remove('aberto');document.getElementById('fundo').style.display='none';}
+function atualizarStatus(){const el=document.getElementById('statusConexao');if(!el)return;if(navigator.onLine){el.className='status online';el.innerText='🟢 ONLINE';}else{el.className='status offline';el.innerText='🔴 OFFLINE - Dados salvos';}}
 window.addEventListener('online',atualizarStatus);window.addEventListener('offline',atualizarStatus);atualizarStatus();
-let deferredPrompt;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;btnInstalar.style.display='block';});btnInstalar.addEventListener('click',async()=>{if(deferredPrompt){deferredPrompt.prompt();const{outcome}=await deferredPrompt.userChoice;if(outcome==='accepted'){btnInstalar.innerHTML='✅ INSTALADO!';setTimeout(()=>btnInstalar.style.display='none',2000);}deferredPrompt=null;}else alert('3 pontinhos > Instalar app');});
-render();if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js');}
+render();
+if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js');}
 </script>
 </body>
 </html>
