@@ -4,5 +4,6 @@
   "start_url": "./agenda-shows.html",
   "display": "standalone",
   "background_color": "#E9E9E9",
-  "theme_color": "#3A3A3A"
+  "theme_color": "#3A3A3A",
+  "icons": []
 }
