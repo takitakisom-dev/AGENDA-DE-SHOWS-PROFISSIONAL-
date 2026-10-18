@@ -13,7 +13,7 @@
 body{background:#E9E9E9;color:#222;min-height:100vh;padding-bottom:90px}
 .topo{background:#D9D9D9;padding:14px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:5}
 .topo .hamb{font-size:26px;cursor:pointer;padding:4px 8px}
-.topo h1{font-size:18px;font-weight:800;flex:1}
+.topo h1{font-size:17px;font-weight:800;flex:1}
 .topo .btn-home-top{background:#3A3A3A;color:#fff;border:none;padding:7px 12px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer}
 .fundo{position:fixed;inset:0;background:rgba(0,0,0,.25);z-index:10;display:none}
 .menu{position:fixed;top:0;left:0;width:300px;height:100vh;background:#fff;z-index:20;padding:16px 12px;transform:translateX(-100%);transition:.32s ease;overflow:auto}
@@ -22,7 +22,7 @@ body{background:#E9E9E9;color:#222;min-height:100vh;padding-bottom:90px}
 .avatar{width:48px;height:48px;background:#E9E9E9;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:#888}
 .menu-item{display:flex;align-items:center;gap:14px;padding:13px 10px;border-radius:10px;font-size:13px;font-weight:700;color:#222;cursor:pointer;margin-bottom:2px}
 .divider{height:1px;background:#eee;margin:12px 0}
-.container{padding:16px;max-width:500px;margin:0 auto}
+.container{padding:16px;max-width:520px;margin:0 auto}
 .card{background:#fff;border-radius:20px;padding:18px;margin-bottom:14px;box-shadow:0 4px 12px rgba(0,0,0,.06)}
 .status{padding:8px 12px;border-radius:20px;font-size:11px;font-weight:700;display:inline-block;margin:10px 16px}
 .online{background:#d1f5d1;color:#067a00}.offline{background:#ffe0e0;color:#c00}
@@ -32,16 +32,24 @@ body{background:#E9E9E9;color:#222;min-height:100vh;padding-bottom:90px}
 @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.05)}100%{transform:scale(1)}}
 .badge{background:#F2F2F2;padding:7px 14px;border-radius:20px;display:inline-block;font-size:12px;font-weight:600}
 .item-valor{font-weight:800;background:#f0f0f0;padding:6px 10px;border-radius:20px;font-size:13px}
-.btn{width:100%;background:#3A3A3A;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:700;margin-top:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn{width:100%;background:#3A3A3A;color:#fff;border:none;padding:14px;border-radius:14px;font-weight:800;margin-top:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-size:14px}
 .btn-small{padding:8px 12px;font-size:12px;width:auto;border-radius:8px}
 .btn-green{background:#25D366}.btn-red{background:#ff4444}.btn-blue{background:#007AFF}.btn-light{background:#eee;color:#222;border:1.5px solid #ddd}.btn-voltar{background:#fff;color:#3A3A3A;border:2px solid #3A3A3A;margin-top:16px}
-input,select{width:100%;padding:12px;border:1.5px solid #ddd;border-radius:10px;margin-top:6px;margin-bottom:12px;font-size:14px}
+input,select{width:100%;padding:12px;border:1.5px solid #ddd;border-radius:12px;margin-top:6px;margin-bottom:12px;font-size:14px;background:#fff}
 label{font-size:11px;font-weight:700;color:#555;text-transform:uppercase}
 .list-item{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #f0f0f0}
 .card-actions{display:flex;gap:8px;margin-top:10px;justify-content:flex-end}
 .card-actions button{padding:7px 14px;border-radius:8px;border:none;font-size:12px;font-weight:700;cursor:pointer}
 .btn-edit{background:#E8F0FE;color:#1A73E8}.btn-del{background:#FCE8E6;color:#D93025}
 .fin-musico{background:#f8f8f8;border-radius:12px;padding:12px;margin-top:10px}.fin-linha{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #eee;font-size:12px}
+.preview-bonito{display:flex;flex-direction:column;gap:10px;max-height:420px;overflow:auto;padding:4px}
+.show-card-bonito{background:#fff;border-radius:16px;padding:14px 16px;border-left:6px solid #3A3A3A;box-shadow:0 2px 8px rgba(0,0,0,.06);display:flex;flex-direction:column;gap:6px;position:relative}
+.show-card-bonito .linha1{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.show-card-bonito .artista-pill{background:#3A3A3A;color:#fff;padding:6px 14px;border-radius:20px;font-weight:800;font-size:13px;letter-spacing:.3px}
+.show-card-bonito .casa-pill{background:#FFF3CD;color:#856404;padding:6px 12px;border-radius:20px;font-weight:700;font-size:12px;border:1px solid #FFE69C}
+.show-card-bonito .hora-big{background:#F1F3F5;padding:8px 12px;border-radius:10px;font-weight:700;font-size:13px;color:#333;display:flex;align-items:center;gap:6px;width:fit-content}
+.show-card-bonito .data-badge{position:absolute;top:10px;right:10px;background:#E9ECEF;color:#495057;padding:4px 8px;border-radius:8px;font-size:11px;font-weight:700}
+.grupo-data{font-size:12px;font-weight:800;color:#666;margin:8px 0 2px 4px;text-transform:uppercase;letter-spacing:.5px}
 </style>
 </head>
 <body>
@@ -64,9 +72,9 @@ label{font-size:11px;font-weight:700;color:#555;text-transform:uppercase}
 <div class="divider"></div>
 <div class="menu-item" onclick="mostrarTela('config')">CONFIGURACOES</div>
 </div>
-<div class="container" id="tela-inicio"><div style="font-size:13px;font-weight:700;margin:6px 0 12px">Hoje - <span id="dataHoje"></span></div><div id="lista"></div></div>
-<div class="container" id="tela-mes" style="display:none"><div style="font-size:13px;font-weight:700;margin:6px 0 12px">Agenda do Mes - <span id="tituloMes"></span></div><div id="listaMes"></div><div class="card" style="background:#3A3A3A;color:#fff"><div style="font-size:12px;opacity:.8">TOTAL DO MES</div><div style="font-size:20px;font-weight:800" id="totalMes">R$ 0</div></div><button class="btn btn-voltar" onclick="mostrarTela('inicio')">VOLTAR PARA INICIO</button></div>
-<div class="container" id="tela-ano" style="display:none"><div style="font-size:13px;font-weight:700;margin:6px 0 12px">Agenda do Ano - <span id="tituloAno"></span></div><div id="listaAno"></div><div class="card" style="background:#3A3A3A;color:#fff"><div style="font-size:12px;opacity:.8">TOTAL DO ANO</div><div style="font-size:20px;font-weight:800" id="totalAno">R$ 0</div></div><button class="btn btn-voltar" onclick="mostrarTela('inicio')">VOLTAR PARA INICIO</button></div>
+<div class="container" id="tela-inicio"><div style="font-size:13px;font-weight:700;margin:6px 0 12px">Hoje • <span id="dataHoje"></span></div><div id="lista"></div></div>
+<div class="container" id="tela-mes" style="display:none"><div style="font-size:13px;font-weight:700;margin:6px 0 12px">Agenda do Mes • <span id="tituloMes"></span></div><div id="listaMes"></div><div class="card" style="background:#3A3A3A;color:#fff"><div style="font-size:12px;opacity:.8">TOTAL DO MES</div><div style="font-size:20px;font-weight:800" id="totalMes">R$ 0</div></div><button class="btn btn-voltar" onclick="mostrarTela('inicio')">VOLTAR PARA INICIO</button></div>
+<div class="container" id="tela-ano" style="display:none"><div style="font-size:13px;font-weight:700;margin:6px 0 12px">Agenda do Ano • <span id="tituloAno"></span></div><div id="listaAno"></div><div class="card" style="background:#3A3A3A;color:#fff"><div style="font-size:12px;opacity:.8">TOTAL DO ANO</div><div style="font-size:20px;font-weight:800" id="totalAno">R$ 0</div></div><button class="btn btn-voltar" onclick="mostrarTela('inicio')">VOLTAR PARA INICIO</button></div>
 <div class="container" id="tela-cadRestaurantes" style="display:none">
 <div class="card"><b>CADASTRAR RESTAURANTE / CASA DE SHOW</b><label>Nome do Restaurante / Casa</label><input id="cadRestNome" placeholder="Ex: Cantina Italiana"><label>Bairro / Local</label><input id="cadRestLocal" placeholder="Ex: Centro"><label>Contato / Obs (opcional)</label><input id="cadRestObs"><button class="btn" id="btnSalvarRest" onclick="addRestauranteCad()">SALVAR RESTAURANTE</button><button class="btn btn-light" onclick="cancelarEdicaoRest()">CANCELAR EDICAO</button></div>
 <div class="card"><b>Lista rapida</b><div id="listaCadRestSimples"></div></div><button class="btn btn-voltar" onclick="mostrarTela('inicio')">VOLTAR PARA INICIO</button>
@@ -75,7 +83,23 @@ label{font-size:11px;font-weight:700;color:#555;text-transform:uppercase}
 <div class="card"><b>CADASTRAR MUSICO</b><label>Nome do Musico</label><input id="cadMusNome" placeholder="Ex: Andre Taki"><label>Cache Padrao R$ (opcional)</label><input id="cadMusCache" type="number" placeholder="Ex: 350"><label>WhatsApp / Obs (opcional)</label><input id="cadMusObs"><button class="btn" id="btnSalvarMus" onclick="addMusicoCad()">SALVAR MUSICO</button><button class="btn btn-light" onclick="cancelarEdicaoMus()">CANCELAR EDICAO</button></div>
 <div class="card"><b>Lista rapida</b><div id="listaCadMusSimples"></div></div><button class="btn btn-voltar" onclick="mostrarTela('inicio')">VOLTAR PARA INICIO</button>
 </div>
-<div class="container" id="tela-enviar" style="display:none"><div class="card"><b>ENVIAR CRONOGRAMA (SEM VALOR)</b><br><br><label>Filtrar por Musico</label><select id="filtroMusico"></select><label>Data</label><input type="date" id="filtroData"><label>Visao</label><select id="filtroVisao"><option value="todos">Todos</option><option value="mes">So MES</option><option value="ano">So ANO</option></select><div id="textoSemValor" style="background:#f9f9f9;padding:12px;border-radius:10px;white-space:pre-wrap;font-size:13px;border:1px dashed #ccc;margin:12px 0;min-height:80px"></div><button class="btn btn-green" onclick="enviarZap()">ENVIAR NO WHATSAPP</button><button class="btn btn-light" onclick="copiar()">COPIAR</button></div><button class="btn btn-voltar" onclick="mostrarTela('inicio')">VOLTAR PARA INICIO</button></div>
+<div class="container" id="tela-enviar" style="display:none">
+<div class="card">
+<b style="font-size:16px">ENVIAR CRONOGRAMA (SEM VALOR)</b>
+<p style="font-size:12px;color:#666;margin:6px 0 14px">Ordem: ARTISTA → CASA → DATA E HORA - como voce pediu</p>
+<label>FILTRAR POR MUSICO</label><select id="filtroMusico"></select>
+<label>DATA</label><input type="date" id="filtroData">
+<label>VISAO</label><select id="filtroVisao"><option value="todos">Todos</option><option value="mes">So MES</option><option value="ano">So ANO</option></select>
+<label>ORDEM DO TEXTO (como vai no WhatsApp)</label><select id="ordemTexto" onchange="gerarTexto()"><option value="artista_casa_data_hora">ARTISTA - CASA - DATA - HORA (recomendado)</option><option value="casa_artista_data_hora">CASA - ARTISTA - DATA - HORA</option><option value="data_casa_hora_artista">DATA - CASA - HORA - ARTISTA (antigo)</option></select>
+<div style="margin:16px 0 8px;display:flex;justify-content:space-between;align-items:center"><b style="font-size:12px">PREVIA BONITA (botoes grandes)</b><span style="font-size:11px;color:#888" id="contadorPrev">0 shows</span></div>
+<div id="previewBonito" class="preview-bonito" style="background:#F8F9FA;border-radius:14px;padding:12px;border:1px solid #eee;min-height:120px"></div>
+<div style="margin:16px 0 8px"><b style="font-size:12px">TEXTO QUE VAI NO WHATSAPP</b></div>
+<div id="textoSemValor" style="background:#f9f9f9;padding:12px;border-radius:10px;white-space:pre-wrap;font-size:13px;border:1px dashed #ccc;min-height:80px"></div>
+<button class="btn btn-green" style="font-size:16px;padding:16px" onclick="enviarZap()">📱 ENVIAR NO WHATSAPP</button>
+<button class="btn btn-light" style="font-size:15px;padding:14px" onclick="copiar()">📋 COPIAR TEXTO</button>
+</div>
+<button class="btn btn-voltar" onclick="mostrarTela('inicio')">VOLTAR PARA INICIO</button>
+</div>
 <div class="container" id="tela-adicionar" style="display:none">
 <div class="card">
 <b id="tituloFormShow">+ Novo Show</b><br><span style="font-size:11px;color:#888">Escolha da lista cadastrada</span><br><br>
@@ -101,8 +125,8 @@ label{font-size:11px;font-weight:700;color:#555;text-transform:uppercase}
 </div>
 <div class="container" id="tela-restaurantes" style="display:none"><div class="card"><b>RESTAURANTES CADASTRADOS</b><div id="listaRest" style="margin-top:12px"></div><button class="btn" onclick="mostrarTela('cadRestaurantes')">+ CADASTRAR NOVO</button></div><button class="btn btn-voltar" onclick="mostrarTela('inicio')">VOLTAR PARA INICIO</button></div>
 <div class="container" id="tela-musicos" style="display:none"><div class="card"><b>MUSICOS CADASTRADOS</b><div id="listaMusicosDiv" style="margin-top:12px"></div><button class="btn" onclick="mostrarTela('cadMusicos')">+ CADASTRAR NOVO</button></div><button class="btn btn-voltar" onclick="mostrarTela('inicio')">VOLTAR PARA INICIO</button></div>
-<div class="container" id="tela-financeiro" style="display:none"><div class="card"><b>RELATORIOS FINANCEIROS</b><div style="margin-top:12px;display:flex;gap:8px"><div style="flex:1"><label>De</label><input type="date" id="finDe"></div><div style="flex:1"><label>Ate</label><input type="date" id="finAte"></div></div><label>Filtrar por Musico</label><select id="finMusico"><option value="">Todos</option></select><div id="totalFinanceiro" style="font-size:20px;font-weight:800;margin-top:12px;background:#3A3A3A;color:#fff;padding:14px;border-radius:12px"></div><div id="detalheFinanceiro" style="margin-top:12px"></div><button class="btn btn-green" onclick="enviarFinanceiroZap()">ENVIAR RELATORIO</button></div><button class="btn btn-voltar" onclick="mostrarTela('inicio')">VOLTAR PARA INICIO</button></div>
-<div class="container" id="tela-config" style="display:none"><div class="card"><b>CONFIG</b><p style="margin-top:10px;font-size:13px;color:#666">v3.7 - Almoco + Janta + Editar/Excluir + Home</p><button class="btn" style="background:#25D366" onclick="instalarApp()">INSTALAR APP AGORA</button><button class="btn btn-red" onclick="limparTudo()">LIMPAR TUDO</button></div><button class="btn btn-voltar" onclick="mostrarTela('inicio')">VOLTAR PARA INICIO</button></div>
+<div class="container" id="tela-financeiro" style="display:none"><div class="card"><b>RELATORIOS FINANCEIROS</b><div style="margin-top:12px;display:flex;gap:8px"><div style="flex:1"><label>De</label><input type="date" id="finDe"></div><div style="flex:1"><label>Até</label><input type="date" id="finAte"></div></div><label>Filtrar por Músico</label><select id="finMusico"><option value="">Todos</option></select><div id="totalFinanceiro" style="font-size:20px;font-weight:800;margin-top:12px;background:#3A3A3A;color:#fff;padding:14px;border-radius:12px"></div><div id="detalheFinanceiro" style="margin-top:12px"></div><button class="btn btn-green" onclick="enviarFinanceiroZap()">ENVIAR RELATORIO</button></div><button class="btn btn-voltar" onclick="mostrarTela('inicio')">VOLTAR PARA INICIO</button></div>
+<div class="container" id="tela-config" style="display:none"><div class="card"><b>CONFIG</b><p style="margin-top:10px;font-size:13px;color:#666">v3.8 - Design bonito enviar + Almoco/Janta + Editar/Excluir + Home</p><button class="btn" style="background:#25D366" onclick="instalarApp()">INSTALAR APP AGORA</button><button class="btn btn-red" onclick="limparTudo()">LIMPAR TUDO</button></div><button class="btn btn-voltar" onclick="mostrarTela('inicio')">VOLTAR PARA INICIO</button></div>
 <button class="btn-instalar" id="btnInstalar" onclick="instalarApp()">INSTALAR APP</button>
 <button class="btn-plus" onclick="novoShow()">+</button>
 <script>
@@ -112,9 +136,9 @@ try{shows=JSON.parse(localStorage.getItem('shows_v3_final')||'[]')}catch(e){show
 try{cadMus=JSON.parse(localStorage.getItem('cad_musicos_v34')||'[]')}catch(e){cadMus=[]}
 try{cadRest=JSON.parse(localStorage.getItem('cad_rests_v34')||'[]')}catch(e){cadRest=[]}
 function hojeISO(){return new Date().toISOString().slice(0,10)}
-if(cadMus.length===0){cadMus=[{nome:'Andre Taki',cache:350,obs:''},{nome:'Joao Silva',cache:300,obs:''},{nome:'EDILL',cache:300,obs:''}];localStorage.setItem('cad_musicos_v34',JSON.stringify(cadMus));}
-if(cadRest.length===0){cadRest=[{nome:'P1',local:'Ubatuba',obs:''},{nome:'Cantina Italiana',local:'Centro',obs:''}];localStorage.setItem('cad_rests_v34',JSON.stringify(cadRest));}
-if(shows.length===0){var h=hojeISO();shows=[{rest:'P1',local:'Ubatuba',musico:'EDILL',data:'2026-10-12',hIni:'12:00',hFim:'15:00',cache:300,status:'Confirmado'},{rest:'P1',local:'Ubatuba',musico:'EDILL',data:'2026-10-12',hIni:'19:00',hFim:'22:00',cache:300,status:'Confirmado'}];localStorage.setItem('shows_v3_final',JSON.stringify(shows));}
+if(cadMus.length===0){cadMus=[{nome:'Andre Taki',cache:350,obs:''},{nome:'Joao Silva',cache:300,obs:''},{nome:'EDILL',cache:300,obs:''},{nome:'ISRAEL',cache:300,obs:''},{nome:'YGOR',cache:300,obs:''}];localStorage.setItem('cad_musicos_v34',JSON.stringify(cadMus));}
+if(cadRest.length===0){cadRest=[{nome:'P1',local:'Ubatuba',obs:''},{nome:'P2',local:'Ubatuba',obs:''},{nome:'P3',local:'Ubatuba',obs:''}];localStorage.setItem('cad_rests_v34',JSON.stringify(cadRest));}
+if(shows.length===0){var h=hojeISO();shows=[{rest:'P1',local:'Ubatuba',musico:'EDILL',data:'2026-10-12',[STRIPPED]
 function salvar(){localStorage.setItem('shows_v3_final',JSON.stringify(shows)); render()}
 function salvarCads(){localStorage.setItem('cad_musicos_v34',JSON.stringify(cadMus)); localStorage.setItem('cad_rests_v34',JSON.stringify(cadRest)); render()}
 function abrirMenu(){document.getElementById('menu').classList.add('aberto');document.getElementById('fundo').style.display='block'}
@@ -135,8 +159,58 @@ function apagarRestCad(idx){if(confirm('Apagar '+cadRest[idx].nome+'?')){cadRest
 function renderSelects(){var selRest=document.getElementById('rest');if(selRest){selRest.innerHTML='<option value="">Selecione a casa...</option>';cadRest.forEach(function(r){selRest.innerHTML+='<option value="'+r.nome+'">'+r.nome+' ('+(r.local||'')+')</option>'})}var selMus=document.getElementById('musico');if(selMus){selMus.innerHTML='<option value="">Selecione o musico...</option>';cadMus.forEach(function(m){selMus.innerHTML+='<option value="'+m.nome+'">'+m.nome+(m.cache?' - R$ '+m.cache:'')+'</option>'})}}
 function render(){document.getElementById('dataHoje').innerText=new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});renderSelects();var lista=document.getElementById('lista');var html='';var h=hojeISO();var doDia=shows.map(function(s,i){return {s:s,i:i}}).filter(function(o){return o.s.data===h});if(doDia.length===0){html='<div class="card"><div style="color:#999">Nenhum show hoje</div></div>'}else{doDia.forEach(function(o){var s=o.s;var idx=o.i;html+='<div class="card"><div style="font-weight:700">'+s.rest+' - '+s.hIni+'</div><div style="font-size:13px;color:#666;margin-top:6px">Musico '+s.musico+' <span class="item-valor">R$ '+(s.cache||0)+'</span></div><div class="card-actions"><button class="btn-edit" onclick="editarShow('+idx+')">EDITAR</button><button class="btn-del" onclick="apagarShow('+idx+')">EXCLUIR</button></div></div>'})}lista.innerHTML=html;var agora=new Date();var mes=agora.getMonth(),ano=agora.getFullYear();var tituloMesEl=document.getElementById('tituloMes');if(tituloMesEl)tituloMesEl.innerText=agora.toLocaleDateString('pt-BR',{month:'long',year:'numeric'});var filtradosMes=shows.map(function(s,i){return {s:s,i:i}}).filter(function(o){var d=new Date(o.s.data+'T12:00:00');return d.getMonth()===mes&&d.getFullYear()===ano});filtradosMes.sort(function(a,b){return a.s.data.localeCompare(b.s.data)});var htmlMes='';var totalMes=0;filtradosMes.forEach(function(o){var s=o.s;totalMes+=s.cache||0;htmlMes+='<div class="card"><div style="font-weight:700">'+s.data.split('-').reverse().slice(0,2).join('/')+' - '+s.rest+' - '+s.hIni+'</div><div style="font-size:13px;color:#666;margin-top:4px">Musico '+s.musico+' <span class="item-valor">R$ '+(s.cache||0)+'</span></div><div class="card-actions"><button class="btn-edit" onclick="editarShow('+o.i+')">EDITAR</button><button class="btn-del" onclick="apagarShow('+o.i+')">EXCLUIR</button></div></div>'});if(filtradosMes.length===0)htmlMes='<div class="card"><div style="color:#999">Nenhum show este mes</div></div>';document.getElementById('listaMes').innerHTML=htmlMes;document.getElementById('totalMes').innerText='R$ '+totalMes.toLocaleString('pt-BR')+',00';document.getElementById('tituloAno').innerText=ano;var filtradosAno=shows.map(function(s,i){return {s:s,i:i}}).filter(function(o){return new Date(o.s.data+'T12:00:00').getFullYear()===ano});filtradosAno.sort(function(a,b){return a.s.data.localeCompare(b.s.data)});var porMes={};filtradosAno.forEach(function(o){var m=new Date(o.s.data+'T12:00:00').toLocaleDateString('pt-BR',{month:'long'});if(!porMes[m])porMes[m]=[];porMes[m].push(o)});var htmlAno='';var totalAno=0;for(var k in porMes){var tot=porMes[k].reduce(function(a,b){return a+(b.s.cache||0)},0);totalAno+=tot;htmlAno+='<div class="card"><div style="font-weight:700;text-transform:capitalize">'+k+' - '+porMes[k].length+' shows - R$ '+tot+'</div>';porMes[k].forEach(function(o){var s=o.s;htmlAno+='<div style="padding:8px 0;border-bottom:1px solid #f0f0f0;font-size:13px;display:flex;justify-content:space-between;align-items:center"><span>'+s.data.split('-').reverse().join('/')+' - '+s.rest+' - '+s.musico+' - R$ '+(s.cache||0)+' ('+s.hIni+'-'+s.hFim+')</span><span style="display:flex;gap:4px"><button class="btn-edit" style="padding:4px 8px" onclick="editarShow('+o.i+')">E</button><button class="btn-del" style="padding:4px 8px" onclick="apagarShow('+o.i+')">X</button></span></div>'});htmlAno+='</div>'}if(filtradosAno.length===0)htmlAno='<div class="card"><div style="color:#999">Nenhum show este ano</div></div>';document.getElementById('listaAno').innerHTML=htmlAno;document.getElementById('totalAno').innerText='R$ '+totalAno.toLocaleString('pt-BR')+',00';var sel=document.getElementById('filtroMusico');if(sel){sel.innerHTML='<option value="">Todos</option>';cadMus.forEach(function(m){sel.innerHTML+='<option value="'+m.nome+'">'+m.nome+'</option>'})}var selFin=document.getElementById('finMusico');if(selFin){var atual=selFin.value;selFin.innerHTML='<option value="">Todos os musicos</option>';cadMus.forEach(function(m){selFin.innerHTML+='<option value="'+m.nome+'">'+m.nome+'</option>'});if(atual)selFin.value=atual}var listaRestEl=document.getElementById('listaRest');if(listaRestEl){if(cadRest.length===0)listaRestEl.innerHTML='<div style="color:#999;padding:8px">Nenhum restaurante</div>';else{var htmlR='';cadRest.forEach(function(r,i){htmlR+='<div class="list-item"><div><b>'+r.nome+'</b><br><span style="font-size:12px;color:#666">'+(r.local||'')+'</span></div><div style="display:flex;gap:6px"><button class="btn-small btn-blue" onclick="editarRestCad('+i+')">EDITAR</button><button class="btn-small btn-red" onclick="apagarRestCad('+i+')">X</button></div></div>'});listaRestEl.innerHTML=htmlR}}var listaMusEl=document.getElementById('listaMusicosDiv');if(listaMusEl){if(cadMus.length===0)listaMusEl.innerHTML='<div style="color:#999;padding:8px">Nenhum musico</div>';else{var htmlM='';cadMus.forEach(function(m,i){htmlM+='<div class="list-item"><div><b>'+m.nome+'</b><br><span style="font-size:12px;color:#666">'+(m.cache?'R$ '+m.cache:'')+'</span></div><div style="display:flex;gap:6px"><button class="btn-small btn-blue" onclick="editarMusicoCad('+i+')">EDITAR</button><button class="btn-small btn-red" onclick="apagarMusicoCad('+i+')">X</button></div></div>'});listaMusEl.innerHTML=htmlM}}var listaCadRestSimples=document.getElementById('listaCadRestSimples');if(listaCadRestSimples){listaCadRestSimples.innerHTML=cadRest.map(function(r){return '<div style="padding:6px 0;border-bottom:1px solid #eee;font-size:13px">'+r.nome+'</div>'}).join('')||'<div style="color:#999;font-size:12px">vazio</div>'}var listaCadMusSimples=document.getElementById('listaCadMusSimples');if(listaCadMusSimples){listaCadMusSimples.innerHTML=cadMus.map(function(m){return '<div style="padding:6px 0;border-bottom:1px solid #eee;font-size:13px">'+m.nome+'</div>'}).join('')||'<div style="color:#999;font-size:12px">vazio</div>'}renderFinanceiro();gerarTexto();}
 function renderFinanceiro(){var de=document.getElementById('finDe')?document.getElementById('finDe').value:'';var ate=document.getElementById('finAte')?document.getElementById('finAte').value:'';var fm=document.getElementById('finMusico')?document.getElementById('finMusico').value:'';var filtrados=shows.slice();if(de)filtrados=filtrados.filter(function(s){return s.data>=de});if(ate)filtrados=filtrados.filter(function(s){return s.data<=ate});if(fm)filtrados=filtrados.filter(function(s){return s.musico===fm});var totalG=filtrados.reduce(function(a,b){return a+(b.cache||0)},0);document.getElementById('totalFinanceiro').innerHTML='Total geral: R$ '+totalG.toLocaleString('pt-BR')+'<br><small style="font-weight:400;font-size:12px;opacity:.8">'+filtrados.length+' shows</small>';var porMusico={};filtrados.forEach(function(s){if(!porMusico[s.musico])porMusico[s.musico]={total:0,shows:[]};porMusico[s.musico].total+=s.cache||0;porMusico[s.musico].shows.push(s)});var html='';for(var musico in porMusico){var dados=porMusico[musico];html+='<div class="fin-musico"><b>'+musico+': R$ '+dados.total.toLocaleString('pt-BR')+' ('+dados.shows.length+')</b>';dados.shows.sort(function(a,b){return a.data.localeCompare(b.data)}).forEach(function(s){html+='<div class="fin-linha"><span>'+s.data.split('-').reverse().join('/')+' - '+s.rest+' ('+s.hIni+')</span><span style="font-weight:700">R$ '+(s.cache||0)+'</span></div>'});html+='</div>'}if(filtrados.length===0)html='<div style="padding:12px;color:#999;font-size:13px">Nenhum show neste filtro</div>';document.getElementById('detalheFinanceiro').innerHTML=html;}
-function gerarTexto(){var fm=document.getElementById('filtroMusico')?document.getElementById('filtroMusico').value:'';var fd=document.getElementById('filtroData')?document.getElementById('filtroData').value:'';var fv=document.getElementById('filtroVisao')?document.getElementById('filtroVisao').value:'todos';var f=shows.slice();if(fm)f=f.filter(function(s){return s.musico===fm});if(fd)f=f.filter(function(s){return s.data===fd});if(fv==='mes'){var a=new Date();f=f.filter(function(s){var d=new Date(s.data+'T12:00:00');return d.getMonth()===a.getMonth()&&d.getFullYear()===a.getFullYear()})}if(fv==='ano'){var a=new Date();f=f.filter(function(s){return new Date(s.data+'T12:00:00').getFullYear()===a.getFullYear()})}f.sort(function(a,b){return a.data.localeCompare(b.data)});var txt='*AGENDA DE SHOWS*\n\n';f.forEach(function(s){var d=s.data.split('-');txt+=d[2]+'/'+d[1]+' - '+s.rest+' - '+s.hIni+' as '+s.hFim+' - '+s.musico+'\n'});document.getElementById('textoSemValor').innerText=txt}
-function bindFiltros(){['filtroMusico','filtroData','filtroVisao','finDe','finAte','finMusico'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('change',function(){if(id.startsWith('fin'))renderFinanceiro();else gerarTexto()})})}
+function gerarTexto(){
+var fm=document.getElementById('filtroMusico')?document.getElementById('filtroMusico').value:'';
+var fd=document.getElementById('filtroData')?document.getElementById('filtroData').value:'';
+var fv=document.getElementById('filtroVisao')?document.getElementById('filtroVisao').value:'todos';
+var ordem=document.getElementById('ordemTexto')?document.getElementById('ordemTexto').value:'artista_casa_data_hora';
+var f=shows.slice();
+if(fm)f=f.filter(function(s){return s.musico===fm});
+if(fd)f=f.filter(function(s){return s.data===fd});
+if(fv==='mes'){var a=new Date();f=f.filter(function(s){var d=new Date(s.data+'T12:00:00');return d.getMonth()===a.getMonth()&&d.getFullYear()===a.getFullYear()})}
+if(fv==='ano'){var a=new Date();f=f.filter(function(s){return new Date(s.data+'T12:00:00').getFullYear()===a.getFullYear()})}
+f.sort(function(a,b){return a.data.localeCompare(b.data) || a.hIni.localeCompare(b.hIni)});
+var txt='*AGENDA DE SHOWS*\n\n';
+var htmlBonito='';
+var ultimoDia='';
+var count=0;
+f.forEach(function(s){
+var d=s.data.split('-');
+var dataFmt=d[2]+'/'+d[1];
+var diaKey=d[2]+'/'+d[1]+'/'+d[0];
+if(diaKey!==ultimoDia){
+if(ultimoDia!=='') htmlBonito+='</div>';
+htmlBonito+='<div class="grupo-data">📅 '+dataFmt+'</div><div style="display:flex;flex-direction:column;gap:8px">';
+ultimoDia=diaKey;
+}
+var linhaTxt='';
+if(ordem==='artista_casa_data_hora'){
+linhaTxt=s.musico+' - '+s.rest+' - '+dataFmt+' - '+s.hIni+' as '+s.hFim;
+}else if(ordem==='casa_artista_data_hora'){
+linhaTxt=s.rest+' - '+s.musico+' - '+dataFmt+' - '+s.hIni+' as '+s.hFim;
+}else{
+linhaTxt=dataFmt+' - '+s.rest+' - '+s.hIni+' as '+s.hFim+' - '+s.musico;
+}
+txt+=linhaTxt+'\n';
+htmlBonito+='<div class="show-card-bonito">'
++'<div class="data-badge">'+dataFmt+'</div>'
++'<div class="linha1"><span class="artista-pill">🎤 '+s.musico+'</span><span class="casa-pill">🏠 '+s.rest+'</span></div>'
++'<div class="hora-big">🕐 '+s.hIni+' as '+s.hFim+'</div>'
++'</div>';
+count++;
+});
+if(f.length>0) htmlBonito+='</div>';
+if(f.length===0){
+htmlBonito='<div style="padding:20px;text-align:center;color:#999;font-size:13px">Nenhum show neste filtro<br>Selecione outro músico ou data</div>';
+txt='*AGENDA DE SHOWS*\n\nNenhum show encontrado neste filtro.';
+}
+document.getElementById('textoSemValor').innerText=txt;
+var prevEl=document.getElementById('previewBonito');
+if(prevEl) prevEl.innerHTML=htmlBonito;
+var contEl=document.getElementById('contadorPrev');
+if(contEl) contEl.innerText=count+' shows';
+}
+function bindFiltros(){['filtroMusico','filtroData','filtroVisao','ordemTexto','finDe','finAte','finMusico'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('change',function(){if(id.startsWith('fin'))renderFinanceiro();else gerarTexto()})})}
 function enviarZap(){window.open('https://wa.me/?text='+encodeURIComponent(document.getElementById('textoSemValor').innerText),'_blank')}
 function copiar(){var t=document.getElementById('textoSemValor').innerText;navigator.clipboard.writeText(t).then(function(){alert('Copiado!')})}
 function enviarFinanceiroZap(){var de=document.getElementById('finDe').value||'inicio';var ate=document.getElementById('finAte').value||'hoje';var fm=document.getElementById('finMusico').value||'todos';var filtrados=shows.slice();if(document.getElementById('finDe').value)filtrados=filtrados.filter(function(s){return s.data>=document.getElementById('finDe').value});if(document.getElementById('finAte').value)filtrados=filtrados.filter(function(s){return s.data<=document.getElementById('finAte').value});if(fm!=='todos')filtrados=filtrados.filter(function(s){return s.musico===fm});var porMusico={};filtrados.forEach(function(s){if(!porMusico[s.musico])porMusico[s.musico]=0;porMusico[s.musico]+=s.cache||0});var txt='*RELATORIO FINANCEIRO*\nPeriodo: '+de+' ate '+ate+'\n\n';for(var m in porMusico){txt+='🎤 '+m+': R$ '+porMusico[m]+'\n'}txt+='\nTotal geral: R$ '+filtrados.reduce(function(a,b){return a+(b.cache||0)},0);window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank')}
@@ -147,13 +221,13 @@ var temSegundo=document.getElementById('temSegundo')?document.getElementById('te
 if(!r||!m||!d){alert('Selecione restaurante, musico e data');return}
 var restObj=cadRest.find(function(x){return x.nome===r});
 if(editShowIdx>=0){
-var novo={rest:r,local:restObj?restObj.local:'',musico:m,data:d,hIni:hi,hFim:hf,cache:c,status:'Confirmado'};
+var novo={rest:r,local:restObj?restObj.local:'',musico:m,data:d,[STRIPPED]
 shows[editShowIdx]=novo;editShowIdx=-1;salvar();
 } else {
-var novo={rest:r,local:restObj?restObj.local:'',musico:m,data:d,hIni:hi,hFim:hf,cache:c,status:'Confirmado'};
+var novo={rest:r,local:restObj?restObj.local:'',musico:m,data:d,[STRIPPED]
 shows.push(novo);
 if(temSegundo && hi2 && hf2){
-var novo2={rest:r,local:restObj?restObj.local:'',musico:m,data:d,hIni:hi2,hFim:hf2,cache:c,status:'Confirmado'};
+var novo2={rest:r,local:restObj?restObj.local:'',musico:m,data:d,[STRIPPED]
 shows.push(novo2);
 }
 salvar();
