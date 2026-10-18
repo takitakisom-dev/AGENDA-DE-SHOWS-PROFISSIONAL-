@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>AGENDA DE SHOWS PROFISSIONAL</title>
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#3A3A3A">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+body{background:#f5f5f5;color:#222}
+.topo{background:#fff;padding:16px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,.06);position:sticky;top:0;z-index:10}
+.topo h1{font-size:12px;color:#3A3A3A;font-weight:800}
+.container{padding:16px;max-width:600px;margin:0 auto}
+.card{background:#fff;border-radius:16px;padding:16px;margin-bottom:16px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+.card-titulo{font-weight:700;margin-bottom:12px;font-size:13px;color:#3A3A3A;display:flex;justify-content:space-between}
+.item{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid #eee}
+.item-valor{font-weight:800;color:#3A3A3A;background:#f0f0f0;padding:6px 10px;border-radius:20px}
+.btn{width:100%;background:#3A3A3A;color:#fff;border:none;padding:14px;border-radius:10px;font-weight:700;margin-top:10px}
+.btn-green{background:#25D366}
+.btn-instalar{background:#3A3A3A;color:#fff;padding:16px;border-radius:12px;width:100%;font-weight:800;border:none;margin-bottom:16px;display:none}
+.status{padding:8px 12px;border-radius:20px;font-size:11px;font-weight:700;display:inline-block;margin-bottom:12px}
+.offline{background:#ffe0e0;color:#c00} .online{background:#e0ffe0;color:#067a00}
+input,select{width:100%;padding:12px;border:1.5px solid #ddd;border-radius:8px;margin:6px 0 12px}
+label{font-size:11px;font-weight:700;color:#555;text-transform:uppercase}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.menu-lateral{position:fixed;top:0;right:-280px;width:280px;height:100%;background:#fff;box-shadow:-5px 0 20px rgba(0,0,0,.15);z-index:20;transition:.3s;padding:24px}
+.menu-lateral.aberto{right:0}
+.menu-item{padding:14px 0;border-bottom:1px solid #eee;font-size:13px;cursor:pointer;font-weight:600}
+.fundo-escuro{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.4);display:none;z-index:15}
+</style>
+</head>
+<body>
+<div class="topo"><h1>AGENDA DE SHOWS • NAO APAGA</h1><button onclick="abrirMenu()" style="font-size:24px;background:none;border:none">☰</button></div>
+<div class="fundo-escuro" id="fundo" onclick="fecharMenu()"></div>
+<div class="menu-lateral" id="menu">
+<h3 style="margin-bottom:20px">MENU</h3>
+<div class="menu-item" onclick="mostrarTela('inicio');fecharMenu()">🏠 INICIO - AGENDA DO DIA (COM VALOR)</div>
+<div class="menu-item" style="color:#25D366" onclick="mostrarTela('enviar');fecharMenu()">📤 ENVIAR CRONOGRAMA P/ MUSICO (SEM VALOR)</div>
+<div class="menu-item" onclick="mostrarTela('adicionar');fecharMenu()">➕ ADICIONAR NOVO SHOW</div>
+</div>
+<div class="container">
+<button id="btnInstalar" class="btn-instalar">📲 INSTALAR APP NO CELULAR - 1 CLIQUE</button>
+<div id="statusConexao" class="status offline">🔴 OFFLINE - Dados salvos localmente</div>
+<div id="tela-inicio"><div class="card"><div class="card-titulo"><span id="tituloDia"></span><span id="totalDia"></span></div><div id="listaHoje"></div></div><div class="card" style="background:#3A3A3A;color:#fff"><div style="font-size:12px;opacity:.8">TOTAL DO DIA</div><div style="font-size:22px;font-weight:800;margin-top:4px" id="totalGrande"></div></div></div>
+<div id="tela-enviar" style="display:none"><div class="card"><div class="card-titulo">📤 CRONOGRAMA SEM VALOR</div>
+<label>Filtrar por Musico</label><select id="filtroMusico" onchange="gerarTextoSemValor()"></select>
+<label>Data</label><input type="date" id="filtroData" onchange="gerarTextoSemValor()">
+<div style="background:#f9f9f9;padding:14px;border-radius:8px;margin:12px 0;white-space:pre-wrap;font-size:13px;border:1px dashed #ccc" id="textoSemValor"></div>
+<button class="btn btn-green" onclick="enviarWhats()">📱 ENVIAR NO WHATSAPP</button>
+<button class="btn" style="background:#fff;color:#3A3A3A;border:1.5px solid #ddd" onclick="copiarTexto()">📋 COPIAR TEXTO</button></div></div>
+<div id="tela-adicionar" style="display:none"><div class="card"><div class="card-titulo">+ Adicionar Novo Show</div>
+<label>Restaurante</label><input id="rest" placeholder="Cantina Italiana">
+<label>Musico</label><input id="musico" placeholder="Andre Taki">
+<div class="grid2"><div><label>Data</label><input id="data" type="date"></div><div><label>Cache R$</label><input id="cache" type="number" placeholder="350"></div></div>
+<div class="grid2"><div><label>Hora Inicio</label><input id="hIni" type="time" value="19:00"></div><div><label>Hora Fim</label><input id="hFim" type="time" value="22:00"></div></div>
+<button class="btn" onclick="adicionar()">ADICIONAR SHOW</button></div></div>
+</div>
+<script>
+let shows=JSON.parse(localStorage.getItem('shows_v2_final')||'[]');
+if(shows.length==0){const hoje=new Date().toISOString().slice(0,10);shows=[{rest:'Cantina Italiana - RESTAURANTE 1',musico:'Andre Taki',data:hoje,hIni:'19:00',hFim:'22:00',cache:350},{rest:'Bar do Centro - RESTAURANTE 2',musico:'Joao Silva',data:hoje,hIni:'20:00',hFim:'23:00',cache:300},{rest:'Sabor da Praia - RESTAURANTE 3',musico:'Maria Voz',data:hoje,hIni:'18:00',hFim:'21:00',cache:400}];salvar();}
+function salvar(){localStorage.setItem('shows_v2_final',JSON.stringify(shows));render();}
+function adicionar(){const r=rest.value.trim(),m=musico.value.trim(),d=data.value,hi=hIni.value,hf=hFim.value,c=parseInt(cache.value||0);if(!r||!m||!d){alert('Preencha Restaurante, Musico e Data');return}shows.push({rest:r,musico:m,data:d,hIni:hi,hFim:hf,cache:c});salvar();rest.value='';musico.value='';mostrarTela('inicio');}
+function apagar(i){if(confirm('Apagar?')){shows.splice(i,1);salvar();}}
+function render(){const hoje=new Date().toISOString().slice(0,10);tituloDia.innerText='AGENDA DO DIA - '+new Date().toLocaleDateString('pt-BR');let lista=shows.filter(s=>s.data===hoje);if(lista.length==0)lista=shows.slice(0,10);let html='',total=0;lista.forEach(s=>{const gi=shows.indexOf(s);total+=s.cache;html+=`<div class="item"><div><div style="font-weight:600">${s.rest}</div><div style="font-size:12px;color:#666">${s.musico} • ${s.hIni} às ${s.hFim} • ${s.data.split('-').reverse().join('/')}</div><button onclick="apagar(${gi})" style="font-size:10px">🗑️ Apagar</button></div><div class="item-valor">R$ ${s.cache}</div></div>`});totalDia.innerText=lista.length+' shows';totalGrande.innerText='R$ '+total.toLocaleString('pt-BR')+',00';listaHoje.innerHTML=html;const mus=[...new Set(shows.map(s=>s.musico))];filtroMusico.innerHTML='<option value="">Todos</option>';mus.forEach(mm=>filtroMusico.innerHTML+=`<option value="${mm}">${mm}</option>`);gerarTextoSemValor();}
+function gerarTextoSemValor(){let f=shows;if(filtroMusico.value)f=f.filter(s=>s.musico===filtroMusico.value);if(filtroData.value)f=f.filter(s=>s.data===filtroData.value);f.sort((a,b)=>a.data.localeCompare(b.data));let txt='*AGENDA DE SHOWS*\\n\\n';if(f.length==0)txt='Nenhum show.';else f.forEach(s=>{const d=s.data.split('-');txt+=`${new Date(s.data+'T12:00:00').toLocaleDateString('pt-BR',{weekday:'short'})} ${d[2]}/${d[1]} - ${s.rest} - ${s.hIni} as ${s.hFim} - ${s.musico}\\n`});textoSemValor.innerText=txt;}
+function enviarWhats(){window.open('https://wa.me/?text='+encodeURIComponent(textoSemValor.innerText),'_blank');}
+function copiarTexto(){navigator.clipboard.writeText(textoSemValor.innerText).then(()=>alert('Copiado!'))}
+function mostrarTela(t){document.getElementById('tela-inicio').style.display=t==='inicio'?'block':'none';document.getElementById('tela-enviar').style.display=t==='enviar'?'block':'none';document.getElementById('tela-adicionar').style.display=t==='adicionar'?'block':'none';}
+function abrirMenu(){menu.classList.add('aberto');fundo.style.display='block'} function fecharMenu(){menu.classList.remove('aberto');fundo.style.display='none'}
+function atualizarStatus(){const el=statusConexao;if(navigator.onLine){el.className='status online';el.innerText='🟢 ONLINE'}else{el.className='status offline';el.innerText='🔴 OFFLINE - Dados salvos localmente';}}
+window.addEventListener('online',atualizarStatus);window.addEventListener('offline',atualizarStatus);atualizarStatus();
+let deferredPrompt;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;btnInstalar.style.display='block';});btnInstalar.addEventListener('click',async()=>{if(deferredPrompt){deferredPrompt.prompt();const{outcome}=await deferredPrompt.userChoice;if(outcome==='accepted'){btnInstalar.innerHTML='✅ INSTALADO!';setTimeout(()=>btnInstalar.style.display='none',2000);}deferredPrompt=null;}else alert('3 pontinhos > Instalar app');});
+render();if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js');}
+</script>
+</body>
+</html>
