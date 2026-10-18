@@ -1,4 +1,4 @@
-const CACHE='v3.3-musico-nome-final';
+const CACHE='v3.4-cadastro-separado';
 self.addEventListener('install',e=>{
   e.waitUntil(caches.open(CACHE).then(c=>c.addAll(['./','./agenda-shows.html'])));
   self.skipWaiting();
