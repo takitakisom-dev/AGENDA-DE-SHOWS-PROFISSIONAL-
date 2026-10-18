@@ -2,16 +2,15 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AGENDA DO DIA</title>
 <link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#3A3A3A">
 <link rel="icon" href="./icon-192.png">
-<link rel="apple-touch-icon" href="./icon-192.png">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,Inter,Segoe UI,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,sans-serif}
 body{background:#E9E9E9;color:#222;min-height:100vh;padding-bottom:90px}
-.topo{background:#D9D9D9;padding:14px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:5}
+.topo{background:#D9D9D9;padding:14px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:10}
 .topo .hamb{font-size:26px;cursor:pointer;padding:4px 8px}
 .topo h1{font-size:17px;font-weight:800;flex:1}
 .topo .btn-home-top{background:#3A3A3A;color:#fff;border:none;padding:7px 12px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer}
@@ -20,17 +19,16 @@ body{background:#E9E9E9;color:#222;min-height:100vh;padding-bottom:90px}
 .menu.aberto{transform:translateX(0)}
 .user{display:flex;align-items:center;gap:12px;padding:8px 8px 16px;border-bottom:1px solid #eee;margin-bottom:8px}
 .avatar{width:48px;height:48px;background:#E9E9E9;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:#888}
-.menu-item{display:flex;align-items:center;gap:14px;padding:13px 10px;border-radius:12px;font-size:13px;font-weight:700;color:#222;cursor:pointer;margin-bottom:2px;border:1px solid transparent}
-.menu-item:hover{background:#F5F5F5;border-color:#eee}
+.menu-item{display:flex;align-items:center;gap:14px;padding:13px 10px;border-radius:12px;font-size:13px;font-weight:700;color:#222;cursor:pointer;margin-bottom:2px}
+.menu-item:hover{background:#F5F5F5}
 .divider{height:1px;background:#eee;margin:12px 0}
 .container{padding:16px;max-width:520px;margin:0 auto}
 .card{background:#fff;border-radius:20px;padding:18px;margin-bottom:14px;box-shadow:0 4px 12px rgba(0,0,0,.06)}
 .status{padding:8px 12px;border-radius:20px;font-size:11px;font-weight:700;display:inline-block;margin:10px 16px}
 .online{background:#d1f5d1;color:#067a00}.offline{background:#ffe0e0;color:#c00}
 .btn-plus{position:fixed;bottom:24px;right:24px;width:60px;height:60px;background:#3A3A3A;color:#fff;border-radius:50%;border:none;font-size:34px;z-index:6;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.25)}
-.btn-instalar{position:fixed;bottom:94px;right:24px;background:#25D366;color:#fff;border:none;padding:13px 20px;border-radius:30px;font-weight:800;font-size:13px;z-index:7;box-shadow:0 8px 20px rgba(0,0,0,.25);display:none;cursor:pointer;animation:pulse 2s infinite}
+.btn-instalar{position:fixed;bottom:94px;right:24px;background:#25D366;color:#fff;border:none;padding:13px 20px;border-radius:30px;font-weight:800;font-size:13px;z-index:7;box-shadow:0 8px 20px rgba(0,0,0,.25);display:none;cursor:pointer}
 .btn-instalar.mostrar{display:flex;align-items:center;gap:6px}
-@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.05)}100%{transform:scale(1)}}
 .badge{background:#F2F2F2;padding:7px 14px;border-radius:20px;display:inline-block;font-size:12px;font-weight:600}
 .item-valor{font-weight:800;background:#f0f0f0;padding:6px 10px;border-radius:20px;font-size:13px}
 .btn{width:100%;background:#3A3A3A;color:#fff;border:none;padding:14px;border-radius:14px;font-weight:800;margin-top:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-size:14px}
@@ -44,14 +42,13 @@ label{font-size:11px;font-weight:700;color:#555;text-transform:uppercase}
 .card-actions button{padding:7px 14px;border-radius:8px;border:none;font-size:12px;font-weight:700;cursor:pointer}
 .btn-edit{background:#E8F0FE;color:#1A73E8}.btn-del{background:#FCE8E6;color:#D93025}
 .fin-musico{background:#f8f8f8;border-radius:12px;padding:12px;margin-top:10px}.fin-linha{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #eee;font-size:12px}
-.preview-bonito{display:flex;flex-direction:column;gap:10px;max-height:500px;overflow:auto;padding:4px}
+.preview-bonito{display:flex;flex-direction:column;gap:10px;max-height:600px;overflow:auto;padding:4px}
 .show-card-bonito{background:#fff;border-radius:16px;padding:14px 16px;border-left:6px solid #3A3A3A;box-shadow:0 2px 8px rgba(0,0,0,.06);display:flex;flex-direction:column;gap:6px;position:relative}
 .show-card-bonito .linha1{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .show-card-bonito .artista-pill{background:#3A3A3A;color:#fff;padding:6px 14px;border-radius:20px;font-weight:800;font-size:13px}
 .show-card-bonito .casa-pill{background:#FFF3CD;color:#856404;padding:6px 12px;border-radius:20px;font-weight:700;font-size:12px;border:1px solid #FFE69C}
 .show-card-bonito .hora-big{background:#F1F3F5;padding:8px 12px;border-radius:10px;font-weight:700;font-size:13px;color:#333;display:flex;align-items:center;gap:6px;width:fit-content}
 .show-card-bonito .data-badge{position:absolute;top:10px;right:10px;background:#E9ECEF;color:#495057;padding:4px 8px;border-radius:8px;font-size:11px;font-weight:700}
-.grupo-data{font-size:12px;font-weight:800;color:#666;margin:8px 0 2px 4px;text-transform:uppercase;letter-spacing:.5px}
 .grupo-casa{background:#3A3A3A;color:#fff;padding:10px 14px;border-radius:10px;margin:14px 0 8px;font-weight:800;font-size:14px;display:flex;justify-content:space-between;align-items:center}
 </style>
 </head>
@@ -80,7 +77,7 @@ label{font-size:11px;font-weight:700;color:#555;text-transform:uppercase}
 <div class="container" id="tela-mes" style="display:none"><div style="font-size:13px;font-weight:700;margin:6px 0 12px">Agenda do Mes - <span id="tituloMes"></span></div><div id="listaMes"></div><div class="card" style="background:#3A3A3A;color:#fff"><div style="font-size:12px;opacity:.8">TOTAL DO MES</div><div style="font-size:20px;font-weight:800" id="totalMes">R$ 0</div></div><button class="btn btn-voltar" onclick="mostrarTela('inicio')">VOLTAR PARA INICIO</button></div>
 <div class="container" id="tela-ano" style="display:none"><div style="font-size:13px;font-weight:700;margin:6px 0 12px">Agenda do Ano - <span id="tituloAno"></span></div><div id="listaAno"></div><div class="card" style="background:#3A3A3A;color:#fff"><div style="font-size:12px;opacity:.8">TOTAL DO ANO</div><div style="font-size:20px;font-weight:800" id="totalAno">R$ 0</div></div><button class="btn btn-voltar" onclick="mostrarTela('inicio')">VOLTAR PARA INICIO</button></div>
 <div class="container" id="tela-cadRestaurantes" style="display:none">
-<div class="card"><b>CADASTRAR RESTAURANTE / CASA DE SHOW</b><label>Nome do Restaurante / Casa</label><input id="cadRestNome" placeholder="Ex: P1, P2, Cantina Italiana"><label>Bairro / Local</label><input id="cadRestLocal" placeholder="Ex: Centro"><label>Contato / Obs (opcional)</label><input id="cadRestObs"><button class="btn" id="btnSalvarRest" onclick="addRestauranteCad()">SALVAR RESTAURANTE</button><button class="btn btn-light" onclick="cancelarEdicaoRest()">CANCELAR EDICAO</button></div>
+<div class="card"><b>CADASTRAR RESTAURANTE / CASA DE SHOW</b><label>Nome do Restaurante / Casa</label><input id="cadRestNome" placeholder="Ex: P1, P2"><label>Bairro / Local</label><input id="cadRestLocal" placeholder="Ex: Centro"><label>Contato / Obs (opcional)</label><input id="cadRestObs"><button class="btn" id="btnSalvarRest" onclick="addRestauranteCad()">SALVAR RESTAURANTE</button><button class="btn btn-light" onclick="cancelarEdicaoRest()">CANCELAR EDICAO</button></div>
 <div class="card"><b>Lista rapida</b><div id="listaCadRestSimples"></div></div><button class="btn btn-voltar" onclick="mostrarTela('inicio')">VOLTAR PARA INICIO</button>
 </div>
 <div class="container" id="tela-cadMusicos" style="display:none">
@@ -90,19 +87,19 @@ label{font-size:11px;font-weight:700;color:#555;text-transform:uppercase}
 <div class="container" id="tela-enviar" style="display:none">
 <div class="card">
 <b style="font-size:16px">ENVIAR CRONOGRAMA ORGANIZADO P1,P2,P3...</b>
-<p style="font-size:12px;color:#666;margin:6px 0 14px">Modo geral bonitao pra mandar pra todo mundo - ja em ordem!</p>
+<p style="font-size:12px;color:#666;margin:6px 0 14px">Bonitao e organizado por casas - ja em ordem!</p>
 <label>FILTRAR POR MUSICO</label><select id="filtroMusico"></select>
 <label>DATA</label><input type="date" id="filtroData">
 <label>VISAO</label><select id="filtroVisao"><option value="todos">Todos</option><option value="mes">So MES</option><option value="ano">So ANO</option></select>
-<label>ORDENAR POR (importante!)</label><select id="ordemLista"><option value="casa">CASA - P1,P2,P3,P4,P5,P6 (recomendado geral)</option><option value="data">DATA + HORA</option><option value="artista">ARTISTA A-Z</option></select>
-<label>ORDEM DO TEXTO WHATSAPP</label><select id="ordemTexto"><option value="casa_artista_data_hora">CASA - ARTISTA - DATA - HORA (P1 - EDILL - 12/10 - 12:30)</option><option value="artista_casa_data_hora">ARTISTA - CASA - DATA - HORA</option><option value="data_casa_hora_artista">DATA - CASA - HORA - ARTISTA</option></select>
-<div style="margin:16px 0 8px;display:flex;justify-content:space-between;align-items:center"><b style="font-size:12px">PREVIA BONITA ORGANIZADA POR CASAS</b><span style="font-size:11px;color:#888" id="contadorPrev">0 shows</span></div>
+<label>ORDENAR POR</label><select id="ordemLista"><option value="casa">CASA - P1,P2,P3,P4,P5,P6 (recomendado)</option><option value="data">DATA + HORA</option><option value="artista">ARTISTA A-Z</option></select>
+<label>ORDEM DO TEXTO WHATSAPP</label><select id="ordemTexto"><option value="casa_artista_data_hora">CASA - ARTISTA - DATA - HORA</option><option value="artista_casa_data_hora">ARTISTA - CASA - DATA - HORA</option><option value="data_casa_hora_artista">DATA - CASA - HORA - ARTISTA</option></select>
+<div style="margin:16px 0 8px;display:flex;justify-content:space-between;align-items:center"><b style="font-size:12px">PREVIA BONITA ORGANIZADA</b><span style="font-size:11px;color:#888" id="contadorPrev">0 shows</span></div>
 <div id="previewBonito" class="preview-bonito" style="background:#F8F9FA;border-radius:14px;padding:12px;border:1px solid #eee;min-height:120px"></div>
 <div style="margin:16px 0 8px"><b style="font-size:12px">TEXTO WHATSAPP JA EM ORDEM P1,P2...</b></div>
 <div id="textoSemValor" style="background:#f9f9f9;padding:12px;border-radius:10px;white-space:pre-wrap;font-size:13px;border:1px dashed #ccc;min-height:80px"></div>
-<button class="btn btn-green" style="font-size:16px;padding:16px" onclick="enviarZap()">ENVIAR NO WHATSAPP (ORGANIZADO P1,P2...)</button>
-<button class="btn btn-print" style="font-size:16px;padding:16px" onclick="imprimirBonitao()">IMPRIMIR BONITAO SIMPLES (P1,P2...)</button>
-<button class="btn btn-print2" style="font-size:16px;padding:16px" onclick="imprimirQuadroGeral()">IMPRIMIR QUADRO GERAL POR CASAS (MAIS BONITO PRA TODO MUNDO)</button>
+<button class="btn btn-green" style="font-size:16px;padding:16px" onclick="enviarZap()">ENVIAR NO WHATSAPP ORGANIZADO</button>
+<button class="btn btn-print" style="font-size:16px;padding:16px" onclick="imprimirBonitao()">IMPRIMIR BONITAO SIMPLES</button>
+<button class="btn btn-print2" style="font-size:16px;padding:16px" onclick="imprimirQuadroGeral()">IMPRIMIR QUADRO GERAL POR CASAS</button>
 <button class="btn btn-light" style="font-size:15px;padding:14px" onclick="copiar()">COPIAR TEXTO</button>
 </div>
 <button class="btn btn-voltar" onclick="mostrarTela('inicio')">VOLTAR PARA INICIO</button>
@@ -110,20 +107,18 @@ label{font-size:11px;font-weight:700;color:#555;text-transform:uppercase}
 <div class="container" id="tela-adicionar" style="display:none">
 <div class="card">
 <b id="tituloFormShow">+ Novo Show</b><br><span style="font-size:11px;color:#888">Escolha da lista cadastrada</span><br><br>
-<label>RESTAURANTE / CASA (escolha da lista)</label><select id="rest"></select><div style="font-size:11px;margin:-8px 0 12px"><a href="#" onclick="mostrarTela('cadRestaurantes');return false">+ Cadastrar novo restaurante</a></div>
-<label>MUSICO (escolha da lista)</label><select id="musico"></select><div style="font-size:11px;margin:-8px 0 12px"><a href="#" onclick="mostrarTela('cadMusicos');return false">+ Cadastrar novo musico</a></div>
+<label>RESTAURANTE / CASA</label><select id="rest"></select>
+<label>MUSICO</label><select id="musico"></select>
 <label>DATA</label><input id="data" type="date">
 <label>CACHE R$ (so voce ve)</label><input id="cache" type="number" placeholder="350">
 <div style="background:#F7F7F7;border-radius:12px;padding:12px;margin-bottom:12px">
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><b style="font-size:12px">HORARIO 1 - ALMOCO / PRINCIPAL</b><span style="font-size:10px;color:#888">obrigatorio</span></div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><b style="font-size:12px">HORARIO 1 - ALMOCO / PRINCIPAL</b></div>
 <div style="display:flex;gap:8px"><div style="flex:1"><label>INICIO</label><input id="hIni" type="time" value="12:00"></div><div style="flex:1"><label>FIM</label><input id="hFim" type="time" value="15:00"></div></div>
 </div>
 <div style="background:#FFF8E1;border:1.5px dashed #FFC107;border-radius:12px;padding:12px;margin-bottom:12px">
 <label style="display:flex;align-items:center;gap:8px;cursor:pointer;margin:0"><input type="checkbox" id="temSegundo" style="width:18px;height:18px" onchange="toggleSegundo()"> <b style="font-size:12px">TEM SEGUNDO HORARIO NO MESMO DIA? (JANTA)</b></label>
 <div id="boxSegundo" style="display:none;margin-top:10px">
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><b style="font-size:12px">HORARIO 2 - JANTA / EXTRA</b><span style="font-size:10px;color:#D68C00">mesma casa, mesmo dia</span></div>
 <div style="display:flex;gap:8px"><div style="flex:1"><label>INICIO 2</label><input id="hIni2" type="time" value="19:00"></div><div style="flex:1"><label>FIM 2</label><input id="hFim2" type="time" value="22:00"></div></div>
-<div style="font-size:11px;color:#8a6d00;margin-top:6px;background:#fff;padding:6px 8px;border-radius:8px">Ao salvar, vai criar 2 shows automaticamente</div>
 </div>
 </div>
 <button class="btn" id="btnSalvarShow" onclick="adicionar()">ADICIONAR</button>
@@ -132,233 +127,267 @@ label{font-size:11px;font-weight:700;color:#555;text-transform:uppercase}
 </div>
 <div class="container" id="tela-restaurantes" style="display:none"><div class="card"><b>RESTAURANTES CADASTRADOS</b><div id="listaRest" style="margin-top:12px"></div><button class="btn" onclick="mostrarTela('cadRestaurantes')">+ CADASTRAR NOVO</button></div><button class="btn btn-voltar" onclick="mostrarTela('inicio')">VOLTAR PARA INICIO</button></div>
 <div class="container" id="tela-musicos" style="display:none"><div class="card"><b>MUSICOS CADASTRADOS</b><div id="listaMusicosDiv" style="margin-top:12px"></div><button class="btn" onclick="mostrarTela('cadMusicos')">+ CADASTRAR NOVO</button></div><button class="btn btn-voltar" onclick="mostrarTela('inicio')">VOLTAR PARA INICIO</button></div>
-<div class="container" id="tela-financeiro" style="display:none"><div class="card"><b>RELATORIOS FINANCEIROS</b><div style="margin-top:12px;display:flex;gap:8px"><div style="flex:1"><label>De</label><input type="date" id="finDe"></div><div style="flex:1"><label>Ate</label><input type="date" id="finAte"></div></div><label>Filtrar por Musico</label><select id="finMusico"><option value="">Todos</option></select><div id="totalFinanceiro" style="font-size:20px;font-weight:800;margin-top:12px;background:#3A3A3A;color:#fff;padding:14px;border-radius:12px"></div><div id="detalheFinanceiro" style="margin-top:12px"></div><button class="btn btn-green" onclick="enviarFinanceiroZap()">ENVIAR RELATORIO</button></div><button class="btn btn-voltar" onclick="mostrarTela('inicio')">VOLTAR PARA INICIO</button></div>
-<div class="container" id="tela-config" style="display:none"><div class="card"><b>CONFIG</b><p style="margin-top:10px;font-size:13px;color:#666">v5.0 - Quadro geral organizado P1,P2,P3 + Imprimir bonitao</p><button class="btn" style="background:#25D366" onclick="instalarApp()">INSTALAR APP AGORA</button><button class="btn btn-red" onclick="limparTudo()">LIMPAR TUDO</button></div><button class="btn btn-voltar" onclick="mostrarTela('inicio')">VOLTAR PARA INICIO</button></div>
+<div class="container" id="tela-financeiro" style="display:none"><div class="card"><b>RELATORIOS FINANCEIROS</b><div style="margin-top:12px;display:flex;gap:8px"><div style="flex:1"><label>De</label><input type="date" id="finDe"></div><div style="flex:1"><label>Até</label><input type="date" id="finAte"></div></div><label>Filtrar por Músico</label><select id="finMusico"><option value="">Todos</option></select><div id="totalFinanceiro" style="font-size:20px;font-weight:800;margin-top:12px;background:#3A3A3A;color:#fff;padding:14px;border-radius:12px"></div><div id="detalheFinanceiro" style="margin-top:12px"></div><button class="btn btn-green" onclick="enviarFinanceiroZap()">ENVIAR RELATORIO</button></div><button class="btn btn-voltar" onclick="mostrarTela('inicio')">VOLTAR PARA INICIO</button></div>
+<div class="container" id="tela-config" style="display:none"><div class="card"><b>CONFIG</b><p style="margin-top:10px;font-size:13px;color:#666">v6 FINAL ULTRA STABLE - Sem erro match - Organizado P1-P6</p><button class="btn" style="background:#25D366" onclick="instalarApp()">INSTALAR APP AGORA</button><button class="btn btn-red" onclick="limparTudo()">LIMPAR TUDO (CORRIGE ERROS)</button></div><button class="btn btn-voltar" onclick="mostrarTela('inicio')">VOLTAR PARA INICIO</button></div>
 <button class="btn-instalar" id="btnInstalar" onclick="instalarApp()">INSTALAR APP</button>
 <button class="btn-plus" onclick="novoShow()">+</button>
-<div id="print-area" style="display:none"></div>
 <script>
 var shows=[]; var cadMus=[]; var cadRest=[];
 var editShowIdx=-1; var editMusIdx=-1; var editRestIdx=-1;
-try{shows=JSON.parse(localStorage.getItem('shows_v3_final')||'[]')}catch(e){shows=[]}
-try{cadMus=JSON.parse(localStorage.getItem('cad_musicos_v34')||'[]')}catch(e){cadMus=[]}
-try{cadRest=JSON.parse(localStorage.getItem('cad_rests_v34')||'[]')}catch(e){cadRest=[]}
-function hojeISO(){var d=new Date();var off=d.getTimezoneOffset();var local=new Date(d.getTime()-off*60*1000);return local.toISOString().slice(0,10);}
-function ordenaCasa(a,b){
-  var mA=a.rest.match(/P?(\d+)/i);
-  var mB=b.rest.match(/P?(\d+)/i);
-  var nA=mA?parseInt(mA[1]):9999;
-  var nB=mB?parseInt(mB[1]):9999;
-  if(nA!==nB) return nA-nB;
-  var cmp=a.rest.localeCompare(b.rest);
-  if(cmp!==0) return cmp;
-  return a.hIni.localeCompare(b.hIni);
+function safeParse(key, def){
+  try{
+    var v = localStorage.getItem(key);
+    if(!v) return def;
+    var j = JSON.parse(v);
+    if(!Array.isArray(j)) return def;
+    return j;
+  }catch(e){ return def; }
 }
-if(cadMus.length===0){cadMus=[{nome:'Andre Taki',cache:350,obs:''},{nome:'EDILL',cache:300,obs:''},{nome:'ISRAEL',cache:300,obs:''},{nome:'YGOR',cache:300,obs:''},{nome:'Joao Silva',cache:300,obs:''},{nome:'LUCIANO',cache:300,obs:''},{nome:'VAT 60 DUO',cache:300,obs:''}];localStorage.setItem('cad_musicos_v34',JSON.stringify(cadMus));}
-if(cadRest.length===0){cadRest=[{nome:'P1',local:'Ubatuba',obs:''},{nome:'P2',local:'Ubatuba',obs:''},{nome:'P3',local:'Ubatuba',obs:''},{nome:'P4',local:'Ubatuba',obs:''},{nome:'P5',local:'Ubatuba',obs:''},{nome:'P6',local:'Ubatuba',obs:''}];localStorage.setItem('cad_rests_v34',JSON.stringify(cadRest));}
+shows = safeParse('shows_v3_final', []);
+cadMus = safeParse('cad_musicos_v34', []);
+cadRest = safeParse('cad_rests_v34', []);
+function hojeISO(){
+  try{
+    var d=new Date();
+    var off=d.getTimezoneOffset();
+    var local=new Date(d.getTime()-off*60*1000);
+    return local.toISOString().slice(0,10);
+  }catch(e){ return new Date().toISOString().slice(0,10); }
+}
+function ordenaCasa(a,b){
+  try{
+    if(!a || !b) return 0;
+    var ra = (a.rest || '').toString();
+    var rb = (b.rest || '').toString();
+    var ma = ra.match(/P?(\d+)/i);
+    var mb = rb.match(/P?(\d+)/i);
+    var na = ma ? parseInt(ma[1],10) : 9999;
+    var nb = mb ? parseInt(mb[1],10) : 9999;
+    if(isNaN(na)) na=9999;
+    if(isNaN(nb)) nb=9999;
+    if(na!==nb) return na-nb;
+    var cmp = ra.localeCompare(rb);
+    if(cmp!==0) return cmp;
+    var ha = (a.hIni||'').toString();
+    var hb = (b.hIni||'').toString();
+    return ha.localeCompare(hb);
+  }catch(e){ return 0; }
+}
+if(cadMus.length===0){
+  cadMus=[{nome:'Andre Taki',cache:350,obs:''},{nome:'EDILL',cache:300,obs:''},{nome:'ISRAEL',cache:300,obs:''},{nome:'YGOR',cache:300,obs:''},{nome:'LUCIANO',cache:300,obs:''},{nome:'VAT 60 DUO',cache:300,obs:''}];
+  try{localStorage.setItem('cad_musicos_v34',JSON.stringify(cadMus));}catch(e){}
+}
+if(cadRest.length===0){
+  cadRest=[{nome:'P1',local:'Ubatuba',obs:''},{nome:'P2',local:'Ubatuba',obs:''},{nome:'P3',local:'Ubatuba',obs:''},{nome:'P4',local:'Ubatuba',obs:''},{nome:'P5',local:'Ubatuba',obs:''},{nome:'P6',local:'Ubatuba',obs:''}];
+  try{localStorage.setItem('cad_rests_v34',JSON.stringify(cadRest));}catch(e){}
+}
 if(shows.length===0){
   var h=hojeISO();
   shows=[
-    {rest:'P1',local:'Ubatuba',musico:'EDILL',data:h,cache:300,hIni:'12:30',hFim:'15:30'},
-    {rest:'P2',local:'Ubatuba',musico:'ISRAEL',data:h,cache:300,hIni:'12:30',hFim:'15:30'},
-    {rest:'P3',local:'Ubatuba',musico:'YGOR',data:h,cache:300,hIni:'13:00',hFim:'16:00'},
-    {rest:'P4',local:'Ubatuba',musico:'LUCIANO',data:h,cache:300,hIni:'13:00',hFim:'16:00'},
-    {rest:'P5',local:'Ubatuba',musico:'VAT 60 DUO',data:h,cache:300,hIni:'12:30',hFim:'15:30'},
-    {rest:'P6',local:'Ubatuba',musico:'Andre Taki',data:h,cache:350,hIni:'12:00',hFim:'15:00'},
-    {rest:'P1',local:'Ubatuba',musico:'EDILL',data:h,cache:300,hIni:'19:00',hFim:'22:00'},
-    {rest:'P2',local:'Ubatuba',musico:'ISRAEL',data:h,cache:300,hIni:'19:00',hFim:'22:00'},
-    {rest:'P3',local:'Ubatuba',musico:'YGOR',data:h,cache:300,hIni:'19:30',hFim:'22:30'},
-    {rest:'P4',local:'Ubatuba',musico:'LUCIANO',data:h,cache:300,hIni:'20:30',hFim:'23:30'},
-    {rest:'P5',local:'Ubatuba',musico:'VAT 60 DUO',data:h,cache:300,hIni:'18:30',hFim:'21:30'}
+    {rest:'P1',local:'Ubatuba',musico:'EDILL',data:h,hIni:'12:30',hFim:'15:30',cache:300},
+    {rest:'P2',local:'Ubatuba',musico:'ISRAEL',data:h,hIni:'12:30',hFim:'15:30',cache:300},
+    {rest:'P3',local:'Ubatuba',musico:'YGOR',data:h,hIni:'13:00',hFim:'16:00',cache:300},
+    {rest:'P4',local:'Ubatuba',musico:'LUCIANO',data:h,hIni:'13:00',hFim:'16:00',cache:300},
+    {rest:'P5',local:'Ubatuba',musico:'VAT 60 DUO',data:h,hIni:'12:30',hFim:'15:30',cache:300},
+    {rest:'P6',local:'Ubatuba',musico:'Andre Taki',data:h,hIni:'12:00',hFim:'15:00',cache:350},
+    {rest:'P1',local:'Ubatuba',musico:'EDILL',data:h,hIni:'19:00',hFim:'22:00',cache:300},
+    {rest:'P2',local:'Ubatuba',musico:'ISRAEL',data:h,hIni:'19:00',hFim:'22:00',cache:300},
+    {rest:'P3',local:'Ubatuba',musico:'YGOR',data:h,hIni:'19:30',hFim:'22:30',cache:300},
+    {rest:'P4',local:'Ubatuba',musico:'LUCIANO',data:h,hIni:'20:30',hFim:'23:30',cache:300},
+    {rest:'P5',local:'Ubatuba',musico:'VAT 60 DUO',data:h,hIni:'18:30',hFim:'21:30',cache:300}
   ];
-  localStorage.setItem('shows_v3_final',JSON.stringify(shows));
+  try{localStorage.setItem('shows_v3_final',JSON.stringify(shows));}catch(e){}
 }
-function salvar(){localStorage.setItem('shows_v3_final',JSON.stringify(shows)); render()}
-function salvarCads(){localStorage.setItem('cad_musicos_v34',JSON.stringify(cadMus)); localStorage.setItem('cad_rests_v34',JSON.stringify(cadRest)); render()}
-function abrirMenu(){document.getElementById('menu').classList.add('aberto');document.getElementById('fundo').style.display='block'}
-function fecharMenu(){document.getElementById('menu').classList.remove('aberto');document.getElementById('fundo').style.display='none'}
+function salvar(){ try{localStorage.setItem('shows_v3_final',JSON.stringify(shows));}catch(e){} render(); }
+function salvarCads(){ try{localStorage.setItem('cad_musicos_v34',JSON.stringify(cadMus)); localStorage.setItem('cad_rests_v34',JSON.stringify(cadRest));}catch(e){} render(); }
+function abrirMenu(){try{document.getElementById('menu').classList.add('aberto');document.getElementById('fundo').style.display='block';}catch(e){}}
+function fecharMenu(){try{document.getElementById('menu').classList.remove('aberto');document.getElementById('fundo').style.display='none';}catch(e){}}
 function mostrarTela(t){
   fecharMenu();
   var telas=['inicio','mes','ano','enviar','adicionar','restaurantes','musicos','financeiro','config','cadRestaurantes','cadMusicos'];
   telas.forEach(function(id){var el=document.getElementById('tela-'+id);if(el)el.style.display=(id===t?'block':'none')});
   var tit=document.getElementById('topoTitulo');
   var mapa={'inicio':'AGENDA DO DIA','mes':'AGENDA DO MES','ano':'AGENDA DO ANO','enviar':'ENVIAR CRONOGRAMA','adicionar':editShowIdx>=0?'EDITAR SHOW':'+ Novo Show','restaurantes':'RESTAURANTES','musicos':'MUSICOS','financeiro':'RELATORIOS','cadRestaurantes':editRestIdx>=0?'EDITAR RESTAURANTE':'CADASTRAR RESTAURANTE','cadMusicos':editMusIdx>=0?'EDITAR MUSICO':'CADASTRAR MUSICO','config':'CONFIG'};
-  tit.innerText=mapa[t]||'AGENDA DO DIA';
+  if(tit) tit.innerText=mapa[t]||'AGENDA DO DIA';
   render();
 }
-function toggleSegundo(){var chk=document.getElementById('temSegundo');var box=document.getElementById('boxSegundo');if(box)box.style.display=chk && chk.checked?'block':'none';}
+function toggleSegundo(){try{var chk=document.getElementById('temSegundo');var box=document.getElementById('boxSegundo');if(box)box.style.display=chk && chk.checked?'block':'none';}catch(e){}}
 function novoShow(){
   editShowIdx=-1;
-  document.getElementById('tituloFormShow').innerText='+ Novo Show';
-  document.getElementById('btnSalvarShow').innerText='ADICIONAR';
-  var chk=document.getElementById('temSegundo'); if(chk) chk.checked=false;
-  var box=document.getElementById('boxSegundo'); if(box) box.style.display='none';
-  document.getElementById('rest').value='';
-  document.getElementById('musico').value='';
-  document.getElementById('data').value=hojeISO();
-  document.getElementById('cache').value='';
-  document.getElementById('hIni').value='12:00';
-  document.getElementById('hFim').value='15:00';
-  if(document.getElementById('hIni2')) document.getElementById('hIni2').value='19:00';
-  if(document.getElementById('hFim2')) document.getElementById('hFim2').value='22:00';
+  try{
+    document.getElementById('tituloFormShow').innerText='+ Novo Show';
+    document.getElementById('btnSalvarShow').innerText='ADICIONAR';
+    var chk=document.getElementById('temSegundo'); if(chk) chk.checked=false;
+    var box=document.getElementById('boxSegundo'); if(box) box.style.display='none';
+    document.getElementById('rest').value='';
+    document.getElementById('musico').value='';
+    document.getElementById('data').value=hojeISO();
+    document.getElementById('cache').value='';
+    document.getElementById('hIni').value='12:00';
+    document.getElementById('hFim').value='15:00';
+    if(document.getElementById('hIni2')) document.getElementById('hIni2').value='19:00';
+    if(document.getElementById('hFim2')) document.getElementById('hFim2').value='22:00';
+  }catch(e){}
   mostrarTela('adicionar');
 }
 function editarShow(idx){
-  editShowIdx=idx;
-  var s=shows[idx];
-  document.getElementById('tituloFormShow').innerText='EDITAR SHOW';
-  document.getElementById('btnSalvarShow').innerText='SALVAR ALTERACOES';
-  renderSelects();
-  document.getElementById('rest').value=s.rest;
-  document.getElementById('musico').value=s.musico;
-  document.getElementById('data').value=s.data;
-  document.getElementById('hIni').value=s.hIni;
-  document.getElementById('hFim').value=s.hFim;
-  document.getElementById('cache').value=s.cache;
-  var chk=document.getElementById('temSegundo'); if(chk) chk.checked=false;
-  var box=document.getElementById('boxSegundo'); if(box) box.style.display='none';
+  try{
+    editShowIdx=idx;
+    var s=shows[idx];
+    if(!s) return;
+    document.getElementById('tituloFormShow').innerText='EDITAR SHOW';
+    document.getElementById('btnSalvarShow').innerText='SALVAR ALTERACOES';
+    renderSelects();
+    document.getElementById('rest').value=s.rest||'';
+    document.getElementById('musico').value=s.musico||'';
+    document.getElementById('data').value=s.data||hojeISO();
+    document.getElementById('hIni').value=s.hIni||'12:00';
+    document.getElementById('hFim').value=s.hFim||'15:00';
+    document.getElementById('cache').value=s.cache||'';
+    var chk=document.getElementById('temSegundo'); if(chk) chk.checked=false;
+    var box=document.getElementById('boxSegundo'); if(box) box.style.display='none';
+  }catch(e){}
   mostrarTela('adicionar');
 }
 function apagarShow(idx){
-  if(confirm('Excluir este show?\n'+shows[idx].rest+' - '+shows[idx].musico+' - R$ '+(shows[idx].cache||0))){
-    shows.splice(idx,1); salvar();
-  }
+  try{
+    if(confirm('Excluir este show?\n'+(shows[idx]&&shows[idx].rest||'')+' - '+(shows[idx]&&shows[idx].musico||''))){
+      shows.splice(idx,1); salvar();
+    }
+  }catch(e){}
 }
 function addMusicoCad(){
-  var nome=document.getElementById('cadMusNome').value.trim();
-  var cache=parseInt(document.getElementById('cadMusCache').value||0);
-  var obs=document.getElementById('cadMusObs').value.trim();
-  if(!nome){alert('Digite o nome');return}
-  if(editMusIdx>=0){
-    cadMus[editMusIdx]={nome:nome,cache:cache,obs:obs};
-    editMusIdx=-1;
-    document.getElementById('btnSalvarMus').innerText='SALVAR MUSICO';
-    salvarCads(); alert('Atualizado!'); mostrarTela('musicos'); return;
-  }
-  if(cadMus.some(function(m){return m.nome.toLowerCase()===nome.toLowerCase()})){alert('Ja cadastrado');return}
-  cadMus.push({nome:nome,cache:cache,obs:obs});
-  salvarCads();
-  document.getElementById('cadMusNome').value='';document.getElementById('cadMusCache').value='';document.getElementById('cadMusObs').value='';
-  alert('Cadastrado!'); mostrarTela('musicos');
+  try{
+    var nome=document.getElementById('cadMusNome').value.trim();
+    var cache=parseInt(document.getElementById('cadMusCache').value||0);
+    var obs=document.getElementById('cadMusObs').value.trim();
+    if(!nome){alert('Digite o nome');return}
+    if(editMusIdx>=0){
+      cadMus[editMusIdx]={nome:nome,cache:cache,obs:obs};
+      editMusIdx=-1;
+      document.getElementById('btnSalvarMus').innerText='SALVAR MUSICO';
+      salvarCads(); alert('Atualizado!'); mostrarTela('musicos'); return;
+    }
+    if(cadMus.some(function(m){return m && m.nome && m.nome.toLowerCase()===nome.toLowerCase()})){alert('Ja cadastrado');return}
+    cadMus.push({nome:nome,cache:cache,obs:obs});
+    salvarCads();
+    document.getElementById('cadMusNome').value='';document.getElementById('cadMusCache').value='';document.getElementById('cadMusObs').value='';
+    alert('Cadastrado!'); mostrarTela('musicos');
+  }catch(e){ alert('Erro: '+e.message); }
 }
-function editarMusicoCad(idx){
-  editMusIdx=idx;var m=cadMus[idx];
-  document.getElementById('cadMusNome').value=m.nome;
-  document.getElementById('cadMusCache').value=m.cache;
-  document.getElementById('cadMusObs').value=m.obs;
-  document.getElementById('btnSalvarMus').innerText='ATUALIZAR MUSICO';
-  mostrarTela('cadMusicos');
-}
-function cancelarEdicaoMus(){editMusIdx=-1;document.getElementById('cadMusNome').value='';document.getElementById('cadMusCache').value='';document.getElementById('cadMusObs').value='';document.getElementById('btnSalvarMus').innerText='SALVAR MUSICO';}
-function apagarMusicoCad(idx){if(confirm('Apagar '+cadMus[idx].nome+'?')){cadMus.splice(idx,1);salvarCads()}}
+function editarMusicoCad(idx){ try{ editMusIdx=idx;var m=cadMus[idx]; if(!m) return; document.getElementById('cadMusNome').value=m.nome||''; document.getElementById('cadMusCache').value=m.cache||''; document.getElementById('cadMusObs').value=m.obs||''; document.getElementById('btnSalvarMus').innerText='ATUALIZAR MUSICO'; mostrarTela('cadMusicos'); }catch(e){} }
+function cancelarEdicaoMus(){try{editMusIdx=-1;document.getElementById('cadMusNome').value='';document.getElementById('cadMusCache').value='';document.getElementById('cadMusObs').value='';document.getElementById('btnSalvarMus').innerText='SALVAR MUSICO';}catch(e){}}
+function apagarMusicoCad(idx){try{if(confirm('Apagar '+(cadMus[idx]&&cadMus[idx].nome||'')+'?')){cadMus.splice(idx,1);salvarCads()}}catch(e){}}
 function addRestauranteCad(){
-  var nome=document.getElementById('cadRestNome').value.trim();
-  var localV=document.getElementById('cadRestLocal').value.trim();
-  var obs=document.getElementById('cadRestObs').value.trim();
-  if(!nome){alert('Digite o nome');return}
-  if(editRestIdx>=0){
-    cadRest[editRestIdx]={nome:nome,local:localV,obs:obs};
-    editRestIdx=-1;
-    document.getElementById('btnSalvarRest').innerText='SALVAR RESTAURANTE';
-    salvarCads(); alert('Atualizado!'); mostrarTela('restaurantes'); return;
-  }
-  if(cadRest.some(function(r){return r.nome.toLowerCase()===nome.toLowerCase()})){alert('Ja cadastrado');return}
-  cadRest.push({nome:nome,local:localV,obs:obs});
-  salvarCads();
-  document.getElementById('cadRestNome').value='';document.getElementById('cadRestLocal').value='';document.getElementById('cadRestObs').value='';
-  alert('Cadastrado!'); mostrarTela('restaurantes');
+  try{
+    var nome=document.getElementById('cadRestNome').value.trim();
+    var localV=document.getElementById('cadRestLocal').value.trim();
+    var obs=document.getElementById('cadRestObs').value.trim();
+    if(!nome){alert('Digite o nome');return}
+    if(editRestIdx>=0){
+      cadRest[editRestIdx]={nome:nome,local:localV,obs:obs};
+      editRestIdx=-1;
+      document.getElementById('btnSalvarRest').innerText='SALVAR RESTAURANTE';
+      salvarCads(); alert('Atualizado!'); mostrarTela('restaurantes'); return;
+    }
+    if(cadRest.some(function(r){return r && r.nome && r.nome.toLowerCase()===nome.toLowerCase()})){alert('Ja cadastrado');return}
+    cadRest.push({nome:nome,local:localV,obs:obs});
+    salvarCads();
+    document.getElementById('cadRestNome').value='';document.getElementById('cadRestLocal').value='';document.getElementById('cadRestObs').value='';
+    alert('Cadastrado!'); mostrarTela('restaurantes');
+  }catch(e){ alert('Erro: '+e.message); }
 }
-function editarRestCad(idx){
-  editRestIdx=idx;var r=cadRest[idx];
-  document.getElementById('cadRestNome').value=r.nome;
-  document.getElementById('cadRestLocal').value=r.local;
-  document.getElementById('cadRestObs').value=r.obs;
-  document.getElementById('btnSalvarRest').innerText='ATUALIZAR RESTAURANTE';
-  mostrarTela('cadRestaurantes');
-}
-function cancelarEdicaoRest(){editRestIdx=-1;document.getElementById('cadRestNome').value='';document.getElementById('cadRestLocal').value='';document.getElementById('cadRestObs').value='';document.getElementById('btnSalvarRest').innerText='SALVAR RESTAURANTE';}
-function apagarRestCad(idx){if(confirm('Apagar '+cadRest[idx].nome+'?')){cadRest.splice(idx,1);salvarCads()}}
+function editarRestCad(idx){ try{ editRestIdx=idx;var r=cadRest[idx]; if(!r) return; document.getElementById('cadRestNome').value=r.nome||''; document.getElementById('cadRestLocal').value=r.local||''; document.getElementById('cadRestObs').value=r.obs||''; document.getElementById('btnSalvarRest').innerText='ATUALIZAR RESTAURANTE'; mostrarTela('cadRestaurantes'); }catch(e){} }
+function cancelarEdicaoRest(){try{editRestIdx=-1;document.getElementById('cadRestNome').value='';document.getElementById('cadRestLocal').value='';document.getElementById('cadRestObs').value='';document.getElementById('btnSalvarRest').innerText='SALVAR RESTAURANTE';}catch(e){}}
+function apagarRestCad(idx){try{if(confirm('Apagar '+(cadRest[idx]&&cadRest[idx].nome||'')+'?')){cadRest.splice(idx,1);salvarCads()}}catch(e){}}
 function renderSelects(){
-  var selRest=document.getElementById('rest');
-  if(selRest){selRest.innerHTML='<option value="">Selecione a casa...</option>';cadRest.slice().sort(ordenaCasa).forEach(function(r){selRest.innerHTML+='<option value="'+r.nome+'">'+r.nome+' ('+(r.local||'')+')</option>'})}
-  var selMus=document.getElementById('musico');
-  if(selMus){selMus.innerHTML='<option value="">Selecione o musico...</option>';cadMus.slice().sort(function(a,b){return a.nome.localeCompare(b.nome)}).forEach(function(m){selMus.innerHTML+='<option value="'+m.nome+'">'+m.nome+(m.cache?' - R$ '+m.cache:'')+'</option>'})}
+  try{
+    var selRest=document.getElementById('rest');
+    if(selRest){selRest.innerHTML='<option value="">Selecione a casa...</option>';cadRest.slice().sort(ordenaCasa).forEach(function(r){ if(!r||!r.nome) return; selRest.innerHTML+='<option value="'+r.nome+'">'+r.nome+' ('+(r.local||'')+')</option>'})}
+    var selMus=document.getElementById('musico');
+    if(selMus){selMus.innerHTML='<option value="">Selecione o musico...</option>';cadMus.slice().sort(function(a,b){try{return (a.nome||'').localeCompare(b.nome||'')}catch(e){return 0}}).forEach(function(m){ if(!m||!m.nome) return; selMus.innerHTML+='<option value="'+m.nome+'">'+m.nome+(m.cache?' - R$ '+m.cache:'')+'</option>'})}
+  }catch(e){}
 }
 function getFiltroShows(){
-  var fm=document.getElementById('filtroMusico')?document.getElementById('filtroMusico').value:'';
-  var fd=document.getElementById('filtroData')?document.getElementById('filtroData').value:'';
-  var fv=document.getElementById('filtroVisao')?document.getElementById('filtroVisao').value:'todos';
-  var ordem=document.getElementById('ordemLista')?document.getElementById('ordemLista').value:'casa';
-  var f=shows.slice();
-  if(fm) f=f.filter(function(s){return s.musico===fm});
-  if(fd) f=f.filter(function(s){return s.data===fd});
-  if(fv==='mes'){var a=new Date();f=f.filter(function(s){var d=new Date(s.data+'T12:00:00');return d.getMonth()===a.getMonth()&&d.getFullYear()===a.getFullYear()})}
-  if(fv==='ano'){var a=new Date();f=f.filter(function(s){return new Date(s.data+'T12:00:00').getFullYear()===a.getFullYear()})}
-  if(ordem==='casa'){f.sort(function(a,b){var c=ordenaCasa(a,b); if(c!==0) return c; return a.data.localeCompare(b.data)});}
-  else if(ordem==='artista'){f.sort(function(a,b){var c=a.musico.localeCompare(b.musico); if(c!==0) return c; return ordenaCasa(a,b)});}
-  else {f.sort(function(a,b){var c=a.data.localeCompare(b.data); if(c!==0) return c; c=a.hIni.localeCompare(b.hIni); if(c!==0) return c; return ordenaCasa(a,b)});}
-  return f;
+  try{
+    var fm=document.getElementById('filtroMusico')?document.getElementById('filtroMusico').value:'';
+    var fd=document.getElementById('filtroData')?document.getElementById('filtroData').value:'';
+    var fv=document.getElementById('filtroVisao')?document.getElementById('filtroVisao').value:'todos';
+    var ordem=document.getElementById('ordemLista')?document.getElementById('ordemLista').value:'casa';
+    var f=shows.slice().filter(function(s){ return s && s.rest && s.musico && s.data && s.hIni; });
+    if(fm) f=f.filter(function(s){return s.musico===fm});
+    if(fd) f=f.filter(function(s){return s.data===fd});
+    if(fv==='mes'){var a=new Date();f=f.filter(function(s){try{var d=new Date(s.data+'T12:00:00');return d.getMonth()===a.getMonth()&&d.getFullYear()===a.getFullYear()}catch(e){return false}})}
+    if(fv==='ano'){var a=new Date();f=f.filter(function(s){try{return new Date(s.data+'T12:00:00').getFullYear()===a.getFullYear()}catch(e){return false}})}
+    if(ordem==='casa'){f.sort(function(a,b){try{var c=ordenaCasa(a,b); if(c!==0) return c; return (a.data||'').localeCompare(b.data||'')}catch(e){return 0}});}
+    else if(ordem==='artista'){f.sort(function(a,b){try{var c=(a.musico||'').localeCompare(b.musico||''); if(c!==0) return c; return ordenaCasa(a,b)}catch(e){return 0}});}
+    else {f.sort(function(a,b){try{var c=(a.data||'').localeCompare(b.data||''); if(c!==0) return c; c=(a.hIni||'').localeCompare(b.hIni||''); if(c!==0) return c; return ordenaCasa(a,b)}catch(e){return 0}});}
+    return f;
+  }catch(e){ return []; }
 }
 function render(){
   try{
     var dtHoje=document.getElementById('dataHoje');
-    if(dtHoje){dtHoje.innerText=new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});}
+    if(dtHoje){try{dtHoje.innerText=new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});}catch(e){dtHoje.innerText=hojeISO();}}
     renderSelects();
     var lista=document.getElementById('lista');
     var html='';
     var h=hojeISO();
-    var doDia=shows.map(function(s,i){return {s:s,i:i}}).filter(function(o){return o.s.data===h});
+    var doDia=shows.map(function(s,i){return {s:s,i:i}}).filter(function(o){return o && o.s && o.s.data===h && o.s.rest;});
     doDia.sort(function(a,b){return ordenaCasa(a.s,b.s)});
     if(doDia.length===0){
       html='<div class="card"><div style="color:#999">Nenhum show hoje - clique no + para adicionar</div></div>';
     }else{
       doDia.forEach(function(o){
-        var s=o.s;var idx=o.i;
-        html+='<div class="card"><div style="font-weight:700">🏠 '+s.rest+' — 🕐 '+s.hIni+' as '+s.hFim+'</div><div style="font-size:13px;color:#666;margin-top:6px">🎤 '+s.musico+' <span class="item-valor">R$ '+(s.cache||0)+'</span></div><div class="card-actions"><button class="btn-edit" onclick="editarShow('+idx+')">EDITAR</button><button class="btn-del" onclick="apagarShow('+idx+')">EXCLUIR</button></div></div>';
+        try{
+          var s=o.s;var idx=o.i;
+          html+='<div class="card"><div style="font-weight:700">🏠 '+(s.rest||'')+' — 🕐 '+(s.hIni||'')+' as '+(s.hFim||'')+'</div><div style="font-size:13px;color:#666;margin-top:6px">🎤 '+(s.musico||'')+' <span class="item-valor">R$ '+(s.cache||0)+'</span></div><div class="card-actions"><button class="btn-edit" onclick="editarShow('+idx+')">EDITAR</button><button class="btn-del" onclick="apagarShow('+idx+')">EXCLUIR</button></div></div>';
+        }catch(e){}
       });
     }
     if(lista) lista.innerHTML=html;
     var agora=new Date();
     var mes=agora.getMonth(),ano=agora.getFullYear();
     var tituloMesEl=document.getElementById('tituloMes');
-    if(tituloMesEl) tituloMesEl.innerText=agora.toLocaleDateString('pt-BR',{month:'long',year:'numeric'});
-    var filtradosMes=shows.map(function(s,i){return {s:s,i:i}}).filter(function(o){var d=new Date(o.s.data+'T12:00:00');return d.getMonth()===mes&&d.getFullYear()===ano});
-    filtradosMes.sort(function(a,b){var c=ordenaCasa(a.s,b.s); if(c!==0) return c; return a.s.data.localeCompare(b.s.data) || a.s.hIni.localeCompare(b.s.hIni)});
+    if(tituloMesEl){try{tituloMesEl.innerText=agora.toLocaleDateString('pt-BR',{month:'long',year:'numeric'});}catch(e){}}
+    var filtradosMes=shows.map(function(s,i){return {s:s,i:i}}).filter(function(o){try{var d=new Date(o.s.data+'T12:00:00');return d.getMonth()===mes&&d.getFullYear()===ano&&o.s.rest}catch(e){return false}});
+    filtradosMes.sort(function(a,b){try{var c=ordenaCasa(a.s,b.s); if(c!==0) return c; return (a.s.data||'').localeCompare(b.s.data||'') || (a.s.hIni||'').localeCompare(b.s.hIni||'')}catch(e){return 0}});
     var htmlMes='';var totalMes=0;
     filtradosMes.forEach(function(o){
-      var s=o.s;totalMes+=s.cache||0;
-      htmlMes+='<div class="card"><div style="font-weight:700">'+s.data.split('-').reverse().slice(0,2).join('/')+' • 🏠 '+s.rest+' — 🕐 '+s.hIni+' as '+s.hFim+'</div><div style="font-size:13px;color:#666;margin-top:4px">🎤 '+s.musico+' <span class="item-valor">R$ '+(s.cache||0)+'</span></div><div class="card-actions"><button class="btn-edit" onclick="editarShow('+o.i+')">EDITAR</button><button class="btn-del" onclick="apagarShow('+o.i+')">EXCLUIR</button></div></div>';
+      try{var s=o.s;totalMes+=parseInt(s.cache||0,10)||0;
+      htmlMes+='<div class="card"><div style="font-weight:700">'+(s.data||'').split('-').reverse().slice(0,2).join('/')+' • 🏠 '+(s.rest||'')+' — 🕐 '+(s.hIni||'')+' as '+(s.hFim||'')+'</div><div style="font-size:13px;color:#666;margin-top:4px">🎤 '+(s.musico||'')+' <span class="item-valor">R$ '+(s.cache||0)+'</span></div><div class="card-actions"><button class="btn-edit" onclick="editarShow('+o.i+')">EDITAR</button><button class="btn-del" onclick="apagarShow('+o.i+')">EXCLUIR</button></div></div>';}catch(e){}
     });
     if(filtradosMes.length===0) htmlMes='<div class="card"><div style="color:#999">Nenhum show este mês</div></div>';
     var elMes=document.getElementById('listaMes'); if(elMes) elMes.innerHTML=htmlMes;
     var elTotalMes=document.getElementById('totalMes'); if(elTotalMes) elTotalMes.innerText='R$ '+totalMes.toLocaleString('pt-BR')+',00';
     var tituloAnoEl=document.getElementById('tituloAno'); if(tituloAnoEl) tituloAnoEl.innerText=ano;
-    var filtradosAno=shows.map(function(s,i){return {s:s,i:i}}).filter(function(o){return new Date(o.s.data+'T12:00:00').getFullYear()===ano});
-    filtradosAno.sort(function(a,b){return ordenaCasa(a.s,b.s)});
+    var filtradosAno=shows.map(function(s,i){return {s:s,i:i}}).filter(function(o){try{return new Date(o.s.data+'T12:00:00').getFullYear()===ano&&o.s.rest}catch(e){return false}});
+    filtradosAno.sort(function(a,b){try{return ordenaCasa(a.s,b.s)}catch(e){return 0}});
     var porMes={};
-    filtradosAno.forEach(function(o){var m=new Date(o.s.data+'T12:00:00').toLocaleDateString('pt-BR',{month:'long'});if(!porMes[m])porMes[m]=[];porMes[m].push(o)});
+    filtradosAno.forEach(function(o){try{var m=new Date(o.s.data+'T12:00:00').toLocaleDateString('pt-BR',{month:'long'});if(!porMes[m])porMes[m]=[];porMes[m].push(o)}catch(e){}});
     var htmlAno='';var totalAno=0;
     for(var k in porMes){
-      var tot=porMes[k].reduce(function(a,b){return a+(b.s.cache||0)},0);totalAno+=tot;
-      htmlAno+='<div class="card"><div style="font-weight:700;text-transform:capitalize">📅 '+k+' — '+porMes[k].length+' shows — R$ '+tot+'</div>';
-      porMes[k].forEach(function(o){
-        var s=o.s;
-        htmlAno+='<div style="padding:8px 0;border-bottom:1px solid #f0f0f0;font-size:13px;display:flex;justify-content:space-between;align-items:center"><span>'+s.data.split('-').reverse().join('/')+' - 🏠 '+s.rest+' - 🎤 '+s.musico+' - R$ '+(s.cache||0)+' ('+s.hIni+'-'+s.hFim+')</span><span style="display:flex;gap:4px"><button class="btn-edit" style="padding:4px 8px" onclick="editarShow('+o.i+')">E</button><button class="btn-del" style="padding:4px 8px" onclick="apagarShow('+o.i+')">X</button></span></div>';
-      });
-      htmlAno+='</div>';
+      try{
+        var tot=porMes[k].reduce(function(a,b){return a+((b.s&&b.s.cache)||0)},0);totalAno+=tot;
+        htmlAno+='<div class="card"><div style="font-weight:700;text-transform:capitalize">📅 '+k+' — '+porMes[k].length+' shows — R$ '+tot+'</div>';
+        porMes[k].forEach(function(o){
+          try{var s=o.s; htmlAno+='<div style="padding:8px 0;border-bottom:1px solid #f0f0f0;font-size:13px;display:flex;justify-content:space-between;align-items:center"><span>'+(s.data||'').split('-').reverse().join('/')+' - 🏠 '+(s.rest||'')+' - 🎤 '+(s.musico||'')+' - R$ '+(s.cache||0)+' ('+(s.hIni||'')+'-'+(s.hFim||'')+')</span><span style="display:flex;gap:4px"><button class="btn-edit" style="padding:4px 8px" onclick="editarShow('+o.i+')">E</button><button class="btn-del" style="padding:4px 8px" onclick="apagarShow('+o.i+')">X</button></span></div>';}catch(e){}
+        });
+        htmlAno+='</div>';
+      }catch(e){}
     }
     if(filtradosAno.length===0) htmlAno='<div class="card"><div style="color:#999">Nenhum show este ano</div></div>';
     var elAno=document.getElementById('listaAno'); if(elAno) elAno.innerHTML=htmlAno;
     var elTotalAno=document.getElementById('totalAno'); if(elTotalAno) elTotalAno.innerText='R$ '+totalAno.toLocaleString('pt-BR')+',00';
     var sel=document.getElementById('filtroMusico');
-    if(sel){sel.innerHTML='<option value="">Todos</option>';cadMus.slice().sort(function(a,b){return a.nome.localeCompare(b.nome)}).forEach(function(m){sel.innerHTML+='<option value="'+m.nome+'">'+m.nome+'</option>'})}
+    if(sel){sel.innerHTML='<option value="">Todos</option>';cadMus.slice().sort(function(a,b){try{return (a.nome||'').localeCompare(b.nome||'')}catch(e){return 0}}).forEach(function(m){ if(!m||!m.nome) return; sel.innerHTML+='<option value="'+m.nome+'">'+m.nome+'</option>'})}
     var selFin=document.getElementById('finMusico');
-    if(selFin){var atual=selFin.value;selFin.innerHTML='<option value="">Todos os músicos</option>';cadMus.forEach(function(m){selFin.innerHTML+='<option value="'+m.nome+'">'+m.nome+'</option>'});if(atual)selFin.value=atual}
+    if(selFin){var atual=selFin.value;selFin.innerHTML='<option value="">Todos os músicos</option>';cadMus.forEach(function(m){ if(!m||!m.nome) return; selFin.innerHTML+='<option value="'+m.nome+'">'+m.nome+'</option>'});if(atual)selFin.value=atual}
     var listaRestEl=document.getElementById('listaRest');
     if(listaRestEl){
       if(cadRest.length===0) listaRestEl.innerHTML='<div style="color:#999;padding:8px">Nenhum restaurante</div>';
       else{
-        var htmlR='';cadRest.slice().sort(ordenaCasa).forEach(function(r){htmlR+='<div class="list-item"><div><b>🏠 '+r.nome+'</b><br><span style="font-size:12px;color:#666">'+(r.local||'')+'</span></div><div style="display:flex;gap:6px"><button class="btn-small btn-blue" onclick="editarRestCad('+cadRest.indexOf(r)+')">EDITAR</button><button class="btn-small btn-red" onclick="apagarRestCad('+cadRest.indexOf(r)+')">X</button></div></div>'});
+        var htmlR='';cadRest.slice().sort(ordenaCasa).forEach(function(r){ if(!r||!r.nome) return; htmlR+='<div class="list-item"><div><b>🏠 '+r.nome+'</b><br><span style="font-size:12px;color:#666">'+(r.local||'')+'</span></div><div style="display:flex;gap:6px"><button class="btn-small btn-blue" onclick="editarRestCad('+cadRest.indexOf(r)+')">EDITAR</button><button class="btn-small btn-red" onclick="apagarRestCad('+cadRest.indexOf(r)+')">X</button></div></div>'});
         listaRestEl.innerHTML=htmlR;
       }
     }
@@ -366,177 +395,209 @@ function render(){
     if(listaMusEl){
       if(cadMus.length===0) listaMusEl.innerHTML='<div style="color:#999;padding:8px">Nenhum músico</div>';
       else{
-        var htmlM='';cadMus.slice().sort(function(a,b){return a.nome.localeCompare(b.nome)}).forEach(function(m){htmlM+='<div class="list-item"><div><b>🎤 '+m.nome+'</b><br><span style="font-size:12px;color:#666">'+(m.cache?'R$ '+m.cache:'')+'</span></div><div style="display:flex;gap:6px"><button class="btn-small btn-blue" onclick="editarMusicoCad('+cadMus.indexOf(m)+')">EDITAR</button><button class="btn-small btn-red" onclick="apagarMusicoCad('+cadMus.indexOf(m)+')">X</button></div></div>'});
+        var htmlM='';cadMus.slice().sort(function(a,b){try{return (a.nome||'').localeCompare(b.nome||'')}catch(e){return 0}}).forEach(function(m){ if(!m||!m.nome) return; htmlM+='<div class="list-item"><div><b>🎤 '+m.nome+'</b><br><span style="font-size:12px;color:#666">'+(m.cache?'R$ '+m.cache:'')+'</span></div><div style="display:flex;gap:6px"><button class="btn-small btn-blue" onclick="editarMusicoCad('+cadMus.indexOf(m)+')">EDITAR</button><button class="btn-small btn-red" onclick="apagarMusicoCad('+cadMus.indexOf(m)+')">X</button></div></div>'});
         listaMusEl.innerHTML=htmlM;
       }
     }
     var listaCadRestSimples=document.getElementById('listaCadRestSimples');
-    if(listaCadRestSimples){listaCadRestSimples.innerHTML=cadRest.slice().sort(ordenaCasa).map(function(r){return '<div style="padding:6px 0;border-bottom:1px solid #eee;font-size:13px">🏠 '+r.nome+'</div>'}).join('')||'<div style="color:#999;font-size:12px">vazio</div>'}
+    if(listaCadRestSimples){listaCadRestSimples.innerHTML=cadRest.slice().sort(ordenaCasa).map(function(r){return r&&r.nome?'<div style="padding:6px 0;border-bottom:1px solid #eee;font-size:13px">🏠 '+r.nome+'</div>':''}).join('')||'<div style="color:#999;font-size:12px">vazio</div>'}
     var listaCadMusSimples=document.getElementById('listaCadMusSimples');
-    if(listaCadMusSimples){listaCadMusSimples.innerHTML=cadMus.slice().sort(function(a,b){return a.nome.localeCompare(b.nome)}).map(function(m){return '<div style="padding:6px 0;border-bottom:1px solid #eee;font-size:13px">🎤 '+m.nome+'</div>'}).join('')||'<div style="color:#999;font-size:12px">vazio</div>'}
+    if(listaCadMusSimples){listaCadMusSimples.innerHTML=cadMus.slice().sort(function(a,b){try{return (a.nome||'').localeCompare(b.nome||'')}catch(e){return 0}}).map(function(m){return m&&m.nome?'<div style="padding:6px 0;border-bottom:1px solid #eee;font-size:13px">🎤 '+m.nome+'</div>':''}).join('')||'<div style="color:#999;font-size:12px">vazio</div>'}
     renderFinanceiro(); gerarTexto();
   }catch(err){
     console.error(err);
     var lista=document.getElementById('lista');
-    if(lista) lista.innerHTML='<div class="card" style="color:red">Erro: '+err.message+'</div>';
+    if(lista) lista.innerHTML='<div class="card"><b style="color:red">Erro recuperavel: '+err.message+'</b><br><br><button class="btn btn-red" onclick="limparTudo()">CLIQUE AQUI PARA CORRIGIR - LIMPAR TUDO</button></div>';
   }
 }
 function renderFinanceiro(){
-  var de=document.getElementById('finDe')?document.getElementById('finDe').value:'';
-  var ate=document.getElementById('finAte')?document.getElementById('finAte').value:'';
-  var fm=document.getElementById('finMusico')?document.getElementById('finMusico').value:'';
-  var filtrados=shows.slice();
-  if(de) filtrados=filtrados.filter(function(s){return s.data>=de});
-  if(ate) filtrados=filtrados.filter(function(s){return s.data<=ate});
-  if(fm) filtrados=filtrados.filter(function(s){return s.musico===fm});
-  var totalG=filtrados.reduce(function(a,b){return a+(b.cache||0)},0);
-  var el=document.getElementById('totalFinanceiro');
-  if(el) el.innerHTML='Total geral: R$ '+totalG.toLocaleString('pt-BR')+'<br><small style="font-weight:400;font-size:12px;opacity:.8">'+filtrados.length+' shows</small>';
-  var porMusico={};
-  filtrados.forEach(function(s){if(!porMusico[s.musico])porMusico[s.musico]={total:0,shows:[]};porMusico[s.musico].total+=s.cache||0;porMusico[s.musico].shows.push(s)});
-  var html='';
-  for(var musico in porMusico){
-    var dados=porMusico[musico];
-    html+='<div class="fin-musico"><b>🎤 '+musico+': R$ '+dados.total.toLocaleString('pt-BR')+' ('+dados.shows.length+')</b>';
-    dados.shows.sort(function(a,b){return a.data.localeCompare(b.data)}).forEach(function(s){html+='<div class="fin-linha"><span>'+s.data.split('-').reverse().join('/')+' - 🏠 '+s.rest+' ('+s.hIni+')</span><span style="font-weight:700">R$ '+(s.cache||0)+'</span></div>'});
-    html+='</div>';
-  }
-  if(filtrados.length===0) html='<div style="padding:12px;color:#999;font-size:13px">Nenhum show neste filtro</div>';
-  var el2=document.getElementById('detalheFinanceiro'); if(el2) el2.innerHTML=html;
+  try{
+    var de=document.getElementById('finDe')?document.getElementById('finDe').value:'';
+    var ate=document.getElementById('finAte')?document.getElementById('finAte').value:'';
+    var fm=document.getElementById('finMusico')?document.getElementById('finMusico').value:'';
+    var filtrados=shows.slice().filter(function(s){return s&&s.rest;});
+    if(de) filtrados=filtrados.filter(function(s){return s.data>=de});
+    if(ate) filtrados=filtrados.filter(function(s){return s.data<=ate});
+    if(fm) filtrados=filtrados.filter(function(s){return s.musico===fm});
+    var totalG=filtrados.reduce(function(a,b){return a+(parseInt(b.cache||0,10)||0)},0);
+    var el=document.getElementById('totalFinanceiro');
+    if(el) el.innerHTML='Total geral: R$ '+totalG.toLocaleString('pt-BR')+'<br><small style="font-weight:400;font-size:12px;opacity:.8">'+filtrados.length+' shows</small>';
+    var porMusico={};
+    filtrados.forEach(function(s){if(!porMusico[s.musico])porMusico[s.musico]={total:0,shows:[]};porMusico[s.musico].total+=(parseInt(s.cache||0,10)||0);porMusico[s.musico].shows.push(s)});
+    var html='';
+    for(var musico in porMusico){
+      var dados=porMusico[musico];
+      html+='<div class="fin-musico"><b>🎤 '+musico+': R$ '+dados.total.toLocaleString('pt-BR')+' ('+dados.shows.length+')</b>';
+      dados.shows.sort(function(a,b){try{return (a.data||'').localeCompare(b.data||'')}catch(e){return 0}}).forEach(function(s){html+='<div class="fin-linha"><span>'+(s.data||'').split('-').reverse().join('/')+' - 🏠 '+(s.rest||'')+' ('+(s.hIni||'')+')</span><span style="font-weight:700">R$ '+(s.cache||0)+'</span></div>'});
+      html+='</div>';
+    }
+    if(filtrados.length===0) html='<div style="padding:12px;color:#999;font-size:13px">Nenhum show neste filtro</div>';
+    var el2=document.getElementById('detalheFinanceiro'); if(el2) el2.innerHTML=html;
+  }catch(e){}
 }
 function gerarTexto(){
   try{
     var f=getFiltroShows();
     var ordemTexto=document.getElementById('ordemTexto')?document.getElementById('ordemTexto').value:'casa_artista_data_hora';
     var txt='*AGENDA DE SHOWS - ORGANIZADA POR CASAS*\n';
-    if(f.length>0){txt+='Data: '+f[0].data.split('-').reverse().join('/')+'\n';}
+    if(f.length>0){try{txt+='Data: '+f[0].data.split('-').reverse().join('/')+'\n';}catch(e){}}
     txt+='\n';
     var htmlBonito='';
     var count=0;
     var porCasa={};
-    f.forEach(function(s){if(!porCasa[s.rest]) porCasa[s.rest]=[]; porCasa[s.rest].push(s);});
+    f.forEach(function(s){ if(!s||!s.rest) return; if(!porCasa[s.rest]) porCasa[s.rest]=[]; porCasa[s.rest].push(s); });
     var casasOrdenadas=Object.keys(porCasa).sort(function(a,b){
-      var mA=a.match(/P?(\d+)/i); var mB=b.match(/P?(\d+)/i);
-      var nA=mA?parseInt(mA[1]):9999; var nB=mB?parseInt(mB[1]):9999;
-      if(nA!==nB) return nA-nB; return a.localeCompare(b);
+      try{
+        var mA=a.match(/P?(\d+)/i); var mB=b.match(/P?(\d+)/i);
+        var nA=mA?parseInt(mA[1],10):9999; var nB=mB?parseInt(mB[1],10):9999;
+        if(isNaN(nA)) nA=9999; if(isNaN(nB)) nB=9999;
+        if(nA!==nB) return nA-nB; return a.localeCompare(b);
+      }catch(e){return 0;}
     });
     casasOrdenadas.forEach(function(casa){
-      var showsCasa=porCasa[casa]; showsCasa.sort(function(a,b){return a.hIni.localeCompare(b.hIni)});
-      htmlBonito+='<div class="grupo-casa">🏠 '+casa+' <span style="font-size:11px;opacity:.8">'+showsCasa.length+' shows</span></div><div style="display:flex;flex-direction:column;gap:8px;margin-bottom:6px">';
-      showsCasa.forEach(function(s){
-        var d=s.data.split('-'); var dataFmt=d[2]+'/'+d[1];
-        var linhaTxt='';
-        if(ordemTexto==='casa_artista_data_hora'){linhaTxt=casa+' - '+s.musico+' - '+dataFmt+' - '+s.hIni+' as '+s.hFim;}
-        else if(ordemTexto==='artista_casa_data_hora'){linhaTxt=s.musico+' - '+casa+' - '+dataFmt+' - '+s.hIni+' as '+s.hFim;}
-        else{linhaTxt=dataFmt+' - '+casa+' - '+s.hIni+' as '+s.hFim+' - '+s.musico;}
-        txt+=linhaTxt+'\n';
-        htmlBonito+='<div class="show-card-bonito"><div class="data-badge">'+dataFmt+'</div><div class="linha1"><span class="artista-pill">🎤 '+s.musico+'</span><span class="casa-pill">🏠 '+s.rest+'</span></div><div class="hora-big">🕐 '+s.hIni+' as '+s.hFim+'</div></div>';
-        count++;
-      });
-      htmlBonito+='</div>';
+      try{
+        var showsCasa=porCasa[casa]; showsCasa.sort(function(a,b){try{return (a.hIni||'').localeCompare(b.hIni||'')}catch(e){return 0}});
+        htmlBonito+='<div class="grupo-casa">🏠 '+casa+' <span style="font-size:11px;opacity:.8">'+showsCasa.length+' shows</span></div><div style="display:flex;flex-direction:column;gap:8px;margin-bottom:6px">';
+        showsCasa.forEach(function(s){
+          try{
+            var d=(s.data||'').split('-'); var dataFmt=d.length>=3?d[2]+'/'+d[1]:s.data||'';
+            var linhaTxt='';
+            if(ordemTexto==='casa_artista_data_hora'){linhaTxt=casa+' - '+s.musico+' - '+dataFmt+' - '+s.hIni+' as '+s.hFim;}
+            else if(ordemTexto==='artista_casa_data_hora'){linhaTxt=s.musico+' - '+casa+' - '+dataFmt+' - '+s.hIni+' as '+s.hFim;}
+            else{linhaTxt=dataFmt+' - '+casa+' - '+s.hIni+' as '+s.hFim+' - '+s.musico;}
+            txt+=linhaTxt+'\n';
+            htmlBonito+='<div class="show-card-bonito"><div class="data-badge">'+dataFmt+'</div><div class="linha1"><span class="artista-pill">🎤 '+(s.musico||'')+'</span><span class="casa-pill">🏠 '+(s.rest||'')+'</span></div><div class="hora-big">🕐 '+(s.hIni||'')+' as '+(s.hFim||'')+'</div></div>';
+            count++;
+          }catch(e){}
+        });
+        htmlBonito+='</div>';
+      }catch(e){}
     });
     if(f.length===0){htmlBonito='<div style="padding:20px;text-align:center;color:#999;font-size:13px">Nenhum show neste filtro</div>'; txt='*AGENDA DE SHOWS*\n\nNenhum show encontrado neste filtro.';}
     var elT=document.getElementById('textoSemValor'); if(elT) elT.innerText=txt;
     var prevEl=document.getElementById('previewBonito'); if(prevEl) prevEl.innerHTML=htmlBonito;
     var contEl=document.getElementById('contadorPrev'); if(contEl) contEl.innerText=count+' shows';
-  }catch(e){console.error(e)}
+  }catch(e){ console.error(e); }
 }
 function bindFiltros(){
-  ['filtroMusico','filtroData','filtroVisao','ordemLista','ordemTexto','finDe','finAte','finMusico'].forEach(function(id){
-    var el=document.getElementById(id);
-    if(el) el.addEventListener('change',function(){if(id.indexOf('fin')===0) renderFinanceiro(); else gerarTexto()})
-  });
+  try{
+    ['filtroMusico','filtroData','filtroVisao','ordemLista','ordemTexto','finDe','finAte','finMusico'].forEach(function(id){
+      var el=document.getElementById(id);
+      if(el) el.addEventListener('change',function(){if(id.indexOf('fin')===0) renderFinanceiro(); else gerarTexto()})
+    });
+  }catch(e){}
 }
-function enviarZap(){var t=document.getElementById('textoSemValor'); if(t) window.open('https://wa.me/?text='+encodeURIComponent(t.innerText),'_blank')}
-function copiar(){var t=document.getElementById('textoSemValor'); if(!t) return; var txt=t.innerText; navigator.clipboard.writeText(txt).then(function(){alert('Copiado! Texto ja em ordem P1,P2,P3...')})}
+function enviarZap(){try{var t=document.getElementById('textoSemValor'); if(t) window.open('https://wa.me/?text='+encodeURIComponent(t.innerText),'_blank')}catch(e){}}
+function copiar(){try{var t=document.getElementById('textoSemValor'); if(!t) return; var txt=t.innerText; navigator.clipboard.writeText(txt).then(function(){alert('Copiado! Texto ja em ordem P1,P2,P3...')})}catch(e){}}
 function imprimirBonitao(){
-  var f=getFiltroShows();
-  var htmlPrint='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Cronograma Organizado P1-P6</title><style>body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#222;padding:20px;max-width:800px;margin:0 auto}.header{text-align:center;margin-bottom:24px;border-bottom:3px solid #3A3A3A;padding-bottom:16px}.header h1{font-size:28px;font-weight:900;margin:0}.grupo-data{font-size:16px;font-weight:800;color:#fff;background:#3A3A3A;padding:8px 14px;border-radius:8px;margin:20px 0 10px}.show-card{background:#fff;border:2px solid #eee;border-left:8px solid #3A3A3A;border-radius:12px;padding:16px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}.artista{font-size:18px;font-weight:900;background:#3A3A3A;color:#fff;padding:8px 16px;border-radius:20px}.casa{font-size:15px;font-weight:700;background:#FFF3CD;color:#856404;padding:6px 14px;border-radius:20px;border:1px solid #FFE69C;margin-left:10px}.hora{font-size:15px;font-weight:700;background:#F1F3F5;padding:8px 14px;border-radius:10px;margin-top:8px;display:inline-block}@media print{.no-print{display:none}}</style></head><body><div class="header"><h1>AGENDA DE SHOWS</h1><p>Organizada por Casas P1,P2,P3... - '+new Date().toLocaleDateString('pt-BR')+' - '+f.length+' shows</p></div>';
-  var ultimoDia=''; f.forEach(function(s){var d=s.data.split('-');var dataFmt=d[2]+'/'+d[1]+'/'+d[0];if(dataFmt!==ultimoDia){htmlPrint+='<div class="grupo-data">📅 '+dataFmt+'</div>';ultimoDia=dataFmt;}htmlPrint+='<div class="show-card"><div><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span class="artista">🎤 '+s.musico+'</span><span class="casa">🏠 '+s.rest+'</span></div><div class="hora">🕐 '+s.hIni+' as '+s.hFim+'</div></div><div style="text-align:right"><div style="font-size:14px;font-weight:800;color:#6C5CE7">'+d[2]+'/'+d[1]+'</div></div></div>';});
-  htmlPrint+='<div style="margin-top:30px;text-align:center;color:#888;font-size:11px;border-top:1px solid #eee;padding-top:12px">Gerado pelo sistema AGENDA DO DIA - v5.0 Organizada P1-P6</div><div class="no-print" style="text-align:center;margin-top:20px"><button onclick="window.print()" style="background:#3A3A3A;color:#fff;border:none;padding:14px 28px;border-radius:12px;font-weight:800;font-size:16px;cursor:pointer">IMPRIMIR / SALVAR PDF</button> <button onclick="window.close()" style="background:#eee;color:#333;border:none;padding:14px 20px;border-radius:12px;font-weight:700;margin-left:8px;cursor:pointer">FECHAR</button></div></body></html>';
-  var w=window.open('','_blank'); w.document.write(htmlPrint); w.document.close();
+  try{
+    var f=getFiltroShows();
+    var htmlPrint='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Cronograma Organizado P1-P6</title><style>body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#222;padding:20px;max-width:800px;margin:0 auto}.header{text-align:center;margin-bottom:24px;border-bottom:3px solid #3A3A3A;padding-bottom:16px}.header h1{font-size:28px;font-weight:900;margin:0}.grupo-data{font-size:16px;font-weight:800;color:#fff;background:#3A3A3A;padding:8px 14px;border-radius:8px;margin:20px 0 10px}.show-card{background:#fff;border:2px solid #eee;border-left:8px solid #3A3A3A;border-radius:12px;padding:16px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}.artista{font-size:18px;font-weight:900;background:#3A3A3A;color:#fff;padding:8px 16px;border-radius:20px}.casa{font-size:15px;font-weight:700;background:#FFF3CD;color:#856404;padding:6px 14px;border-radius:20px;border:1px solid #FFE69C;margin-left:10px}.hora{font-size:15px;font-weight:700;background:#F1F3F5;padding:8px 14px;border-radius:10px;margin-top:8px;display:inline-block}@media print{.no-print{display:none}}</style></head><body><div class="header"><h1>AGENDA DE SHOWS</h1><p>Organizada por Casas P1,P2,P3... - '+new Date().toLocaleDateString('pt-BR')+' - '+f.length+' shows</p></div>';
+    var ultimoDia=''; f.forEach(function(s){try{var d=s.data.split('-');var dataFmt=d[2]+'/'+d[1]+'/'+d[0];if(dataFmt!==ultimoDia){htmlPrint+='<div class="grupo-data">📅 '+dataFmt+'</div>';ultimoDia=dataFmt;}htmlPrint+='<div class="show-card"><div><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span class="artista">🎤 '+(s.musico||'')+'</span><span class="casa">🏠 '+(s.rest||'')+'</span></div><div class="hora">🕐 '+(s.hIni||'')+' as '+(s.hFim||'')+'</div></div><div style="text-align:right"><div style="font-size:14px;font-weight:800;color:#6C5CE7">'+(d[2]||'')+'/'+(d[1]||'')+'</div></div></div>';}catch(e){}});
+    htmlPrint+='<div style="margin-top:30px;text-align:center;color:#888;font-size:11px;border-top:1px solid #eee;padding-top:12px">Gerado pelo sistema AGENDA DO DIA - v6 FINAL</div><div class="no-print" style="text-align:center;margin-top:20px"><button onclick="window.print()" style="background:#3A3A3A;color:#fff;border:none;padding:14px 28px;border-radius:12px;font-weight:800;font-size:16px;cursor:pointer">IMPRIMIR / SALVAR PDF</button> <button onclick="window.close()" style="background:#eee;color:#333;border:none;padding:14px 20px;border-radius:12px;font-weight:700;margin-left:8px;cursor:pointer">FECHAR</button></div></body></html>';
+    var w=window.open('','_blank'); w.document.write(htmlPrint); w.document.close();
+  }catch(e){ alert('Erro ao imprimir: '+e.message); }
 }
 function imprimirQuadroGeral(){
-  var f=getFiltroShows();
-  var porCasa={}; f.forEach(function(s){if(!porCasa[s.rest]) porCasa[s.rest]=[]; porCasa[s.rest].push(s);});
-  var casasOrdenadas=Object.keys(porCasa).sort(function(a,b){var mA=a.match(/P?(\d+)/i);var mB=b.match(/P?(\d+)/i);var nA=mA?parseInt(mA[1]):9999;var nB=mB?parseInt(mB[1]):9999;if(nA!==nB) return nA-nB;return a.localeCompare(b);});
-  var htmlPrint='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Quadro Geral por Casas P1-P6</title><style>body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#F5F5F5;color:#222;padding:20px;max-width:1000px;margin:0 auto}.header{text-align:center;margin-bottom:24px;background:#fff;border-radius:16px;padding:20px;border-bottom:4px solid #3A3A3A}.header h1{font-size:30px;font-weight:900;margin:0}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}.casa-col{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.06);border-top:6px solid #3A3A3A}.casa-header{background:#3A3A3A;color:#fff;padding:12px 16px;font-weight:800;font-size:16px;display:flex;justify-content:space-between}.show-item{padding:12px 16px;border-bottom:1px solid #f0f0f0;display:flex;justify-content:space-between;align-items:center}.artista{font-weight:800;font-size:13px}.hora{background:#F1F3F5;padding:4px 8px;border-radius:8px;font-size:12px;font-weight:700}@media print{body{background:#fff}.grid{grid-template-columns:repeat(2,1fr)}.no-print{display:none}}</style></head><body><div class="header"><h1>QUADRO GERAL - AGENDA DE SHOWS</h1><p style="color:#666;margin-top:6px">Organizado por Casas em ordem P1, P2, P3, P4, P5, P6 - '+new Date().toLocaleDateString('pt-BR')+' - '+f.length+' shows - Data: '+(f[0]?f[0].data.split('-').reverse().join('/'):'')+'</p></div><div class="grid">';
-  casasOrdenadas.forEach(function(casa){
-    var showsCasa=porCasa[casa].sort(function(a,b){return a.hIni.localeCompare(b.hIni)});
-    htmlPrint+='<div class="casa-col"><div class="casa-header"><span>🏠 '+casa+'</span><span style="opacity:.7;font-size:12px">'+showsCasa.length+' shows</span></div>';
-    showsCasa.forEach(function(s){htmlPrint+='<div class="show-item"><div><div class="artista">🎤 '+s.musico+'</div><div style="font-size:11px;color:#888">'+s.data.split('-').reverse().slice(0,2).join('/')+' - '+s.local+'</div></div><div class="hora">🕐 '+s.hIni+' - '+s.hFim+'</div></div>';});
-    htmlPrint+='</div>';
-  });
-  htmlPrint+='</div><div style="margin-top:24px;text-align:center;color:#888;font-size:11px">Gerado pelo sistema AGENDA DO DIA - v5.0 Quadro Geral Organizado P1-P6</div><div class="no-print" style="text-align:center;margin-top:20px"><button onclick="window.print()" style="background:#00B894;color:#fff;border:none;padding:16px 32px;border-radius:12px;font-weight:800;font-size:16px;cursor:pointer">IMPRIMIR QUADRO GERAL BONITAO / SALVAR PDF</button> <button onclick="window.close()" style="background:#eee;color:#333;border:none;padding:14px 20px;border-radius:12px;font-weight:700;margin-left:8px;cursor:pointer">FECHAR</button></div></body></html>';
-  var w=window.open('','_blank'); w.document.write(htmlPrint); w.document.close();
+  try{
+    var f=getFiltroShows();
+    var porCasa={}; f.forEach(function(s){if(!s||!s.rest) return; if(!porCasa[s.rest]) porCasa[s.rest]=[]; porCasa[s.rest].push(s);});
+    var casasOrdenadas=Object.keys(porCasa).sort(function(a,b){try{var mA=a.match(/P?(\d+)/i);var mB=b.match(/P?(\d+)/i);var nA=mA?parseInt(mA[1],10):9999;var nB=mB?parseInt(mB[1],10):9999;if(isNaN(nA)) nA=9999; if(isNaN(nB)) nB=9999;if(nA!==nB) return nA-nB;return a.localeCompare(b);}catch(e){return 0;}});
+    var htmlPrint='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Quadro Geral por Casas P1-P6</title><style>body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#F5F5F5;color:#222;padding:20px;max-width:1000px;margin:0 auto}.header{text-align:center;margin-bottom:24px;background:#fff;border-radius:16px;padding:20px;border-bottom:4px solid #3A3A3A}.header h1{font-size:30px;font-weight:900;margin:0}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}.casa-col{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.06);border-top:6px solid #3A3A3A}.casa-header{background:#3A3A3A;color:#fff;padding:12px 16px;font-weight:800;font-size:16px;display:flex;justify-content:space-between}.show-item{padding:12px 16px;border-bottom:1px solid #f0f0f0;display:flex;justify-content:space-between;align-items:center}.artista{font-weight:800;font-size:13px}.hora{background:#F1F3F5;padding:4px 8px;border-radius:8px;font-size:12px;font-weight:700}@media print{body{background:#fff}.grid{grid-template-columns:repeat(2,1fr)}.no-print{display:none}}</style></head><body><div class="header"><h1>QUADRO GERAL - AGENDA DE SHOWS</h1><p style="color:#666;margin-top:6px">Organizado por Casas em ordem P1, P2, P3, P4, P5, P6 - '+new Date().toLocaleDateString('pt-BR')+' - '+f.length+' shows - Data: '+(f[0]?f[0].data.split('-').reverse().join('/'):'')+'</p></div><div class="grid">';
+    casasOrdenadas.forEach(function(casa){
+      try{
+        var showsCasa=porCasa[casa].sort(function(a,b){try{return (a.hIni||'').localeCompare(b.hIni||'')}catch(e){return 0}});
+        htmlPrint+='<div class="casa-col"><div class="casa-header"><span>🏠 '+casa+'</span><span style="opacity:.7;font-size:12px">'+showsCasa.length+' shows</span></div>';
+        showsCasa.forEach(function(s){try{htmlPrint+='<div class="show-item"><div><div class="artista">🎤 '+(s.musico||'')+'</div><div style="font-size:11px;color:#888">'+(s.data||'').split('-').reverse().slice(0,2).join('/')+' - '+(s.local||'')+'</div></div><div class="hora">🕐 '+(s.hIni||'')+' - '+(s.hFim||'')+'</div></div>';}catch(e){}});
+        htmlPrint+='</div>';
+      }catch(e){}
+    });
+    htmlPrint+='</div><div style="margin-top:24px;text-align:center;color:#888;font-size:11px">Gerado pelo sistema AGENDA DO DIA - v6 FINAL</div><div class="no-print" style="text-align:center;margin-top:20px"><button onclick="window.print()" style="background:#00B894;color:#fff;border:none;padding:16px 32px;border-radius:12px;font-weight:800;font-size:16px;cursor:pointer">IMPRIMIR QUADRO GERAL BONITAO / SALVAR PDF</button> <button onclick="window.close()" style="background:#eee;color:#333;border:none;padding:14px 20px;border-radius:12px;font-weight:700;margin-left:8px;cursor:pointer">FECHAR</button></div></body></html>';
+    var w=window.open('','_blank'); w.document.write(htmlPrint); w.document.close();
+  }catch(e){ alert('Erro ao imprimir quadro: '+e.message); }
 }
 function enviarFinanceiroZap(){
-  var de=document.getElementById('finDe').value||'inicio';
-  var ate=document.getElementById('finAte').value||'hoje';
-  var fm=document.getElementById('finMusico').value||'todos';
-  var filtrados=shows.slice();
-  if(document.getElementById('finDe').value) filtrados=filtrados.filter(function(s){return s.data>=document.getElementById('finDe').value});
-  if(document.getElementById('finAte').value) filtrados=filtrados.filter(function(s){return s.data<=document.getElementById('finAte').value});
-  if(fm!=='todos' && fm!=='') filtrados=filtrados.filter(function(s){return s.musico===fm});
-  var porMusico={};
-  filtrados.forEach(function(s){if(!porMusico[s.musico])porMusico[s.musico]=0;porMusico[s.musico]+=s.cache||0});
-  var txt='*RELATORIO FINANCEIRO*\nPeriodo: '+de+' ate '+ate+'\n\n';
-  for(var m in porMusico){txt+='🎤 '+m+': R$ '+porMusico[m]+'\n'}
-  txt+='\nTotal geral: R$ '+filtrados.reduce(function(a,b){return a+(b.cache||0)},0);
-  window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank')
+  try{
+    var de=document.getElementById('finDe').value||'inicio';
+    var ate=document.getElementById('finAte').value||'hoje';
+    var fm=document.getElementById('finMusico').value||'todos';
+    var filtrados=shows.slice().filter(function(s){return s&&s.rest;});
+    if(document.getElementById('finDe').value) filtrados=filtrados.filter(function(s){return s.data>=document.getElementById('finDe').value});
+    if(document.getElementById('finAte').value) filtrados=filtrados.filter(function(s){return s.data<=document.getElementById('finAte').value});
+    if(fm!=='todos' && fm!=='') filtrados=filtrados.filter(function(s){return s.musico===fm});
+    var porMusico={};
+    filtrados.forEach(function(s){if(!porMusico[s.musico])porMusico[s.musico]=0;porMusico[s.musico]+=parseInt(s.cache||0,10)||0});
+    var txt='*RELATORIO FINANCEIRO*\nPeriodo: '+de+' ate '+ate+'\n\n';
+    for(var m in porMusico){txt+='🎤 '+m+': R$ '+porMusico[m]+'\n'}
+    txt+='\nTotal geral: R$ '+filtrados.reduce(function(a,b){return a+(parseInt(b.cache||0,10)||0)},0);
+    window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank')
+  }catch(e){}
 }
 function adicionar(){
-  var r=document.getElementById('rest').value;
-  var m=document.getElementById('musico').value;
-  var d=document.getElementById('data').value;
-  var hi=document.getElementById('hIni').value;
-  var hf=document.getElementById('hFim').value;
-  var c=parseInt(document.getElementById('cache').value||0);
-  var hi2=document.getElementById('hIni2')?document.getElementById('hIni2').value:'';
-  var hf2=document.getElementById('hFim2')?document.getElementById('hFim2').value:'';
-  var temSegundo=document.getElementById('temSegundo')?document.getElementById('temSegundo').checked:false;
-  if(!r||!m||!d){alert('Selecione restaurante, musico e data');return}
-  var restObj=cadRest.find(function(x){return x.nome===r});
-  if(editShowIdx>=0){
-    var novo={rest:r,local:restObj?restObj.local:'',musico:m,data:d,cache:c,hIni:hi,hFim:hf};
-    shows[editShowIdx]=novo;
-    editShowIdx=-1;
-    salvar();
-  }else{
-    var novo={rest:r,local:restObj?restObj.local:'',musico:m,data:d,cache:c,hIni:hi,hFim:hf};
-    shows.push(novo);
-    if(temSegundo && hi2 && hf2){
-      var novo2={rest:r,local:restObj?restObj.local:'',musico:m,data:d,cache:c,hIni:hi2,hFim:hf2};
-      shows.push(novo2);
+  try{
+    var r=document.getElementById('rest').value;
+    var m=document.getElementById('musico').value;
+    var d=document.getElementById('data').value;
+    var hi=document.getElementById('hIni').value;
+    var hf=document.getElementById('hFim').value;
+    var c=parseInt(document.getElementById('cache').value||0,10)||0;
+    var hi2=document.getElementById('hIni2')?document.getElementById('hIni2').value:'';
+    var hf2=document.getElementById('hFim2')?document.getElementById('hFim2').value:'';
+    var temSegundo=document.getElementById('temSegundo')?document.getElementById('temSegundo').checked:false;
+    if(!r||!m||!d){alert('Selecione restaurante, musico e data');return}
+    var restObj=cadRest.find(function(x){return x&&x.nome===r});
+    if(editShowIdx>=0){
+      var novo={rest:r,local:restObj?restObj.local:'',musico:m,data:d,hIni:hi,hFim:hf,cache:c};
+      shows[editShowIdx]=novo;
+      editShowIdx=-1;
+      salvar();
+    }else{
+      var novo={rest:r,local:restObj?restObj.local:'',musico:m,data:d,hIni:hi,hFim:hf,cache:c};
+      shows.push(novo);
+      if(temSegundo && hi2 && hf2){
+        var novo2={rest:r,local:restObj?restObj.local:'',musico:m,data:d,hIni:hi2,hFim:hf2,cache:c};
+        shows.push(novo2);
+      }
+      salvar();
     }
-    salvar();
-  }
-  document.getElementById('rest').value='';
-  document.getElementById('musico').value='';
-  var chk=document.getElementById('temSegundo'); if(chk) chk.checked=false;
-  var box=document.getElementById('boxSegundo'); if(box) box.style.display='none';
-  mostrarTela('inicio');
+    document.getElementById('rest').value='';
+    document.getElementById('musico').value='';
+    var chk=document.getElementById('temSegundo'); if(chk) chk.checked=false;
+    var box=document.getElementById('boxSegundo'); if(box) box.style.display='none';
+    mostrarTela('inicio');
+  }catch(e){ alert('Erro ao adicionar: '+e.message); }
 }
-function limparTudo(){if(confirm('Apagar TUDO? Dados não voltam!')){localStorage.removeItem('shows_v3_final');localStorage.removeItem('cad_musicos_v34');localStorage.removeItem('cad_rests_v34');shows=[];cadMus=[];cadRest=[];localStorage.clear();location.reload();}}
-function atualizarStatus(){var el=document.getElementById('statusConexao');if(!el)return;if(navigator.onLine){el.className='status online';el.innerText='ONLINE'}else{el.className='status offline';el.innerText='OFFLINE'}}
+function limparTudo(){
+  if(confirm('Isso vai apagar TUDO e corrigir o erro. Tem certeza?')){
+    try{
+      localStorage.removeItem('shows_v3_final');
+      localStorage.removeItem('cad_musicos_v34');
+      localStorage.removeItem('cad_rests_v34');
+      localStorage.clear();
+    }catch(e){}
+    shows=[];cadMus=[];cadRest=[];
+    alert('Limpo! Recarregando...');
+    location.reload();
+  }
+}
+function atualizarStatus(){try{var el=document.getElementById('statusConexao');if(!el)return;if(navigator.onLine){el.className='status online';el.innerText='ONLINE'}else{el.className='status offline';el.innerText='OFFLINE'}}catch(e){}}
 var deferredPrompt=null;
-window.addEventListener('beforeinstallprompt', function(e){e.preventDefault();deferredPrompt=e;var btn=document.getElementById('btnInstalar');if(btn)btn.classList.add('mostrar');});
+window.addEventListener('beforeinstallprompt', function(e){try{e.preventDefault();deferredPrompt=e;var btn=document.getElementById('btnInstalar');if(btn)btn.classList.add('mostrar');}catch(err){}});
 function instalarApp(){
-  var btn=document.getElementById('btnInstalar');
-  if(deferredPrompt){
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then(function(choice){deferredPrompt=null;if(btn)btn.classList.remove('mostrar');});
-  }else{
-    alert('Para instalar no celular:\n\nANDROID:\n1. 3 pontinhos no topo\n2. Adicionar à tela inicial / Instalar app\n\nIPHONE:\n1. Botão compartilhar (quadrado com seta)\n2. Adicionar à Tela de Início');
-  }
+  try{
+    var btn=document.getElementById('btnInstalar');
+    if(deferredPrompt){
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(function(choice){deferredPrompt=null;if(btn)btn.classList.remove('mostrar');});
+    }else{
+      alert('Para instalar no celular:\n\nANDROID:\n1. 3 pontinhos no topo\n2. Adicionar à tela inicial / Instalar app\n\nIPHONE:\n1. Botão compartilhar\n2. Adicionar à Tela de Início');
+    }
+  }catch(e){}
 }
-window.addEventListener('appinstalled', function(){var b=document.getElementById('btnInstalar'); if(b) b.classList.remove('mostrar');});
-window.addEventListener('online',atualizarStatus);
-window.addEventListener('offline',atualizarStatus);
-atualizarStatus();
-bindFiltros();
-render();
-if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').catch(function(){})}
+try{ window.addEventListener('appinstalled', function(){var b=document.getElementById('btnInstalar'); if(b) b.classList.remove('mostrar');}); }catch(e){}
+try{ window.addEventListener('online',atualizarStatus); window.addEventListener('offline',atualizarStatus); }catch(e){}
+try{ atualizarStatus(); bindFiltros(); render(); }catch(e){ console.error(e); }
+try{ if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').catch(function(){})} }catch(e){}
 </script>
 </body>
 </html>
