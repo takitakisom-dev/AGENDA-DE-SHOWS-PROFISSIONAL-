@@ -1,4 +1,4 @@
-const CACHE='v3.7-almoco-janta';
+const CACHE='v3.8-bonito';
 self.addEventListener('install',e=>{
   e.waitUntil(caches.open(CACHE).then(c=>c.addAll(['./','./agenda-shows.html','./icon-192.png','./icon-512.png'])));
   self.skipWaiting();
