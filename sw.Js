@@ -1,4 +1,4 @@
-const CACHE='v3.9-fix-bonito';
+const CACHE='v4-imprimir-bonitao';
 self.addEventListener('install',e=>{
   e.waitUntil(caches.open(CACHE).then(c=>c.addAll(['./','./agenda-shows.html','./icon-192.png','./icon-512.png'])));
   self.skipWaiting();
