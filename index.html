@@ -32,8 +32,9 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 .add-btn{position:fixed;right:14px;bottom:80px;width:56px;height:56px;border-radius:50%;border:0;background:#222;color:#fff;font-size:30px;z-index:25;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,.3)}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:100;padding:14px}
 .modal.open{display:flex}
-.modal-box{background:#fff;border-radius:14px;padding:14px;width:100%;max-width:340px}
-.modal-box input{width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;margin:5px 0;font-size:14px}
+.modal-box{background:#fff;border-radius:14px;padding:14px;width:100%;max-width:360px;max-height:90vh;overflow:auto}
+.modal-box input,.modal-box select{width:100%;padding:11px;border:1px solid #ccc;border-radius:8px;margin:5px 0;font-size:14px;background:#fff}
+.modal-box label{font-size:11px;font-weight:800;color:#666;margin-top:6px;display:block}
 .modal-box button{width:100%;padding:12px;border:0;border-radius:10px;font-weight:800;margin-top:6px;font-size:14px;cursor:pointer}
 .save{background:#222;color:#fff}.cancel{background:#eee}
 .side{position:fixed;left:-100%;top:0;bottom:0;width:80%;max-width:300px;background:#fff;z-index:200;transition:.25s;padding:14px;overflow:auto;box-shadow:4px 0 20px rgba(0,0,0,.2)}
@@ -41,7 +42,6 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;z-index:150}
 .overlay.open{display:block}
 .menu-item{padding:12px 0;border-bottom:1px solid #f2f2f2;font-weight:600;font-size:13px;cursor:pointer}
-.menu-item:active{background:#f5f5f5}
 </style>
 </head>
 <body>
@@ -50,63 +50,51 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 <div style="font-weight:800;font-size:14px;margin-bottom:10px">Usuario</div>
 <div class="menu-item" onclick="closeMenu()">🏠 INICIO</div>
 <div class="menu-item" onclick="closeMenu();modoNormal()">📋 AGENDA DO DIA</div>
-<div class="menu-item" onclick="closeMenu()">📅 AGENDA DO MES</div>
-<div class="menu-item" onclick="closeMenu()">🗓️ AGENDA DO ANO</div>
+<div class="menu-item">📅 AGENDA DO MES</div><div class="menu-item">🗓️ AGENDA DO ANO</div>
 <div class="menu-item" onclick="closeMenu();zap()">✈️ ENVIAR CRONOGRAMA</div>
 <div style="height:8px"></div>
-<div class="menu-item" onclick="closeMenu()">🏠 CADASTRAR CASAS</div>
-<div class="menu-item" onclick="closeMenu()">🎤 CADASTRAR MUSICOS</div>
+<div class="menu-item" onclick="cadastrarCasa()">🏠 CADASTRAR CASAS</div>
+<div class="menu-item" onclick="cadastrarMusico()">🎤 CADASTRAR MUSICOS</div>
 <div style="height:8px"></div>
 <div class="menu-item" onclick="closeMenu()">🍴 VER RESTAURANTES</div>
 <div class="menu-item" onclick="closeMenu()">🎤 VER MUSICOS</div>
-<div class="menu-item" onclick="closeMenu()">📊 RELATORIOS</div>
+<div class="menu-item">📊 RELATORIOS</div>
 <div style="height:8px"></div>
-<div class="menu-item" onclick="closeMenu()">⚙️ CONFIG</div>
+<div class="menu-item">⚙️ CONFIG</div>
 <div class="menu-item" onclick="closeMenu()">🚪 FECHAR MENU</div>
 </div>
 
-<header>
-<div style="display:flex;align-items:center;gap:6px"><span class="menu-btn" onclick="openMenu()">☰</span><h1>🎤 AGENDA DO DIA</h1></div>
-<button class="btn-home" onclick="location.reload()">HOME</button>
-</header>
+<header><div style="display:flex;align-items:center;gap:6px"><span class="menu-btn" onclick="openMenu()">☰</span><h1>🎤 AGENDA DO DIA</h1></div><button class="btn-home" onclick="location.reload()">HOME</button></header>
 
-<div id="listView">
-<div class="date-card">
-<div class="title-long" id="titleLong"></div>
-<div style="display:flex;align-items:center;justify-content:space-between">
-<button class="arrow" onclick="mudaDia(-1)">◀</button>
-<div><input type="date" id="inpDate" value="2026-10-19" onchange="render()"><div style="display:flex;justify-content:center;gap:6px;margin-top:6px"><button class="pill" onclick="hoje()">HOJE</button><button class="pill" onclick="amanha()">AMANHÃ</button></div></div>
-<button class="arrow" onclick="mudaDia(1)">▶</button>
-</div>
-</div>
-<div id="lista"></div>
-</div>
+<div id="listView"><div class="date-card"><div class="title-long" id="titleLong"></div><div style="display:flex;align-items:center;justify-content:space-between"><button class="arrow" onclick="mudaDia(-1)">◀</button><div><input type="date" id="inpDate" value="2026-10-19" onchange="render()"><div style="display:flex;justify-content:center;gap:6px;margin-top:6px"><button class="pill" onclick="hoje()">HOJE</button><button class="pill" onclick="amanha()">AMANHÃ</button></div></div><button class="arrow" onclick="mudaDia(1)">▶</button></div></div><div id="lista"></div></div>
 
 <div id="folhaView" class="folha-view"><div class="folha-paper"><h2 id="folhaTitulo"></h2><div id="folhaConteudo"></div></div></div>
 
 <button class="add-btn" onclick="abrirModalNovo()">+</button>
 
-<div class="bottom">
-<button class="b-zap" onclick="zap()">📱 ZAP</button>
-<button class="b-normal" onclick="modoNormal()">🖨️ NORMAL</button>
-<button class="b-folha" onclick="modoFolha()">📒 FOLHA</button>
-<button class="b-pdf" onclick="window.print()">📄 PDF</button>
-</div>
+<div class="bottom"><button class="b-zap" onclick="zap()">📱 ZAP</button><button class="b-normal" onclick="modoNormal()">🖨️ NORMAL</button><button class="b-folha" onclick="modoFolha()">📒 FOLHA</button><button class="b-pdf" onclick="window.print()">📄 PDF</button></div>
 
 <div class="modal" id="modal">
 <div class="modal-box">
-<h3 style="margin:0 0 8px 0;font-size:14px" id="modalTitle">Novo Show</h3>
-<input id="mP" placeholder="Ex: P1">
+<h3 style="margin:0 0 8px 0;font-size:15px" id="modalTitle">Novo Show</h3>
+<label>🏠 RESTAURANTE / CASA</label>
+<select id="mP"></select>
+<label>🕓 INICIO</label>
 <input id="mIni" type="time" value="19:00">
+<label>🕓 FIM</label>
 <input id="mFim" type="time" value="22:00">
-<input id="mNome" placeholder="Nome do cantor">
-<input id="mValor" type="number" placeholder="Valor">
+<label>🎤 MUSICO / CANTOR</label>
+<select id="mNome"></select>
+<label>💰 VALOR</label>
+<input id="mValor" type="number" placeholder="300">
 <button class="save" onclick="salvar()">SALVAR</button>
 <button class="cancel" onclick="fecharModal()">CANCELAR</button>
 </div>
 </div>
 
 <script>
+let casas=JSON.parse(localStorage.getItem('casas_lista')||'null')||['P1','P2','P3','P4','P5','P6','P7','P8'];
+let musicos=JSON.parse(localStorage.getItem('musicos_lista')||'null')||['DOUGLAS','LUCIANO','ISRAEL','Andre Taki','BRUNO','RAFA'];
 let shows=JSON.parse(localStorage.getItem('shows_agenda')||'null')||[
 {p:'P1',ini:'19:00',fim:'22:00',nome:'DOUGLAS',valor:300},
 {p:'P2',ini:'19:00',fim:'22:00',nome:'LUCIANO',valor:300},
@@ -125,7 +113,15 @@ function corCantor(nome){
 function openMenu(){document.getElementById('side').classList.add('open');document.getElementById('overlay').classList.add('open')}
 function closeMenu(){document.getElementById('side').classList.remove('open');document.getElementById('overlay').classList.remove('open')}
 function formatLong(d){return d.toLocaleDateString('pt-BR',{day:'numeric',month:'long',year:'numeric'});}
-function save(){localStorage.setItem('shows_agenda',JSON.stringify(shows));}
+function saveAll(){localStorage.setItem('shows_agenda',JSON.stringify(shows));localStorage.setItem('casas_lista',JSON.stringify(casas));localStorage.setItem('musicos_lista',JSON.stringify(musicos));}
+function preencherSelects(){
+  const selP=document.getElementById('mP');selP.innerHTML='';
+  casas.forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent='🏠 '+c;selP.appendChild(o)});
+  const selM=document.getElementById('mNome');selM.innerHTML='';
+  musicos.forEach(m=>{const o=document.createElement('option');o.value=m;o.textContent='🎤 '+m;selM.appendChild(o)});
+}
+function cadastrarCasa(){const n=prompt('Nome da nova casa / restaurante:');if(n){casas.push(n.toUpperCase());saveAll();alert('Casa '+n+' cadastrada!');closeMenu();}}
+function cadastrarMusico(){const n=prompt('Nome do novo musico / cantor:');if(n){musicos.push(n.toUpperCase());saveAll();alert('Musico '+n+' cadastrado!');closeMenu();}}
 function render(){
  const inp=document.getElementById('inpDate').value;
  const d=inp?new Date(inp+'T12:00:00'):new Date();
@@ -149,12 +145,12 @@ function amanha(){let d=new Date();d.setDate(d.getDate()+1);document.getElementB
 function modoFolha(){document.getElementById('listView').style.display='none';document.getElementById('folhaView').style.display='block';closeMenu()}
 function modoNormal(){document.getElementById('listView').style.display='block';document.getElementById('folhaView').style.display='none';}
 function zap(){const d=document.getElementById('titleLong').innerText;const txt=shows.map(s=>s.p+' '+s.ini+'-'+s.fim+' - '+s.nome+' - R$ '+s.valor).join('\n');window.open('https://wa.me/?text='+encodeURIComponent('🎤 '+d+'\n\n'+txt),'_blank');}
-function abrirModalNovo(){editIdx=-1;document.getElementById('modalTitle').innerText='Novo Show';document.getElementById('mP').value='';document.getElementById('mIni').value='19:00';document.getElementById('mFim').value='22:00';document.getElementById('mNome').value='';document.getElementById('mValor').value='';document.getElementById('modal').classList.add('open');}
+function abrirModalNovo(){preencherSelects();editIdx=-1;document.getElementById('modalTitle').innerText='Novo Show';document.getElementById('mIni').value='19:00';document.getElementById('mFim').value='22:00';document.getElementById('mValor').value='';document.getElementById('modal').classList.add('open');}
 function fecharModal(){document.getElementById('modal').classList.remove('open');editIdx=-1;}
-function salvar(){const o={p:document.getElementById('mP').value||'P',ini:document.getElementById('mIni').value,fim:document.getElementById('mFim').value,nome:document.getElementById('mNome').value||'SEM NOME',valor:document.getElementById('mValor').value||0};if(editIdx>=0)shows[editIdx]=o;else shows.push(o);save();render();fecharModal();}
-function editar(i){editIdx=i;const s=shows[i];document.getElementById('modalTitle').innerText='Editar Show';document.getElementById('mP').value=s.p;document.getElementById('mIni').value=s.ini;document.getElementById('mFim').value=s.fim;document.getElementById('mNome').value=s.nome;document.getElementById('mValor').value=s.valor;document.getElementById('modal').classList.add('open');}
-function excluir(i){if(confirm('Excluir?')){shows.splice(i,1);save();render();}}
-render();
+function salvar(){const o={p:document.getElementById('mP').value,fim:document.getElementById('mFim').value,ini:document.getElementById('mIni').value,nome:document.getElementById('mNome').value,valor:document.getElementById('mValor').value||0};if(editIdx>=0)shows[editIdx]=o;else shows.push(o);saveAll();render();fecharModal();}
+function editar(i){preencherSelects();editIdx=i;const s=shows[i];document.getElementById('modalTitle').innerText='Editar Show';document.getElementById('mP').value=s.p;document.getElementById('mIni').value=s.ini;document.getElementById('mFim').value=s.fim;document.getElementById('mNome').value=s.nome;document.getElementById('mValor').value=s.valor;document.getElementById('modal').classList.add('open');}
+function excluir(i){if(confirm('Excluir?')){shows.splice(i,1);saveAll();render();}}
+render();preencherSelects();
 </script>
 </body>
 </html>
