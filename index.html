@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Agenda do Dia</title>
+<meta name="theme-color" content="#222222">
+<link id="manifestLink" rel="manifest" href="">
 <style>
 *{box-sizing:border-box;font-family:system-ui,Arial,sans-serif}
 body{margin:0;background:#f0f0f0;padding-bottom:90px}
@@ -32,16 +34,16 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 .add-btn{position:fixed;right:14px;bottom:80px;width:56px;height:56px;border-radius:50%;border:0;background:#222;color:#fff;font-size:30px;z-index:25;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,.3)}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:500;padding:14px}
 .modal.open{display:flex}
-.modal-box{background:#fff;border-radius:14px;padding:14px;width:100%;max-width:460px;max-height:92vh;overflow:auto}
+.modal-box{background:#fff;border-radius:14px;padding:14px;width:100%;max-width:480px;max-height:92vh;overflow:auto}
 .modal-box input,.modal-box select{width:100%;padding:11px;border:1px solid #ccc;border-radius:8px;margin:5px 0;font-size:14px;background:#fff}
 .modal-box label{font-size:11px;font-weight:800;color:#666;margin-top:6px;display:block}
 .modal-box button{width:100%;padding:12px;border:0;border-radius:10px;font-weight:800;margin-top:6px;font-size:14px;cursor:pointer}
 .save{background:#222;color:#fff}.cancel{background:#eee}
-.side{position:fixed;left:-100%;top:0;bottom:0;width:80%;max-width:300px;background:#fff;z-index:600;transition:.25s;padding:14px;overflow:auto;box-shadow:4px 0 20px rgba(0,0,0,.2)}
+.side{position:fixed;left:-100%;top:0;bottom:0;width:85%;max-width:320px;background:#fff;z-index:600;transition:.25s;padding:14px;overflow:auto;box-shadow:4px 0 20px rgba(0,0,0,.2)}
 .side.open{left:0}
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;z-index:400}
 .overlay.open{display:block}
-.menu-item{padding:12px 0;border-bottom:1px solid #f2f2f2;font-weight:600;font-size:13px;cursor:pointer}
+.menu-item{padding:12px 0;border-bottom:1px solid #f2f2f2;font-weight:600;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:6px}
 .item-lista{display:flex;justify-content:space-between;align-items:center;background:#f8f8f8;padding:10px;border-radius:10px;margin:6px 0;border:1px solid #eee}
 .mini-btn{border:0;padding:8px 10px;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer;margin:3px 0;width:100%;display:block}
 .mini-edit{background:#dbeafe;color:#1d4ed8}.mini-del{background:#fecaca;color:#b91c1c}
@@ -51,13 +53,18 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 .fin-btn{border:0;padding:8px 10px;border-radius:20px;font-weight:800;font-size:11px;cursor:pointer;margin:2px}
 .fin-btn.active{background:#222;color:#fff}.fin-btn.inactive{background:#eee;color:#666}
 .folha-mini{border:0;padding:6px 12px;border-radius:20px;font-weight:800;font-size:11px;cursor:pointer;margin:2px}
+.install-banner{display:none;background:#222;color:#fff;padding:10px 12px;border-radius:12px;margin:10px;display:flex;justify-content:space-between;align-items:center}
+.install-banner.show{display:flex}
 </style>
 </head>
 <body>
 <div class="overlay" id="overlay" onclick="fecharTodosModais()"></div>
 <div class="side" id="side">
-<div style="font-weight:800;font-size:14px;margin-bottom:6px">Usuario</div>
+<div style="font-weight:800;font-size:14px;margin-bottom:6px">🎤 Usuario</div>
+<div class="menu-item" onclick="closeMenu();modoNormal()">🏠 INICIO</div>
 <div class="menu-item" onclick="closeMenu();modoNormal()">📋 AGENDA DO DIA</div>
+<div class="menu-item" onclick="closeMenu()">📅 AGENDA DO MES</div>
+<div class="menu-item" onclick="closeMenu()">🗓️ AGENDA DO ANO</div>
 <div class="menu-item" onclick="closeMenu();zapMusicos()">✈️ ENVIAR CRONOGRAMA</div>
 <div style="height:8px;border-bottom:1px solid #eee;margin:6px 0"></div>
 <div class="menu-item" onclick="abrirGestaoCasas()">🏠 CADASTRAR CASAS</div>
@@ -65,12 +72,24 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 <div style="height:8px;border-bottom:1px solid #eee;margin:6px 0"></div>
 <div class="menu-item" onclick="abrirRelatorio()">💰 RELATÓRIO FINANCEIRO</div>
 <div class="menu-item" onclick="closeMenu();modoFinanceiro()">💰 FINANCEIRO DO DIA</div>
-<div class="menu-item" onclick="closeMenu()">📊 RELATORIOS</div>
+<div style="height:8px;border-bottom:1px solid #eee;margin:6px 0"></div>
+<div class="menu-item" onclick="exportarBackup()">💾 EXPORTAR BKP</div>
+<div class="menu-item" onclick="document.getElementById('inputImport').click()">📥 IMPORTAR BKP</div>
+<div class="menu-item" onclick="instalarApp()" id="menuInstalar">📲 INSTALAR APP</div>
+<div class="menu-item" onclick="compartilharApp()">🔗 COMPARTILHAR APP</div>
 <div style="height:8px;border-bottom:1px solid #eee;margin:6px 0"></div>
 <div class="menu-item" onclick="closeMenu()">⚙️ CONFIG</div>
 <div class="menu-item" onclick="closeMenu()">🚪 FECHAR MENU</div>
+<input type="file" id="inputImport" accept=".json" style="display:none" onchange="importarBackup(this)">
 </div>
+
 <header><div style="display:flex;align-items:center;gap:6px"><span class="menu-btn" onclick="openMenu()">☰</span><h1>🎤 AGENDA DO DIA</h1></div><button class="btn-home" onclick="location.reload()">HOME</button></header>
+
+<div class="install-banner" id="installBanner">
+<div><b>📲 Instalar App?</b><br><span style="font-size:11px">Instala direto, sem 3 pontinhos!</span></div>
+<button onclick="instalarApp()" style="background:#00e676;color:#000;border:0;padding:8px 14px;border-radius:20px;font-weight:800">INSTALAR</button>
+</div>
+
 <div id="listView"><div class="date-card"><div class="title-long" id="titleLong"></div><div style="display:flex;align-items:center;justify-content:space-between"><button class="arrow" onclick="mudaDia(-1)">◀</button><div><input type="date" id="inpDate" onchange="trocarData()"><div style="display:flex;justify-content:center;gap:6px;margin-top:6px"><button class="pill" onclick="hoje()">HOJE</button><button class="pill" onclick="amanha()">AMANHÃ</button></div></div><button class="arrow" onclick="mudaDia(1)">▶</button></div></div><div id="lista"></div></div>
 <div id="folhaView" class="folha-view"><div class="folha-paper"><h2 id="folhaTitulo"></h2><div id="folhaConteudo"></div></div></div>
 <button class="add-btn" onclick="abrirModalNovo()">+</button>
@@ -87,7 +106,6 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 <div class="modal" id="modalMusicos"><div class="modal-box"><h3>🎤 CADASTRAR MUSICOS</h3><label>Nome do músico</label><input id="novoMusicoInput" placeholder="Ex: BRUNO"><label>💰 Valor do cachê</label><div style="display:flex;gap:6px"><input id="novoMusicoCache" type="number" placeholder="Ex: 350" style="flex:1"><button onclick="addMusico()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaMusicos" style="margin-top:12px"></div><button class="cancel" onclick="fecharModalMusicos()">FECHAR</button></div></div>
 <div class="modal" id="modalEditar"><div class="modal-box"><h3 id="editarTitulo">✏️ Editar</h3><label id="labelEditar1">Nome</label><input id="editarInput"><div id="divEditarCache"><label>💰 Cachê</label><input id="editarCache" type="number" placeholder="300"></div><button class="save" onclick="confirmarEditar()">SALVAR EDIÇÃO</button><button class="cancel" onclick="fecharModalEditar()">CANCELAR</button></div></div>
 
-<!-- RELATORIO FINANCEIRO COM FOLHA -->
 <div class="modal" id="modalRelatorio"><div class="modal-box" style="max-width:480px">
 <h3>💰 RELATÓRIO FINANCEIRO</h3>
 <div style="display:flex;gap:4px;flex-wrap:wrap;margin:8px 0">
@@ -97,29 +115,22 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 <button class="fin-btn inactive" id="btnAno" onclick="gerarRelatorio('ano')">ANO</button>
 <button class="fin-btn inactive" id="btnTodos" onclick="gerarRelatorio('todos')">TUDO</button>
 </div>
-
 <div style="display:flex;gap:4px;margin:8px 0;border-top:1px solid #eee;padding-top:8px">
 <button class="folha-mini" id="btnRelNormal" onclick="modoRelNormal()" style="background:#7c6cff;color:#fff;flex:1">🖨️ NORMAL</button>
 <button class="folha-mini" id="btnRelFolha" onclick="modoRelFolha()" style="background:#ffe066;border:1.5px dashed #000;flex:1">📒 FOLHA</button>
 </div>
-
 <div id="relPeriodo" style="font-size:12px;font-weight:700;color:#666;margin:6px 0"></div>
-
-<!-- VISTA NORMAL -->
 <div id="relVistaNormal">
 <div class="fin-total" id="relTotal">TOTAL: R$ 0</div>
 <div class="fin-card"><div style="font-weight:800;font-size:12px;margin-bottom:6px">📊 POR MÚSICO</div><div id="relMusicos"></div></div>
 <div class="fin-card"><div style="font-weight:800;font-size:12px;margin-bottom:6px">📋 DETALHES DOS SHOWS</div><div id="relDetalhes"></div></div>
 </div>
-
-<!-- VISTA FOLHA DE CADERNO -->
 <div id="relVistaFolha" style="display:none">
 <div class="folha-paper" style="margin-top:8px">
 <h2 id="relFolhaTitulo" style="font-size:11px"></h2>
 <div id="relFolhaConteudo"></div>
 </div>
 </div>
-
 <div style="display:flex;gap:6px;margin-top:10px">
 <button class="cancel" onclick="fecharRelatorio()" style="flex:1">FECHAR</button>
 <button class="save" onclick="zapFinanceiro()" style="flex:1;background:#00e676;color:#000">📱 ZAP FIN</button>
@@ -128,6 +139,100 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 </div></div>
 
 <script>
+// ===== PWA MANIFEST DIRETO SEM 3 PONTINHOS =====
+const manifestData = {
+ name: "Agenda do Dia - Takisom",
+ short_name: "Agenda",
+ start_url: ".",
+ display: "standalone",
+ background_color: "#f0f0f0",
+ theme_color: "#222222",
+ icons: [{src:"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎤</text></svg>", sizes:"192x192", type:"image/svg+xml"}]
+};
+const manifestBlob = new Blob([JSON.stringify(manifestData)], {type:'application/json'});
+const manifestURL = URL.createObjectURL(manifestBlob);
+document.getElementById('manifestLink').href = manifestURL;
+
+let deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', (e)=>{
+ e.preventDefault();
+ deferredPrompt = e;
+ document.getElementById('installBanner').classList.add('show');
+ document.getElementById('menuInstalar').style.display='flex';
+});
+window.addEventListener('appinstalled', ()=>{
+ deferredPrompt=null;
+ document.getElementById('installBanner').classList.remove('show');
+});
+function instalarApp(){
+ if(deferredPrompt){
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then(r=>{
+   if(r.outcome==='accepted'){document.getElementById('installBanner').classList.remove('show');}
+   deferredPrompt=null;
+  });
+ }else{
+  alert('Para instalar:\n\nNo Android já aparece o botão INSTALAR automaticamente.\n\nSe não aparecer: seu navegador já instalou ou você está no modo computador. Abra no celular Android Chrome.\n\nDICA: Depois de instalar, abre como APP na tela inicial, sem barra do Google!');
+ }
+}
+function compartilharApp(){
+ const url = location.href;
+ if(navigator.share){
+  navigator.share({title:'Agenda do Dia', text:'Baixa minha agenda de shows!', url:url}).catch(()=>{});
+ }else{
+  navigator.clipboard.writeText(url).then(()=>{alert('Link copiado! '+url);}).catch(()=>{prompt('Copia o link:', url);});
+ }
+}
+
+// ===== BKP EXPORTAR / IMPORTAR =====
+function exportarBackup(){
+ const dados = {
+  casas: casas,
+  musicos: musicos,
+  agendaCompleta: agendaCompleta,
+  data: new Date().toISOString(),
+  versao: 'v3'
+ };
+ const blob = new Blob([JSON.stringify(dados, null, 2)], {type:'application/json'});
+ const url = URL.createObjectURL(blob);
+ const a = document.createElement('a');
+ a.href=url;
+ a.download='BKP-AGENDA-'+new Date().toISOString().slice(0,10)+'.json';
+ document.body.appendChild(a);
+ a.click();
+ document.body.removeChild(a);
+ URL.revokeObjectURL(url);
+ closeMenu();
+ alert('💾 Backup exportado com sucesso!');
+}
+function importarBackup(input){
+ const file = input.files[0];
+ if(!file) return;
+ const reader = new FileReader();
+ reader.onload = function(e){
+  try{
+   const dados = JSON.parse(e.target.result);
+   if(dados.casas) casas = dados.casas;
+   if(dados.musicos) musicos = dados.musicos;
+   if(dados.agendaCompleta) agendaCompleta = dados.agendaCompleta;
+   // compat antigo
+   if(dados.shows && !dados.agendaCompleta){
+    const k = new Date().toISOString().slice(0,10);
+    agendaCompleta[k]=dados.shows;
+   }
+   saveAll();
+   localStorage.setItem('agenda_completa_v3', JSON.stringify(agendaCompleta));
+   alert('📥 Backup importado! '+Object.keys(agendaCompleta).length+' dias recuperados.');
+   location.reload();
+  }catch(err){
+   alert('Erro ao importar: arquivo inválido');
+  }
+ };
+ reader.readAsText(file);
+ input.value='';
+}
+
+// ===== LOGICA PRINCIPAL =====
 function carregar(chave, padrao){try{const v=localStorage.getItem(chave);if(v){const a=JSON.parse(v);if(Array.isArray(a)&&a.length>0)return a; if(typeof a==='object' && Object.keys(a).length>0) return a;}}catch(e){}return padrao;}
 let casasRaw=carregar('casas_lista_final',['P1','P2','P3','P4','P5']);
 let musicosRaw=carregar('musicos_lista_final_v2',null);
@@ -142,7 +247,6 @@ let editIdx=-1,editTipo=null,editPos=-1;
 let modoFinanceiroAtivo=false;
 let relTipoAtual='dia';
 let relFolhaAtiva=false;
-let ultimoRelTodos=[];
 function corCantor(n){n=(n||'').toUpperCase();if(n.includes('DOUGLAS'))return '#1565ff';if(n.includes('LUCIANO'))return '#7c4dff';if(n.includes('ISRAEL'))return '#00a651';if(n.includes('TAKI')||n.includes('ANDRE'))return '#ff6f00';return '#d32f2f';}
 function openMenu(){document.getElementById('side').classList.add('open');document.getElementById('overlay').classList.add('open')}
 function closeMenu(){document.getElementById('side').classList.remove('open');if(!document.querySelector('.modal.open'))document.getElementById('overlay').classList.remove('open');}
@@ -225,20 +329,16 @@ function fecharModal(){document.getElementById('modal').classList.remove('open')
 function salvar(){const o={p:document.getElementById('mP').value,fim:document.getElementById('mFim').value,ini:document.getElementById('mIni').value,nome:document.getElementById('mNome').value,valor:document.getElementById('mValor').value||0};if(editIdx>=0)shows[editIdx]=o;else shows.push(o);const k=getKey();agendaCompleta[k]=shows;saveAll();render();fecharModal();}
 function editar(i){preencherSelects();editIdx=i;const s=shows[i];document.getElementById('modalTitle').innerText='Editar Show';document.getElementById('mP').value=s.p;document.getElementById('mIni').value=s.ini;document.getElementById('mFim').value=s.fim;document.getElementById('mNome').value=s.nome;document.getElementById('mValor').value=s.valor;document.getElementById('modal').classList.add('open');document.getElementById('overlay').classList.add('open');}
 function excluir(i){if(confirm('Excluir?')){shows.splice(i,1);const k=getKey();agendaCompleta[k]=shows;saveAll();render();}}
-
-// RELATORIO
 function abrirRelatorio(){closeMenu();document.getElementById('modalRelatorio').classList.add('open');document.getElementById('overlay').classList.add('open');gerarRelatorio('dia');}
 function fecharRelatorio(){document.getElementById('modalRelatorio').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
-function modoRelNormal(){relFolhaAtiva=false;document.getElementById('relVistaNormal').style.display='block';document.getElementById('relVistaFolha').style.display='none';document.getElementById('btnRelNormal').style.background='#7c6cff';document.getElementById('btnRelNormal').style.color='#fff';document.getElementById('btnRelFolha').style.background='#ffe066';}
+function modoRelNormal(){relFolhaAtiva=false;document.getElementById('relVistaNormal').style.display='block';document.getElementById('relVistaFolha').style.display='none';document.getElementById('btnRelNormal').style.background='#7c6cff';document.getElementById('btnRelNormal').style.color='#fff';document.getElementById('btnRelFolha').style.background='#ffe066';document.getElementById('btnRelFolha').style.color='#000';}
 function modoRelFolha(){relFolhaAtiva=true;document.getElementById('relVistaNormal').style.display='none';document.getElementById('relVistaFolha').style.display='block';document.getElementById('btnRelFolha').style.background='#222';document.getElementById('btnRelFolha').style.color='#fff';document.getElementById('btnRelNormal').style.background='#eee';document.getElementById('btnRelNormal').style.color='#666';}
-
 function gerarRelatorio(tipo){
  relTipoAtual=tipo;
  document.querySelectorAll('.fin-btn').forEach(b=>{b.classList.remove('active');b.classList.add('inactive');});
  const btn=document.getElementById('btn'+tipo.charAt(0).toUpperCase()+tipo.slice(1));
  if(btn){btn.classList.add('active');btn.classList.remove('inactive');}
  if(tipo==='todos') document.getElementById('btnTodos').classList.add('active');
-
  const hojeKey=getKey();
  const hojeDate=new Date(hojeKey+'T12:00:00');
  let datas=[];
@@ -265,16 +365,13 @@ function gerarRelatorio(tipo){
   if(datas.length===0) datas=[hojeKey];
   document.getElementById('relPeriodo').innerText='📅 TODOS OS DIAS';
  }
-
  let todosShows=[];
  datas.forEach(k=>{
   const arr=agendaCompleta[k]|| (k===hojeKey?shows:[]);
   arr.forEach(s=>{todosShows.push({...s, data:k})});
  });
- ultimoRelTodos=todosShows;
  const total=todosShows.reduce((sum,s)=>sum+(parseInt(s.valor)||0),0);
  document.getElementById('relTotal').innerText='TOTAL: R$ '+total+' | '+todosShows.length+' SHOWS';
-
  const porMusico={};
  todosShows.forEach(s=>{
   const nome=s.nome.toUpperCase();
@@ -289,15 +386,12 @@ function gerarRelatorio(tipo){
  });
  if(htmlMusicos==='') htmlMusicos='<div style="font-size:12px;color:#888">Nenhum show</div>';
  document.getElementById('relMusicos').innerHTML=htmlMusicos;
-
  let htmlDetalhes='';
  todosShows.sort((a,b)=>a.data.localeCompare(b.data)).forEach(s=>{
   htmlDetalhes+='<div class=fin-row><span>'+s.data.slice(8,10)+'/'+s.data.slice(5,7)+' '+s.p+' '+s.nome+'</span><span>R$ '+s.valor+'</span></div>';
  });
  if(htmlDetalhes==='') htmlDetalhes='<div style="font-size:12px;color:#888">Nenhum show</div>';
  document.getElementById('relDetalhes').innerHTML=htmlDetalhes;
-
- // FOLHA DE CADERNO - SEM NUMEROS, COM CACHÊ SÓ NO FINANCEIRO
  const periodo=document.getElementById('relPeriodo').innerText;
  document.getElementById('relFolhaTitulo').innerText=periodo+' - TOTAL R$ '+total;
  let htmlFolha='';
@@ -309,14 +403,21 @@ function gerarRelatorio(tipo){
  htmlFolha+='<p class=folha-item style="font-weight:700;margin-top:4px">--- DETALHES ---</p>';
  todosShows.forEach(s=>{
   const cor=corCantor(s.nome);
-  htmlFolha+='<p class=folha-item>'+s.data.slice(8,10)+'/'+s.data.slice(5,7)+' '+s.p+' '+s.ini+'-'+s.fim+' - <b style="color:'+cor+'">'+s.nome+'</b> - R$ '+s.valor+'</p>';
+  htmlFolha+='<p class=folha-item>'+s.data.slice(8,10)+'/'+s.data.slice(5,7)+' '+s.p+' - <b style="color:'+cor+'">'+s.nome+'</b> - R$ '+s.valor+'</p>';
  });
  document.getElementById('relFolhaConteudo').innerHTML=htmlFolha;
 }
-
 render();preencherSelects();
 if(!document.getElementById('inpDate').value) document.getElementById('inpDate').value=new Date().toISOString().slice(0,10);
 trocarData();
+
+// Service Worker simples para PWA
+if('serviceWorker' in navigator){
+ const swCode = `self.addEventListener('install', e=>self.skipWaiting());self.addEventListener('activate', e=>self.clients.claim());self.addEventListener('fetch', e=>e.respondWith(fetch(e.request).catch(()=>caches.match(e.request))));`;
+ const swBlob = new Blob([swCode], {type:'application/javascript'});
+ const swURL = URL.createObjectURL(swBlob);
+ navigator.serviceWorker.register(swURL).catch(()=>{});
+}
 </script>
 </body>
 </html>
