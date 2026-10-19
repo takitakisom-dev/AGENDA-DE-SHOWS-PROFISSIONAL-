@@ -8,51 +8,104 @@
 *{box-sizing:border-box;font-family:system-ui,Arial,sans-serif}
 body{margin:0;background:#f0f0f0;padding-bottom:90px}
 header{background:#e9e9e9;display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:1px solid #ddd;position:sticky;top:0;z-index:10}
-header h1{margin:0;font-size:14px !important;font-weight:800}
+header h1{margin:0;font-size:14px;font-weight:800}
 .btn-home{background:#222;color:#fff;border:0;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:700}
+.menu-btn{font-size:22px;cursor:pointer;padding:4px 8px}
 .date-card{background:#fff;margin:10px;border-radius:14px;padding:10px;box-shadow:0 1px 4px rgba(0,0,0,.08);text-align:center}
-.arrow{width:44px;height:44px;border:0;border-radius:10px;background:#222;color:#fff;font-size:20px;display:grid;place-items:center}
-.title-long{font-weight:700;font-size:13px !important;margin-bottom:6px}
+.arrow{width:44px;height:44px;border:0;border-radius:10px;background:#222;color:#fff;font-size:20px;display:grid;place-items:center;cursor:pointer}
+.title-long{font-weight:700;font-size:13px;margin-bottom:6px}
 input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-radius:10px;max-width:160px}
-.pill{border:0;background:#eee;padding:5px 10px;border-radius:20px;font-weight:700;color:#888;font-size:11px}
+.pill{border:0;background:#eee;padding:5px 10px;border-radius:20px;font-weight:700;color:#888;font-size:11px;cursor:pointer}
 .show-card{background:#fff;margin:8px 10px;border-radius:12px;padding:10px 12px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
-.line{font-weight:700;font-size:13px !important}
-.line2{font-size:12px !important;margin:4px 0 6px 0;color:#444}
-.line2 b{font-weight:900}
-.b-edit,.b-del{border:0;padding:5px 10px;border-radius:6px;font-weight:700;font-size:11px}
+.line{font-weight:700;font-size:13px}
+.line2{font-size:12px;margin:4px 0 6px 0;color:#444}
+.b-edit,.b-del{border:0;padding:5px 10px;border-radius:6px;font-weight:700;font-size:11px;cursor:pointer}
 .b-edit{background:#e3f0ff;color:#2a7fff}.b-del{background:#ffe3e3;color:#d44}
 .bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #ddd;display:flex;gap:4px;padding:6px;justify-content:space-around;z-index:20}
-.bottom button{border:0;padding:8px 10px;border-radius:10px;font-weight:800;font-size:11px}
+.bottom button{border:0;padding:8px 10px;border-radius:10px;font-weight:800;font-size:11px;cursor:pointer}
 .b-zap{background:#00e676}.b-normal{background:#7c6cff;color:#fff}.b-folha{background:#ffe066;border:1.5px dashed #000}.b-pdf{background:#00bfa6;color:#fff}
 .folha-view{display:none;padding:8px}
 .folha-paper{background:#fff;background-image:repeating-linear-gradient(transparent,transparent 31px,#b5d8ff 31px,#b5d8ff 32px);border:1.5px solid #333;border-radius:6px;padding:0 10px 0 36px;position:relative}
 .folha-paper:before{content:'';position:absolute;left:28px;top:0;bottom:0;width:1.5px;background:#ff8a8a}
-.folha-paper h2{font-family:Arial,sans-serif;font-size:12px !important;line-height:32px !important;height:32px;margin:0;white-space:nowrap;overflow:hidden;font-weight:700}
-.folha-item{font-family:Arial,sans-serif !important;font-size:11.5px !important;line-height:32px !important;height:32px !important;margin:0 !important;padding:0 !important;transform:translateY(2px);white-space:nowrap;overflow:hidden;color:#222}
-.folha-item b{font-weight:900}
-.add-btn{position:fixed;right:14px;bottom:80px;width:50px;height:50px;border-radius:50%;border:0;background:#222;color:#fff;font-size:28px;z-index:25}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;align-items:center;justify-content:center;z-index:30;padding:14px}
+.folha-paper h2{font-family:Arial,sans-serif;font-size:12px;line-height:32px;height:32px;margin:0;white-space:nowrap;overflow:hidden;font-weight:700}
+.folha-item{font-family:Arial,sans-serif;font-size:11.5px;line-height:32px;height:32px;margin:0;padding:0;transform:translateY(2px);white-space:nowrap;overflow:hidden;color:#222}
+.add-btn{position:fixed;right:14px;bottom:80px;width:56px;height:56px;border-radius:50%;border:0;background:#222;color:#fff;font-size:30px;z-index:25;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,.3)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:100;padding:14px}
+.modal.open{display:flex}
 .modal-box{background:#fff;border-radius:14px;padding:14px;width:100%;max-width:340px}
-.modal-box input{width:100%;padding:8px;border:1px solid #ccc;border-radius:8px;margin:4px 0;font-size:13px}
-.modal-box button{width:100%;padding:10px;border:0;border-radius:10px;font-weight:800;margin-top:6px;font-size:13px}
+.modal-box input{width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;margin:5px 0;font-size:14px}
+.modal-box button{width:100%;padding:12px;border:0;border-radius:10px;font-weight:800;margin-top:6px;font-size:14px;cursor:pointer}
 .save{background:#222;color:#fff}.cancel{background:#eee}
-.side{position:fixed;left:-100%;top:0;bottom:0;width:80%;max-width:300px;background:#fff;z-index:50;transition:.25s;padding:14px;overflow:auto}
-.side.open{left:0}.overlay{position:fixed;inset:0;background:rgba(0,0,0,.3);display:none;z-index:40}.overlay.open{display:block}
-.menu-item{padding:10px 0;border-bottom:1px solid #f2f2f2;font-weight:600;font-size:13px}
+.side{position:fixed;left:-100%;top:0;bottom:0;width:80%;max-width:300px;background:#fff;z-index:200;transition:.25s;padding:14px;overflow:auto;box-shadow:4px 0 20px rgba(0,0,0,.2)}
+.side.open{left:0}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;z-index:150}
+.overlay.open{display:block}
+.menu-item{padding:12px 0;border-bottom:1px solid #f2f2f2;font-weight:600;font-size:13px;cursor:pointer}
+.menu-item:active{background:#f5f5f5}
 </style>
 </head>
 <body>
 <div class="overlay" id="overlay" onclick="closeMenu()"></div>
 <div class="side" id="side">
 <div style="font-weight:800;font-size:14px;margin-bottom:10px">Usuario</div>
-<div class="menu-item">🏠 INICIO</div><div class="menu-item">📋 AGENDA DO DIA</div><div class="menu-item">📅 AGENDA DO MES</div><div class="menu-item">🗓️ AGENDA DO ANO</div><div class="menu-item">✈️ ENVIAR CRONOGRAMA</div><div style="height:8px"></div><div class="menu-item">🏠 CADASTRAR CASAS</div><div class="menu-item">🎤 CADASTRAR MUSICOS</div><div style="height:8px"></div><div class="menu-item">🍴 VER RESTAURANTES</div><div class="menu-item">🎤 VER MUSICOS</div><div class="menu-item">📊 RELATORIOS</div><div style="height:8px"></div><div class="menu-item">⚙️ CONFIG</div><div class="menu-item" onclick="closeMenu()">🚪 FECHAR MENU</div>
+<div class="menu-item" onclick="closeMenu()">🏠 INICIO</div>
+<div class="menu-item" onclick="closeMenu();modoNormal()">📋 AGENDA DO DIA</div>
+<div class="menu-item" onclick="closeMenu()">📅 AGENDA DO MES</div>
+<div class="menu-item" onclick="closeMenu()">🗓️ AGENDA DO ANO</div>
+<div class="menu-item" onclick="closeMenu();zap()">✈️ ENVIAR CRONOGRAMA</div>
+<div style="height:8px"></div>
+<div class="menu-item" onclick="closeMenu()">🏠 CADASTRAR CASAS</div>
+<div class="menu-item" onclick="closeMenu()">🎤 CADASTRAR MUSICOS</div>
+<div style="height:8px"></div>
+<div class="menu-item" onclick="closeMenu()">🍴 VER RESTAURANTES</div>
+<div class="menu-item" onclick="closeMenu()">🎤 VER MUSICOS</div>
+<div class="menu-item" onclick="closeMenu()">📊 RELATORIOS</div>
+<div style="height:8px"></div>
+<div class="menu-item" onclick="closeMenu()">⚙️ CONFIG</div>
+<div class="menu-item" onclick="closeMenu()">🚪 FECHAR MENU</div>
 </div>
-<header><div style="display:flex;align-items:center;gap:8px"><span style="font-size:20px" onclick="openMenu()">☰</span><h1>🎤 AGENDA DO DIA</h1></div><button class="btn-home" onclick="location.reload()">HOME</button></header>
-<div id="listView"><div class="date-card"><div class="title-long" id="titleLong"></div><div style="display:flex;align-items:center;justify-content:space-between"><button class="arrow" onclick="mudaDia(-1)">◀</button><div><input type="date" id="inpDate" value="2026-10-19" onchange="render()"><div style="display:flex;justify-content:center;gap:6px;margin-top:6px"><button class="pill" onclick="hoje()">HOJE</button><button class="pill" onclick="amanha()">AMANHÃ</button></div></div><button class="arrow" onclick="mudaDia(1)">▶</button></div></div><div id="lista"></div></div>
+
+<header>
+<div style="display:flex;align-items:center;gap:6px"><span class="menu-btn" onclick="openMenu()">☰</span><h1>🎤 AGENDA DO DIA</h1></div>
+<button class="btn-home" onclick="location.reload()">HOME</button>
+</header>
+
+<div id="listView">
+<div class="date-card">
+<div class="title-long" id="titleLong"></div>
+<div style="display:flex;align-items:center;justify-content:space-between">
+<button class="arrow" onclick="mudaDia(-1)">◀</button>
+<div><input type="date" id="inpDate" value="2026-10-19" onchange="render()"><div style="display:flex;justify-content:center;gap:6px;margin-top:6px"><button class="pill" onclick="hoje()">HOJE</button><button class="pill" onclick="amanha()">AMANHÃ</button></div></div>
+<button class="arrow" onclick="mudaDia(1)">▶</button>
+</div>
+</div>
+<div id="lista"></div>
+</div>
+
 <div id="folhaView" class="folha-view"><div class="folha-paper"><h2 id="folhaTitulo"></h2><div id="folhaConteudo"></div></div></div>
-<button class="add-btn" onclick="abrirModal()">+</button>
-<div class="bottom"><button class="b-zap" onclick="zap()">ZAP</button><button class="b-normal" onclick="modoNormal()">NORMAL</button><button class="b-folha" onclick="modoFolha()">FOLHA</button><button class="b-pdf" onclick="window.print()">PDF</button></div>
-<div class="modal" id="modal"><div class="modal-box"><h3 style="margin:0 0 8px 0;font-size:14px">Novo Show</h3><input id="mP" placeholder="P1, P2..."><input id="mIni" type="time" value="19:00"><input id="mFim" type="time" value="22:00"><input id="mNome" placeholder="Nome - DOUGLAS"><input id="mValor" type="number" placeholder="Valor - 300"><button class="save" onclick="salvar()">SALVAR</button><button class="cancel" onclick="fecharModal()">CANCELAR</button></div></div>
+
+<button class="add-btn" onclick="abrirModalNovo()">+</button>
+
+<div class="bottom">
+<button class="b-zap" onclick="zap()">📱 ZAP</button>
+<button class="b-normal" onclick="modoNormal()">🖨️ NORMAL</button>
+<button class="b-folha" onclick="modoFolha()">📒 FOLHA</button>
+<button class="b-pdf" onclick="window.print()">📄 PDF</button>
+</div>
+
+<div class="modal" id="modal">
+<div class="modal-box">
+<h3 style="margin:0 0 8px 0;font-size:14px" id="modalTitle">Novo Show</h3>
+<input id="mP" placeholder="Ex: P1">
+<input id="mIni" type="time" value="19:00">
+<input id="mFim" type="time" value="22:00">
+<input id="mNome" placeholder="Nome do cantor">
+<input id="mValor" type="number" placeholder="Valor">
+<button class="save" onclick="salvar()">SALVAR</button>
+<button class="cancel" onclick="fecharModal()">CANCELAR</button>
+</div>
+</div>
+
 <script>
 let shows=JSON.parse(localStorage.getItem('shows_agenda')||'null')||[
 {p:'P1',ini:'19:00',fim:'22:00',nome:'DOUGLAS',valor:300},
@@ -96,10 +149,10 @@ function amanha(){let d=new Date();d.setDate(d.getDate()+1);document.getElementB
 function modoFolha(){document.getElementById('listView').style.display='none';document.getElementById('folhaView').style.display='block';closeMenu()}
 function modoNormal(){document.getElementById('listView').style.display='block';document.getElementById('folhaView').style.display='none';}
 function zap(){const d=document.getElementById('titleLong').innerText;const txt=shows.map(s=>s.p+' '+s.ini+'-'+s.fim+' - '+s.nome+' - R$ '+s.valor).join('\n');window.open('https://wa.me/?text='+encodeURIComponent('🎤 '+d+'\n\n'+txt),'_blank');}
-function abrirModal(){document.getElementById('modal').style.display='flex';}
-function fecharModal(){document.getElementById('modal').style.display='none';editIdx=-1;}
+function abrirModalNovo(){editIdx=-1;document.getElementById('modalTitle').innerText='Novo Show';document.getElementById('mP').value='';document.getElementById('mIni').value='19:00';document.getElementById('mFim').value='22:00';document.getElementById('mNome').value='';document.getElementById('mValor').value='';document.getElementById('modal').classList.add('open');}
+function fecharModal(){document.getElementById('modal').classList.remove('open');editIdx=-1;}
 function salvar(){const o={p:document.getElementById('mP').value||'P',ini:document.getElementById('mIni').value,fim:document.getElementById('mFim').value,nome:document.getElementById('mNome').value||'SEM NOME',valor:document.getElementById('mValor').value||0};if(editIdx>=0)shows[editIdx]=o;else shows.push(o);save();render();fecharModal();}
-function editar(i){editIdx=i;const s=shows[i];document.getElementById('mP').value=s.p;document.getElementById('mIni').value=s.ini;document.getElementById('mFim').value=s.fim;document.getElementById('mNome').value=s.nome;document.getElementById('mValor').value=s.valor;abrirModal();}
+function editar(i){editIdx=i;const s=shows[i];document.getElementById('modalTitle').innerText='Editar Show';document.getElementById('mP').value=s.p;document.getElementById('mIni').value=s.ini;document.getElementById('mFim').value=s.fim;document.getElementById('mNome').value=s.nome;document.getElementById('mValor').value=s.valor;document.getElementById('modal').classList.add('open');}
 function excluir(i){if(confirm('Excluir?')){shows.splice(i,1);save();render();}}
 render();
 </script>
