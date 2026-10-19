@@ -43,7 +43,6 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 .overlay.open{display:block}
 .menu-item{padding:12px 0;border-bottom:1px solid #f2f2f2;font-weight:600;font-size:13px;cursor:pointer}
 .item-lista{display:flex;justify-content:space-between;align-items:center;background:#f8f8f8;padding:10px;border-radius:10px;margin:6px 0;border:1px solid #eee}
-.item-lista b{font-size:13px}
 .mini-btn{border:0;padding:6px 10px;border-radius:6px;font-size:11px;font-weight:800;cursor:pointer;margin-left:4px}
 .mini-edit{background:#e3f0ff;color:#2a7fff}.mini-del{background:#ffe3e3;color:#d44}
 </style>
@@ -51,10 +50,21 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 <body>
 <div class="overlay" id="overlay" onclick="closeMenu();fecharTodosModais()"></div>
 <div class="side" id="side">
-<div style="font-weight:800;font-size:15px;margin-bottom:10px">MENU</div>
+<div style="font-weight:800;font-size:14px;margin-bottom:6px">Usuario</div>
+<div class="menu-item" onclick="closeMenu()">🏠 INICIO</div>
 <div class="menu-item" onclick="closeMenu();modoNormal()">📋 AGENDA DO DIA</div>
-<div class="menu-item" onclick="abrirGestaoCasas()">🏠 CASAS - EDITAR / EXCLUIR</div>
-<div class="menu-item" onclick="abrirGestaoMusicos()">🎤 MUSICOS - EDITAR / EXCLUIR</div>
+<div class="menu-item" onclick="closeMenu()">📅 AGENDA DO MES</div>
+<div class="menu-item" onclick="closeMenu()">🗓️ AGENDA DO ANO</div>
+<div class="menu-item" onclick="closeMenu();zap()">✈️ ENVIAR CRONOGRAMA</div>
+<div style="height:8px;border-bottom:1px solid #eee;margin:6px 0"></div>
+<div class="menu-item" onclick="abrirGestaoCasas()">🏠 CADASTRAR CASAS</div>
+<div class="menu-item" onclick="abrirGestaoMusicos()">🎤 CADASTRAR MUSICOS</div>
+<div style="height:8px;border-bottom:1px solid #eee;margin:6px 0"></div>
+<div class="menu-item" onclick="closeMenu()">🍴 VER RESTAURANTES</div>
+<div class="menu-item" onclick="closeMenu()">🎤 VER MUSICOS</div>
+<div class="menu-item" onclick="closeMenu()">📊 RELATORIOS</div>
+<div style="height:8px;border-bottom:1px solid #eee;margin:6px 0"></div>
+<div class="menu-item" onclick="closeMenu()">⚙️ CONFIG</div>
 <div class="menu-item" onclick="closeMenu()">🚪 FECHAR MENU</div>
 </div>
 
@@ -66,35 +76,13 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 <button class="add-btn" onclick="abrirModalNovo()">+</button>
 <div class="bottom"><button class="b-zap" onclick="zap()">📱 ZAP</button><button class="b-normal" onclick="modoNormal()">🖨️ NORMAL</button><button class="b-folha" onclick="modoFolha()">📒 FOLHA</button><button class="b-pdf" onclick="window.print()">📄 PDF</button></div>
 
-<div class="modal" id="modal">
-<div class="modal-box"><h3 id="modalTitle">Novo Show</h3><label>🏠 CASA</label><select id="mP"></select><label>🕓 INICIO</label><input id="mIni" type="time" value="19:00"><label>🕓 FIM</label><input id="mFim" type="time" value="22:00"><label>🎤 MUSICO</label><select id="mNome"></select><label>💰 VALOR</label><input id="mValor" type="number" placeholder="300"><button class="save" onclick="salvar()">SALVAR</button><button class="cancel" onclick="fecharModal()">CANCELAR</button></div>
-</div>
+<div class="modal" id="modal"><div class="modal-box"><h3 id="modalTitle">Novo Show</h3><label>🏠 CASA</label><select id="mP"></select><label>🕓 INICIO</label><input id="mIni" type="time" value="19:00"><label>🕓 FIM</label><input id="mFim" type="time" value="22:00"><label>🎤 MUSICO</label><select id="mNome"></select><label>💰 VALOR</label><input id="mValor" type="number" placeholder="300"><button class="save" onclick="salvar()">SALVAR</button><button class="cancel" onclick="fecharModal()">CANCELAR</button></div></div>
 
-<div class="modal" id="modalCasas">
-<div class="modal-box">
-<h3>🏠 GERENCIAR CASAS</h3>
-<label>Adicionar nova casa</label>
-<div style="display:flex;gap:6px"><input id="novaCasaInput" placeholder="Ex: P5, BAR CENTRAL" style="flex:1"><button onclick="addCasa()" style="width:80px;background:#222;color:#fff">+ ADD</button></div>
-<div style="font-size:11px;color:#888;margin-top:10px">Toque em EDITAR ou EXCLUIR em cada casa abaixo:</div>
-<div id="listaCasas" style="margin-top:8px"></div>
-<button class="cancel" onclick="fecharModalCasas()">FECHAR</button>
-</div>
-</div>
+<div class="modal" id="modalCasas"><div class="modal-box"><h3>🏠 CADASTRAR CASAS</h3><label>Nova casa</label><div style="display:flex;gap:6px"><input id="novaCasaInput" placeholder="Ex: P5" style="flex:1"><button onclick="addCasa()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaCasas" style="margin-top:12px"></div><button class="cancel" onclick="fecharModalCasas()">FECHAR</button></div></div>
 
-<div class="modal" id="modalMusicos">
-<div class="modal-box">
-<h3>🎤 GERENCIAR MUSICOS</h3>
-<label>Adicionar novo músico</label>
-<div style="display:flex;gap:6px"><input id="novoMusicoInput" placeholder="Ex: BRUNO, RAFA" style="flex:1"><button onclick="addMusico()" style="width:80px;background:#222;color:#fff">+ ADD</button></div>
-<div style="font-size:11px;color:#888;margin-top:10px">Cada músico tem botão EDITAR e EXCLUIR:</div>
-<div id="listaMusicos" style="margin-top:8px"></div>
-<button class="cancel" onclick="fecharModalMusicos()">FECHAR</button>
-</div>
-</div>
+<div class="modal" id="modalMusicos"><div class="modal-box"><h3>🎤 CADASTRAR MUSICOS</h3><label>Novo músico</label><div style="display:flex;gap:6px"><input id="novoMusicoInput" placeholder="Ex: BRUNO" style="flex:1"><button onclick="addMusico()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaMusicos" style="margin-top:12px"></div><button class="cancel" onclick="fecharModalMusicos()">FECHAR</button></div></div>
 
-<div class="modal" id="modalEditar">
-<div class="modal-box"><h3 id="editarTitulo">✏️ Editar</h3><input id="editarInput"><button class="save" onclick="confirmarEditar()">SALVAR EDIÇÃO</button><button class="cancel" onclick="fecharModalEditar()">CANCELAR</button></div>
-</div>
+<div class="modal" id="modalEditar"><div class="modal-box"><h3 id="editarTitulo">✏️ Editar</h3><input id="editarInput"><button class="save" onclick="confirmarEditar()">SALVAR</button><button class="cancel" onclick="fecharModalEditar()">CANCELAR</button></div></div>
 
 <script>
 function carregar(chave, padrao){try{const v=localStorage.getItem(chave);if(v){const a=JSON.parse(v);if(Array.isArray(a)&&a.length>0)return a;}}catch(e){}return padrao;}
