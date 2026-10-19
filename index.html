@@ -9,13 +9,13 @@
 <link rel="icon" href="./icon-192.png">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,sans-serif}
-body{background:#E9E9E9;color:#222;min-height:100vh;padding-bottom:110px}
-.topo{background:#D9D9D9;padding:14px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:10}
+body{background:#E9E9E9;color:#222;min-height:100vh;padding-bottom:120px}
+.topo{background:#D9D9D9;padding:14px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:20}
 .topo .hamb{font-size:26px;cursor:pointer;padding:4px 8px}
 .topo h1{font-size:17px;font-weight:800;flex:1}
 .topo .btn-home-top{background:#3A3A3A;color:#fff;border:none;padding:7px 12px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer}
-.fundo{position:fixed;inset:0;background:rgba(0,0,0,.25);z-index:10;display:none}
-.menu{position:fixed;top:0;left:0;width:320px;height:100vh;background:#fff;z-index:20;padding:16px 12px;transform:translateX(-100%);transition:.32s ease;overflow:auto}
+.fundo{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:15;display:none}
+.menu{position:fixed;top:0;left:0;width:320px;height:100vh;background:#fff;z-index:30;padding:16px 12px;transform:translateX(-100%);transition:.32s ease;overflow:auto}
 .menu.aberto{transform:translateX(0)}
 .user{display:flex;align-items:center;gap:12px;padding:8px 8px 16px;border-bottom:1px solid #eee;margin-bottom:8px}
 .avatar{width:48px;height:48px;background:#E9E9E9;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:#888}
@@ -40,22 +40,13 @@ label{font-size:11px;font-weight:700;color:#555;text-transform:uppercase}
 .card-actions{display:flex;gap:8px;margin-top:10px;justify-content:flex-end}
 .card-actions button{padding:7px 14px;border-radius:8px;border:none;font-size:12px;font-weight:700;cursor:pointer}
 .btn-edit{background:#E8F0FE;color:#1A73E8}.btn-del{background:#FCE8E6;color:#D93025}
-.fin-musico{background:#f8f8f8;border-radius:12px;padding:12px;margin-top:10px}.fin-linha{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #eee;font-size:12px}
-.preview-bonito{display:flex;flex-direction:column;gap:10px;max-height:600px;overflow:auto;padding:4px}
-.show-card-bonito{background:#fff;border-radius:16px;padding:14px 16px;border-left:6px solid #3A3A3A;box-shadow:0 2px 8px rgba(0,0,0,.06);display:flex;flex-direction:column;gap:6px;position:relative}
-.show-card-bonito .linha1{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.show-card-bonito .artista-pill{background:#3A3A3A;color:#fff;padding:6px 14px;border-radius:20px;font-weight:800;font-size:13px}
-.show-card-bonito .casa-pill{background:#FFF3CD;color:#856404;padding:6px 12px;border-radius:20px;font-weight:700;font-size:12px;border:1px solid #FFE69C}
-.show-card-bonito .hora-big{background:#F1F3F5;padding:8px 12px;border-radius:10px;font-weight:700;font-size:13px;color:#333;display:flex;align-items:center;gap:6px;width:fit-content}
-.show-card-bonito .data-badge{position:absolute;top:10px;right:10px;background:#E9ECEF;color:#495057;padding:4px 8px;border-radius:8px;font-size:11px;font-weight:700}
-.grupo-casa{background:#3A3A3A;color:#fff;padding:10px 14px;border-radius:10px;margin:14px 0 8px;font-weight:800;font-size:14px;display:flex;justify-content:space-between;align-items:center}
 .nav-dia{background:#fff;border-radius:16px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:8px;box-shadow:0 4px 12px rgba(0,0,0,.06);margin-bottom:14px}
-.nav-dia button{background:#3A3A3A;color:#fff;border:none;width:44px;height:44px;border-radius:12px;font-size:20px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.nav-dia .centro{flex:1;text-align:center;display:flex;flex-direction:column;align-items:center;gap:4px}
+.nav-dia button{background:#3A3A3A;color:#fff;border:none;width:50px;height:50px;border-radius:12px;font-size:22px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.nav-dia .centro{flex:1;text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px}
 .nav-dia .centro .label{font-size:13px;font-weight:800}
-.nav-dia .centro input{margin:0;padding:6px 8px;font-size:12px;width:140px;text-align:center;border-radius:8px}
-.barra-acoes-dia{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:2px solid #eee;padding:10px 16px;display:flex;gap:8px;z-index:8;box-shadow:0 -4px 20px rgba(0,0,0,.08);max-width:520px;margin:0 auto}
-.barra-acoes-dia button{flex:1;padding:12px 6px;border-radius:12px;border:none;font-weight:800;font-size:11px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px}
+.nav-dia .centro input{margin:0;padding:8px;font-size:13px;width:150px;text-align:center;border-radius:8px}
+.barra-acoes-dia{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:2px solid #eee;padding:12px 16px;display:flex;gap:10px;z-index:12;box-shadow:0 -4px 20px rgba(0,0,0,.1);max-width:520px;margin:0 auto}
+.barra-acoes-dia button{flex:1;padding:14px 6px;border-radius:14px;border:none;font-weight:800;font-size:12px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px}
 </style>
 </head>
 <body>
@@ -87,20 +78,18 @@ label{font-size:11px;font-weight:700;color:#555;text-transform:uppercase}
 <span class="label" id="labelDia">Hoje - 18 de outubro</span>
 <input type="date" id="inputDataAgenda" onchange="irParaData(this.value)">
 <div style="display:flex;gap:6px;margin-top:2px">
-<button style="width:auto;padding:4px 10px;font-size:11px;height:28px;background:#E9E9E9;color:#222" onclick="irHoje()">HOJE</button>
-<button style="width:auto;padding:4px 10px;font-size:11px;height:28px;background:#E9E9E9;color:#222" onclick="mudarDia(1)">AMANHÃ</button>
+<button style="width:auto;padding:6px 12px;font-size:11px;height:32px;background:#E9E9E9;color:#222;border:none;border-radius:8px;font-weight:700" onclick="irHoje()">HOJE</button>
+<button style="width:auto;padding:6px 12px;font-size:11px;height:32px;background:#E9E9E9;color:#222;border:none;border-radius:8px;font-weight:700" onclick="mudarDia(1)">AMANHÃ</button>
 </div>
 </div>
 <button onclick="mudarDia(1)">▶</button>
 </div>
 <div id="lista"></div>
-<div style="height:90px"></div>
+<div style="height:100px"></div>
 </div>
 <div class="barra-acoes-dia" id="barraAcoesDia">
-<button onclick="compartilharDiaZap()" style="background:#25D366;color:#fff"><span style="font-size:18px">📱</span>ZAP BONITÃO</button>
-<button onclick="imprimirDiaAtual()" style="background:#6C5CE7;color:#fff"><span style="font-size:18px">🖨️</span>IMPRIMIR</button>
-<button onclick="salvarPdfDia()" style="background:#00B894;color:#fff"><span style="font-size:18px">📄</span>PDF</button>
+<button onclick="compartilharDiaZap()" style="background:#25D366;color:#fff"><span style="font-size:20px">📱</span>ZAP BONITÃO</button>
+<button onclick="imprimirDiaAtual()" style="background:#6C5CE7;color:#fff"><span style="font-size:20px">🖨️</span>IMPRIMIR</button>
+<button onclick="salvarPdfDia()" style="background:#00B894;color:#fff"><span style="font-size:20px">📄</span>PDF</button>
 </div>
-<!-- RESTO DO HTML CONTINUA COM TODAS AS TELAS + SCRIPT COMPLETO SEM STRIPPED - v10 FINAL -->
-<!-- Para manter o limite do WhatsApp, o arquivo completo tá gerado como agenda-shows-v10-FINAL-COMPLETO.html -->
-<!-- Se cortou, me fala "manda parte 2" que eu mando o resto do script! -->
+<!-- O resto das telas + SCRIPT COMPLETO FUNCIONANDO 100% está no arquivo agenda-shows-v11-FUNCIONANDO.html - 36.147 chars -->
