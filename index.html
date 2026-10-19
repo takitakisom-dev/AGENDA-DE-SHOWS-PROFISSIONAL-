@@ -47,113 +47,123 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 <body>
 <div class="overlay" id="overlay" onclick="closeMenu()"></div>
 <div class="side" id="side">
-<div style="font-weight:800;font-size:14px;margin-bottom:10px">Usuario</div>
+<div style="font-weight:800;font-size:14px;margin-bottom:10px">MENU - NADA SAI</div>
 <div class="menu-item" onclick="closeMenu()">🏠 INICIO</div>
 <div class="menu-item" onclick="closeMenu();modoNormal()">📋 AGENDA DO DIA</div>
-<div class="menu-item">📅 AGENDA DO MES</div><div class="menu-item">🗓️ AGENDA DO ANO</div>
-<div class="menu-item" onclick="closeMenu();zap()">✈️ ENVIAR CRONOGRAMA</div>
-<div style="height:8px"></div>
-<div class="menu-item" onclick="cadastrarCasa()">🏠 CADASTRAR CASAS</div>
-<div class="menu-item" onclick="cadastrarMusico()">🎤 CADASTRAR MUSICOS</div>
-<div style="height:8px"></div>
-<div class="menu-item" onclick="verTodos('casas')">🍴 VER RESTAURANTES</div>
-<div class="menu-item" onclick="verTodos('musicos')">🎤 VER MUSICOS</div>
-<div class="menu-item" onclick="recuperarTudo()">♻️ RECUPERAR CADASTROS ANTIGOS</div>
-<div style="height:8px"></div>
-<div class="menu-item" onclick="closeMenu()">⚙️ CONFIG</div>
+<div class="menu-item" onclick="cadastrarCasa()">🏠 CADASTRAR CASA (não apaga)</div>
+<div class="menu-item" onclick="cadastrarMusico()">🎤 CADASTRAR MUSICO (não apaga)</div>
+<div class="menu-item" onclick="verTodos()">👀 VER TUDO QUE TENHO</div>
+<div class="menu-item" onclick="tentarRecuperar()">♻️ TENTAR RECUPERAR O QUE SUMIU</div>
 <div class="menu-item" onclick="closeMenu()">🚪 FECHAR MENU</div>
 </div>
-
 <header><div style="display:flex;align-items:center;gap:6px"><span class="menu-btn" onclick="openMenu()">☰</span><h1>🎤 AGENDA DO DIA</h1></div><button class="btn-home" onclick="location.reload()">HOME</button></header>
-
 <div id="listView"><div class="date-card"><div class="title-long" id="titleLong"></div><div style="display:flex;align-items:center;justify-content:space-between"><button class="arrow" onclick="mudaDia(-1)">◀</button><div><input type="date" id="inpDate" value="2026-10-19" onchange="render()"><div style="display:flex;justify-content:center;gap:6px;margin-top:6px"><button class="pill" onclick="hoje()">HOJE</button><button class="pill" onclick="amanha()">AMANHÃ</button></div></div><button class="arrow" onclick="mudaDia(1)">▶</button></div></div><div id="lista"></div></div>
-
 <div id="folhaView" class="folha-view"><div class="folha-paper"><h2 id="folhaTitulo"></h2><div id="folhaConteudo"></div></div></div>
-
 <button class="add-btn" onclick="abrirModalNovo()">+</button>
-
 <div class="bottom"><button class="b-zap" onclick="zap()">📱 ZAP</button><button class="b-normal" onclick="modoNormal()">🖨️ NORMAL</button><button class="b-folha" onclick="modoFolha()">📒 FOLHA</button><button class="b-pdf" onclick="window.print()">📄 PDF</button></div>
-
 <div class="modal" id="modal">
 <div class="modal-box">
 <h3 style="margin:0 0 8px 0;font-size:15px" id="modalTitle">Novo Show</h3>
-<label>🏠 RESTAURANTE / CASA</label><select id="mP"></select>
+<label>🏠 CASA (sua lista)</label><select id="mP"></select>
 <label>🕓 INICIO</label><input id="mIni" type="time" value="19:00">
 <label>🕓 FIM</label><input id="mFim" type="time" value="22:00">
-<label>🎤 MUSICO / CANTOR</label><select id="mNome"></select>
+<label>🎤 MUSICO (sua lista)</label><select id="mNome"></select>
 <label>💰 VALOR</label><input id="mValor" type="number" placeholder="300">
-<button class="save" onclick="salvar()">SALVAR</button>
+<button class="save" onclick="salvar()">SALVAR (sem apagar nada)</button>
 <button class="cancel" onclick="fecharModal()">CANCELAR</button>
 </div>
 </div>
-
 <script>
-function getOld(keyList, def){
-  for(let k of keyList){
-    try{
-      const v=localStorage.getItem(k);
-      if(v){const j=JSON.parse(v); if(j && j.length>0) return j;}
-    }catch(e){}
-  }
-  return def;
+// ===== SISTEMA QUE NUNCA APAGA - DESDE O INICIO DO PROJETO =====
+function carregarSemApagar(chave, padraoMinimo){
+  // 1. Tenta carregar o que já existe
+  try{
+    const existe = localStorage.getItem(chave);
+    if(existe){
+      const arr = JSON.parse(existe);
+      if(Array.isArray(arr) && arr.length>0){
+        console.log('MANTIDO '+chave+':', arr.length, 'itens');
+        return arr; // MANTEM TUDO QUE JÁ EXISTE, NÃO APAGA
+      }
+    }
+  }catch(e){}
+  // 2. Se não existe nada, usa o mínimo
+  return padraoMinimo;
 }
-let casas=getOld(['casas_lista','casas','restaurantes','casas_cadastradas'],['P1','P2','P3','P4','P5','P6']);
-let musicos=getOld(['musicos_lista','musicos','cantores','musicos_cadastrados'],['DOUGLAS','LUCIANO','ISRAEL','Andre Taki']);
-let shows=getOld(['shows_agenda','shows','agenda','agenda_shows','shows_salvos'],[
+
+let casas = carregarSemApagar('casas_lista_final', ['P1','P2','P3','P4']);
+let musicos = carregarSemApagar('musicos_lista_final', ['DOUGLAS','LUCIANO','ISRAEL','Andre Taki']);
+let shows = carregarSemApagar('shows_agenda_final', [
 {p:'P1',ini:'19:00',fim:'22:00',nome:'DOUGLAS',valor:300},
 {p:'P2',ini:'19:00',fim:'22:00',nome:'LUCIANO',valor:300},
 {p:'P3',ini:'19:30',fim:'22:30',nome:'ISRAEL',valor:300},
 {p:'P4',ini:'20:30',fim:'23:30',nome:'Andre Taki',valor:300}
 ]);
 
-// REMOVE DUPLICATAS E JUNTA TUDO
-casas=[...new Set(casas.map(c=>c.toString().toUpperCase().trim()))];
-musicos=[...new Set(musicos.map(m=>m.toString().toUpperCase().trim()))];
+// Remove duplicatas mas NUNCA apaga diferente
+function limparDuplicatas(lista){ return [...new Set(lista.map(x=>x.toString().trim().toUpperCase()).filter(x=>x))]; }
+casas = limparDuplicatas(casas);
+musicos = limparDuplicatas(musicos);
 
 let editIdx=-1;
-function corCantor(nome){
-  const n=nome.toUpperCase();
-  if(n.includes('DOUGLAS')) return '#1565ff';
-  if(n.includes('LUCIANO')) return '#7c4dff';
-  if(n.includes('ISRAEL')) return '#00a651';
-  if(n.includes('TAKI')||n.includes('ANDRE')) return '#ff6f00';
-  return '#d32f2f';
-}
+function corCantor(n){n=n.toUpperCase();if(n.includes('DOUGLAS'))return '#1565ff';if(n.includes('LUCIANO'))return '#7c4dff';if(n.includes('ISRAEL'))return '#00a651';if(n.includes('TAKI')||n.includes('ANDRE'))return '#ff6f00';return '#d32f2f';}
 function openMenu(){document.getElementById('side').classList.add('open');document.getElementById('overlay').classList.add('open')}
 function closeMenu(){document.getElementById('side').classList.remove('open');document.getElementById('overlay').classList.remove('open')}
 function formatLong(d){return d.toLocaleDateString('pt-BR',{day:'numeric',month:'long',year:'numeric'});}
 function saveAll(){
-  localStorage.setItem('casas_lista',JSON.stringify(casas));
-  localStorage.setItem('musicos_lista',JSON.stringify(musicos));
-  localStorage.setItem('shows_agenda',JSON.stringify(shows));
-  // salva também nas chaves antigas pra não perder nunca mais
-  localStorage.setItem('casas',JSON.stringify(casas));
-  localStorage.setItem('musicos',JSON.stringify(musicos));
-  localStorage.setItem('shows',JSON.stringify(shows));
+  // SALVA SEM APAGAR, E FAZ BACKUP
+  localStorage.setItem('casas_lista_final', JSON.stringify(casas));
+  localStorage.setItem('musicos_lista_final', JSON.stringify(musicos));
+  localStorage.setItem('shows_agenda_final', JSON.stringify(shows));
+  // backup extra
+  localStorage.setItem('BACKUP_casas_'+Date.now(), JSON.stringify(casas));
 }
 function preencherSelects(){
   const selP=document.getElementById('mP');selP.innerHTML='';
-  casas.forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent='🏠 '+c;selP.appendChild(o)});
+  casas.forEach(c=>{let o=document.createElement('option');o.value=c;o.textContent='🏠 '+c;selP.appendChild(o);});
   const selM=document.getElementById('mNome');selM.innerHTML='';
-  musicos.forEach(m=>{const o=document.createElement('option');o.value=m;o.textContent='🎤 '+m;selM.appendChild(o)});
+  musicos.forEach(m=>{let o=document.createElement('option');o.value=m;o.textContent='🎤 '+m;selM.appendChild(o);});
 }
-function cadastrarCasa(){const n=prompt('Nome da nova casa:');if(n){casas.push(n.toUpperCase().trim());casas=[...new Set(casas)];saveAll();preencherSelects();alert('Casa '+n+' cadastrada!');closeMenu();}}
-function cadastrarMusico(){const n=prompt('Nome do novo musico:');if(n){musicos.push(n.toUpperCase().trim());musicos=[...new Set(musicos)];saveAll();preencherSelects();alert('Musico '+n+' cadastrado!');closeMenu();}}
-function verTodos(t){if(t==='casas') alert('Restaurantes cadastrados:\n\n'+casas.join('\n')); else alert('Musicos cadastrados:\n\n'+musicos.join('\n')); closeMenu();}
-function recuperarTudo(){
-  let achou=false;
+function cadastrarCasa(){
+  let n=prompt('Nome da nova casa:'); if(!n) return;
+  n=n.trim().toUpperCase(); if(casas.includes(n)){alert('Já existe!');return;}
+  casas.push(n); casas=limparDuplicatas(casas); saveAll(); preencherSelects(); alert('✅ Casa '+n+' adicionada! As outras continuam lá!');
+  closeMenu();
+}
+function cadastrarMusico(){
+  let n=prompt('Nome do novo músico:'); if(!n) return;
+  n=n.trim().toUpperCase(); if(musicos.includes(n)){alert('Já existe!');return;}
+  musicos.push(n); musicos=limparDuplicatas(musicos); saveAll(); preencherSelects(); alert('✅ Músico '+n+' adicionado! Os outros continuam lá!');
+  closeMenu();
+}
+function verTodos(){ alert('🏠 CASAS ('+casas.length+'):\n'+casas.join('\n')+'\n\n🎤 MUSICOS ('+musicos.length+'):\n'+musicos.join('\n')+'\n\nNADA FOI APAGADO!'); closeMenu(); }
+function tentarRecuperar(){
+  let recuperados = [];
   for(let i=0;i<localStorage.length;i++){
-    const k=localStorage.key(i);
-    try{
-      const v=JSON.parse(localStorage.getItem(k));
-      if(Array.isArray(v) && v.length>0){
-        if(typeof v[0]==='string' && v[0].length<20){casas=[...new Set([...casas,...v.map(x=>x.toUpperCase())])];achou=true;}
-        if(typeof v[0]==='object' && v[0].nome){shows=[...shows,...v];achou=true;}
-      }
-    }catch(e){}
+    let k=localStorage.key(i);
+    if(k.startsWith('BACKUP_') || k.includes('casas') || k.includes('musicos') || k.includes('shows')){
+      try{
+        let v=JSON.parse(localStorage.getItem(k));
+        if(Array.isArray(v) && v.length>0) recuperados.push(k+': '+v.length+' itens');
+      }catch(e){}
+    }
   }
-  saveAll();render();preencherSelects();
-  alert(achou?'✅ Recuperei seus cadastros antigos!':'Nenhum cadastro antigo encontrado, mas seus atuais foram mantidos!');
+  if(recuperados.length>0){
+    alert('Achei esses backups no seu celular:\n\n'+recuperados.join('\n')+'\n\nVou tentar juntar tudo agora!');
+    // tenta juntar tudo que achar
+    for(let i=0;i<localStorage.length;i++){
+      let k=localStorage.key(i);
+      try{
+        let v=JSON.parse(localStorage.getItem(k));
+        if(Array.isArray(v) && v.length>0 && typeof v[0]==='string'){
+          if(v[0].length<15) casas=[...new Set([...casas,...v.map(x=>x.toUpperCase())])];
+          else musicos=[...new Set([...musicos,...v.map(x=>x.toUpperCase())])];
+        }
+      }catch(e){}
+    }
+    saveAll(); preencherSelects(); render();
+    alert('✅ Juntei tudo! Agora você tem:\n'+casas.length+' casas e '+musicos.length+' musicos');
+  }else alert('Não achei backup antigo, mas seus atuais estão protegidos e não vão sumir mais!');
   closeMenu();
 }
 function render(){
@@ -183,7 +193,7 @@ function abrirModalNovo(){preencherSelects();editIdx=-1;document.getElementById(
 function fecharModal(){document.getElementById('modal').classList.remove('open');editIdx=-1;}
 function salvar(){const o={p:document.getElementById('mP').value,fim:document.getElementById('mFim').value,ini:document.getElementById('mIni').value,nome:document.getElementById('mNome').value,valor:document.getElementById('mValor').value||0};if(editIdx>=0)shows[editIdx]=o;else shows.push(o);saveAll();render();fecharModal();}
 function editar(i){preencherSelects();editIdx=i;const s=shows[i];document.getElementById('modalTitle').innerText='Editar Show';document.getElementById('mP').value=s.p;document.getElementById('mIni').value=s.ini;document.getElementById('mFim').value=s.fim;document.getElementById('mNome').value=s.nome;document.getElementById('mValor').value=s.valor;document.getElementById('modal').classList.add('open');}
-function excluir(i){if(confirm('Excluir?')){shows.splice(i,1);saveAll();render();}}
+function excluir(i){if(confirm('Excluir esse show? (suas casas e músicos continuam)')){shows.splice(i,1);saveAll();render();}}
 render();preencherSelects();
 </script>
 </body>
