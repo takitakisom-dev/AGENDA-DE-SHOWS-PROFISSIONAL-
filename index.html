@@ -17,7 +17,8 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 .pill{border:0;background:#eee;padding:5px 10px;border-radius:20px;font-weight:700;color:#888;font-size:11px}
 .show-card{background:#fff;margin:8px 10px;border-radius:12px;padding:10px 12px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
 .line{font-weight:700;font-size:13px !important}
-.line2{color:#666;font-size:12px !important;margin:4px 0 6px 0}
+.line2{font-size:12px !important;margin:4px 0 6px 0;color:#444}
+.line2 b{font-weight:900}
 .b-edit,.b-del{border:0;padding:5px 10px;border-radius:6px;font-weight:700;font-size:11px}
 .b-edit{background:#e3f0ff;color:#2a7fff}.b-del{background:#ffe3e3;color:#d44}
 .bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #ddd;display:flex;gap:4px;padding:6px;justify-content:space-around;z-index:20}
@@ -26,8 +27,9 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 .folha-view{display:none;padding:8px}
 .folha-paper{background:#fff;background-image:repeating-linear-gradient(transparent,transparent 31px,#b5d8ff 31px,#b5d8ff 32px);border:1.5px solid #333;border-radius:6px;padding:0 10px 0 36px;position:relative}
 .folha-paper:before{content:'';position:absolute;left:28px;top:0;bottom:0;width:1.5px;background:#ff8a8a}
-.folha-paper h2{font-family:Arial,sans-serif;font-size:13px !important;line-height:32px !important;height:32px;margin:0;white-space:nowrap;overflow:hidden}
-.folha-item{font-family:Arial,sans-serif !important;font-size:12px !important;line-height:32px !important;height:32px !important;margin:0 !important;padding:0 !important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#222}
+.folha-paper h2{font-family:Arial,sans-serif;font-size:12px !important;line-height:32px !important;height:32px;margin:0;white-space:nowrap;overflow:hidden;font-weight:700}
+.folha-item{font-family:Arial,sans-serif !important;font-size:11.5px !important;line-height:32px !important;height:32px !important;margin:0 !important;padding:0 !important;transform:translateY(2px);white-space:nowrap;overflow:hidden;color:#222}
+.folha-item b{font-weight:900}
 .add-btn{position:fixed;right:14px;bottom:80px;width:50px;height:50px;border-radius:50%;border:0;background:#222;color:#fff;font-size:28px;z-index:25}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;align-items:center;justify-content:center;z-index:30;padding:14px}
 .modal-box{background:#fff;border-radius:14px;padding:14px;width:100%;max-width:340px}
@@ -43,75 +45,14 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 <div class="overlay" id="overlay" onclick="closeMenu()"></div>
 <div class="side" id="side">
 <div style="font-weight:800;font-size:14px;margin-bottom:10px">Usuario</div>
-<div class="menu-item">🏠 INICIO</div>
-<div class="menu-item">📋 AGENDA DO DIA</div>
-<div class="menu-item">📅 AGENDA DO MES</div>
-<div class="menu-item">🗓️ AGENDA DO ANO</div>
-<div class="menu-item">✈️ ENVIAR CRONOGRAMA</div>
-<div style="height:8px"></div>
-<div class="menu-item">🏠 CADASTRAR CASAS</div>
-<div class="menu-item">🎤 CADASTRAR MUSICOS</div>
-<div style="height:8px"></div>
-<div class="menu-item">🍴 VER RESTAURANTES</div>
-<div class="menu-item">🎤 VER MUSICOS</div>
-<div class="menu-item">📊 RELATORIOS</div>
-<div style="height:8px"></div>
-<div class="menu-item">⚙️ CONFIG</div>
-<div class="menu-item" onclick="closeMenu()">🚪 FECHAR MENU</div>
+<div class="menu-item">🏠 INICIO</div><div class="menu-item">📋 AGENDA DO DIA</div><div class="menu-item">📅 AGENDA DO MES</div><div class="menu-item">🗓️ AGENDA DO ANO</div><div class="menu-item">✈️ ENVIAR CRONOGRAMA</div><div style="height:8px"></div><div class="menu-item">🏠 CADASTRAR CASAS</div><div class="menu-item">🎤 CADASTRAR MUSICOS</div><div style="height:8px"></div><div class="menu-item">🍴 VER RESTAURANTES</div><div class="menu-item">🎤 VER MUSICOS</div><div class="menu-item">📊 RELATORIOS</div><div style="height:8px"></div><div class="menu-item">⚙️ CONFIG</div><div class="menu-item" onclick="closeMenu()">🚪 FECHAR MENU</div>
 </div>
-
-<header>
-<div style="display:flex;align-items:center;gap:8px"><span style="font-size:20px" onclick="openMenu()">☰</span><h1>🎤 AGENDA DO DIA</h1></div>
-<button class="btn-home" onclick="location.reload()">HOME</button>
-</header>
-
-<div id="listView">
-<div class="date-card">
-<div class="title-long" id="titleLong"></div>
-<div style="display:flex;align-items:center;justify-content:space-between">
-<button class="arrow" onclick="mudaDia(-1)">◀</button>
-<div>
-<input type="date" id="inpDate" value="2026-10-19" onchange="render()">
-<div style="display:flex;justify-content:center;gap:6px;margin-top:6px">
-<button class="pill" onclick="hoje()">HOJE</button>
-<button class="pill" onclick="amanha()">AMANHÃ</button>
-</div>
-</div>
-<button class="arrow" onclick="mudaDia(1)">▶</button>
-</div>
-</div>
-<div id="lista"></div>
-</div>
-
-<div id="folhaView" class="folha-view">
-<div class="folha-paper">
-<h2 id="folhaTitulo"></h2>
-<div id="folhaConteudo"></div>
-</div>
-</div>
-
+<header><div style="display:flex;align-items:center;gap:8px"><span style="font-size:20px" onclick="openMenu()">☰</span><h1>🎤 AGENDA DO DIA</h1></div><button class="btn-home" onclick="location.reload()">HOME</button></header>
+<div id="listView"><div class="date-card"><div class="title-long" id="titleLong"></div><div style="display:flex;align-items:center;justify-content:space-between"><button class="arrow" onclick="mudaDia(-1)">◀</button><div><input type="date" id="inpDate" value="2026-10-19" onchange="render()"><div style="display:flex;justify-content:center;gap:6px;margin-top:6px"><button class="pill" onclick="hoje()">HOJE</button><button class="pill" onclick="amanha()">AMANHÃ</button></div></div><button class="arrow" onclick="mudaDia(1)">▶</button></div></div><div id="lista"></div></div>
+<div id="folhaView" class="folha-view"><div class="folha-paper"><h2 id="folhaTitulo"></h2><div id="folhaConteudo"></div></div></div>
 <button class="add-btn" onclick="abrirModal()">+</button>
-
-<div class="bottom">
-<button class="b-zap" onclick="zap()">ZAP</button>
-<button class="b-normal" onclick="modoNormal()">NORMAL</button>
-<button class="b-folha" onclick="modoFolha()">FOLHA</button>
-<button class="b-pdf" onclick="window.print()">PDF</button>
-</div>
-
-<div class="modal" id="modal">
-<div class="modal-box">
-<h3 style="margin:0 0 8px 0;font-size:14px">Novo Show</h3>
-<input id="mP" placeholder="P1, P2...">
-<input id="mIni" type="time" value="19:00">
-<input id="mFim" type="time" value="22:00">
-<input id="mNome" placeholder="Nome - DOUGLAS">
-<input id="mValor" type="number" placeholder="Valor - 300">
-<button class="save" onclick="salvar()">SALVAR</button>
-<button class="cancel" onclick="fecharModal()">CANCELAR</button>
-</div>
-</div>
-
+<div class="bottom"><button class="b-zap" onclick="zap()">ZAP</button><button class="b-normal" onclick="modoNormal()">NORMAL</button><button class="b-folha" onclick="modoFolha()">FOLHA</button><button class="b-pdf" onclick="window.print()">PDF</button></div>
+<div class="modal" id="modal"><div class="modal-box"><h3 style="margin:0 0 8px 0;font-size:14px">Novo Show</h3><input id="mP" placeholder="P1, P2..."><input id="mIni" type="time" value="19:00"><input id="mFim" type="time" value="22:00"><input id="mNome" placeholder="Nome - DOUGLAS"><input id="mValor" type="number" placeholder="Valor - 300"><button class="save" onclick="salvar()">SALVAR</button><button class="cancel" onclick="fecharModal()">CANCELAR</button></div></div>
 <script>
 let shows=JSON.parse(localStorage.getItem('shows_agenda')||'null')||[
 {p:'P1',ini:'19:00',fim:'22:00',nome:'DOUGLAS',valor:300},
@@ -120,6 +61,14 @@ let shows=JSON.parse(localStorage.getItem('shows_agenda')||'null')||[
 {p:'P4',ini:'20:30',fim:'23:30',nome:'Andre Taki',valor:300}
 ];
 let editIdx=-1;
+function corCantor(nome){
+  const n=nome.toUpperCase();
+  if(n.includes('DOUGLAS')) return '#1565ff';
+  if(n.includes('LUCIANO')) return '#7c4dff';
+  if(n.includes('ISRAEL')) return '#00a651';
+  if(n.includes('TAKI')||n.includes('ANDRE')) return '#ff6f00';
+  return '#d32f2f';
+}
 function openMenu(){document.getElementById('side').classList.add('open');document.getElementById('overlay').classList.add('open')}
 function closeMenu(){document.getElementById('side').classList.remove('open');document.getElementById('overlay').classList.remove('open')}
 function formatLong(d){return d.toLocaleDateString('pt-BR',{day:'numeric',month:'long',year:'numeric'});}
@@ -128,28 +77,28 @@ function render(){
  const inp=document.getElementById('inpDate').value;
  const d=inp?new Date(inp+'T12:00:00'):new Date();
  document.getElementById('titleLong').innerText='Hoje - '+formatLong(d);
- document.getElementById('folhaTitulo').innerText='Hoje - '+formatLong(d)+' - '+d.toLocaleDateString('pt-BR');
+ document.getElementById('folhaTitulo').innerText=formatLong(d)+' - '+d.toLocaleDateString('pt-BR');
  const lista=document.getElementById('lista');lista.innerHTML='';
  shows.forEach((s,i)=>{
+  const cor=corCantor(s.nome);
   const div=document.createElement('div');div.className='show-card';
-  div.innerHTML='<div class=line>🏠 '+s.p+' — 🕓 '+s.ini+' as '+s.fim+'</div><div class=line2>🎤 '+s.nome+' - R$ '+s.valor+'</div><div><button class=b-edit onclick=editar('+i+')>✏️ EDITAR</button> <button class=b-del onclick=excluir('+i+')>🗑️ EXCLUIR</button></div>';
+  div.innerHTML='<div class=line>🏠 '+s.p+' — 🕓 '+s.ini+' as '+s.fim+'</div><div class=line2>🎤 <b style="color:'+cor+'">'+s.nome+'</b> - R$ '+s.valor+'</div><div><button class=b-edit onclick=editar('+i+')>✏️ EDITAR</button> <button class=b-del onclick=excluir('+i+')>🗑️ EXCLUIR</button></div>';
   lista.appendChild(div);
  });
- document.getElementById('folhaConteudo').innerHTML=shows.map((s,idx)=>'<p class=folha-item>0'+(idx+1)+'. 🏠 '+s.p+' - 🕓 '+s.ini+' as '+s.fim+' - 🎤 '+s.nome+' - R$ '+s.valor+'</p>').join('');
+ document.getElementById('folhaConteudo').innerHTML=shows.map((s,idx)=>{
+  const cor=corCantor(s.nome);
+  return '<p class=folha-item>0'+(idx+1)+'. '+s.p+' '+s.ini+'-'+s.fim+' - <b style="color:'+cor+'">'+s.nome+'</b> - R$ '+s.valor+'</p>';
+ }).join('');
 }
 function mudaDia(n){const inp=document.getElementById('inpDate');let d=new Date(inp.value+'T12:00:00');d.setDate(d.getDate()+n);inp.value=d.toISOString().slice(0,10);render();}
 function hoje(){document.getElementById('inpDate').value=new Date().toISOString().slice(0,10);render();}
 function amanha(){let d=new Date();d.setDate(d.getDate()+1);document.getElementById('inpDate').value=d.toISOString().slice(0,10);render();}
 function modoFolha(){document.getElementById('listView').style.display='none';document.getElementById('folhaView').style.display='block';closeMenu()}
 function modoNormal(){document.getElementById('listView').style.display='block';document.getElementById('folhaView').style.display='none';}
-function zap(){const d=document.getElementById('titleLong').innerText;const txt=shows.map(s=>'🏠 '+s.p+' - '+s.ini+' as '+s.fim+' - 🎤 '+s.nome+' - R$ '+s.valor).join('\n');window.open('https://wa.me/?text='+encodeURIComponent('🎤 '+d+'\n\n'+txt),'_blank');}
+function zap(){const d=document.getElementById('titleLong').innerText;const txt=shows.map(s=>s.p+' '+s.ini+'-'+s.fim+' - '+s.nome+' - R$ '+s.valor).join('\n');window.open('https://wa.me/?text='+encodeURIComponent('🎤 '+d+'\n\n'+txt),'_blank');}
 function abrirModal(){document.getElementById('modal').style.display='flex';}
 function fecharModal(){document.getElementById('modal').style.display='none';editIdx=-1;}
-function salvar(){
- const o={p:document.getElementById('mP').value||'P',ini:document.getElementById('mIni').value,fim:document.getElementById('mFim').value,nome:document.getElementById('mNome').value||'SEM NOME',valor:document.getElementById('mValor').value||0};
- if(editIdx>=0)shows[editIdx]=o;else shows.push(o);
- save();render();fecharModal();
-}
+function salvar(){const o={p:document.getElementById('mP').value||'P',ini:document.getElementById('mIni').value,fim:document.getElementById('mFim').value,nome:document.getElementById('mNome').value||'SEM NOME',valor:document.getElementById('mValor').value||0};if(editIdx>=0)shows[editIdx]=o;else shows.push(o);save();render();fecharModal();}
 function editar(i){editIdx=i;const s=shows[i];document.getElementById('mP').value=s.p;document.getElementById('mIni').value=s.ini;document.getElementById('mFim').value=s.fim;document.getElementById('mNome').value=s.nome;document.getElementById('mValor').value=s.valor;abrirModal();}
 function excluir(i){if(confirm('Excluir?')){shows.splice(i,1);save();render();}}
 render();
