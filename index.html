@@ -43,7 +43,7 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 .overlay.open{display:block}
 .menu-item{padding:12px 0;border-bottom:1px solid #f2f2f2;font-weight:600;font-size:13px;cursor:pointer}
 .item-lista{display:flex;justify-content:space-between;align-items:center;background:#f8f8f8;padding:10px;border-radius:10px;margin:6px 0;border:1px solid #eee}
-.mini-btn{border:0;padding:10px 12px;border-radius:8px;font-size:12px;font-weight:800;cursor:pointer;margin:4px 0;width:110px;display:block}
+.mini-btn{border:0;padding:8px 10px;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer;margin:3px 0;width:100%;display:block}
 .mini-edit{background:#dbeafe;color:#1d4ed8}.mini-del{background:#fecaca;color:#b91c1c}
 </style>
 </head>
@@ -51,7 +51,7 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 <div class="overlay" id="overlay" onclick="fecharTodosModais()"></div>
 <div class="side" id="side">
 <div style="font-weight:800;font-size:14px;margin-bottom:6px">Usuario</div>
-<div class="menu-item" onclick="openMenu();closeMenu()">🏠 INICIO</div>
+<div class="menu-item" onclick="closeMenu()">🏠 INICIO</div>
 <div class="menu-item" onclick="closeMenu();modoNormal()">📋 AGENDA DO DIA</div>
 <div class="menu-item" onclick="closeMenu()">📅 AGENDA DO MES</div>
 <div class="menu-item" onclick="closeMenu()">🗓️ AGENDA DO ANO</div>
@@ -72,25 +72,50 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 <div id="folhaView" class="folha-view"><div class="folha-paper"><h2 id="folhaTitulo"></h2><div id="folhaConteudo"></div></div></div>
 <button class="add-btn" onclick="abrirModalNovo()">+</button>
 <div class="bottom"><button class="b-zap" onclick="zap()">📱 ZAP</button><button class="b-normal" onclick="modoNormal()">🖨️ NORMAL</button><button class="b-folha" onclick="modoFolha()">📒 FOLHA</button><button class="b-pdf" onclick="window.print()">📄 PDF</button></div>
-<div class="modal" id="modal"><div class="modal-box"><h3 id="modalTitle">Novo Show</h3><label>🏠 CASA</label><select id="mP"></select><label>🕓 INICIO</label><input id="mIni" type="time" value="19:00"><label>🕓 FIM</label><input id="mFim" type="time" value="22:00"><label>🎤 MUSICO</label><select id="mNome"></select><label>💰 VALOR</label><input id="mValor" type="number" placeholder="300"><button class="save" onclick="salvar()">SALVAR</button><button class="cancel" onclick="fecharModal()">CANCELAR</button></div></div>
+<div class="modal" id="modal"><div class="modal-box"><h3 id="modalTitle">Novo Show</h3><label>🏠 CASA</label><select id="mP"></select><label>🕓 INICIO</label><input id="mIni" type="time" value="19:00"><label>🕓 FIM</label><input id="mFim" type="time" value="22:00"><label>🎤 MUSICO</label><select id="mNome" onchange="autoCache()"></select><label>💰 VALOR CACHÊ</label><input id="mValor" type="number" placeholder="300"><button class="save" onclick="salvar()">SALVAR</button><button class="cancel" onclick="fecharModal()">CANCELAR</button></div></div>
 <div class="modal" id="modalCasas"><div class="modal-box"><h3>🏠 CADASTRAR CASAS</h3><label>Nova casa</label><div style="display:flex;gap:6px"><input id="novaCasaInput" placeholder="Ex: P5" style="flex:1"><button onclick="addCasa()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaCasas" style="margin-top:12px"></div><button class="cancel" onclick="fecharModalCasas()">FECHAR</button></div></div>
-<div class="modal" id="modalMusicos"><div class="modal-box"><h3>🎤 CADASTRAR MUSICOS</h3><label>Novo músico</label><div style="display:flex;gap:6px"><input id="novoMusicoInput" placeholder="Ex: BRUNO" style="flex:1"><button onclick="addMusico()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaMusicos" style="margin-top:12px"></div><button class="cancel" onclick="fecharModalMusicos()">FECHAR</button></div></div>
-<div class="modal" id="modalEditar"><div class="modal-box"><h3 id="editarTitulo">✏️ Editar</h3><input id="editarInput"><button class="save" onclick="confirmarEditar()">SALVAR EDIÇÃO</button><button class="cancel" onclick="fecharModalEditar()">CANCELAR</button></div></div>
+<div class="modal" id="modalMusicos"><div class="modal-box"><h3>🎤 CADASTRAR MUSICOS</h3><label>Nome do músico</label><input id="novoMusicoInput" placeholder="Ex: BRUNO"><label>💰 Valor do cachê</label><div style="display:flex;gap:6px"><input id="novoMusicoCache" type="number" placeholder="Ex: 350" style="flex:1"><button onclick="addMusico()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div style="font-size:11px;color:#666;margin-top:10px">Com cachê salvo! Clique em EDITAR para mudar valor:</div><div id="listaMusicos" style="margin-top:8px"></div><button class="cancel" onclick="fecharModalMusicos()">FECHAR</button></div></div>
+<div class="modal" id="modalEditar"><div class="modal-box"><h3 id="editarTitulo">✏️ Editar</h3><label id="labelEditar1">Nome</label><input id="editarInput"><div id="divEditarCache"><label>💰 Cachê</label><input id="editarCache" type="number" placeholder="300"></div><button class="save" onclick="confirmarEditar()">SALVAR EDIÇÃO</button><button class="cancel" onclick="fecharModalEditar()">CANCELAR</button></div></div>
 <script>
-// NUNCA APAGA
 function carregar(chave, padrao){try{const v=localStorage.getItem(chave);if(v){const a=JSON.parse(v);if(Array.isArray(a)&&a.length>0)return a;}}catch(e){}return padrao;}
-let casas=carregar('casas_lista_final',['P1','P2','P3','P4']);
-let musicos=carregar('musicos_lista_final',['DOUGLAS','LUCIANO','ISRAEL','ANDRE TAKI']);
+let casasRaw=carregar('casas_lista_final',['P1','P2','P3','P4']);
+// MUSICOS AGORA É OBJETO COM NOME E CACHE
+let musicosRaw=carregar('musicos_lista_final_v2',null);
+let musicos;
+if(musicosRaw){
+ musicos=musicosRaw;
+}else{
+ // converte lista antiga de string para objeto
+ let antigo=carregar('musicos_lista_final',['DOUGLAS','LUCIANO','ISRAEL','ANDRE TAKI']);
+ musicos=antigo.map(n=>{
+  if(typeof n==='string') return {nome:n.toUpperCase(), cache:300};
+  return n;
+ });
+}
 let shows=carregar('shows_agenda_final',[{p:'P1',ini:'19:00',fim:'22:00',nome:'DOUGLAS',valor:300},{p:'P2',ini:'19:00',fim:'22:00',nome:'LUCIANO',valor:300},{p:'P3',ini:'19:30',fim:'22:30',nome:'ISRAEL',valor:300},{p:'P4',ini:'20:30',fim:'23:30',nome:'ANDRE TAKI',valor:300}]);
-function limpar(l){return [...new Set(l.map(x=>x.toString().trim().toUpperCase()).filter(x=>x))];}
-casas=limpar(casas);musicos=limpar(musicos);
+function limparCasas(l){return [...new Set(l.map(x=>x.toString().trim().toUpperCase()).filter(x=>x))];}
+casas=limparCasas(casasRaw);
+function limparMusicos(l){
+ const map={};
+ l.forEach(m=>{
+  let nome, cache;
+  if(typeof m==='string'){nome=m.toUpperCase(); cache=300;}
+  else {nome=(m.nome||'').toUpperCase(); cache=parseInt(m.cache)||300;}
+  if(nome) map[nome]=cache;
+ });
+ return Object.keys(map).map(k=>({nome:k, cache:map[k]}));
+}
+musicos=limparMusicos(musicos);
 let editIdx=-1,editTipo=null,editPos=-1;
-function corCantor(n){n=n.toUpperCase();if(n.includes('DOUGLAS'))return '#1565ff';if(n.includes('LUCIANO'))return '#7c4dff';if(n.includes('ISRAEL'))return '#00a651';if(n.includes('TAKI')||n.includes('ANDRE'))return '#ff6f00';return '#d32f2f';}
+function corCantor(n){n=(n||'').toUpperCase();if(n.includes('DOUGLAS'))return '#1565ff';if(n.includes('LUCIANO'))return '#7c4dff';if(n.includes('ISRAEL'))return '#00a651';if(n.includes('TAKI')||n.includes('ANDRE'))return '#ff6f00';return '#d32f2f';}
 function openMenu(){document.getElementById('side').classList.add('open');document.getElementById('overlay').classList.add('open')}
 function closeMenu(){document.getElementById('side').classList.remove('open');if(!document.querySelector('.modal.open'))document.getElementById('overlay').classList.remove('open');}
 function formatLong(d){return d.toLocaleDateString('pt-BR',{day:'numeric',month:'long',year:'numeric'});}
-function saveAll(){localStorage.setItem('casas_lista_final',JSON.stringify(casas));localStorage.setItem('musicos_lista_final',JSON.stringify(musicos));localStorage.setItem('shows_agenda_final',JSON.stringify(shows));}
-function preencherSelects(){const selP=document.getElementById('mP');selP.innerHTML='';casas.forEach(c=>{let o=document.createElement('option');o.value=c;o.textContent='🏠 '+c;selP.appendChild(o);});const selM=document.getElementById('mNome');selM.innerHTML='';musicos.forEach(m=>{let o=document.createElement('option');o.value=m;o.textContent='🎤 '+m;selM.appendChild(o);});}
+function saveAll(){localStorage.setItem('casas_lista_final',JSON.stringify(casas));localStorage.setItem('musicos_lista_final_v2',JSON.stringify(musicos));localStorage.setItem('shows_agenda_final',JSON.stringify(shows));}
+function preencherSelects(){
+ const selP=document.getElementById('mP');selP.innerHTML='';casas.forEach(c=>{let o=document.createElement('option');o.value=c;o.textContent='🏠 '+c;selP.appendChild(o);});
+ const selM=document.getElementById('mNome');selM.innerHTML='';musicos.forEach(m=>{let o=document.createElement('option');o.value=m.nome;o.textContent='🎤 '+m.nome+' - R$ '+m.cache; selM.appendChild(o);});
+}
 function fecharTodosModais(){document.querySelectorAll('.modal').forEach(m=>m.classList.remove('open'));document.getElementById('overlay').classList.remove('open');}
 function abrirGestaoCasas(){closeMenu();renderListaCasas();document.getElementById('modalCasas').classList.add('open');document.getElementById('overlay').classList.add('open');}
 function fecharModalCasas(){document.getElementById('modalCasas').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
@@ -109,31 +134,101 @@ function renderListaCasas(){
   div.appendChild(row);
  });
 }
-function addCasa(){let n=document.getElementById('novaCasaInput').value.trim().toUpperCase();if(!n)return;if(casas.includes(n)){alert('Já existe!');return;}casas.push(n);casas=limpar(casas);saveAll();preencherSelects();renderListaCasas();document.getElementById('novaCasaInput').value='';}
+function addCasa(){let n=document.getElementById('novaCasaInput').value.trim().toUpperCase();if(!n)return;if(casas.includes(n)){alert('Já existe!');return;}casas.push(n);casas=limparCasas(casas);saveAll();preencherSelects();renderListaCasas();document.getElementById('novaCasaInput').value='';}
 function abrirGestaoMusicos(){closeMenu();renderListaMusicos();document.getElementById('modalMusicos').classList.add('open');document.getElementById('overlay').classList.add('open');}
 function fecharModalMusicos(){document.getElementById('modalMusicos').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
 function renderListaMusicos(){
  const div=document.getElementById('listaMusicos'); div.innerHTML='';
  musicos.forEach((m,i)=>{
-  const cor=corCantor(m);
+  const cor=corCantor(m.nome);
   const row=document.createElement('div'); row.className='item-lista';
-  const b=document.createElement('b'); b.textContent='🎤 '+m; b.style.color=cor;
+  const left=document.createElement('div');
+  const b=document.createElement('b'); b.textContent='🎤 '+m.nome; b.style.color=cor;
+  const cache=document.createElement('div'); cache.textContent='💰 R$ '+m.cache; cache.style.fontSize='11px'; cache.style.fontWeight='800'; cache.style.color='#333';
+  left.appendChild(b); left.appendChild(cache);
   const btns=document.createElement('div');
   const be=document.createElement('button'); be.className='mini-btn mini-edit'; be.textContent='✏️ EDITAR';
   be.onclick=function(){editarItem('musico',i);};
   const bd=document.createElement('button'); bd.className='mini-btn mini-del'; bd.textContent='🗑️ EXCLUIR';
   bd.onclick=function(){excluirItem('musico',i);};
   btns.appendChild(be); btns.appendChild(bd);
-  row.appendChild(b); row.appendChild(btns);
+  row.appendChild(left); row.appendChild(btns);
   div.appendChild(row);
  });
 }
-function addMusico(){let n=document.getElementById('novoMusicoInput').value.trim().toUpperCase();if(!n)return;if(musicos.includes(n)){alert('Já existe!');return;}musicos.push(n);musicos=limpar(musicos);saveAll();preencherSelects();renderListaMusicos();document.getElementById('novoMusicoInput').value='';}
-function editarItem(tipo,pos){editTipo=tipo;editPos=pos;const nome=tipo==='casa'?casas[pos]:musicos[pos];document.getElementById('editarTitulo').innerText='✏️ Editar '+nome;document.getElementById('editarInput').value=nome;document.getElementById('modalEditar').classList.add('open');document.getElementById('overlay').classList.add('open');}
-function fecharModalEditar(){document.getElementById('modalEditar').classList.remove('open');if(!document.getElementById('modalCasas').classList.contains('open') && !document.getElementById('modalMusicos').classList.contains('open'))document.getElementById('overlay').classList.remove('open');else document.getElementById('overlay').classList.add('open');}
-function confirmarEditar(){let novo=document.getElementById('editarInput').value.trim().toUpperCase();if(!novo)return;if(editTipo==='casa'){casas[editPos]=novo;casas=limpar(casas);renderListaCasas();}else{musicos[editPos]=novo;musicos=limpar(musicos);renderListaMusicos();}saveAll();preencherSelects();fecharModalEditar();}
-function excluirItem(tipo,pos){const nome=tipo==='casa'?casas[pos]:musicos[pos];if(!confirm('Excluir '+nome+'?'))return;if(tipo==='casa'){casas.splice(pos,1);renderListaCasas();}else{musicos.splice(pos,1);renderListaMusicos();}saveAll();preencherSelects();}
-function render(){const inp=document.getElementById('inpDate');if(!inp.value)inp.value=new Date().toISOString().slice(0,10);const d=new Date(inp.value+'T12:00:00');document.getElementById('titleLong').innerText='Hoje - '+formatLong(d);document.getElementById('folhaTitulo').innerText=formatLong(d)+' - '+d.toLocaleDateString('pt-BR');const lista=document.getElementById('lista');lista.innerHTML='';shows.forEach((s,i)=>{const cor=corCantor(s.nome);const div=document.createElement('div');div.className='show-card';div.innerHTML='<div class=line>🏠 '+s.p+' — 🕓 '+s.ini+' as '+s.fim+'</div><div class=line2>🎤 <b style="color:'+cor+'">'+s.nome+'</b> - R$ '+s.valor+'</div><div><button class=b-edit onclick=editar('+i+')>✏️ EDITAR</button> <button class=b-del onclick=excluir('+i+')>🗑️ EXCLUIR</button></div>';lista.appendChild(div);});document.getElementById('folhaConteudo').innerHTML=shows.map((s,idx)=>{const cor=corCantor(s.nome);return '<p class=folha-item>0'+(idx+1)+'. '+s.p+' '+s.ini+'-'+s.fim+' - <b style="color:'+cor+'">'+s.nome+'</b> - R$ '+s.valor+'</p>';}).join('');}
+function addMusico(){
+ let n=document.getElementById('novoMusicoInput').value.trim().toUpperCase();
+ let c=parseInt(document.getElementById('novoMusicoCache').value)||300;
+ if(!n)return;
+ if(musicos.find(x=>x.nome===n)){alert('Já existe!');return;}
+ musicos.push({nome:n, cache:c});
+ musicos=limparMusicos(musicos);
+ saveAll();preencherSelects();renderListaMusicos();
+ document.getElementById('novoMusicoInput').value='';
+ document.getElementById('novoMusicoCache').value='';
+}
+function editarItem(tipo,pos){
+ editTipo=tipo;editPos=pos;
+ if(tipo==='casa'){
+  const nome=casas[pos];
+  document.getElementById('editarTitulo').innerText='✏️ Editar '+nome;
+  document.getElementById('labelEditar1').innerText='Nome da casa';
+  document.getElementById('editarInput').value=nome;
+  document.getElementById('divEditarCache').style.display='none';
+ }else{
+  const m=musicos[pos];
+  document.getElementById('editarTitulo').innerText='✏️ Editar '+m.nome;
+  document.getElementById('labelEditar1').innerText='Nome do músico';
+  document.getElementById('editarInput').value=m.nome;
+  document.getElementById('editarCache').value=m.cache;
+  document.getElementById('divEditarCache').style.display='block';
+ }
+ document.getElementById('modalEditar').classList.add('open');
+ document.getElementById('overlay').classList.add('open');
+}
+function fecharModalEditar(){
+ document.getElementById('modalEditar').classList.remove('open');
+ if(!document.getElementById('modalCasas').classList.contains('open') && !document.getElementById('modalMusicos').classList.contains('open'))document.getElementById('overlay').classList.remove('open');
+ else document.getElementById('overlay').classList.add('open');
+}
+function confirmarEditar(){
+ let novo=document.getElementById('editarInput').value.trim().toUpperCase();
+ if(!novo)return;
+ if(editTipo==='casa'){casas[editPos]=novo;casas=limparCasas(casas);renderListaCasas();}
+ else{
+  let novoCache=parseInt(document.getElementById('editarCache').value)||300;
+  musicos[editPos]={nome:novo, cache:novoCache};
+  musicos=limparMusicos(musicos);
+  renderListaMusicos();
+ }
+ saveAll();preencherSelects();fecharModalEditar();
+}
+function excluirItem(tipo,pos){
+ const nome=tipo==='casa'?casas[pos]:musicos[pos].nome;
+ if(!confirm('Excluir '+nome+'?'))return;
+ if(tipo==='casa'){casas.splice(pos,1);renderListaCasas();}
+ else{musicos.splice(pos,1);renderListaMusicos();}
+ saveAll();preencherSelects();
+}
+function autoCache(){
+ const nome=document.getElementById('mNome').value;
+ const m=musicos.find(x=>x.nome===nome);
+ if(m) document.getElementById('mValor').value=m.cache;
+}
+function render(){
+ const inp=document.getElementById('inpDate');if(!inp.value)inp.value=new Date().toISOString().slice(0,10);
+ const d=new Date(inp.value+'T12:00:00');
+ document.getElementById('titleLong').innerText='Hoje - '+formatLong(d);
+ document.getElementById('folhaTitulo').innerText=formatLong(d)+' - '+d.toLocaleDateString('pt-BR');
+ const lista=document.getElementById('lista');lista.innerHTML='';
+ shows.forEach((s,i)=>{
+  const cor=corCantor(s.nome);
+  const div=document.createElement('div');div.className='show-card';
+  div.innerHTML='<div class=line>🏠 '+s.p+' — 🕓 '+s.ini+' as '+s.fim+'</div><div class=line2>🎤 <b style="color:'+cor+'">'+s.nome+'</b> - R$ '+s.valor+'</div><div><button class=b-edit onclick=editar('+i+')>✏️ EDITAR</button> <button class=b-del onclick=excluir('+i+')>🗑️ EXCLUIR</button></div>';
+  lista.appendChild(div);
+ });
+ document.getElementById('folhaConteudo').innerHTML=shows.map((s,idx)=>{const cor=corCantor(s.nome);return '<p class=folha-item>0'+(idx+1)+'. '+s.p+' '+s.ini+'-'+s.fim+' - <b style="color:'+cor+'">'+s.nome+'</b> - R$ '+s.valor+'</p>';}).join('');
+}
 function mudaDia(n){const inp=document.getElementById('inpDate');let d=new Date(inp.value+'T12:00:00');d.setDate(d.getDate()+n);inp.value=d.toISOString().slice(0,10);render();}
 function hoje(){document.getElementById('inpDate').value=new Date().toISOString().slice(0,10);render();}
 function amanha(){let d=new Date();d.setDate(d.getDate()+1);document.getElementById('inpDate').value=d.toISOString().slice(0,10);render();}
