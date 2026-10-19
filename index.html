@@ -5,9 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Agenda do Dia</title>
 <style>
-:root{--bg:#f2f2f2}
 *{box-sizing:border-box;font-family:Inter,system-ui,Arial,sans-serif}
-body{margin:0;background:var(--bg);padding-bottom:110px}
+body{margin:0;background:#f2f2f2;padding-bottom:110px}
 header{position:sticky;top:0;z-index:20;background:#e9e9e9;display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #ddd}
 header h1{margin:0;font-size:18px;font-weight:900}
 .btn-home{background:#222;color:#fff;border:0;padding:8px 16px;border-radius:999px;font-weight:800}
@@ -19,7 +18,7 @@ input[type=date]{font-size:16px;padding:8px 12px;border:1px solid #ccc;border-ra
 .pill{border:0;background:#eee;padding:6px 14px;border-radius:999px;font-weight:800;color:#999}
 .show-card{background:#fff;margin:12px;border-radius:18px;padding:14px 16px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
 .line{font-weight:900;font-size:18px}
-.line2{color:#555;font-size:18px;margin-top:4px;margin-bottom:10px}
+.line2{color:#555;font-size:18px;margin:8px 0 10px 0}
 .actions{display:flex;gap:10px}
 .b-edit{border:0;background:#e3f0ff;color:#2a7fff;padding:8px 14px;border-radius:10px;font-weight:800}
 .b-del{border:0;background:#ffe3e3;color:#d44;padding:8px 14px;border-radius:10px;font-weight:800}
@@ -29,8 +28,8 @@ input[type=date]{font-size:16px;padding:8px 12px;border:1px solid #ccc;border-ra
 .folha-view{display:none;padding:12px}
 .folha-paper{background:#fff;background-image:repeating-linear-gradient(transparent,transparent 31px,#a9d4ff 31px,#a9d4ff 32px);border:2px solid #333;border-radius:8px;padding:16px 18px 16px 48px;position:relative;min-height:80vh}
 .folha-paper:before{content:'';position:absolute;left:36px;top:0;bottom:0;width:2px;background:#ff7b7b}
-.folha-paper h2{font-family:'Comic Sans MS','Segoe Script',cursive;font-weight:900;margin:0 0 12px 0}
-.folha-item{font-family:'Comic Sans MS','Segoe Script',cursive;font-size:20px;line-height:32px;margin:0}
+.folha-paper h2{font-family:'Comic Sans MS',cursive;font-weight:900;margin:0 0 12px 0}
+.folha-item{font-family:'Comic Sans MS',cursive;font-size:20px;line-height:32px;margin:0}
 .add-btn{position:fixed;right:18px;bottom:90px;width:62px;height:62px;border-radius:50%;border:0;background:#222;color:#fff;font-size:36px;z-index:25}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;align-items:center;justify-content:center;z-index:30;padding:16px}
 .modal-box{background:#fff;border-radius:18px;padding:18px;width:100%;max-width:420px}
@@ -64,13 +63,15 @@ input[type=date]{font-size:16px;padding:8px 12px;border:1px solid #ccc;border-ra
 <div class="menu-item">⚙️ CONFIG</div>
 <div class="menu-item" onclick="closeMenu()">🚪 FECHAR MENU</div>
 </div>
+
 <header>
 <div style="display:flex;align-items:center;gap:12px"><span style="font-size:26px;cursor:pointer" onclick="openMenu()">☰</span><h1>🎤 AGENDA DO DIA</h1></div>
 <button class="btn-home" onclick="location.reload()">HOME</button>
 </header>
+
 <div id="listView">
 <div class="date-card">
-<div class="title-long" id="titleLong">Hoje - 19 de outubro de 2026</div>
+<div class="title-long" id="titleLong"></div>
 <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
 <button class="arrow" onclick="mudaDia(-1)">◀</button>
 <div>
@@ -82,19 +83,23 @@ input[type=date]{font-size:16px;padding:8px 12px;border:1px solid #ccc;border-ra
 </div>
 <div id="lista"></div>
 </div>
+
 <div id="folhaView" class="folha-view">
 <div class="folha-paper">
 <h2 id="folhaTitulo"></h2>
 <div id="folhaConteudo"></div>
 </div>
 </div>
+
 <button class="add-btn" onclick="abrirModal()">+</button>
+
 <div class="bottom">
 <button class="b-zap" onclick="zap()">📱 ZAP</button>
 <button class="b-normal" onclick="modoNormal()">🖨️ NORMAL</button>
 <button class="b-folha" onclick="modoFolha()">📒 FOLHA</button>
 <button class="b-pdf" onclick="window.print()">📄 PDF</button>
 </div>
+
 <div class="modal" id="modal">
 <div class="modal-box">
 <h3>Novo Show</h3>
@@ -107,6 +112,7 @@ input[type=date]{font-size:16px;padding:8px 12px;border:1px solid #ccc;border-ra
 <button class="cancel" onclick="fecharModal()">CANCELAR</button>
 </div>
 </div>
+
 <script>
 let shows=JSON.parse(localStorage.getItem('shows_agenda')||'null')||[{p:'P1',ini:'19:00',fim:'22:00',nome:'DOUGLAS',valor:300},{p:'P2',ini:'19:00',fim:'22:00',nome:'LUCIANO',valor:300},{p:'P3',ini:'19:30',fim:'22:30',nome:'ISRAEL',valor:300},{p:'P4',ini:'20:30',fim:'23:30',nome:'Andre Taki',valor:300}];
 let editIdx=-1;
