@@ -8,71 +8,69 @@
 *{box-sizing:border-box;font-family:Inter,system-ui,Arial,sans-serif}
 body{margin:0;background:#f2f2f2;padding-bottom:110px}
 header{position:sticky;top:0;z-index:20;background:#e9e9e9;display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #ddd}
-header h1{margin:0;font-size:18px;font-weight:900}
+header h1{margin:0;font-size:16px;font-weight:900}
 .btn-home{background:#222;color:#fff;border:0;padding:8px 16px;border-radius:999px;font-weight:800}
 .date-card{background:#fff;margin:12px;border-radius:18px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.06);text-align:center}
-.arrow{width:56px;height:56px;border:0;border-radius:14px;background:#222;color:#fff;font-size:28px;display:grid;place-items:center}
-.title-long{font-weight:900;font-size:18px;margin-bottom:8px}
-input[type=date]{font-size:16px;padding:8px 12px;border:1px solid #ccc;border-radius:12px;max-width:220px;text-align:center}
+.arrow{width:50px;height:50px;border:0;border-radius:14px;background:#222;color:#fff;font-size:24px;display:grid;place-items:center}
+.title-long{font-weight:900;font-size:16px;margin-bottom:8px}
+input[type=date]{font-size:15px;padding:8px 12px;border:1px solid #ccc;border-radius:12px;max-width:200px;text-align:center}
 .pills{margin-top:8px;display:flex;justify-content:center;gap:8px}
-.pill{border:0;background:#eee;padding:6px 14px;border-radius:999px;font-weight:800;color:#999}
-.show-card{background:#fff;margin:12px;border-radius:18px;padding:14px 16px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.line{font-weight:900;font-size:18px}
-.line2{color:#555;font-size:18px;margin:8px 0 10px 0}
-.actions{display:flex;gap:10px}
-.b-edit{border:0;background:#e3f0ff;color:#2a7fff;padding:8px 14px;border-radius:10px;font-weight:800}
-.b-del{border:0;background:#ffe3e3;color:#d44;padding:8px 14px;border-radius:10px;font-weight:800}
-.bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #ddd;display:flex;gap:8px;padding:10px;justify-content:space-around;z-index:20}
-.bottom button{border:0;padding:12px 18px;border-radius:14px;font-weight:900}
+.pill{border:0;background:#eee;padding:6px 14px;border-radius:999px;font-weight:800;color:#888;font-size:13px}
+.show-card{background:#fff;margin:10px 12px;border-radius:16px;padding:12px 14px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.line{font-weight:700;font-size:15px}
+.line2{color:#555;font-size:14px;margin:6px 0 8px 0}
+.actions{display:flex;gap:8px}
+.b-edit{border:0;background:#e3f0ff;color:#2a7fff;padding:6px 12px;border-radius:8px;font-weight:700;font-size:13px}
+.b-del{border:0;background:#ffe3e3;color:#d44;padding:6px 12px;border-radius:8px;font-weight:700;font-size:13px}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #ddd;display:flex;gap:6px;padding:8px;justify-content:space-around;z-index:20}
+.bottom button{border:0;padding:10px 14px;border-radius:12px;font-weight:900;font-size:13px}
 .b-zap{background:#00e676}.b-normal{background:#7c6cff;color:#fff}.b-folha{background:#ffe066;border:2px dashed #000}.b-pdf{background:#00bfa6;color:#fff}
 .folha-view{display:none;padding:12px}
-.folha-paper{background:#fff;background-image:repeating-linear-gradient(transparent,transparent 31px,#a9d4ff 31px,#a9d4ff 32px);border:2px solid #333;border-radius:8px;padding:16px 18px 16px 48px;position:relative;min-height:80vh}
-.folha-paper:before{content:'';position:absolute;left:36px;top:0;bottom:0;width:2px;background:#ff7b7b}
-.folha-paper h2{font-family:'Comic Sans MS',cursive;font-weight:900;margin:0 0 12px 0}
-.folha-item{font-family:'Comic Sans MS',cursive;font-size:20px;line-height:32px;margin:0}
-.add-btn{position:fixed;right:18px;bottom:90px;width:62px;height:62px;border-radius:50%;border:0;background:#222;color:#fff;font-size:36px;z-index:25}
+.folha-paper{background:#fff;background-image:repeating-linear-gradient(transparent,transparent 31px,#a9d4ff 31px,#a9d4ff 32px);border:2px solid #333;border-radius:8px;padding:14px 14px 14px 42px;position:relative;min-height:80vh;background-position-y:14px}
+.folha-paper:before{content:'';position:absolute;left:32px;top:0;bottom:0;width:2px;background:#ff7b7b}
+.folha-paper h2{font-family:'Segoe Script','Comic Sans MS',cursive;font-weight:700;margin:0 0 0 0;font-size:18px;line-height:32px;height:32px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.folha-item{font-family:'Segoe Script','Comic Sans MS',cursive;font-size:15px;line-height:32px;height:32px;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#111}
+.add-btn{position:fixed;right:18px;bottom:90px;width:58px;height:58px;border-radius:50%;border:0;background:#222;color:#fff;font-size:32px;z-index:25}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;align-items:center;justify-content:center;z-index:30;padding:16px}
-.modal-box{background:#fff;border-radius:18px;padding:18px;width:100%;max-width:420px}
-.modal-box input{width:100%;padding:10px;border:1px solid #ccc;border-radius:10px;margin:6px 0;font-size:16px}
-.modal-box button{width:100%;padding:12px;border:0;border-radius:12px;font-weight:900;margin-top:8px}
+.modal-box{background:#fff;border-radius:18px;padding:18px;width:100%;max-width:380px}
+.modal-box input{width:100%;padding:10px;border:1px solid #ccc;border-radius:10px;margin:6px 0;font-size:15px}
+.modal-box button{width:100%;padding:11px;border:0;border-radius:12px;font-weight:900;margin-top:8px}
 .save{background:#222;color:#fff}.cancel{background:#eee}
-.side{position:fixed;left:-100%;top:0;bottom:0;width:85%;max-width:360px;background:#fff;z-index:50;transition:.3s;overflow:auto;padding:16px}
+.side{position:fixed;left:-100%;top:0;bottom:0;width:82%;max-width:340px;background:#fff;z-index:50;transition:.3s;overflow:auto;padding:16px}
 .side.open{left:0}
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;z-index:40}
 .overlay.open{display:block}
-.menu-item{padding:12px 0;border-bottom:1px solid #f0f0f0;font-weight:700}
+.menu-item{padding:11px 0;border-bottom:1px solid #f0f0f0;font-weight:700;font-size:14px}
 </style>
 </head>
 <body>
 <div class="overlay" id="overlay" onclick="closeMenu()"></div>
 <div class="side" id="side">
-<div style="font-weight:900;font-size:18px;margin-bottom:16px">Usuario</div>
+<div style="font-weight:900;font-size:16px;margin-bottom:14px">Usuario</div>
 <div class="menu-item">🏠 INICIO</div>
 <div class="menu-item">📋 AGENDA DO DIA</div>
 <div class="menu-item">📅 AGENDA DO MES</div>
 <div class="menu-item">🗓️ AGENDA DO ANO</div>
 <div class="menu-item">✈️ ENVIAR CRONOGRAMA</div>
-<div style="height:12px"></div>
+<div style="height:10px"></div>
 <div class="menu-item">🏠 CADASTRAR CASAS</div>
 <div class="menu-item">🎤 CADASTRAR MUSICOS</div>
-<div style="height:12px"></div>
+<div style="height:10px"></div>
 <div class="menu-item">🍴 VER RESTAURANTES</div>
 <div class="menu-item">🎤 VER MUSICOS</div>
 <div class="menu-item">📊 RELATORIOS FINANCEIROS</div>
-<div style="height:12px"></div>
+<div style="height:10px"></div>
 <div class="menu-item">⚙️ CONFIG</div>
 <div class="menu-item" onclick="closeMenu()">🚪 FECHAR MENU</div>
 </div>
-
 <header>
-<div style="display:flex;align-items:center;gap:12px"><span style="font-size:26px;cursor:pointer" onclick="openMenu()">☰</span><h1>🎤 AGENDA DO DIA</h1></div>
+<div style="display:flex;align-items:center;gap:10px"><span style="font-size:24px;cursor:pointer" onclick="openMenu()">☰</span><h1>🎤 AGENDA DO DIA</h1></div>
 <button class="btn-home" onclick="location.reload()">HOME</button>
 </header>
-
 <div id="listView">
 <div class="date-card">
 <div class="title-long" id="titleLong"></div>
-<div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
 <button class="arrow" onclick="mudaDia(-1)">◀</button>
 <div>
 <input type="date" id="inpDate" value="2026-10-19" onchange="render()">
@@ -83,26 +81,22 @@ input[type=date]{font-size:16px;padding:8px 12px;border:1px solid #ccc;border-ra
 </div>
 <div id="lista"></div>
 </div>
-
 <div id="folhaView" class="folha-view">
 <div class="folha-paper">
 <h2 id="folhaTitulo"></h2>
 <div id="folhaConteudo"></div>
 </div>
 </div>
-
 <button class="add-btn" onclick="abrirModal()">+</button>
-
 <div class="bottom">
 <button class="b-zap" onclick="zap()">📱 ZAP</button>
 <button class="b-normal" onclick="modoNormal()">🖨️ NORMAL</button>
 <button class="b-folha" onclick="modoFolha()">📒 FOLHA</button>
 <button class="b-pdf" onclick="window.print()">📄 PDF</button>
 </div>
-
 <div class="modal" id="modal">
 <div class="modal-box">
-<h3>Novo Show</h3>
+<h3 style="margin:0 0 10px 0">Novo Show</h3>
 <input id="mP" placeholder="P1, P2...">
 <input id="mIni" type="time" value="19:00">
 <input id="mFim" type="time" value="22:00">
@@ -112,7 +106,6 @@ input[type=date]{font-size:16px;padding:8px 12px;border:1px solid #ccc;border-ra
 <button class="cancel" onclick="fecharModal()">CANCELAR</button>
 </div>
 </div>
-
 <script>
 let shows=JSON.parse(localStorage.getItem('shows_agenda')||'null')||[{p:'P1',ini:'19:00',fim:'22:00',nome:'DOUGLAS',valor:300},{p:'P2',ini:'19:00',fim:'22:00',nome:'LUCIANO',valor:300},{p:'P3',ini:'19:30',fim:'22:30',nome:'ISRAEL',valor:300},{p:'P4',ini:'20:30',fim:'23:30',nome:'Andre Taki',valor:300}];
 let editIdx=-1;
