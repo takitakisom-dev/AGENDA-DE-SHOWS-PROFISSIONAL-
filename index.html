@@ -22,13 +22,13 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 .b-edit,.b-del{border:0;padding:5px 10px;border-radius:6px;font-weight:700;font-size:11px;cursor:pointer}
 .b-edit{background:#e3f0ff;color:#2a7fff}.b-del{background:#ffe3e3;color:#d44}
 .bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #ddd;display:flex;gap:2px;padding:6px;justify-content:space-around;z-index:20}
-.bottom button{border:0;padding:7px 8px;border-radius:10px;font-weight:800;font-size:10px;cursor:pointer}
+.bottom button{border:0;padding:7px 6px;border-radius:10px;font-weight:800;font-size:9px;cursor:pointer}
 .b-zap{background:#00e676}.b-normal{background:#7c6cff;color:#fff}.b-folha{background:#ffe066;border:1.5px dashed #000}.b-pdf{background:#00bfa6;color:#fff}.b-fin{background:#ff8a65;color:#fff}
 .folha-view{display:none;padding:8px}
 .folha-paper{background:#fff;background-image:repeating-linear-gradient(transparent,transparent 31px,#b5d8ff 31px,#b5d8ff 32px);border:1.5px solid #333;border-radius:6px;padding:0 10px 0 36px;position:relative}
 .folha-paper:before{content:'';position:absolute;left:28px;top:0;bottom:0;width:1.5px;background:#ff8a8a}
 .folha-paper h2{font-size:12px;line-height:32px;height:32px;margin:0;white-space:nowrap;overflow:hidden;font-weight:700}
-.folha-item{font-size:11.5px;line-height:32px;height:32px;margin:0;padding:0;transform:translateY(2px);white-space:nowrap;overflow:hidden;color:#222}
+.folha-item{font-size:12px;line-height:32px;height:32px;margin:0;padding:0;transform:translateY(2px);white-space:nowrap;overflow:hidden;color:#222}
 .add-btn{position:fixed;right:14px;bottom:80px;width:56px;height:56px;border-radius:50%;border:0;background:#222;color:#fff;font-size:30px;z-index:25;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,.3)}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:500;padding:14px}
 .modal.open{display:flex}
@@ -70,7 +70,7 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 </div>
 <header><div style="display:flex;align-items:center;gap:6px"><span class="menu-btn" onclick="openMenu()">☰</span><h1>🎤 AGENDA DO DIA</h1></div><button class="btn-home" onclick="location.reload()">HOME</button></header>
 <div id="listView"><div class="date-card"><div class="title-long" id="titleLong"></div><div style="display:flex;align-items:center;justify-content:space-between"><button class="arrow" onclick="mudaDia(-1)">◀</button><div><input type="date" id="inpDate" onchange="render()"><div style="display:flex;justify-content:center;gap:6px;margin-top:6px"><button class="pill" onclick="hoje()">HOJE</button><button class="pill" onclick="amanha()">AMANHÃ</button></div></div><button class="arrow" onclick="mudaDia(1)">▶</button></div></div><div id="lista"></div></div>
-<div id="folhaView" class="folha-view"><div class="folha-paper"><h2 id="folhaTitulo"></h2><div id="folhaConteudo"></div><div id="folhaTotal" style="font-weight:800;font-size:12px;line-height:32px"></div></div></div>
+<div id="folhaView" class="folha-view"><div class="folha-paper"><h2 id="folhaTitulo"></h2><div id="folhaConteudo"></div></div></div>
 <button class="add-btn" onclick="abrirModalNovo()">+</button>
 <div class="bottom">
 <button class="b-zap" onclick="zapMusicos()">📱 ZAP</button>
@@ -81,15 +81,15 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 </div>
 <div class="modal" id="modal"><div class="modal-box"><h3 id="modalTitle">Novo Show</h3><label>🏠 CASA</label><select id="mP"></select><label>🕓 INICIO</label><input id="mIni" type="time" value="19:00"><label>🕓 FIM</label><input id="mFim" type="time" value="22:00"><label>🎤 MUSICO</label><select id="mNome" onchange="autoCache()"></select><label>💰 VALOR CACHÊ</label><input id="mValor" type="number" placeholder="300"><button class="save" onclick="salvar()">SALVAR</button><button class="cancel" onclick="fecharModal()">CANCELAR</button></div></div>
 <div class="modal" id="modalCasas"><div class="modal-box"><h3>🏠 CADASTRAR CASAS</h3><label>Nova casa</label><div style="display:flex;gap:6px"><input id="novaCasaInput" placeholder="Ex: P5" style="flex:1"><button onclick="addCasa()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaCasas" style="margin-top:12px"></div><button class="cancel" onclick="fecharModalCasas()">FECHAR</button></div></div>
-<div class="modal" id="modalMusicos"><div class="modal-box"><h3>🎤 CADASTRAR MUSICOS</h3><label>Nome do músico</label><input id="novoMusicoInput" placeholder="Ex: BRUNO"><label>💰 Valor do cachê</label><div style="display:flex;gap:6px"><input id="novoMusicoCache" type="number" placeholder="Ex: 350" style="flex:1"><button onclick="addMusico()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaMusicos" style="margin-top:12px"></div><button class="cancel" onclick="fecharModalMusicos()">FECHAR</button></div></div>
+<div class="modal" id="modalMusicos"><div class="modal-box"><h3>🎤 CADASTRAR MUSICOS</h3><label>Nome do músico</label><input id="novoMusicoInput" placeholder="Ex: BRUNO"><label>💰 Valor do cachê</label><div style="display:flex;gap:6px"><input id="novoMusicoCache" type="number" placeholder="Ex: 350" style="flex:1"><button onclick="addMusico()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div style="font-size:11px;color:#666;margin-top:10px">Salvo com cachê! Serve para casas e músicos novos também:</div><div id="listaMusicos" style="margin-top:8px"></div><button class="cancel" onclick="fecharModalMusicos()">FECHAR</button></div></div>
 <div class="modal" id="modalEditar"><div class="modal-box"><h3 id="editarTitulo">✏️ Editar</h3><label id="labelEditar1">Nome</label><input id="editarInput"><div id="divEditarCache"><label>💰 Cachê</label><input id="editarCache" type="number" placeholder="300"></div><button class="save" onclick="confirmarEditar()">SALVAR EDIÇÃO</button><button class="cancel" onclick="fecharModalEditar()">CANCELAR</button></div></div>
 <script>
 function carregar(chave, padrao){try{const v=localStorage.getItem(chave);if(v){const a=JSON.parse(v);if(Array.isArray(a)&&a.length>0)return a;}}catch(e){}return padrao;}
-let casasRaw=carregar('casas_lista_final',['P1','P2','P3','P4']);
+let casasRaw=carregar('casas_lista_final',['P1','P2','P3','P4','P5']);
 let musicosRaw=carregar('musicos_lista_final_v2',null);
 let musicos;
-if(musicosRaw){musicos=musicosRaw;}else{let antigo=carregar('musicos_lista_final',['DOUGLAS','LUCIANO','ISRAEL','ANDRE TAKI']);musicos=antigo.map(n=>{if(typeof n==='string')return{nome:n.toUpperCase(),cache:300};return n;});}
-let shows=carregar('shows_agenda_final',[{p:'P1',ini:'19:00',fim:'22:00',nome:'DOUGLAS',valor:300},{p:'P2',ini:'19:00',fim:'22:00',nome:'LUCIANO',valor:300},{p:'P3',ini:'19:30',fim:'22:30',nome:'ISRAEL',valor:300},{p:'P4',ini:'20:30',fim:'23:30',nome:'ANDRE TAKI',valor:300}]);
+if(musicosRaw){musicos=musicosRaw;}else{let antigo=carregar('musicos_lista_final',['DOUGLAS','LUCIANO','ISRAEL','ANDRE TAKI','MARTIN']);musicos=antigo.map(n=>{if(typeof n==='string')return{nome:n.toUpperCase(),cache:300};return n;});}
+let shows=carregar('shows_agenda_final',[{p:'P1',ini:'19:00',fim:'22:00',nome:'DOUGLAS',valor:300},{p:'P2',ini:'19:00',fim:'22:00',nome:'LUCIANO',valor:300},{p:'P3',ini:'19:30',fim:'22:30',nome:'ISRAEL',valor:300},{p:'P4',ini:'20:30',fim:'23:30',nome:'ANDRE TAKI',valor:300},{p:'P5',ini:'18:30',fim:'21:30',nome:'MARTIN',valor:300}]);
 function limparCasas(l){return [...new Set(l.map(x=>x.toString().trim().toUpperCase()).filter(x=>x))];}
 let casas=limparCasas(casasRaw);
 function limparMusicos(l){const map={};l.forEach(m=>{let nome,cache;if(typeof m==='string'){nome=m.toUpperCase();cache=300;}else{nome=(m.nome||'').toUpperCase();cache=parseInt(m.cache)||300;}if(nome)map[nome]=cache;});return Object.keys(map).map(k=>({nome:k,cache:map[k]}));}
@@ -131,20 +131,17 @@ function render(){
  renderFolha();
 }
 function renderFolha(){
- const total=shows.reduce((sum,s)=>sum+(parseInt(s.valor)||0),0);
  if(modoFinanceiroAtivo){
-  document.getElementById('folhaConteudo').innerHTML=shows.map((s,idx)=>{
+  const total=shows.reduce((sum,s)=>sum+(parseInt(s.valor)||0),0);
+  document.getElementById('folhaConteudo').innerHTML=shows.map((s)=>{
    const cor=corCantor(s.nome);
-   return '<p class=folha-item>0'+(idx+1)+'. '+s.p+' '+s.ini+'-'+s.fim+' - <b style="color:'+cor+'">'+s.nome+'</b> - R$ '+s.valor+'</p>';
-  }).join('') + '<p class=folha-item style="font-weight:800;margin-top:8px;border-top:1px solid #000">TOTAL DO DIA: R$ '+total+'</p>';
-  document.getElementById('folhaTotal').innerText='';
+   return '<p class=folha-item>'+s.p+' '+s.ini+'-'+s.fim+' - <b style="color:'+cor+'">'+s.nome+'</b> - R$ '+s.valor+'</p>';
+  }).join('') + '<p class=folha-item style="font-weight:800;border-top:1px solid #000;margin-top:4px">TOTAL: R$ '+total+'</p>';
  }else{
-  // MODO MUSICOS - SEM VALOR
-  document.getElementById('folhaConteudo').innerHTML=shows.map((s,idx)=>{
+  document.getElementById('folhaConteudo').innerHTML=shows.map((s)=>{
    const cor=corCantor(s.nome);
-   return '<p class=folha-item>0'+(idx+1)+'. '+s.p+' '+s.ini+'-'+s.fim+' - <b style="color:'+cor+'">'+s.nome+'</b></p>';
+   return '<p class=folha-item>'+s.p+' '+s.ini+'-'+s.fim+' - <b style="color:'+cor+'">'+s.nome+'</b></p>';
   }).join('');
-  document.getElementById('folhaTotal').innerText='';
  }
 }
 function mudaDia(n){const inp=document.getElementById('inpDate');let d=new Date(inp.value+'T12:00:00');d.setDate(d.getDate()+n);inp.value=d.toISOString().slice(0,10);render();}
@@ -153,19 +150,7 @@ function amanha(){let d=new Date();d.setDate(d.getDate()+1);document.getElementB
 function modoFolha(){modoFinanceiroAtivo=false;document.getElementById('listView').style.display='none';document.getElementById('folhaView').style.display='block';renderFolha();closeMenu()}
 function modoFinanceiro(){modoFinanceiroAtivo=true;document.getElementById('listView').style.display='none';document.getElementById('folhaView').style.display='block';renderFolha();closeMenu()}
 function modoNormal(){document.getElementById('listView').style.display='block';document.getElementById('folhaView').style.display='none';}
-// ZAP PARA MUSICOS - SEM VALOR
-function zapMusicos(){
- const d=document.getElementById('titleLong').innerText;
- const txt=shows.map(s=>s.p+' '+s.ini+'-'+s.fim+' - '+s.nome).join('\n');
- window.open('https://wa.me/?text='+encodeURIComponent('🎤 '+d+'\n\n'+txt),'_blank');
-}
-// ZAP FINANCEIRO - COM VALOR (só se precisar)
-function zapFinanceiro(){
- const d=document.getElementById('titleLong').innerText;
- const txt=shows.map(s=>s.p+' '+s.ini+'-'+s.fim+' - '+s.nome+' - R$ '+s.valor).join('\n');
- const total=shows.reduce((sum,s)=>sum+(parseInt(s.valor)||0),0);
- window.open('https://wa.me/?text='+encodeURIComponent('💰 FINANCEIRO - '+d+'\n\n'+txt+'\n\nTOTAL: R$ '+total),'_blank');
-}
+function zapMusicos(){const d=document.getElementById('titleLong').innerText;const txt=shows.map(s=>s.p+' '+s.ini+'-'+s.fim+' - '+s.nome).join('\n');window.open('https://wa.me/?text='+encodeURIComponent('🎤 '+d+'\n\n'+txt),'_blank');}
 function abrirModalNovo(){preencherSelects();editIdx=-1;document.getElementById('modalTitle').innerText='Novo Show';document.getElementById('mIni').value='19:00';document.getElementById('mFim').value='22:00';document.getElementById('mValor').value='';document.getElementById('modal').classList.add('open');document.getElementById('overlay').classList.add('open');}
 function fecharModal(){document.getElementById('modal').classList.remove('open');document.getElementById('overlay').classList.remove('open');editIdx=-1;}
 function salvar(){const o={p:document.getElementById('mP').value,fim:document.getElementById('mFim').value,ini:document.getElementById('mIni').value,nome:document.getElementById('mNome').value,valor:document.getElementById('mValor').value||0};if(editIdx>=0)shows[editIdx]=o;else shows.push(o);saveAll();render();fecharModal();}
