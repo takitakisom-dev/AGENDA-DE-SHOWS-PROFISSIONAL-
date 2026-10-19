@@ -30,21 +30,21 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 .folha-paper h2{font-size:12px;line-height:32px;height:32px;margin:0;white-space:nowrap;overflow:hidden;font-weight:700}
 .folha-item{font-size:11.5px;line-height:32px;height:32px;margin:0;padding:0;transform:translateY(2px);white-space:nowrap;overflow:hidden;color:#222}
 .add-btn{position:fixed;right:14px;bottom:80px;width:56px;height:56px;border-radius:50%;border:0;background:#222;color:#fff;font-size:30px;z-index:25;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,.3)}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:100;padding:14px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:500;padding:14px}
 .modal.open{display:flex}
 .modal-box{background:#fff;border-radius:14px;padding:14px;width:100%;max-width:380px;max-height:85vh;overflow:auto}
 .modal-box input,.modal-box select{width:100%;padding:11px;border:1px solid #ccc;border-radius:8px;margin:5px 0;font-size:14px;background:#fff}
 .modal-box label{font-size:11px;font-weight:800;color:#666;margin-top:6px;display:block}
 .modal-box button{width:100%;padding:12px;border:0;border-radius:10px;font-weight:800;margin-top:6px;font-size:14px;cursor:pointer}
 .save{background:#222;color:#fff}.cancel{background:#eee}
-.side{position:fixed;left:-100%;top:0;bottom:0;width:80%;max-width:300px;background:#fff;z-index:200;transition:.25s;padding:14px;overflow:auto;box-shadow:4px 0 20px rgba(0,0,0,.2)}
+.side{position:fixed;left:-100%;top:0;bottom:0;width:80%;max-width:300px;background:#fff;z-index:600;transition:.25s;padding:14px;overflow:auto;box-shadow:4px 0 20px rgba(0,0,0,.2)}
 .side.open{left:0}
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;z-index:150}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;z-index:400}
 .overlay.open{display:block}
 .menu-item{padding:12px 0;border-bottom:1px solid #f2f2f2;font-weight:600;font-size:13px;cursor:pointer}
 .item-lista{display:flex;justify-content:space-between;align-items:center;background:#f8f8f8;padding:10px;border-radius:10px;margin:6px 0;border:1px solid #eee}
-.mini-btn{border:0;padding:6px 10px;border-radius:6px;font-size:11px;font-weight:800;cursor:pointer;margin-left:4px}
-.mini-edit{background:#e3f0ff;color:#2a7fff}.mini-del{background:#ffe3e3;color:#d44}
+.mini-btn{border:0;padding:8px 10px;border-radius:8px;font-size:12px;font-weight:800;cursor:pointer;margin-left:4px}
+.mini-edit{background:#dbeafe;color:#1d4ed8}.mini-del{background:#fecaca;color:#b91c1c}
 </style>
 </head>
 <body>
@@ -67,23 +67,15 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 <div class="menu-item" onclick="closeMenu()">⚙️ CONFIG</div>
 <div class="menu-item" onclick="closeMenu()">🚪 FECHAR MENU</div>
 </div>
-
 <header><div style="display:flex;align-items:center;gap:6px"><span class="menu-btn" onclick="openMenu()">☰</span><h1>🎤 AGENDA DO DIA</h1></div><button class="btn-home" onclick="location.reload()">HOME</button></header>
-
 <div id="listView"><div class="date-card"><div class="title-long" id="titleLong"></div><div style="display:flex;align-items:center;justify-content:space-between"><button class="arrow" onclick="mudaDia(-1)">◀</button><div><input type="date" id="inpDate" onchange="render()"><div style="display:flex;justify-content:center;gap:6px;margin-top:6px"><button class="pill" onclick="hoje()">HOJE</button><button class="pill" onclick="amanha()">AMANHÃ</button></div></div><button class="arrow" onclick="mudaDia(1)">▶</button></div></div><div id="lista"></div></div>
 <div id="folhaView" class="folha-view"><div class="folha-paper"><h2 id="folhaTitulo"></h2><div id="folhaConteudo"></div></div></div>
-
 <button class="add-btn" onclick="abrirModalNovo()">+</button>
 <div class="bottom"><button class="b-zap" onclick="zap()">📱 ZAP</button><button class="b-normal" onclick="modoNormal()">🖨️ NORMAL</button><button class="b-folha" onclick="modoFolha()">📒 FOLHA</button><button class="b-pdf" onclick="window.print()">📄 PDF</button></div>
-
 <div class="modal" id="modal"><div class="modal-box"><h3 id="modalTitle">Novo Show</h3><label>🏠 CASA</label><select id="mP"></select><label>🕓 INICIO</label><input id="mIni" type="time" value="19:00"><label>🕓 FIM</label><input id="mFim" type="time" value="22:00"><label>🎤 MUSICO</label><select id="mNome"></select><label>💰 VALOR</label><input id="mValor" type="number" placeholder="300"><button class="save" onclick="salvar()">SALVAR</button><button class="cancel" onclick="fecharModal()">CANCELAR</button></div></div>
-
-<div class="modal" id="modalCasas"><div class="modal-box"><h3>🏠 CADASTRAR CASAS</h3><label>Nova casa</label><div style="display:flex;gap:6px"><input id="novaCasaInput" placeholder="Ex: P5, BAR CENTRAL" style="flex:1"><button onclick="addCasa()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div style="font-size:11px;color:#666;margin-top:10px">Toque em EDITAR ou EXCLUIR para gerenciar:</div><div id="listaCasas" style="margin-top:8px"></div><button class="cancel" onclick="fecharModalCasas()">FECHAR</button></div></div>
-
-<div class="modal" id="modalMusicos"><div class="modal-box"><h3>🎤 CADASTRAR MUSICOS</h3><label>Novo músico</label><div style="display:flex;gap:6px"><input id="novoMusicoInput" placeholder="Ex: BRUNO" style="flex:1"><button onclick="addMusico()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div style="font-size:11px;color:#666;margin-top:10px">Cada músico tem EDITAR e EXCLUIR, inclusive os novos:</div><div id="listaMusicos" style="margin-top:8px"></div><button class="cancel" onclick="fecharModalMusicos()">FECHAR</button></div></div>
-
+<div class="modal" id="modalCasas"><div class="modal-box"><h3>🏠 CADASTRAR CASAS</h3><label>Nova casa</label><div style="display:flex;gap:6px"><input id="novaCasaInput" placeholder="Ex: P5, BAR CENTRAL" style="flex:1"><button onclick="addCasa()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div style="font-size:11px;color:#666;margin-top:10px">Toque em EDITAR ou EXCLUIR para gerenciar, vale para as antigas e para as novas:</div><div id="listaCasas" style="margin-top:8px"></div><button class="cancel" onclick="fecharModalCasas()">FECHAR</button></div></div>
+<div class="modal" id="modalMusicos"><div class="modal-box"><h3>🎤 CADASTRAR MUSICOS</h3><label>Novo músico</label><div style="display:flex;gap:6px"><input id="novoMusicoInput" placeholder="Ex: BRUNO, RAFA" style="flex:1"><button onclick="addMusico()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div style="font-size:11px;color:#666;margin-top:10px">Cada músico tem EDITAR e EXCLUIR, antigas e novas:</div><div id="listaMusicos" style="margin-top:8px"></div><button class="cancel" onclick="fecharModalMusicos()">FECHAR</button></div></div>
 <div class="modal" id="modalEditar"><div class="modal-box"><h3 id="editarTitulo">✏️ Editar</h3><input id="editarInput"><button class="save" onclick="confirmarEditar()">SALVAR EDIÇÃO</button><button class="cancel" onclick="fecharModalEditar()">CANCELAR</button></div></div>
-
 <script>
 function carregar(chave, padrao){try{const v=localStorage.getItem(chave);if(v){const a=JSON.parse(v);if(Array.isArray(a)&&a.length>0)return a;}}catch(e){}return padrao;}
 let casas=carregar('casas_lista_final',['P1','P2','P3','P4']);
@@ -107,8 +99,8 @@ function abrirGestaoMusicos(){closeMenu();renderListaMusicos();document.getEleme
 function fecharModalMusicos(){document.getElementById('modalMusicos').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
 function renderListaMusicos(){const div=document.getElementById('listaMusicos');div.innerHTML='';musicos.forEach((m,i)=>{const cor=corCantor(m);div.innerHTML+='<div class=item-lista><b style="color:'+cor+'">🎤 '+m+'</b><div><button class="mini-btn mini-edit" onclick="editarItem(\'musico\','+i+')">✏️ EDITAR</button><button class="mini-btn mini-del" onclick="excluirItem(\'musico\','+i+')">🗑️ EXCLUIR</button></div></div>';});}
 function addMusico(){let n=document.getElementById('novoMusicoInput').value.trim().toUpperCase();if(!n)return;if(musicos.includes(n)){alert('Já existe!');return;}musicos.push(n);musicos=limpar(musicos);saveAll();preencherSelects();renderListaMusicos();document.getElementById('novoMusicoInput').value='';}
-function editarItem(tipo,pos){editTipo=tipo;editPos=pos;const nome=tipo==='casa'?casas[pos]:musicos[pos];document.getElementById('editarTitulo').innerText='✏️ Editar '+nome;document.getElementById('editarInput').value=nome;document.getElementById('modalEditar').classList.add('open');}
-function fecharModalEditar(){document.getElementById('modalEditar').classList.remove('open');}
+function editarItem(tipo,pos){editTipo=tipo;editPos=pos;const nome=tipo==='casa'?casas[pos]:musicos[pos];document.getElementById('editarTitulo').innerText='✏️ Editar '+nome;document.getElementById('editarInput').value=nome;document.getElementById('modalEditar').classList.add('open');document.getElementById('overlay').classList.add('open');}
+function fecharModalEditar(){document.getElementById('modalEditar').classList.remove('open');if(!document.getElementById('modalCasas').classList.contains('open') && !document.getElementById('modalMusicos').classList.contains('open'))document.getElementById('overlay').classList.remove('open');}
 function confirmarEditar(){let novo=document.getElementById('editarInput').value.trim().toUpperCase();if(!novo)return;if(editTipo==='casa'){casas[editPos]=novo;casas=limpar(casas);renderListaCasas();}else{musicos[editPos]=novo;musicos=limpar(musicos);renderListaMusicos();}saveAll();preencherSelects();fecharModalEditar();}
 function excluirItem(tipo,pos){const nome=tipo==='casa'?casas[pos]:musicos[pos];if(!confirm('Excluir '+nome+'?'))return;if(tipo==='casa'){casas.splice(pos,1);renderListaCasas();}else{musicos.splice(pos,1);renderListaMusicos();}saveAll();preencherSelects();}
 function render(){const inp=document.getElementById('inpDate');if(!inp.value)inp.value=new Date().toISOString().slice(0,10);const d=new Date(inp.value+'T12:00:00');document.getElementById('titleLong').innerText='Hoje - '+formatLong(d);document.getElementById('folhaTitulo').innerText=formatLong(d)+' - '+d.toLocaleDateString('pt-BR');const lista=document.getElementById('lista');lista.innerHTML='';shows.forEach((s,i)=>{const cor=corCantor(s.nome);const div=document.createElement('div');div.className='show-card';div.innerHTML='<div class=line>🏠 '+s.p+' — 🕓 '+s.ini+' as '+s.fim+'</div><div class=line2>🎤 <b style="color:'+cor+'">'+s.nome+'</b> - R$ '+s.valor+'</div><div><button class=b-edit onclick=editar('+i+')>✏️ EDITAR</button> <button class=b-del onclick=excluir('+i+')>🗑️ EXCLUIR</button></div>';lista.appendChild(div);});document.getElementById('folhaConteudo').innerHTML=shows.map((s,idx)=>{const cor=corCantor(s.nome);return '<p class=folha-item>0'+(idx+1)+'. '+s.p+' '+s.ini+'-'+s.fim+' - <b style="color:'+cor+'">'+s.nome+'</b> - R$ '+s.valor+'</p>';}).join('');}
