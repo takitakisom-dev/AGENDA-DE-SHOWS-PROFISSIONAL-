@@ -21,9 +21,9 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 .line2{font-size:12px;margin:4px 0 6px 0;color:#444}
 .b-edit,.b-del{border:0;padding:5px 10px;border-radius:6px;font-weight:700;font-size:11px;cursor:pointer}
 .b-edit{background:#e3f0ff;color:#2a7fff}.b-del{background:#ffe3e3;color:#d44}
-.bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #ddd;display:flex;gap:4px;padding:6px;justify-content:space-around;z-index:20}
-.bottom button{border:0;padding:8px 10px;border-radius:10px;font-weight:800;font-size:11px;cursor:pointer}
-.b-zap{background:#00e676}.b-normal{background:#7c6cff;color:#fff}.b-folha{background:#ffe066;border:1.5px dashed #000}.b-pdf{background:#00bfa6;color:#fff}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #ddd;display:flex;gap:2px;padding:6px;justify-content:space-around;z-index:20}
+.bottom button{border:0;padding:7px 8px;border-radius:10px;font-weight:800;font-size:10px;cursor:pointer}
+.b-zap{background:#00e676}.b-normal{background:#7c6cff;color:#fff}.b-folha{background:#ffe066;border:1.5px dashed #000}.b-pdf{background:#00bfa6;color:#fff}.b-fin{background:#ff8a65;color:#fff}
 .folha-view{display:none;padding:8px}
 .folha-paper{background:#fff;background-image:repeating-linear-gradient(transparent,transparent 31px,#b5d8ff 31px,#b5d8ff 32px);border:1.5px solid #333;border-radius:6px;padding:0 10px 0 36px;position:relative}
 .folha-paper:before{content:'';position:absolute;left:28px;top:0;bottom:0;width:1.5px;background:#ff8a8a}
@@ -55,13 +55,14 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 <div class="menu-item" onclick="closeMenu();modoNormal()">📋 AGENDA DO DIA</div>
 <div class="menu-item" onclick="closeMenu()">📅 AGENDA DO MES</div>
 <div class="menu-item" onclick="closeMenu()">🗓️ AGENDA DO ANO</div>
-<div class="menu-item" onclick="closeMenu();zap()">✈️ ENVIAR CRONOGRAMA</div>
+<div class="menu-item" onclick="closeMenu();zapMusicos()">✈️ ENVIAR CRONOGRAMA</div>
 <div style="height:8px;border-bottom:1px solid #eee;margin:6px 0"></div>
 <div class="menu-item" onclick="abrirGestaoCasas()">🏠 CADASTRAR CASAS</div>
 <div class="menu-item" onclick="abrirGestaoMusicos()">🎤 CADASTRAR MUSICOS</div>
 <div style="height:8px;border-bottom:1px solid #eee;margin:6px 0"></div>
 <div class="menu-item" onclick="closeMenu()">🍴 VER RESTAURANTES</div>
 <div class="menu-item" onclick="closeMenu()">🎤 VER MUSICOS</div>
+<div class="menu-item" onclick="closeMenu();modoFinanceiro()">💰 FINANCEIRO</div>
 <div class="menu-item" onclick="closeMenu()">📊 RELATORIOS</div>
 <div style="height:8px;border-bottom:1px solid #eee;margin:6px 0"></div>
 <div class="menu-item" onclick="closeMenu()">⚙️ CONFIG</div>
@@ -69,152 +70,52 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 </div>
 <header><div style="display:flex;align-items:center;gap:6px"><span class="menu-btn" onclick="openMenu()">☰</span><h1>🎤 AGENDA DO DIA</h1></div><button class="btn-home" onclick="location.reload()">HOME</button></header>
 <div id="listView"><div class="date-card"><div class="title-long" id="titleLong"></div><div style="display:flex;align-items:center;justify-content:space-between"><button class="arrow" onclick="mudaDia(-1)">◀</button><div><input type="date" id="inpDate" onchange="render()"><div style="display:flex;justify-content:center;gap:6px;margin-top:6px"><button class="pill" onclick="hoje()">HOJE</button><button class="pill" onclick="amanha()">AMANHÃ</button></div></div><button class="arrow" onclick="mudaDia(1)">▶</button></div></div><div id="lista"></div></div>
-<div id="folhaView" class="folha-view"><div class="folha-paper"><h2 id="folhaTitulo"></h2><div id="folhaConteudo"></div></div></div>
+<div id="folhaView" class="folha-view"><div class="folha-paper"><h2 id="folhaTitulo"></h2><div id="folhaConteudo"></div><div id="folhaTotal" style="font-weight:800;font-size:12px;line-height:32px"></div></div></div>
 <button class="add-btn" onclick="abrirModalNovo()">+</button>
-<div class="bottom"><button class="b-zap" onclick="zap()">📱 ZAP</button><button class="b-normal" onclick="modoNormal()">🖨️ NORMAL</button><button class="b-folha" onclick="modoFolha()">📒 FOLHA</button><button class="b-pdf" onclick="window.print()">📄 PDF</button></div>
+<div class="bottom">
+<button class="b-zap" onclick="zapMusicos()">📱 ZAP</button>
+<button class="b-normal" onclick="modoNormal()">🖨️ NORMAL</button>
+<button class="b-folha" onclick="modoFolha()">📒 FOLHA</button>
+<button class="b-fin" onclick="modoFinanceiro()">💰 FIN</button>
+<button class="b-pdf" onclick="window.print()">📄 PDF</button>
+</div>
 <div class="modal" id="modal"><div class="modal-box"><h3 id="modalTitle">Novo Show</h3><label>🏠 CASA</label><select id="mP"></select><label>🕓 INICIO</label><input id="mIni" type="time" value="19:00"><label>🕓 FIM</label><input id="mFim" type="time" value="22:00"><label>🎤 MUSICO</label><select id="mNome" onchange="autoCache()"></select><label>💰 VALOR CACHÊ</label><input id="mValor" type="number" placeholder="300"><button class="save" onclick="salvar()">SALVAR</button><button class="cancel" onclick="fecharModal()">CANCELAR</button></div></div>
 <div class="modal" id="modalCasas"><div class="modal-box"><h3>🏠 CADASTRAR CASAS</h3><label>Nova casa</label><div style="display:flex;gap:6px"><input id="novaCasaInput" placeholder="Ex: P5" style="flex:1"><button onclick="addCasa()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaCasas" style="margin-top:12px"></div><button class="cancel" onclick="fecharModalCasas()">FECHAR</button></div></div>
-<div class="modal" id="modalMusicos"><div class="modal-box"><h3>🎤 CADASTRAR MUSICOS</h3><label>Nome do músico</label><input id="novoMusicoInput" placeholder="Ex: BRUNO"><label>💰 Valor do cachê</label><div style="display:flex;gap:6px"><input id="novoMusicoCache" type="number" placeholder="Ex: 350" style="flex:1"><button onclick="addMusico()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div style="font-size:11px;color:#666;margin-top:10px">Com cachê salvo! Clique em EDITAR para mudar valor:</div><div id="listaMusicos" style="margin-top:8px"></div><button class="cancel" onclick="fecharModalMusicos()">FECHAR</button></div></div>
+<div class="modal" id="modalMusicos"><div class="modal-box"><h3>🎤 CADASTRAR MUSICOS</h3><label>Nome do músico</label><input id="novoMusicoInput" placeholder="Ex: BRUNO"><label>💰 Valor do cachê</label><div style="display:flex;gap:6px"><input id="novoMusicoCache" type="number" placeholder="Ex: 350" style="flex:1"><button onclick="addMusico()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaMusicos" style="margin-top:12px"></div><button class="cancel" onclick="fecharModalMusicos()">FECHAR</button></div></div>
 <div class="modal" id="modalEditar"><div class="modal-box"><h3 id="editarTitulo">✏️ Editar</h3><label id="labelEditar1">Nome</label><input id="editarInput"><div id="divEditarCache"><label>💰 Cachê</label><input id="editarCache" type="number" placeholder="300"></div><button class="save" onclick="confirmarEditar()">SALVAR EDIÇÃO</button><button class="cancel" onclick="fecharModalEditar()">CANCELAR</button></div></div>
 <script>
 function carregar(chave, padrao){try{const v=localStorage.getItem(chave);if(v){const a=JSON.parse(v);if(Array.isArray(a)&&a.length>0)return a;}}catch(e){}return padrao;}
 let casasRaw=carregar('casas_lista_final',['P1','P2','P3','P4']);
-// MUSICOS AGORA É OBJETO COM NOME E CACHE
 let musicosRaw=carregar('musicos_lista_final_v2',null);
 let musicos;
-if(musicosRaw){
- musicos=musicosRaw;
-}else{
- // converte lista antiga de string para objeto
- let antigo=carregar('musicos_lista_final',['DOUGLAS','LUCIANO','ISRAEL','ANDRE TAKI']);
- musicos=antigo.map(n=>{
-  if(typeof n==='string') return {nome:n.toUpperCase(), cache:300};
-  return n;
- });
-}
+if(musicosRaw){musicos=musicosRaw;}else{let antigo=carregar('musicos_lista_final',['DOUGLAS','LUCIANO','ISRAEL','ANDRE TAKI']);musicos=antigo.map(n=>{if(typeof n==='string')return{nome:n.toUpperCase(),cache:300};return n;});}
 let shows=carregar('shows_agenda_final',[{p:'P1',ini:'19:00',fim:'22:00',nome:'DOUGLAS',valor:300},{p:'P2',ini:'19:00',fim:'22:00',nome:'LUCIANO',valor:300},{p:'P3',ini:'19:30',fim:'22:30',nome:'ISRAEL',valor:300},{p:'P4',ini:'20:30',fim:'23:30',nome:'ANDRE TAKI',valor:300}]);
 function limparCasas(l){return [...new Set(l.map(x=>x.toString().trim().toUpperCase()).filter(x=>x))];}
-casas=limparCasas(casasRaw);
-function limparMusicos(l){
- const map={};
- l.forEach(m=>{
-  let nome, cache;
-  if(typeof m==='string'){nome=m.toUpperCase(); cache=300;}
-  else {nome=(m.nome||'').toUpperCase(); cache=parseInt(m.cache)||300;}
-  if(nome) map[nome]=cache;
- });
- return Object.keys(map).map(k=>({nome:k, cache:map[k]}));
-}
+let casas=limparCasas(casasRaw);
+function limparMusicos(l){const map={};l.forEach(m=>{let nome,cache;if(typeof m==='string'){nome=m.toUpperCase();cache=300;}else{nome=(m.nome||'').toUpperCase();cache=parseInt(m.cache)||300;}if(nome)map[nome]=cache;});return Object.keys(map).map(k=>({nome:k,cache:map[k]}));}
 musicos=limparMusicos(musicos);
 let editIdx=-1,editTipo=null,editPos=-1;
+let modoFinanceiroAtivo=false;
 function corCantor(n){n=(n||'').toUpperCase();if(n.includes('DOUGLAS'))return '#1565ff';if(n.includes('LUCIANO'))return '#7c4dff';if(n.includes('ISRAEL'))return '#00a651';if(n.includes('TAKI')||n.includes('ANDRE'))return '#ff6f00';return '#d32f2f';}
 function openMenu(){document.getElementById('side').classList.add('open');document.getElementById('overlay').classList.add('open')}
 function closeMenu(){document.getElementById('side').classList.remove('open');if(!document.querySelector('.modal.open'))document.getElementById('overlay').classList.remove('open');}
 function formatLong(d){return d.toLocaleDateString('pt-BR',{day:'numeric',month:'long',year:'numeric'});}
 function saveAll(){localStorage.setItem('casas_lista_final',JSON.stringify(casas));localStorage.setItem('musicos_lista_final_v2',JSON.stringify(musicos));localStorage.setItem('shows_agenda_final',JSON.stringify(shows));}
-function preencherSelects(){
- const selP=document.getElementById('mP');selP.innerHTML='';casas.forEach(c=>{let o=document.createElement('option');o.value=c;o.textContent='🏠 '+c;selP.appendChild(o);});
- const selM=document.getElementById('mNome');selM.innerHTML='';musicos.forEach(m=>{let o=document.createElement('option');o.value=m.nome;o.textContent='🎤 '+m.nome+' - R$ '+m.cache; selM.appendChild(o);});
-}
+function preencherSelects(){const selP=document.getElementById('mP');selP.innerHTML='';casas.forEach(c=>{let o=document.createElement('option');o.value=c;o.textContent='🏠 '+c;selP.appendChild(o);});const selM=document.getElementById('mNome');selM.innerHTML='';musicos.forEach(m=>{let o=document.createElement('option');o.value=m.nome;o.textContent='🎤 '+m.nome+' - R$ '+m.cache;selM.appendChild(o);});}
 function fecharTodosModais(){document.querySelectorAll('.modal').forEach(m=>m.classList.remove('open'));document.getElementById('overlay').classList.remove('open');}
 function abrirGestaoCasas(){closeMenu();renderListaCasas();document.getElementById('modalCasas').classList.add('open');document.getElementById('overlay').classList.add('open');}
 function fecharModalCasas(){document.getElementById('modalCasas').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
-function renderListaCasas(){
- const div=document.getElementById('listaCasas'); div.innerHTML='';
- casas.forEach((c,i)=>{
-  const row=document.createElement('div'); row.className='item-lista';
-  const b=document.createElement('b'); b.textContent='🏠 '+c;
-  const btns=document.createElement('div');
-  const be=document.createElement('button'); be.className='mini-btn mini-edit'; be.textContent='✏️ EDITAR';
-  be.onclick=function(){editarItem('casa',i);};
-  const bd=document.createElement('button'); bd.className='mini-btn mini-del'; bd.textContent='🗑️ EXCLUIR';
-  bd.onclick=function(){excluirItem('casa',i);};
-  btns.appendChild(be); btns.appendChild(bd);
-  row.appendChild(b); row.appendChild(btns);
-  div.appendChild(row);
- });
-}
+function renderListaCasas(){const div=document.getElementById('listaCasas');div.innerHTML='';casas.forEach((c,i)=>{const row=document.createElement('div');row.className='item-lista';const b=document.createElement('b');b.textContent='🏠 '+c;const btns=document.createElement('div');const be=document.createElement('button');be.className='mini-btn mini-edit';be.textContent='✏️ EDITAR';be.onclick=function(){editarItem('casa',i);};const bd=document.createElement('button');bd.className='mini-btn mini-del';bd.textContent='🗑️ EXCLUIR';bd.onclick=function(){excluirItem('casa',i);};btns.appendChild(be);btns.appendChild(bd);row.appendChild(b);row.appendChild(btns);div.appendChild(row);});}
 function addCasa(){let n=document.getElementById('novaCasaInput').value.trim().toUpperCase();if(!n)return;if(casas.includes(n)){alert('Já existe!');return;}casas.push(n);casas=limparCasas(casas);saveAll();preencherSelects();renderListaCasas();document.getElementById('novaCasaInput').value='';}
 function abrirGestaoMusicos(){closeMenu();renderListaMusicos();document.getElementById('modalMusicos').classList.add('open');document.getElementById('overlay').classList.add('open');}
 function fecharModalMusicos(){document.getElementById('modalMusicos').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
-function renderListaMusicos(){
- const div=document.getElementById('listaMusicos'); div.innerHTML='';
- musicos.forEach((m,i)=>{
-  const cor=corCantor(m.nome);
-  const row=document.createElement('div'); row.className='item-lista';
-  const left=document.createElement('div');
-  const b=document.createElement('b'); b.textContent='🎤 '+m.nome; b.style.color=cor;
-  const cache=document.createElement('div'); cache.textContent='💰 R$ '+m.cache; cache.style.fontSize='11px'; cache.style.fontWeight='800'; cache.style.color='#333';
-  left.appendChild(b); left.appendChild(cache);
-  const btns=document.createElement('div');
-  const be=document.createElement('button'); be.className='mini-btn mini-edit'; be.textContent='✏️ EDITAR';
-  be.onclick=function(){editarItem('musico',i);};
-  const bd=document.createElement('button'); bd.className='mini-btn mini-del'; bd.textContent='🗑️ EXCLUIR';
-  bd.onclick=function(){excluirItem('musico',i);};
-  btns.appendChild(be); btns.appendChild(bd);
-  row.appendChild(left); row.appendChild(btns);
-  div.appendChild(row);
- });
-}
-function addMusico(){
- let n=document.getElementById('novoMusicoInput').value.trim().toUpperCase();
- let c=parseInt(document.getElementById('novoMusicoCache').value)||300;
- if(!n)return;
- if(musicos.find(x=>x.nome===n)){alert('Já existe!');return;}
- musicos.push({nome:n, cache:c});
- musicos=limparMusicos(musicos);
- saveAll();preencherSelects();renderListaMusicos();
- document.getElementById('novoMusicoInput').value='';
- document.getElementById('novoMusicoCache').value='';
-}
-function editarItem(tipo,pos){
- editTipo=tipo;editPos=pos;
- if(tipo==='casa'){
-  const nome=casas[pos];
-  document.getElementById('editarTitulo').innerText='✏️ Editar '+nome;
-  document.getElementById('labelEditar1').innerText='Nome da casa';
-  document.getElementById('editarInput').value=nome;
-  document.getElementById('divEditarCache').style.display='none';
- }else{
-  const m=musicos[pos];
-  document.getElementById('editarTitulo').innerText='✏️ Editar '+m.nome;
-  document.getElementById('labelEditar1').innerText='Nome do músico';
-  document.getElementById('editarInput').value=m.nome;
-  document.getElementById('editarCache').value=m.cache;
-  document.getElementById('divEditarCache').style.display='block';
- }
- document.getElementById('modalEditar').classList.add('open');
- document.getElementById('overlay').classList.add('open');
-}
-function fecharModalEditar(){
- document.getElementById('modalEditar').classList.remove('open');
- if(!document.getElementById('modalCasas').classList.contains('open') && !document.getElementById('modalMusicos').classList.contains('open'))document.getElementById('overlay').classList.remove('open');
- else document.getElementById('overlay').classList.add('open');
-}
-function confirmarEditar(){
- let novo=document.getElementById('editarInput').value.trim().toUpperCase();
- if(!novo)return;
- if(editTipo==='casa'){casas[editPos]=novo;casas=limparCasas(casas);renderListaCasas();}
- else{
-  let novoCache=parseInt(document.getElementById('editarCache').value)||300;
-  musicos[editPos]={nome:novo, cache:novoCache};
-  musicos=limparMusicos(musicos);
-  renderListaMusicos();
- }
- saveAll();preencherSelects();fecharModalEditar();
-}
-function excluirItem(tipo,pos){
- const nome=tipo==='casa'?casas[pos]:musicos[pos].nome;
- if(!confirm('Excluir '+nome+'?'))return;
- if(tipo==='casa'){casas.splice(pos,1);renderListaCasas();}
- else{musicos.splice(pos,1);renderListaMusicos();}
- saveAll();preencherSelects();
-}
-function autoCache(){
- const nome=document.getElementById('mNome').value;
- const m=musicos.find(x=>x.nome===nome);
- if(m) document.getElementById('mValor').value=m.cache;
-}
+function renderListaMusicos(){const div=document.getElementById('listaMusicos');div.innerHTML='';musicos.forEach((m,i)=>{const cor=corCantor(m.nome);const row=document.createElement('div');row.className='item-lista';const left=document.createElement('div');const b=document.createElement('b');b.textContent='🎤 '+m.nome;b.style.color=cor;const cache=document.createElement('div');cache.textContent='💰 R$ '+m.cache;cache.style.fontSize='11px';cache.style.fontWeight='800';left.appendChild(b);left.appendChild(cache);const btns=document.createElement('div');const be=document.createElement('button');be.className='mini-btn mini-edit';be.textContent='✏️ EDITAR';be.onclick=function(){editarItem('musico',i);};const bd=document.createElement('button');bd.className='mini-btn mini-del';bd.textContent='🗑️ EXCLUIR';bd.onclick=function(){excluirItem('musico',i);};btns.appendChild(be);btns.appendChild(bd);row.appendChild(left);row.appendChild(btns);div.appendChild(row);});}
+function addMusico(){let n=document.getElementById('novoMusicoInput').value.trim().toUpperCase();let c=parseInt(document.getElementById('novoMusicoCache').value)||300;if(!n)return;if(musicos.find(x=>x.nome===n)){alert('Já existe!');return;}musicos.push({nome:n,cache:c});musicos=limparMusicos(musicos);saveAll();preencherSelects();renderListaMusicos();document.getElementById('novoMusicoInput').value='';document.getElementById('novoMusicoCache').value='';}
+function editarItem(tipo,pos){editTipo=tipo;editPos=pos;if(tipo==='casa'){const nome=casas[pos];document.getElementById('editarTitulo').innerText='✏️ Editar '+nome;document.getElementById('labelEditar1').innerText='Nome da casa';document.getElementById('editarInput').value=nome;document.getElementById('divEditarCache').style.display='none';}else{const m=musicos[pos];document.getElementById('editarTitulo').innerText='✏️ Editar '+m.nome;document.getElementById('labelEditar1').innerText='Nome do músico';document.getElementById('editarInput').value=m.nome;document.getElementById('editarCache').value=m.cache;document.getElementById('divEditarCache').style.display='block';}document.getElementById('modalEditar').classList.add('open');document.getElementById('overlay').classList.add('open');}
+function fecharModalEditar(){document.getElementById('modalEditar').classList.remove('open');if(!document.getElementById('modalCasas').classList.contains('open') && !document.getElementById('modalMusicos').classList.contains('open'))document.getElementById('overlay').classList.remove('open');else document.getElementById('overlay').classList.add('open');}
+function confirmarEditar(){let novo=document.getElementById('editarInput').value.trim().toUpperCase();if(!novo)return;if(editTipo==='casa'){casas[editPos]=novo;casas=limparCasas(casas);renderListaCasas();}else{let novoCache=parseInt(document.getElementById('editarCache').value)||300;musicos[editPos]={nome:novo,cache:novoCache};musicos=limparMusicos(musicos);renderListaMusicos();}saveAll();preencherSelects();fecharModalEditar();}
+function excluirItem(tipo,pos){const nome=tipo==='casa'?casas[pos]:musicos[pos].nome;if(!confirm('Excluir '+nome+'?'))return;if(tipo==='casa'){casas.splice(pos,1);renderListaCasas();}else{musicos.splice(pos,1);renderListaMusicos();}saveAll();preencherSelects();}
+function autoCache(){const nome=document.getElementById('mNome').value;const m=musicos.find(x=>x.nome===nome);if(m)document.getElementById('mValor').value=m.cache;}
 function render(){
  const inp=document.getElementById('inpDate');if(!inp.value)inp.value=new Date().toISOString().slice(0,10);
  const d=new Date(inp.value+'T12:00:00');
@@ -227,14 +128,44 @@ function render(){
   div.innerHTML='<div class=line>🏠 '+s.p+' — 🕓 '+s.ini+' as '+s.fim+'</div><div class=line2>🎤 <b style="color:'+cor+'">'+s.nome+'</b> - R$ '+s.valor+'</div><div><button class=b-edit onclick=editar('+i+')>✏️ EDITAR</button> <button class=b-del onclick=excluir('+i+')>🗑️ EXCLUIR</button></div>';
   lista.appendChild(div);
  });
- document.getElementById('folhaConteudo').innerHTML=shows.map((s,idx)=>{const cor=corCantor(s.nome);return '<p class=folha-item>0'+(idx+1)+'. '+s.p+' '+s.ini+'-'+s.fim+' - <b style="color:'+cor+'">'+s.nome+'</b> - R$ '+s.valor+'</p>';}).join('');
+ renderFolha();
+}
+function renderFolha(){
+ const total=shows.reduce((sum,s)=>sum+(parseInt(s.valor)||0),0);
+ if(modoFinanceiroAtivo){
+  document.getElementById('folhaConteudo').innerHTML=shows.map((s,idx)=>{
+   const cor=corCantor(s.nome);
+   return '<p class=folha-item>0'+(idx+1)+'. '+s.p+' '+s.ini+'-'+s.fim+' - <b style="color:'+cor+'">'+s.nome+'</b> - R$ '+s.valor+'</p>';
+  }).join('') + '<p class=folha-item style="font-weight:800;margin-top:8px;border-top:1px solid #000">TOTAL DO DIA: R$ '+total+'</p>';
+  document.getElementById('folhaTotal').innerText='';
+ }else{
+  // MODO MUSICOS - SEM VALOR
+  document.getElementById('folhaConteudo').innerHTML=shows.map((s,idx)=>{
+   const cor=corCantor(s.nome);
+   return '<p class=folha-item>0'+(idx+1)+'. '+s.p+' '+s.ini+'-'+s.fim+' - <b style="color:'+cor+'">'+s.nome+'</b></p>';
+  }).join('');
+  document.getElementById('folhaTotal').innerText='';
+ }
 }
 function mudaDia(n){const inp=document.getElementById('inpDate');let d=new Date(inp.value+'T12:00:00');d.setDate(d.getDate()+n);inp.value=d.toISOString().slice(0,10);render();}
 function hoje(){document.getElementById('inpDate').value=new Date().toISOString().slice(0,10);render();}
 function amanha(){let d=new Date();d.setDate(d.getDate()+1);document.getElementById('inpDate').value=d.toISOString().slice(0,10);render();}
-function modoFolha(){document.getElementById('listView').style.display='none';document.getElementById('folhaView').style.display='block';closeMenu()}
+function modoFolha(){modoFinanceiroAtivo=false;document.getElementById('listView').style.display='none';document.getElementById('folhaView').style.display='block';renderFolha();closeMenu()}
+function modoFinanceiro(){modoFinanceiroAtivo=true;document.getElementById('listView').style.display='none';document.getElementById('folhaView').style.display='block';renderFolha();closeMenu()}
 function modoNormal(){document.getElementById('listView').style.display='block';document.getElementById('folhaView').style.display='none';}
-function zap(){const d=document.getElementById('titleLong').innerText;const txt=shows.map(s=>s.p+' '+s.ini+'-'+s.fim+' - '+s.nome+' - R$ '+s.valor).join('\n');window.open('https://wa.me/?text='+encodeURIComponent('🎤 '+d+'\n\n'+txt),'_blank');}
+// ZAP PARA MUSICOS - SEM VALOR
+function zapMusicos(){
+ const d=document.getElementById('titleLong').innerText;
+ const txt=shows.map(s=>s.p+' '+s.ini+'-'+s.fim+' - '+s.nome).join('\n');
+ window.open('https://wa.me/?text='+encodeURIComponent('🎤 '+d+'\n\n'+txt),'_blank');
+}
+// ZAP FINANCEIRO - COM VALOR (só se precisar)
+function zapFinanceiro(){
+ const d=document.getElementById('titleLong').innerText;
+ const txt=shows.map(s=>s.p+' '+s.ini+'-'+s.fim+' - '+s.nome+' - R$ '+s.valor).join('\n');
+ const total=shows.reduce((sum,s)=>sum+(parseInt(s.valor)||0),0);
+ window.open('https://wa.me/?text='+encodeURIComponent('💰 FINANCEIRO - '+d+'\n\n'+txt+'\n\nTOTAL: R$ '+total),'_blank');
+}
 function abrirModalNovo(){preencherSelects();editIdx=-1;document.getElementById('modalTitle').innerText='Novo Show';document.getElementById('mIni').value='19:00';document.getElementById('mFim').value='22:00';document.getElementById('mValor').value='';document.getElementById('modal').classList.add('open');document.getElementById('overlay').classList.add('open');}
 function fecharModal(){document.getElementById('modal').classList.remove('open');document.getElementById('overlay').classList.remove('open');editIdx=-1;}
 function salvar(){const o={p:document.getElementById('mP').value,fim:document.getElementById('mFim').value,ini:document.getElementById('mIni').value,nome:document.getElementById('mNome').value,valor:document.getElementById('mValor').value||0};if(editIdx>=0)shows[editIdx]=o;else shows.push(o);saveAll();render();fecharModal();}
