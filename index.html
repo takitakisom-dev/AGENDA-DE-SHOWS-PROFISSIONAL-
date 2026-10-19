@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agenda Musical Profissional</title>
+<title>Agenda do Dia</title>
 <meta name="theme-color" content="#222222">
 <link id="manifestLink" rel="manifest" href="">
 <style>
 *{box-sizing:border-box;font-family:system-ui,Arial,sans-serif}
 body{margin:0;background:#f0f0f0;padding-bottom:90px}
 header{background:#1a1a2e;display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:2px solid #7c6cff;position:sticky;top:0;z-index:10}
-header h1{margin:0;font-size:13px;font-weight:800;color:#fff;display:flex;flex-direction:column}
-header h1 small{font-size:10px;color:#ffe066;font-weight:600}
+header h1{margin:0;font-size:12px;font-weight:800;color:#fff;display:flex;flex-direction:column;line-height:1.1}
+header h1 small{font-size:9px;color:#ffe066;font-weight:700;margin-top:2px}
 .btn-home{background:#7c6cff;color:#fff;border:0;padding:6px 12px;border-radius:20px;font-size:11px;font-weight:700}
 .menu-btn{font-size:22px;cursor:pointer;padding:4px 8px;color:#fff}
 .date-card{background:#fff;margin:10px;border-radius:14px;padding:10px;box-shadow:0 1px 4px rgba(0,0,0,.08);text-align:center}
@@ -30,7 +30,7 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 .folha-view{display:none;padding:8px}
 .folha-paper{background:#fff;background-image:repeating-linear-gradient(transparent,transparent 31px,#b5d8ff 31px,#b5d8ff 32px);border:1.5px solid #333;border-radius:6px;padding:0 10px 0 36px;position:relative}
 .folha-paper:before{content:'';position:absolute;left:28px;top:0;bottom:0;width:1.5px;background:#ff8a8a}
-.folha-paper h2{font-size:12px;line-height:32px;height:32px;margin:0;white-space:nowrap;overflow:hidden;font-weight:700}
+.folha-paper h2{font-size:11px;line-height:32px;height:32px;margin:0;white-space:nowrap;overflow:hidden;font-weight:700;text-transform:uppercase}
 .folha-item{font-size:12px;line-height:32px;height:32px;margin:0;padding:0;transform:translateY(2px);white-space:nowrap;overflow:hidden;color:#222}
 .add-btn{position:fixed;right:14px;bottom:80px;width:56px;height:56px;border-radius:50%;border:0;background:#7c6cff;color:#fff;font-size:30px;z-index:25;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,.3)}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:500;padding:14px}
@@ -54,15 +54,13 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 .fin-btn{border:0;padding:8px 10px;border-radius:20px;font-weight:800;font-size:11px;cursor:pointer;margin:2px}
 .fin-btn.active{background:#222;color:#fff}.fin-btn.inactive{background:#eee;color:#666}
 .folha-mini{border:0;padding:6px 12px;border-radius:20px;font-weight:800;font-size:11px;cursor:pointer;margin:2px}
-.install-banner{display:none;background:#1a1a2e;color:#fff;padding:10px 12px;border-radius:12px;margin:10px;display:flex;justify-content:space-between;align-items:center;border:1px solid #7c6cff}
-.install-banner.show{display:flex}
-.emp-logo{width:36px;height:36px;border-radius:8px;background:#7c6cff;display:grid;place-items:center;font-size:18px;color:#fff;font-weight:800}
+.emp-logo{width:32px;height:32px;border-radius:8px;background:#7c6cff;display:grid;place-items:center;font-size:16px;color:#fff;font-weight:800}
 </style>
 </head>
 <body>
 <div class="overlay" id="overlay" onclick="fecharTodosModais()"></div>
 <div class="side" id="side">
-<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><div class="emp-logo" id="sideLogo">🎤</div><div><div style="font-weight:800;font-size:14px" id="sideEmpresaNome">Minha Empresa</div><div style="font-size:10px;color:#666">Agenda Musical Pro</div></div></div>
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><div class="emp-logo" id="sideLogo">T</div><div><div style="font-weight:800;font-size:14px" id="sideEmpresaNome">TAKI SISTEMAS</div><div style="font-size:10px;color:#666">Agenda Musical Pro</div></div></div>
 <div class="menu-item" onclick="abrirCadastroEmpresa()" style="background:#f0f0ff;border-radius:8px;padding:10px;margin-bottom:6px;border:1px dashed #7c6cff">🏢 CADASTRO DA EMPRESA</div>
 <div class="menu-item" onclick="closeMenu();modoNormal()">🏠 INICIO</div>
 <div class="menu-item" onclick="closeMenu();modoNormal()">📋 AGENDA DO DIA</div>
@@ -89,16 +87,13 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 <header>
 <div style="display:flex;align-items:center;gap:8px">
 <span class="menu-btn" onclick="openMenu()">☰</span>
-<div class="emp-logo" id="headerLogo">🎤</div>
-<h1 id="headerTitulo">AGENDA DO DIA<small id="headerEmpresa">Minha Empresa</small></h1>
+<div class="emp-logo" id="headerLogo">T</div>
+<h1 id="headerTitulo">AGENDA DO DIA<small id="headerEmpresa">TAKI DESENVOLVIMENTO DE SISTEMAS</small></h1>
 </div>
 <button class="btn-home" onclick="location.reload()">HOME</button>
 </header>
 
-<div class="install-banner" id="installBanner">
-<div><b>📲 Instalar App?</b><br><span style="font-size:11px">Instala direto na tela inicial!</span></div>
-<button onclick="instalarApp()" style="background:#00e676;color:#000;border:0;padding:8px 14px;border-radius:20px;font-weight:800">INSTALAR</button>
-</div>
+<!-- SEM BANNER DE INSTALAR NA PÁGINA, SÓ NO MENU COMO VOCÊ PEDIU -->
 
 <div id="listView"><div class="date-card"><div class="title-long" id="titleLong"></div><div style="display:flex;align-items:center;justify-content:space-between"><button class="arrow" onclick="mudaDia(-1)">◀</button><div><input type="date" id="inpDate" onchange="trocarData()"><div style="display:flex;justify-content:center;gap:6px;margin-top:6px"><button class="pill" onclick="hoje()">HOJE</button><button class="pill" onclick="amanha()">AMANHÃ</button></div></div><button class="arrow" onclick="mudaDia(1)">▶</button></div></div><div id="lista"></div></div>
 <div id="folhaView" class="folha-view"><div class="folha-paper"><h2 id="folhaTitulo"></h2><div id="folhaConteudo"></div></div></div>
@@ -111,33 +106,25 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 <button class="b-pdf" onclick="window.print()">📄 PDF</button>
 </div>
 
-<!-- CADASTRO EMPRESA -->
 <div class="modal" id="modalEmpresa"><div class="modal-box">
 <h3>🏢 CADASTRO DA EMPRESA</h3>
-<p style="font-size:11px;color:#666">Nome que aparecerá para seu cliente em toda a agenda</p>
-<label>🏢 Nome do Estabelecimento *</label>
-<input id="empNome" placeholder="Ex: Restaurante Jobs, Bar do Zé, P5 Music">
-<label>👤 Nome do Responsável</label>
-<input id="empResp" placeholder="Ex: João da Silva">
-<label>📱 WhatsApp / Telefone</label>
-<input id="empFone" placeholder="Ex: (12) 99999-9999">
-<label>📧 Email (opcional)</label>
-<input id="empEmail" placeholder="Ex: contato@jobs.com">
-<label>🎨 Cor da Marca (opcional)</label>
+<p style="font-size:11px;color:#666">Nome que aparecerá no topo da agenda e na folha de caderno</p>
+<label>🏢 Nome do Estabelecimento / Empresa *</label>
+<input id="empNome" placeholder="Ex: TAKI DESENVOLVIMENTO DE SISTEMAS">
+<label>👤 Responsável</label>
+<input id="empResp" placeholder="Ex: André Taki">
+<label>📱 WhatsApp</label>
+<input id="empFone" placeholder="(12) 99999-9999">
+<label>📧 Email</label>
+<input id="empEmail" placeholder="contato@empresa.com">
+<label>🎨 Cor da Marca</label>
 <input id="empCor" type="color" value="#7c6cff" style="height:44px;padding:4px">
-<div style="margin-top:10px;padding:10px;background:#f8f8ff;border-radius:10px;border:1px solid #ddd">
-<div style="font-size:11px;font-weight:800">PRÉVIA:</div>
-<div style="display:flex;align-items:center;gap:8px;margin-top:6px">
-<div class="emp-logo" id="previewLogo" style="background:#7c6cff">J</div>
-<div><b id="previewNome" style="font-size:13px">Restaurante Jobs</b><br><span style="font-size:10px;color:#666">Agenda Musical Pro</span></div>
-</div>
-</div>
 <button class="save" onclick="salvarEmpresa()">💾 SALVAR EMPRESA</button>
 <button class="cancel" onclick="fecharEmpresa()">FECHAR</button>
 </div></div>
 
-<div class="modal" id="modal"><div class="modal-box"><h3 id="modalTitle">Novo Show</h3><label>🏠 CASA</label><select id="mP"></select><label>🕓 INICIO</label><input id="mIni" type="time" value="19:00"><label>🕓 FIM</label><input id="mFim" type="time" value="22:00"><label>🎤 MUSICO</label><select id="mNome" onchange="autoCache()"></select><label>💰 VALOR CACHÊ</label><input id="mValor" type="number" placeholder="300"><button class="save" onclick="salvar()">SALVAR</button><button class="cancel" onclick="fecharModal()">CANCELAR</button></div></div>
-<div class="modal" id="modalCasas"><div class="modal-box"><h3>🏠 CADASTRAR CASAS</h3><label>Nova casa</label><div style="display:flex;gap:6px"><input id="novaCasaInput" placeholder="Ex: P5" style="flex:1"><button onclick="addCasa()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaCasas" style="margin-top:12px"></div><button class="cancel" onclick="fecharModalCasas()">FECHAR</button></div></div>
+<div class="modal" id="modal"><div class="modal-box"><h3 id="modalTitle">Novo Show</h3><label>🏠 RESTAURANTE / CASA</label><select id="mP"></select><label>🕓 INICIO</label><input id="mIni" type="time" value="19:00"><label>🕓 FIM</label><input id="mFim" type="time" value="22:00"><label>🎤 NOME DO MÚSICO</label><select id="mNome" onchange="autoCache()"></select><label>💰 VALOR CACHÊ</label><input id="mValor" type="number" placeholder="300"><button class="save" onclick="salvar()">SALVAR</button><button class="cancel" onclick="fecharModal()">CANCELAR</button></div></div>
+<div class="modal" id="modalCasas"><div class="modal-box"><h3>🏠 CADASTRAR CASAS</h3><label>Nova casa / Restaurante</label><div style="display:flex;gap:6px"><input id="novaCasaInput" placeholder="Ex: P1" style="flex:1"><button onclick="addCasa()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaCasas" style="margin-top:12px"></div><button class="cancel" onclick="fecharModalCasas()">FECHAR</button></div></div>
 <div class="modal" id="modalMusicos"><div class="modal-box"><h3>🎤 CADASTRAR MUSICOS</h3><label>Nome do músico</label><input id="novoMusicoInput" placeholder="Ex: BRUNO"><label>💰 Valor do cachê</label><div style="display:flex;gap:6px"><input id="novoMusicoCache" type="number" placeholder="Ex: 350" style="flex:1"><button onclick="addMusico()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaMusicos" style="margin-top:12px"></div><button class="cancel" onclick="fecharModalMusicos()">FECHAR</button></div></div>
 <div class="modal" id="modalEditar"><div class="modal-box"><h3 id="editarTitulo">✏️ Editar</h3><label id="labelEditar1">Nome</label><input id="editarInput"><div id="divEditarCache"><label>💰 Cachê</label><input id="editarCache" type="number" placeholder="300"></div><button class="save" onclick="confirmarEditar()">SALVAR EDIÇÃO</button><button class="cancel" onclick="fecharModalEditar()">CANCELAR</button></div></div>
 
@@ -159,7 +146,7 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 <div id="relVistaNormal">
 <div class="fin-total" id="relTotal">TOTAL: R$ 0</div>
 <div class="fin-card"><div style="font-weight:800;font-size:12px;margin-bottom:6px">📊 POR MÚSICO</div><div id="relMusicos"></div></div>
-<div class="fin-card"><div style="font-weight:800;font-size:12px;margin-bottom:6px">📋 DETALHES DOS SHOWS</div><div id="relDetalhes"></div></div>
+<div class="fin-card"><div style="font-weight:800;font-size:12px;margin-bottom:6px">📋 DETALHES</div><div id="relDetalhes"></div></div>
 </div>
 <div id="relVistaFolha" style="display:none">
 <div class="folha-paper" style="margin-top:8px">
@@ -169,13 +156,13 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 </div>
 <div style="display:flex;gap:6px;margin-top:10px">
 <button class="cancel" onclick="fecharRelatorio()" style="flex:1">FECHAR</button>
-<button class="save" onclick="zapFinanceiro()" style="flex:1;background:#00e676;color:#000">📱 ZAP FIN</button>
+<button class="save" onclick="zapFinanceiro()" style="flex:1;background:#00e676;color:#000">📱 ZAP</button>
 <button class="save" onclick="window.print()" style="flex:1;background:#00bfa6;color:#fff">📄 PDF</button>
 </div>
 </div></div>
 
 <script>
-// ===== MANIFEST COM ICONE PROFISSIONAL =====
+// PWA - INSTALAR DIRETO SÓ NO MENU
 const manifestData = {
  name: "Agenda Musical Pro",
  short_name: "Agenda Pro",
@@ -183,28 +170,49 @@ const manifestData = {
  display: "standalone",
  background_color: "#1a1a2e",
  theme_color: "#7c6cff",
- icons: [{src:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%237c6cff'/%3E%3Ctext x='50' y='65' font-size='50' text-anchor='middle' fill='white'%3E🎤%3C/text%3E%3C/svg%3E", sizes:"192x192", type:"image/svg+xml"}]
+ icons: [{src:"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%237c6cff'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-size='50'>🎤</text></svg>", sizes:"192x192", type:"image/svg+xml"}]
 };
 const manifestBlob = new Blob([JSON.stringify(manifestData)], {type:'application/json'});
-const manifestURL = URL.createObjectURL(manifestBlob);
-document.getElementById('manifestLink').href = manifestURL;
+document.getElementById('manifestLink').href = URL.createObjectURL(manifestBlob);
 
 let deferredPrompt = null;
-window.addEventListener('beforeinstallprompt', (e)=>{ e.preventDefault(); deferredPrompt = e; document.getElementById('installBanner').classList.add('show'); });
+window.addEventListener('beforeinstallprompt', (e)=>{
+ e.preventDefault();
+ deferredPrompt = e;
+ // NÃO mostra banner na página, só deixa no menu
+ document.getElementById('menuInstalar').innerHTML = '📲 INSTALAR APP (DISPONÍVEL)';
+ document.getElementById('menuInstalar').style.background = '#e8ffe8';
+});
 function instalarApp(){
- if(deferredPrompt){ deferredPrompt.prompt(); deferredPrompt.userChoice.then(r=>{ document.getElementById('installBanner').classList.remove('show'); deferredPrompt=null; }); }
- else{ alert('No Android Chrome vai aparecer INSTALAR automático. Abra no celular para instalar como APP!'); }
+ if(deferredPrompt){
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then(r=>{
+   if(r.outcome==='accepted'){
+    alert('App instalado! Agora abre pela tela inicial!');
+   }
+   deferredPrompt=null;
+  });
+ }else{
+  alert('Para instalar:\n\nAndroid Chrome: já está disponível no menu. Se não aparecer o botão, seu navegador já instalou ou você precisa abrir no Chrome do celular.\n\nO app vai ficar na tela inicial como um app de verdade!');
+ }
 }
 function compartilharApp(){
  const url = location.href;
- if(navigator.share){ navigator.share({title: getEmpresaNome()+' - Agenda Musical', text:'Agenda de shows do '+getEmpresaNome(), url:url}).catch(()=>{}); }
- else{ prompt('Copia o link:', url); }
+ if(navigator.share){
+  navigator.share({title:empresaNome+' - Agenda', text:'Veja minha agenda musical!', url:url}).catch(()=>{});
+ }else{
+  navigator.clipboard.writeText(url).then(()=>{alert('Link copiado! '+url);}).catch(()=>{prompt('Copia o link:', url);});
+ }
 }
 function exportarBackup(){
- const dados = { casas, musicos, agendaCompleta, empresa: carregar('empresa_dados',{}), data: new Date().toISOString() };
+ const dados = {casas: casas, musicos: musicos, agendaCompleta: agendaCompleta, empresa: {nome:empresaNome, resp:empresaResp, fone:empresaFone, email:empresaEmail, cor:empresaCor}, data: new Date().toISOString()};
  const blob = new Blob([JSON.stringify(dados, null, 2)], {type:'application/json'});
  const url = URL.createObjectURL(blob);
- const a = document.createElement('a'); a.href=url; a.download='BKP-'+getEmpresaNome().replace(/\s+/g,'_')+'-'+new Date().toISOString().slice(0,10)+'.json'; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url); closeMenu();
+ const a = document.createElement('a');
+ a.href=url;
+ a.download='BKP-'+empresaNome.replace(/\s+/g,'-')+'-'+new Date().toISOString().slice(0,10)+'.json';
+ document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+ closeMenu(); alert('💾 Backup exportado!');
 }
 function importarBackup(input){
  const file = input.files[0]; if(!file) return;
@@ -215,83 +223,62 @@ function importarBackup(input){
    if(dados.casas) casas = dados.casas;
    if(dados.musicos) musicos = dados.musicos;
    if(dados.agendaCompleta) agendaCompleta = dados.agendaCompleta;
-   if(dados.empresa) localStorage.setItem('empresa_dados', JSON.stringify(dados.empresa));
+   if(dados.empresa){localStorage.setItem('empresa_nome', dados.empresa.nome||''); localStorage.setItem('empresa_resp', dados.empresa.resp||''); localStorage.setItem('empresa_fone', dados.empresa.fone||''); localStorage.setItem('empresa_email', dados.empresa.email||''); localStorage.setItem('empresa_cor', dados.empresa.cor||'#7c6cff');}
    saveAll(); localStorage.setItem('agenda_completa_v3', JSON.stringify(agendaCompleta));
-   alert('Backup importado!'); location.reload();
-  }catch(err){ alert('Arquivo inválido'); }
- };
- reader.readAsText(file); input.value='';
+   alert('📥 Backup importado!'); location.reload();
+  }catch(err){alert('Erro: arquivo inválido');}
+ }; reader.readAsText(file); input.value='';
 }
 
-// ===== EMPRESA =====
+// DADOS
 function carregar(chave, padrao){try{const v=localStorage.getItem(chave);if(v){const a=JSON.parse(v);if(Array.isArray(a)&&a.length>0)return a; if(typeof a==='object' && Object.keys(a).length>0) return a;}}catch(e){}return padrao;}
-function getEmpresaNome(){ const emp=carregar('empresa_dados',{nome:''}); return emp.nome || 'Minha Empresa'; }
-function getEmpresaDados(){ return carregar('empresa_dados',{nome:'Minha Empresa', resp:'', fone:'', email:'', cor:'#7c6cff'}); }
-function atualizarEmpresaUI(){
- const emp=getEmpresaDados();
- document.getElementById('headerEmpresa').innerText=emp.nome || 'Minha Empresa';
- document.getElementById('sideEmpresaNome').innerText=emp.nome || 'Minha Empresa';
- document.getElementById('headerLogo').innerText=(emp.nome||'M').charAt(0).toUpperCase();
- document.getElementById('headerLogo').style.background=emp.cor || '#7c6cff';
- document.getElementById('sideLogo').innerText=(emp.nome||'M').charAt(0).toUpperCase();
- document.getElementById('sideLogo').style.background=emp.cor || '#7c6cff';
- document.getElementById('relEmpresaNome').innerText='🏢 '+ (emp.nome || 'Minha Empresa');
- document.title=(emp.nome || 'Agenda')+' - Agenda Musical';
-}
-function abrirCadastroEmpresa(){
- closeMenu();
- const emp=getEmpresaDados();
- document.getElementById('empNome').value=emp.nome||'';
- document.getElementById('empResp').value=emp.resp||'';
- document.getElementById('empFone').value=emp.fone||'';
- document.getElementById('empEmail').value=emp.email||'';
- document.getElementById('empCor').value=emp.cor||'#7c6cff';
- atualizarPreview();
- document.getElementById('modalEmpresa').classList.add('open');
- document.getElementById('overlay').classList.add('open');
-}
-function fecharEmpresa(){ document.getElementById('modalEmpresa').classList.remove('open'); document.getElementById('overlay').classList.remove('open'); }
-function atualizarPreview(){
- const nome=document.getElementById('empNome').value||'Restaurante Jobs';
- const cor=document.getElementById('empCor').value||'#7c6cff';
- document.getElementById('previewNome').innerText=nome;
- document.getElementById('previewLogo').innerText=nome.charAt(0).toUpperCase();
- document.getElementById('previewLogo').style.background=cor;
-}
-document.getElementById('empNome')?.addEventListener('input', atualizarPreview);
-document.getElementById('empCor')?.addEventListener('input', atualizarPreview);
-function salvarEmpresa(){
- const dados={
-  nome: document.getElementById('empNome').value.trim() || 'Minha Empresa',
-  resp: document.getElementById('empResp').value.trim(),
-  fone: document.getElementById('empFone').value.trim(),
-  email: document.getElementById('empEmail').value.trim(),
-  cor: document.getElementById('empCor').value
- };
- localStorage.setItem('empresa_dados', JSON.stringify(dados));
- atualizarEmpresaUI();
- fecharEmpresa();
- alert('🏢 Empresa salva! Agora aparece "'+dados.nome+'" em toda agenda!');
- render();
-}
+let empresaNome = localStorage.getItem('empresa_nome') || 'TAKI DESENVOLVIMENTO DE SISTEMAS';
+let empresaResp = localStorage.getItem('empresa_resp') || '';
+let empresaFone = localStorage.getItem('empresa_fone') || '';
+let empresaEmail = localStorage.getItem('empresa_email') || '';
+let empresaCor = localStorage.getItem('empresa_cor') || '#7c6cff';
 
-// ===== RESTANTE =====
 let casasRaw=carregar('casas_lista_final',['P1','P2','P3','P4','P5']);
 let musicosRaw=carregar('musicos_lista_final_v2',null);
-let musicos;
-if(musicosRaw){musicos=musicosRaw;}else{let antigo=carregar('musicos_lista_final',['DOUGLAS','LUCIANO','ISRAEL','ANDRE TAKI','MARTIN']);musicos=antigo.map(n=>{if(typeof n==='string')return{nome:n.toUpperCase(),cache:300};return n;});}
+let musicos; if(musicosRaw){musicos=musicosRaw;}else{let antigo=carregar('musicos_lista_final',['DOUGLAS','LUCIANO','ISRAEL','ANDRE TAKI','MARTIN']);musicos=antigo.map(n=>{if(typeof n==='string')return{nome:n.toUpperCase(),cache:300};return n;});}
 let agendaCompleta=carregar('agenda_completa_v3',{});
 let casas= [...new Set(casasRaw.map(x=>x.toString().trim().toUpperCase()).filter(x=>x))];
 function limparMusicos(l){const map={};l.forEach(m=>{let nome,cache;if(typeof m==='string'){nome=m.toUpperCase();cache=300;}else{nome=(m.nome||'').toUpperCase();cache=parseInt(m.cache)||300;}if(nome)map[nome]=cache;});return Object.keys(map).map(k=>({nome:k,cache:map[k]}));}
 musicos=limparMusicos(musicos);
-let shows=[];let editIdx=-1,editTipo=null,editPos=-1;let modoFinanceiroAtivo=false;let relTipoAtual='dia';let relFolhaAtiva=false;
+let shows=[]; let editIdx=-1,editTipo=null,editPos=-1; let modoFinanceiroAtivo=false; let relTipoAtual='dia'; let relFolhaAtiva=false;
+
+function atualizarEmpresaUI(){
+ document.getElementById('headerEmpresa').innerText = empresaNome.toUpperCase();
+ document.getElementById('sideEmpresaNome').innerText = empresaNome;
+ document.getElementById('headerLogo').innerText = empresaNome.trim().charAt(0).toUpperCase();
+ document.getElementById('headerLogo').style.background = empresaCor;
+ document.getElementById('sideLogo').innerText = empresaNome.trim().charAt(0).toUpperCase();
+ document.getElementById('sideLogo').style.background = empresaCor;
+ document.getElementById('relEmpresaNome').innerText = '🏢 '+empresaNome;
+}
+
 function corCantor(n){n=(n||'').toUpperCase();if(n.includes('DOUGLAS'))return '#1565ff';if(n.includes('LUCIANO'))return '#7c4dff';if(n.includes('ISRAEL'))return '#00a651';if(n.includes('TAKI')||n.includes('ANDRE'))return '#ff6f00';return '#d32f2f';}
 function openMenu(){document.getElementById('side').classList.add('open');document.getElementById('overlay').classList.add('open')}
 function closeMenu(){document.getElementById('side').classList.remove('open');if(!document.querySelector('.modal.open'))document.getElementById('overlay').classList.remove('open');}
 function formatLong(d){return d.toLocaleDateString('pt-BR',{day:'numeric',month:'long',year:'numeric'});}
-function saveAll(){localStorage.setItem('casas_lista_final',JSON.stringify(casas));localStorage.setItem('musicos_lista_final_v2',JSON.stringify(musicos));localStorage.setItem('agenda_completa_v3',JSON.stringify(agendaCompleta));const key=document.getElementById('inpDate').value;if(key){agendaCompleta[key]=shows;localStorage.setItem('agenda_completa_v3',JSON.stringify(agendaCompleta));}}
+function saveAll(){
+ localStorage.setItem('casas_lista_final',JSON.stringify(casas));
+ localStorage.setItem('musicos_lista_final_v2',JSON.stringify(musicos));
+ localStorage.setItem('agenda_completa_v3',JSON.stringify(agendaCompleta));
+ const key=document.getElementById('inpDate').value;
+ if(key){agendaCompleta[key]=shows; localStorage.setItem('agenda_completa_v3',JSON.stringify(agendaCompleta));}
+}
 function preencherSelects(){const selP=document.getElementById('mP');selP.innerHTML='';casas.forEach(c=>{let o=document.createElement('option');o.value=c;o.textContent='🏠 '+c;selP.appendChild(o);});const selM=document.getElementById('mNome');selM.innerHTML='';musicos.forEach(m=>{let o=document.createElement('option');o.value=m.nome;o.textContent='🎤 '+m.nome+' - R$ '+m.cache;selM.appendChild(o);});}
 function fecharTodosModais(){document.querySelectorAll('.modal').forEach(m=>m.classList.remove('open'));document.getElementById('overlay').classList.remove('open');}
+function abrirCadastroEmpresa(){closeMenu();document.getElementById('empNome').value=empresaNome;document.getElementById('empResp').value=empresaResp;document.getElementById('empFone').value=empresaFone;document.getElementById('empEmail').value=empresaEmail;document.getElementById('empCor').value=empresaCor;document.getElementById('modalEmpresa').classList.add('open');document.getElementById('overlay').classList.add('open');}
+function fecharEmpresa(){document.getElementById('modalEmpresa').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
+function salvarEmpresa(){
+ const nome=document.getElementById('empNome').value.trim();
+ if(!nome){alert('Digite o nome da empresa!');return;}
+ empresaNome=nome; empresaResp=document.getElementById('empResp').value.trim(); empresaFone=document.getElementById('empFone').value.trim(); empresaEmail=document.getElementById('empEmail').value.trim(); empresaCor=document.getElementById('empCor').value;
+ localStorage.setItem('empresa_nome', empresaNome); localStorage.setItem('empresa_resp', empresaResp); localStorage.setItem('empresa_fone', empresaFone); localStorage.setItem('empresa_email', empresaEmail); localStorage.setItem('empresa_cor', empresaCor);
+ atualizarEmpresaUI(); render(); fecharEmpresa(); alert('✅ Empresa salva! Nome agora aparece em todo o app: '+empresaNome);
+}
 function abrirGestaoCasas(){closeMenu();renderListaCasas();document.getElementById('modalCasas').classList.add('open');document.getElementById('overlay').classList.add('open');}
 function fecharModalCasas(){document.getElementById('modalCasas').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
 function renderListaCasas(){const div=document.getElementById('listaCasas');div.innerHTML='';casas.forEach((c,i)=>{const row=document.createElement('div');row.className='item-lista';const b=document.createElement('b');b.textContent='🏠 '+c;const btns=document.createElement('div');const be=document.createElement('button');be.className='mini-btn mini-edit';be.textContent='✏️ EDITAR';be.onclick=function(){editarItem('casa',i);};const bd=document.createElement('button');bd.className='mini-btn mini-del';bd.textContent='🗑️ EXCLUIR';bd.onclick=function(){excluirItem('casa',i);};btns.appendChild(be);btns.appendChild(bd);row.appendChild(b);row.appendChild(btns);div.appendChild(row);});}
@@ -300,35 +287,51 @@ function abrirGestaoMusicos(){closeMenu();renderListaMusicos();document.getEleme
 function fecharModalMusicos(){document.getElementById('modalMusicos').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
 function renderListaMusicos(){const div=document.getElementById('listaMusicos');div.innerHTML='';musicos.forEach((m,i)=>{const cor=corCantor(m.nome);const row=document.createElement('div');row.className='item-lista';const left=document.createElement('div');const b=document.createElement('b');b.textContent='🎤 '+m.nome;b.style.color=cor;const cache=document.createElement('div');cache.textContent='💰 R$ '+m.cache;cache.style.fontSize='11px';cache.style.fontWeight='800';left.appendChild(b);left.appendChild(cache);const btns=document.createElement('div');const be=document.createElement('button');be.className='mini-btn mini-edit';be.textContent='✏️ EDITAR';be.onclick=function(){editarItem('musico',i);};const bd=document.createElement('button');bd.className='mini-btn mini-del';bd.textContent='🗑️ EXCLUIR';bd.onclick=function(){excluirItem('musico',i);};btns.appendChild(be);btns.appendChild(bd);row.appendChild(left);row.appendChild(btns);div.appendChild(row);});}
 function addMusico(){let n=document.getElementById('novoMusicoInput').value.trim().toUpperCase();let c=parseInt(document.getElementById('novoMusicoCache').value)||300;if(!n)return;if(musicos.find(x=>x.nome===n)){alert('Já existe!');return;}musicos.push({nome:n,cache:c});musicos=limparMusicos(musicos);saveAll();preencherSelects();renderListaMusicos();document.getElementById('novoMusicoInput').value='';document.getElementById('novoMusicoCache').value='';}
-function editarItem(tipo,pos){editTipo=tipo;editPos=pos;if(tipo==='casa'){const nome=casas[pos];document.getElementById('editarTitulo').innerText='✏️ Editar '+nome;document.getElementById('labelEditar1').innerText='Nome da casa';document.getElementById('editarInput').value=nome;document.getElementById('divEditarCache').style.display='none';}else{const m=musicos[pos];document.getElementById('editarTitulo').innerText='✏️ Editar '+m.nome;document.getElementById('labelEditar1').innerText='Nome do músico';document.getElementById('editarInput').value=m.nome;document.getElementById('editarCache').value=m.cache;document.getElementById('divEditarCache').style.display='block';}document.getElementById('modalEditar').classList.add('open');document.getElementById('overlay').classList.add('open');}
-function fecharModalEditar(){document.getElementById('modalEditar').classList.remove('open');if(!document.querySelector('.modal.open'))document.getElementById('overlay').classList.remove('open');else document.getElementById('overlay').classList.add('open');}
+function editarItem(tipo,pos){editTipo=tipo;editPos=pos;if(tipo==='casa'){const nome=casas[pos];document.getElementById('editarTitulo').innerText='✏️ Editar '+nome;document.getElementById('labelEditar1').innerText='Nome da casa / Restaurante';document.getElementById('editarInput').value=nome;document.getElementById('divEditarCache').style.display='none';}else{const m=musicos[pos];document.getElementById('editarTitulo').innerText='✏️ Editar '+m.nome;document.getElementById('labelEditar1').innerText='Nome do músico';document.getElementById('editarInput').value=m.nome;document.getElementById('editarCache').value=m.cache;document.getElementById('divEditarCache').style.display='block';}document.getElementById('modalEditar').classList.add('open');document.getElementById('overlay').classList.add('open');}
+function fecharModalEditar(){document.getElementById('modalEditar').classList.remove('open');if(!document.getElementById('modalCasas').classList.contains('open') && !document.getElementById('modalMusicos').classList.contains('open') && !document.getElementById('modalRelatorio').classList.contains('open') && !document.getElementById('modalEmpresa').classList.contains('open'))document.getElementById('overlay').classList.remove('open');else document.getElementById('overlay').classList.add('open');}
 function confirmarEditar(){let novo=document.getElementById('editarInput').value.trim().toUpperCase();if(!novo)return;if(editTipo==='casa'){casas[editPos]=novo;casas=[...new Set(casas)];renderListaCasas();}else{let novoCache=parseInt(document.getElementById('editarCache').value)||300;musicos[editPos]={nome:novo,cache:novoCache};musicos=limparMusicos(musicos);renderListaMusicos();}saveAll();preencherSelects();fecharModalEditar();}
 function excluirItem(tipo,pos){const nome=tipo==='casa'?casas[pos]:musicos[pos].nome;if(!confirm('Excluir '+nome+'?'))return;if(tipo==='casa'){casas.splice(pos,1);renderListaCasas();}else{musicos.splice(pos,1);renderListaMusicos();}saveAll();preencherSelects();}
 function autoCache(){const nome=document.getElementById('mNome').value;const m=musicos.find(x=>x.nome===nome);if(m)document.getElementById('mValor').value=m.cache;}
 function getKey(){return document.getElementById('inpDate').value;}
 function trocarData(){saveAll();const k=getKey();shows=agendaCompleta[k]||[];if(shows.length===0 && Object.keys(agendaCompleta).length===0){shows=[{p:'P1',ini:'19:00',fim:'22:00',nome:'DOUGLAS',valor:300},{p:'P2',ini:'19:00',fim:'22:00',nome:'LUCIANO',valor:300},{p:'P3',ini:'19:30',fim:'22:30',nome:'ISRAEL',valor:300},{p:'P4',ini:'20:30',fim:'23:30',nome:'ANDRE TAKI',valor:300},{p:'P5',ini:'18:30',fim:'21:30',nome:'MARTIN',valor:300}]; agendaCompleta[k]=shows;} render();}
 function render(){
- const inp=document.getElementById('inpDate'); if(!inp.value) inp.value=new Date().toISOString().slice(0,10);
+ const inp=document.getElementById('inpDate');
+ if(!inp.value) inp.value=new Date().toISOString().slice(0,10);
  const k=inp.value;
- if(!agendaCompleta[k] || agendaCompleta[k].length===0){ if(Object.keys(agendaCompleta).length===0){ shows=[{p:'P1',ini:'19:00',fim:'22:00',nome:'DOUGLAS',valor:300},{p:'P2',ini:'19:00',fim:'22:00',nome:'LUCIANO',valor:300},{p:'P3',ini:'19:30',fim:'22:30',nome:'ISRAEL',valor:300},{p:'P4',ini:'20:30',fim:'23:30',nome:'ANDRE TAKI',valor:300},{p:'P5',ini:'18:30',fim:'21:30',nome:'MARTIN',valor:300}]; agendaCompleta[k]=shows; } else { shows=agendaCompleta[k]||[]; } } else { shows=agendaCompleta[k]; }
+ if(!agendaCompleta[k] || agendaCompleta[k].length===0){
+  if(Object.keys(agendaCompleta).length===0){
+   shows=[{p:'P1',ini:'19:00',fim:'22:00',nome:'DOUGLAS',valor:300},{p:'P2',ini:'19:00',fim:'22:00',nome:'LUCIANO',valor:300},{p:'P3',ini:'19:30',fim:'22:30',nome:'ISRAEL',valor:300},{p:'P4',ini:'20:30',fim:'23:30',nome:'ANDRE TAKI',valor:300},{p:'P5',ini:'18:30',fim:'21:30',nome:'MARTIN',valor:300}];
+   agendaCompleta[k]=shows;
+  } else {shows=agendaCompleta[k]||[];}
+ } else {shows=agendaCompleta[k];}
  const d=new Date(k+'T12:00:00');
- document.getElementById('titleLong').innerText=getEmpresaNome()+' - '+formatLong(d);
- document.getElementById('folhaTitulo').innerText=getEmpresaNome()+' - '+formatLong(d);
+ document.getElementById('titleLong').innerText=empresaNome+' - '+formatLong(d);
+ // FOLHA COM RESTAURANTE - NOME - DATA - HORA
+ document.getElementById('folhaTitulo').innerText=empresaNome.toUpperCase()+' - '+formatLong(d)+' - '+d.toLocaleDateString('pt-BR');
  const lista=document.getElementById('lista');lista.innerHTML='';
  shows.forEach((s,i)=>{
   const cor=corCantor(s.nome);
   const div=document.createElement('div');div.className='show-card';
-  div.innerHTML='<div class=line>🏠 '+s.p+' — 🕓 '+s.ini+' as '+s.fim+'</div><div class=line2>🎤 <b style="color:'+cor+'">'+s.nome+'</b> - R$ '+s.valor+'</div><div><button class=b-edit onclick=editar('+i+')>✏️ EDITAR</button> <button class=b-del onclick=excluir('+i+')>🗑️ EXCLUIR</button></div>';
+  div.innerHTML='<div class=line>🏠 '+s.p+' — 🕓 '+s.ini+' as '+s.fim+'</div><div class=line2>🎤 <b style="color:'+cor+'">'+s.nome+'</b> - R$ '+s.valor+' | 📅 '+d.toLocaleDateString('pt-BR')+'</div><div><button class=b-edit onclick=editar('+i+')>✏️ EDITAR</button> <button class=b-del onclick=excluir('+i+')>🗑️ EXCLUIR</button></div>';
   lista.appendChild(div);
  });
- renderFolha(); localStorage.setItem('agenda_completa_v3',JSON.stringify(agendaCompleta));
+ renderFolha();
+ localStorage.setItem('agenda_completa_v3',JSON.stringify(agendaCompleta));
+ atualizarEmpresaUI();
 }
 function renderFolha(){
  if(modoFinanceiroAtivo){
   const total=shows.reduce((sum,s)=>sum+(parseInt(s.valor)||0),0);
-  document.getElementById('folhaConteudo').innerHTML=shows.map((s)=>{ const cor=corCantor(s.nome); return '<p class=folha-item>'+s.p+' '+s.ini+'-'+s.fim+' - <b style="color:'+cor+'">'+s.nome+'</b> - R$ '+s.valor+'</p>'; }).join('') + '<p class=folha-item style="font-weight:800;border-top:1px solid #000;margin-top:4px">TOTAL: R$ '+total+'</p>';
+  document.getElementById('folhaConteudo').innerHTML=shows.map((s)=>{
+   const cor=corCantor(s.nome);
+   // CONFIG: RESTAURANTE - NOME - DATA - HORA
+   return '<p class=folha-item>'+s.p+' '+s.ini+'-'+s.fim+' - <b style="color:'+cor+'">'+s.nome+'</b> - R$ '+s.valor+'</p>';
+  }).join('') + '<p class=folha-item style="font-weight:800;border-top:1px solid #000;margin-top:4px">TOTAL: R$ '+total+' - '+empresaNome+'</p>';
  }else{
-  document.getElementById('folhaConteudo').innerHTML=shows.map((s)=>{ const cor=corCantor(s.nome); return '<p class=folha-item>'+s.p+' '+s.ini+'-'+s.fim+' - <b style="color:'+cor+'">'+s.nome+'</b></p>'; }).join('');
+  document.getElementById('folhaConteudo').innerHTML=shows.map((s)=>{
+   const cor=corCantor(s.nome);
+   return '<p class=folha-item>'+s.p+' '+s.ini+'-'+s.fim+' - <b style="color:'+cor+'">'+s.nome+'</b></p>';
+  }).join('');
  }
 }
 function mudaDia(n){const inp=document.getElementById('inpDate');let d=new Date(inp.value+'T12:00:00');d.setDate(d.getDate()+n);inp.value=d.toISOString().slice(0,10);trocarData();}
@@ -337,8 +340,8 @@ function amanha(){let d=new Date();d.setDate(d.getDate()+1);document.getElementB
 function modoFolha(){modoFinanceiroAtivo=false;document.getElementById('listView').style.display='none';document.getElementById('folhaView').style.display='block';renderFolha();closeMenu()}
 function modoFinanceiro(){modoFinanceiroAtivo=true;document.getElementById('listView').style.display='none';document.getElementById('folhaView').style.display='block';renderFolha();closeMenu()}
 function modoNormal(){document.getElementById('listView').style.display='block';document.getElementById('folhaView').style.display='none';}
-function zapMusicos(){const d=document.getElementById('titleLong').innerText;const emp=getEmpresaNome();const txt=shows.map(s=>s.p+' '+s.ini+'-'+s.fim+' - '+s.nome).join('\n');window.open('https://wa.me/?text='+encodeURIComponent('🎤 '+emp+'\n'+d+'\n\n'+txt),'_blank');}
-function zapFinanceiro(){const periodo=document.getElementById('relPeriodo').innerText;const emp=getEmpresaNome();let txt='';if(relFolhaAtiva){txt=document.getElementById('relFolhaConteudo').innerText;}else{txt=document.getElementById('relTotal').innerText+'\n\n'+document.getElementById('relMusicos').innerText+'\n\n'+document.getElementById('relDetalhes').innerText;}window.open('https://wa.me/?text='+encodeURIComponent('💰 '+emp+'\n'+periodo+'\n\n'+txt),'_blank');}
+function zapMusicos(){const d=document.getElementById('titleLong').innerText;const txt=shows.map(s=>s.p+' '+s.ini+'-'+s.fim+' - '+s.nome).join('\n');window.open('https://wa.me/?text='+encodeURIComponent('🎤 '+d+'\n\n'+txt),'_blank');}
+function zapFinanceiro(){const periodo=document.getElementById('relPeriodo').innerText;let txt='';if(relFolhaAtiva){txt=document.getElementById('relFolhaConteudo').innerText;}else{txt=document.getElementById('relTotal').innerText+'\n\n'+document.getElementById('relMusicos').innerText+'\n\n'+document.getElementById('relDetalhes').innerText;}window.open('https://wa.me/?text='+encodeURIComponent('🏢 '+empresaNome+'\n💰 '+periodo+'\n\n'+txt),'_blank');}
 function abrirModalNovo(){preencherSelects();editIdx=-1;document.getElementById('modalTitle').innerText='Novo Show';document.getElementById('mIni').value='19:00';document.getElementById('mFim').value='22:00';document.getElementById('mValor').value='';document.getElementById('modal').classList.add('open');document.getElementById('overlay').classList.add('open');}
 function fecharModal(){document.getElementById('modal').classList.remove('open');document.getElementById('overlay').classList.remove('open');editIdx=-1;}
 function salvar(){const o={p:document.getElementById('mP').value,fim:document.getElementById('mFim').value,ini:document.getElementById('mIni').value,nome:document.getElementById('mNome').value,valor:document.getElementById('mValor').value||0};if(editIdx>=0)shows[editIdx]=o;else shows.push(o);const k=getKey();agendaCompleta[k]=shows;saveAll();render();fecharModal();}
@@ -346,39 +349,46 @@ function editar(i){preencherSelects();editIdx=i;const s=shows[i];document.getEle
 function excluir(i){if(confirm('Excluir?')){shows.splice(i,1);const k=getKey();agendaCompleta[k]=shows;saveAll();render();}}
 function abrirRelatorio(){closeMenu();document.getElementById('modalRelatorio').classList.add('open');document.getElementById('overlay').classList.add('open');gerarRelatorio('dia');}
 function fecharRelatorio(){document.getElementById('modalRelatorio').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
-function modoRelNormal(){relFolhaAtiva=false;document.getElementById('relVistaNormal').style.display='block';document.getElementById('relVistaFolha').style.display='none';}
-function modoRelFolha(){relFolhaAtiva=true;document.getElementById('relVistaNormal').style.display='none';document.getElementById('relVistaFolha').style.display='block';}
+function modoRelNormal(){relFolhaAtiva=false;document.getElementById('relVistaNormal').style.display='block';document.getElementById('relVistaFolha').style.display='none';document.getElementById('btnRelNormal').style.background='#7c6cff';document.getElementById('btnRelNormal').style.color='#fff';document.getElementById('btnRelFolha').style.background='#ffe066';document.getElementById('btnRelFolha').style.color='#000';}
+function modoRelFolha(){relFolhaAtiva=true;document.getElementById('relVistaNormal').style.display='none';document.getElementById('relVistaFolha').style.display='block';document.getElementById('btnRelFolha').style.background='#222';document.getElementById('btnRelFolha').style.color='#fff';document.getElementById('btnRelNormal').style.background='#eee';document.getElementById('btnRelNormal').style.color='#666';}
 function gerarRelatorio(tipo){
  relTipoAtual=tipo;
  document.querySelectorAll('.fin-btn').forEach(b=>{b.classList.remove('active');b.classList.add('inactive');});
- const btn=document.getElementById('btn'+tipo.charAt(0).toUpperCase()+tipo.slice(1)); if(btn){btn.classList.add('active');btn.classList.remove('inactive');} if(tipo==='todos') document.getElementById('btnTodos').classList.add('active');
+ const btn=document.getElementById('btn'+tipo.charAt(0).toUpperCase()+tipo.slice(1));
+ if(btn){btn.classList.add('active');btn.classList.remove('inactive');}
+ if(tipo==='todos') document.getElementById('btnTodos').classList.add('active');
  const hojeKey=getKey(); const hojeDate=new Date(hojeKey+'T12:00:00'); let datas=[];
- if(tipo==='dia'){ datas=[hojeKey]; document.getElementById('relPeriodo').innerText='📅 DIA: '+formatLong(hojeDate); }
- else if(tipo==='semana'){ let inicio=new Date(hojeDate); inicio.setDate(hojeDate.getDate()-hojeDate.getDay()); let fim=new Date(inicio); fim.setDate(inicio.getDate()+6); for(let d=new Date(inicio); d<=fim; d.setDate(d.getDate()+1)){datas.push(d.toISOString().slice(0,10));} document.getElementById('relPeriodo').innerText='📅 SEMANA: '+inicio.toLocaleDateString('pt-BR')+' a '+fim.toLocaleDateString('pt-BR'); }
- else if(tipo==='mes'){ const ym=hojeKey.slice(0,7); datas=Object.keys(agendaCompleta).filter(k=>k.startsWith(ym)); if(datas.length===0) datas=[hojeKey]; document.getElementById('relPeriodo').innerText='📅 MÊS: '+(hojeDate.getMonth()+1)+'/'+hojeDate.getFullYear(); }
- else if(tipo==='ano'){ const y=hojeKey.slice(0,4); datas=Object.keys(agendaCompleta).filter(k=>k.startsWith(y)); if(datas.length===0) datas=[hojeKey]; document.getElementById('relPeriodo').innerText='📅 ANO: '+y; }
- else { datas=Object.keys(agendaCompleta); if(datas.length===0) datas=[hojeKey]; document.getElementById('relPeriodo').innerText='📅 TODOS OS DIAS'; }
- let todosShows=[]; datas.forEach(k=>{ const arr=agendaCompleta[k]|| (k===hojeKey?shows:[]); arr.forEach(s=>{todosShows.push({...s, data:k})}); });
+ if(tipo==='dia'){datas=[hojeKey];document.getElementById('relPeriodo').innerText='📅 DIA: '+formatLong(hojeDate);}
+ else if(tipo==='semana'){let inicio=new Date(hojeDate); inicio.setDate(hojeDate.getDate()-hojeDate.getDay()); let fim=new Date(inicio); fim.setDate(inicio.getDate()+6); for(let d=new Date(inicio); d<=fim; d.setDate(d.getDate()+1)){datas.push(d.toISOString().slice(0,10));} document.getElementById('relPeriodo').innerText='📅 SEMANA: '+inicio.toLocaleDateString('pt-BR')+' a '+fim.toLocaleDateString('pt-BR');}
+ else if(tipo==='mes'){const ym=hojeKey.slice(0,7); datas=Object.keys(agendaCompleta).filter(k=>k.startsWith(ym)); if(datas.length===0) datas=[hojeKey]; document.getElementById('relPeriodo').innerText='📅 MÊS: '+(hojeDate.getMonth()+1)+'/'+hojeDate.getFullYear();}
+ else if(tipo==='ano'){const y=hojeKey.slice(0,4); datas=Object.keys(agendaCompleta).filter(k=>k.startsWith(y)); if(datas.length===0) datas=[hojeKey]; document.getElementById('relPeriodo').innerText='📅 ANO: '+y;}
+ else {datas=Object.keys(agendaCompleta); if(datas.length===0) datas=[hojeKey]; document.getElementById('relPeriodo').innerText='📅 TODOS OS DIAS';}
+ let todosShows=[]; datas.forEach(k=>{const arr=agendaCompleta[k]|| (k===hojeKey?shows:[]); arr.forEach(s=>{todosShows.push({...s, data:k})});});
  const total=todosShows.reduce((sum,s)=>sum+(parseInt(s.valor)||0),0);
  document.getElementById('relTotal').innerText='TOTAL: R$ '+total+' | '+todosShows.length+' SHOWS';
- const porMusico={}; todosShows.forEach(s=>{ const nome=s.nome.toUpperCase(); if(!porMusico[nome]) porMusico[nome]={qtd:0, total:0}; porMusico[nome].qtd++; porMusico[nome].total+=parseInt(s.valor)||0; });
- let htmlMusicos=''; Object.keys(porMusico).sort().forEach(nome=>{ const cor=corCantor(nome); htmlMusicos+='<div class=fin-row><b style="color:'+cor+'">'+nome+'</b><span>'+porMusico[nome].qtd+' shows - R$ '+porMusico[nome].total+'</span></div>'; });
- if(htmlMusicos==='') htmlMusicos='<div style="font-size:12px;color:#888">Nenhum show</div>'; document.getElementById('relMusicos').innerHTML=htmlMusicos;
- let htmlDetalhes=''; todosShows.sort((a,b)=>a.data.localeCompare(b.data)).forEach(s=>{ htmlDetalhes+='<div class=fin-row><span>'+s.data.slice(8,10)+'/'+s.data.slice(5,7)+' '+s.p+' '+s.nome+'</span><span>R$ '+s.valor+'</span></div>'; });
- if(htmlDetalhes==='') htmlDetalhes='<div style="font-size:12px;color:#888">Nenhum show</div>'; document.getElementById('relDetalhes').innerHTML=htmlDetalhes;
+ const porMusico={}; todosShows.forEach(s=>{const nome=s.nome.toUpperCase(); if(!porMusico[nome]) porMusico[nome]={qtd:0, total:0}; porMusico[nome].qtd++; porMusico[nome].total+=parseInt(s.valor)||0;});
+ let htmlMusicos=''; Object.keys(porMusico).sort().forEach(nome=>{const cor=corCantor(nome); htmlMusicos+='<div class=fin-row><b style="color:'+cor+'">'+nome+'</b><span>'+porMusico[nome].qtd+' shows - R$ '+porMusico[nome].total+'</span></div>';});
+ if(htmlMusicos==='') htmlMusicos='<div style="font-size:12px;color:#888">Nenhum show</div>';
+ document.getElementById('relMusicos').innerHTML=htmlMusicos;
+ let htmlDetalhes=''; todosShows.sort((a,b)=>a.data.localeCompare(b.data)).forEach(s=>{htmlDetalhes+='<div class=fin-row><span>'+s.data.slice(8,10)+'/'+s.data.slice(5,7)+' '+s.p+' '+s.nome+'</span><span>R$ '+s.valor+'</span></div>';});
+ if(htmlDetalhes==='') htmlDetalhes='<div style="font-size:12px;color:#888">Nenhum show</div>';
+ document.getElementById('relDetalhes').innerHTML=htmlDetalhes;
  const periodo=document.getElementById('relPeriodo').innerText;
- document.getElementById('relFolhaTitulo').innerText=getEmpresaNome()+' - '+periodo+' - TOTAL R$ '+total;
- let htmlFolha=''; htmlFolha+='<p class=folha-item style="font-weight:800">'+getEmpresaNome()+'</p>'; htmlFolha+='<p class=folha-item style="font-weight:800">TOTAL: R$ '+total+' - '+todosShows.length+' SHOWS</p>'; htmlFolha+='<p class=folha-item style="font-weight:700">--- POR MUSICO ---</p>'; Object.keys(porMusico).sort().forEach(nome=>{ htmlFolha+='<p class=folha-item>'+nome+' - '+porMusico[nome].qtd+' shows - R$ '+porMusico[nome].total+'</p>'; }); htmlFolha+='<p class=folha-item style="font-weight:700">--- DETALHES ---</p>'; todosShows.forEach(s=>{ const cor=corCantor(s.nome); htmlFolha+='<p class=folha-item>'+s.data.slice(8,10)+'/'+s.data.slice(5,7)+' '+s.p+' - <b style="color:'+cor+'">'+s.nome+'</b> - R$ '+s.valor+'</p>'; }); document.getElementById('relFolhaConteudo').innerHTML=htmlFolha;
+ document.getElementById('relFolhaTitulo').innerText=empresaNome.toUpperCase()+' - '+periodo+' - TOTAL R$ '+total;
+ let htmlFolha=''; htmlFolha+='<p class=folha-item style="font-weight:800">'+empresaNome.toUpperCase()+' - TOTAL: R$ '+total+' - '+todosShows.length+' SHOWS</p>';
+ htmlFolha+='<p class=folha-item style="font-weight:700;margin-top:4px">--- POR MUSICO ---</p>';
+ Object.keys(porMusico).sort().forEach(nome=>{htmlFolha+='<p class=folha-item>'+nome+' - '+porMusico[nome].qtd+' shows - R$ '+porMusico[nome].total+'</p>';});
+ htmlFolha+='<p class=folha-item style="font-weight:700;margin-top:4px">--- DETALHES (RESTAURANTE - NOME - DATA - HORA) ---</p>';
+ todosShows.forEach(s=>{const cor=corCantor(s.nome); htmlFolha+='<p class=folha-item>'+s.p+' - <b style="color:'+cor+'">'+s.nome+'</b> - '+s.data.slice(8,10)+'/'+s.data.slice(5,7)+' - '+s.ini+'-'+s.fim+' - R$ '+s.valor+'</p>';});
+ document.getElementById('relFolhaConteudo').innerHTML=htmlFolha;
 }
-atualizarEmpresaUI();
-render();preencherSelects();
+render();preencherSelects(); atualizarEmpresaUI();
 if(!document.getElementById('inpDate').value) document.getElementById('inpDate').value=new Date().toISOString().slice(0,10);
 trocarData();
 if('serviceWorker' in navigator){
  const swCode = `self.addEventListener('install', e=>self.skipWaiting());self.addEventListener('activate', e=>self.clients.claim());self.addEventListener('fetch', e=>e.respondWith(fetch(e.request).catch(()=>caches.match(e.request))));`;
  const swBlob = new Blob([swCode], {type:'application/javascript'});
- const swURL = URL.createObjectURL(swBlob);
- navigator.serviceWorker.register(swURL).catch(()=>{});
+ navigator.serviceWorker.register(URL.createObjectURL(swBlob)).catch(()=>{});
 }
 </script>
 </body>
