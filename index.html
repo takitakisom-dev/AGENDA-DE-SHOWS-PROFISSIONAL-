@@ -65,22 +65,20 @@ input[type=date],input[type=month]{font-size:13px;padding:6px 10px;border:1px so
 <div class="menu-item" onclick="abrirGestaoMusicos()">🎤 CADASTRAR MUSICOS</div>
 <div style="height:8px;border-bottom:1px solid #eee;margin:8px 0"></div>
 <div class="menu-item" onclick="abrirBKP()">💾 BKP EXPORTAR / IMPORTAR</div>
-<div class="menu-item" onclick="instalarApp()" id="btnInstalar" style="background:#e0ffe0;border-radius:8px;padding:10px">📲 INSTALAR APP</div>
 <div class="menu-item" onclick="abrirRelatorios()">📊 RELATÓRIOS FINANCEIROS</div>
-<div style="height:8px;border-bottom:1px solid #eee;margin:8px 0"></div>
 <div class="menu-item" onclick="closeMenu()">🚪 FECHAR MENU</div>
 </div>
-<header><div style="display:flex;align-items:center;gap:6px"><span class="menu-btn" onclick="openMenu()">☰</span><h1 id="headerTitle">AGENDA DO DIA <span>TAKI DESENVOLVIMENTO</span></h1></div><button class="btn-home" onclick="hoje()">HOME</button></header>
-<div id="listView"><div class="date-card"><div class="title-long" id="titleLong"></div><div style="display:flex;align-items:center;justify-content:space-between"><button class="arrow" onclick="mudaDia(-1)">◀</button><div><input type="date" id="inpDate" onchange="render()"><input type="month" id="inpMonth" style="display:none" onchange="render()"><div style="display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-top:8px"><button class="pill" onclick="hoje()">HOJE</button><button class="pill" onclick="amanha()">AMANHÃ</button><button class="pill" onclick="modo('dia')">DIA</button><button class="pill" onclick="modo('semana')">SEMANA</button><button class="pill" onclick="modo('mes')">MÊS</button><button class="pill" onclick="modo('ano')">ANO</button></div></div><button class="arrow" onclick="mudaDia(1)">▶</button></div></div><div id="lista"></div></div>
+<header><div style="display:flex;align-items:center;gap:6px"><span class="menu-btn" onclick="openMenu()">☰</span><h1 id="headerTitle">AGENDA DO DIA <span>TAKI</span></h1></div><button class="btn-home" onclick="hoje()">HOME</button></header>
+<div id="listView"><div class="date-card"><div class="title-long" id="titleLong"></div><div style="display:flex;align-items:center;justify-content:space-between"><button class="arrow" onclick="mudaDia(-1)">◀</button><div><input type="date" id="inpDate" onchange="render()"><input type="month" id="inpMonth" style="display:none" onchange="render()"><div style="display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-top:8px"><button class="pill" onclick="hoje()">HOJE</button><button class="pill" onclick="modo('dia')">DIA</button><button class="pill" onclick="modo('semana')">SEMANA</button><button class="pill" onclick="modo('mes')">MÊS</button><button class="pill" onclick="modo('ano')">ANO</button></div></div><button class="arrow" onclick="mudaDia(1)">▶</button></div></div><div id="lista"></div></div>
 <div id="folhaView" class="folha-view"><div class="folha-paper"><h2 id="folhaTitulo"></h2><div id="folhaConteudo"></div></div></div>
 <button class="add-btn" onclick="abrirModalNovo()">+</button>
 <div class="bottom"><button class="b-zap" onclick="zap()">📱 ZAP</button><button class="b-normal" onclick="modoNormal()">🖨️ NORMAL</button><button class="b-folha" onclick="modoFolha()">📒 FOLHA</button><button class="b-pdf" onclick="window.print()">📄 PDF</button></div>
 <div class="modal" id="modal"><div class="modal-box"><h3 id="modalTitle">Novo Show</h3><label>🏠 CASA</label><select id="mP"></select><label>🕓 INICIO</label><input id="mIni" type="time" value="19:00"><label>🕓 FIM</label><input id="mFim" type="time" value="22:00"><label>🎤 MUSICO</label><select id="mNome"></select><label>💰 VALOR</label><input id="mValor" type="number" placeholder="300"><label>📅 DATA</label><input id="mData" type="date"><button class="save" onclick="salvar()">SALVAR</button><button class="cancel" onclick="fecharModal()">CANCELAR</button></div></div>
 <div class="modal" id="modalCasas"><div class="modal-box"><h3>🏠 CASAS</h3><div style="display:flex;gap:6px"><input id="novaCasaInput" placeholder="Ex: P5" style="flex:1"><button onclick="addCasa()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaCasas" style="margin-top:8px"></div><button class="cancel" onclick="fecharModalCasas()">FECHAR</button></div></div>
 <div class="modal" id="modalMusicos"><div class="modal-box"><h3>🎤 MUSICOS</h3><div style="display:flex;gap:6px"><input id="novoMusicoInput" placeholder="Ex: BRUNO" style="flex:1"><button onclick="addMusico()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaMusicos" style="margin-top:8px"></div><button class="cancel" onclick="fecharModalMusicos()">FECHAR</button></div></div>
-<div class="modal" id="modalEditar"><div class="modal-box"><h3 id="editarTitulo">✏️ Editar</h3><input id="editarInput"><button class="save" onclick="confirmarEditar()">SALVAR EDIÇÃO</button><button class="cancel" onclick="fecharModalEditar()">CANCELAR</button></div></div>
-<div class="modal" id="modalBKP"><div class="modal-box"><h3>💾 BACKUP</h3><button class="save" onclick="exportarBKP()" style="background:#00a651">📤 EXPORTAR AGORA</button><label style="margin-top:14px">📥 IMPORTAR</label><input type="file" id="inputBKP" accept=".json" onchange="importarBKP(event)"><div id="bkpStatus" style="font-size:11px;margin-top:8px"></div><button class="cancel" onclick="fecharBKP()">FECHAR</button></div></div>
-<div class="modal" id="modalRel"><div class="modal-box"><h3>📊 RELATÓRIOS CORRIGIDO</h3><div><button class="pill active" onclick="setRelFiltro('mes')" id="relMes">MÊS ATUAL</button><button class="pill" onclick="setRelFiltro('semana')" id="relSem">SEMANA</button><button class="pill" onclick="setRelFiltro('todos')" id="relTodos">TODOS</button><button class="pill" onclick="setRelFiltro('ano')" id="relAno">ANO</button></div><div id="relConteudo" style="margin-top:10px"></div><button class="cancel" onclick="fecharRel()">FECHAR</button></div></div>
+<div class="modal" id="modalEditar"><div class="modal-box"><h3 id="editarTitulo">✏️ Editar</h3><input id="editarInput"><button class="save" onclick="confirmarEditar()">SALVAR</button><button class="cancel" onclick="fecharModalEditar()">CANCELAR</button></div></div>
+<div class="modal" id="modalBKP"><div class="modal-box"><h3>💾 BACKUP</h3><button class="save" onclick="exportarBKP()" style="background:#00a651">📤 EXPORTAR</button><label style="margin-top:14px">📥 IMPORTAR</label><input type="file" id="inputBKP" accept=".json" onchange="importarBKP(event)"><div id="bkpStatus" style="font-size:11px;margin-top:8px"></div><button class="cancel" onclick="fecharBKP()">FECHAR</button></div></div>
+<div class="modal" id="modalRel"><div class="modal-box"><h3>📊 RELATÓRIOS</h3><div><button class="pill active" onclick="setRelFiltro('mes')" id="relMes">MÊS SELECIONADO</button><button class="pill" onclick="setRelFiltro('semana')" id="relSem">SEMANA</button><button class="pill" onclick="setRelFiltro('todos')" id="relTodos">TODOS</button><button class="pill" onclick="setRelFiltro('ano')" id="relAno">ANO</button></div><div id="relConteudo" style="margin-top:10px"></div><button class="cancel" onclick="fecharRel()">FECHAR</button></div></div>
 <script>
 function carregar(chave, padrao){try{const v=localStorage.getItem(chave);if(v!==null){const a=JSON.parse(v);if(Array.isArray(a))return a;}}catch(e){}return padrao;}
 let casas=carregar('casas_lista_final',['P1','P2','P3','P4','P5']);
@@ -116,17 +114,28 @@ function importarBKP(ev){const file=ev.target.files[0];if(!file)return;const r=n
 function abrirRelatorios(){closeMenu();renderRel();document.getElementById('modalRel').classList.add('open');document.getElementById('overlay').classList.add('open');}
 function fecharRel(){document.getElementById('modalRel').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
 function setRelFiltro(f){relFiltro=f;document.querySelectorAll('#modalRel .pill').forEach(p=>p.classList.remove('active'));document.getElementById(f==='mes'?'relMes':f==='semana'?'relSem':f==='ano'?'relAno':'relTodos').classList.add('active');renderRel();}
-function getShowsFiltro(){const hoje=new Date();if(relFiltro==='todos')return shows;if(relFiltro==='ano')return shows.filter(s=>s.data&&s.data.startsWith(hoje.getFullYear().toString()));if(relFiltro==='semana'){const sem=getSemana(hoje.toISOString().slice(0,10));return shows.filter(s=>s.data&&sem.includes(s.data));}const mes=hoje.toISOString().slice(0,7);return shows.filter(s=>s.data&&s.data.startsWith(mes));}
+// CORREÇÃO PRINCIPAL: USA O MÊS SELECIONADO NA TELA, NÃO O MÊS DE HOJE
+function getShowsFiltro(){
+  const selMes = document.getElementById('inpMonth').value || new Date().toISOString().slice(0,7);
+  const selData = document.getElementById('inpDate').value || new Date().toISOString().slice(0,10);
+  if(relFiltro==='todos') return shows;
+  if(relFiltro==='ano') return shows.filter(s=>s.data && s.data.startsWith(selMes.split('-')[0]));
+  if(relFiltro==='semana'){const sem=getSemana(selData);return shows.filter(s=>s.data && sem.includes(s.data));}
+  return shows.filter(s=>s.data && s.data.startsWith(selMes));
+}
 function renderRel(){
   const f=getShowsFiltro();
   const porMusico={}; let total=0;
+  const diasUnicos=new Set();
   f.forEach(s=>{
+    diasUnicos.add(s.data);
     const raw=(s.nome||'').toString().trim(); const key=raw.toUpperCase(); if(!key)return;
     const v=parseFloat(s.valor)||0;
     if(!porMusico[key]) porMusico[key]={qtd:0,total:0,display:key,list:[]};
     porMusico[key].qtd++; porMusico[key].total+=v; porMusico[key].list.push({s, idx: shows.indexOf(s)}); total+=v;
   });
-  let html='<div class="report-card"><b>📊 TOTAL: '+f.length+' shows - R$ '+total.toFixed(2)+'</b><br><small>Período: '+relFiltro.toUpperCase()+'</small></div>';
+  const selMes = document.getElementById('inpMonth').value || '';
+  let html='<div class="report-card" style="background:#1a1a2e;color:#fff"><b>📊 TOTAL: '+f.length+' shows em '+diasUnicos.size+' dias<br>R$ '+total.toFixed(2)+'</b><br><small>Mês: '+(selMes||'TODOS')+' | Período: '+relFiltro.toUpperCase()+'</small></div>';
   Object.keys(porMusico).sort().forEach(k=>{
     const d=porMusico[k]; const cor=corCantor(d.display);
     html+='<div class="report-card"><b style="color:'+cor+'">🎤 '+d.display+'</b> - '+d.qtd+' shows - R$ '+d.total.toFixed(2)+'<div style="margin-top:6px">';
@@ -136,12 +145,12 @@ function renderRel(){
     });
     html+='</div></div>';
   });
-  if(f.length===0) html='<div style="text-align:center;padding:20px;color:#888">Nenhum show</div>';
+  if(f.length===0) html='<div style="text-align:center;padding:20px;color:#888">Nenhum show no mês selecionado<br>Selecione Outubro/2026 no campo mês</div>';
   document.getElementById('relConteudo').innerHTML=html;
 }
-window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;document.getElementById('btnInstalar').style.display='flex';});
-function instalarApp(){if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.then(c=>{if(c.outcome==='accepted')alert('App instalado!');deferredPrompt=null;});}else{alert('Já instalado');}}
-function modo(t){modoAtual=t;const titles={dia:'AGENDA DO DIA',semana:'AGENDA DA SEMANA',mes:'AGENDA DO MES',ano:'AGENDA DO ANO'};document.getElementById('headerTitle').innerHTML=titles[t]+' <span>TAKI DESENVOLVIMENTO</span>';if(t==='mes'||t==='ano'){document.getElementById('inpDate').style.display='none';document.getElementById('inpMonth').style.display='inline-block';if(!document.getElementById('inpMonth').value)document.getElementById('inpMonth').value=new Date().toISOString().slice(0,7);}else{document.getElementById('inpDate').style.display='inline-block';document.getElementById('inpMonth').style.display='none';}render();}
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;});
+function instalarApp(){if(deferredPrompt){deferredPrompt.prompt();}else{alert('Já instalado');}}
+function modo(t){modoAtual=t;const titles={dia:'AGENDA DO DIA',semana:'AGENDA DA SEMANA',mes:'AGENDA DO MES',ano:'AGENDA DO ANO'};document.getElementById('headerTitle').innerHTML=titles[t]+' <span>TAKI</span>';if(t==='mes'||t==='ano'){document.getElementById('inpDate').style.display='none';document.getElementById('inpMonth').style.display='inline-block';if(!document.getElementById('inpMonth').value)document.getElementById('inpMonth').value=new Date().toISOString().slice(0,7);}else{document.getElementById('inpDate').style.display='inline-block';document.getElementById('inpMonth').style.display='none';}render();}
 function getSemana(date){const d=new Date(date+'T12:00:00');const dia=d.getDay();const diff=d.getDate()-dia+(dia==0?-6:1);const seg=new Date(d.setDate(diff));const datas=[];for(let i=0;i<7;i++){const dd=new Date(seg);dd.setDate(seg.getDate()+i);datas.push(dd.toISOString().slice(0,10));}return datas;}
 function render(){
   const inpDate=document.getElementById('inpDate');const inpMonth=document.getElementById('inpMonth');
@@ -154,7 +163,7 @@ function render(){
   else{const ano=mesSel.split('-')[0];titulo='ANO DE '+ano;shows.sort((a,b)=>{if(a.data!==b.data)return a.data.localeCompare(b.data);return a.p.localeCompare(b.p);});filtrados=shows.filter(s=>s.data&&s.data.startsWith(ano));}
   document.getElementById('titleLong').innerText=titulo;document.getElementById('folhaTitulo').innerText=titulo;
   const lista=document.getElementById('lista');lista.innerHTML='';
-  if(filtrados.length===0){lista.innerHTML='<div class="show-card" style="text-align:center;color:#888;padding:20px">Nenhum show<br>Clique no +</div>';}
+  if(filtrados.length===0){lista.innerHTML='<div class="show-card" style="text-align:center;color:#888;padding:20px">Nenhum show neste período</div>';}
   else{let dataAtual='';filtrados.forEach(s=>{if(s.data!==dataAtual&&modoAtual!=='dia'){dataAtual=s.data;const divDia=document.createElement('div');divDia.className='dia-label';divDia.innerText=formatLong(new Date(dataAtual+'T12:00:00')).toUpperCase();lista.appendChild(divDia);}const idx=shows.indexOf(s);const cor=corCantor(s.nome);const div=document.createElement('div');div.className='show-card';div.innerHTML='<div class=line>'+s.p+' - <b style="color:'+cor+'">'+s.nome+'</b> - '+s.ini+'-'+s.fim+'</div><div style="margin-top:6px"><button class=b-edit onclick=editar('+idx+')>✏️ EDITAR</button> <button class=b-del onclick=excluir('+idx+')>🗑️ EXCLUIR</button></div>';lista.appendChild(div);});}
   document.getElementById('folhaConteudo').innerHTML=filtrados.map(s=>{const cor=corCantor(s.nome);const label=modoAtual==='dia'?'':s.data.split('-').reverse().slice(0,2).join('/')+' ';return '<p class=folha-item>'+label+s.p+' - <b style="color:'+cor+'">'+s.nome+'</b> - '+s.ini+'-'+s.fim+'</p>';}).join('');
 }
@@ -168,7 +177,7 @@ function abrirModalNovo(){preencherSelects();editIdx=-1;document.getElementById(
 function fecharModal(){document.getElementById('modal').classList.remove('open');document.getElementById('overlay').classList.remove('open');editIdx=-1;}
 function salvar(){const dataSel=document.getElementById('mData').value||document.getElementById('inpDate').value;const o={p:document.getElementById('mP').value,fim:document.getElementById('mFim').value,ini:document.getElementById('mIni').value,nome:document.getElementById('mNome').value,valor:document.getElementById('mValor').value||300,data:dataSel};if(editIdx>=0)shows[editIdx]=o;else shows.push(o);saveAll();render();fecharModal();}
 function editar(i){preencherSelects();editIdx=i;const s=shows[i];document.getElementById('modalTitle').innerText='Editar Show';document.getElementById('mP').value=s.p;document.getElementById('mIni').value=s.ini;document.getElementById('mFim').value=s.fim;document.getElementById('mNome').value=s.nome;document.getElementById('mValor').value=s.valor;document.getElementById('mData').value=s.data;document.getElementById('modal').classList.add('open');document.getElementById('overlay').classList.add('open');}
-function excluir(i){if(confirm('Excluir? Faça BKP antes!')){shows.splice(i,1);saveAll();render();}}
+function excluir(i){if(confirm('Excluir?')){shows.splice(i,1);saveAll();render();}}
 if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}
 render();preencherSelects();
 </script>
