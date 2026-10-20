@@ -80,38 +80,24 @@ input[type=date],input[type=month]{font-size:13px;padding:6px 10px;border:1px so
 <div class="modal" id="modalCasas"><div class="modal-box"><h3>🏠 CASAS</h3><div style="display:flex;gap:6px"><input id="novaCasaInput" placeholder="Ex: P5" style="flex:1"><button onclick="addCasa()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaCasas" style="margin-top:8px"></div><button class="cancel" onclick="fecharModalCasas()">FECHAR</button></div></div>
 <div class="modal" id="modalMusicos"><div class="modal-box"><h3>🎤 MUSICOS</h3><div style="display:flex;gap:6px"><input id="novoMusicoInput" placeholder="Ex: BRUNO" style="flex:1"><button onclick="addMusico()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaMusicos" style="margin-top:8px"></div><button class="cancel" onclick="fecharModalMusicos()">FECHAR</button></div></div>
 <div class="modal" id="modalEditar"><div class="modal-box"><h3 id="editarTitulo">✏️ Editar</h3><input id="editarInput"><button class="save" onclick="confirmarEditar()">SALVAR EDIÇÃO</button><button class="cancel" onclick="fecharModalEditar()">CANCELAR</button></div></div>
-<div class="modal" id="modalBKP"><div class="modal-box"><h3>💾 BACKUP</h3><p style="font-size:12px">Exporte toda semana pro Drive pra nunca perder.</p><button class="save" onclick="exportarBKP()" style="background:#00a651">📤 EXPORTAR AGORA (.json)</button><label style="margin-top:14px">📥 IMPORTAR ARQUIVO</label><input type="file" id="inputBKP" accept=".json" onchange="importarBKP(event)"><div id="bkpStatus" style="font-size:11px;margin-top:8px"></div><button class="cancel" onclick="fecharBKP()">FECHAR</button></div></div>
-<div class="modal" id="modalRel"><div class="modal-box"><h3>📊 RELATÓRIOS</h3><div><button class="pill active" onclick="setRelFiltro('mes')" id="relMes">MÊS ATUAL</button><button class="pill" onclick="setRelFiltro('semana')" id="relSem">SEMANA</button><button class="pill" onclick="setRelFiltro('todos')" id="relTodos">TODOS</button><button class="pill" onclick="setRelFiltro('ano')" id="relAno">ANO</button></div><div id="relConteudo" style="margin-top:10px"></div><button class="cancel" onclick="fecharRel()">FECHAR</button></div></div>
+<div class="modal" id="modalBKP"><div class="modal-box"><h3>💾 BACKUP</h3><button class="save" onclick="exportarBKP()" style="background:#00a651">📤 EXPORTAR AGORA (.json)</button><label style="margin-top:14px">📥 IMPORTAR</label><input type="file" id="inputBKP" accept=".json" onchange="importarBKP(event)"><div id="bkpStatus" style="font-size:11px;margin-top:8px"></div><button class="cancel" onclick="fecharBKP()">FECHAR</button></div></div>
+<div class="modal" id="modalRel"><div class="modal-box"><h3>📊 RELATÓRIOS - CORRIGIDO</h3><div><button class="pill active" onclick="setRelFiltro('mes')" id="relMes">MÊS ATUAL</button><button class="pill" onclick="setRelFiltro('semana')" id="relSem">SEMANA</button><button class="pill" onclick="setRelFiltro('todos')" id="relTodos">TODOS</button><button class="pill" onclick="setRelFiltro('ano')" id="relAno">ANO</button></div><button onclick="limparDuplicados()" style="background:#ffe0e0;color:#b00;margin-top:8px;border:1.5px solid #b00">🧹 LIMPAR DUPLICADOS</button><div id="relConteudo" style="margin-top:10px"></div><button class="cancel" onclick="fecharRel()">FECHAR</button></div></div>
 <script>
 function carregar(chave, padrao){
-  try{
-    const v = localStorage.getItem(chave);
-    if(v !== null){
-      const a = JSON.parse(v);
-      if(Array.isArray(a)) return a;
-    }
-  }catch(e){}
-  return padrao;
+  try{const v=localStorage.getItem(chave);if(v!==null){const a=JSON.parse(v);if(Array.isArray(a))return a;}}catch(e){}return padrao;
 }
 let casas=carregar('casas_lista_final',['P1','P2','P3','P4','P5']);
 let musicos=carregar('musicos_lista_final',['DOUGLAS','LUCIANO','ISRAEL','ANDRE TAKI','MARTIN','RICK SOLO','ROBSON SOLO']);
 let shows=carregar('shows_agenda_final',[]);
-shows = shows.map(s=>{ if(!s.data){ s.data = new Date().toISOString().slice(0,10); } return s; });
+shows=shows.map(s=>{if(!s.data){s.data=new Date().toISOString().slice(0,10);}return s;});
 function limpar(l){return [...new Set(l.map(x=>x.toString().trim().toUpperCase()).filter(x=>x))];}
 casas=limpar(casas);musicos=limpar(musicos);
-let editIdx=-1,editTipo=null,editPos=-1;
-let modoAtual='dia'; let relFiltro='mes';
-let deferredPrompt=null;
+let editIdx=-1,editTipo=null,editPos=-1;let modoAtual='dia';let relFiltro='mes';let deferredPrompt=null;
 function corCantor(n){n=n.toUpperCase();if(n.includes('DOUGLAS'))return '#1565ff';if(n.includes('LUCIANO'))return '#7c4dff';if(n.includes('ISRAEL'))return '#00a651';if(n.includes('TAKI')||n.includes('ANDRE'))return '#ff6f00';if(n.includes('RICK'))return '#d32f2f';if(n.includes('ROBSON'))return '#c62828';if(n.includes('MARTIN'))return '#ad1457';return '#222';}
 function openMenu(){document.getElementById('side').classList.add('open');document.getElementById('overlay').classList.add('open')}
 function closeMenu(){document.getElementById('side').classList.remove('open');if(!document.querySelector('.modal.open'))document.getElementById('overlay').classList.remove('open');}
 function formatLong(d){return d.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});}
-function saveAll(){
-  localStorage.setItem('casas_lista_final',JSON.stringify(casas));
-  localStorage.setItem('musicos_lista_final',JSON.stringify(musicos));
-  localStorage.setItem('shows_agenda_final',JSON.stringify(shows));
-  localStorage.setItem('bkp_auto_'+new Date().toISOString().slice(0,10), JSON.stringify({casas,musicos,shows}));
-}
+function saveAll(){localStorage.setItem('casas_lista_final',JSON.stringify(casas));localStorage.setItem('musicos_lista_final',JSON.stringify(musicos));localStorage.setItem('shows_agenda_final',JSON.stringify(shows));}
 function preencherSelects(){const selP=document.getElementById('mP');selP.innerHTML='';casas.forEach(c=>{let o=document.createElement('option');o.value=c;o.textContent=c;selP.appendChild(o);});const selM=document.getElementById('mNome');selM.innerHTML='';musicos.forEach(m=>{let o=document.createElement('option');o.value=m;o.textContent=m;selM.appendChild(o);});}
 function fecharTodosModais(){document.querySelectorAll('.modal').forEach(m=>m.classList.remove('open'));document.getElementById('overlay').classList.remove('open');}
 function abrirGestaoCasas(){closeMenu();renderListaCasas();document.getElementById('modalCasas').classList.add('open');document.getElementById('overlay').classList.add('open');}
@@ -128,69 +114,60 @@ function confirmarEditar(){let novo=document.getElementById('editarInput').value
 function excluirItem(tipo,pos){const nome=tipo==='casa'?casas[pos]:musicos[pos];if(!confirm('Excluir '+nome+'?'))return;if(tipo==='casa'){casas.splice(pos,1);renderListaCasas();}else{musicos.splice(pos,1);renderListaMusicos();}saveAll();preencherSelects();}
 function abrirBKP(){closeMenu();document.getElementById('modalBKP').classList.add('open');document.getElementById('overlay').classList.add('open');}
 function fecharBKP(){document.getElementById('modalBKP').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
-function exportarBKP(){const dados={casas,musicos,shows,exportadoEm:new Date().toLocaleString('pt-BR')};const blob=new Blob([JSON.stringify(dados,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='TAKI-BKP-'+new Date().toISOString().slice(0,10)+'.json';a.click();document.getElementById('bkpStatus').innerText='✅ Exportado! Salve no Drive.';}
-function importarBKP(ev){const file=ev.target.files[0];if(!file)return;const r=new FileReader();r.onload=e=>{try{const d=JSON.parse(e.target.result);if(!d.shows) throw 'inválido';if(confirm('Substituir tudo pelo backup de '+d.exportadoEm+'?')){casas=d.casas;musicos=d.musicos;shows=d.shows;saveAll();preencherSelects();render();document.getElementById('bkpStatus').innerText='✅ Importado! '+shows.length+' shows.';}}catch(err){document.getElementById('bkpStatus').innerText='❌ Erro';}};r.readAsText(file);}
+function exportarBKP(){const dados={casas,musicos,shows,exportadoEm:new Date().toLocaleString('pt-BR')};const blob=new Blob([JSON.stringify(dados,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='TAKI-BKP-'+new Date().toISOString().slice(0,10)+'.json';a.click();document.getElementById('bkpStatus').innerText='✅ Exportado!';}
+function importarBKP(ev){const file=ev.target.files[0];if(!file)return;const r=new FileReader();r.onload=e=>{try{const d=JSON.parse(e.target.result);if(!d.shows)throw 'inválido';if(confirm('Substituir pelo backup de '+d.exportadoEm+'?')){casas=d.casas;musicos=d.musicos;shows=d.shows;saveAll();preencherSelects();render();document.getElementById('bkpStatus').innerText='✅ Importado '+shows.length;}}catch(err){document.getElementById('bkpStatus').innerText='❌ Erro';}};r.readAsText(file);}
 function abrirRelatorios(){closeMenu();renderRel();document.getElementById('modalRel').classList.add('open');document.getElementById('overlay').classList.add('open');}
 function fecharRel(){document.getElementById('modalRel').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
 function setRelFiltro(f){relFiltro=f;document.querySelectorAll('#modalRel .pill').forEach(p=>p.classList.remove('active'));document.getElementById(f==='mes'?'relMes':f==='semana'?'relSem':f==='ano'?'relAno':'relTodos').classList.add('active');renderRel();}
-function getShowsFiltro(){
-  const hoje=new Date();
-  if(relFiltro==='todos') return shows;
-  if(relFiltro==='ano') return shows.filter(s=>s.data && s.data.startsWith(hoje.getFullYear().toString()));
-  if(relFiltro==='semana'){const sem=getSemana(hoje.toISOString().slice(0,10));return shows.filter(s=>s.data && sem.includes(s.data));}
-  const mes=hoje.toISOString().slice(0,7);
-  return shows.filter(s=>s.data && s.data.startsWith(mes));
+function getShowsFiltro(){const hoje=new Date();if(relFiltro==='todos')return shows;if(relFiltro==='ano')return shows.filter(s=>s.data&&s.data.startsWith(hoje.getFullYear().toString()));if(relFiltro==='semana'){const sem=getSemana(hoje.toISOString().slice(0,10));return shows.filter(s=>s.data&&sem.includes(s.data));}const mes=hoje.toISOString().slice(0,7);return shows.filter(s=>s.data&&s.data.startsWith(mes));}
+function limparDuplicados(){
+  const seen=new Set(); const unico=[];
+  shows.forEach(s=>{
+    const key=(s.data||'')+'|'+(s.p||'')+'|'+(s.nome||'').toString().trim().toUpperCase()+'|'+s.ini+'|'+s.fim;
+    if(!seen.has(key)){seen.add(key);unico.push(s);}
+  });
+  const qtdAntes=shows.length;
+  shows=unico; saveAll(); renderRel(); render();
+  alert('Limpeza feita! Antes: '+qtdAntes+' | Agora: '+shows.length+' | Removidos: '+(qtdAntes-shows.length));
 }
-// === RELATÓRIO CONSERTADO - AGRUPA POR NOME MAIÚSCULO ===
 function renderRel(){
   const f=getShowsFiltro();
-  const porMusico={};
-  let total=0;
+  const porMusico={}; let total=0;
   f.forEach(s=>{
-    const raw=(s.nome||'').toString().trim();
-    const key=raw.toUpperCase();
-    if(!key) return;
+    const raw=(s.nome||'').toString().trim(); const key=raw.toUpperCase(); if(!key)return;
     const v=parseFloat(s.valor)||0;
-    if(!porMusico[key]) porMusico[key]={qtd:0,total:0,display:key};
-    porMusico[key].qtd++;
-    porMusico[key].total+=v;
-    total+=v;
+    if(!porMusico[key]) porMusico[key]={qtd:0,total:0,display:key,list:[]};
+    porMusico[key].qtd++; porMusico[key].total+=v; porMusico[key].list.push(s); total+=v;
   });
   let html='<div class="report-card"><b>📊 TOTAL: '+f.length+' shows - R$ '+total.toFixed(2)+'</b><br><small>Período: '+relFiltro.toUpperCase()+'</small></div>';
   Object.keys(porMusico).sort().forEach(k=>{
-    const d=porMusico[k];
-    const cor=corCantor(d.display);
-    html+='<div class="report-card"><b style="color:'+cor+'">🎤 '+d.display+'</b> - '+d.qtd+' shows<br>R$ '+d.total.toFixed(2)+' | Média R$ '+(d.total/d.qtd).toFixed(2)+'</div>';
+    const d=porMusico[k]; const cor=corCantor(d.display);
+    html+='<div class="report-card"><b style="color:'+cor+'">🎤 '+d.display+'</b> - '+d.qtd+' shows<br>R$ '+d.total.toFixed(2)+' | Média R$ '+(d.total/d.qtd).toFixed(2);
+    // detalhe de cada show desse músico
+    html+='<div style="margin-top:6px;border-top:1px dashed #ccc;padding-top:4px">';
+    d.list.forEach(s=>{html+='<small>📅 '+s.data.split("-").reverse().join("/")+' - '+s.p+' - '+s.ini+'-'+s.fim+' - R$ '+s.valor+'</small><br>';});
+    html+='</div></div>';
   });
-  if(f.length>0){
-    html+='<div class="report-card" style="background:#fff"><b>📅 Detalhe pra conferência:</b><br>';
-    f.sort((a,b)=>a.data.localeCompare(b.data)).forEach(s=>{
-      html+='<small>'+s.data.split('-').reverse().join('/')+' - '+s.p+' - '+s.nome.toUpperCase()+' - R$ '+s.valor+'</small><br>';
-    });
-    html+='</div>';
-  }
-  if(f.length===0) html='<div style="text-align:center;padding:20px;color:#888">Nenhum show neste filtro</div>';
+  if(f.length===0) html='<div style="text-align:center;padding:20px;color:#888">Nenhum show</div>';
   document.getElementById('relConteudo').innerHTML=html;
 }
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;document.getElementById('btnInstalar').style.display='flex';});
-function instalarApp(){if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.then(c=>{if(c.outcome==='accepted')alert('App instalado!');deferredPrompt=null;});}else{alert('Já instalado ou use Chrome > Instalar app.');}}
+function instalarApp(){if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.then(c=>{if(c.outcome==='accepted')alert('App instalado!');deferredPrompt=null;});}else{alert('Já instalado');}}
 function modo(t){modoAtual=t;const titles={dia:'AGENDA DO DIA',semana:'AGENDA DA SEMANA',mes:'AGENDA DO MES',ano:'AGENDA DO ANO'};document.getElementById('headerTitle').innerHTML=titles[t]+' <span>TAKI DESENVOLVIMENTO</span>';if(t==='mes'||t==='ano'){document.getElementById('inpDate').style.display='none';document.getElementById('inpMonth').style.display='inline-block';if(!document.getElementById('inpMonth').value)document.getElementById('inpMonth').value=new Date().toISOString().slice(0,7);}else{document.getElementById('inpDate').style.display='inline-block';document.getElementById('inpMonth').style.display='none';}render();}
 function getSemana(date){const d=new Date(date+'T12:00:00');const dia=d.getDay();const diff=d.getDate()-dia+(dia==0?-6:1);const seg=new Date(d.setDate(diff));const datas=[];for(let i=0;i<7;i++){const dd=new Date(seg);dd.setDate(seg.getDate()+i);datas.push(dd.toISOString().slice(0,10));}return datas;}
 function render(){
   const inpDate=document.getElementById('inpDate');const inpMonth=document.getElementById('inpMonth');
   if(!inpDate.value)inpDate.value=new Date().toISOString().slice(0,10);
   if(!inpMonth.value)inpMonth.value=new Date().toISOString().slice(0,7);
-  let dataSel=inpDate.value;let mesSel=inpMonth.value;
-  let titulo='';let filtrados=[];
+  let dataSel=inpDate.value;let mesSel=inpMonth.value;let titulo='';let filtrados=[];
   if(modoAtual==='dia'){titulo=formatLong(new Date(dataSel+'T12:00:00')).toUpperCase();shows.sort((a,b)=>a.p.localeCompare(b.p));filtrados=shows.filter(s=>s.data===dataSel);}
   else if(modoAtual==='semana'){const sem=getSemana(dataSel);titulo='SEMANA '+new Date(sem[0]+'T12:00:00').toLocaleDateString('pt-BR')+' A '+new Date(sem[6]+'T12:00:00').toLocaleDateString('pt-BR');shows.sort((a,b)=>{if(a.data!==b.data)return a.data.localeCompare(b.data);return a.p.localeCompare(b.p);});filtrados=shows.filter(s=>sem.includes(s.data));}
   else if(modoAtual==='mes'){const [y,m]=mesSel.split('-');titulo='MES DE '+new Date(y,m-1,1).toLocaleDateString('pt-BR',{month:'long',year:'numeric'}).toUpperCase();shows.sort((a,b)=>{if(a.data!==b.data)return a.data.localeCompare(b.data);return a.p.localeCompare(b.p);});filtrados=shows.filter(s=>s.data&&s.data.startsWith(mesSel));}
   else{const ano=mesSel.split('-')[0];titulo='ANO DE '+ano;shows.sort((a,b)=>{if(a.data!==b.data)return a.data.localeCompare(b.data);return a.p.localeCompare(b.p);});filtrados=shows.filter(s=>s.data&&s.data.startsWith(ano));}
-  document.getElementById('titleLong').innerText=titulo;
-  document.getElementById('folhaTitulo').innerText=titulo;
+  document.getElementById('titleLong').innerText=titulo;document.getElementById('folhaTitulo').innerText=titulo;
   const lista=document.getElementById('lista');lista.innerHTML='';
-  if(filtrados.length===0){lista.innerHTML='<div class="show-card" style="text-align:center;color:#888;padding:20px">Nenhum show neste período.<br>Clique no + para adicionar</div>';}
-  else{let dataAtual='';filtrados.forEach(s=>{if(s.data!==dataAtual && modoAtual!=='dia'){dataAtual=s.data;const divDia=document.createElement('div');divDia.className='dia-label';divDia.innerText=formatLong(new Date(dataAtual+'T12:00:00')).toUpperCase();lista.appendChild(divDia);}const idx=shows.indexOf(s);const cor=corCantor(s.nome);const div=document.createElement('div');div.className='show-card';div.innerHTML='<div class=line>'+s.p+' - <b style="color:'+cor+'">'+s.nome+'</b> - '+s.ini+'-'+s.fim+'</div><div style="margin-top:6px"><button class=b-edit onclick=editar('+idx+')>✏️ EDITAR</button> <button class=b-del onclick=excluir('+idx+')>🗑️ EXCLUIR</button></div>';lista.appendChild(div);});}
+  if(filtrados.length===0){lista.innerHTML='<div class="show-card" style="text-align:center;color:#888;padding:20px">Nenhum show<br>Clique no +</div>';}
+  else{let dataAtual='';filtrados.forEach(s=>{if(s.data!==dataAtual&&modoAtual!=='dia'){dataAtual=s.data;const divDia=document.createElement('div');divDia.className='dia-label';divDia.innerText=formatLong(new Date(dataAtual+'T12:00:00')).toUpperCase();lista.appendChild(divDia);}const idx=shows.indexOf(s);const cor=corCantor(s.nome);const div=document.createElement('div');div.className='show-card';div.innerHTML='<div class=line>'+s.p+' - <b style="color:'+cor+'">'+s.nome+'</b> - '+s.ini+'-'+s.fim+'</div><div style="margin-top:6px"><button class=b-edit onclick=editar('+idx+')>✏️ EDITAR</button> <button class=b-del onclick=excluir('+idx+')>🗑️ EXCLUIR</button></div>';lista.appendChild(div);});}
   document.getElementById('folhaConteudo').innerHTML=filtrados.map(s=>{const cor=corCantor(s.nome);const label=modoAtual==='dia'?'':s.data.split('-').reverse().slice(0,2).join('/')+' ';return '<p class=folha-item>'+label+s.p+' - <b style="color:'+cor+'">'+s.nome+'</b> - '+s.ini+'-'+s.fim+'</p>';}).join('');
 }
 function mudaDia(n){if(modoAtual==='mes'||modoAtual==='ano'){const inp=document.getElementById('inpMonth');let [y,m]=inp.value.split('-').map(Number);m+=n;if(m>12){m=1;y++;}if(m<1){m=12;y--;}inp.value=y+'-'+String(m).padStart(2,'0');render();}else{const inp=document.getElementById('inpDate');let d=new Date(inp.value+'T12:00:00');d.setDate(d.getDate()+n);inp.value=d.toISOString().slice(0,10);render();}}
