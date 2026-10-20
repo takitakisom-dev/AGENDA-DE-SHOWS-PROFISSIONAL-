@@ -19,7 +19,6 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 .pill{border:0;background:#eee;padding:5px 10px;border-radius:20px;font-weight:700;color:#888;font-size:11px;cursor:pointer}
 .show-card{background:#fff;margin:8px 10px;border-radius:12px;padding:10px 12px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
 .line{font-weight:700;font-size:13px}
-.line2{font-size:12px;margin:4px 0 6px 0;color:#444}
 .b-edit,.b-del{border:0;padding:5px 10px;border-radius:6px;font-weight:700;font-size:11px;cursor:pointer}
 .b-edit{background:#e3f0ff;color:#2a7fff}.b-del{background:#ffe3e3;color:#d44}
 .bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #ddd;display:flex;gap:4px;padding:6px;justify-content:space-around;z-index:20}
@@ -51,7 +50,7 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 <body>
 <div class="overlay" id="overlay" onclick="closeMenu();fecharTodosModais()"></div>
 <div class="side" id="side">
-<div style="font-weight:800;font-size:14px;margin-bottom:6px">Usuario</div>
+<div style="font-weight:800;font-size:14px;margin-bottom:6px">TAKI - MENU</div>
 <div class="menu-item" onclick="closeMenu()">🏠 INICIO</div>
 <div class="menu-item" onclick="closeMenu();modoNormal()">📋 AGENDA DO DIA</div>
 <div class="menu-item" onclick="closeMenu()">📅 AGENDA DO MES</div>
@@ -60,10 +59,6 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 <div style="height:8px;border-bottom:1px solid #eee;margin:6px 0"></div>
 <div class="menu-item" onclick="abrirGestaoCasas()">🏠 CADASTRAR CASAS</div>
 <div class="menu-item" onclick="abrirGestaoMusicos()">🎤 CADASTRAR MUSICOS</div>
-<div style="height:8px;border-bottom:1px solid #eee;margin:6px 0"></div>
-<div class="menu-item" onclick="closeMenu()">🍴 VER RESTAURANTES</div>
-<div class="menu-item" onclick="closeMenu()">🎤 VER MUSICOS</div>
-<div class="menu-item" onclick="closeMenu()">📊 RELATORIOS</div>
 <div style="height:8px;border-bottom:1px solid #eee;margin:6px 0"></div>
 <div class="menu-item" onclick="closeMenu()">⚙️ CONFIG</div>
 <div class="menu-item" onclick="closeMenu()">🚪 FECHAR MENU</div>
@@ -78,14 +73,21 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 <div class="modal" id="modalMusicos"><div class="modal-box"><h3>🎤 CADASTRAR MUSICOS</h3><label>Novo músico</label><div style="display:flex;gap:6px"><input id="novoMusicoInput" placeholder="Ex: BRUNO, RAFA" style="flex:1"><button onclick="addMusico()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaMusicos" style="margin-top:8px"></div><button class="cancel" onclick="fecharModalMusicos()">FECHAR</button></div></div>
 <div class="modal" id="modalEditar"><div class="modal-box"><h3 id="editarTitulo">✏️ Editar</h3><input id="editarInput"><button class="save" onclick="confirmarEditar()">SALVAR EDIÇÃO</button><button class="cancel" onclick="fecharModalEditar()">CANCELAR</button></div></div>
 <script>
-function carregar(chave, padrao){try{const v=localStorage.getItem(chave);if(v){const a=JSON.parse(v);if(Array.isArray(a)&&a.length>0)return a;}}catch(e){}return padrao;}
+// *** CORREÇÃO 1: AGORA RETORNA MESMO SE FOR VAZIO [] ***
+function carregar(chave, padrao){
+  try{
+    const v = localStorage.getItem(chave);
+    if(v !== null){
+      const a = JSON.parse(v);
+      if(Array.isArray(a)) return a;
+    }
+  }catch(e){}
+  return padrao;
+}
 let casas=carregar('casas_lista_final',['P1','P2','P3','P4','P5']);
 let musicos=carregar('musicos_lista_final',['DOUGLAS','LUCIANO','ISRAEL','ANDRE TAKI','MARTIN','RICK SOLO','ROBSON SOLO']);
-let shows=carregar('shows_agenda_final',[
-{p:'P1',ini:'19:00',fim:'22:00',nome:'DOUGLAS',valor:300,data:'2026-10-20'},
-{p:'P2',ini:'19:00',fim:'22:00',nome:'LUCIANO',valor:300,data:'2026-10-20'}
-]);
-// CORREÇÃO: garante que todo show antigo ganhe uma data se não tiver
+let shows=carregar('shows_agenda_final',[]);
+// Garante data nos antigos
 shows = shows.map(s=>{ if(!s.data){ s.data = new Date().toISOString().slice(0,10); } return s; });
 
 function limpar(l){return [...new Set(l.map(x=>x.toString().trim().toUpperCase()).filter(x=>x))];}
@@ -111,7 +113,7 @@ function fecharModalEditar(){document.getElementById('modalEditar').classList.re
 function confirmarEditar(){let novo=document.getElementById('editarInput').value.trim().toUpperCase();if(!novo)return;if(editTipo==='casa'){casas[editPos]=novo;casas=limpar(casas);renderListaCasas();}else{musicos[editPos]=novo;musicos=limpar(musicos);renderListaMusicos();}saveAll();preencherSelects();fecharModalEditar();}
 function excluirItem(tipo,pos){const nome=tipo==='casa'?casas[pos]:musicos[pos];if(!confirm('Excluir '+nome+'?'))return;if(tipo==='casa'){casas.splice(pos,1);renderListaCasas();}else{musicos.splice(pos,1);renderListaMusicos();}saveAll();preencherSelects();}
 
-// *** AQUI ESTÁ A CORREÇÃO DA AGENDA DO DIA ***
+// *** CORREÇÃO 2: FILTRA SÓ DO DIA ***
 function render(){
   const inp=document.getElementById('inpDate');
   if(!inp.value)inp.value=new Date().toISOString().slice(0,10);
@@ -119,26 +121,22 @@ function render(){
   const d=new Date(dataSelecionada+'T12:00:00');
   document.getElementById('titleLong').innerText='TAKI DESENVOLVIMENTO DE SISTEMAS - '+formatLong(d).toUpperCase();
   document.getElementById('folhaTitulo').innerText=formatLong(d).toUpperCase();
-  
-  // FILTRA SÓ DO DIA SELECIONADO
   const filtrados = shows.filter(s => s.data === dataSelecionada);
-
   const lista=document.getElementById('lista');
   lista.innerHTML='';
   if(filtrados.length===0){
-    lista.innerHTML='<div class="show-card" style="text-align:center;color:#888">Nenhum show para este dia</div>';
+    lista.innerHTML='<div class="show-card" style="text-align:center;color:#888;padding:20px">Nenhum show para este dia.<br>Clique no + para adicionar</div>';
   }
   filtrados.forEach((s)=>{
-    const idxReal = shows.indexOf(s); // índice real no array completo para editar/excluir
+    const idxReal = shows.indexOf(s);
     const cor=corCantor(s.nome);
     const div=document.createElement('div');
     div.className='show-card';
     div.innerHTML='<div class=line>'+s.p+' '+s.ini+'-'+s.fim+' - <b style="color:'+cor+'">'+s.nome+'</b></div><div style="margin-top:6px"><button class=b-edit onclick=editar('+idxReal+')>✏️ EDITAR</button> <button class=b-del onclick=excluir('+idxReal+')>🗑️ EXCLUIR</button></div>';
     lista.appendChild(div);
   });
-  document.getElementById('folhaConteudo').innerHTML=filtrados.map((s,idx)=>{const cor=corCantor(s.nome);return '<p class=folha-item>'+s.p+' '+s.ini+'-'+s.fim+' - <b style="color:'+cor+'">'+s.nome+'</b></p>';}).join('');
+  document.getElementById('folhaConteudo').innerHTML=filtrados.map((s)=>{const cor=corCantor(s.nome);return '<p class=folha-item>'+s.p+' '+s.ini+'-'+s.fim+' - <b style="color:'+cor+'">'+s.nome+'</b></p>';}).join('');
 }
-
 function mudaDia(n){const inp=document.getElementById('inpDate');let d=new Date(inp.value+'T12:00:00');d.setDate(d.getDate()+n);inp.value=d.toISOString().slice(0,10);render();}
 function hoje(){document.getElementById('inpDate').value=new Date().toISOString().slice(0,10);render();}
 function amanha(){let d=new Date();d.setDate(d.getDate()+1);document.getElementById('inpDate').value=d.toISOString().slice(0,10);render();}
