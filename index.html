@@ -10,7 +10,7 @@
 *{box-sizing:border-box;font-family:system-ui,Arial,sans-serif}
 body{margin:0;background:#f0f0f0;padding-bottom:90px}
 header{background:#1a1a2e;display:flex;align-items:center;justify-content:space-between;padding:10px 12px;position:sticky;top:0;z-index:10;color:#fff}
-header h1{margin:0;font-size:12px;line-height:13px} header h1 span{font-size:10px;color:#f0c040;display:block;font-weight:800;letter-spacing:0.5px}
+header h1{margin:0;font-size:12px;line-height:13px} header h1 span{font-size:10px;color:#f0c040;display:block;font-weight:800}
 .btn-home{background:#7c6cff;color:#fff;border:0;padding:7px 14px;border-radius:20px;font-size:12px;font-weight:800}
 .menu-btn{font-size:22px;cursor:pointer;padding:4px 8px}
 .date-card{background:#fff;margin:10px;border-radius:14px;padding:10px;box-shadow:0 1px 4px rgba(0,0,0,.08);text-align:center}
@@ -34,7 +34,7 @@ input[type=date],input[type=month]{font-size:13px;padding:6px 10px;border:1px so
 .add-btn{position:fixed;right:14px;bottom:80px;width:56px;height:56px;border-radius:50%;border:0;background:#7c6cff;color:#fff;font-size:30px;z-index:25;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,.3)}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:500;padding:14px}
 .modal.open{display:flex}
-.modal-box{background:#fff;border-radius:14px;padding:14px;width:100%;max-width:440px;max-height:90vh;overflow:auto}
+.modal-box{background:#fff;border-radius:14px;padding:14px;width:100%;max-width:460px;max-height:90vh;overflow:auto}
 .modal-box input,.modal-box select{width:100%;padding:11px;border:1px solid #ccc;border-radius:8px;margin:5px 0;font-size:14px;background:#fff}
 .modal-box label{font-size:11px;font-weight:800;color:#666;margin-top:6px;display:block}
 .modal-box button{width:100%;padding:12px;border:0;border-radius:10px;font-weight:800;margin-top:6px;font-size:14px;cursor:pointer}
@@ -50,6 +50,13 @@ input[type=date],input[type=month]{font-size:13px;padding:6px 10px;border:1px so
 .mini-edit{background:#dbeafe;color:#1d4ed8}.mini-del{background:#fecaca;color:#b91c1c}.mini-ok{background:#d1fae5;color:#065f46}
 .report-card{background:#f9f9ff;border:1px solid #ddd;border-radius:10px;padding:10px;margin:8px 0;font-size:13px}
 .report-line{display:flex;justify-content:space-between;align-items:center;background:#fff;padding:6px 8px;border-radius:6px;margin:4px 0;border:1px solid #eee}
+.rel-print-btns{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+.rel-print-btns button{flex:1;min-width:70px;padding:8px;font-size:11px;font-weight:800;border-radius:8px;border:0;cursor:pointer}
+@media print{
+  body *{visibility:hidden}
+  #printArea, #printArea *{visibility:visible}
+  #printArea{position:absolute;left:0;top:0;width:100%}
+}
 </style>
 </head>
 <body>
@@ -80,54 +87,38 @@ input[type=date],input[type=month]{font-size:13px;padding:6px 10px;border:1px so
 <div class="modal" id="modal"><div class="modal-box"><h3 id="modalTitle">Novo Show</h3><label>🏠 CASA</label><select id="mP"></select><label>🏢 EMPRESA</label><select id="mEmpresa"></select><label>🕓 INICIO</label><input id="mIni" type="time" value="19:00"><label>🕓 FIM</label><input id="mFim" type="time" value="22:00"><label>🎤 MUSICO</label><select id="mNome"></select><label>💰 VALOR</label><input id="mValor" type="number" placeholder="300"><label>📅 DATA</label><input id="mData" type="date"><button class="save" onclick="salvar()">SALVAR</button><button class="cancel" onclick="fecharModal()">CANCELAR</button></div></div>
 <div class="modal" id="modalCasas"><div class="modal-box"><h3>🏠 CASAS</h3><div style="display:flex;gap:6px"><input id="novaCasaInput" placeholder="Ex: P5" style="flex:1"><button onclick="addCasa()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaCasas" style="margin-top:8px"></div><button class="cancel" onclick="fecharModalCasas()">FECHAR</button></div></div>
 <div class="modal" id="modalMusicos"><div class="modal-box"><h3>🎤 MUSICOS</h3><div style="display:flex;gap:6px"><input id="novoMusicoInput" placeholder="Ex: BRUNO" style="flex:1"><button onclick="addMusico()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaMusicos" style="margin-top:8px"></div><button class="cancel" onclick="fecharModalMusicos()">FECHAR</button></div></div>
-
-<div class="modal" id="modalEmpresas"><div class="modal-box"><h3>🏢 CADASTRAR EMPRESA COMPLETO</h3>
-<label>🏢 NOME DA EMPRESA *</label><input id="empNome" placeholder="Ex: TAKI SOM">
-<label>👤 RESPONSÁVEL</label><input id="empResp" placeholder="Ex: Andre Taki">
-<label>📱 ZAP / CELULAR</label><input id="empZap" placeholder="(11) 99999-9999" type="tel">
-<label>📧 EMAIL</label><input id="empEmail" placeholder="contato@takisom.com.br" type="email">
-<label>🪪 CNPJ ou CPF</label><input id="empDoc" placeholder="00.000.000/0001-00">
-<button class="save" onclick="addEmpresa()" style="background:#00a651">💾 SALVAR EMPRESA</button>
-<div id="listaEmpresas" style="margin-top:14px"></div>
-<button class="cancel" onclick="fecharModalEmpresas()">FECHAR</button>
-</div></div>
-
-<div class="modal" id="modalEditarEmpresa"><div class="modal-box"><h3>✏️ Editar Empresa</h3>
-<label>🏢 EMPRESA</label><input id="editEmpNome">
-<label>👤 RESPONSÁVEL</label><input id="editEmpResp">
-<label>📱 ZAP</label><input id="editEmpZap">
-<label>📧 EMAIL</label><input id="editEmpEmail">
-<label>🪪 CNPJ/CPF</label><input id="editEmpDoc">
-<button class="save" onclick="confirmarEditarEmpresa()">SALVAR EDIÇÃO</button>
-<button class="cancel" onclick="fecharModalEditarEmpresa()">CANCELAR</button>
-</div></div>
-
+<div class="modal" id="modalEmpresas"><div class="modal-box"><h3>🏢 CADASTRAR EMPRESA</h3>
+<label>🏢 NOME *</label><input id="empNome" placeholder="Ex: TAKI SOM"><label>👤 RESPONSÁVEL</label><input id="empResp"><label>📱 ZAP</label><input id="empZap" type="tel"><label>📧 EMAIL</label><input id="empEmail" type="email"><label>🪪 CNPJ/CPF</label><input id="empDoc"><button class="save" onclick="addEmpresa()" style="background:#00a651">💾 SALVAR EMPRESA</button><div id="listaEmpresas" style="margin-top:14px"></div><button class="cancel" onclick="fecharModalEmpresas()">FECHAR</button></div></div>
+<div class="modal" id="modalEditarEmpresa"><div class="modal-box"><h3>✏️ Editar Empresa</h3><label>🏢 EMPRESA</label><input id="editEmpNome"><label>👤 RESPONSÁVEL</label><input id="editEmpResp"><label>📱 ZAP</label><input id="editEmpZap"><label>📧 EMAIL</label><input id="editEmpEmail"><label>🪪 CNPJ/CPF</label><input id="editEmpDoc"><button class="save" onclick="confirmarEditarEmpresa()">SALVAR</button><button class="cancel" onclick="fecharModalEditarEmpresa()">CANCELAR</button></div></div>
 <div class="modal" id="modalEditar"><div class="modal-box"><h3 id="editarTitulo">✏️ Editar</h3><input id="editarInput"><button class="save" onclick="confirmarEditar()">SALVAR</button><button class="cancel" onclick="fecharModalEditar()">CANCELAR</button></div></div>
-<div class="modal" id="modalBKP"><div class="modal-box"><h3>💾 BACKUP</h3><button class="save" onclick="exportarBKP()" style="background:#00a651">📤 EXPORTAR</button><div style="margin-top:12px;padding:10px;background:#fff3cd;border-radius:8px"><b>🛡️ Recuperar:</b><div id="listaAutoBKP" style="margin-top:6px"></div><button onclick="recuperarAuto()" style="background:#ff9800;color:#fff;margin-top:6px">🔍 PROCURAR BACKUPS</button></div><label style="margin-top:14px">📥 IMPORTAR</label><input type="file" id="inputBKP" accept=".json" onchange="importarBKP(event)"><div id="bkpStatus" style="font-size:11px;margin-top:8px"></div><button class="cancel" onclick="fecharBKP()">FECHAR</button></div></div>
-<div class="modal" id="modalRel"><div class="modal-box"><h3>📊 RELATÓRIOS</h3><div><button class="pill active" onclick="setRelFiltro('mes')" id="relMes">MÊS</button><button class="pill" onclick="setRelFiltro('semana')" id="relSem">SEMANA</button><button class="pill" onclick="setRelFiltro('todos')" id="relTodos">TODOS</button><button class="pill" onclick="setRelFiltro('ano')" id="relAno">ANO</button></div><div id="relConteudo" style="margin-top:10px"></div><button class="cancel" onclick="fecharRel()">FECHAR</button></div></div>
+<div class="modal" id="modalBKP"><div class="modal-box"><h3>💾 BACKUP</h3><button class="save" onclick="exportarBKP()" style="background:#00a651">📤 EXPORTAR</button><div style="margin-top:12px;padding:10px;background:#fff3cd;border-radius:8px"><b>🛡️ Recuperar:</b><div id="listaAutoBKP"></div><button onclick="recuperarAuto()" style="background:#ff9800;color:#fff;margin-top:6px">🔍 PROCURAR BACKUPS</button></div><label style="margin-top:14px">📥 IMPORTAR</label><input type="file" id="inputBKP" accept=".json" onchange="importarBKP(event)"><div id="bkpStatus"></div><button class="cancel" onclick="fecharBKP()">FECHAR</button></div></div>
+
+<!-- MODAL RELATORIO COM OPÇÕES DE IMPRESSÃO -->
+<div class="modal" id="modalRel"><div class="modal-box"><h3>📊 RELATÓRIOS FINANCEIROS</h3>
+<div><button class="pill active" onclick="setRelFiltro('mes')" id="relMes">MÊS</button><button class="pill" onclick="setRelFiltro('semana')" id="relSem">SEMANA</button><button class="pill" onclick="setRelFiltro('todos')" id="relTodos">TODOS</button><button class="pill" onclick="setRelFiltro('ano')" id="relAno">ANO</button></div>
+
+<!-- BOTÕES DE IMPRESSÃO DO RELATÓRIO -->
+<div class="rel-print-btns">
+<button class="b-zap" onclick="imprimirRelatorio('zap')">📱 ZAP</button>
+<button class="b-normal" onclick="imprimirRelatorio('normal')">🖨️ NORMAL</button>
+<button class="b-folha" onclick="imprimirRelatorio('folha')">📒 FOLHA</button>
+<button class="b-pdf" onclick="imprimirRelatorio('pdf')">📄 PDF</button>
+</div>
+
+<div id="relConteudo" style="margin-top:10px"></div>
+<div id="printArea" style="display:none"></div>
+<button class="cancel" onclick="fecharRel()">FECHAR</button></div></div>
 
 <script>
-function carregar(chave, padrao){
-  try{
-    const v=localStorage.getItem(chave);
-    if(v!==null){
-      const a=JSON.parse(v);
-      if(Array.isArray(a) || typeof a==='string') return a;
-    }
-  }catch(e){}
-  return padrao;
-}
+function carregar(chave, padrao){try{const v=localStorage.getItem(chave);if(v!==null){const a=JSON.parse(v);if(Array.isArray(a)||typeof a==='string')return a;}}catch(e){}return padrao;}
 let casas=carregar('casas_lista_final',['P1','P2','P3','P4','P5']);
 let musicos=carregar('musicos_lista_final',['DOUGLAS','LUCIANO','ISRAEL','ANDRE TAKI','MARTIN','RICK SOLO','ROBSON SOLO']);
 let empresasRaw=carregar('empresas_lista_final',['TAKI SOM']);
-let empresas=empresasRaw.map(e=>{
-  if(typeof e==='string'){return {nome:e.toUpperCase(), responsavel:'', zap:'', email:'', doc:''};}
-  return e;
-});
+let empresas=empresasRaw.map(e=>{if(typeof e==='string'){return {nome:e.toUpperCase(), responsavel:'', zap:'', email:'', doc:''};}return e;});
 let empresaAtiva=carregar('empresa_ativa_final','');
 if(!empresaAtiva && empresas.length>0) empresaAtiva=empresas[0].nome;
 let shows=carregar('shows_agenda_final',[]);
-shows=shows.map(s=>{if(!s.data){s.data=new Date().toISOString().slice(0,10);} if(!s.empresa){s.empresa=empresaAtiva||'TAKI SOM';} return s;});
+shows=shows.map(s=>{if(!s.data){s.data=new Date().toISOString().slice(0,10);} if(!s.empresa){s.empresa=empresaAtiva||'TAKI SOM';}return s;});
 function limpar(l){return [...new Set(l.map(x=>x.toString().trim().toUpperCase()).filter(x=>x))];}
 casas=limpar(casas);musicos=limpar(musicos);
 let editIdx=-1,editTipo=null,editPos=-1;let modoAtual='dia';let relFiltro='mes';
@@ -144,11 +135,7 @@ function saveAll(){
   localStorage.setItem('bkp_auto_'+new Date().toISOString().slice(0,10), JSON.stringify({casas,musicos,empresas,empresaAtiva,shows,data:new Date().toISOString()}));
 }
 function atualizarHeaderEmpresa(){
-  const el=document.getElementById('headerEmpresa');
-  if(el){el.innerText=(empresaAtiva||'TAKI').toUpperCase();}
-  // Atualiza tambem o titulo completo
-  const modoTit={'dia':'AGENDA DO DIA','semana':'AGENDA DA SEMANA','mes':'AGENDA DO MES','ano':'AGENDA DO ANO'};
-  document.getElementById('headerTitle').innerHTML=modoTit[modoAtual]+' <span id="headerEmpresa">'+(empresaAtiva||'TAKI').toUpperCase()+'</span>';
+  document.getElementById('headerTitle').innerHTML=(modoAtual==='dia'?'AGENDA DO DIA':modoAtual==='semana'?'AGENDA DA SEMANA':modoAtual==='mes'?'AGENDA DO MES':'AGENDA DO ANO')+' <span id="headerEmpresa">'+(empresaAtiva||'TAKI').toUpperCase()+'</span>';
 }
 function preencherSelects(){
   const selP=document.getElementById('mP');selP.innerHTML='';casas.forEach(c=>{let o=document.createElement('option');o.value=c;o.textContent=c;selP.appendChild(o);});
@@ -165,93 +152,44 @@ function abrirGestaoMusicos(){closeMenu();renderListaMusicos();document.getEleme
 function fecharModalMusicos(){document.getElementById('modalMusicos').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
 function renderListaMusicos(){const div=document.getElementById('listaMusicos');div.innerHTML='';musicos.forEach((m,i)=>{const cor=corCantor(m);div.innerHTML+='<div class=item-lista><b style="color:'+cor+'">'+m+'</b><div style="float:right"><button class="mini-btn mini-edit" onclick="editarItem(\'musico\','+i+')">✏️</button><button class="mini-btn mini-del" onclick="excluirItem(\'musico\','+i+')">🗑️</button></div></div>';});}
 function addMusico(){let n=document.getElementById('novoMusicoInput').value.trim().toUpperCase();if(!n)return;if(musicos.includes(n)){alert('Já existe!');return;}musicos.push(n);musicos=limpar(musicos);saveAll();preencherSelects();renderListaMusicos();document.getElementById('novoMusicoInput').value='';}
-
-// EMPRESAS COMPLETO COM TOPO
 function abrirGestaoEmpresas(){closeMenu();renderListaEmpresas();document.getElementById('modalEmpresas').classList.add('open');document.getElementById('overlay').classList.add('open');}
 function fecharModalEmpresas(){document.getElementById('modalEmpresas').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
 function renderListaEmpresas(){
   const div=document.getElementById('listaEmpresas');div.innerHTML='';
-  if(empresas.length===0){div.innerHTML='<small style="color:#888">Nenhuma empresa cadastrada</small>';return;}
   empresas.forEach((e,i)=>{
-    const ativa = e.nome===empresaAtiva ? '<span style="background:#f0c040;color:#000;padding:2px 6px;border-radius:10px;font-size:10px;margin-left:6px">ATIVA NO TOPO</span>' : '';
-    div.innerHTML+='<div class="item-lista"><b>🏢 '+e.nome+'</b>'+ativa+
-    '<small>👤 '+(e.responsavel||'Sem responsável')+'</small>'+
-    '<small>📱 '+(e.zap||'Sem zap')+' | 📧 '+(e.email||'Sem email')+'</small>'+
-    '<small>🪪 '+(e.doc||'Sem CNPJ/CPF')+'</small>'+
-    '<div style="margin-top:6px"><button class="mini-btn mini-ok" onclick="definirEmpresaAtiva('+i+')">✅ USAR NO TOPO</button><button class="mini-btn mini-edit" onclick="editarEmpresa('+i+')">✏️ EDITAR</button><button class="mini-btn mini-del" onclick="excluirItem(\'empresa\','+i+')">🗑️</button></div></div>';
+    const ativa=e.nome===empresaAtiva?' <span style="background:#f0c040;color:#000;padding:2px 6px;border-radius:10px;font-size:10px">ATIVA NO TOPO</span>':'';
+    div.innerHTML+='<div class="item-lista"><b>🏢 '+e.nome+'</b>'+ativa+'<small>👤 '+(e.responsavel||'')+'</small><small>📱 '+(e.zap||'')+' | '+ (e.email||'')+'</small><small>🪪 '+(e.doc||'')+'</small><div style="margin-top:6px"><button class="mini-btn mini-ok" onclick="definirEmpresaAtiva('+i+')">✅ USAR NO TOPO</button><button class="mini-btn mini-edit" onclick="editarEmpresa('+i+')">✏️</button><button class="mini-btn mini-del" onclick="excluirItem(\'empresa\','+i+')">🗑️</button></div></div>';
   });
 }
 function addEmpresa(){
   const nome=document.getElementById('empNome').value.trim().toUpperCase();
-  const resp=document.getElementById('empResp').value.trim();
-  const zap=document.getElementById('empZap').value.trim();
-  const email=document.getElementById('empEmail').value.trim();
-  const doc=document.getElementById('empDoc').value.trim();
-  if(!nome){alert('Digite o nome da empresa!');return;}
-  if(empresas.some(e=>e.nome===nome)){alert('Empresa já existe! Use editar.');return;}
-  empresas.push({nome, responsavel:resp, zap, email, doc});
-  empresaAtiva=nome;
-  saveAll();preencherSelects();renderListaEmpresas();atualizarHeaderEmpresa();
+  if(!nome){alert('Nome obrigatório');return;}
+  if(empresas.some(e=>e.nome===nome)){alert('Já existe');return;}
+  empresas.push({nome, responsavel:document.getElementById('empResp').value.trim(), zap:document.getElementById('empZap').value.trim(), email:document.getElementById('empEmail').value.trim(), doc:document.getElementById('empDoc').value.trim()});
+  empresaAtiva=nome;saveAll();preencherSelects();renderListaEmpresas();atualizarHeaderEmpresa();
   document.getElementById('empNome').value='';document.getElementById('empResp').value='';document.getElementById('empZap').value='';document.getElementById('empEmail').value='';document.getElementById('empDoc').value='';
 }
-function definirEmpresaAtiva(i){
-  empresaAtiva=empresas[i].nome;
-  saveAll();renderListaEmpresas();atualizarHeaderEmpresa();preencherSelects();
-  alert('Topo alterado para: '+empresaAtiva);
-}
-function editarEmpresa(i){
-  const e=empresas[i];
-  document.getElementById('editEmpNome').value=e.nome;
-  document.getElementById('editEmpResp').value=e.responsavel;
-  document.getElementById('editEmpZap').value=e.zap;
-  document.getElementById('editEmpEmail').value=e.email;
-  document.getElementById('editEmpDoc').value=e.doc;
-  editPos=i;
-  document.getElementById('modalEmpresas').classList.remove('open');
-  document.getElementById('modalEditarEmpresa').classList.add('open');
-}
+function definirEmpresaAtiva(i){empresaAtiva=empresas[i].nome;saveAll();renderListaEmpresas();atualizarHeaderEmpresa();preencherSelects();}
+function editarEmpresa(i){const e=empresas[i];document.getElementById('editEmpNome').value=e.nome;document.getElementById('editEmpResp').value=e.responsavel;document.getElementById('editEmpZap').value=e.zap;document.getElementById('editEmpEmail').value=e.email;document.getElementById('editEmpDoc').value=e.doc;editPos=i;document.getElementById('modalEmpresas').classList.remove('open');document.getElementById('modalEditarEmpresa').classList.add('open');}
 function fecharModalEditarEmpresa(){document.getElementById('modalEditarEmpresa').classList.remove('open');document.getElementById('modalEmpresas').classList.add('open');}
 function confirmarEditarEmpresa(){
   const nome=document.getElementById('editEmpNome').value.trim().toUpperCase();
-  if(!nome){alert('Nome obrigatório');return;}
-  const antigoNome=empresas[editPos].nome;
+  if(!nome)return;const antigo=empresas[editPos].nome;
   empresas[editPos]={nome, responsavel:document.getElementById('editEmpResp').value.trim(), zap:document.getElementById('editEmpZap').value.trim(), email:document.getElementById('editEmpEmail').value.trim(), doc:document.getElementById('editEmpDoc').value.trim()};
-  if(empresaAtiva===antigoNome) empresaAtiva=nome;
+  if(empresaAtiva===antigo) empresaAtiva=nome;
   saveAll();preencherSelects();renderListaEmpresas();atualizarHeaderEmpresa();fecharModalEditarEmpresa();
 }
-
 function editarItem(tipo,pos){editTipo=tipo;editPos=pos;const nome=tipo==='casa'?casas[pos]:musicos[pos];document.getElementById('editarTitulo').innerText='✏️ Editar '+nome;document.getElementById('editarInput').value=nome;document.getElementById('modalEditar').classList.add('open');document.getElementById('overlay').classList.add('open');}
-function fecharModalEditar(){document.getElementById('modalEditar').classList.remove('open');if(!document.getElementById('modalCasas').classList.contains('open') && !document.getElementById('modalMusicos').classList.contains('open') && !document.getElementById('modalEmpresas').classList.contains('open'))document.getElementById('overlay').classList.remove('open');}
+function fecharModalEditar(){document.getElementById('modalEditar').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
 function confirmarEditar(){let novo=document.getElementById('editarInput').value.trim().toUpperCase();if(!novo)return;if(editTipo==='casa'){casas[editPos]=novo;casas=limpar(casas);renderListaCasas();}else{musicos[editPos]=novo;musicos=limpar(musicos);renderListaMusicos();}saveAll();preencherSelects();fecharModalEditar();}
-function excluirItem(tipo,pos){const nome=tipo==='casa'?casas[pos]:tipo==='musico'?musicos[pos]:empresas[pos].nome;if(!confirm('Excluir '+nome+'?'))return;if(tipo==='casa'){casas.splice(pos,1);renderListaCasas();}else if(tipo==='musico'){musicos.splice(pos,1);renderListaMusicos();}else{const eraAtiva=empresas[pos].nome===empresaAtiva;empresas.splice(pos,1);if(eraAtiva){empresaAtiva=empresas.length>0?empresas[0].nome:'';}renderListaEmpresas();atualizarHeaderEmpresa();}saveAll();preencherSelects();}
-
+function excluirItem(tipo,pos){const nome=tipo==='casa'?casas[pos]:tipo==='musico'?musicos[pos]:empresas[pos].nome;if(!confirm('Excluir '+nome+'?'))return;if(tipo==='casa'){casas.splice(pos,1);renderListaCasas();}else if(tipo==='musico'){musicos.splice(pos,1);renderListaMusicos();}else{const era=empresas[pos].nome===empresaAtiva;empresas.splice(pos,1);if(era){empresaAtiva=empresas.length>0?empresas[0].nome:'';}renderListaEmpresas();atualizarHeaderEmpresa();}saveAll();preencherSelects();}
 function abrirBKP(){closeMenu();document.getElementById('modalBKP').classList.add('open');document.getElementById('overlay').classList.add('open');recuperarAuto();}
 function fecharBKP(){document.getElementById('modalBKP').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
 function exportarBKP(){const dados={casas,musicos,empresas,empresaAtiva,shows,exportadoEm:new Date().toLocaleString('pt-BR')};const blob=new Blob([JSON.stringify(dados,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='TAKI-BKP-'+new Date().toISOString().slice(0,10)+'.json';a.click();document.getElementById('bkpStatus').innerText='✅ Exportado!';}
-function importarBKP(ev){const file=ev.target.files[0];if(!file)return;const r=new FileReader();r.onload=e=>{try{const d=JSON.parse(e.target.result);if(!d.shows)throw 'inválido';if(confirm('Substituir pelo backup de '+d.exportadoEm+'?')){casas=d.casas||casas;musicos=d.musicos||musicos;empresas=d.empresas||empresas;if(empresas.length>0 && typeof empresas[0]==='string'){empresas=empresas.map(nome=>({nome, responsavel:'', zap:'', email:'', doc:''}));}empresaAtiva=d.empresaAtiva||empresaAtiva;shows=d.shows;saveAll();preencherSelects();render();atualizarHeaderEmpresa();document.getElementById('bkpStatus').innerText='✅ Importado '+shows.length+' shows';}}catch(err){document.getElementById('bkpStatus').innerText='❌ Erro';}};r.readAsText(file);}
-function recuperarAuto(){
-  const div=document.getElementById('listaAutoBKP');div.innerHTML='';
-  let achou=false;
-  for(let i=0;i<localStorage.length;i++){
-    const k=localStorage.key(i);
-    if(k && k.startsWith('bkp_auto_')){
-      try{
-        const bkp=JSON.parse(localStorage.getItem(k));
-        achou=true;
-        div.innerHTML+='<div style="font-size:11px;padding:4px;border-bottom:1px solid #eee"><b>'+k+'</b> - '+bkp.shows.length+' shows <button class="mini-btn mini-edit" onclick="restaurarBKP(\''+k+'\')">RESTAURAR</button></div>';
-      }catch(e){}
-    }
-  }
-  if(!achou) div.innerHTML='<small>Dados atuais: '+shows.length+' shows, '+casas.length+' casas, '+musicos.length+' músicos, '+empresas.length+' empresas</small>';
-}
-function restaurarBKP(chave){
-  try{
-    const bkp=JSON.parse(localStorage.getItem(chave));
-    if(confirm('Restaurar backup de '+chave+' com '+bkp.shows.length+' shows?')){
-      casas=bkp.casas;musicos=bkp.musicos;empresas=bkp.empresas||empresas;empresaAtiva=bkp.empresaAtiva||empresaAtiva;shows=bkp.shows;saveAll();preencherSelects();render();atualizarHeaderEmpresa();document.getElementById('bkpStatus').innerText='✅ Restaurado de '+chave;
-    }
-  }catch(e){alert('Erro ao restaurar');}
-}
+function importarBKP(ev){const file=ev.target.files[0];if(!file)return;const r=new FileReader();r.onload=e=>{try{const d=JSON.parse(e.target.result);if(!d.shows)throw 'inválido';if(confirm('Restaurar '+d.exportadoEm+'?')){casas=d.casas||casas;musicos=d.musicos||musicos;empresas=d.empresas||empresas;if(empresas.length>0&&typeof empresas[0]==='string'){empresas=empresas.map(nome=>({nome, responsavel:'', zap:'', email:'', doc:''}));}empresaAtiva=d.empresaAtiva||empresaAtiva;shows=d.shows;saveAll();preencherSelects();render();atualizarHeaderEmpresa();document.getElementById('bkpStatus').innerText='✅ Importado';}}catch(err){document.getElementById('bkpStatus').innerText='❌ Erro';}};r.readAsText(file);}
+function recuperarAuto(){const div=document.getElementById('listaAutoBKP');div.innerHTML='';let achou=false;for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&k.startsWith('bkp_auto_')){try{const bkp=JSON.parse(localStorage.getItem(k));achou=true;div.innerHTML+='<div style="font-size:11px;padding:4px;border-bottom:1px solid #eee"><b>'+k+'</b> - '+bkp.shows.length+' shows <button class="mini-btn mini-edit" onclick="restaurarBKP(\''+k+'\')">RESTAURAR</button></div>';}catch(e){}}}if(!achou)div.innerHTML='<small>Dados atuais: '+shows.length+' shows</small>';}
+function restaurarBKP(chave){try{const bkp=JSON.parse(localStorage.getItem(chave));if(confirm('Restaurar '+chave+'?')){casas=bkp.casas;musicos=bkp.musicos;empresas=bkp.empresas||empresas;empresaAtiva=bkp.empresaAtiva||empresaAtiva;shows=bkp.shows;saveAll();preencherSelects();render();atualizarHeaderEmpresa();document.getElementById('bkpStatus').innerText='✅ Restaurado';}}catch(e){alert('Erro');}}
+
 function abrirRelatorios(){closeMenu();renderRel();document.getElementById('modalRel').classList.add('open');document.getElementById('overlay').classList.add('open');}
 function fecharRel(){document.getElementById('modalRel').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
 function setRelFiltro(f){relFiltro=f;document.querySelectorAll('#modalRel .pill').forEach(p=>p.classList.remove('active'));document.getElementById(f==='mes'?'relMes':f==='semana'?'relSem':f==='ano'?'relAno':'relTodos').classList.add('active');renderRel();}
@@ -280,7 +218,66 @@ function renderRel(){
   if(f.length===0)html='<div style="text-align:center;padding:20px;color:#888">Nenhum show no mês selecionado</div>';
   document.getElementById('relConteudo').innerHTML=html;
 }
-function modo(t){modoAtual=t;const titles={dia:'AGENDA DO DIA',semana:'AGENDA DA SEMANA',mes:'AGENDA DO MES',ano:'AGENDA DO ANO'};document.getElementById('headerTitle').innerHTML=titles[t]+' <span id="headerEmpresa">'+(empresaAtiva||'TAKI').toUpperCase()+'</span>';if(t==='mes'||t==='ano'){document.getElementById('inpDate').style.display='none';document.getElementById('inpMonth').style.display='inline-block';if(!document.getElementById('inpMonth').value)document.getElementById('inpMonth').value=new Date().toISOString().slice(0,7);}else{document.getElementById('inpDate').style.display='inline-block';document.getElementById('inpMonth').style.display='none';}render();}
+
+// NOVA FUNÇÃO DE IMPRESSÃO DO RELATÓRIO IGUAL AGENDA
+function imprimirRelatorio(tipo){
+  const f=getShowsFiltro();
+  const selMes=document.getElementById('inpMonth').value||new Date().toISOString().slice(0,7);
+  const empresaNome=empresaAtiva||'TAKI';
+  const porMusico={}; let total=0; const diasUnicos=new Set();
+  f.forEach(s=>{diasUnicos.add(s.data);const key=(s.nome||'').toUpperCase();const v=parseFloat(s.valor)||0;if(!porMusico[key])porMusico[key]={qtd:0,total:0,list:[]};porMusico[key].qtd++;porMusico[key].total+=v;porMusico[key].list.push(s);total+=v;});
+  if(f.length===0){alert('Nenhum show para imprimir neste filtro');return;}
+
+  if(tipo==='zap'){
+    let txt='📊 RELATÓRIO FINANCEIRO - '+empresaNome.toUpperCase()+'\n';
+    txt+='Mês: '+selMes+' - '+f.length+' shows em '+diasUnicos.size+' dias - R$ '+total.toFixed(2)+'\n\n';
+    Object.keys(porMusico).sort().forEach(k=>{
+      const d=porMusico[k];
+      txt+='🎤 '+k+' - '+d.qtd+' shows - R$ '+d.total.toFixed(2)+'\n';
+      d.list.forEach(s=>{txt+='  '+s.data.split('-').reverse().join('/')+' - '+s.p+' - '+s.ini+'-'+s.fim+' - R$ '+s.valor+'\n';});
+      txt+='\n';
+    });
+    window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');
+    return;
+  }
+
+  let htmlImprimir='';
+  if(tipo==='normal'){
+    htmlImprimir+='<div style="font-family:Arial;padding:20px"><h2 style="text-align:center">📊 RELATÓRIO FINANCEIRO - '+empresaNome+'</h2>';
+    htmlImprimir+='<p style="text-align:center"><b>Mês: '+selMes+' | '+f.length+' shows em '+diasUnicos.size+' dias | TOTAL R$ '+total.toFixed(2)+'</b></p><hr>';
+    Object.keys(porMusico).sort().forEach(k=>{
+      const d=porMusico[k];
+      htmlImprimir+='<h3>🎤 '+k+' - '+d.qtd+' shows - R$ '+d.total.toFixed(2)+'</h3><ul>';
+      d.list.forEach(s=>{htmlImprimir+='<li>'+s.data.split('-').reverse().join('/')+' - '+s.p+' - '+s.ini+'-'+s.fim+' - R$ '+s.valor+' - '+(s.empresa||'')+'</li>';});
+      htmlImprimir+='</ul>';
+    });
+    htmlImprimir+='</div>';
+  } else if(tipo==='folha'){
+    htmlImprimir+='<div style="font-family:Arial;background:#fff;background-image:repeating-linear-gradient(transparent,transparent 31px,#b5d8ff 31px,#b5d8ff 32px);border:1.5px solid #333;border-radius:6px;padding:0 10px 0 36px;position:relative">';
+    htmlImprimir+='<h2 style="font-size:14px;line-height:32px;height:32px;margin:0;text-transform:uppercase">RELATÓRIO FINANCEIRO - '+empresaNome+' - '+selMes+' - R$ '+total.toFixed(2)+'</h2>';
+    Object.keys(porMusico).sort().forEach(k=>{
+      const d=porMusico[k];
+      htmlImprimir+='<p style="font-size:13px;line-height:32px;height:32px;margin:0;font-weight:700">'+k+' - '+d.qtd+' shows - R$ '+d.total.toFixed(2)+'</p>';
+      d.list.forEach(s=>{htmlImprimir+='<p style="font-size:12px;line-height:32px;height:32px;margin:0;padding-left:10px">'+s.data.split('-').reverse().join('/')+' - '+s.p+' - '+s.ini+'-'+s.fim+' - R$ '+s.valor+'</p>';});
+    });
+    htmlImprimir+='</div>';
+  } else if(tipo==='pdf'){
+    htmlImprimir+='<div id="pdfRel"><h2>RELATÓRIO FINANCEIRO</h2><p><b>Empresa:</b> '+empresaNome+'<br><b>Mês:</b> '+selMes+'<br><b>Total:</b> '+f.length+' shows em '+diasUnicos.size+' dias - R$ '+total.toFixed(2)+'</p><hr><table border="1" cellpadding="6" cellspacing="0" width="100%"><tr><th>Data</th><th>Casa</th><th>Músico</th><th>Horário</th><th>Valor</th><th>Empresa</th></tr>';
+    f.sort((a,b)=>{if(a.data!==b.data)return a.data.localeCompare(b.data);return a.p.localeCompare(b.p);}).forEach(s=>{
+      htmlImprimir+='<tr><td>'+s.data.split('-').reverse().join('/')+'</td><td>'+s.p+'</td><td>'+s.nome+'</td><td>'+s.ini+'-'+s.fim+'</td><td>R$ '+s.valor+'</td><td>'+(s.empresa||'')+'</td></tr>';
+    });
+    htmlImprimir+='</table></div>';
+  }
+
+  const printArea=document.getElementById('printArea');
+  printArea.innerHTML=htmlImprimir;
+  printArea.style.display='block';
+  document.body.innerHTML=printArea.innerHTML;
+  window.print();
+  location.reload();
+}
+
+function modo(t){modoAtual=t;document.getElementById('headerTitle').innerHTML=(t==='dia'?'AGENDA DO DIA':t==='semana'?'AGENDA DA SEMANA':t==='mes'?'AGENDA DO MES':'AGENDA DO ANO')+' <span id="headerEmpresa">'+(empresaAtiva||'TAKI').toUpperCase()+'</span>';if(t==='mes'||t==='ano'){document.getElementById('inpDate').style.display='none';document.getElementById('inpMonth').style.display='inline-block';}else{document.getElementById('inpDate').style.display='inline-block';document.getElementById('inpMonth').style.display='none';}render();}
 function getSemana(date){const d=new Date(date+'T12:00:00');const dia=d.getDay();const diff=d.getDate()-dia+(dia==0?-6:1);const seg=new Date(d.setDate(diff));const datas=[];for(let i=0;i<7;i++){const dd=new Date(seg);dd.setDate(seg.getDate()+i);datas.push(dd.toISOString().slice(0,10));}return datas;}
 function render(){
   const inpDate=document.getElementById('inpDate');const inpMonth=document.getElementById('inpMonth');
@@ -294,7 +291,7 @@ function render(){
   document.getElementById('titleLong').innerText=titulo;document.getElementById('folhaTitulo').innerText=titulo+' - '+(empresaAtiva||'TAKI');
   const lista=document.getElementById('lista');lista.innerHTML='';
   if(filtrados.length===0){lista.innerHTML='<div class="show-card" style="text-align:center;color:#888;padding:20px">Nenhum show<br>Clique no +</div>';}
-  else{let dataAtual='';filtrados.forEach(s=>{if(s.data!==dataAtual&&modoAtual!=='dia'){dataAtual=s.data;const divDia=document.createElement('div');divDia.className='dia-label';divDia.innerText=formatLong(new Date(dataAtual+'T12:00:00')).toUpperCase();lista.appendChild(divDia);}const idx=shows.indexOf(s);const cor=corCantor(s.nome);const div=document.createElement('div');div.className='show-card';div.innerHTML='<div class=line>'+s.p+' - <b style="color:'+cor+'">'+s.nome+'</b> - '+s.ini+'-'+s.fim+' <small style="color:#888">['+(s.empresa||empresaAtiva)+']</small></div><div style="margin-top:6px"><button class=b-edit onclick=editar('+idx+')>✏️ EDITAR</button> <button class=b-del onclick=excluir('+idx+')>🗑️ EXCLUIR</button></div>';lista.appendChild(div);});}
+  else{let dataAtual='';filtrados.forEach(s=>{if(s.data!==dataAtual&&modoAtual!=='dia'){dataAtual=s.data;const divDia=document.createElement('div');divDia.className='dia-label';divDia.innerText=formatLong(new Date(dataAtual+'T12:00:00')).toUpperCase();lista.appendChild(divDia);}const idx=shows.indexOf(s);const cor=corCantor(s.nome);const div=document.createElement('div');div.className='show-card';div.innerHTML='<div class=line>'+s.p+' - <b style="color:'+cor+'">'+s.nome+'</b> - '+s.ini+'-'+s.fim+' <small>['+(s.empresa||empresaAtiva)+']</small></div><div style="margin-top:6px"><button class=b-edit onclick=editar('+idx+')>✏️ EDITAR</button> <button class=b-del onclick=excluir('+idx+')>🗑️ EXCLUIR</button></div>';lista.appendChild(div);});}
   document.getElementById('folhaConteudo').innerHTML=filtrados.map(s=>{const cor=corCantor(s.nome);const label=modoAtual==='dia'?'':s.data.split('-').reverse().slice(0,2).join('/')+' ';return '<p class=folha-item>'+label+s.p+' - <b style="color:'+cor+'">'+s.nome+'</b> - '+s.ini+'-'+s.fim+'</p>';}).join('');
 }
 function mudaDia(n){if(modoAtual==='mes'||modoAtual==='ano'){const inp=document.getElementById('inpMonth');let [y,m]=inp.value.split('-').map(Number);m+=n;if(m>12){m=1;y++;}if(m<1){m=12;y--;}inp.value=y+'-'+String(m).padStart(2,'0');render();}else{const inp=document.getElementById('inpDate');let d=new Date(inp.value+'T12:00:00');d.setDate(d.getDate()+n);inp.value=d.toISOString().slice(0,10);render();}}
