@@ -3,22 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agenda do Dia</title>
+<title>TAKI - Agenda Profissional</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1a1a2e">
 <style>
 *{box-sizing:border-box;font-family:system-ui,Arial,sans-serif}
 body{margin:0;background:#f0f0f0;padding-bottom:90px}
 header{background:#1a1a2e;display:flex;align-items:center;justify-content:space-between;padding:10px 12px;position:sticky;top:0;z-index:10;color:#fff}
-header h1{margin:0;font-size:13px;line-height:14px}
-header h1 span{font-size:10px;color:#f0c040;display:block;font-weight:600}
+header h1{margin:0;font-size:12px;line-height:13px} header h1 span{font-size:9px;color:#f0c040;display:block;font-weight:600}
 .btn-home{background:#7c6cff;color:#fff;border:0;padding:7px 14px;border-radius:20px;font-size:12px;font-weight:800}
 .menu-btn{font-size:22px;cursor:pointer;padding:4px 8px}
 .date-card{background:#fff;margin:10px;border-radius:14px;padding:10px;box-shadow:0 1px 4px rgba(0,0,0,.08);text-align:center}
 .arrow{width:44px;height:44px;border:0;border-radius:10px;background:#222;color:#fff;font-size:20px;display:grid;place-items:center;cursor:pointer}
-.title-long{font-weight:800;font-size:12px;margin-bottom:8px;text-transform:uppercase}
-input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-radius:10px;max-width:160px}
-.pill{border:0;background:#eee;padding:5px 10px;border-radius:20px;font-weight:700;color:#888;font-size:11px;cursor:pointer}
+.title-long{font-weight:800;font-size:11px;margin-bottom:8px;text-transform:uppercase;text-align:center}
+input[type=date],input[type=month]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-radius:10px;max-width:170px}
+.pill{border:0;background:#eee;padding:5px 10px;border-radius:20px;font-weight:700;color:#555;font-size:11px;cursor:pointer;margin:2px}
+.pill.active{background:#1a1a2e;color:#fff}
 .show-card{background:#fff;margin:8px 10px;border-radius:12px;padding:10px 12px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
-.line{font-weight:700;font-size:13px}
+.line{font-weight:700;font-size:13px} .dia-label{font-weight:800;font-size:11px;background:#1a1a2e;color:#fff;padding:6px 10px;border-radius:8px;margin:14px 10px 4px 10px}
 .b-edit,.b-del{border:0;padding:5px 10px;border-radius:6px;font-weight:700;font-size:11px;cursor:pointer}
 .b-edit{background:#e3f0ff;color:#2a7fff}.b-del{background:#ffe3e3;color:#d44}
 .bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #ddd;display:flex;gap:4px;padding:6px;justify-content:space-around;z-index:20}
@@ -27,52 +29,67 @@ input[type=date]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-ra
 .folha-view{display:none;padding:8px}
 .folha-paper{background:#fff;background-image:repeating-linear-gradient(transparent,transparent 31px,#b5d8ff 31px,#b5d8ff 32px);border:1.5px solid #333;border-radius:6px;padding:0 10px 0 36px;position:relative}
 .folha-paper:before{content:'';position:absolute;left:28px;top:0;bottom:0;width:1.5px;background:#ff8a8a}
-.folha-paper h2{font-size:12px;line-height:32px;height:32px;margin:0;white-space:nowrap;overflow:hidden;font-weight:700;text-transform:uppercase}
-.folha-item{font-size:12.5px;line-height:32px;height:32px;margin:0;padding:0;transform:translateY(2px);white-space:nowrap;overflow:hidden;color:#222}
+.folha-paper h2{font-size:11px;line-height:32px;height:32px;margin:0;white-space:nowrap;overflow:hidden;font-weight:700;text-transform:uppercase}
+.folha-item{font-size:12px;line-height:32px;height:32px;margin:0;padding:0;white-space:nowrap;overflow:hidden;color:#222}
 .add-btn{position:fixed;right:14px;bottom:80px;width:56px;height:56px;border-radius:50%;border:0;background:#7c6cff;color:#fff;font-size:30px;z-index:25;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,.3)}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:500;padding:14px}
 .modal.open{display:flex}
-.modal-box{background:#fff;border-radius:14px;padding:14px;width:100%;max-width:380px;max-height:85vh;overflow:auto}
+.modal-box{background:#fff;border-radius:14px;padding:14px;width:100%;max-width:420px;max-height:85vh;overflow:auto}
 .modal-box input,.modal-box select{width:100%;padding:11px;border:1px solid #ccc;border-radius:8px;margin:5px 0;font-size:14px;background:#fff}
 .modal-box label{font-size:11px;font-weight:800;color:#666;margin-top:6px;display:block}
 .modal-box button{width:100%;padding:12px;border:0;border-radius:10px;font-weight:800;margin-top:6px;font-size:14px;cursor:pointer}
 .save{background:#222;color:#fff}.cancel{background:#eee}
-.side{position:fixed;left:-100%;top:0;bottom:0;width:80%;max-width:300px;background:#fff;z-index:600;transition:.25s;padding:14px;overflow:auto;box-shadow:4px 0 20px rgba(0,0,0,.2)}
+.side{position:fixed;left:-100%;top:0;bottom:0;width:86%;max-width:340px;background:#fff;z-index:600;transition:.25s;padding:14px;overflow:auto;box-shadow:4px 0 20px rgba(0,0,0,.2)}
 .side.open{left:0}
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;z-index:400}
 .overlay.open{display:block}
-.menu-item{padding:12px 0;border-bottom:1px solid #f2f2f2;font-weight:600;font-size:13px;cursor:pointer}
+.menu-item{padding:13px 0;border-bottom:1px solid #f2f2f2;font-weight:700;font-size:13px;cursor:pointer;display:flex;gap:8px;align-items:center}
 .item-lista{display:flex;justify-content:space-between;align-items:center;background:#f8f8f8;padding:10px;border-radius:10px;margin:6px 0;border:1px solid #eee}
 .mini-btn{border:0;padding:8px 10px;border-radius:8px;font-size:12px;font-weight:800;cursor:pointer;margin-left:4px}
 .mini-edit{background:#dbeafe;color:#1d4ed8}.mini-del{background:#fecaca;color:#b91c1c}
+.report-card{background:#f9f9ff;border:1px solid #ddd;border-radius:10px;padding:10px;margin:6px 0;font-size:13px}
 </style>
 </head>
 <body>
 <div class="overlay" id="overlay" onclick="closeMenu();fecharTodosModais()"></div>
 <div class="side" id="side">
-<div style="font-weight:800;font-size:14px;margin-bottom:6px">TAKI - MENU</div>
-<div class="menu-item" onclick="closeMenu()">🏠 INICIO</div>
-<div class="menu-item" onclick="closeMenu();modoNormal()">📋 AGENDA DO DIA</div>
-<div class="menu-item" onclick="closeMenu()">📅 AGENDA DO MES</div>
-<div class="menu-item" onclick="closeMenu()">🗓️ AGENDA DO ANO</div>
+<div style="font-weight:900;font-size:15px;margin-bottom:8px">TAKI - MENU</div>
+<div class="menu-item" onclick="closeMenu();modo('dia')">🏠 INICIO</div>
+<div class="menu-item" onclick="closeMenu();modo('dia')">📋 AGENDA DO DIA</div>
+<div class="menu-item" onclick="closeMenu();modo('semana')">🗓️ AGENDA DA SEMANA</div>
+<div class="menu-item" onclick="closeMenu();modo('mes')">📅 AGENDA DO MES</div>
+<div class="menu-item" onclick="closeMenu();modo('ano')">🗓️ AGENDA DO ANO</div>
 <div class="menu-item" onclick="closeMenu();zap()">✈️ ENVIAR CRONOGRAMA</div>
-<div style="height:8px;border-bottom:1px solid #eee;margin:6px 0"></div>
+<div style="height:8px;border-bottom:1px solid #eee;margin:8px 0"></div>
 <div class="menu-item" onclick="abrirGestaoCasas()">🏠 CADASTRAR CASAS</div>
 <div class="menu-item" onclick="abrirGestaoMusicos()">🎤 CADASTRAR MUSICOS</div>
-<div style="height:8px;border-bottom:1px solid #eee;margin:6px 0"></div>
+<div style="height:8px;border-bottom:1px solid #eee;margin:8px 0"></div>
+<div class="menu-item" onclick="abrirBKP()">💾 BKP EXPORTAR / IMPORTAR</div>
+<div class="menu-item" onclick="instalarApp()" id="btnInstalar" style="background:#e0ffe0;border-radius:8px;padding:10px">📲 INSTALAR APP DIRETO</div>
+<div class="menu-item" onclick="abrirRelatorios()">📊 RELATÓRIOS FINANCEIROS</div>
+<div style="height:8px;border-bottom:1px solid #eee;margin:8px 0"></div>
 <div class="menu-item" onclick="closeMenu()">⚙️ CONFIG</div>
 <div class="menu-item" onclick="closeMenu()">🚪 FECHAR MENU</div>
 </div>
-<header><div style="display:flex;align-items:center;gap:6px"><span class="menu-btn" onclick="openMenu()">☰</span><div style="display:flex;gap:8px;align-items:center"><div style="width:36px;height:36px;background:#7c6cff;border-radius:8px;display:grid;place-items:center;font-weight:800">T</div><h1>AGENDA DO DIA <span>TAKI DESENVOLVIMENTO DE SISTEMAS</span></h1></div></div><button class="btn-home" onclick="location.reload()">HOME</button></header>
-<div id="listView"><div class="date-card"><div class="title-long" id="titleLong"></div><div style="display:flex;align-items:center;justify-content:space-between"><button class="arrow" onclick="mudaDia(-1)">◀</button><div><input type="date" id="inpDate" onchange="render()"><div style="display:flex;justify-content:center;gap:6px;margin-top:6px"><button class="pill" onclick="hoje()">HOJE</button><button class="pill" onclick="amanha()">AMANHÃ</button></div></div><button class="arrow" onclick="mudaDia(1)">▶</button></div></div><div id="lista"></div></div>
+
+<header><div style="display:flex;align-items:center;gap:6px"><span class="menu-btn" onclick="openMenu()">☰</span><h1 id="headerTitle">AGENDA DO DIA <span>TAKI DESENVOLVIMENTO</span></h1></div><button class="btn-home" onclick="hoje()">HOME</button></header>
+
+<div id="listView"><div class="date-card"><div class="title-long" id="titleLong"></div><div style="display:flex;align-items:center;justify-content:space-between"><button class="arrow" onclick="mudaDia(-1)">◀</button><div><input type="date" id="inpDate" onchange="render()"><input type="month" id="inpMonth" style="display:none" onchange="render()"><div style="display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-top:8px"><button class="pill" onclick="hoje()">HOJE</button><button class="pill" onclick="amanha()">AMANHÃ</button><button class="pill" onclick="modo('dia')">DIA</button><button class="pill" onclick="modo('semana')">SEMANA</button><button class="pill" onclick="modo('mes')">MÊS</button><button class="pill" onclick="modo('ano')">ANO</button></div></div><button class="arrow" onclick="mudaDia(1)">▶</button></div></div><div id="lista"></div></div>
+
 <div id="folhaView" class="folha-view"><div class="folha-paper"><h2 id="folhaTitulo"></h2><div id="folhaConteudo"></div></div></div>
+
 <button class="add-btn" onclick="abrirModalNovo()">+</button>
 <div class="bottom"><button class="b-zap" onclick="zap()">📱 ZAP</button><button class="b-normal" onclick="modoNormal()">🖨️ NORMAL</button><button class="b-folha" onclick="modoFolha()">📒 FOLHA</button><button class="b-pdf" onclick="window.print()">📄 PDF</button></div>
-<div class="modal" id="modal"><div class="modal-box"><h3 id="modalTitle">Novo Show</h3><label>🏠 CASA</label><select id="mP"></select><label>🕓 INICIO</label><input id="mIni" type="time" value="19:00"><label>🕓 FIM</label><input id="mFim" type="time" value="22:00"><label>🎤 MUSICO</label><select id="mNome"></select><label>💰 VALOR</label><input id="mValor" type="number" placeholder="300"><button class="save" onclick="salvar()">SALVAR</button><button class="cancel" onclick="fecharModal()">CANCELAR</button></div></div>
-<div class="modal" id="modalCasas"><div class="modal-box"><h3>🏠 CADASTRAR CASAS</h3><label>Nova casa</label><div style="display:flex;gap:6px"><input id="novaCasaInput" placeholder="Ex: P5, BAR CENTRAL" style="flex:1"><button onclick="addCasa()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaCasas" style="margin-top:8px"></div><button class="cancel" onclick="fecharModalCasas()">FECHAR</button></div></div>
-<div class="modal" id="modalMusicos"><div class="modal-box"><h3>🎤 CADASTRAR MUSICOS</h3><label>Novo músico</label><div style="display:flex;gap:6px"><input id="novoMusicoInput" placeholder="Ex: BRUNO, RAFA" style="flex:1"><button onclick="addMusico()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaMusicos" style="margin-top:8px"></div><button class="cancel" onclick="fecharModalMusicos()">FECHAR</button></div></div>
+
+<div class="modal" id="modal"><div class="modal-box"><h3 id="modalTitle">Novo Show</h3><label>🏠 CASA</label><select id="mP"></select><label>🕓 INICIO</label><input id="mIni" type="time" value="19:00"><label>🕓 FIM</label><input id="mFim" type="time" value="22:00"><label>🎤 MUSICO</label><select id="mNome"></select><label>💰 VALOR</label><input id="mValor" type="number" placeholder="300"><label>📅 DATA</label><input id="mData" type="date"><button class="save" onclick="salvar()">SALVAR</button><button class="cancel" onclick="fecharModal()">CANCELAR</button></div></div>
+<div class="modal" id="modalCasas"><div class="modal-box"><h3>🏠 CASAS</h3><div style="display:flex;gap:6px"><input id="novaCasaInput" placeholder="Ex: P5" style="flex:1"><button onclick="addCasa()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaCasas" style="margin-top:8px"></div><button class="cancel" onclick="fecharModalCasas()">FECHAR</button></div></div>
+<div class="modal" id="modalMusicos"><div class="modal-box"><h3>🎤 MUSICOS</h3><div style="display:flex;gap:6px"><input id="novoMusicoInput" placeholder="Ex: BRUNO" style="flex:1"><button onclick="addMusico()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaMusicos" style="margin-top:8px"></div><button class="cancel" onclick="fecharModalMusicos()">FECHAR</button></div></div>
 <div class="modal" id="modalEditar"><div class="modal-box"><h3 id="editarTitulo">✏️ Editar</h3><input id="editarInput"><button class="save" onclick="confirmarEditar()">SALVAR EDIÇÃO</button><button class="cancel" onclick="fecharModalEditar()">CANCELAR</button></div></div>
+<div class="modal" id="modalBKP"><div class="modal-box"><h3>💾 BACKUP - SALVA TUDO</h3><p style="font-size:12px">Seu dado nunca será perdido se você exportar. Salve no Drive toda semana.</p><button class="save" onclick="exportarBKP()" style="background:#00a651">📤 EXPORTAR AGORA (.json)</button><label style="margin-top:14px">📥 IMPORTAR ARQUIVO</label><input type="file" id="inputBKP" accept=".json" onchange="importarBKP(event)"><div id="bkpStatus" style="font-size:11px;margin-top:8px"></div><button class="cancel" onclick="fecharBKP()">FECHAR</button></div></div>
+<div class="modal" id="modalRel"><div class="modal-box"><h3>📊 RELATÓRIOS</h3><div><button class="pill active" onclick="setRelFiltro('mes')" id="relMes">MÊS ATUAL</button><button class="pill" onclick="setRelFiltro('semana')" id="relSem">SEMANA</button><button class="pill" onclick="setRelFiltro('todos')" id="relTodos">TODOS</button><button class="pill" onclick="setRelFiltro('ano')" id="relAno">ANO</button></div><div id="relConteudo" style="margin-top:10px"></div><button class="cancel" onclick="fecharRel()">FECHAR</button></div></div>
+
 <script>
+// === ANTI-PERDA: NUNCA RETORNA PADRÃO SE JÁ EXISTE REGISTRO, MESMO VAZIO ===
 function carregar(chave, padrao){
   try{
     const v = localStorage.getItem(chave);
@@ -91,80 +108,80 @@ shows = shows.map(s=>{ if(!s.data){ s.data = new Date().toISOString().slice(0,10
 function limpar(l){return [...new Set(l.map(x=>x.toString().trim().toUpperCase()).filter(x=>x))];}
 casas=limpar(casas);musicos=limpar(musicos);
 let editIdx=-1,editTipo=null,editPos=-1;
+let modoAtual='dia'; let relFiltro='mes';
+let deferredPrompt=null;
+
 function corCantor(n){n=n.toUpperCase();if(n.includes('DOUGLAS'))return '#1565ff';if(n.includes('LUCIANO'))return '#7c4dff';if(n.includes('ISRAEL'))return '#00a651';if(n.includes('TAKI')||n.includes('ANDRE'))return '#ff6f00';if(n.includes('RICK'))return '#d32f2f';if(n.includes('ROBSON'))return '#c62828';if(n.includes('MARTIN'))return '#ad1457';return '#222';}
 function openMenu(){document.getElementById('side').classList.add('open');document.getElementById('overlay').classList.add('open')}
 function closeMenu(){document.getElementById('side').classList.remove('open');if(!document.querySelector('.modal.open'))document.getElementById('overlay').classList.remove('open');}
 function formatLong(d){return d.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});}
-function saveAll(){localStorage.setItem('casas_lista_final',JSON.stringify(casas));localStorage.setItem('musicos_lista_final',JSON.stringify(musicos));localStorage.setItem('shows_agenda_final',JSON.stringify(shows));}
-function preencherSelects(){const selP=document.getElementById('mP');selP.innerHTML='';casas.forEach(c=>{let o=document.createElement('option');o.value=c;o.textContent='🏠 '+c;selP.appendChild(o);});const selM=document.getElementById('mNome');selM.innerHTML='';musicos.forEach(m=>{let o=document.createElement('option');o.value=m;o.textContent='🎤 '+m;selM.appendChild(o);});}
+function saveAll(){
+  localStorage.setItem('casas_lista_final',JSON.stringify(casas));
+  localStorage.setItem('musicos_lista_final',JSON.stringify(musicos));
+  localStorage.setItem('shows_agenda_final',JSON.stringify(shows));
+  localStorage.setItem('bkp_auto_'+new Date().toISOString().slice(0,10), JSON.stringify({casas,musicos,shows}));
+}
+function preencherSelects(){const selP=document.getElementById('mP');selP.innerHTML='';casas.forEach(c=>{let o=document.createElement('option');o.value=c;o.textContent=c;selP.appendChild(o);});const selM=document.getElementById('mNome');selM.innerHTML='';musicos.forEach(m=>{let o=document.createElement('option');o.value=m;o.textContent=m;selM.appendChild(o);});}
 function fecharTodosModais(){document.querySelectorAll('.modal').forEach(m=>m.classList.remove('open'));document.getElementById('overlay').classList.remove('open');}
 function abrirGestaoCasas(){closeMenu();renderListaCasas();document.getElementById('modalCasas').classList.add('open');document.getElementById('overlay').classList.add('open');}
 function fecharModalCasas(){document.getElementById('modalCasas').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
-function renderListaCasas(){const div=document.getElementById('listaCasas');div.innerHTML='';casas.forEach((c,i)=>{div.innerHTML+='<div class=item-lista><b>🏠 '+c+'</b><div><button class="mini-btn mini-edit" onclick="editarItem(\'casa\','+i+')">✏️</button><button class="mini-btn mini-del" onclick="excluirItem(\'casa\','+i+')">🗑️</button></div></div>';});}
+function renderListaCasas(){const div=document.getElementById('listaCasas');div.innerHTML='';casas.forEach((c,i)=>{div.innerHTML+='<div class=item-lista><b>'+c+'</b><div><button class="mini-btn mini-edit" onclick="editarItem(\'casa\','+i+')">✏️</button><button class="mini-btn mini-del" onclick="excluirItem(\'casa\','+i+')">🗑️</button></div></div>';});}
 function addCasa(){let n=document.getElementById('novaCasaInput').value.trim().toUpperCase();if(!n)return;if(casas.includes(n)){alert('Já existe!');return;}casas.push(n);casas=limpar(casas);saveAll();preencherSelects();renderListaCasas();document.getElementById('novaCasaInput').value='';}
 function abrirGestaoMusicos(){closeMenu();renderListaMusicos();document.getElementById('modalMusicos').classList.add('open');document.getElementById('overlay').classList.add('open');}
 function fecharModalMusicos(){document.getElementById('modalMusicos').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
-function renderListaMusicos(){const div=document.getElementById('listaMusicos');div.innerHTML='';musicos.forEach((m,i)=>{const cor=corCantor(m);div.innerHTML+='<div class=item-lista><b style="color:'+cor+'">🎤 '+m+'</b><div><button class="mini-btn mini-edit" onclick="editarItem(\'musico\','+i+')">✏️</button><button class="mini-btn mini-del" onclick="excluirItem(\'musico\','+i+')">🗑️</button></div></div>';});}
+function renderListaMusicos(){const div=document.getElementById('listaMusicos');div.innerHTML='';musicos.forEach((m,i)=>{const cor=corCantor(m);div.innerHTML+='<div class=item-lista><b style="color:'+cor+'">'+m+'</b><div><button class="mini-btn mini-edit" onclick="editarItem(\'musico\','+i+')">✏️</button><button class="mini-btn mini-del" onclick="excluirItem(\'musico\','+i+')">🗑️</button></div></div>';});}
 function addMusico(){let n=document.getElementById('novoMusicoInput').value.trim().toUpperCase();if(!n)return;if(musicos.includes(n)){alert('Já existe!');return;}musicos.push(n);musicos=limpar(musicos);saveAll();preencherSelects();renderListaMusicos();document.getElementById('novoMusicoInput').value='';}
 function editarItem(tipo,pos){editTipo=tipo;editPos=pos;const nome=tipo==='casa'?casas[pos]:musicos[pos];document.getElementById('editarTitulo').innerText='✏️ Editar '+nome;document.getElementById('editarInput').value=nome;document.getElementById('modalEditar').classList.add('open');document.getElementById('overlay').classList.add('open');}
 function fecharModalEditar(){document.getElementById('modalEditar').classList.remove('open');if(!document.getElementById('modalCasas').classList.contains('open') && !document.getElementById('modalMusicos').classList.contains('open'))document.getElementById('overlay').classList.remove('open');}
 function confirmarEditar(){let novo=document.getElementById('editarInput').value.trim().toUpperCase();if(!novo)return;if(editTipo==='casa'){casas[editPos]=novo;casas=limpar(casas);renderListaCasas();}else{musicos[editPos]=novo;musicos=limpar(musicos);renderListaMusicos();}saveAll();preencherSelects();fecharModalEditar();}
 function excluirItem(tipo,pos){const nome=tipo==='casa'?casas[pos]:musicos[pos];if(!confirm('Excluir '+nome+'?'))return;if(tipo==='casa'){casas.splice(pos,1);renderListaCasas();}else{musicos.splice(pos,1);renderListaMusicos();}saveAll();preencherSelects();}
 
+function abrirBKP(){closeMenu();document.getElementById('modalBKP').classList.add('open');document.getElementById('overlay').classList.add('open');}
+function fecharBKP(){document.getElementById('modalBKP').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
+function exportarBKP(){const dados={casas,musicos,shows,exportadoEm:new Date().toLocaleString('pt-BR')};const blob=new Blob([JSON.stringify(dados,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='TAKI-BKP-'+new Date().toISOString().slice(0,10)+'.json';a.click();document.getElementById('bkpStatus').innerText='✅ Exportado! Salve no Drive.';}
+function importarBKP(ev){const file=ev.target.files[0];if(!file)return;const r=new FileReader();r.onload=e=>{try{const d=JSON.parse(e.target.result);if(!d.shows) throw 'inválido';if(confirm('Substituir tudo pelo backup de '+d.exportadoEm+'?')){casas=d.casas;musicos=d.musicos;shows=d.shows;saveAll();preencherSelects();render();document.getElementById('bkpStatus').innerText='✅ Importado! '+shows.length+' shows.';}}catch(err){document.getElementById('bkpStatus').innerText='❌ Erro';}};r.readAsText(file);}
+
+function abrirRelatorios(){closeMenu();renderRel();document.getElementById('modalRel').classList.add('open');document.getElementById('overlay').classList.add('open');}
+function fecharRel(){document.getElementById('modalRel').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
+function setRelFiltro(f){relFiltro=f;document.querySelectorAll('#modalRel .pill').forEach(p=>p.classList.remove('active'));document.getElementById(f==='mes'?'relMes':f==='semana'?'relSem':f==='ano'?'relAno':'relTodos').classList.add('active');renderRel();}
+function getShowsFiltro(){const hoje=new Date();if(relFiltro==='todos')return shows;if(relFiltro==='ano')return shows.filter(s=>s.data&&s.data.startsWith(hoje.getFullYear().toString()));if(relFiltro==='semana'){const sem=getSemana(hoje.toISOString().slice(0,10));return shows.filter(s=>sem.includes(s.data));}const mes=hoje.toISOString().slice(0,7);return shows.filter(s=>s.data&&s.data.startsWith(mes));}
+function renderRel(){const f=getShowsFiltro();const porMusico={};let total=0;f.forEach(s=>{const v=parseFloat(s.valor)||0;porMusico[s.nome]=porMusico[s.nome]||{qtd:0,total:0};porMusico[s.nome].qtd++;porMusico[s.nome].total+=v;total+=v;});let html='<div class="report-card"><b>📊 TOTAL: '+f.length+' shows - R$ '+total.toFixed(2)+'</b></div>';Object.keys(porMusico).sort().forEach(n=>{const d=porMusico[n];const cor=corCantor(n);html+='<div class="report-card"><b style="color:'+cor+'">'+n+'</b> - '+d.qtd+' shows<br>R$ '+d.total.toFixed(2)+' | Média R$ '+(d.total/d.qtd).toFixed(2)+'</div>';});if(f.length===0)html='<div style="text-align:center;padding:20px;color:#888">Nenhum show neste período</div>';document.getElementById('relConteudo').innerHTML=html;}
+
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;document.getElementById('btnInstalar').style.display='flex';});
+function instalarApp(){if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.then(c=>{if(c.outcome==='accepted')alert('App instalado!');deferredPrompt=null;});}else{alert('Já instalado ou use Chrome > Instalar app. No iPhone: Compartilhar > Adicionar à Tela de Início.');}}
+
+function modo(t){modoAtual=t;const titles={dia:'AGENDA DO DIA',semana:'AGENDA DA SEMANA',mes:'AGENDA DO MES',ano:'AGENDA DO ANO'};document.getElementById('headerTitle').innerHTML=titles[t]+' <span>TAKI DESENVOLVIMENTO</span>';if(t==='mes'||t==='ano'){document.getElementById('inpDate').style.display='none';document.getElementById('inpMonth').style.display='inline-block';if(!document.getElementById('inpMonth').value)document.getElementById('inpMonth').value=new Date().toISOString().slice(0,7);}else{document.getElementById('inpDate').style.display='inline-block';document.getElementById('inpMonth').style.display='none';}render();}
+function getSemana(date){const d=new Date(date+'T12:00:00');const dia=d.getDay();const diff=d.getDate()-dia+(dia==0?-6:1);const seg=new Date(d.setDate(diff));const datas=[];for(let i=0;i<7;i++){const dd=new Date(seg);dd.setDate(seg.getDate()+i);datas.push(dd.toISOString().slice(0,10));}return datas;}
+
 function render(){
-  const inp=document.getElementById('inpDate');
-  if(!inp.value)inp.value=new Date().toISOString().slice(0,10);
-  const dataSelecionada = inp.value;
-  const d=new Date(dataSelecionada+'T12:00:00');
-  document.getElementById('titleLong').innerText='TAKI DESENVOLVIMENTO DE SISTEMAS - '+formatLong(d).toUpperCase();
-  document.getElementById('folhaTitulo').innerText=formatLong(d).toUpperCase();
-  
-  // Ordena por P1, P2, P3...
-  shows.sort((a,b)=> a.p.localeCompare(b.p));
-  const filtrados = shows.filter(s => s.data === dataSelecionada);
-  
-  const lista=document.getElementById('lista');
-  lista.innerHTML='';
-  if(filtrados.length===0){
-    lista.innerHTML='<div class="show-card" style="text-align:center;color:#888;padding:20px">Nenhum show para este dia.<br>Clique no + para adicionar</div>';
-  }
-  filtrados.forEach((s)=>{
-    const idxReal = shows.indexOf(s);
-    const cor=corCantor(s.nome);
-    const div=document.createElement('div');
-    div.className='show-card';
-    // SEQUÊNCIA CORRETA: RESTAURANTE, NOME E HORÁRIO
-    div.innerHTML='<div class=line>'+s.p+' - <b style="color:'+cor+'">'+s.nome+'</b> - '+s.ini+'-'+s.fim+'</div><div style="margin-top:6px"><button class=b-edit onclick=editar('+idxReal+')>✏️ EDITAR</button> <button class=b-del onclick=excluir('+idxReal+')>🗑️ EXCLUIR</button></div>';
-    lista.appendChild(div);
-  });
-  // FOLHA TAMBÉM NA SEQUÊNCIA CORRETA
-  document.getElementById('folhaConteudo').innerHTML=filtrados.map((s)=>{
-    const cor=corCantor(s.nome);
-    return '<p class=folha-item>'+s.p+' - <b style="color:'+cor+'">'+s.nome+'</b> - '+s.ini+'-'+s.fim+'</p>';
-  }).join('');
+  const inpDate=document.getElementById('inpDate');const inpMonth=document.getElementById('inpMonth');
+  if(!inpDate.value)inpDate.value=new Date().toISOString().slice(0,10);
+  if(!inpMonth.value)inpMonth.value=new Date().toISOString().slice(0,7);
+  let dataSel=inpDate.value;let mesSel=inpMonth.value;
+  let titulo='';let filtrados=[];
+  if(modoAtual==='dia'){titulo=formatLong(new Date(dataSel+'T12:00:00')).toUpperCase();shows.sort((a,b)=>a.p.localeCompare(b.p));filtrados=shows.filter(s=>s.data===dataSel);}
+  else if(modoAtual==='semana'){const sem=getSemana(dataSel);titulo='SEMANA '+new Date(sem[0]+'T12:00:00').toLocaleDateString('pt-BR')+' A '+new Date(sem[6]+'T12:00:00').toLocaleDateString('pt-BR');shows.sort((a,b)=>{if(a.data!==b.data)return a.data.localeCompare(b.data);return a.p.localeCompare(b.p);});filtrados=shows.filter(s=>sem.includes(s.data));}
+  else if(modoAtual==='mes'){const [y,m]=mesSel.split('-');titulo='MES DE '+new Date(y,m-1,1).toLocaleDateString('pt-BR',{month:'long',year:'numeric'}).toUpperCase();shows.sort((a,b)=>{if(a.data!==b.data)return a.data.localeCompare(b.data);return a.p.localeCompare(b.p);});filtrados=shows.filter(s=>s.data&&s.data.startsWith(mesSel));}
+  else{const ano=mesSel.split('-')[0];titulo='ANO DE '+ano;shows.sort((a,b)=>{if(a.data!==b.data)return a.data.localeCompare(b.data);return a.p.localeCompare(b.p);});filtrados=shows.filter(s=>s.data&&s.data.startsWith(ano));}
+  document.getElementById('titleLong').innerText=titulo;
+  document.getElementById('folhaTitulo').innerText=titulo;
+  const lista=document.getElementById('lista');lista.innerHTML='';
+  if(filtrados.length===0){lista.innerHTML='<div class="show-card" style="text-align:center;color:#888;padding:20px">Nenhum show neste período.<br>Clique no + para adicionar</div>';}
+  else{let dataAtual='';filtrados.forEach(s=>{if(s.data!==dataAtual && modoAtual!=='dia'){dataAtual=s.data;const divDia=document.createElement('div');divDia.className='dia-label';divDia.innerText=formatLong(new Date(dataAtual+'T12:00:00')).toUpperCase();lista.appendChild(divDia);}const idx=shows.indexOf(s);const cor=corCantor(s.nome);const div=document.createElement('div');div.className='show-card';div.innerHTML='<div class=line>'+s.p+' - <b style="color:'+cor+'">'+s.nome+'</b> - '+s.ini+'-'+s.fim+'</div><div style="margin-top:6px"><button class=b-edit onclick=editar('+idx+')>✏️ EDITAR</button> <button class=b-del onclick=excluir('+idx+')>🗑️ EXCLUIR</button></div>';lista.appendChild(div);});}
+  document.getElementById('folhaConteudo').innerHTML=filtrados.map(s=>{const cor=corCantor(s.nome);const label=modoAtual==='dia'?'':s.data.split('-').reverse().slice(0,2).join('/')+' ';return '<p class=folha-item>'+label+s.p+' - <b style="color:'+cor+'">'+s.nome+'</b> - '+s.ini+'-'+s.fim+'</p>';}).join('');
 }
-function mudaDia(n){const inp=document.getElementById('inpDate');let d=new Date(inp.value+'T12:00:00');d.setDate(d.getDate()+n);inp.value=d.toISOString().slice(0,10);render();}
-function hoje(){document.getElementById('inpDate').value=new Date().toISOString().slice(0,10);render();}
-function amanha(){let d=new Date();d.setDate(d.getDate()+1);document.getElementById('inpDate').value=d.toISOString().slice(0,10);render();}
+function mudaDia(n){if(modoAtual==='mes'||modoAtual==='ano'){const inp=document.getElementById('inpMonth');let [y,m]=inp.value.split('-').map(Number);m+=n;if(m>12){m=1;y++;}if(m<1){m=12;y--;}inp.value=y+'-'+String(m).padStart(2,'0');render();}else{const inp=document.getElementById('inpDate');let d=new Date(inp.value+'T12:00:00');d.setDate(d.getDate()+n);inp.value=d.toISOString().slice(0,10);render();}}
+function hoje(){document.getElementById('inpDate').value=new Date().toISOString().slice(0,10);document.getElementById('inpMonth').value=new Date().toISOString().slice(0,7);modo('dia');}
+function amanha(){let d=new Date();d.setDate(d.getDate()+1);document.getElementById('inpDate').value=d.toISOString().slice(0,10);modo('dia');}
 function modoFolha(){document.getElementById('listView').style.display='none';document.getElementById('folhaView').style.display='block';closeMenu()}
 function modoNormal(){document.getElementById('listView').style.display='block';document.getElementById('folhaView').style.display='none';}
-function zap(){
-  const d=document.getElementById('titleLong').innerText;
-  const dataSel = document.getElementById('inpDate').value;
-  const filtrados = shows.filter(s => s.data === dataSel);
-  const txt=filtrados.map(s=>s.p+' - '+s.nome+' - '+s.ini+'-'+s.fim+' - R$ '+s.valor).join('\n');
-  window.open('https://wa.me/?text='+encodeURIComponent('🎤 '+d+'\n\n'+txt),'_blank');
-}
-function abrirModalNovo(){preencherSelects();editIdx=-1;document.getElementById('modalTitle').innerText='Novo Show';document.getElementById('mIni').value='19:00';document.getElementById('mFim').value='22:00';document.getElementById('mValor').value='';document.getElementById('modal').classList.add('open');document.getElementById('overlay').classList.add('open');}
+function zap(){const d=document.getElementById('titleLong').innerText;const filtrados=(()=>{if(modoAtual==='dia')return shows.filter(s=>s.data===document.getElementById('inpDate').value);if(modoAtual==='semana'){const sem=getSemana(document.getElementById('inpDate').value);return shows.filter(s=>sem.includes(s.data));}if(modoAtual==='mes')return shows.filter(s=>s.data&&s.data.startsWith(document.getElementById('inpMonth').value));return shows.filter(s=>s.data&&s.data.startsWith(document.getElementById('inpMonth').value.split('-')[0]));})();const txt=filtrados.map(s=>(modoAtual!=='dia'?s.data.split('-').reverse().join('/')+' ':'')+s.p+' - '+s.nome+' - '+s.ini+'-'+s.fim).join('\n');window.open('https://wa.me/?text='+encodeURIComponent('🎤 '+d+'\n\n'+txt),'_blank');}
+function abrirModalNovo(){preencherSelects();editIdx=-1;document.getElementById('modalTitle').innerText='Novo Show';document.getElementById('mIni').value='19:00';document.getElementById('mFim').value='22:00';document.getElementById('mValor').value='';document.getElementById('mData').value=document.getElementById('inpDate').value||new Date().toISOString().slice(0,10);document.getElementById('modal').classList.add('open');document.getElementById('overlay').classList.add('open');}
 function fecharModal(){document.getElementById('modal').classList.remove('open');document.getElementById('overlay').classList.remove('open');editIdx=-1;}
-function salvar(){
-  const dataSel = document.getElementById('inpDate').value;
-  const o={p:document.getElementById('mP').value,fim:document.getElementById('mFim').value,ini:document.getElementById('mIni').value,nome:document.getElementById('mNome').value,valor:document.getElementById('mValor').value||300,data:dataSel};
-  if(editIdx>=0)shows[editIdx]=o;else shows.push(o);
-  saveAll();render();fecharModal();
-}
-function editar(i){preencherSelects();editIdx=i;const s=shows[i];document.getElementById('modalTitle').innerText='Editar Show';document.getElementById('mP').value=s.p;document.getElementById('mIni').value=s.ini;document.getElementById('mFim').value=s.fim;document.getElementById('mNome').value=s.nome;document.getElementById('mValor').value=s.valor;document.getElementById('inpDate').value=s.data||new Date().toISOString().slice(0,10);document.getElementById('modal').classList.add('open');document.getElementById('overlay').classList.add('open');}
-function excluir(i){if(confirm('Excluir?')){shows.splice(i,1);saveAll();render();}}
+function salvar(){const dataSel=document.getElementById('mData').value||document.getElementById('inpDate').value;const o={p:document.getElementById('mP').value,fim:document.getElementById('mFim').value,ini:document.getElementById('mIni').value,nome:document.getElementById('mNome').value,valor:document.getElementById('mValor').value||300,data:dataSel};if(editIdx>=0)shows[editIdx]=o;else shows.push(o);saveAll();render();fecharModal();}
+function editar(i){preencherSelects();editIdx=i;const s=shows[i];document.getElementById('modalTitle').innerText='Editar Show';document.getElementById('mP').value=s.p;document.getElementById('mIni').value=s.ini;document.getElementById('mFim').value=s.fim;document.getElementById('mNome').value=s.nome;document.getElementById('mValor').value=s.valor;document.getElementById('mData').value=s.data;document.getElementById('modal').classList.add('open');document.getElementById('overlay').classList.add('open');}
+function excluir(i){if(confirm('Excluir? Faça BKP antes!')){shows.splice(i,1);saveAll();render();}}
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}
 render();preencherSelects();
 </script>
 </body>
