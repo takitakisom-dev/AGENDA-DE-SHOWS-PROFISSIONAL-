@@ -34,7 +34,7 @@ input[type=date],input[type=month]{font-size:13px;padding:6px 10px;border:1px so
 .add-btn{position:fixed;right:14px;bottom:80px;width:56px;height:56px;border-radius:50%;border:0;background:#7c6cff;color:#fff;font-size:30px;z-index:25;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,.3)}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:500;padding:14px}
 .modal.open{display:flex}
-.modal-box{background:#fff;border-radius:14px;padding:14px;width:100%;max-width:460px;max-height:90vh;overflow:auto}
+.modal-box{background:#fff;border-radius:14px;padding:14px;width:100%;max-width:480px;max-height:92vh;overflow:auto}
 .modal-box input,.modal-box select{width:100%;padding:11px;border:1px solid #ccc;border-radius:8px;margin:5px 0;font-size:14px;background:#fff}
 .modal-box label{font-size:11px;font-weight:800;color:#666;margin-top:6px;display:block}
 .modal-box button{width:100%;padding:12px;border:0;border-radius:10px;font-weight:800;margin-top:6px;font-size:14px;cursor:pointer}
@@ -48,15 +48,11 @@ input[type=date],input[type=month]{font-size:13px;padding:6px 10px;border:1px so
 .item-lista b{font-size:13px} .item-lista small{font-size:11px;color:#555;display:block;margin:2px 0}
 .mini-btn{border:0;padding:8px 10px;border-radius:8px;font-size:12px;font-weight:800;cursor:pointer;margin-left:4px}
 .mini-edit{background:#dbeafe;color:#1d4ed8}.mini-del{background:#fecaca;color:#b91c1c}.mini-ok{background:#d1fae5;color:#065f46}
-.report-card{background:#f9f9ff;border:1px solid #ddd;border-radius:10px;padding:10px;margin:8px 0;font-size:13px}
-.report-line{display:flex;justify-content:space-between;align-items:center;background:#fff;padding:6px 8px;border-radius:6px;margin:4px 0;border:1px solid #eee}
-.rel-print-btns{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
-.rel-print-btns button{flex:1;min-width:70px;padding:8px;font-size:11px;font-weight:800;border-radius:8px;border:0;cursor:pointer}
-@media print{
-  body *{visibility:hidden}
-  #printArea, #printArea *{visibility:visible}
-  #printArea{position:absolute;left:0;top:0;width:100%}
-}
+.report-card-pro{background:linear-gradient(135deg,#1a1a2e 0%,#2d2d5a 100%);color:#fff;border-radius:12px;padding:14px;margin:8px 0;font-size:13px;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.report-card{border:1px solid #e5e7eb;border-radius:12px;padding:12px;margin:10px 0;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.report-line{display:flex;justify-content:space-between;align-items:center;background:#f9fafb;padding:8px 10px;border-radius:8px;margin:5px 0;border:1px solid #eee}
+.rel-print-btns{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
+.rel-print-btns button{flex:1;min-width:72px;padding:10px;font-size:11px;font-weight:800;border-radius:8px;border:0;cursor:pointer}
 </style>
 </head>
 <body>
@@ -93,20 +89,15 @@ input[type=date],input[type=month]{font-size:13px;padding:6px 10px;border:1px so
 <div class="modal" id="modalEditar"><div class="modal-box"><h3 id="editarTitulo">✏️ Editar</h3><input id="editarInput"><button class="save" onclick="confirmarEditar()">SALVAR</button><button class="cancel" onclick="fecharModalEditar()">CANCELAR</button></div></div>
 <div class="modal" id="modalBKP"><div class="modal-box"><h3>💾 BACKUP</h3><button class="save" onclick="exportarBKP()" style="background:#00a651">📤 EXPORTAR</button><div style="margin-top:12px;padding:10px;background:#fff3cd;border-radius:8px"><b>🛡️ Recuperar:</b><div id="listaAutoBKP"></div><button onclick="recuperarAuto()" style="background:#ff9800;color:#fff;margin-top:6px">🔍 PROCURAR BACKUPS</button></div><label style="margin-top:14px">📥 IMPORTAR</label><input type="file" id="inputBKP" accept=".json" onchange="importarBKP(event)"><div id="bkpStatus"></div><button class="cancel" onclick="fecharBKP()">FECHAR</button></div></div>
 
-<!-- MODAL RELATORIO COM OPÇÕES DE IMPRESSÃO -->
-<div class="modal" id="modalRel"><div class="modal-box"><h3>📊 RELATÓRIOS FINANCEIROS</h3>
+<div class="modal" id="modalRel"><div class="modal-box"><h3>📊 RELATÓRIO PROFISSIONAL</h3>
 <div><button class="pill active" onclick="setRelFiltro('mes')" id="relMes">MÊS</button><button class="pill" onclick="setRelFiltro('semana')" id="relSem">SEMANA</button><button class="pill" onclick="setRelFiltro('todos')" id="relTodos">TODOS</button><button class="pill" onclick="setRelFiltro('ano')" id="relAno">ANO</button></div>
-
-<!-- BOTÕES DE IMPRESSÃO DO RELATÓRIO -->
 <div class="rel-print-btns">
 <button class="b-zap" onclick="imprimirRelatorio('zap')">📱 ZAP</button>
 <button class="b-normal" onclick="imprimirRelatorio('normal')">🖨️ NORMAL</button>
 <button class="b-folha" onclick="imprimirRelatorio('folha')">📒 FOLHA</button>
 <button class="b-pdf" onclick="imprimirRelatorio('pdf')">📄 PDF</button>
 </div>
-
 <div id="relConteudo" style="margin-top:10px"></div>
-<div id="printArea" style="display:none"></div>
 <button class="cancel" onclick="fecharRel()">FECHAR</button></div></div>
 
 <script>
@@ -134,9 +125,7 @@ function saveAll(){
   localStorage.setItem('shows_agenda_final',JSON.stringify(shows));
   localStorage.setItem('bkp_auto_'+new Date().toISOString().slice(0,10), JSON.stringify({casas,musicos,empresas,empresaAtiva,shows,data:new Date().toISOString()}));
 }
-function atualizarHeaderEmpresa(){
-  document.getElementById('headerTitle').innerHTML=(modoAtual==='dia'?'AGENDA DO DIA':modoAtual==='semana'?'AGENDA DA SEMANA':modoAtual==='mes'?'AGENDA DO MES':'AGENDA DO ANO')+' <span id="headerEmpresa">'+(empresaAtiva||'TAKI').toUpperCase()+'</span>';
-}
+function atualizarHeaderEmpresa(){document.getElementById('headerTitle').innerHTML=(modoAtual==='dia'?'AGENDA DO DIA':modoAtual==='semana'?'AGENDA DA SEMANA':modoAtual==='mes'?'AGENDA DO MES':'AGENDA DO ANO')+' <span id="headerEmpresa">'+(empresaAtiva||'TAKI').toUpperCase()+'</span>';}
 function preencherSelects(){
   const selP=document.getElementById('mP');selP.innerHTML='';casas.forEach(c=>{let o=document.createElement('option');o.value=c;o.textContent=c;selP.appendChild(o);});
   const selM=document.getElementById('mNome');selM.innerHTML='';musicos.forEach(m=>{let o=document.createElement('option');o.value=m;o.textContent=m;selM.appendChild(o);});
@@ -201,80 +190,90 @@ function getShowsFiltro(){
   if(relFiltro==='semana'){const sem=getSemana(selData);return shows.filter(s=>s.data&&sem.includes(s.data));}
   return shows.filter(s=>s.data&&s.data.startsWith(selMes));
 }
+function getEmpresaObj(){return empresas.find(e=>e.nome===empresaAtiva)||empresas[0]||{nome:'TAKI', responsavel:'', zap:'', email:'', doc:''};}
 function renderRel(){
   const f=getShowsFiltro();const porMusico={};let total=0;const diasUnicos=new Set();
   f.forEach(s=>{diasUnicos.add(s.data);const raw=(s.nome||'').toString().trim();const key=raw.toUpperCase();if(!key)return;const v=parseFloat(s.valor)||0;if(!porMusico[key])porMusico[key]={qtd:0,total:0,display:key,list:[]};porMusico[key].qtd++;porMusico[key].total+=v;porMusico[key].list.push({s,idx:shows.indexOf(s)});total+=v;});
   const selMes=document.getElementById('inpMonth').value||'';
-  let html='<div class="report-card" style="background:#1a1a2e;color:#fff"><b>📊 TOTAL: '+f.length+' shows em '+diasUnicos.size+' dias<br>R$ '+total.toFixed(2)+'</b><br><small>Mês: '+(selMes||'TODOS')+' - Empresa: '+(empresaAtiva||'TAKI')+'</small></div>';
+  const emp=getEmpresaObj();
+  let html='<div class="report-card-pro"><div style="display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:18px;font-weight:900">📊 RELATÓRIO FINANCEIRO</div><div style="font-size:12px;margin-top:4px;opacity:.9">🏢 '+emp.nome+'</div><div style="font-size:10px;opacity:.7">👤 '+(emp.responsavel||'')+' | 📱 '+(emp.zap||'')+' | 🪪 '+(emp.doc||'')+'</div></div><div style="text-align:right"><div style="font-size:11px">Mês: '+selMes+'</div><div style="font-size:20px;font-weight:900;margin-top:4px">R$ '+total.toFixed(2)+'</div><div style="font-size:11px">'+f.length+' shows em '+diasUnicos.size+' dias</div></div></div></div>';
   Object.keys(porMusico).sort().forEach(k=>{
     const d=porMusico[k];const cor=corCantor(d.display);
-    html+='<div class="report-card"><b style="color:'+cor+'">🎤 '+d.display+'</b> - '+d.qtd+' shows - R$ '+d.total.toFixed(2)+'<div style="margin-top:6px">';
+    html+='<div class="report-card"><div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee;padding-bottom:8px;margin-bottom:8px"><b style="color:'+cor+';font-size:14px">🎤 '+d.display+'</b><span style="background:#1a1a2e;color:#fff;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800">'+d.qtd+' shows - R$ '+d.total.toFixed(2)+'</span></div>';
     d.list.forEach(item=>{
       const s=item.s;
-      html+='<div class="report-line"><span><small>'+s.data.split("-").reverse().join("/")+' - '+s.p+' - '+s.ini+'-'+s.fim+' - R$ '+s.valor+'</small></span><span><button class="mini-btn mini-edit" onclick="editar('+item.idx+');fecharRel()">✏️</button><button class="mini-btn mini-del" onclick="if(confirm(\'Apagar?\')){excluir('+item.idx+');renderRel();render();}">🗑️</button></span></div>';
+      html+='<div class="report-line"><span style="font-size:12px"><b>'+s.data.split("-").reverse().join("/")+'</b> - '+s.p+' - '+s.ini+'-'+s.fim+'<br><small style="color:#666">R$ '+s.valor+' | '+(s.empresa||'')+'</small></span><span><button class="mini-btn mini-edit" onclick="editar('+item.idx+');fecharRel()">✏️</button><button class="mini-btn mini-del" onclick="if(confirm(\'Apagar?\')){excluir('+item.idx+');renderRel();render();}">🗑️</button></span></div>';
     });
-    html+='</div></div>';
+    html+='</div>';
   });
-  if(f.length===0)html='<div style="text-align:center;padding:20px;color:#888">Nenhum show no mês selecionado</div>';
+  if(f.length===0)html='<div style="text-align:center;padding:30px;color:#888;background:#fff;border-radius:12px">Nenhum show neste filtro<br><small>Selecione o mês correto no topo</small></div>';
   document.getElementById('relConteudo').innerHTML=html;
 }
 
-// NOVA FUNÇÃO DE IMPRESSÃO DO RELATÓRIO IGUAL AGENDA
-function imprimirRelatorio(tipo){
+function gerarHTMLProfissional(tipo){
   const f=getShowsFiltro();
   const selMes=document.getElementById('inpMonth').value||new Date().toISOString().slice(0,7);
-  const empresaNome=empresaAtiva||'TAKI';
-  const porMusico={}; let total=0; const diasUnicos=new Set();
+  const emp=getEmpresaObj();
+  let total=0; const diasUnicos=new Set(); const porMusico={};
   f.forEach(s=>{diasUnicos.add(s.data);const key=(s.nome||'').toUpperCase();const v=parseFloat(s.valor)||0;if(!porMusico[key])porMusico[key]={qtd:0,total:0,list:[]};porMusico[key].qtd++;porMusico[key].total+=v;porMusico[key].list.push(s);total+=v;});
-  if(f.length===0){alert('Nenhum show para imprimir neste filtro');return;}
-
-  if(tipo==='zap'){
-    let txt='📊 RELATÓRIO FINANCEIRO - '+empresaNome.toUpperCase()+'\n';
-    txt+='Mês: '+selMes+' - '+f.length+' shows em '+diasUnicos.size+' dias - R$ '+total.toFixed(2)+'\n\n';
+  
+  let body='';
+  if(tipo==='normal'){
+    body+='<div style="border-bottom:3px solid #1a1a2e;padding-bottom:12px;margin-bottom:16px;display:flex;justify-content:space-between"><div><h1 style="margin:0;font-size:22px;color:#1a1a2e">📊 RELATÓRIO FINANCEIRO</h1><p style="margin:4px 0 0 0;color:#555"><b>'+emp.nome+'</b><br>Responsável: '+(emp.responsavel||'-')+' | CNPJ/CPF: '+(emp.doc||'-')+'<br>Contato: '+(emp.zap||'')+' | '+(emp.email||'')+'</p></div><div style="text-align:right"><div style="background:#1a1a2e;color:#fff;padding:10px 16px;border-radius:10px"><div style="font-size:12px">MÊS '+selMes+'</div><div style="font-size:22px;font-weight:900">R$ '+total.toFixed(2)+'</div><div style="font-size:11px">'+f.length+' shows em '+diasUnicos.size+' dias</div></div></div></div>';
+    body+='<table style="width:100%;border-collapse:collapse;font-size:12px"><thead><tr style="background:#1a1a2e;color:#fff"><th style="padding:8px;text-align:left">DATA</th><th style="padding:8px;text-align:left">CASA</th><th style="padding:8px;text-align:left">MÚSICO</th><th style="padding:8px;text-align:left">HORÁRIO</th><th style="padding:8px;text-align:right">VALOR</th></tr></thead><tbody>';
+    f.sort((a,b)=>a.data.localeCompare(b.data)).forEach((s,i)=>{
+      body+='<tr style="background:'+(i%2===0?'#fff':'#f9fafb')+'"><td style="padding:7px;border-bottom:1px solid #eee">'+s.data.split('-').reverse().join('/')+'</td><td style="padding:7px;border-bottom:1px solid #eee">'+s.p+'</td><td style="padding:7px;border-bottom:1px solid #eee"><b>'+s.nome+'</b></td><td style="padding:7px;border-bottom:1px solid #eee">'+s.ini+'-'+s.fim+'</td><td style="padding:7px;border-bottom:1px solid #eee;text-align:right">R$ '+parseFloat(s.valor||0).toFixed(2)+'</td></tr>';
+    });
+    body+='</tbody></table>';
     Object.keys(porMusico).sort().forEach(k=>{
-      const d=porMusico[k];
-      txt+='🎤 '+k+' - '+d.qtd+' shows - R$ '+d.total.toFixed(2)+'\n';
-      d.list.forEach(s=>{txt+='  '+s.data.split('-').reverse().join('/')+' - '+s.p+' - '+s.ini+'-'+s.fim+' - R$ '+s.valor+'\n';});
+      body+='<p style="margin:12px 0 0 0"><b>🎤 '+k+':</b> '+porMusico[k].qtd+' shows - R$ '+porMusico[k].total.toFixed(2)+'</p>';
+    });
+  } else if(tipo==='folha'){
+    body+='<div style="background:#fff;background-image:repeating-linear-gradient(transparent,transparent 31px,#b5d8ff 31px,#b5d8ff 32px);border:2px solid #333;border-radius:8px;padding:10px 16px 10px 48px;position:relative;min-height:90vh"><div style="position:absolute;left:36px;top:0;bottom:0;width:2px;background:#ff8a8a"></div>';
+    body+='<h2 style="font-size:16px;line-height:32px;height:32px;margin:0;text-transform:uppercase;border-bottom:2px solid #000">RELATÓRIO - '+emp.nome+' - '+selMes+' - R$ '+total.toFixed(2)+'</h2>';
+    body+='<p style="font-size:12px;line-height:32px;height:32px;margin:0">Empresa: '+emp.nome+' | Responsável: '+(emp.responsavel||'')+' | CNPJ: '+(emp.doc||'')+'</p>';
+    Object.keys(porMusico).sort().forEach(k=>{
+      body+='<p style="font-size:13px;line-height:32px;height:32px;margin:0;font-weight:800;color:#1a1a2e">🎤 '+k+' - '+porMusico[k].qtd+' shows - R$ '+porMusico[k].total.toFixed(2)+'</p>';
+      porMusico[k].list.forEach(s=>{
+        body+='<p style="font-size:12px;line-height:32px;height:32px;margin:0;padding-left:12px">'+s.data.split('-').reverse().join('/')+' - '+s.p+' - '+s.ini+'-'+s.fim+' - R$ '+s.valor+' - '+s.nome+'</p>';
+      });
+    });
+    body+='</div>';
+  } else if(tipo==='pdf'){
+    body+='<div style="padding:20px"><h1 style="text-align:center;color:#1a1a2e">RELATÓRIO FINANCEIRO PROFISSIONAL</h1>';
+    body+='<div style="display:flex;justify-content:space-between;border:2px solid #1a1a2e;padding:12px;border-radius:8px;margin-bottom:16px"><div><b>Empresa:</b> '+emp.nome+'<br><b>Responsável:</b> '+(emp.responsavel||'-')+'<br><b>CNPJ/CPF:</b> '+(emp.doc||'-')+'</div><div><b>Contato:</b> '+(emp.zap||'-')+'<br><b>Email:</b> '+(emp.email||'-')+'<br><b>Mês:</b> '+selMes+'</div><div style="text-align:right"><b>TOTAL GERAL</b><br><span style="font-size:22px;font-weight:900">R$ '+total.toFixed(2)+'</span><br>'+f.length+' shows em '+diasUnicos.size+' dias</div></div>';
+    body+='<table border="1" cellpadding="8" cellspacing="0" width="100%" style="border-collapse:collapse;font-size:11px"><tr style="background:#1a1a2e;color:#fff"><th>DATA</th><th>CASA</th><th>MÚSICO</th><th>HORÁRIO</th><th>EMPRESA</th><th>VALOR</th></tr>';
+    f.sort((a,b)=>a.data.localeCompare(b.data)).forEach(s=>{
+      body+='<tr><td>'+s.data.split('-').reverse().join('/')+'</td><td>'+s.p+'</td><td>'+s.nome+'</td><td>'+s.ini+'-'+s.fim+'</td><td>'+(s.empresa||'')+'</td><td align="right">R$ '+parseFloat(s.valor||0).toFixed(2)+'</td></tr>';
+    });
+    body+='<tr style="background:#f0f0f0;font-weight:800"><td colspan="5" align="right">TOTAL GERAL:</td><td align="right">R$ '+total.toFixed(2)+'</td></tr></table>';
+    body+='<br><p style="font-size:10px;color:#666;text-align:center">Documento gerado em '+new Date().toLocaleString('pt-BR')+' - Sistema TAKI - Agenda Profissional</p></div>';
+  }
+  return '<html><head><meta charset="UTF-8"><title>Relatório - '+emp.nome+'</title><style>@page{margin:15mm}body{font-family:Arial,sans-serif;margin:0;padding:20px}table{width:100%}</style></head><body>'+body+'<script>setTimeout(()=>{window.print();window.close();},500)<\/script></body></html>';
+}
+
+function imprimirRelatorio(tipo){
+  const f=getShowsFiltro();
+  if(f.length===0){alert('Nenhum show neste filtro. Selecione o mês certo no topo (ex: 2026-10).');return;}
+  if(tipo==='zap'){
+    let txt='📊 *RELATÓRIO FINANCEIRO* - '+ (empresaAtiva||'TAKI').toUpperCase() +'\n';
+    const emp=getEmpresaObj();
+    txt+='🏢 '+emp.nome+' | 👤 '+(emp.responsavel||'')+'\n';
+    txt+='Mês: '+(document.getElementById('inpMonth').value||'')+' | '+f.length+' shows | R$ '+f.reduce((a,s)=>a+parseFloat(s.valor||0),0).toFixed(2)+'\n\n';
+    const porMusico={};
+    f.forEach(s=>{const k=s.nome.toUpperCase();if(!porMusico[k])porMusico[k]=[];porMusico[k].push(s);});
+    Object.keys(porMusico).sort().forEach(k=>{
+      txt+='🎤 *'+k+'* - '+porMusico[k].length+' shows\n';
+      porMusico[k].forEach(s=>{txt+='  '+s.data.split('-').reverse().join('/')+' - '+s.p+' - '+s.ini+'-'+s.fim+' - R$ '+s.valor+'\n';});
       txt+='\n';
     });
     window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');
     return;
   }
-
-  let htmlImprimir='';
-  if(tipo==='normal'){
-    htmlImprimir+='<div style="font-family:Arial;padding:20px"><h2 style="text-align:center">📊 RELATÓRIO FINANCEIRO - '+empresaNome+'</h2>';
-    htmlImprimir+='<p style="text-align:center"><b>Mês: '+selMes+' | '+f.length+' shows em '+diasUnicos.size+' dias | TOTAL R$ '+total.toFixed(2)+'</b></p><hr>';
-    Object.keys(porMusico).sort().forEach(k=>{
-      const d=porMusico[k];
-      htmlImprimir+='<h3>🎤 '+k+' - '+d.qtd+' shows - R$ '+d.total.toFixed(2)+'</h3><ul>';
-      d.list.forEach(s=>{htmlImprimir+='<li>'+s.data.split('-').reverse().join('/')+' - '+s.p+' - '+s.ini+'-'+s.fim+' - R$ '+s.valor+' - '+(s.empresa||'')+'</li>';});
-      htmlImprimir+='</ul>';
-    });
-    htmlImprimir+='</div>';
-  } else if(tipo==='folha'){
-    htmlImprimir+='<div style="font-family:Arial;background:#fff;background-image:repeating-linear-gradient(transparent,transparent 31px,#b5d8ff 31px,#b5d8ff 32px);border:1.5px solid #333;border-radius:6px;padding:0 10px 0 36px;position:relative">';
-    htmlImprimir+='<h2 style="font-size:14px;line-height:32px;height:32px;margin:0;text-transform:uppercase">RELATÓRIO FINANCEIRO - '+empresaNome+' - '+selMes+' - R$ '+total.toFixed(2)+'</h2>';
-    Object.keys(porMusico).sort().forEach(k=>{
-      const d=porMusico[k];
-      htmlImprimir+='<p style="font-size:13px;line-height:32px;height:32px;margin:0;font-weight:700">'+k+' - '+d.qtd+' shows - R$ '+d.total.toFixed(2)+'</p>';
-      d.list.forEach(s=>{htmlImprimir+='<p style="font-size:12px;line-height:32px;height:32px;margin:0;padding-left:10px">'+s.data.split('-').reverse().join('/')+' - '+s.p+' - '+s.ini+'-'+s.fim+' - R$ '+s.valor+'</p>';});
-    });
-    htmlImprimir+='</div>';
-  } else if(tipo==='pdf'){
-    htmlImprimir+='<div id="pdfRel"><h2>RELATÓRIO FINANCEIRO</h2><p><b>Empresa:</b> '+empresaNome+'<br><b>Mês:</b> '+selMes+'<br><b>Total:</b> '+f.length+' shows em '+diasUnicos.size+' dias - R$ '+total.toFixed(2)+'</p><hr><table border="1" cellpadding="6" cellspacing="0" width="100%"><tr><th>Data</th><th>Casa</th><th>Músico</th><th>Horário</th><th>Valor</th><th>Empresa</th></tr>';
-    f.sort((a,b)=>{if(a.data!==b.data)return a.data.localeCompare(b.data);return a.p.localeCompare(b.p);}).forEach(s=>{
-      htmlImprimir+='<tr><td>'+s.data.split('-').reverse().join('/')+'</td><td>'+s.p+'</td><td>'+s.nome+'</td><td>'+s.ini+'-'+s.fim+'</td><td>R$ '+s.valor+'</td><td>'+(s.empresa||'')+'</td></tr>';
-    });
-    htmlImprimir+='</table></div>';
-  }
-
-  const printArea=document.getElementById('printArea');
-  printArea.innerHTML=htmlImprimir;
-  printArea.style.display='block';
-  document.body.innerHTML=printArea.innerHTML;
-  window.print();
-  location.reload();
+  const html=gerarHTMLProfissional(tipo);
+  const win=window.open('','_blank');
+  win.document.write(html);
+  win.document.close();
 }
 
 function modo(t){modoAtual=t;document.getElementById('headerTitle').innerHTML=(t==='dia'?'AGENDA DO DIA':t==='semana'?'AGENDA DA SEMANA':t==='mes'?'AGENDA DO MES':'AGENDA DO ANO')+' <span id="headerEmpresa">'+(empresaAtiva||'TAKI').toUpperCase()+'</span>';if(t==='mes'||t==='ano'){document.getElementById('inpDate').style.display='none';document.getElementById('inpMonth').style.display='inline-block';}else{document.getElementById('inpDate').style.display='inline-block';document.getElementById('inpMonth').style.display='none';}render();}
