@@ -63,6 +63,7 @@ input[type=date],input[type=month]{font-size:13px;padding:6px 10px;border:1px so
 <div style="height:8px;border-bottom:1px solid #eee;margin:8px 0"></div>
 <div class="menu-item" onclick="abrirGestaoCasas()">🏠 CADASTRAR CASAS</div>
 <div class="menu-item" onclick="abrirGestaoMusicos()">🎤 CADASTRAR MUSICOS</div>
+<div class="menu-item" onclick="abrirGestaoEmpresas()">🏢 CADASTRAR EMPRESAS</div>
 <div style="height:8px;border-bottom:1px solid #eee;margin:8px 0"></div>
 <div class="menu-item" onclick="abrirBKP()">💾 BKP EXPORTAR / IMPORTAR</div>
 <div class="menu-item" onclick="abrirBKP()" style="background:#ffe0e0;border-radius:8px;padding:10px">🛡️ RECUPERAR DADOS PERDIDOS</div>
@@ -74,14 +75,16 @@ input[type=date],input[type=month]{font-size:13px;padding:6px 10px;border:1px so
 <div id="folhaView" class="folha-view"><div class="folha-paper"><h2 id="folhaTitulo"></h2><div id="folhaConteudo"></div></div></div>
 <button class="add-btn" onclick="abrirModalNovo()">+</button>
 <div class="bottom"><button class="b-zap" onclick="zap()">📱 ZAP</button><button class="b-normal" onclick="modoNormal()">🖨️ NORMAL</button><button class="b-folha" onclick="modoFolha()">📒 FOLHA</button><button class="b-pdf" onclick="window.print()">📄 PDF</button></div>
-<div class="modal" id="modal"><div class="modal-box"><h3 id="modalTitle">Novo Show</h3><label>🏠 CASA</label><select id="mP"></select><label>🕓 INICIO</label><input id="mIni" type="time" value="19:00"><label>🕓 FIM</label><input id="mFim" type="time" value="22:00"><label>🎤 MUSICO</label><select id="mNome"></select><label>💰 VALOR</label><input id="mValor" type="number" placeholder="300"><label>📅 DATA</label><input id="mData" type="date"><button class="save" onclick="salvar()">SALVAR</button><button class="cancel" onclick="fecharModal()">CANCELAR</button></div></div>
-<div class="modal" id="modalCasas"><div class="modal-box"><h3>🏠 CASAS - TODAS AQUI</h3><div style="display:flex;gap:6px"><input id="novaCasaInput" placeholder="Ex: P5" style="flex:1"><button onclick="addCasa()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaCasas" style="margin-top:8px"></div><button class="cancel" onclick="fecharModalCasas()">FECHAR</button></div></div>
-<div class="modal" id="modalMusicos"><div class="modal-box"><h3>🎤 MUSICOS - TODOS AQUI</h3><div style="display:flex;gap:6px"><input id="novoMusicoInput" placeholder="Ex: BRUNO" style="flex:1"><button onclick="addMusico()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaMusicos" style="margin-top:8px"></div><button class="cancel" onclick="fecharModalMusicos()">FECHAR</button></div></div>
+
+<div class="modal" id="modal"><div class="modal-box"><h3 id="modalTitle">Novo Show</h3><label>🏠 CASA</label><select id="mP"></select><label>🏢 EMPRESA</label><select id="mEmpresa"></select><label>🕓 INICIO</label><input id="mIni" type="time" value="19:00"><label>🕓 FIM</label><input id="mFim" type="time" value="22:00"><label>🎤 MUSICO</label><select id="mNome"></select><label>💰 VALOR</label><input id="mValor" type="number" placeholder="300"><label>📅 DATA</label><input id="mData" type="date"><button class="save" onclick="salvar()">SALVAR</button><button class="cancel" onclick="fecharModal()">CANCELAR</button></div></div>
+<div class="modal" id="modalCasas"><div class="modal-box"><h3>🏠 CASAS</h3><div style="display:flex;gap:6px"><input id="novaCasaInput" placeholder="Ex: P5" style="flex:1"><button onclick="addCasa()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaCasas" style="margin-top:8px"></div><button class="cancel" onclick="fecharModalCasas()">FECHAR</button></div></div>
+<div class="modal" id="modalMusicos"><div class="modal-box"><h3>🎤 MUSICOS</h3><div style="display:flex;gap:6px"><input id="novoMusicoInput" placeholder="Ex: BRUNO" style="flex:1"><button onclick="addMusico()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaMusicos" style="margin-top:8px"></div><button class="cancel" onclick="fecharModalMusicos()">FECHAR</button></div></div>
+<div class="modal" id="modalEmpresas"><div class="modal-box"><h3>🏢 EMPRESAS</h3><div style="display:flex;gap:6px"><input id="novaEmpresaInput" placeholder="Ex: TAKI SOM, EMPRESA X" style="flex:1"><button onclick="addEmpresa()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaEmpresas" style="margin-top:8px"></div><button class="cancel" onclick="fecharModalEmpresas()">FECHAR</button></div></div>
 <div class="modal" id="modalEditar"><div class="modal-box"><h3 id="editarTitulo">✏️ Editar</h3><input id="editarInput"><button class="save" onclick="confirmarEditar()">SALVAR</button><button class="cancel" onclick="fecharModalEditar()">CANCELAR</button></div></div>
-<div class="modal" id="modalBKP"><div class="modal-box"><h3>💾 BACKUP - RECUPERAR</h3><button class="save" onclick="exportarBKP()" style="background:#00a651">📤 EXPORTAR AGORA</button><div style="margin-top:12px;padding:10px;background:#fff3cd;border-radius:8px"><b>🛡️ Se sumiu tudo, clique abaixo:</b><br><small>Busca backups automáticos dos últimos dias</small><div id="listaAutoBKP" style="margin-top:6px"></div><button onclick="recuperarAuto()" style="background:#ff9800;color:#fff;margin-top:6px">🔍 PROCURAR BACKUPS AUTOMÁTICOS</button></div><label style="margin-top:14px">📥 IMPORTAR ARQUIVO</label><input type="file" id="inputBKP" accept=".json" onchange="importarBKP(event)"><div id="bkpStatus" style="font-size:11px;margin-top:8px"></div><button class="cancel" onclick="fecharBKP()">FECHAR</button></div></div>
+<div class="modal" id="modalBKP"><div class="modal-box"><h3>💾 BACKUP - RECUPERAR</h3><button class="save" onclick="exportarBKP()" style="background:#00a651">📤 EXPORTAR AGORA</button><div style="margin-top:12px;padding:10px;background:#fff3cd;border-radius:8px"><b>🛡️ Se sumiu tudo, clique:</b><div id="listaAutoBKP" style="margin-top:6px"></div><button onclick="recuperarAuto()" style="background:#ff9800;color:#fff;margin-top:6px">🔍 PROCURAR BACKUPS</button></div><label style="margin-top:14px">📥 IMPORTAR ARQUIVO</label><input type="file" id="inputBKP" accept=".json" onchange="importarBKP(event)"><div id="bkpStatus" style="font-size:11px;margin-top:8px"></div><button class="cancel" onclick="fecharBKP()">FECHAR</button></div></div>
 <div class="modal" id="modalRel"><div class="modal-box"><h3>📊 RELATÓRIOS</h3><div><button class="pill active" onclick="setRelFiltro('mes')" id="relMes">MÊS SELECIONADO</button><button class="pill" onclick="setRelFiltro('semana')" id="relSem">SEMANA</button><button class="pill" onclick="setRelFiltro('todos')" id="relTodos">TODOS</button><button class="pill" onclick="setRelFiltro('ano')" id="relAno">ANO</button></div><div id="relConteudo" style="margin-top:10px"></div><button class="cancel" onclick="fecharRel()">FECHAR</button></div></div>
+
 <script>
-// RECUPERAÇÃO AUTOMÁTICA ANTI-PERDA
 function carregar(chave, padrao){
   try{
     const v=localStorage.getItem(chave);
@@ -90,19 +93,19 @@ function carregar(chave, padrao){
       if(Array.isArray(a)) return a;
     }
   }catch(e){}
-  // TENTA RECUPERAR DE BACKUP AUTO SE ESTIVER VAZIO
-  if(padrao.length===0 || chave==='shows_agenda_final'){
+  // RECUPERA DE BACKUP AUTO
+  if(chave==='shows_agenda_final' || chave==='casas_lista_final' || chave==='musicos_lista_final' || chave==='empresas_lista_final'){
     for(let i=0;i<localStorage.length;i++){
       const k=localStorage.key(i);
       if(k && k.startsWith('bkp_auto_')){
         try{
           const bkp=JSON.parse(localStorage.getItem(k));
-          if(bkp && bkp.shows && bkp.shows.length>0 && chave==='shows_agenda_final'){
-            console.log('Recuperado de',k);
-            return bkp.shows;
+          if(bkp){
+            if(chave==='shows_agenda_final' && bkp.shows && bkp.shows.length>0) return bkp.shows;
+            if(chave==='casas_lista_final' && bkp.casas && bkp.casas.length>0) return bkp.casas;
+            if(chave==='musicos_lista_final' && bkp.musicos && bkp.musicos.length>0) return bkp.musicos;
+            if(chave==='empresas_lista_final' && bkp.empresas && bkp.empresas.length>0) return bkp.empresas;
           }
-          if(bkp && bkp.casas && chave==='casas_lista_final' && bkp.casas.length>0) return bkp.casas;
-          if(bkp && bkp.musicos && chave==='musicos_lista_final' && bkp.musicos.length>0) return bkp.musicos;
         }catch(e){}
       }
     }
@@ -111,10 +114,11 @@ function carregar(chave, padrao){
 }
 let casas=carregar('casas_lista_final',['P1','P2','P3','P4','P5']);
 let musicos=carregar('musicos_lista_final',['DOUGLAS','LUCIANO','ISRAEL','ANDRE TAKI','MARTIN','RICK SOLO','ROBSON SOLO']);
+let empresas=carregar('empresas_lista_final',['TAKI SOM']);
 let shows=carregar('shows_agenda_final',[]);
-shows=shows.map(s=>{if(!s.data){s.data=new Date().toISOString().slice(0,10);}return s;});
+shows=shows.map(s=>{if(!s.data){s.data=new Date().toISOString().slice(0,10);} if(!s.empresa){s.empresa='TAKI SOM';} return s;});
 function limpar(l){return [...new Set(l.map(x=>x.toString().trim().toUpperCase()).filter(x=>x))];}
-casas=limpar(casas);musicos=limpar(musicos);
+casas=limpar(casas);musicos=limpar(musicos);empresas=limpar(empresas);
 let editIdx=-1,editTipo=null,editPos=-1;let modoAtual='dia';let relFiltro='mes';
 function corCantor(n){n=n.toUpperCase();if(n.includes('DOUGLAS'))return '#1565ff';if(n.includes('LUCIANO'))return '#7c4dff';if(n.includes('ISRAEL'))return '#00a651';if(n.includes('TAKI')||n.includes('ANDRE'))return '#ff6f00';if(n.includes('RICK'))return '#d32f2f';if(n.includes('ROBSON'))return '#c62828';if(n.includes('MARTIN'))return '#ad1457';return '#222';}
 function openMenu(){document.getElementById('side').classList.add('open');document.getElementById('overlay').classList.add('open')}
@@ -123,27 +127,38 @@ function formatLong(d){return d.toLocaleDateString('pt-BR',{weekday:'long',day:'
 function saveAll(){
   localStorage.setItem('casas_lista_final',JSON.stringify(casas));
   localStorage.setItem('musicos_lista_final',JSON.stringify(musicos));
+  localStorage.setItem('empresas_lista_final',JSON.stringify(empresas));
   localStorage.setItem('shows_agenda_final',JSON.stringify(shows));
-  localStorage.setItem('bkp_auto_'+new Date().toISOString().slice(0,10), JSON.stringify({casas,musicos,shows,data:new Date().toISOString()}));
+  localStorage.setItem('bkp_auto_'+new Date().toISOString().slice(0,10), JSON.stringify({casas,musicos,empresas,shows,data:new Date().toISOString()}));
 }
-function preencherSelects(){const selP=document.getElementById('mP');selP.innerHTML='';casas.forEach(c=>{let o=document.createElement('option');o.value=c;o.textContent=c;selP.appendChild(o);});const selM=document.getElementById('mNome');selM.innerHTML='';musicos.forEach(m=>{let o=document.createElement('option');o.value=m;o.textContent=m;selM.appendChild(o);});}
+function preencherSelects(){
+  const selP=document.getElementById('mP');selP.innerHTML='';casas.forEach(c=>{let o=document.createElement('option');o.value=c;o.textContent=c;selP.appendChild(o);});
+  const selM=document.getElementById('mNome');selM.innerHTML='';musicos.forEach(m=>{let o=document.createElement('option');o.value=m;o.textContent=m;selM.appendChild(o);});
+  const selE=document.getElementById('mEmpresa');selE.innerHTML='';empresas.forEach(e=>{let o=document.createElement('option');o.value=e;o.textContent=e;selE.appendChild(o);});
+}
 function fecharTodosModais(){document.querySelectorAll('.modal').forEach(m=>m.classList.remove('open'));document.getElementById('overlay').classList.remove('open');}
 function abrirGestaoCasas(){closeMenu();renderListaCasas();document.getElementById('modalCasas').classList.add('open');document.getElementById('overlay').classList.add('open');}
 function fecharModalCasas(){document.getElementById('modalCasas').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
-function renderListaCasas(){const div=document.getElementById('listaCasas');div.innerHTML='';if(casas.length===0)div.innerHTML='<small style="color:#888">Nenhuma casa cadastrada</small>';casas.forEach((c,i)=>{div.innerHTML+='<div class=item-lista><b>'+c+'</b><div><button class="mini-btn mini-edit" onclick="editarItem(\'casa\','+i+')">✏️</button><button class="mini-btn mini-del" onclick="excluirItem(\'casa\','+i+')">🗑️</button></div></div>';});}
+function renderListaCasas(){const div=document.getElementById('listaCasas');div.innerHTML='';casas.forEach((c,i)=>{div.innerHTML+='<div class=item-lista><b>'+c+'</b><div><button class="mini-btn mini-edit" onclick="editarItem(\'casa\','+i+')">✏️</button><button class="mini-btn mini-del" onclick="excluirItem(\'casa\','+i+')">🗑️</button></div></div>';});}
 function addCasa(){let n=document.getElementById('novaCasaInput').value.trim().toUpperCase();if(!n)return;if(casas.includes(n)){alert('Já existe!');return;}casas.push(n);casas=limpar(casas);saveAll();preencherSelects();renderListaCasas();document.getElementById('novaCasaInput').value='';}
 function abrirGestaoMusicos(){closeMenu();renderListaMusicos();document.getElementById('modalMusicos').classList.add('open');document.getElementById('overlay').classList.add('open');}
 function fecharModalMusicos(){document.getElementById('modalMusicos').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
-function renderListaMusicos(){const div=document.getElementById('listaMusicos');div.innerHTML='';if(musicos.length===0)div.innerHTML='<small style="color:#888">Nenhum músico cadastrado</small>';musicos.forEach((m,i)=>{const cor=corCantor(m);div.innerHTML+='<div class=item-lista><b style="color:'+cor+'">'+m+'</b><div><button class="mini-btn mini-edit" onclick="editarItem(\'musico\','+i+')">✏️</button><button class="mini-btn mini-del" onclick="excluirItem(\'musico\','+i+')">🗑️</button></div></div>';});}
+function renderListaMusicos(){const div=document.getElementById('listaMusicos');div.innerHTML='';musicos.forEach((m,i)=>{const cor=corCantor(m);div.innerHTML+='<div class=item-lista><b style="color:'+cor+'">'+m+'</b><div><button class="mini-btn mini-edit" onclick="editarItem(\'musico\','+i+')">✏️</button><button class="mini-btn mini-del" onclick="excluirItem(\'musico\','+i+')">🗑️</button></div></div>';});}
 function addMusico(){let n=document.getElementById('novoMusicoInput').value.trim().toUpperCase();if(!n)return;if(musicos.includes(n)){alert('Já existe!');return;}musicos.push(n);musicos=limpar(musicos);saveAll();preencherSelects();renderListaMusicos();document.getElementById('novoMusicoInput').value='';}
-function editarItem(tipo,pos){editTipo=tipo;editPos=pos;const nome=tipo==='casa'?casas[pos]:musicos[pos];document.getElementById('editarTitulo').innerText='✏️ Editar '+nome;document.getElementById('editarInput').value=nome;document.getElementById('modalEditar').classList.add('open');document.getElementById('overlay').classList.add('open');}
-function fecharModalEditar(){document.getElementById('modalEditar').classList.remove('open');if(!document.getElementById('modalCasas').classList.contains('open') && !document.getElementById('modalMusicos').classList.contains('open'))document.getElementById('overlay').classList.remove('open');}
-function confirmarEditar(){let novo=document.getElementById('editarInput').value.trim().toUpperCase();if(!novo)return;if(editTipo==='casa'){casas[editPos]=novo;casas=limpar(casas);renderListaCasas();}else{musicos[editPos]=novo;musicos=limpar(musicos);renderListaMusicos();}saveAll();preencherSelects();fecharModalEditar();}
-function excluirItem(tipo,pos){const nome=tipo==='casa'?casas[pos]:musicos[pos];if(!confirm('Excluir '+nome+'?'))return;if(tipo==='casa'){casas.splice(pos,1);renderListaCasas();}else{musicos.splice(pos,1);renderListaMusicos();}saveAll();preencherSelects();}
+function abrirGestaoEmpresas(){closeMenu();renderListaEmpresas();document.getElementById('modalEmpresas').classList.add('open');document.getElementById('overlay').classList.add('open');}
+function fecharModalEmpresas(){document.getElementById('modalEmpresas').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
+function renderListaEmpresas(){const div=document.getElementById('listaEmpresas');div.innerHTML='';if(empresas.length===0)div.innerHTML='<small style="color:#888">Nenhuma empresa</small>';empresas.forEach((e,i)=>{div.innerHTML+='<div class=item-lista><b>🏢 '+e+'</b><div><button class="mini-btn mini-edit" onclick="editarItem(\'empresa\','+i+')">✏️</button><button class="mini-btn mini-del" onclick="excluirItem(\'empresa\','+i+')">🗑️</button></div></div>';});}
+function addEmpresa(){let n=document.getElementById('novaEmpresaInput').value.trim().toUpperCase();if(!n)return;if(empresas.includes(n)){alert('Já existe!');return;}empresas.push(n);empresas=limpar(empresas);saveAll();preencherSelects();renderListaEmpresas();document.getElementById('novaEmpresaInput').value='';}
+
+function editarItem(tipo,pos){editTipo=tipo;editPos=pos;const nome=tipo==='casa'?casas[pos]:tipo==='musico'?musicos[pos]:empresas[pos];document.getElementById('editarTitulo').innerText='✏️ Editar '+nome;document.getElementById('editarInput').value=nome;document.getElementById('modalEditar').classList.add('open');document.getElementById('overlay').classList.add('open');}
+function fecharModalEditar(){document.getElementById('modalEditar').classList.remove('open');if(!document.getElementById('modalCasas').classList.contains('open') && !document.getElementById('modalMusicos').classList.contains('open') && !document.getElementById('modalEmpresas').classList.contains('open'))document.getElementById('overlay').classList.remove('open');}
+function confirmarEditar(){let novo=document.getElementById('editarInput').value.trim().toUpperCase();if(!novo)return;if(editTipo==='casa'){casas[editPos]=novo;casas=limpar(casas);renderListaCasas();}else if(editTipo==='musico'){musicos[editPos]=novo;musicos=limpar(musicos);renderListaMusicos();}else{empresas[editPos]=novo;empresas=limpar(empresas);renderListaEmpresas();}saveAll();preencherSelects();fecharModalEditar();}
+function excluirItem(tipo,pos){const nome=tipo==='casa'?casas[pos]:tipo==='musico'?musicos[pos]:empresas[pos];if(!confirm('Excluir '+nome+'?'))return;if(tipo==='casa'){casas.splice(pos,1);renderListaCasas();}else if(tipo==='musico'){musicos.splice(pos,1);renderListaMusicos();}else{empresas.splice(pos,1);renderListaEmpresas();}saveAll();preencherSelects();}
+
 function abrirBKP(){closeMenu();document.getElementById('modalBKP').classList.add('open');document.getElementById('overlay').classList.add('open');recuperarAuto();}
 function fecharBKP(){document.getElementById('modalBKP').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
-function exportarBKP(){const dados={casas,musicos,shows,exportadoEm:new Date().toLocaleString('pt-BR')};const blob=new Blob([JSON.stringify(dados,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='TAKI-BKP-'+new Date().toISOString().slice(0,10)+'.json';a.click();document.getElementById('bkpStatus').innerText='✅ Exportado! Salve no Drive.';}
-function importarBKP(ev){const file=ev.target.files[0];if(!file)return;const r=new FileReader();r.onload=e=>{try{const d=JSON.parse(e.target.result);if(!d.shows)throw 'inválido';if(confirm('Substituir pelo backup de '+d.exportadoEm+'?')){casas=d.casas;musicos=d.musicos;shows=d.shows;saveAll();preencherSelects();render();document.getElementById('bkpStatus').innerText='✅ Importado '+shows.length+' shows';}}catch(err){document.getElementById('bkpStatus').innerText='❌ Erro';}};r.readAsText(file);}
+function exportarBKP(){const dados={casas,musicos,empresas,shows,exportadoEm:new Date().toLocaleString('pt-BR')};const blob=new Blob([JSON.stringify(dados,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='TAKI-BKP-'+new Date().toISOString().slice(0,10)+'.json';a.click();document.getElementById('bkpStatus').innerText='✅ Exportado!';}
+function importarBKP(ev){const file=ev.target.files[0];if(!file)return;const r=new FileReader();r.onload=e=>{try{const d=JSON.parse(e.target.result);if(!d.shows)throw 'inválido';if(confirm('Substituir pelo backup de '+d.exportadoEm+'?')){casas=d.casas||casas;musicos=d.musicos||musicos;empresas=d.empresas||empresas;shows=d.shows;saveAll();preencherSelects();render();document.getElementById('bkpStatus').innerText='✅ Importado '+shows.length+' shows';}}catch(err){document.getElementById('bkpStatus').innerText='❌ Erro';}};r.readAsText(file);}
 function recuperarAuto(){
   const div=document.getElementById('listaAutoBKP');div.innerHTML='';
   let achou=false;
@@ -157,14 +172,13 @@ function recuperarAuto(){
       }catch(e){}
     }
   }
-  if(!achou) div.innerHTML='<small>Nenhum backup automático encontrado. Mas seus dados atuais: '+shows.length+' shows, '+casas.length+' casas, '+musicos.length+' músicos</small>';
-  else div.innerHTML+='<small style="color:green">✅ Seus dados atuais: '+shows.length+' shows</small>';
+  if(!achou) div.innerHTML='<small>Dados atuais: '+shows.length+' shows, '+casas.length+' casas, '+musicos.length+' músicos, '+empresas.length+' empresas</small>';
 }
 function restaurarBKP(chave){
   try{
     const bkp=JSON.parse(localStorage.getItem(chave));
     if(confirm('Restaurar backup de '+chave+' com '+bkp.shows.length+' shows?')){
-      casas=bkp.casas;musicos=bkp.musicos;shows=bkp.shows;saveAll();preencherSelects();render();document.getElementById('bkpStatus').innerText='✅ Restaurado de '+chave;
+      casas=bkp.casas;musicos=bkp.musicos;empresas=bkp.empresas||empresas;shows=bkp.shows;saveAll();preencherSelects();render();document.getElementById('bkpStatus').innerText='✅ Restaurado de '+chave;
     }
   }catch(e){alert('Erro ao restaurar');}
 }
@@ -210,7 +224,7 @@ function render(){
   document.getElementById('titleLong').innerText=titulo;document.getElementById('folhaTitulo').innerText=titulo;
   const lista=document.getElementById('lista');lista.innerHTML='';
   if(filtrados.length===0){lista.innerHTML='<div class="show-card" style="text-align:center;color:#888;padding:20px">Nenhum show<br>Clique no +</div>';}
-  else{let dataAtual='';filtrados.forEach(s=>{if(s.data!==dataAtual&&modoAtual!=='dia'){dataAtual=s.data;const divDia=document.createElement('div');divDia.className='dia-label';divDia.innerText=formatLong(new Date(dataAtual+'T12:00:00')).toUpperCase();lista.appendChild(divDia);}const idx=shows.indexOf(s);const cor=corCantor(s.nome);const div=document.createElement('div');div.className='show-card';div.innerHTML='<div class=line>'+s.p+' - <b style="color:'+cor+'">'+s.nome+'</b> - '+s.ini+'-'+s.fim+'</div><div style="margin-top:6px"><button class=b-edit onclick=editar('+idx+')>✏️ EDITAR</button> <button class=b-del onclick=excluir('+idx+')>🗑️ EXCLUIR</button></div>';lista.appendChild(div);});}
+  else{let dataAtual='';filtrados.forEach(s=>{if(s.data!==dataAtual&&modoAtual!=='dia'){dataAtual=s.data;const divDia=document.createElement('div');divDia.className='dia-label';divDia.innerText=formatLong(new Date(dataAtual+'T12:00:00')).toUpperCase();lista.appendChild(divDia);}const idx=shows.indexOf(s);const cor=corCantor(s.nome);const div=document.createElement('div');div.className='show-card';div.innerHTML='<div class=line>'+s.p+' - <b style="color:'+cor+'">'+s.nome+'</b> - '+s.ini+'-'+s.fim+' <small style="color:#888">['+(s.empresa||'TAKI SOM')+']</small></div><div style="margin-top:6px"><button class=b-edit onclick=editar('+idx+')>✏️ EDITAR</button> <button class=b-del onclick=excluir('+idx+')>🗑️ EXCLUIR</button></div>';lista.appendChild(div);});}
   document.getElementById('folhaConteudo').innerHTML=filtrados.map(s=>{const cor=corCantor(s.nome);const label=modoAtual==='dia'?'':s.data.split('-').reverse().slice(0,2).join('/')+' ';return '<p class=folha-item>'+label+s.p+' - <b style="color:'+cor+'">'+s.nome+'</b> - '+s.ini+'-'+s.fim+'</p>';}).join('');
 }
 function mudaDia(n){if(modoAtual==='mes'||modoAtual==='ano'){const inp=document.getElementById('inpMonth');let [y,m]=inp.value.split('-').map(Number);m+=n;if(m>12){m=1;y++;}if(m<1){m=12;y--;}inp.value=y+'-'+String(m).padStart(2,'0');render();}else{const inp=document.getElementById('inpDate');let d=new Date(inp.value+'T12:00:00');d.setDate(d.getDate()+n);inp.value=d.toISOString().slice(0,10);render();}}
@@ -221,8 +235,8 @@ function modoNormal(){document.getElementById('listView').style.display='block';
 function zap(){const d=document.getElementById('titleLong').innerText;const filtrados=(()=>{if(modoAtual==='dia')return shows.filter(s=>s.data===document.getElementById('inpDate').value);if(modoAtual==='semana'){const sem=getSemana(document.getElementById('inpDate').value);return shows.filter(s=>sem.includes(s.data));}if(modoAtual==='mes')return shows.filter(s=>s.data&&s.data.startsWith(document.getElementById('inpMonth').value));return shows.filter(s=>s.data&&s.data.startsWith(document.getElementById('inpMonth').value.split('-')[0]));})();const txt=filtrados.map(s=>(modoAtual!=='dia'?s.data.split('-').reverse().join('/')+' ':'')+s.p+' - '+s.nome+' - '+s.ini+'-'+s.fim).join('\n');window.open('https://wa.me/?text='+encodeURIComponent('🎤 '+d+'\n\n'+txt),'_blank');}
 function abrirModalNovo(){preencherSelects();editIdx=-1;document.getElementById('modalTitle').innerText='Novo Show';document.getElementById('mIni').value='19:00';document.getElementById('mFim').value='22:00';document.getElementById('mValor').value='';document.getElementById('mData').value=document.getElementById('inpDate').value||new Date().toISOString().slice(0,10);document.getElementById('modal').classList.add('open');document.getElementById('overlay').classList.add('open');}
 function fecharModal(){document.getElementById('modal').classList.remove('open');document.getElementById('overlay').classList.remove('open');editIdx=-1;}
-function salvar(){const dataSel=document.getElementById('mData').value||document.getElementById('inpDate').value;const o={p:document.getElementById('mP').value,fim:document.getElementById('mFim').value,ini:document.getElementById('mIni').value,nome:document.getElementById('mNome').value,valor:document.getElementById('mValor').value||300,data:dataSel};if(editIdx>=0)shows[editIdx]=o;else shows.push(o);saveAll();render();fecharModal();}
-function editar(i){preencherSelects();editIdx=i;const s=shows[i];document.getElementById('modalTitle').innerText='Editar Show';document.getElementById('mP').value=s.p;document.getElementById('mIni').value=s.ini;document.getElementById('mFim').value=s.fim;document.getElementById('mNome').value=s.nome;document.getElementById('mValor').value=s.valor;document.getElementById('mData').value=s.data;document.getElementById('modal').classList.add('open');document.getElementById('overlay').classList.add('open');}
+function salvar(){const dataSel=document.getElementById('mData').value||document.getElementById('inpDate').value;const o={p:document.getElementById('mP').value,empresa:document.getElementById('mEmpresa').value,fim:document.getElementById('mFim').value,ini:document.getElementById('mIni').value,nome:document.getElementById('mNome').value,valor:document.getElementById('mValor').value||300,data:dataSel};if(editIdx>=0)shows[editIdx]=o;else shows.push(o);saveAll();render();fecharModal();}
+function editar(i){preencherSelects();editIdx=i;const s=shows[i];document.getElementById('modalTitle').innerText='Editar Show';document.getElementById('mP').value=s.p;document.getElementById('mEmpresa').value=s.empresa||'TAKI SOM';document.getElementById('mIni').value=s.ini;document.getElementById('mFim').value=s.fim;document.getElementById('mNome').value=s.nome;document.getElementById('mValor').value=s.valor;document.getElementById('mData').value=s.data;document.getElementById('modal').classList.add('open');document.getElementById('overlay').classList.add('open');}
 function excluir(i){if(confirm('Excluir?')){shows.splice(i,1);saveAll();render();}}
 if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}
 render();preencherSelects();
