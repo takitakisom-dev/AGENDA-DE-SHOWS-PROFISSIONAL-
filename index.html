@@ -65,6 +65,7 @@ input[type=date],input[type=month]{font-size:13px;padding:6px 10px;border:1px so
 <div class="menu-item" onclick="abrirGestaoMusicos()">🎤 CADASTRAR MUSICOS</div>
 <div style="height:8px;border-bottom:1px solid #eee;margin:8px 0"></div>
 <div class="menu-item" onclick="abrirBKP()">💾 BKP EXPORTAR / IMPORTAR</div>
+<div class="menu-item" onclick="abrirBKP()" style="background:#ffe0e0;border-radius:8px;padding:10px">🛡️ RECUPERAR DADOS PERDIDOS</div>
 <div class="menu-item" onclick="abrirRelatorios()">📊 RELATÓRIOS FINANCEIROS</div>
 <div class="menu-item" onclick="closeMenu()">🚪 FECHAR MENU</div>
 </div>
@@ -74,82 +75,127 @@ input[type=date],input[type=month]{font-size:13px;padding:6px 10px;border:1px so
 <button class="add-btn" onclick="abrirModalNovo()">+</button>
 <div class="bottom"><button class="b-zap" onclick="zap()">📱 ZAP</button><button class="b-normal" onclick="modoNormal()">🖨️ NORMAL</button><button class="b-folha" onclick="modoFolha()">📒 FOLHA</button><button class="b-pdf" onclick="window.print()">📄 PDF</button></div>
 <div class="modal" id="modal"><div class="modal-box"><h3 id="modalTitle">Novo Show</h3><label>🏠 CASA</label><select id="mP"></select><label>🕓 INICIO</label><input id="mIni" type="time" value="19:00"><label>🕓 FIM</label><input id="mFim" type="time" value="22:00"><label>🎤 MUSICO</label><select id="mNome"></select><label>💰 VALOR</label><input id="mValor" type="number" placeholder="300"><label>📅 DATA</label><input id="mData" type="date"><button class="save" onclick="salvar()">SALVAR</button><button class="cancel" onclick="fecharModal()">CANCELAR</button></div></div>
-<div class="modal" id="modalCasas"><div class="modal-box"><h3>🏠 CASAS</h3><div style="display:flex;gap:6px"><input id="novaCasaInput" placeholder="Ex: P5" style="flex:1"><button onclick="addCasa()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaCasas" style="margin-top:8px"></div><button class="cancel" onclick="fecharModalCasas()">FECHAR</button></div></div>
-<div class="modal" id="modalMusicos"><div class="modal-box"><h3>🎤 MUSICOS</h3><div style="display:flex;gap:6px"><input id="novoMusicoInput" placeholder="Ex: BRUNO" style="flex:1"><button onclick="addMusico()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaMusicos" style="margin-top:8px"></div><button class="cancel" onclick="fecharModalMusicos()">FECHAR</button></div></div>
+<div class="modal" id="modalCasas"><div class="modal-box"><h3>🏠 CASAS - TODAS AQUI</h3><div style="display:flex;gap:6px"><input id="novaCasaInput" placeholder="Ex: P5" style="flex:1"><button onclick="addCasa()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaCasas" style="margin-top:8px"></div><button class="cancel" onclick="fecharModalCasas()">FECHAR</button></div></div>
+<div class="modal" id="modalMusicos"><div class="modal-box"><h3>🎤 MUSICOS - TODOS AQUI</h3><div style="display:flex;gap:6px"><input id="novoMusicoInput" placeholder="Ex: BRUNO" style="flex:1"><button onclick="addMusico()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaMusicos" style="margin-top:8px"></div><button class="cancel" onclick="fecharModalMusicos()">FECHAR</button></div></div>
 <div class="modal" id="modalEditar"><div class="modal-box"><h3 id="editarTitulo">✏️ Editar</h3><input id="editarInput"><button class="save" onclick="confirmarEditar()">SALVAR</button><button class="cancel" onclick="fecharModalEditar()">CANCELAR</button></div></div>
-<div class="modal" id="modalBKP"><div class="modal-box"><h3>💾 BACKUP</h3><button class="save" onclick="exportarBKP()" style="background:#00a651">📤 EXPORTAR</button><label style="margin-top:14px">📥 IMPORTAR</label><input type="file" id="inputBKP" accept=".json" onchange="importarBKP(event)"><div id="bkpStatus" style="font-size:11px;margin-top:8px"></div><button class="cancel" onclick="fecharBKP()">FECHAR</button></div></div>
+<div class="modal" id="modalBKP"><div class="modal-box"><h3>💾 BACKUP - RECUPERAR</h3><button class="save" onclick="exportarBKP()" style="background:#00a651">📤 EXPORTAR AGORA</button><div style="margin-top:12px;padding:10px;background:#fff3cd;border-radius:8px"><b>🛡️ Se sumiu tudo, clique abaixo:</b><br><small>Busca backups automáticos dos últimos dias</small><div id="listaAutoBKP" style="margin-top:6px"></div><button onclick="recuperarAuto()" style="background:#ff9800;color:#fff;margin-top:6px">🔍 PROCURAR BACKUPS AUTOMÁTICOS</button></div><label style="margin-top:14px">📥 IMPORTAR ARQUIVO</label><input type="file" id="inputBKP" accept=".json" onchange="importarBKP(event)"><div id="bkpStatus" style="font-size:11px;margin-top:8px"></div><button class="cancel" onclick="fecharBKP()">FECHAR</button></div></div>
 <div class="modal" id="modalRel"><div class="modal-box"><h3>📊 RELATÓRIOS</h3><div><button class="pill active" onclick="setRelFiltro('mes')" id="relMes">MÊS SELECIONADO</button><button class="pill" onclick="setRelFiltro('semana')" id="relSem">SEMANA</button><button class="pill" onclick="setRelFiltro('todos')" id="relTodos">TODOS</button><button class="pill" onclick="setRelFiltro('ano')" id="relAno">ANO</button></div><div id="relConteudo" style="margin-top:10px"></div><button class="cancel" onclick="fecharRel()">FECHAR</button></div></div>
 <script>
-function carregar(chave, padrao){try{const v=localStorage.getItem(chave);if(v!==null){const a=JSON.parse(v);if(Array.isArray(a))return a;}}catch(e){}return padrao;}
+// RECUPERAÇÃO AUTOMÁTICA ANTI-PERDA
+function carregar(chave, padrao){
+  try{
+    const v=localStorage.getItem(chave);
+    if(v!==null){
+      const a=JSON.parse(v);
+      if(Array.isArray(a)) return a;
+    }
+  }catch(e){}
+  // TENTA RECUPERAR DE BACKUP AUTO SE ESTIVER VAZIO
+  if(padrao.length===0 || chave==='shows_agenda_final'){
+    for(let i=0;i<localStorage.length;i++){
+      const k=localStorage.key(i);
+      if(k && k.startsWith('bkp_auto_')){
+        try{
+          const bkp=JSON.parse(localStorage.getItem(k));
+          if(bkp && bkp.shows && bkp.shows.length>0 && chave==='shows_agenda_final'){
+            console.log('Recuperado de',k);
+            return bkp.shows;
+          }
+          if(bkp && bkp.casas && chave==='casas_lista_final' && bkp.casas.length>0) return bkp.casas;
+          if(bkp && bkp.musicos && chave==='musicos_lista_final' && bkp.musicos.length>0) return bkp.musicos;
+        }catch(e){}
+      }
+    }
+  }
+  return padrao;
+}
 let casas=carregar('casas_lista_final',['P1','P2','P3','P4','P5']);
 let musicos=carregar('musicos_lista_final',['DOUGLAS','LUCIANO','ISRAEL','ANDRE TAKI','MARTIN','RICK SOLO','ROBSON SOLO']);
 let shows=carregar('shows_agenda_final',[]);
 shows=shows.map(s=>{if(!s.data){s.data=new Date().toISOString().slice(0,10);}return s;});
 function limpar(l){return [...new Set(l.map(x=>x.toString().trim().toUpperCase()).filter(x=>x))];}
 casas=limpar(casas);musicos=limpar(musicos);
-let editIdx=-1,editTipo=null,editPos=-1;let modoAtual='dia';let relFiltro='mes';let deferredPrompt=null;
+let editIdx=-1,editTipo=null,editPos=-1;let modoAtual='dia';let relFiltro='mes';
 function corCantor(n){n=n.toUpperCase();if(n.includes('DOUGLAS'))return '#1565ff';if(n.includes('LUCIANO'))return '#7c4dff';if(n.includes('ISRAEL'))return '#00a651';if(n.includes('TAKI')||n.includes('ANDRE'))return '#ff6f00';if(n.includes('RICK'))return '#d32f2f';if(n.includes('ROBSON'))return '#c62828';if(n.includes('MARTIN'))return '#ad1457';return '#222';}
 function openMenu(){document.getElementById('side').classList.add('open');document.getElementById('overlay').classList.add('open')}
 function closeMenu(){document.getElementById('side').classList.remove('open');if(!document.querySelector('.modal.open'))document.getElementById('overlay').classList.remove('open');}
 function formatLong(d){return d.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});}
-function saveAll(){localStorage.setItem('casas_lista_final',JSON.stringify(casas));localStorage.setItem('musicos_lista_final',JSON.stringify(musicos));localStorage.setItem('shows_agenda_final',JSON.stringify(shows));}
+function saveAll(){
+  localStorage.setItem('casas_lista_final',JSON.stringify(casas));
+  localStorage.setItem('musicos_lista_final',JSON.stringify(musicos));
+  localStorage.setItem('shows_agenda_final',JSON.stringify(shows));
+  localStorage.setItem('bkp_auto_'+new Date().toISOString().slice(0,10), JSON.stringify({casas,musicos,shows,data:new Date().toISOString()}));
+}
 function preencherSelects(){const selP=document.getElementById('mP');selP.innerHTML='';casas.forEach(c=>{let o=document.createElement('option');o.value=c;o.textContent=c;selP.appendChild(o);});const selM=document.getElementById('mNome');selM.innerHTML='';musicos.forEach(m=>{let o=document.createElement('option');o.value=m;o.textContent=m;selM.appendChild(o);});}
 function fecharTodosModais(){document.querySelectorAll('.modal').forEach(m=>m.classList.remove('open'));document.getElementById('overlay').classList.remove('open');}
 function abrirGestaoCasas(){closeMenu();renderListaCasas();document.getElementById('modalCasas').classList.add('open');document.getElementById('overlay').classList.add('open');}
 function fecharModalCasas(){document.getElementById('modalCasas').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
-function renderListaCasas(){const div=document.getElementById('listaCasas');div.innerHTML='';casas.forEach((c,i)=>{div.innerHTML+='<div class=item-lista><b>'+c+'</b><div><button class="mini-btn mini-edit" onclick="editarItem(\'casa\','+i+')">✏️</button><button class="mini-btn mini-del" onclick="excluirItem(\'casa\','+i+')">🗑️</button></div></div>';});}
+function renderListaCasas(){const div=document.getElementById('listaCasas');div.innerHTML='';if(casas.length===0)div.innerHTML='<small style="color:#888">Nenhuma casa cadastrada</small>';casas.forEach((c,i)=>{div.innerHTML+='<div class=item-lista><b>'+c+'</b><div><button class="mini-btn mini-edit" onclick="editarItem(\'casa\','+i+')">✏️</button><button class="mini-btn mini-del" onclick="excluirItem(\'casa\','+i+')">🗑️</button></div></div>';});}
 function addCasa(){let n=document.getElementById('novaCasaInput').value.trim().toUpperCase();if(!n)return;if(casas.includes(n)){alert('Já existe!');return;}casas.push(n);casas=limpar(casas);saveAll();preencherSelects();renderListaCasas();document.getElementById('novaCasaInput').value='';}
 function abrirGestaoMusicos(){closeMenu();renderListaMusicos();document.getElementById('modalMusicos').classList.add('open');document.getElementById('overlay').classList.add('open');}
 function fecharModalMusicos(){document.getElementById('modalMusicos').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
-function renderListaMusicos(){const div=document.getElementById('listaMusicos');div.innerHTML='';musicos.forEach((m,i)=>{const cor=corCantor(m);div.innerHTML+='<div class=item-lista><b style="color:'+cor+'">'+m+'</b><div><button class="mini-btn mini-edit" onclick="editarItem(\'musico\','+i+')">✏️</button><button class="mini-btn mini-del" onclick="excluirItem(\'musico\','+i+')">🗑️</button></div></div>';});}
+function renderListaMusicos(){const div=document.getElementById('listaMusicos');div.innerHTML='';if(musicos.length===0)div.innerHTML='<small style="color:#888">Nenhum músico cadastrado</small>';musicos.forEach((m,i)=>{const cor=corCantor(m);div.innerHTML+='<div class=item-lista><b style="color:'+cor+'">'+m+'</b><div><button class="mini-btn mini-edit" onclick="editarItem(\'musico\','+i+')">✏️</button><button class="mini-btn mini-del" onclick="excluirItem(\'musico\','+i+')">🗑️</button></div></div>';});}
 function addMusico(){let n=document.getElementById('novoMusicoInput').value.trim().toUpperCase();if(!n)return;if(musicos.includes(n)){alert('Já existe!');return;}musicos.push(n);musicos=limpar(musicos);saveAll();preencherSelects();renderListaMusicos();document.getElementById('novoMusicoInput').value='';}
 function editarItem(tipo,pos){editTipo=tipo;editPos=pos;const nome=tipo==='casa'?casas[pos]:musicos[pos];document.getElementById('editarTitulo').innerText='✏️ Editar '+nome;document.getElementById('editarInput').value=nome;document.getElementById('modalEditar').classList.add('open');document.getElementById('overlay').classList.add('open');}
 function fecharModalEditar(){document.getElementById('modalEditar').classList.remove('open');if(!document.getElementById('modalCasas').classList.contains('open') && !document.getElementById('modalMusicos').classList.contains('open'))document.getElementById('overlay').classList.remove('open');}
 function confirmarEditar(){let novo=document.getElementById('editarInput').value.trim().toUpperCase();if(!novo)return;if(editTipo==='casa'){casas[editPos]=novo;casas=limpar(casas);renderListaCasas();}else{musicos[editPos]=novo;musicos=limpar(musicos);renderListaMusicos();}saveAll();preencherSelects();fecharModalEditar();}
 function excluirItem(tipo,pos){const nome=tipo==='casa'?casas[pos]:musicos[pos];if(!confirm('Excluir '+nome+'?'))return;if(tipo==='casa'){casas.splice(pos,1);renderListaCasas();}else{musicos.splice(pos,1);renderListaMusicos();}saveAll();preencherSelects();}
-function abrirBKP(){closeMenu();document.getElementById('modalBKP').classList.add('open');document.getElementById('overlay').classList.add('open');}
+function abrirBKP(){closeMenu();document.getElementById('modalBKP').classList.add('open');document.getElementById('overlay').classList.add('open');recuperarAuto();}
 function fecharBKP(){document.getElementById('modalBKP').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
-function exportarBKP(){const dados={casas,musicos,shows,exportadoEm:new Date().toLocaleString('pt-BR')};const blob=new Blob([JSON.stringify(dados,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='TAKI-BKP-'+new Date().toISOString().slice(0,10)+'.json';a.click();document.getElementById('bkpStatus').innerText='✅ Exportado!';}
-function importarBKP(ev){const file=ev.target.files[0];if(!file)return;const r=new FileReader();r.onload=e=>{try{const d=JSON.parse(e.target.result);if(!d.shows)throw 'inválido';if(confirm('Substituir pelo backup de '+d.exportadoEm+'?')){casas=d.casas;musicos=d.musicos;shows=d.shows;saveAll();preencherSelects();render();document.getElementById('bkpStatus').innerText='✅ Importado '+shows.length;}}catch(err){document.getElementById('bkpStatus').innerText='❌ Erro';}};r.readAsText(file);}
+function exportarBKP(){const dados={casas,musicos,shows,exportadoEm:new Date().toLocaleString('pt-BR')};const blob=new Blob([JSON.stringify(dados,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='TAKI-BKP-'+new Date().toISOString().slice(0,10)+'.json';a.click();document.getElementById('bkpStatus').innerText='✅ Exportado! Salve no Drive.';}
+function importarBKP(ev){const file=ev.target.files[0];if(!file)return;const r=new FileReader();r.onload=e=>{try{const d=JSON.parse(e.target.result);if(!d.shows)throw 'inválido';if(confirm('Substituir pelo backup de '+d.exportadoEm+'?')){casas=d.casas;musicos=d.musicos;shows=d.shows;saveAll();preencherSelects();render();document.getElementById('bkpStatus').innerText='✅ Importado '+shows.length+' shows';}}catch(err){document.getElementById('bkpStatus').innerText='❌ Erro';}};r.readAsText(file);}
+function recuperarAuto(){
+  const div=document.getElementById('listaAutoBKP');div.innerHTML='';
+  let achou=false;
+  for(let i=0;i<localStorage.length;i++){
+    const k=localStorage.key(i);
+    if(k && k.startsWith('bkp_auto_')){
+      try{
+        const bkp=JSON.parse(localStorage.getItem(k));
+        achou=true;
+        div.innerHTML+='<div style="font-size:11px;padding:4px;border-bottom:1px solid #eee"><b>'+k+'</b> - '+bkp.shows.length+' shows <button class="mini-btn mini-edit" onclick="restaurarBKP(\''+k+'\')">RESTAURAR</button></div>';
+      }catch(e){}
+    }
+  }
+  if(!achou) div.innerHTML='<small>Nenhum backup automático encontrado. Mas seus dados atuais: '+shows.length+' shows, '+casas.length+' casas, '+musicos.length+' músicos</small>';
+  else div.innerHTML+='<small style="color:green">✅ Seus dados atuais: '+shows.length+' shows</small>';
+}
+function restaurarBKP(chave){
+  try{
+    const bkp=JSON.parse(localStorage.getItem(chave));
+    if(confirm('Restaurar backup de '+chave+' com '+bkp.shows.length+' shows?')){
+      casas=bkp.casas;musicos=bkp.musicos;shows=bkp.shows;saveAll();preencherSelects();render();document.getElementById('bkpStatus').innerText='✅ Restaurado de '+chave;
+    }
+  }catch(e){alert('Erro ao restaurar');}
+}
 function abrirRelatorios(){closeMenu();renderRel();document.getElementById('modalRel').classList.add('open');document.getElementById('overlay').classList.add('open');}
 function fecharRel(){document.getElementById('modalRel').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
 function setRelFiltro(f){relFiltro=f;document.querySelectorAll('#modalRel .pill').forEach(p=>p.classList.remove('active'));document.getElementById(f==='mes'?'relMes':f==='semana'?'relSem':f==='ano'?'relAno':'relTodos').classList.add('active');renderRel();}
-// CORREÇÃO PRINCIPAL: USA O MÊS SELECIONADO NA TELA, NÃO O MÊS DE HOJE
 function getShowsFiltro(){
-  const selMes = document.getElementById('inpMonth').value || new Date().toISOString().slice(0,7);
-  const selData = document.getElementById('inpDate').value || new Date().toISOString().slice(0,10);
-  if(relFiltro==='todos') return shows;
-  if(relFiltro==='ano') return shows.filter(s=>s.data && s.data.startsWith(selMes.split('-')[0]));
-  if(relFiltro==='semana'){const sem=getSemana(selData);return shows.filter(s=>s.data && sem.includes(s.data));}
-  return shows.filter(s=>s.data && s.data.startsWith(selMes));
+  const selMes=document.getElementById('inpMonth').value||new Date().toISOString().slice(0,7);
+  const selData=document.getElementById('inpDate').value||new Date().toISOString().slice(0,10);
+  if(relFiltro==='todos')return shows;
+  if(relFiltro==='ano')return shows.filter(s=>s.data&&s.data.startsWith(selMes.split('-')[0]));
+  if(relFiltro==='semana'){const sem=getSemana(selData);return shows.filter(s=>s.data&&sem.includes(s.data));}
+  return shows.filter(s=>s.data&&s.data.startsWith(selMes));
 }
 function renderRel(){
-  const f=getShowsFiltro();
-  const porMusico={}; let total=0;
-  const diasUnicos=new Set();
-  f.forEach(s=>{
-    diasUnicos.add(s.data);
-    const raw=(s.nome||'').toString().trim(); const key=raw.toUpperCase(); if(!key)return;
-    const v=parseFloat(s.valor)||0;
-    if(!porMusico[key]) porMusico[key]={qtd:0,total:0,display:key,list:[]};
-    porMusico[key].qtd++; porMusico[key].total+=v; porMusico[key].list.push({s, idx: shows.indexOf(s)}); total+=v;
-  });
-  const selMes = document.getElementById('inpMonth').value || '';
-  let html='<div class="report-card" style="background:#1a1a2e;color:#fff"><b>📊 TOTAL: '+f.length+' shows em '+diasUnicos.size+' dias<br>R$ '+total.toFixed(2)+'</b><br><small>Mês: '+(selMes||'TODOS')+' | Período: '+relFiltro.toUpperCase()+'</small></div>';
+  const f=getShowsFiltro();const porMusico={};let total=0;const diasUnicos=new Set();
+  f.forEach(s=>{diasUnicos.add(s.data);const raw=(s.nome||'').toString().trim();const key=raw.toUpperCase();if(!key)return;const v=parseFloat(s.valor)||0;if(!porMusico[key])porMusico[key]={qtd:0,total:0,display:key,list:[]};porMusico[key].qtd++;porMusico[key].total+=v;porMusico[key].list.push({s,idx:shows.indexOf(s)});total+=v;});
+  const selMes=document.getElementById('inpMonth').value||'';
+  let html='<div class="report-card" style="background:#1a1a2e;color:#fff"><b>📊 TOTAL: '+f.length+' shows em '+diasUnicos.size+' dias<br>R$ '+total.toFixed(2)+'</b><br><small>Mês: '+(selMes||'TODOS')+'</small></div>';
   Object.keys(porMusico).sort().forEach(k=>{
-    const d=porMusico[k]; const cor=corCantor(d.display);
+    const d=porMusico[k];const cor=corCantor(d.display);
     html+='<div class="report-card"><b style="color:'+cor+'">🎤 '+d.display+'</b> - '+d.qtd+' shows - R$ '+d.total.toFixed(2)+'<div style="margin-top:6px">';
     d.list.forEach(item=>{
       const s=item.s;
-      html+='<div class="report-line"><span><small>'+s.data.split("-").reverse().join("/")+' - '+s.p+' - '+s.ini+'-'+s.fim+' - R$ '+s.valor+'</small></span><span><button class="mini-btn mini-edit" onclick="editar('+item.idx+');fecharRel()">✏️</button><button class="mini-btn mini-del" onclick="if(confirm(\'Apagar esse show?\')){excluir('+item.idx+');renderRel();render();}">🗑️</button></span></div>';
+      html+='<div class="report-line"><span><small>'+s.data.split("-").reverse().join("/")+' - '+s.p+' - '+s.ini+'-'+s.fim+' - R$ '+s.valor+'</small></span><span><button class="mini-btn mini-edit" onclick="editar('+item.idx+');fecharRel()">✏️</button><button class="mini-btn mini-del" onclick="if(confirm(\'Apagar?\')){excluir('+item.idx+');renderRel();render();}">🗑️</button></span></div>';
     });
     html+='</div></div>';
   });
-  if(f.length===0) html='<div style="text-align:center;padding:20px;color:#888">Nenhum show no mês selecionado<br>Selecione Outubro/2026 no campo mês</div>';
+  if(f.length===0)html='<div style="text-align:center;padding:20px;color:#888">Nenhum show no mês selecionado</div>';
   document.getElementById('relConteudo').innerHTML=html;
 }
-window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;});
-function instalarApp(){if(deferredPrompt){deferredPrompt.prompt();}else{alert('Já instalado');}}
 function modo(t){modoAtual=t;const titles={dia:'AGENDA DO DIA',semana:'AGENDA DA SEMANA',mes:'AGENDA DO MES',ano:'AGENDA DO ANO'};document.getElementById('headerTitle').innerHTML=titles[t]+' <span>TAKI</span>';if(t==='mes'||t==='ano'){document.getElementById('inpDate').style.display='none';document.getElementById('inpMonth').style.display='inline-block';if(!document.getElementById('inpMonth').value)document.getElementById('inpMonth').value=new Date().toISOString().slice(0,7);}else{document.getElementById('inpDate').style.display='inline-block';document.getElementById('inpMonth').style.display='none';}render();}
 function getSemana(date){const d=new Date(date+'T12:00:00');const dia=d.getDay();const diff=d.getDate()-dia+(dia==0?-6:1);const seg=new Date(d.setDate(diff));const datas=[];for(let i=0;i<7;i++){const dd=new Date(seg);dd.setDate(seg.getDate()+i);datas.push(dd.toISOString().slice(0,10));}return datas;}
 function render(){
@@ -163,7 +209,7 @@ function render(){
   else{const ano=mesSel.split('-')[0];titulo='ANO DE '+ano;shows.sort((a,b)=>{if(a.data!==b.data)return a.data.localeCompare(b.data);return a.p.localeCompare(b.p);});filtrados=shows.filter(s=>s.data&&s.data.startsWith(ano));}
   document.getElementById('titleLong').innerText=titulo;document.getElementById('folhaTitulo').innerText=titulo;
   const lista=document.getElementById('lista');lista.innerHTML='';
-  if(filtrados.length===0){lista.innerHTML='<div class="show-card" style="text-align:center;color:#888;padding:20px">Nenhum show neste período</div>';}
+  if(filtrados.length===0){lista.innerHTML='<div class="show-card" style="text-align:center;color:#888;padding:20px">Nenhum show<br>Clique no +</div>';}
   else{let dataAtual='';filtrados.forEach(s=>{if(s.data!==dataAtual&&modoAtual!=='dia'){dataAtual=s.data;const divDia=document.createElement('div');divDia.className='dia-label';divDia.innerText=formatLong(new Date(dataAtual+'T12:00:00')).toUpperCase();lista.appendChild(divDia);}const idx=shows.indexOf(s);const cor=corCantor(s.nome);const div=document.createElement('div');div.className='show-card';div.innerHTML='<div class=line>'+s.p+' - <b style="color:'+cor+'">'+s.nome+'</b> - '+s.ini+'-'+s.fim+'</div><div style="margin-top:6px"><button class=b-edit onclick=editar('+idx+')>✏️ EDITAR</button> <button class=b-del onclick=excluir('+idx+')>🗑️ EXCLUIR</button></div>';lista.appendChild(div);});}
   document.getElementById('folhaConteudo').innerHTML=filtrados.map(s=>{const cor=corCantor(s.nome);const label=modoAtual==='dia'?'':s.data.split('-').reverse().slice(0,2).join('/')+' ';return '<p class=folha-item>'+label+s.p+' - <b style="color:'+cor+'">'+s.nome+'</b> - '+s.ini+'-'+s.fim+'</p>';}).join('');
 }
