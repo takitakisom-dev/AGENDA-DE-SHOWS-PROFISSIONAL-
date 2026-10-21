@@ -24,7 +24,7 @@ input[type=date],input[type=month]{font-size:13px;padding:6px 10px;border:1px so
 .b-edit,.b-del{border:0;padding:5px 10px;border-radius:6px;font-weight:700;font-size:11px;cursor:pointer}
 .b-edit{background:#e3f0ff;color:#2a7fff}.b-del{background:#ffe3e3;color:#d44}
 .bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #ddd;display:flex;gap:4px;padding:6px;justify-content:space-around;z-index:20}
-.bottom button{border:0;padding:8px 10px;border-radius:10px;font-weight:800;font-size:11px;cursor:pointer}
+.bottom button{border:0;padding:10px 12px;border-radius:10px;font-weight:800;font-size:12px;cursor:pointer;flex:1;margin:2px}
 .b-zap{background:#00e676}.b-normal{background:#7c6cff;color:#fff}.b-folha{background:#ffe066;border:1.5px dashed #000}.b-pdf{background:#00bfa6;color:#fff}
 .folha-view{display:none;padding:8px}
 .folha-paper{background:#fff;background-image:repeating-linear-gradient(transparent,transparent 31px,#b5d8ff 31px,#b5d8ff 32px);border:1.5px solid #333;border-radius:6px;padding:0 10px 0 36px;position:relative}
@@ -78,13 +78,19 @@ input[type=date],input[type=month]{font-size:13px;padding:6px 10px;border:1px so
 <div id="listView"><div class="date-card"><div class="title-long" id="titleLong"></div><div style="display:flex;align-items:center;justify-content:space-between"><button class="arrow" onclick="mudaDia(-1)">◀</button><div><input type="date" id="inpDate" onchange="render()"><input type="month" id="inpMonth" style="display:none" onchange="render()"><div style="display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-top:8px"><button class="pill" onclick="hoje()">HOJE</button><button class="pill" onclick="modo('dia')">DIA</button><button class="pill" onclick="modo('semana')">SEMANA</button><button class="pill" onclick="modo('mes')">MÊS</button><button class="pill" onclick="modo('ano')">ANO</button></div></div><button class="arrow" onclick="mudaDia(1)">▶</button></div></div><div id="lista"></div></div>
 <div id="folhaView" class="folha-view"><div class="folha-paper"><h2 id="folhaTitulo"></h2><div id="folhaConteudo"></div></div></div>
 <button class="add-btn" onclick="abrirModalNovo()">+</button>
-<div class="bottom"><button class="b-zap" onclick="zap()">📱 ZAP</button><button class="b-normal" onclick="modoNormal()">🖨️ NORMAL</button><button class="b-folha" onclick="modoFolha()">📒 FOLHA</button><button class="b-pdf" onclick="window.print()">📄 PDF</button></div>
+
+<div class="bottom">
+<button class="b-zap" onclick="zap()">📱 ZAP</button>
+<button class="b-normal" onclick="imprimirAgenda('normal')">🖨️ NORMAL</button>
+<button class="b-folha" onclick="imprimirAgenda('folha')">📒 FOLHA</button>
+<button class="b-pdf" onclick="imprimirAgenda('pdf')">📄 PDF</button>
+</div>
 
 <div class="modal" id="modal"><div class="modal-box"><h3 id="modalTitle">Novo Show</h3><label>🏠 CASA</label><select id="mP"></select><label>🏢 EMPRESA</label><select id="mEmpresa"></select><label>🕓 INICIO</label><input id="mIni" type="time" value="19:00"><label>🕓 FIM</label><input id="mFim" type="time" value="22:00"><label>🎤 MUSICO</label><select id="mNome"></select><label>💰 VALOR</label><input id="mValor" type="number" placeholder="300"><label>📅 DATA</label><input id="mData" type="date"><button class="save" onclick="salvar()">SALVAR</button><button class="cancel" onclick="fecharModal()">CANCELAR</button></div></div>
 <div class="modal" id="modalCasas"><div class="modal-box"><h3>🏠 CASAS</h3><div style="display:flex;gap:6px"><input id="novaCasaInput" placeholder="Ex: P5" style="flex:1"><button onclick="addCasa()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaCasas" style="margin-top:8px"></div><button class="cancel" onclick="fecharModalCasas()">FECHAR</button></div></div>
 <div class="modal" id="modalMusicos"><div class="modal-box"><h3>🎤 MUSICOS</h3><div style="display:flex;gap:6px"><input id="novoMusicoInput" placeholder="Ex: BRUNO" style="flex:1"><button onclick="addMusico()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaMusicos" style="margin-top:8px"></div><button class="cancel" onclick="fecharModalMusicos()">FECHAR</button></div></div>
 <div class="modal" id="modalEmpresas"><div class="modal-box"><h3>🏢 CADASTRAR EMPRESA</h3>
-<label>🏢 NOME *</label><input id="empNome" placeholder="Ex: TAKI SOM"><label>👤 RESPONSÁVEL</label><input id="empResp"><label>📱 ZAP</label><input id="empZap" type="tel"><label>📧 EMAIL</label><input id="empEmail" type="email"><label>🪪 CNPJ/CPF</label><input id="empDoc"><button class="save" onclick="addEmpresa()" style="background:#00a651">💾 SALVAR EMPRESA</button><div id="listaEmpresas" style="margin-top:14px"></div><button class="cancel" onclick="fecharModalEmpresas()">FECHAR</button></div></div>
+<label>🏢 NOME *</label><input id="empNome"><label>👤 RESPONSÁVEL</label><input id="empResp"><label>📱 ZAP</label><input id="empZap" type="tel"><label>📧 EMAIL</label><input id="empEmail" type="email"><label>🪪 CNPJ/CPF</label><input id="empDoc"><button class="save" onclick="addEmpresa()" style="background:#00a651">💾 SALVAR EMPRESA</button><div id="listaEmpresas" style="margin-top:14px"></div><button class="cancel" onclick="fecharModalEmpresas()">FECHAR</button></div></div>
 <div class="modal" id="modalEditarEmpresa"><div class="modal-box"><h3>✏️ Editar Empresa</h3><label>🏢 EMPRESA</label><input id="editEmpNome"><label>👤 RESPONSÁVEL</label><input id="editEmpResp"><label>📱 ZAP</label><input id="editEmpZap"><label>📧 EMAIL</label><input id="editEmpEmail"><label>🪪 CNPJ/CPF</label><input id="editEmpDoc"><button class="save" onclick="confirmarEditarEmpresa()">SALVAR</button><button class="cancel" onclick="fecharModalEditarEmpresa()">CANCELAR</button></div></div>
 <div class="modal" id="modalEditar"><div class="modal-box"><h3 id="editarTitulo">✏️ Editar</h3><input id="editarInput"><button class="save" onclick="confirmarEditar()">SALVAR</button><button class="cancel" onclick="fecharModalEditar()">CANCELAR</button></div></div>
 <div class="modal" id="modalBKP"><div class="modal-box"><h3>💾 BACKUP</h3><button class="save" onclick="exportarBKP()" style="background:#00a651">📤 EXPORTAR</button><div style="margin-top:12px;padding:10px;background:#fff3cd;border-radius:8px"><b>🛡️ Recuperar:</b><div id="listaAutoBKP"></div><button onclick="recuperarAuto()" style="background:#ff9800;color:#fff;margin-top:6px">🔍 PROCURAR BACKUPS</button></div><label style="margin-top:14px">📥 IMPORTAR</label><input type="file" id="inputBKP" accept=".json" onchange="importarBKP(event)"><div id="bkpStatus"></div><button class="cancel" onclick="fecharBKP()">FECHAR</button></div></div>
@@ -190,6 +196,14 @@ function getShowsFiltro(){
   if(relFiltro==='semana'){const sem=getSemana(selData);return shows.filter(s=>s.data&&sem.includes(s.data));}
   return shows.filter(s=>s.data&&s.data.startsWith(selMes));
 }
+function getShowsAgenda(){
+  const selMes=document.getElementById('inpMonth').value||new Date().toISOString().slice(0,7);
+  const selData=document.getElementById('inpDate').value||new Date().toISOString().slice(0,10);
+  if(modoAtual==='dia')return shows.filter(s=>s.data===selData);
+  if(modoAtual==='semana'){const sem=getSemana(selData);return shows.filter(s=>sem.includes(s.data));}
+  if(modoAtual==='mes')return shows.filter(s=>s.data&&s.data.startsWith(selMes));
+  return shows.filter(s=>s.data&&s.data.startsWith(selMes.split('-')[0]));
+}
 function getEmpresaObj(){return empresas.find(e=>e.nome===empresaAtiva)||empresas[0]||{nome:'TAKI', responsavel:'', zap:'', email:'', doc:''};}
 function renderRel(){
   const f=getShowsFiltro();const porMusico={};let total=0;const diasUnicos=new Set();
@@ -206,8 +220,64 @@ function renderRel(){
     });
     html+='</div>';
   });
-  if(f.length===0)html='<div style="text-align:center;padding:30px;color:#888;background:#fff;border-radius:12px">Nenhum show neste filtro<br><small>Selecione o mês correto no topo</small></div>';
+  if(f.length===0)html='<div style="text-align:center;padding:30px;color:#888;background:#fff;border-radius:12px">Nenhum show neste filtro</div>';
   document.getElementById('relConteudo').innerHTML=html;
+}
+
+// NOVA FUNÇÃO AGENDA - TODAS BONITAS
+function gerarHTMLAgenda(tipo){
+  const f=getShowsAgenda();
+  const emp=getEmpresaObj();
+  const titulo=document.getElementById('titleLong').innerText||'AGENDA';
+  let total=0; f.forEach(s=>total+=parseFloat(s.valor||0));
+  const diasUnicos=new Set(f.map(s=>s.data));
+  let body='';
+  if(tipo==='normal'){
+    body+='<div style="border-bottom:4px solid #1a1a2e;padding-bottom:14px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:flex-start"><div><h1 style="margin:0;font-size:26px;color:#1a1a2e">🎤 '+titulo+'</h1><p style="margin:6px 0 0 0;font-size:14px"><b style="color:#f0c040;background:#1a1a2e;padding:4px 10px;border-radius:6px">'+emp.nome.toUpperCase()+'</b><br><span style="font-size:12px;color:#555;margin-top:6px;display:block">👤 '+(emp.responsavel||'')+' | 📱 '+(emp.zap||'')+' | 🪪 '+(emp.doc||'')+'<br>📧 '+(emp.email||'')+'</span></p></div><div style="text-align:right"><div style="background:linear-gradient(135deg,#1a1a2e,#2d2d5a);color:#fff;padding:12px 18px;border-radius:12px"><div style="font-size:12px;opacity:.8">'+diasUnicos.size+' dias | '+f.length+' shows</div><div style="font-size:20px;font-weight:900;margin-top:4px">R$ '+total.toFixed(2)+'</div></div><div style="font-size:10px;color:#888;margin-top:6px">Gerado em '+new Date().toLocaleString('pt-BR')+'</div></div></div>';
+    // Agrupa por data
+    const porData={}; f.forEach(s=>{if(!porData[s.data])porData[s.data]=[];porData[s.data].push(s);});
+    Object.keys(porData).sort().forEach(data=>{
+      const dataLong=new Date(data+'T12:00:00').toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long',year:'numeric'});
+      body+='<div style="background:#1a1a2e;color:#fff;padding:8px 12px;border-radius:8px;margin:18px 0 8px 0;font-weight:800;font-size:13px;text-transform:uppercase">'+dataLong+'</div>';
+      body+='<table style="width:100%;border-collapse:collapse;font-size:13px"><thead><tr style="background:#f3f4f6"><th style="padding:8px;text-align:left">CASA</th><th style="padding:8px;text-align:left">MÚSICO</th><th style="padding:8px;text-align:left">HORÁRIO</th><th style="padding:8px;text-align:left">EMPRESA</th><th style="padding:8px;text-align:right">VALOR</th></tr></thead><tbody>';
+      porData[data].sort((a,b)=>a.p.localeCompare(b.p)).forEach(s=>{
+        const cor=corCantor(s.nome);
+        body+='<tr><td style="padding:8px;border-bottom:1px solid #eee"><b>'+s.p+'</b></td><td style="padding:8px;border-bottom:1px solid #eee"><b style="color:'+cor+'">'+s.nome+'</b></td><td style="padding:8px;border-bottom:1px solid #eee">'+s.ini+' - '+s.fim+'</td><td style="padding:8px;border-bottom:1px solid #eee;font-size:11px">'+(s.empresa||'')+'</td><td style="padding:8px;border-bottom:1px solid #eee;text-align:right">R$ '+parseFloat(s.valor||0).toFixed(2)+'</td></tr>';
+      });
+      body+='</tbody></table>';
+    });
+  } else if(tipo==='folha'){
+    body+='<div style="background:#fff;background-image:repeating-linear-gradient(transparent,transparent 31px,#b5d8ff 31px,#b5d8ff 32px);border:2.5px solid #1a1a2e;border-radius:10px;padding:0 16px 20px 52px;position:relative;min-height:100vh"><div style="position:absolute;left:38px;top:0;bottom:0;width:2.5px;background:#ff8a8a"></div>';
+    body+='<div style="height:36px;line-height:36px;border-bottom:2.5px solid #1a1a2e;display:flex;justify-content:space-between;font-weight:900"><span>🎤 '+titulo+' - '+emp.nome.toUpperCase()+'</span><span style="font-size:11px">'+f.length+' SHOWS | R$ '+total.toFixed(2)+'</span></div>';
+    const porData={}; f.forEach(s=>{if(!porData[s.data])porData[s.data]=[];porData[s.data].push(s);});
+    Object.keys(porData).sort().forEach(data=>{
+      const dl=new Date(data+'T12:00:00').toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'short'});
+      body+='<div style="height:32px;line-height:32px;font-weight:900;background:#1a1a2e;color:#fff;margin:8px -16px 0 -52px;padding-left:52px;font-size:11px;text-transform:uppercase">'+dl+'</div>';
+      porData[data].forEach(s=>{
+        const cor=corCantor(s.nome);
+        body+='<div style="height:32px;line-height:32px;font-size:12px;white-space:nowrap;overflow:hidden"><b>'+s.p+'</b> - <b style="color:'+cor+'">'+s.nome+'</b> - '+s.ini+'-'+s.fim+' <span style="font-size:10px;color:#666">['+(s.empresa||'')+']</span></div>';
+      });
+    });
+    body+='</div>';
+  } else if(tipo==='pdf'){
+    body+='<div style="padding:10px"><div style="text-align:center;border-bottom:3px solid #1a1a2e;padding-bottom:12px"><h1 style="margin:0;color:#1a1a2e">AGENDA PROFISSIONAL</h1><h2 style="margin:4px 0;color:#f0c040;background:#1a1a2e;display:inline-block;padding:4px 14px;border-radius:20px;font-size:14px">'+emp.nome.toUpperCase()+'</h2><p style="margin:6px 0 0 0;font-size:11px;color:#555">'+titulo+' | '+(emp.responsavel||'')+' | '+(emp.doc||'')+' | '+(emp.zap||'')+'</p></div>';
+    body+='<table border="1" cellpadding="8" cellspacing="0" width="100%" style="border-collapse:collapse;font-size:12px;margin-top:14px"><thead><tr style="background:#1a1a2e;color:#fff"><th>DATA</th><th>CASA</th><th>MÚSICO</th><th>HORÁRIO</th><th>VALOR</th></tr></thead><tbody>';
+    f.sort((a,b)=>a.data.localeCompare(b.data)).forEach(s=>{
+      body+='<tr><td>'+s.data.split('-').reverse().join('/')+'</td><td>'+s.p+'</td><td>'+s.nome+'</td><td>'+s.ini+'-'+s.fim+'</td><td align="right">R$ '+parseFloat(s.valor||0).toFixed(2)+'</td></tr>';
+    });
+    body+='<tr style="background:#1a1a2e;color:#fff;font-weight:900"><td colspan="4" align="right">TOTAL '+f.length+' SHOWS:</td><td align="right">R$ '+total.toFixed(2)+'</td></tr></tbody></table>';
+    body+='<p style="font-size:9px;color:#888;text-align:center;margin-top:20px">Sistema TAKI - Agenda Profissional - Gerado em '+new Date().toLocaleString('pt-BR')+'</p></div>';
+  }
+  return '<html><head><meta charset="UTF-8"><title>'+titulo+' - '+emp.nome+'</title><style>@page{margin:12mm}body{font-family:Arial,sans-serif;margin:0;padding:20px}</style></head><body>'+body+'<script>setTimeout(()=>{window.print();},600)<\/script></body></html>';
+}
+function imprimirAgenda(tipo){
+  const f=getShowsAgenda();
+  if(f.length===0){alert('Nenhum show neste período. Selecione a data certa.');return;}
+  if(tipo==='zap'){zap();return;}
+  const html=gerarHTMLAgenda(tipo);
+  const win=window.open('','_blank');
+  win.document.write(html);
+  win.document.close();
 }
 
 function gerarHTMLProfissional(tipo){
@@ -216,45 +286,40 @@ function gerarHTMLProfissional(tipo){
   const emp=getEmpresaObj();
   let total=0; const diasUnicos=new Set(); const porMusico={};
   f.forEach(s=>{diasUnicos.add(s.data);const key=(s.nome||'').toUpperCase();const v=parseFloat(s.valor)||0;if(!porMusico[key])porMusico[key]={qtd:0,total:0,list:[]};porMusico[key].qtd++;porMusico[key].total+=v;porMusico[key].list.push(s);total+=v;});
-  
   let body='';
   if(tipo==='normal'){
-    body+='<div style="border-bottom:3px solid #1a1a2e;padding-bottom:12px;margin-bottom:16px;display:flex;justify-content:space-between"><div><h1 style="margin:0;font-size:22px;color:#1a1a2e">📊 RELATÓRIO FINANCEIRO</h1><p style="margin:4px 0 0 0;color:#555"><b>'+emp.nome+'</b><br>Responsável: '+(emp.responsavel||'-')+' | CNPJ/CPF: '+(emp.doc||'-')+'<br>Contato: '+(emp.zap||'')+' | '+(emp.email||'')+'</p></div><div style="text-align:right"><div style="background:#1a1a2e;color:#fff;padding:10px 16px;border-radius:10px"><div style="font-size:12px">MÊS '+selMes+'</div><div style="font-size:22px;font-weight:900">R$ '+total.toFixed(2)+'</div><div style="font-size:11px">'+f.length+' shows em '+diasUnicos.size+' dias</div></div></div></div>';
+    body+='<div style="border-bottom:4px solid #1a1a2e;padding-bottom:14px;margin-bottom:18px;display:flex;justify-content:space-between"><div><h1 style="margin:0;font-size:24px;color:#1a1a2e">📊 RELATÓRIO FINANCEIRO</h1><p style="margin:6px 0 0 0"><b style="background:#1a1a2e;color:#f0c040;padding:4px 10px;border-radius:6px">'+emp.nome.toUpperCase()+'</b><br><span style="font-size:12px;color:#555">👤 '+(emp.responsavel||'-')+' | 🪪 '+(emp.doc||'-')+'<br>📱 '+(emp.zap||'')+' | 📧 '+(emp.email||'')+'</span></p></div><div style="text-align:right"><div style="background:linear-gradient(135deg,#1a1a2e,#2d2d5a);color:#fff;padding:12px 18px;border-radius:12px"><div style="font-size:11px">MÊS '+selMes+'</div><div style="font-size:24px;font-weight:900">R$ '+total.toFixed(2)+'</div><div style="font-size:11px">'+f.length+' shows em '+diasUnicos.size+' dias</div></div></div></div>';
     body+='<table style="width:100%;border-collapse:collapse;font-size:12px"><thead><tr style="background:#1a1a2e;color:#fff"><th style="padding:8px;text-align:left">DATA</th><th style="padding:8px;text-align:left">CASA</th><th style="padding:8px;text-align:left">MÚSICO</th><th style="padding:8px;text-align:left">HORÁRIO</th><th style="padding:8px;text-align:right">VALOR</th></tr></thead><tbody>';
     f.sort((a,b)=>a.data.localeCompare(b.data)).forEach((s,i)=>{
       body+='<tr style="background:'+(i%2===0?'#fff':'#f9fafb')+'"><td style="padding:7px;border-bottom:1px solid #eee">'+s.data.split('-').reverse().join('/')+'</td><td style="padding:7px;border-bottom:1px solid #eee">'+s.p+'</td><td style="padding:7px;border-bottom:1px solid #eee"><b>'+s.nome+'</b></td><td style="padding:7px;border-bottom:1px solid #eee">'+s.ini+'-'+s.fim+'</td><td style="padding:7px;border-bottom:1px solid #eee;text-align:right">R$ '+parseFloat(s.valor||0).toFixed(2)+'</td></tr>';
     });
     body+='</tbody></table>';
-    Object.keys(porMusico).sort().forEach(k=>{
-      body+='<p style="margin:12px 0 0 0"><b>🎤 '+k+':</b> '+porMusico[k].qtd+' shows - R$ '+porMusico[k].total.toFixed(2)+'</p>';
-    });
   } else if(tipo==='folha'){
-    body+='<div style="background:#fff;background-image:repeating-linear-gradient(transparent,transparent 31px,#b5d8ff 31px,#b5d8ff 32px);border:2px solid #333;border-radius:8px;padding:10px 16px 10px 48px;position:relative;min-height:90vh"><div style="position:absolute;left:36px;top:0;bottom:0;width:2px;background:#ff8a8a"></div>';
-    body+='<h2 style="font-size:16px;line-height:32px;height:32px;margin:0;text-transform:uppercase;border-bottom:2px solid #000">RELATÓRIO - '+emp.nome+' - '+selMes+' - R$ '+total.toFixed(2)+'</h2>';
-    body+='<p style="font-size:12px;line-height:32px;height:32px;margin:0">Empresa: '+emp.nome+' | Responsável: '+(emp.responsavel||'')+' | CNPJ: '+(emp.doc||'')+'</p>';
+    body+='<div style="background:#fff;background-image:repeating-linear-gradient(transparent,transparent 31px,#b5d8ff 31px,#b5d8ff 32px);border:2.5px solid #333;border-radius:10px;padding:0 16px 20px 50px;position:relative;min-height:100vh"><div style="position:absolute;left:38px;top:0;bottom:0;width:2.5px;background:#ff8a8a"></div>';
+    body+='<div style="height:36px;line-height:36px;border-bottom:2.5px solid #000;font-weight:900;font-size:14px;display:flex;justify-content:space-between"><span>📊 RELATÓRIO - '+emp.nome.toUpperCase()+' - '+selMes+'</span><span>R$ '+total.toFixed(2)+'</span></div>';
+    body+='<div style="height:32px;line-height:32px;font-size:11px;color:#555">Empresa: '+emp.nome+' | Resp: '+(emp.responsavel||'')+' | CNPJ: '+(emp.doc||'')+' | '+f.length+' shows em '+diasUnicos.size+' dias</div>';
     Object.keys(porMusico).sort().forEach(k=>{
-      body+='<p style="font-size:13px;line-height:32px;height:32px;margin:0;font-weight:800;color:#1a1a2e">🎤 '+k+' - '+porMusico[k].qtd+' shows - R$ '+porMusico[k].total.toFixed(2)+'</p>';
-      porMusico[k].list.forEach(s=>{
-        body+='<p style="font-size:12px;line-height:32px;height:32px;margin:0;padding-left:12px">'+s.data.split('-').reverse().join('/')+' - '+s.p+' - '+s.ini+'-'+s.fim+' - R$ '+s.valor+' - '+s.nome+'</p>';
+      const d=porMusico[k];
+      body+='<div style="height:32px;line-height:32px;font-weight:900;color:#1a1a2e;font-size:13px">🎤 '+k+' - '+d.qtd+' shows - R$ '+d.total.toFixed(2)+'</div>';
+      d.list.forEach(s=>{
+        body+='<div style="height:32px;line-height:32px;font-size:12px;padding-left:10px">- '+s.data.split('-').reverse().join('/')+' - '+s.p+' - '+s.ini+'-'+s.fim+' - R$ '+s.valor+'</div>';
       });
     });
     body+='</div>';
   } else if(tipo==='pdf'){
     body+='<div style="padding:20px"><h1 style="text-align:center;color:#1a1a2e">RELATÓRIO FINANCEIRO PROFISSIONAL</h1>';
-    body+='<div style="display:flex;justify-content:space-between;border:2px solid #1a1a2e;padding:12px;border-radius:8px;margin-bottom:16px"><div><b>Empresa:</b> '+emp.nome+'<br><b>Responsável:</b> '+(emp.responsavel||'-')+'<br><b>CNPJ/CPF:</b> '+(emp.doc||'-')+'</div><div><b>Contato:</b> '+(emp.zap||'-')+'<br><b>Email:</b> '+(emp.email||'-')+'<br><b>Mês:</b> '+selMes+'</div><div style="text-align:right"><b>TOTAL GERAL</b><br><span style="font-size:22px;font-weight:900">R$ '+total.toFixed(2)+'</span><br>'+f.length+' shows em '+diasUnicos.size+' dias</div></div>';
-    body+='<table border="1" cellpadding="8" cellspacing="0" width="100%" style="border-collapse:collapse;font-size:11px"><tr style="background:#1a1a2e;color:#fff"><th>DATA</th><th>CASA</th><th>MÚSICO</th><th>HORÁRIO</th><th>EMPRESA</th><th>VALOR</th></tr>';
+    body+='<div style="display:flex;justify-content:space-between;border:2px solid #1a1a2e;padding:12px;border-radius:8px;margin-bottom:16px"><div><b>Empresa:</b> '+emp.nome+'<br><b>Responsável:</b> '+(emp.responsavel||'-')+'<br><b>CNPJ/CPF:</b> '+(emp.doc||'-')+'</div><div><b>Contato:</b> '+(emp.zap||'-')+'<br><b>Email:</b> '+(emp.email||'-')+'<br><b>Mês:</b> '+selMes+'</div><div style="text-align:right"><b>TOTAL</b><br><span style="font-size:22px;font-weight:900">R$ '+total.toFixed(2)+'</span><br>'+f.length+' shows</div></div>';
+    body+='<table border="1" cellpadding="8" cellspacing="0" width="100%" style="border-collapse:collapse;font-size:11px"><tr style="background:#1a1a2e;color:#fff"><th>DATA</th><th>CASA</th><th>MÚSICO</th><th>HORÁRIO</th><th>VALOR</th></tr>';
     f.sort((a,b)=>a.data.localeCompare(b.data)).forEach(s=>{
-      body+='<tr><td>'+s.data.split('-').reverse().join('/')+'</td><td>'+s.p+'</td><td>'+s.nome+'</td><td>'+s.ini+'-'+s.fim+'</td><td>'+(s.empresa||'')+'</td><td align="right">R$ '+parseFloat(s.valor||0).toFixed(2)+'</td></tr>';
+      body+='<tr><td>'+s.data.split('-').reverse().join('/')+'</td><td>'+s.p+'</td><td>'+s.nome+'</td><td>'+s.ini+'-'+s.fim+'</td><td align="right">R$ '+parseFloat(s.valor||0).toFixed(2)+'</td></tr>';
     });
-    body+='<tr style="background:#f0f0f0;font-weight:800"><td colspan="5" align="right">TOTAL GERAL:</td><td align="right">R$ '+total.toFixed(2)+'</td></tr></table>';
-    body+='<br><p style="font-size:10px;color:#666;text-align:center">Documento gerado em '+new Date().toLocaleString('pt-BR')+' - Sistema TAKI - Agenda Profissional</p></div>';
+    body+='<tr style="background:#f0f0f0;font-weight:800"><td colspan="4" align="right">TOTAL GERAL:</td><td align="right">R$ '+total.toFixed(2)+'</td></tr></table></div>';
   }
-  return '<html><head><meta charset="UTF-8"><title>Relatório - '+emp.nome+'</title><style>@page{margin:15mm}body{font-family:Arial,sans-serif;margin:0;padding:20px}table{width:100%}</style></head><body>'+body+'<script>setTimeout(()=>{window.print();window.close();},500)<\/script></body></html>';
+  return '<html><head><meta charset="UTF-8"><title>Relatório - '+emp.nome+'</title><style>@page{margin:12mm}body{font-family:Arial,sans-serif;margin:0;padding:20px}</style></head><body>'+body+'<script>setTimeout(()=>{window.print();},600)<\/script></body></html>';
 }
-
 function imprimirRelatorio(tipo){
   const f=getShowsFiltro();
-  if(f.length===0){alert('Nenhum show neste filtro. Selecione o mês certo no topo (ex: 2026-10).');return;}
+  if(f.length===0){alert('Nenhum show neste filtro.');return;}
   if(tipo==='zap'){
     let txt='📊 *RELATÓRIO FINANCEIRO* - '+ (empresaAtiva||'TAKI').toUpperCase() +'\n';
     const emp=getEmpresaObj();
@@ -298,7 +363,7 @@ function hoje(){document.getElementById('inpDate').value=new Date().toISOString(
 function amanha(){let d=new Date();d.setDate(d.getDate()+1);document.getElementById('inpDate').value=d.toISOString().slice(0,10);modo('dia');}
 function modoFolha(){document.getElementById('listView').style.display='none';document.getElementById('folhaView').style.display='block';closeMenu()}
 function modoNormal(){document.getElementById('listView').style.display='block';document.getElementById('folhaView').style.display='none';}
-function zap(){const d=document.getElementById('titleLong').innerText+' - '+(empresaAtiva||'TAKI');const filtrados=(()=>{if(modoAtual==='dia')return shows.filter(s=>s.data===document.getElementById('inpDate').value);if(modoAtual==='semana'){const sem=getSemana(document.getElementById('inpDate').value);return shows.filter(s=>sem.includes(s.data));}if(modoAtual==='mes')return shows.filter(s=>s.data&&s.data.startsWith(document.getElementById('inpMonth').value));return shows.filter(s=>s.data&&s.data.startsWith(document.getElementById('inpMonth').value.split('-')[0]));})();const txt=filtrados.map(s=>(modoAtual!=='dia'?s.data.split('-').reverse().join('/')+' ':'')+s.p+' - '+s.nome+' - '+s.ini+'-'+s.fim).join('\n');window.open('https://wa.me/?text='+encodeURIComponent('🎤 '+d+'\n\n'+txt),'_blank');}
+function zap(){const d=document.getElementById('titleLong').innerText+' - '+(empresaAtiva||'TAKI');const filtrados=getShowsAgenda();const txt=filtrados.map(s=>(modoAtual!=='dia'?s.data.split('-').reverse().join('/')+' ':'')+s.p+' - '+s.nome+' - '+s.ini+'-'+s.fim).join('\n');window.open('https://wa.me/?text='+encodeURIComponent('🎤 '+d+'\n\n'+txt),'_blank');}
 function abrirModalNovo(){preencherSelects();editIdx=-1;document.getElementById('modalTitle').innerText='Novo Show';document.getElementById('mIni').value='19:00';document.getElementById('mFim').value='22:00';document.getElementById('mValor').value='';document.getElementById('mData').value=document.getElementById('inpDate').value||new Date().toISOString().slice(0,10);document.getElementById('modal').classList.add('open');document.getElementById('overlay').classList.add('open');}
 function fecharModal(){document.getElementById('modal').classList.remove('open');document.getElementById('overlay').classList.remove('open');editIdx=-1;}
 function salvar(){const dataSel=document.getElementById('mData').value||document.getElementById('inpDate').value;const o={p:document.getElementById('mP').value,empresa:document.getElementById('mEmpresa').value,fim:document.getElementById('mFim').value,ini:document.getElementById('mIni').value,nome:document.getElementById('mNome').value,valor:document.getElementById('mValor').value||300,data:dataSel};if(editIdx>=0)shows[editIdx]=o;else shows.push(o);saveAll();render();fecharModal();}
