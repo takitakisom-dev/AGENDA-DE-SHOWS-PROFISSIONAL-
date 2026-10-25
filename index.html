@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TAKI v65.2 FINAL COMPLETO - NEGRITO</title>
+<title>TAKI v65.3 - NEGRITO TOTAL - SABADO DOMINGO</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--dark:#1E3A8A;--blue:#2563EB;--bg:#F1F5F9;--border:#E2E8F0}
@@ -48,13 +48,13 @@ body{background:var(--bg);font-family:Inter,sans-serif;padding-bottom:92px}
 </style>
 </head>
 <body>
-<div class="top"><div style="display:flex;align-items:center;gap:10px"><span onclick="openMenu()" style="font-size:26px;cursor:pointer">☰</span><b>TAKI v65.2 FINAL - NEGRITO</b></div><button onclick="location.reload()" style="background:#fff;color:#2563EB;border:none;padding:7px 14px;border-radius:20px;font-weight:700;font-size:11px;cursor:pointer">ATUALIZAR</button></div>
+<div class="top"><div style="display:flex;align-items:center;gap:10px"><span onclick="openMenu()" style="font-size:26px;cursor:pointer">☰</span><b>TAKI v65.3 - NEGRITO TOTAL</b></div><button onclick="location.reload()" style="background:#fff;color:#2563EB;border:none;padding:7px 14px;border-radius:20px;font-weight:700;font-size:11px;cursor:pointer">ATUALIZAR</button></div>
 <div id="takiMenu"><div id="takiMenuBg" onclick="closeMenu()"></div><div id="takiMenuPanel">
 <div class="takiMenuHead"><span>TAKI MENU</span><span onclick="closeMenu()" style="cursor:pointer;background:#fff;padding:6px 10px;border-radius:8px">✕</span></div>
 <div class="takiMenuItem" onclick="setView('semana');closeMenu()">🗓️ Semana</div>
 <div class="takiMenuItem" onclick="setView('mes');closeMenu()">📅 Mês</div>
-<div class="takiMenuItem" onclick="exportZap(true);closeMenu()">🏠 COM valor - NEGRITO</div>
-<div class="takiMenuItem" onclick="exportZap(false);closeMenu()">🎤 SEM valor - NEGRITO</div>
+<div class="takiMenuItem" onclick="exportZap(true);closeMenu()">🏠 COM valor - NEGRITO TOTAL</div>
+<div class="takiMenuItem" onclick="exportZap(false);closeMenu()">🎤 SEM valor - NEGRITO TOTAL</div>
 <div class="takiMenuItem" onclick="openRecuperar();closeMenu()" style="background:#FEF2F2;color:#991B1B;font-weight:800;margin:8px;border-radius:10px;border:1px solid #FECACA">🛡️ RECUPERAR DADOS PERDIDOS</div>
 <div class="takiMenuItem" onclick="openRelatorios();closeMenu()">📊 Relatórios AZUL</div>
 <div class="takiMenuItem" onclick="closeMenu()" style="justify-content:center">🚪 Fechar</div>
@@ -64,11 +64,11 @@ body{background:var(--bg);font-family:Inter,sans-serif;padding-bottom:92px}
 <div class="contador" id="contador"></div>
 <div id="lista"></div>
 <button class="plus" onclick="abreNovo()">+</button>
-<div class="bottom"><button class="btnZap" onclick="escolheZap()">💬 ZAP</button><button onclick="escolheFolha()">📋 FOLHA</button><button onclick="escolheNormal()">📄 NORMAL - NEGRITO</button><button onclick="escolhePdf()">📑 PDF</button></div>
-<div class="modal" id="modZap"><div class="modalBox"><b>💬 ZAP COM NEGRITO</b><br><br><button class="btnPrimary" onclick="exportZap(true);closeM('modZap')">🏠 COM VALOR - DATAS EM NEGRITO</button><button class="btnPrimary" style="background:#1E3A8A;margin-top:8px" onclick="exportZap(false);closeM('modZap')">🎤 SEM VALOR - DATAS EM NEGRITO</button><button class="btnGhost" onclick="closeM('modZap')">Cancelar</button></div></div>
-<div class="modal" id="modFolha"><div class="modalBox"><b>📋 FOLHA</b><br><br><button class="btnPrimary" onclick="exportFolha(true);closeM('modFolha')">🏠 COM VALOR</button><button class="btnPrimary" style="background:#1E3A8A;margin-top:8px" onclick="exportFolha(false);closeM('modFolha')">🎤 SEM VALOR</button><button class="btnGhost" onclick="closeM('modFolha')">Cancelar</button></div></div>
-<div class="modal" id="modNormal"><div class="modalBox"><b>📄 NORMAL - DATAS EM NEGRITO</b><br><br><button class="btnPrimary" onclick="exportNormal(true);closeM('modNormal')">🏠 COM VALOR - NEGRITO</button><button class="btnPrimary" style="background:#1E3A8A;margin-top:8px" onclick="exportNormal(false);closeM('modNormal')">🎤 SEM VALOR - NEGRITO</button><button class="btnGhost" onclick="closeM('modNormal')">Cancelar</button></div></div>
-<div class="modal" id="modPdf"><div class="modalBox"><b>📑 PDF</b><br><br><button class="btnPrimary" onclick="exportPdf(true);closeM('modPdf')">🏠 COM VALOR</button><button class="btnPrimary" style="background:#1E3A8A;margin-top:8px" onclick="exportPdf(false);closeM('modPdf')">🎤 SEM VALOR</button><button class="btnGhost" onclick="closeM('modPdf')">Cancelar</button></div></div>
+<div class="bottom"><button class="btnZap" onclick="escolheZap()">💬 ZAP</button><button onclick="escolheFolha()">📋 FOLHA</button><button onclick="escolheNormal()">📄 NORMAL - NEGRITO TOTAL</button><button onclick="escolhePdf()">📑 PDF</button></div>
+<div class="modal" id="modZap"><div class="modalBox"><b>💬 ZAP COM NEGRITO TOTAL</b><br><small>Agora SÁBADO e DOMINGO também em negrito!</small><br><br><button class="btnPrimary" onclick="exportZap(true);closeM('modZap')">🏠 COM VALOR - NEGRITO TOTAL</button><button class="btnPrimary" style="background:#1E3A8A;margin-top:8px" onclick="exportZap(false);closeM('modZap')">🎤 SEM VALOR - NEGRITO TOTAL</button><button class="btnGhost" onclick="closeM('modZap')">Cancelar</button></div></div>
+<div class="modal" id="modFolha"><div class="modalBox"><b>📋 FOLHA - NEGRITO TOTAL</b><br><br><button class="btnPrimary" onclick="exportFolha(true);closeM('modFolha')">🏠 COM VALOR</button><button class="btnPrimary" style="background:#1E3A8A;margin-top:8px" onclick="exportFolha(false);closeM('modFolha')">🎤 SEM VALOR</button><button class="btnGhost" onclick="closeM('modFolha')">Cancelar</button></div></div>
+<div class="modal" id="modNormal"><div class="modalBox"><b>📄 NORMAL - NEGRITO TOTAL</b><br><small>TODA vez: SEGUNDA a DOMINGO em negrito azul</small><br><br><button class="btnPrimary" onclick="exportNormal(true);closeM('modNormal')">🏠 COM VALOR - NEGRITO TOTAL</button><button class="btnPrimary" style="background:#1E3A8A;margin-top:8px" onclick="exportNormal(false);closeM('modNormal')">🎤 SEM VALOR - NEGRITO TOTAL</button><button class="btnGhost" onclick="closeM('modNormal')">Cancelar</button></div></div>
+<div class="modal" id="modPdf"><div class="modalBox"><b>📑 PDF - NEGRITO TOTAL</b><br><br><button class="btnPrimary" onclick="exportPdf(true);closeM('modPdf')">🏠 COM VALOR</button><button class="btnPrimary" style="background:#1E3A8A;margin-top:8px" onclick="exportPdf(false);closeM('modPdf')">🎤 SEM VALOR</button><button class="btnGhost" onclick="closeM('modPdf')">Cancelar</button></div></div>
 <div class="modal" id="modEdit"><div class="modalBox"><b id="modTitle">Novo</b><br><br><input id="eData" type="date" class="inp"><div class="projGroup"><button class="projBtn active" id="btnP1" onclick="setProjeto('P1')">P1</button><button class="projBtn" id="btnP2" onclick="setProjeto('P2')">P2</button><button class="projBtn" id="btnP3" onclick="setProjeto('P3')">P3</button><button class="projBtn" id="btnP4" onclick="setProjeto('P4')">P4</button><button class="projBtn" id="btnP5" onclick="setProjeto('P5')">P5</button><button class="projBtn" id="btnEDILL" onclick="setProjeto('EDILL')">EDILL</button></div><div class="turnoCard"><label><input type="checkbox" id="chkAlmoco" onchange="calc()"> ☀️ Almoço</label><div class="timeRow"><input id="eIniA" type="time" class="inp" value="12:30"><input id="eFimA" type="time" class="inp" value="15:30"></div></div><div class="turnoCard"><label><input type="checkbox" id="chkJanta" checked onchange="calc()"> 🌙 Janta</label><div class="timeRow"><input id="eIniJ" type="time" class="inp" value="19:00"><input id="eFimJ" type="time" class="inp" value="22:00"></div></div><div id="listaMusicosEvento" style="max-height:160px;overflow-y:auto;margin:10px 0"></div><div class="totalBox"><span id="txtShows">1 show</span><span id="totalCache">R$ 0</span></div><div style="display:flex;gap:8px;margin-top:12px"><button class="btnPrimary" style="flex:1" onclick="salva()">Salvar</button><button class="btnGhost" style="flex:1" onclick="closeM('modEdit')">Cancelar</button></div></div></div>
 <div class="modal" id="modRecup"><div class="modalBox"><b>🛡️ RECUPERAR DADOS PERDIDOS</b><div id="listaBkps" style="margin-top:10px"></div><button class="btnGhost" onclick="closeM('modRecup')">Fechar</button></div></div>
 <div class="modal" id="modRel"><div class="modalBox"><b>📊 Relatórios AZUL</b><div id="relBody" style="margin-top:12px"></div><button class="btnGhost" onclick="closeM('modRel')">Fechar</button></div></div>
@@ -92,14 +92,14 @@ var eventosPadrao=[
 ];
 var musicosPadrao=[{id:1,nome:"ANDERSON VAT 60 DUO",valor:400},{id:2,nome:"ANDERSON VAT 60 TRIO",valor:450},{id:3,nome:"ANDRÉ",valor:300},{id:4,nome:"DOUGLAS",valor:300},{id:5,nome:"EDILL",valor:300},{id:6,nome:"GERVÁSIO",valor:200},{id:7,nome:"ISRAEL",valor:300},{id:8,nome:"LUCIANO",valor:300},{id:9,nome:"MARTIN",valor:300},{id:10,nome:"RICK DUO",valor:400},{id:11,nome:"RICK SOLO",valor:300},{id:12,nome:"RICK TRIO",valor:450},{id:13,nome:"ROBSON SOLO",valor:300},{id:14,nome:"YGOR",valor:300}];
 function carregaDB(){
-var chaves=['taki_v65_1_negrito','taki_v65_final_100_ok','taki_v64_final_404_fix','taki_v63_final_completo','taki_v62_9_azul_imprimir','taki_v62_8_azul','taki_v62_7_final','taki_v62_6_final','taki_v62_5','taki_v62_4','taki_v62_3','taki_agenda','taki_db'];
+var chaves=['taki_v65_3_negrito_total','taki_v65_2_final_negrito_corrigido','taki_v65_1_negrito','taki_v65_final_100_ok','taki_v64_final_404_fix','taki_v63_final_completo','taki_v62_9_azul_imprimir','taki_v62_8_azul','taki_v62_7_final','taki_v62_6_final','taki_v62_5','taki_v62_4','taki_v62_3','taki_agenda','taki_db'];
 for(var i=0;i<chaves.length;i++){try{var b=JSON.parse(localStorage.getItem(chaves[i])||'null');if(b&&b.eventos&&b.eventos.length>0){if(b.eventos.length>=eventosPadrao.length) return b;}}catch(e){}}
 return {eventos:eventosPadrao,musicos:musicosPadrao};
 }
 var db=carregaDB();
 var eventos=db.eventos||eventosPadrao;
 var musicos=db.musicos||musicosPadrao;
-var DB_KEY='taki_v65_2_final_negrito_corrigido';
+var DB_KEY='taki_v65_3_negrito_total';
 var mesAtual=new Date(2026,9,19);
 var view='semana';var editId=null;var selMusicos=[];var projetoAtual='P1';
 function save(){localStorage.setItem(DB_KEY,JSON.stringify({eventos:eventos,musicos:musicos,ts:Date.now()}));}
@@ -125,7 +125,7 @@ lista.innerHTML+='<div class="eventCard"><span class="badgeShows">'+qtd+' shows<
 });
 });
 if(filtrados.length==0) lista.innerHTML='<p style="text-align:center;padding:32px;color:#94A3B8">Nenhum evento neste período<br>Clique no + para criar</p>';
-document.getElementById('contador').innerText=eventos.length+' dias • '+musicos.length+' músicos • v65.2 CORRIGIDO NEGRITO';
+document.getElementById('contador').innerText=eventos.length+' dias • '+musicos.length+' músicos • v65.3 NEGRITO TOTAL';
 }
 function mudaMes(dir){mesAtual.setMonth(mesAtual.getMonth()+dir);render();}
 function abreNovo(){editId=null;selMusicos=[];setProjeto('P1');document.getElementById('eData').value=mesAtual.toISOString().slice(0,10);renderMusEvento();document.getElementById('modEdit').classList.add('open');}
@@ -147,6 +147,12 @@ else{eventos.push({id:Date.now(),data:data,[STRIPPED]
 save();closeM('modEdit');render();
 }
 function exclui(id){if(!confirm('Excluir?'))return;eventos=eventos.filter(function(e){return e.id!=id});save();render();}
+function isDataLine(l){
+var upper=l.toUpperCase().trim();
+var temDia = upper.includes("-FEIRA") || upper.includes("SÁBADO") || upper.includes("SABADO") || upper.includes("DOMINGO") || upper.includes("SEGUNDA") || upper.includes("TERÇA") || upper.includes("TERCA") || upper.includes("QUARTA") || upper.includes("QUINTA") || upper.includes("SEXTA");
+var temDe = upper.includes(" DE ") && upper.includes("202");
+return temDia && temDe;
+}
 function getTexto(comValor){
 var filtrados=eventos.filter(function(ev){var d=new Date(ev.data+'T00:00:00');return d.getMonth()==mesAtual.getMonth()&&d.getFullYear()==mesAtual.getFullYear()}).sort(function(a,b){return a.data.localeCompare(b.data)});
 var txt='';var grupos={};filtrados.forEach(function(ev){if(!grupos[ev.data])grupos[ev.data]=[];grupos[ev.data].push(ev)});
@@ -170,8 +176,7 @@ var titulo=comValor?'CRONOGRAMA COM VALOR':'CRONOGRAMA SEM VALOR';
 var linhas=t.split('\n');
 var htmlLinhas='';
 linhas.forEach(function(l){
-var upper=l.toUpperCase();
-if(upper.includes('-FEIRA') && upper.includes(' DE ') && upper.includes('202')){
+if(isDataLine(l)){
 htmlLinhas+='<div style="font-weight:900;font-size:16px;color:#1E3A8A;margin:20px 0 8px 0;padding:10px 14px;background:#EFF6FF;border-left:5px solid #2563EB;border-radius:8px;">'+l+'</div>';
 }else if(l.trim()==''){
 htmlLinhas+='<div style="height:8px"></div>';
@@ -188,8 +193,7 @@ var t=getTexto(comValor);
 var linhas=t.split('\n');
 var tBold='';
 linhas.forEach(function(l){
-var upper=l.toUpperCase();
-if(upper.includes('-FEIRA') && upper.includes(' DE ') && upper.includes('202')){
+if(isDataLine(l)){
 tBold+='*'+l+'*\\n';
 }else{
 tBold+=l+'\\n';
@@ -224,7 +228,7 @@ var w=window.open('','','width=1100,height=700');w.document.write(html);w.docume
 }
 function exportPdf(comValor){exportFolha(comValor);}
 function openRecuperar(){
-var html='';var chaves=['taki_v65_1_negrito','taki_v65_final_100_ok','taki_v64_final_404_fix','taki_v63_final_completo','taki_v62_9_azul_imprimir','taki_v62_8_azul','taki_v62_7_final','taki_v62_6_final','taki_v62_5','taki_v62_4','taki_v62_3','taki_agenda','taki_db'];
+var html='';var chaves=['taki_v65_3_negrito_total','taki_v65_2_final_negrito_corrigido','taki_v65_1_negrito','taki_v65_final_100_ok','taki_v64_final_404_fix','taki_v63_final_completo','taki_v62_9_azul_imprimir','taki_v62_8_azul','taki_v62_7_final','taki_v62_6_final','taki_v62_5','taki_v62_4','taki_v62_3','taki_agenda','taki_db'];
 chaves.forEach(function(k){
 try{
 var b=JSON.parse(localStorage.getItem(k)||'null');
