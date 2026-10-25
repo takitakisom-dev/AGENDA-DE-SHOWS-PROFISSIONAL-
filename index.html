@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TAKI v65.1 - NEGRITO DATAS - COMPLETO</title>
+<title>TAKI v65.2 FINAL - NEGRITO DATAS - COMPLETO</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--dark:#1E3A8A;--blue:#2563EB;--bg:#F1F5F9;--border:#E2E8F0}
@@ -43,18 +44,19 @@ body{background:var(--bg);font-family:Inter,sans-serif;padding-bottom:92px}
 #takiMenu{position:fixed;inset:0;z-index:999;display:none}#takiMenu.open{display:block}#takiMenuBg{position:absolute;inset:0;background:rgba(0,0,0,.5)}
 #takiMenuPanel{position:absolute;top:0;left:0;bottom:0;width:84%;max-width:340px;background:#fff;overflow-y:auto}
 .takiMenuHead{padding:18px 16px;font-weight:800;font-size:14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;background:#EFF6FF;color:#1E3A8A}
-.takiMenuSection{padding:10px 16px 4px;font-size:10px;font-weight:800;color:#94A3B8}
 .takiMenuItem{padding:13px 16px;border-bottom:1px solid #F1F5F9;cursor:pointer;font-weight:600;font-size:13px;display:flex;gap:10px}
+.bkpItem{background:#fff;border:1px solid var(--border);border-radius:10px;padding:10px;margin:8px 0;display:flex;justify-content:space-between;align-items:center}
 </style>
 </head>
 <body>
-<div class="top"><div style="display:flex;align-items:center;gap:10px"><span onclick="openMenu()" style="font-size:26px;cursor:pointer">☰</span><b>AGENDA DO MES - TAKI SOM v65.1 NEGRITO</b></div><button onclick="location.reload()" style="background:#fff;color:#2563EB;border:none;padding:7px 14px;border-radius:20px;font-weight:700;font-size:11px;cursor:pointer">ATUALIZAR</button></div>
+<div class="top"><div style="display:flex;align-items:center;gap:10px"><span onclick="openMenu()" style="font-size:26px;cursor:pointer">☰</span><b>TAKI v65.2 - NEGRITO + CORRIGIDO</b></div><button onclick="location.reload()" style="background:#fff;color:#2563EB;border:none;padding:7px 14px;border-radius:20px;font-weight:700;font-size:11px;cursor:pointer">ATUALIZAR</button></div>
 <div id="takiMenu"><div id="takiMenuBg" onclick="closeMenu()"></div><div id="takiMenuPanel">
 <div class="takiMenuHead"><span>TAKI MENU</span><span onclick="closeMenu()" style="cursor:pointer;background:#fff;padding:6px 10px;border-radius:8px">✕</span></div>
 <div class="takiMenuItem" onclick="setView('semana');closeMenu()">🗓️ Semana</div>
 <div class="takiMenuItem" onclick="setView('mes');closeMenu()">📅 Mês</div>
-<div class="takiMenuItem" onclick="exportZap(true);closeMenu()">🏠 Enviar COM valor - NEGRITO</div>
-<div class="takiMenuItem" onclick="exportZap(false);closeMenu()">🎤 Enviar SEM valor - NEGRITO</div>
+<div class="takiMenuItem" onclick="exportZap(true);closeMenu()">🏠 COM valor - NEGRITO</div>
+<div class="takiMenuItem" onclick="exportZap(false);closeMenu()">🎤 SEM valor - NEGRITO</div>
+<div class="takiMenuItem" onclick="openRecuperar();closeMenu()" style="background:#FEF2F2;color:#991B1B;font-weight:800;margin:8px;border-radius:10px;border:1px solid #FECACA">🛡️ RECUPERAR DADOS PERDIDOS</div>
 <div class="takiMenuItem" onclick="openRelatorios();closeMenu()">📊 Relatórios AZUL</div>
 <div class="takiMenuItem" onclick="closeMenu()" style="justify-content:center">🚪 Fechar</div>
 </div></div>
@@ -66,27 +68,28 @@ body{background:var(--bg);font-family:Inter,sans-serif;padding-bottom:92px}
 <div class="bottom"><button class="btnZap" onclick="escolheZap()">💬 ZAP</button><button onclick="escolheFolha()">📋 FOLHA</button><button onclick="escolheNormal()">📄 NORMAL - NEGRITO</button><button onclick="escolhePdf()">📑 PDF</button></div>
 <div class="modal" id="modZap"><div class="modalBox"><b>💬 ZAP COM NEGRITO</b><br><br><button class="btnPrimary" onclick="exportZap(true);closeM('modZap')">🏠 COM VALOR - DATAS EM NEGRITO</button><button class="btnPrimary" style="background:#1E3A8A;margin-top:8px" onclick="exportZap(false);closeM('modZap')">🎤 SEM VALOR - DATAS EM NEGRITO</button><button class="btnGhost" onclick="closeM('modZap')">Cancelar</button></div></div>
 <div class="modal" id="modFolha"><div class="modalBox"><b>📋 FOLHA</b><br><br><button class="btnPrimary" onclick="exportFolha(true);closeM('modFolha')">🏠 COM VALOR</button><button class="btnPrimary" style="background:#1E3A8A;margin-top:8px" onclick="exportFolha(false);closeM('modFolha')">🎤 SEM VALOR</button><button class="btnGhost" onclick="closeM('modFolha')">Cancelar</button></div></div>
-<div class="modal" id="modNormal"><div class="modalBox"><b>📄 NORMAL - DATAS EM NEGRITO</b><br><small>As datas SEGUNDA, TERÇA etc vão sair em negrito</small><br><br><button class="btnPrimary" onclick="exportNormal(true);closeM('modNormal')">🏠 COM VALOR - NEGRITO</button><button class="btnPrimary" style="background:#1E3A8A;margin-top:8px" onclick="exportNormal(false);closeM('modNormal')">🎤 SEM VALOR - NEGRITO</button><button class="btnGhost" onclick="closeM('modNormal')">Cancelar</button></div></div>
+<div class="modal" id="modNormal"><div class="modalBox"><b>📄 NORMAL - DATAS EM NEGRITO</b><br><small>SEGUNDA, TERÇA etc vão sair em negrito</small><br><br><button class="btnPrimary" onclick="exportNormal(true);closeM('modNormal')">🏠 COM VALOR - NEGRITO</button><button class="btnPrimary" style="background:#1E3A8A;margin-top:8px" onclick="exportNormal(false);closeM('modNormal')">🎤 SEM VALOR - NEGRITO</button><button class="btnGhost" onclick="closeM('modNormal')">Cancelar</button></div></div>
 <div class="modal" id="modPdf"><div class="modalBox"><b>📑 PDF</b><br><br><button class="btnPrimary" onclick="exportPdf(true);closeM('modPdf')">🏠 COM VALOR</button><button class="btnPrimary" style="background:#1E3A8A;margin-top:8px" onclick="exportPdf(false);closeM('modPdf')">🎤 SEM VALOR</button><button class="btnGhost" onclick="closeM('modPdf')">Cancelar</button></div></div>
-<div class="modal" id="modEdit"><div class="modalBox"><b id="modTitle">Novo</b><br><br><input id="eData" type="date" class="inp"><div class="projGroup"><button class="projBtn active" id="btnP1" onclick="setProjeto('P1')">P1</button><button class="projBtn" id="btnP2" onclick="setProjeto('P2')">P2</button><button class="projBtn" id="btnP3" onclick="setProjeto('P3')">P3</button><button class="projBtn" id="btnP4" onclick="setProjeto('P4')">P4</button><button class="projBtn" id="btnP5" onclick="setProjeto('P5')">P5</button><button class="projBtn" id="btnEDILL" onclick="setProjeto('EDILL')">EDILL</button></div><select id="eCasa" class="inp"><option value="">Casa</option></select><div class="turnoCard"><label><input type="checkbox" id="chkAlmoco" onchange="calc()"> ☀️ Almoço</label><div class="timeRow"><input id="eIniA" type="time" class="inp" value="12:30"><input id="eFimA" type="time" class="inp" value="15:30"></div></div><div class="turnoCard"><label><input type="checkbox" id="chkJanta" checked onchange="calc()"> 🌙 Janta</label><div class="timeRow"><input id="eIniJ" type="time" class="inp" value="19:00"><input id="eFimJ" type="time" class="inp" value="22:00"></div></div><div id="listaMusicosEvento" style="max-height:160px;overflow-y:auto;margin:10px 0"></div><div class="totalBox"><span id="txtShows">1 show</span><span id="totalCache">R$ 0</span></div><div style="display:flex;gap:8px;margin-top:12px"><button class="btnPrimary" style="flex:1" onclick="salva()">Salvar</button><button class="btnGhost" style="flex:1" onclick="closeM('modEdit')">Cancelar</button></div></div></div>
-<div class="modal" id="modRel"><div class="modalBox" style="max-width:520px"><b style="color:#1E3A8A">📊 Relatórios AZUL</b><div id="relBody"></div><button class="btnGhost" onclick="closeM('modRel')">Fechar</button></div></div>
+<div class="modal" id="modEdit"><div class="modalBox"><b id="modTitle">Novo</b><br><br><input id="eData" type="date" class="inp"><div class="projGroup"><button class="projBtn active" id="btnP1" onclick="setProjeto('P1')">P1</button><button class="projBtn" id="btnP2" onclick="setProjeto('P2')">P2</button><button class="projBtn" id="btnP3" onclick="setProjeto('P3')">P3</button><button class="projBtn" id="btnP4" onclick="setProjeto('P4')">P4</button><button class="projBtn" id="btnP5" onclick="setProjeto('P5')">P5</button><button class="projBtn" id="btnEDILL" onclick="setProjeto('EDILL')">EDILL</button></div><select id="eCasa" class="inp"><option value="">Casa</option></select><div id="avisoHorario" style="display:none"></div><div class="turnoCard"><label><input type="checkbox" id="chkAlmoco" onchange="calc()"> ☀️ Almoço</label><div class="timeRow"><input id="eIniA" type="time" class="inp" value="12:30"><input id="eFimA" type="time" class="inp" value="15:30"></div></div><div class="turnoCard"><label><input type="checkbox" id="chkJanta" checked onchange="calc()"> 🌙 Janta</label><div class="timeRow"><input id="eIniJ" type="time" class="inp" value="19:00"><input id="eFimJ" type="time" class="inp" value="22:00"></div></div><div id="listaMusicosEvento" style="max-height:160px;overflow-y:auto;margin:10px 0"></div><div class="totalBox"><span id="txtShows">1 show</span><span id="totalCache">R$ 0</span></div><div style="display:flex;gap:8px;margin-top:12px"><button class="btnPrimary" style="flex:1" onclick="salva()">Salvar</button><button class="btnGhost" style="flex:1" onclick="closeM('modEdit')">Cancelar</button></div></div></div>
+<div class="modal" id="modRecup"><div class="modalBox"><b>🛡️ RECUPERAR DADOS PERDIDOS</b><div id="listaBkps" style="margin-top:10px"></div><button class="btnGhost" onclick="closeM('modRecup')">Fechar</button></div></div>
+<div class="modal" id="modRel"><div class="modalBox" style="max-width:520px"><b style="color:#1E3A8A">📊 Relatórios AZUL</b><div id="relBody" style="margin-top:12px"></div><button class="btnGhost" onclick="closeM('modRel')">Fechar</button></div></div>
 <script>
 var eventosPadrao=[
-  {id:1,data:"2026-10-19",[STRIPPED]
-  {id:2,data:"2026-10-19",[STRIPPED]
-  {id:3,data:"2026-10-19",[STRIPPED]
-  {id:4,data:"2026-10-19",[STRIPPED]
-  {id:5,data:"2026-10-19",[STRIPPED]
-  {id:6,data:"2026-10-20",[STRIPPED] SOLO",valor:300}],valor:300},
-  {id:7,data:"2026-10-20",[STRIPPED]
-  {id:8,data:"2026-10-20",[STRIPPED]
-  {id:9,data:"2026-10-20",[STRIPPED]
-  {id:10,data:"2026-10-20",[STRIPPED] SOLO",valor:300}],valor:300},
-  {id:11,data:"2026-10-21",[STRIPPED]
-  {id:12,data:"2026-10-21",[STRIPPED]
-  {id:13,data:"2026-10-21",[STRIPPED]
-  {id:14,data:"2026-10-21",[STRIPPED] SOLO",valor:300}],valor:300},
-  {id:15,data:"2026-10-21",[STRIPPED] SOLO",valor:300}],valor:300}
+  {id:1,data:"2026-10-19",projeto:"P1",casa:"P1",slots:[{tipo:"janta",inicio:"19:00",fim:"22:00"}],musicos:[{id:1,nome:"ANDERSON VAT 60 DUO",valor:400}],valor:400},
+  {id:2,data:"2026-10-19",projeto:"P2",casa:"P2",slots:[{tipo:"janta",inicio:"19:00",fim:"22:00"}],musicos:[{id:10,nome:"RICK DUO",valor:400}],valor:400},
+  {id:3,data:"2026-10-19",projeto:"P4",casa:"P4",slots:[{tipo:"janta",inicio:"20:30",fim:"23:30"}],musicos:[{id:11,nome:"RICK SOLO",valor:300}],valor:300},
+  {id:4,data:"2026-10-19",projeto:"P5",casa:"P5",slots:[{tipo:"janta",inicio:"18:30",fim:"21:30"}],musicos:[{id:6,nome:"GERVÁSIO",valor:200}],valor:200},
+  {id:5,data:"2026-10-19",projeto:"EDILL",casa:"EDILL",slots:[{tipo:"janta",inicio:"19:30",fim:"22:30"}],musicos:[{id:5,nome:"EDILL",valor:300}],valor:300},
+  {id:6,data:"2026-10-20",projeto:"P1",casa:"P1",slots:[{tipo:"janta",inicio:"19:00",fim:"22:00"}],musicos:[{id:11,nome:"RICK SOLO",valor:300}],valor:300},
+  {id:7,data:"2026-10-20",projeto:"P2",casa:"P2",slots:[{tipo:"janta",inicio:"19:00",fim:"22:00"}],musicos:[{id:8,nome:"LUCIANO",valor:300}],valor:300},
+  {id:8,data:"2026-10-20",projeto:"P4",casa:"P4",slots:[{tipo:"janta",inicio:"20:30",fim:"23:30"}],musicos:[{id:13,nome:"ROBSON SOLO",valor:300}],valor:300},
+  {id:9,data:"2026-10-20",projeto:"P5",casa:"P5",slots:[{tipo:"janta",inicio:"18:30",fim:"21:30"}],musicos:[{id:4,nome:"DOUGLAS",valor:300}],valor:300},
+  {id:10,data:"2026-10-20",projeto:"EDILL",casa:"EDILL",slots:[{tipo:"janta",inicio:"19:30",fim:"22:30"}],musicos:[{id:11,nome:"RICK SOLO",valor:300}],valor:300},
+  {id:11,data:"2026-10-21",projeto:"P1",casa:"P1",slots:[{tipo:"janta",inicio:"19:00",fim:"22:00"}],musicos:[{id:11,nome:"RICK SOLO",valor:300}],valor:300},
+  {id:12,data:"2026-10-21",projeto:"P2",casa:"P2",slots:[{tipo:"janta",inicio:"19:00",fim:"22:00"}],musicos:[{id:4,nome:"DOUGLAS",valor:300}],valor:300},
+  {id:13,data:"2026-10-21",projeto:"P4",casa:"P4",slots:[{tipo:"janta",inicio:"20:30",fim:"23:30"}],musicos:[{id:9,nome:"MARTIN",valor:300}],valor:300},
+  {id:14,data:"2026-10-21",projeto:"P5",casa:"P5",slots:[{tipo:"janta",inicio:"18:30",fim:"21:30"}],musicos:[{id:11,nome:"RICK SOLO",valor:300}],valor:300},
+  {id:15,data:"2026-10-21",projeto:"EDILL",casa:"EDILL",slots:[{tipo:"janta",inicio:"19:30",fim:"22:30"}],musicos:[{id:13,nome:"ROBSON SOLO",valor:300}],valor:300}
 ];
 var casasPadrao=[
   {nome:"P1",iniA:"12:30",fimA:"15:30",iniJ:"19:00",fimJ:"22:00",temAlmoco:false,temJanta:true},
@@ -99,17 +102,31 @@ var casasPadrao=[
 var musicosPadrao=[
   {id:1,nome:"ANDERSON VAT 60 DUO",valor:400},{id:2,nome:"ANDERSON VAT 60 TRIO",valor:450},{id:3,nome:"ANDRÉ",valor:300},{id:4,nome:"DOUGLAS",valor:300},{id:5,nome:"EDILL",valor:300},{id:6,nome:"GERVÁSIO",valor:200},{id:7,nome:"ISRAEL",valor:300},{id:8,nome:"LUCIANO",valor:300},{id:9,nome:"MARTIN",valor:300},{id:10,nome:"RICK DUO",valor:400},{id:11,nome:"RICK SOLO",valor:300},{id:12,nome:"RICK TRIO",valor:450},{id:13,nome:"ROBSON SOLO",valor:300},{id:14,nome:"YGOR",valor:300}
 ];
-var DB_KEY='taki_v65_1_negrito';
-var eventos=eventosPadrao;
-var casas=casasPadrao;
-var musicos=musicosPadrao;
-var empresas=[];
+function carregaDB(){
+  var chaves=['taki_v65_1_negrito','taki_v65_final_100_ok','taki_v64_final_404_fix','taki_v63_final_completo','taki_v62_9_azul_imprimir','taki_v62_8_azul','taki_v62_7_final','taki_v62_6_final','taki_v62_5','taki_v62_4','taki_v62_3','taki_agenda','taki_db'];
+  for(var i=0;i<chaves.length;i++){
+    try{
+      var b=JSON.parse(localStorage.getItem(chaves[i])||'null');
+      if(b && b.eventos && b.eventos.length>0){
+        if(b.eventos.length>=eventosPadrao.length) return b;
+        if(i==0) return b;
+      }
+    }catch(e){}
+  }
+  return {eventos:eventosPadrao,casas:casasPadrao,musicos:musicosPadrao,empresas:[]};
+}
+var db=carregaDB();
+var eventos=db.eventos||eventosPadrao;
+var casas=db.casas||casasPadrao;
+var musicos=db.musicos||musicosPadrao;
+var empresas=db.empresas||[];
+var DB_KEY='taki_v65_2_final_negrito_corrigido';
 var mesAtual=new Date(2026,9,19);
 var view='semana';
 var editId=null;
 var selMusicos=[];
 var projetoAtual='P1';
-function save(){localStorage.setItem(DB_KEY,JSON.stringify({eventos:eventos,ts:Date.now()}));}
+function save(){localStorage.setItem(DB_KEY,JSON.stringify({eventos:eventos,casas:casas,musicos:musicos,empresas:empresas,ts:Date.now()}));}
 function openMenu(){document.getElementById('takiMenu').classList.add('open')}
 function closeMenu(){document.getElementById('takiMenu').classList.remove('open')}
 function closeM(id){document.getElementById(id).classList.remove('open')}
@@ -131,12 +148,13 @@ function render(){
       lista.innerHTML+='<div class="eventCard"><span class="badgeShows">'+qtd+' shows</span><div class="eventTitle">'+nomeCurto+'</div><div>'+slotsHtml+'</div><div class="eventSub">'+nomes+'<br><small>R$'+ev.valor+'</small></div><div class="eventActions"><button class="btnEdit" onclick="edita('+ev.id+')">✏️ Editar</button><button class="btnDel" onclick="exclui('+ev.id+')">🗑️ Excluir</button></div></div>';
     });
   });
-  document.getElementById('contador').innerText=eventos.length+' dias • '+musicos.length+' músicos';
+  if(filtrados.length==0) lista.innerHTML='<p style="text-align:center;padding:32px;color:#94A3B8">Nenhum evento neste período<br>Clique no + para criar</p>';
+  document.getElementById('contador').innerText=eventos.length+' dias • '+musicos.length+' músicos • v65.2 CORRIGIDO';
 }
 function mudaMes(dir){mesAtual.setMonth(mesAtual.getMonth()+dir);render();}
 function abreNovo(){editId=null;selMusicos=[];setProjeto('P1');document.getElementById('eData').value=mesAtual.toISOString().slice(0,10);renderMusEvento();document.getElementById('modEdit').classList.add('open');}
-function edita(id){var ev=eventos.find(function(e){return e.id==id});if(!ev)return;editId=id;selMusicos=ev.musicos?ev.musicos.map(function(m){return m.id}):[];setProjeto(getNomeCurto(ev));document.getElementById('eData').value=ev.data;renderMusEvento();document.getElementById('modEdit').classList.add('open');}
-function renderMusEvento(){var div=document.getElementById('listaMusicosEvento');var html='';musicos.forEach(function(m){var ch=selMusicos.includes(m.id)?'checked':'';var on=selMusicos.includes(m.id)?'on':'';html+='<label class="musCheck '+on+'"><div><input type="checkbox" '+ch+' onchange="toggleM('+m.id+')"><span style="margin-left:6px;font-weight:700">'+m.nome+'</span></div><span style="color:#2563EB;font-weight:800">R$ '+m.valor+'</span></label>'});div.innerHTML=html;calc();}
+function edita(id){var ev=eventos.find(function(e){return e.id==id});if(!ev)return;editId=id;selMusicos=ev.musicos?ev.musicos.map(function(m){return m.id}):[];setProjeto(getNomeCurto(ev));document.getElementById('eData').value=ev.data;if(ev.slots){var alm=ev.slots.find(function(s){return s.tipo=='almoco'});var jan=ev.slots.find(function(s){return s.tipo=='janta'});document.getElementById('chkAlmoco').checked=!!alm;document.getElementById('chkJanta').checked=!!jan;if(alm){document.getElementById('eIniA').value=alm.inicio;document.getElementById('eFimA').value=alm.fim}if(jan){document.getElementById('eIniJ').value=jan.inicio;document.getElementById('eFimJ').value=jan.fim}}renderMusEvento();document.getElementById('modEdit').classList.add('open');}
+function renderMusEvento(){var div=document.getElementById('listaMusicosEvento');var html='';musicos.sort(function(a,b){return a.nome.localeCompare(b.nome)}).forEach(function(m){var ch=selMusicos.includes(m.id)?'checked':'';var on=selMusicos.includes(m.id)?'on':'';html+='<label class="musCheck '+on+'"><div><input type="checkbox" '+ch+' onchange="toggleM('+m.id+')"><span style="margin-left:6px;font-weight:700">'+m.nome+'</span></div><span style="color:#2563EB;font-weight:800">R$ '+m.valor+'</span></label>'});div.innerHTML=html;calc();}
 function toggleM(id){if(selMusicos.includes(id))selMusicos=selMusicos.filter(function(x){return x!=id});else selMusicos.push(id);renderMusEvento();}
 function calc(){var qtd=(document.getElementById('chkAlmoco').checked?1:0)+(document.getElementById('chkJanta').checked?1:0);if(qtd==0)qtd=1;var total=0;selMusicos.forEach(function(id){var m=musicos.find(function(x){return x.id==id});if(m)total+=parseFloat(m.valor)||0});var geral=total*qtd;document.getElementById('txtShows').innerText=qtd+' shows';document.getElementById('totalCache').innerText='R$ '+geral;return {geral:geral}}
 function setProjeto(p){projetoAtual=p;document.querySelectorAll('.projBtn').forEach(function(b){b.classList.remove('active')});var map={'P1':'btnP1','P2':'btnP2','P3':'btnP3','P4':'btnP4','P5':'btnP5','EDILL':'btnEDILL'};if(map[p]&&document.getElementById(map[p])) document.getElementById(map[p]).classList.add('active');}
@@ -145,15 +163,15 @@ function salva(){
   var casaFinal=projetoAtual;
   if(!data){alert('Escolhe DATA');return}
   var slots=[];
-  if(document.getElementById('chkAlmoco').checked)slots.push({tipo:'almoco',inicio:document.getElementById('eIniA').value||'13:00',fim:document.getElementById('eFimA').value||'16:00'});
+  if(document.getElementById('chkAlmoco').checked)slots.push({tipo:'almoco',inicio:document.getElementById('eIniA').value||'12:30',fim:document.getElementById('eFimA').value||'15:30'});
   if(document.getElementById('chkJanta').checked)slots.push({tipo:'janta',inicio:document.getElementById('eIniJ').value||'19:00',fim:document.getElementById('eFimJ').value||'22:00'});
   if(slots.length==0){alert('Marca almoço ou janta');return}
   var c=calc();var geral=c.geral;var listaMus=[];selMusicos.forEach(function(id){var m=musicos.find(function(x){return x.id==id});if(m)listaMus.push(m)});
-  if(editId){var ev=eventos.find(function(e){return e.id==editId});ev.data=data;ev.casa=casaFinal;ev.slots=slots;ev.valor=geral;ev.musicos=listaMus;}
-  else{eventos.push({id:Date.now(),data:data,[STRIPPED]
+  if(editId){var ev=eventos.find(function(e){return e.id==editId});ev.data=data;ev.casa=casaFinal;ev.projeto=casaFinal;ev.slots=slots;ev.valor=geral;ev.musicos=listaMus;}
+  else{eventos.push({id:Date.now(),data:data,projeto:casaFinal,casa:casaFinal,slots:slots,valor:geral,musicos:listaMus});}
   save();closeM('modEdit');render();
 }
-function exclui(id){eventos=eventos.filter(function(e){return e.id!=id});save();render();}
+function exclui(id){if(!confirm('Excluir?'))return;eventos=eventos.filter(function(e){return e.id!=id});save();render();}
 function getTexto(comValor){
   var filtrados=eventos.filter(function(ev){var d=new Date(ev.data+'T00:00:00');return d.getMonth()==mesAtual.getMonth()&&d.getFullYear()==mesAtual.getFullYear()}).sort(function(a,b){return a.data.localeCompare(b.data)});
   var txt='';var grupos={};filtrados.forEach(function(ev){if(!grupos[ev.data])grupos[ev.data]=[];grupos[ev.data].push(ev)});
@@ -167,7 +185,7 @@ function getTexto(comValor){
         if(comValor){var mv=(ev.musicos||[]).map(function(m){return m.nome+' R$'+m.valor}).join(' + ');txt+=label+': '+nomeCurto+' - '+mv+' - '+s.inicio+'-'+s.fim+' = R$'+ev.valor+'\n';}
         else{txt+=label+': '+nomeCurto+' - '+musTxt+' - '+s.inicio+'-'+s.fim+'\n';}
       });
-      if(comValor)txt+='\n';else txt+='\n';
+      txt+='\n';
     });
   });return txt||'Sem eventos';
 }
@@ -230,7 +248,36 @@ function exportFolha(comValor){
   var w=window.open('','','width=1100,height=700');w.document.write(html);w.document.close();
 }
 function exportPdf(comValor){exportFolha(comValor);}
-function openRelatorios(){document.getElementById('modRel').classList.add('open');}
+function openRecuperar(){
+  var html='';var chaves=['taki_v65_1_negrito','taki_v65_final_100_ok','taki_v64_final_404_fix','taki_v63_final_completo','taki_v62_9_azul_imprimir','taki_v62_8_azul','taki_v62_7_final','taki_v62_6_final','taki_v62_5','taki_v62_4','taki_v62_3','taki_agenda','taki_db'];
+  chaves.forEach(function(k){
+    try{
+      var b=JSON.parse(localStorage.getItem(k)||'null');
+      if(b&&b.eventos&&b.eventos.length>0){
+        html+='<div class="bkpItem"><div><b>'+k+'</b><br><small>'+b.eventos.length+' eventos • '+(b.ts?new Date(b.ts).toLocaleString('pt-BR'):'sem data')+'</small></div><button onclick="restauraBkp(\''+k+'\')" style="background:#2563EB;color:#fff;border:none;padding:8px 12px;border-radius:8px;font-weight:700">Recuperar</button></div>';
+      }
+    }catch(e){}
+  });
+  if(!html) html='<p style="font-size:12px;color:#94A3B8;padding:10px">Nenhum backup antigo encontrado</p>';
+  document.getElementById('listaBkps').innerHTML=html;
+  document.getElementById('modRecup').classList.add('open');
+}
+function restauraBkp(key){
+  try{
+    var b=JSON.parse(localStorage.getItem(key)||'null');
+    if(!b||!b.eventos) {alert('Vazio');return;}
+    if(!confirm('Recuperar '+b.eventos.length+' eventos de '+key+'? Vai substituir os atuais!')) return;
+    eventos=b.eventos;casas=b.casas||casas;musicos=b.musicos||musicos;empresas=b.empresas||[];
+    save();alert('✅ Recuperado '+eventos.length+' eventos!');closeM('modRecup');render();
+  }catch(e){alert('Erro ao recuperar');}
+}
+function openRelatorios(){
+  var total=eventos.reduce(function(s,e){return s+(e.valor||0)},0);
+  var qtd=eventos.reduce(function(s,e){return s+(e.slots?e.slots.length:1)},0);
+  var html='<div style="background:linear-gradient(135deg,#1E3A8A,#2563EB);color:#fff;padding:14px;border-radius:12px"><b>R$ '+total+'</b> • '+qtd+' shows • '+eventos.length+' dias</div>';
+  document.getElementById('relBody').innerHTML=html;
+  document.getElementById('modRel').classList.add('open');
+}
 render();
 </script>
 </body>
