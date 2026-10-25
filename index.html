@@ -2,34 +2,33 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TAKI AGENDA v61 - MODELO DA FOTO EXATO</title>
+<title>TAKI AGENDA v61 FINAL SEM ERRO</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--dark:#111827;--purple:#6D5BFF;--bg:#F6F7FB;--border:#E5E7EB}
-*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);font-family:Inter,sans-serif;color:#111827;padding-bottom:88px;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);font-family:Inter,sans-serif;color:#111827;padding-bottom:90px}
 .top{position:sticky;top:0;z-index:100;background:var(--dark);color:#fff;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;height:56px}
 .topLeft{display:flex;align-items:center;gap:10px}.topTitle b{font-size:13px;font-weight:700}.topTitle small{font-size:11px;color:#FBBF24;font-weight:600}
 .btnHome{background:var(--purple);color:#fff;border:none;padding:7px 14px;border-radius:20px;font-weight:700;font-size:11px;cursor:pointer}
 .persistDot{font-size:10px;color:#22C55E;display:flex;align-items:center;gap:6px}.persistDot i{width:6px;height:6px;background:#22C55E;border-radius:50%;display:inline-block}
-#takiMenu{position:fixed;inset:0;z-index:400;display:none}#takiMenu.open{display:block}#takiMenuBg{position:absolute;inset:0;background:rgba(17,24,39,.35)}
-#takiMenuPanel{position:absolute;top:0;left:0;bottom:0;width:82%;max-width:330px;background:#fff;overflow-y:auto}
-.takiMenuHead{padding:18px 16px 10px;font-weight:700;font-size:13px;border-bottom:1px solid var(--border)}
+#takiMenu{position:fixed;inset:0;z-index:999;display:none}#takiMenu.open{display:block}#takiMenuBg{position:absolute;inset:0;background:rgba(17,24,39,.5)}
+#takiMenuPanel{position:absolute;top:0;left:0;bottom:0;width:84%;max-width:330px;background:#fff;overflow-y:auto;box-shadow:8px 0 24px rgba(0,0,0,.25);z-index:1000}
+.takiMenuHead{padding:18px 16px 10px;font-weight:700;font-size:13px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
 .takiMenuItem{display:flex;gap:10px;padding:13px 16px;border-bottom:1px solid #F3F4F6;cursor:pointer;font-weight:500;font-size:12.5px;color:#374151}
 .takiMenuItem.recup{background:#FEF2F2;color:#991B1B;font-weight:700;margin:8px;border-radius:8px;border:1px solid #FECACA}
 .takiMenuItem.inst{background:#EEF2FF;color:#4338CA;font-weight:700;margin:8px;border-radius:8px;border:1px solid #C7D2FE}
-.cardMes{background:#fff;margin:10px;border:1px solid var(--border);border-radius:16px;padding:14px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.cardMes{background:#fff;margin:10px;border:1px solid var(--border);border-radius:16px;padding:14px;text-align:center}
 .cardMes b{font-size:12px;font-weight:700}.rowNav{display:flex;align-items:center;justify-content:space-between;margin:10px 0 4px;gap:8px}
 .arrow{width:36px;height:36px;background:#fff;border:1px solid var(--border);border-radius:10px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .filters{display:flex;gap:4px;flex-wrap:wrap;justify-content:center}.filters button{border:1px solid var(--border);background:#fff;color:#6B7280;padding:6px 11px;border-radius:20px;font-weight:600;font-size:11px;cursor:pointer}
 .filters button.active{background:var(--dark);color:#fff;border-color:var(--dark)}
 input[type=month]{padding:8px 14px;border-radius:10px;border:1px solid var(--border);font-weight:600;font-size:12px;text-align:center;margin:8px 0;background:#F9FAFB}
 .dayHeader{background:#111827;color:#fff;padding:8px 12px;border-radius:8px;margin:14px 10px 6px 10px;font-weight:600;font-size:11px}
-.eventCard{background:#fff;margin:0 10px 10px 10px;border:1px solid var(--border);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px;border-left:3px solid var(--purple);box-shadow:0 1px 2px rgba(0,0,0,.03)}
+.eventCard{background:#fff;margin:0 10px 10px 10px;border:1px solid var(--border);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px;border-left:3px solid var(--purple)}
 .eventHead{display:flex;justify-content:space-between;align-items:center}
 .eventTitle{font-weight:700;font-size:12px}
 .eventSlots{display:flex;flex-direction:column;gap:5px}
 .slot{display:flex;justify-content:space-between;align-items:center;font-size:11px;background:#F9FAFB;padding:7px 10px;border-radius:8px;border:1px solid #F3F4F6}
-.slot b{font-weight:700}.slot span{font-weight:600}
 .eventSub{font-size:11px;color:#374151;font-weight:500;line-height:1.4;background:#F5F3FF;padding:9px 10px;border-radius:8px;border:1px solid #EDE9FE}
 .eventSub small{color:#6B7280;font-size:10.5px}
 .eventActions{display:flex;gap:10px;margin-top:4px}
@@ -54,9 +53,10 @@ input[type=month]{padding:8px 14px;border-radius:10px;border:1px solid var(--bor
 </style>
 </head>
 <body>
-<div class="top"><div class="topLeft"><span style="font-size:22px;cursor:pointer" onclick="openTakiMenu()">☰</span><div class="topTitle"><b>AGENDA DO MES</b><br><small>TAKI SOM</small><div class="persistDot"><i></i><span id="persistStatus">Protegido</span></div></div></div><button class="btnHome" onclick="location.href='index.html'">HOME</button></div>
+<div class="top"><div class="topLeft"><span onclick="openTakiMenu()" style="font-size:24px;cursor:pointer;padding:4px 8px 4px 0">☰</span><div class="topTitle"><b>AGENDA DO MES</b><br><small>TAKI SOM</small><div class="persistDot"><i></i><span>Protegido</span></div></div></div><button class="btnHome" onclick="location.href='index.html'">HOME</button></div>
+
 <div id="takiMenu"><div id="takiMenuBg" onclick="closeTakiMenu()"></div><div id="takiMenuPanel">
-<div class="takiMenuHead">TAKI — MENU</div>
+<div class="takiMenuHead"><span>TAKI — MENU</span><span onclick="closeTakiMenu()" style="cursor:pointer;padding:4px 8px;background:#F3F4F6;border-radius:6px;font-size:14px">✕</span></div>
 <div class="takiMenuItem" onclick="setView('dia');closeTakiMenu()">📋 Agenda do dia</div>
 <div class="takiMenuItem" onclick="setView('semana');closeTakiMenu()">🗓 Agenda da semana</div>
 <div class="takiMenuItem" onclick="setView('mes');closeTakiMenu()">📅 Agenda do mês</div>
@@ -64,165 +64,221 @@ input[type=month]{padding:8px 14px;border-radius:10px;border:1px solid var(--bor
 <div class="takiMenuItem" onclick="exportZap(true);closeTakiMenu()">🏠 Enviar COM valor (casa)</div>
 <div class="takiMenuItem" onclick="exportZap(false);closeTakiMenu()">🎤 Enviar SEM valor (músico)</div>
 <div style="height:12px"></div>
-<div class="takiMenuItem" onclick="openCadastroCasas()">🏠 Cadastrar casas</div>
-<div class="takiMenuItem" onclick="openCadastroMusicos()">🎤 Cadastrar músicos</div>
-<div class="takiMenuItem" onclick="openCadastroEmpresas()">🏢 Cadastrar empresas</div>
+<div class="takiMenuItem" onclick="openCadastroCasas();closeTakiMenu()">🏠 Cadastrar casas</div>
+<div class="takiMenuItem" onclick="openCadastroMusicos();closeTakiMenu()">🎤 Cadastrar músicos</div>
+<div class="takiMenuItem" onclick="openCadastroEmpresas();closeTakiMenu()">🏢 Cadastrar empresas</div>
 <div style="height:12px"></div>
-<div class="takiMenuItem" onclick="bkpExportImport()">💾 BKP exportar / importar</div>
-<div class="takiMenuItem recup" onclick="openRecuperar()">🛡️ Recuperar dados</div>
-<div class="takiMenuItem" onclick="openRelatorios()">📊 Relatórios financeiros</div>
-<div class="takiMenuItem inst" onclick="instalarApp()">📲 Instalar app</div>
+<div class="takiMenuItem" onclick="bkpExportImport();closeTakiMenu()">💾 BKP exportar / importar</div>
+<div class="takiMenuItem recup" onclick="openRecuperar();closeTakiMenu()">🛡️ Recuperar dados</div>
+<div class="takiMenuItem" onclick="openRelatorios();closeTakiMenu()">📊 Relatórios financeiros</div>
+<div class="takiMenuItem inst" onclick="instalarApp();closeTakiMenu()">📲 Instalar app</div>
 <div class="takiMenuItem" onclick="closeTakiMenu()">🚪 Fechar menu</div>
 </div></div>
+
 <div class="cardMes">
 <b id="labelMes">MES DE OUTUBRO DE 2026</b>
 <div><input type="month" id="inputMes" value="2026-10" onchange="mudaMesInput()"></div>
 <div class="rowNav"><button class="arrow" onclick="mudaMes(-1)">‹</button><div class="filters"><button onclick="setView('hoje')" id="fHoje">Hoje</button><button onclick="setView('dia')" id="fDia">Dia</button><button onclick="setView('semana')" id="fSemana">Semana</button><button class="active" onclick="setView('mes')" id="fMes">Mês</button><button onclick="setView('ano')" id="fAno">Ano</button></div><button class="arrow" onclick="mudaMes(1)">›</button></div>
 <div id="contador" style="font-size:11px;color:#6B7280;margin-top:6px"></div>
 </div>
+
 <div id="lista"></div>
 <button class="plus" onclick="abreNovo()">+</button>
+
 <div class="bottom">
 <button class="btnZap" onclick="escolheZap()">ZAP</button>
-<button onclick="exportNormal(true)">NORMAL</button>
+<button onclick="exportNormal()">NORMAL</button>
 <button onclick="exportFolha()">FOLHA</button>
 <button onclick="exportPdf()">PDF</button>
 </div>
+
 <div class="modal" id="modZapEscolha"><div class="modalBox">
 <b>Enviar cronograma</b>
 <p style="font-size:11px;color:#6B7280;margin:6px 0 10px">Escolha o formato:</p>
 <button class="btnPrimary" onclick="exportZap(true);closeModal('modZapEscolha')">🏠 ZAP COM VALOR (para casa)</button>
-<button class="btnPrimary" style="background:#111827;margin-top:6px" onclick="exportZap(false);closeModal('modZapEscolha')">🎤 ZAP SEM VALOR (para músico - só casa, nome e horário)</button>
+<button class="btnPrimary" style="background:#111827;margin-top:6px" onclick="exportZap(false);closeModal('modZapEscolha')">🎤 ZAP SEM VALOR (músico - só casa, nome e horário)</button>
 <button class="btnGhost" onclick="closeModal('modZapEscolha')">Cancelar</button>
 </div></div>
+
 <div class="modal" id="modEdit"><div class="modalBox">
 <b id="modTitle">Novo cronograma</b>
 <input id="eData" type="date" class="inp">
 <select id="eProjeto" class="inp"><option>P1 - EDILL</option><option>P2 - TAKI</option><option>TAKI SOM</option><option>P3 - OUTRO</option></select>
 <select id="eCasa" class="inp"><option value="">Casa / Empresa</option></select>
-<div class="turnoCard"><div class="turnoHead"><label><input type="checkbox" id="chkAlmoco" checked onchange="toggleTurno()"> ☀️ Almoço</label><span style="font-size:10px;color:#6B7280">1 show</span></div><div id="rowAlmoco" class="timeRow"><input id="eInicioAlmoco" type="time" class="inp" value="12:30"><input id="eFimAlmoco" type="time" class="inp" value="15:30"></div></div>
-<div class="turnoCard"><div class="turnoHead"><label><input type="checkbox" id="chkJanta" checked onchange="toggleTurno()"> 🌙 Janta</label><span style="font-size:10px;color:#6B7280">1 show</span></div><div id="rowJanta" class="timeRow"><input id="eInicioJanta" type="time" class="inp" value="19:00"><input id="eFimJanta" type="time" class="inp" value="22:00"></div></div>
+<div class="turnoCard"><div class="turnoHead"><label><input type="checkbox" id="chkAlmoco" checked onchange="toggleTurno()"> ☀️ Almoço</label></div><div id="rowAlmoco" class="timeRow"><input id="eInicioAlmoco" type="time" class="inp" value="12:30"><input id="eFimAlmoco" type="time" class="inp" value="15:30"></div></div>
+<div class="turnoCard"><div class="turnoHead"><label><input type="checkbox" id="chkJanta" checked onchange="toggleTurno()"> 🌙 Janta</label></div><div id="rowJanta" class="timeRow"><input id="eInicioJanta" type="time" class="inp" value="19:00"><input id="eFimJanta" type="time" class="inp" value="22:00"></div></div>
 <b style="font-size:11px;color:#6B7280;margin-top:8px;display:block">Músicos (cachê fixo):</b>
 <div id="listaMusicosEvento" style="max-height:140px;overflow-y:auto;margin:6px 0"></div>
-<div class="totalBox"><div><span id="txtShows">2 shows</span><br><small style="font-weight:500;font-size:10px;color:#9CA3AF" id="txtDetalhe"></small></div><span id="totalCache">R$ 0,00</span></div>
+<div class="totalBox"><div><span id="txtShows">2 shows</span><br><small style="font-size:10px;color:#9CA3AF" id="txtDetalhe"></small></div><span id="totalCache">R$ 0,00</span></div>
 <div style="display:flex;gap:8px;margin-top:10px"><button class="btnPrimary" style="flex:1" onclick="salva()">Salvar</button><button class="btnGhost" style="flex:1" onclick="fecha()">Cancelar</button></div>
 </div></div>
-<div class="modal" id="modMusicos"><div class="modalBox"><b>🎤 Cadastrar músicos</b><input id="musNome" class="inp" placeholder="Nome"><input id="musValor" type="number" class="inp" placeholder="Cachê por show R$ - Ex: 150" style="border-color:#6D5BFF"><button class="btnPrimary" onclick="addMusico()">+ Adicionar</button><div id="listaMusicos" style="margin-top:10px"></div><button class="btnGhost" onclick="closeModal('modMusicos')">Fechar</button></div></div>
+
+<div class="modal" id="modMusicos"><div class="modalBox"><b>🎤 Cadastrar músicos</b><input id="musNome" class="inp" placeholder="Nome"><input id="musValor" type="number" class="inp" placeholder="Cachê por show R$ - Ex: 150"><button class="btnPrimary" onclick="addMusico()">+ Adicionar</button><div id="listaMusicos" style="margin-top:10px"></div><button class="btnGhost" onclick="closeModal('modMusicos')">Fechar</button></div></div>
 <div class="modal" id="modCasas"><div class="modalBox"><b>🏠 Cadastrar casas</b><input id="casaNome" class="inp" placeholder="Nome - P1 - EDILL"><button class="btnPrimary" onclick="addCasa()">Adicionar</button><div id="listaCasas" style="margin-top:10px"></div><button class="btnGhost" onclick="closeModal('modCasas')">Fechar</button></div></div>
 <div class="modal" id="modEmpresas"><div class="modalBox"><b>🏢 Cadastrar empresas</b><input id="empNome" class="inp" placeholder="Nome"><button class="btnPrimary" onclick="addEmpresa()">Adicionar</button><div id="listaEmpresas" style="margin-top:10px"></div><button class="btnGhost" onclick="closeModal('modEmpresas')">Fechar</button></div></div>
 <div class="modal" id="modRel"><div class="modalBox"><b>📊 Relatórios</b><div id="relBody" style="margin-top:10px"></div><button class="btnGhost" onclick="closeModal('modRel')">Fechar</button></div></div>
 <div class="modal" id="modBkp"><div class="modalBox"><b>💾 Backup</b><div style="margin-top:10px;display:flex;flex-direction:column;gap:8px"><button class="btnPrimary" onclick="exportBkpAgenda()">Exportar backup</button><label style="padding:11px;background:#EEF2FF;color:#4338CA;border-radius:8px;font-weight:700;font-size:12px;text-align:center;cursor:pointer;border:1px solid #C7D2FE">Importar backup<input type="file" id="importBkp" hidden accept=".json" onchange="importBkpAgenda(this)"></label><button class="btnGhost" onclick="openRecuperar()">Ver backups</button></div><button class="btnGhost" onclick="closeModal('modBkp')">Fechar</button></div></div>
 <div class="modal" id="modRecup"><div class="modalBox"><b>🛡️ Recuperar dados</b><div id="listaBkps"></div><button class="btnGhost" onclick="closeModal('modRecup')">Fechar</button></div></div>
+
 <script>
-let eventos=[], casas=[], musicos=[], empresas=[], mesAtual=new Date(2026,9,1), view='mes', editId=null, db=null, musicosSelecionados=[], deferredPrompt=null;
-window.addEventListener('beforeinstallprompt',(e)=>{e.preventDefault();deferredPrompt=e;});
-function instalarApp(){if(deferredPrompt){deferredPrompt.prompt();}else{alert('Chrome > 3 pontinhos > Instalar app');}}
-async function openDB(){return new Promise((res,rej)=>{let req=indexedDB.open('TAKI_AGENDA_V61_FOTO',2);req.onupgradeneeded=e=>{let d=e.target.result;if(!d.objectStoreNames.contains('dados'))d.createObjectStore('dados',{keyPath:'id'})};req.onsuccess=e=>{db=e.target.result;res(db)};req.onerror=e=>rej(e)})}
-async function saveDB(id,obj){if(!db)await openDB();return new Promise(r=>{let tx=db.transaction('dados','readwrite');tx.objectStore('dados').put({id:id,data:obj,[STRIPPED]
-async function loadDB(id){if(!db)await openDB();return new Promise(r=>{let tx=db.transaction('dados','readonly');let req=tx.objectStore('dados').get(id);req.onsuccess=e=>r(e.target.result?e.target.result.data:null);req.onerror=()=>r(null)})}
-async function carregaDados(){
-  let dbEv=await loadDB('eventos'), dbCa=await loadDB('casas'), dbMu=await loadDB('musicos'), dbEm=await loadDB('empresas');
-  let lsEv=null, lsCa=null, lsMu=null, lsEm=null;
-  for(let k of ['taki_agenda','taki_agenda_v61','taki_agenda_v60']){let v=JSON.parse(localStorage.getItem(k)||'null');if(v&&v.length>0){lsEv=v;break;}}
-  for(let k of ['taki_musicos','taki_musicos_v61']){let v=JSON.parse(localStorage.getItem(k)||'null');if(v&&v.length>0){lsMu=v;break;}}
-  for(let k of ['taki_casas']){let v=JSON.parse(localStorage.getItem(k)||'null');if(v&&v.length>0){lsCa=v;break;}}
-  for(let k of ['taki_empresas']){let v=JSON.parse(localStorage.getItem(k)||'null');if(v&&v.length>0){lsEm=v;break;}}
-  eventos=(dbEv&&dbEv.length>0)?dbEv:(lsEv&&lsEv.length>0?lsEv:[]);
-  casas=(dbCa&&dbCa.length>0)?dbCa:(lsCa&&lsCa.length>0?lsCa:[]);
-  musicos=(dbMu&&dbMu.length>0)?dbMu:(lsMu&&lsMu.length>0?lsMu:[]);
-  empresas=(dbEm&&dbEm.length>0)?dbEm:(lsEm&&lsEm.length>0?lsEm:[]);
-  if(eventos.length===0){for(let i=1;i<=3;i++){let bkp=JSON.parse(localStorage.getItem('taki_bkp_'+i)||'null');if(bkp&&bkp.eventos&&bkp.eventos.length>0){eventos=bkp.eventos;casas=bkp.casas||[];musicos=bkp.musicos||[];empresas=bkp.empresas||[];break;}}}
-  if(eventos.length===0){let auto=JSON.parse(localStorage.getItem('taki_bkp_auto')||'null');if(auto&&auto.eventos){eventos=auto.eventos;casas=auto.casas||[];musicos=auto.musicos||[];empresas=auto.empresas||[];}}
-  eventos=eventos.map(ev=>{if(!ev.slots){if(ev.inicio&&ev.fim)return {...ev, slots:[{tipo:'janta',inicio:ev.inicio,fim:ev.fim}], casa:ev.casa||ev.local||'TAKI SOM', projeto:ev.projeto||'P1 - EDILL'};return {...ev, slots:[{tipo:'almoco',inicio:'12:30',fim:'15:30'}], casa:ev.casa||ev.local||'TAKI SOM'}}return {...ev, casa:ev.casa||ev.local||'TAKI SOM'}});
-  if(musicos.length===0){musicos=[{id:1,nome:"Ediu",valor:150}];}
+// DADOS - SIMPLES E FUNCIONANDO
+let eventos = JSON.parse(localStorage.getItem('taki_agenda')||'[]');
+let casas = JSON.parse(localStorage.getItem('taki_casas')||'[]');
+let musicos = JSON.parse(localStorage.getItem('taki_musicos')||'[]');
+let empresas = JSON.parse(localStorage.getItem('taki_empresas')||'[]');
+let mesAtual = new Date(2026,9,1);
+let view = 'mes';
+let editId = null;
+let musicosSelecionados = [];
+
+if(eventos.length===0){
+  for(let i=1;i<=3;i++){
+    let bkp = JSON.parse(localStorage.getItem('taki_bkp_'+i)||'null');
+    if(bkp && bkp.eventos && bkp.eventos.length>0){eventos=bkp.eventos; casas=bkp.casas||[]; musicos=bkp.musicos||[]; empresas=bkp.empresas||[]; break;}
+  }
 }
-async function salvaTudo(){localStorage.setItem('taki_agenda',JSON.stringify(eventos));localStorage.setItem('taki_casas',JSON.stringify(casas));localStorage.setItem('taki_musicos',JSON.stringify(musicos));localStorage.setItem('taki_empresas',JSON.stringify(empresas));await saveDB('eventos',eventos);await saveDB('casas',casas);await saveDB('musicos',musicos);await saveDB('empresas',empresas);let idx=parseInt(localStorage.getItem('taki_bkp_idx')||'0');idx=(idx%3)+1;localStorage.setItem('taki_bkp_'+idx,JSON.stringify({eventos,casas,musicos,empresas,ts:Date.now()}));localStorage.setItem('taki_bkp_idx',idx);let hoje=new Date().toISOString().slice(0,10);if(localStorage.getItem('taki_last_bkp')!==hoje){localStorage.setItem('taki_bkp_auto',JSON.stringify({eventos,casas,musicos,empresas,ts:Date.now()}));localStorage.setItem('taki_last_bkp',hoje);}}
-async function ativaPersistencia(){try{if(navigator.storage&&navigator.storage.persist)await navigator.storage.persist();document.getElementById('persistStatus').innerText='Protegido';}catch{}}
-function openTakiMenu(){document.getElementById('takiMenu').classList.add('open')}function closeTakiMenu(){document.getElementById('takiMenu').classList.remove('open')}function closeModal(id){document.getElementById(id).classList.remove('open')}
-function setView(v){view=v;document.querySelectorAll('.filters button').forEach(b=>b.classList.remove('active'));let m={hoje:'fHoje',dia:'fDia',semana:'fSemana',mes:'fMes',ano:'fAno'};if(m[v])document.getElementById(m[v]).classList.add('active');render()}
+if(eventos.length===0){
+  let auto = JSON.parse(localStorage.getItem('taki_bkp_auto')||'null');
+  if(auto && auto.eventos){eventos=auto.eventos; casas=auto.casas||[]; musicos=auto.musicos||[]; empresas=auto.empresas||[];}
+}
+eventos = eventos.map(ev=>{
+  if(!ev.slots){
+    if(ev.inicio && ev.fim){return {...ev, slots:[{tipo:'janta',inicio:ev.inicio,fim:ev.fim}], casa:ev.casa||ev.local||'TAKI SOM', projeto:ev.projeto||'P1 - EDILL'}}
+    return {...ev, slots:[{tipo:'almoco',inicio:'12:30',fim:'15:30'}], casa:ev.casa||ev.local||'TAKI SOM', projeto:ev.projeto||'P1 - EDILL'}
+  }
+  return ev;
+});
+if(musicos.length===0){musicos=[{id:1,nome:"Ediu",valor:150}];}
+if(eventos.length===0){eventos=[{id:1,data:"2026-10-24",projeto:"P1 - EDILL",casa:"P1 - EDILL",slots:[{tipo:"almoco",inicio:"12:30",fim:"15:30"},{tipo:"janta",inicio:"19:00",fim:"22:00"}],musicos:[{id:1,nome:"Ediu",valor:150}],valor:300}];}
+
+function salvaTudo(){
+  localStorage.setItem('taki_agenda',JSON.stringify(eventos));
+  localStorage.setItem('taki_casas',JSON.stringify(casas));
+  localStorage.setItem('taki_musicos',JSON.stringify(musicos));
+  localStorage.setItem('taki_empresas',JSON.stringify(empresas));
+  let idx = parseInt(localStorage.getItem('taki_bkp_idx')||'0'); idx=(idx%3)+1;
+  localStorage.setItem('taki_bkp_'+idx,JSON.stringify({eventos,casas,musicos,empresas,ts:Date.now()}));
+  localStorage.setItem('taki_bkp_idx',idx);
+  let hoje=new Date().toISOString().slice(0,10);
+  if(localStorage.getItem('taki_last_bkp')!==hoje){
+    localStorage.setItem('taki_bkp_auto',JSON.stringify({eventos,casas,musicos,empresas,ts:Date.now()}));
+    localStorage.setItem('taki_last_bkp',hoje);
+  }
+}
+
+function openTakiMenu(){document.getElementById('takiMenu').classList.add('open')}
+function closeTakiMenu(){document.getElementById('takiMenu').classList.remove('open')}
+function closeModal(id){document.getElementById(id).classList.remove('open')}
+
+function setView(v){
+  view=v;
+  document.querySelectorAll('.filters button').forEach(b=>b.classList.remove('active'));
+  let m={hoje:'fHoje',dia:'fDia',semana:'fSemana',mes:'fMes',ano:'fAno'};
+  if(m[v]) document.getElementById(m[v]).classList.add('active');
+  render();
+}
+
 function render(){
   let mes=mesAtual.getMonth(),ano=mesAtual.getFullYear();
-  document.getElementById('labelMes').innerText=`MES DE ${mesAtual.toLocaleDateString('pt-BR',{month:'long'}).toUpperCase()} DE ${ano}`;
-  document.getElementById('inputMes').value=`${ano}-${String(mes+1).padStart(2,'0')}`;
+  document.getElementById('labelMes').innerText='MES DE '+mesAtual.toLocaleDateString('pt-BR',{month:'long'}).toUpperCase()+' DE '+ano;
+  document.getElementById('inputMes').value=ano+'-'+String(mes+1).padStart(2,'0');
   let lista=document.getElementById('lista');lista.innerHTML='';
-  let filtrados=eventos.filter(ev=>{let d=new Date(ev.data+'T00:00:00');if(view==='mes')return d.getMonth()===mes&&d.getFullYear()===ano;if(view==='dia'||view==='hoje'){let alvo=view==='hoje'?new Date():mesAtual;return ev.data===alvo.toISOString().slice(0,10)}if(view==='semana'){let ini=new Date(mesAtual);ini.setDate(mesAtual.getDate()-mesAtual.getDay());let fim=new Date(ini);fim.setDate(ini.getDate()+6);return d>=ini&&d<=fim}if(view==='ano')return d.getFullYear()===ano;return true}).sort((a,b)=>a.data.localeCompare(b.data));
-  let grupos={};filtrados.forEach(ev=>{if(!grupos[ev.data])grupos[ev.data]=[];grupos[ev.data].push(ev)});
+  let filtrados=eventos.filter(ev=>{
+    let d=new Date(ev.data+'T00:00:00');
+    if(view==='mes')return d.getMonth()===mes&&d.getFullYear()===ano;
+    if(view==='dia'||view==='hoje'){let alvo=view==='hoje'?new Date():mesAtual;return ev.data===alvo.toISOString().slice(0,10)}
+    if(view==='semana'){let ini=new Date(mesAtual);ini.setDate(mesAtual.getDate()-mesAtual.getDay());let fim=new Date(ini);fim.setDate(ini.getDate()+6);return d>=ini&&d<=fim}
+    if(view==='ano')return d.getFullYear()===ano;
+    return true
+  }).sort((a,b)=>a.data.localeCompare(b.data));
+  let grupos={};
+  filtrados.forEach(ev=>{if(!grupos[ev.data])grupos[ev.data]=[];grupos[ev.data].push(ev)});
   Object.keys(grupos).sort().forEach(data=>{
-    let d=new Date(data+'T00:00:00');let titulo=d.toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long',year:'numeric'}).toUpperCase();
-    lista.innerHTML+=`<div class="dayHeader">${titulo}</div>`;
+    let d=new Date(data+'T00:00:00');
+    let titulo=d.toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long',year:'numeric'}).toUpperCase();
+    lista.innerHTML+='<div class="dayHeader">'+titulo+'</div>';
     grupos[data].forEach(ev=>{
-      let slotsHtml='';(ev.slots||[]).forEach(s=>{let ico=s.tipo==='almoco'?'☀️':'🌙';let label=s.tipo==='almoco'?'Almoço':'Janta';slotsHtml+=`<div class="slot"><b>${ico} ${label}</b><span>${s.inicio} - ${s.fim}</span></div>`});
+      let slotsHtml=''; (ev.slots||[]).forEach(s=>{let ico=s.tipo==='almoco'?'☀️':'🌙';let label=s.tipo==='almoco'?'Almoço':'Janta';slotsHtml+='<div class="slot"><b>'+ico+' '+label+'</b><span>'+s.inicio+' - '+s.fim+'</span></div>'});
       let qtd=ev.slots?ev.slots.length:1;
       let nomes=(ev.musicos||[]).map(m=>m.nome).join(' + ')||'Sem músico';
-      let detalhe=(ev.musicos||[]).map(m=>`${m.nome} (R$${m.valor})`).join(' + ');
+      let detalhe=(ev.musicos||[]).map(m=>m.nome+' (R$'+m.valor+')').join(' + ');
       let txt='';
-      if(ev.musicos&&ev.musicos.length>0){if(qtd>1)txt=`${nomes}<br><small>${detalhe} x${qtd} shows = Total R$${ev.valor}</small>`;else txt=`${nomes}<br><small>${detalhe} • ${qtd} show • Total R$${ev.valor}</small>`;}else txt=`Total R$${ev.valor||0} • ${qtd} show${qtd>1?'s':''}`;
-      lista.innerHTML+=`<div class="eventCard"><div class="eventHead"><div class="eventTitle">${ev.projeto} — ${ev.casa}</div><div style="font-size:11px;color:#6B7280">${qtd} show${qtd>1?'s':''}</div></div><div class="eventSlots">${slotsHtml}</div><div class="eventSub">${txt}</div><div class="eventActions"><button class="btnEdit" onclick="edita(${ev.id})">Editar</button><button class="btnDel" onclick="exclui(${ev.id})">Excluir</button></div></div>`;
+      if(ev.musicos&&ev.musicos.length>0){
+        if(qtd>1){txt=nomes+'<br><small>'+detalhe+' x'+qtd+' shows = Total R$'+ev.valor+'</small>'}
+        else{txt=nomes+'<br><small>'+detalhe+' • '+qtd+' show • Total R$'+ev.valor+'</small>'}
+      }else{txt='Total R$'+(ev.valor||0)+' • '+qtd+' show'}
+      lista.innerHTML+='<div class="eventCard"><div class="eventHead"><div class="eventTitle">'+ev.projeto+' — '+ev.casa+'</div><div style="font-size:11px;color:#6B7280">'+qtd+' show'+(qtd>1?'s':'')+'</div></div><div class="eventSlots">'+slotsHtml+'</div><div class="eventSub">'+txt+'</div><div class="eventActions"><button class="btnEdit" onclick="edita('+ev.id+')">Editar</button><button class="btnDel" onclick="exclui('+ev.id+')">Excluir</button></div></div>';
     });
   });
-  if(filtrados.length===0)lista.innerHTML=`<p style="text-align:center;padding:28px;color:#9CA3AF;font-size:12px">Nenhum evento.<br>Clique no + para criar.</p>`;
+  if(filtrados.length===0)lista.innerHTML='<p style="text-align:center;padding:28px;color:#9CA3AF;font-size:12px">Nenhum evento neste mês.<br>Clique no + para criar.</p>';
   let sel=document.getElementById('eCasa');sel.innerHTML='<option value="">Casa / Empresa</option>';[...casas,...empresas].forEach(c=>{let opt=document.createElement('option');opt.value=c.nome;opt.textContent=c.nome;sel.appendChild(opt)});
-  document.getElementById('contador').innerText=`${eventos.length} dias • ${eventos.reduce((s,e)=>s+(e.slots?e.slots.length:1),0)} shows • ${musicos.length} músicos • protegido`;
+  document.getElementById('contador').innerText=eventos.length+' dias • '+eventos.reduce((s,e)=>s+(e.slots?e.slots.length:1),0)+' shows • '+musicos.length+' músicos • protegido';
 }
-function mudaMes(dir){mesAtual.setMonth(mesAtual.getMonth()+dir);render()}function mudaMesInput(){let v=document.getElementById('inputMes').value;if(!v)return;let [a,m]=v.split('-');mesAtual=new Date(parseInt(a),parseInt(m)-1,1);render()}
+
+function mudaMes(dir){mesAtual.setMonth(mesAtual.getMonth()+dir);render()}
+function mudaMesInput(){let v=document.getElementById('inputMes').value;if(!v)return;let parts=v.split('-');mesAtual=new Date(parseInt(parts[0]),parseInt(parts[1])-1,1);render()}
 function toggleTurno(){document.getElementById('rowAlmoco').style.display=document.getElementById('chkAlmoco').checked?'flex':'none';document.getElementById('rowJanta').style.display=document.getElementById('chkJanta').checked?'flex':'none';calcTotal()}
 function abreNovo(){editId=null;musicosSelecionados=[];document.getElementById('modTitle').innerText='Novo cronograma';document.getElementById('eData').value=new Date().toISOString().slice(0,10);document.getElementById('chkAlmoco').checked=true;document.getElementById('chkJanta').checked=true;document.getElementById('eInicioAlmoco').value='12:30';document.getElementById('eFimAlmoco').value='15:30';document.getElementById('eInicioJanta').value='19:00';document.getElementById('eFimJanta').value='22:00';toggleTurno();renderMusicosEvento();document.getElementById('modEdit').classList.add('open')}
 function edita(id){let ev=eventos.find(e=>e.id===id);if(!ev)return;editId=id;musicosSelecionados=ev.musicos?ev.musicos.map(m=>m.id):[];document.getElementById('modTitle').innerText='Editar cronograma';document.getElementById('eData').value=ev.data;document.getElementById('eProjeto').value=ev.projeto;document.getElementById('eCasa').value=ev.casa||'';if(ev.slots){let alm=ev.slots.find(s=>s.tipo==='almoco');let jan=ev.slots.find(s=>s.tipo==='janta');document.getElementById('chkAlmoco').checked=!!alm;document.getElementById('chkJanta').checked=!!jan;if(alm){document.getElementById('eInicioAlmoco').value=alm.inicio;document.getElementById('eFimAlmoco').value=alm.fim}if(jan){document.getElementById('eInicioJanta').value=jan.inicio;document.getElementById('eFimJanta').value=jan.fim}}toggleTurno();renderMusicosEvento();document.getElementById('modEdit').classList.add('open')}
 function fecha(){document.getElementById('modEdit').classList.remove('open')}
-function renderMusicosEvento(){let div=document.getElementById('listaMusicosEvento');if(musicos.length===0){div.innerHTML='<small style="font-size:11px;color:#9CA3AF">Nenhum músico. Vá em ☰ > Cadastrar músicos</small>';calcTotal();return;}div.innerHTML=musicos.map(m=>{let ch=musicosSelecionados.includes(m.id)?'checked':'';let on=musicosSelecionados.includes(m.id)?'on':'';return `<label class="musCheck ${on}"><div style="display:flex;align-items:center"><input type="checkbox" value="${m.id}" ${ch} onchange="toggleMusico(${m.id})"><span style="font-size:11.5px;font-weight:600">${m.nome}</span></div><span style="font-size:11px;font-weight:700;color:#6D5BFF">R$ ${m.valor}</span></label>`;}).join('');calcTotal();}
-function toggleMusico(id){if(musicosSelecionados.includes(id))musicosSelecionados=musicosSelecionados.filter(x=>x!==id);else musicosSelecionados.push(id);renderMusicosEvento()}
-function calcTotal(){let qtd=(document.getElementById('chkAlmoco').checked?1:0)+(document.getElementById('chkJanta').checked?1:0);if(qtd===0)qtd=1;let total=0,lista=[];musicosSelecionados.forEach(id=>{let m=musicos.find(x=>x.id===id);if(m){total+=parseFloat(m.valor)||0;lista.push(m)}});let geral=total*qtd;document.getElementById('txtShows').innerText=`${qtd} show${qtd>1?'s':''}`;document.getElementById('txtDetalhe').innerText=lista.length>0?`${lista.map(m=>m.nome+' R$'+m.valor).join(' + ')} x${qtd}`:`0 músicos`;document.getElementById('totalCache').innerText=`R$ ${geral.toFixed(2).replace('.',',')}`;return {totalGeral:geral,lista}}
-async function salva(){let data=document.getElementById('eData').value,proj=document.getElementById('eProjeto').value,casa=document.getElementById('eCasa').value||proj||'TAKI SOM';if(!data){alert('Data obrigatória');return}let slots=[];if(document.getElementById('chkAlmoco').checked)slots.push({tipo:'almoco',inicio:document.getElementById('eInicioAlmoco').value||'12:30',fim:document.getElementById('eFimAlmoco').value||'15:30'});if(document.getElementById('chkJanta').checked)slots.push({tipo:'janta',inicio:document.getElementById('eInicioJanta').value||'19:00',fim:document.getElementById('eFimJanta').value||'22:00'});if(slots.length===0){alert('Marque almoço ou janta');return}let {totalGeral,lista}=calcTotal();if(editId){let ev=eventos.find(e=>e.id===editId);ev.data=data;ev.projeto=proj;ev.casa=casa;ev.slots=slots;ev.valor=totalGeral;ev.musicos=lista}else{eventos.push({id:Date.now(),data,projeto:proj,casa,slots,valor:totalGeral,musicos:lista})}await salvaTudo();fecha();render()}
-async function exclui(id){if(!confirm('Excluir este evento?'))return;eventos=eventos.filter(e=>e.id!==id);await salvaTudo();render()}
+function renderMusicosEvento(){let div=document.getElementById('listaMusicosEvento');if(musicos.length===0){div.innerHTML='<small style="font-size:11px;color:#9CA3AF">Nenhum músico. Vá em ☰ > Cadastrar músicos</small>';calcTotal();return;}let html='';musicos.forEach(m=>{let ch=musicosSelecionados.includes(m.id)?'checked':'';let on=musicosSelecionados.includes(m.id)?'on':'';html+='<label class="musCheck '+on+'"><div style="display:flex;align-items:center"><input type="checkbox" value="'+m.id+'" '+ch+' onchange="toggleMusico('+m.id+')"><span style="font-size:11.5px;font-weight:600">'+m.nome+'</span></div><span style="font-size:11px;font-weight:700;color:#6D5BFF">R$ '+m.valor+'</span></label>'});div.innerHTML=html;calcTotal();}
+function toggleMusico(id){if(musicosSelecionados.includes(id)){musicosSelecionados=musicosSelecionados.filter(x=>x!==id)}else{musicosSelecionados.push(id)}renderMusicosEvento()}
+function calcTotal(){let qtd=(document.getElementById('chkAlmoco').checked?1:0)+(document.getElementById('chkJanta').checked?1:0);if(qtd===0)qtd=1;let total=0,lista=[];musicosSelecionados.forEach(id=>{let m=musicos.find(x=>x.id===id);if(m){total+=parseFloat(m.valor)||0;lista.push(m)}});let geral=total*qtd;document.getElementById('txtShows').innerText=qtd+' show'+(qtd>1?'s':'');document.getElementById('txtDetalhe').innerText=lista.length>0?lista.map(m=>m.nome+' R$'+m.valor).join(' + ')+' x'+qtd:'0 músicos';document.getElementById('totalCache').innerText='R$ '+geral.toFixed(2).replace('.',',');return {totalGeral:geral,lista}}
+function salva(){let data=document.getElementById('eData').value,proj=document.getElementById('eProjeto').value,casa=document.getElementById('eCasa').value||proj||'TAKI SOM';if(!data){alert('Data obrigatória');return}let slots=[];if(document.getElementById('chkAlmoco').checked)slots.push({tipo:'almoco',inicio:document.getElementById('eInicioAlmoco').value||'12:30',fim:document.getElementById('eFimAlmoco').value||'15:30'});if(document.getElementById('chkJanta').checked)slots.push({tipo:'janta',inicio:document.getElementById('eInicioJanta').value||'19:00',fim:document.getElementById('eFimJanta').value||'22:00'});if(slots.length===0){alert('Marque almoço ou janta');return}let calc=calcTotal();let totalGeral=calc.totalGeral,lista=calc.lista;if(editId){let ev=eventos.find(e=>e.id===editId);ev.data=data;ev.projeto=proj;ev.casa=casa;ev.slots=slots;ev.valor=totalGeral;ev.musicos=lista}else{eventos.push({id:Date.now(),data,projeto:proj,casa,slots,valor:totalGeral,musicos:lista})}salvaTudo();fecha();render()}
+function exclui(id){if(!confirm('Excluir este evento?'))return;eventos=eventos.filter(e=>e.id!==id);salvaTudo();render()}
 function openCadastroMusicos(){renderMusicos();document.getElementById('modMusicos').classList.add('open')}
-function renderMusicos(){let d=document.getElementById('listaMusicos');d.innerHTML=musicos.map((m,i)=>`<div style="display:flex;justify-content:space-between;padding:8px;border:1px solid #E5E7EB;border-radius:8px;margin:4px 0;font-size:11.5px"><span><b>${m.nome}</b> • <b style="color:#6D5BFF">R$ ${m.valor}/show</b></span><span><button onclick="editMusicoValor(${i})" style="color:#6D5BFF;background:none;border:none;font-weight:700;font-size:10px;margin-right:6px">Editar</button><button onclick="delMusico(${i})" style="background:none;border:none;color:#9CA3AF;font-size:10px">✕</button></span></div>`).join('')||'<small style="font-size:11px;color:#9CA3AF">Nenhum músico</small>'}
-async function addMusico(){let nome=document.getElementById('musNome').value.trim(),valor=parseFloat(document.getElementById('musValor').value)||0;if(!nome||!valor){alert('Nome e cachê obrigatório');return}musicos.push({id:Date.now(),nome,valor});await salvaTudo();document.getElementById('musNome').value='';document.getElementById('musValor').value='';renderMusicos();render();}
-function editMusicoValor(i){let m=musicos[i];let novo=prompt(`Editar cachê de ${m.nome}:`, m.valor);if(novo===null)return;let v=parseFloat(novo);if(!v)return;m.valor=v;salvaTudo();renderMusicos();render();}
-async function delMusico(i){if(!confirm('Excluir músico?'))return;musicos.splice(i,1);await salvaTudo();renderMusicos();render();}
-function openCadastroCasas(){renderCasas();document.getElementById('modCasas').classList.add('open')}function renderCasas(){let d=document.getElementById('listaCasas');d.innerHTML=casas.map((c,i)=>`<div style="display:flex;justify-content:space-between;padding:8px;border:1px solid #E5E7EB;border-radius:8px;margin:4px 0;font-size:12px"><span>${c.nome}</span><div><button onclick="editCasa(${i})" style="background:none;border:none;color:#6D5BFF;font-weight:700;font-size:10px;margin-right:8px">Editar</button><button onclick="delCasa(${i})" style="background:none;border:none;color:#9CA3AF;font-size:10px">✕</button></div></div>`).join('')||'<small style="font-size:11px;color:#9CA3AF">Nenhuma casa</small>'}
-async function addCasa(){let nome=document.getElementById('casaNome').value.trim();if(!nome)return;casas.push({nome});await salvaTudo();document.getElementById('casaNome').value='';renderCasas();}
+function renderMusicos(){let d=document.getElementById('listaMusicos');let html='';musicos.forEach((m,i)=>{html+='<div style="display:flex;justify-content:space-between;padding:8px;border:1px solid #E5E7EB;border-radius:8px;margin:4px 0;font-size:11.5px"><span><b>'+m.nome+'</b> • <b style="color:#6D5BFF">R$ '+m.valor+'/show</b></span><span><button onclick="editMusicoValor('+i+')" style="color:#6D5BFF;background:none;border:none;font-weight:700;font-size:10px;margin-right:6px">Editar</button><button onclick="delMusico('+i+')" style="background:none;border:none;color:#9CA3AF;font-size:10px">✕</button></span></div>'});d.innerHTML=html||'<small style="font-size:11px;color:#9CA3AF">Nenhum músico</small>'}
+function addMusico(){let nome=document.getElementById('musNome').value.trim(),valor=parseFloat(document.getElementById('musValor').value)||0;if(!nome||!valor){alert('Nome e cachê obrigatório');return}musicos.push({id:Date.now(),nome,valor});salvaTudo();document.getElementById('musNome').value='';document.getElementById('musValor').value='';renderMusicos();render();}
+function editMusicoValor(i){let m=musicos[i];let novo=prompt('Editar cachê de '+m.nome+':', m.valor);if(novo===null)return;let v=parseFloat(novo);if(!v)return;m.valor=v;salvaTudo();renderMusicos();render();}
+function delMusico(i){if(!confirm('Excluir músico?'))return;musicos.splice(i,1);salvaTudo();renderMusicos();render();}
+function openCadastroCasas(){renderCasas();document.getElementById('modCasas').classList.add('open')}
+function renderCasas(){let d=document.getElementById('listaCasas');let html='';casas.forEach((c,i)=>{html+='<div style="display:flex;justify-content:space-between;padding:8px;border:1px solid #E5E7EB;border-radius:8px;margin:4px 0;font-size:12px"><span>'+c.nome+'</span><div><button onclick="editCasa('+i+')" style="background:none;border:none;color:#6D5BFF;font-weight:700;font-size:10px;margin-right:8px">Editar</button><button onclick="delCasa('+i+')" style="background:none;border:none;color:#9CA3AF;font-size:10px">✕</button></div></div>'});d.innerHTML=html||'<small style="font-size:11px;color:#9CA3AF">Nenhuma casa</small>'}
+function addCasa(){let nome=document.getElementById('casaNome').value.trim();if(!nome)return;casas.push({nome});salvaTudo();document.getElementById('casaNome').value='';renderCasas();}
 function editCasa(i){let c=casas[i];let novo=prompt('Editar casa:', c.nome);if(novo===null)return;c.nome=novo.trim()||c.nome;salvaTudo();renderCasas();}
-async function delCasa(i){if(!confirm('Excluir?'))return;casas.splice(i,1);await salvaTudo();renderCasas();}
-function openCadastroEmpresas(){renderEmpresas();document.getElementById('modEmpresas').classList.add('open')}function renderEmpresas(){let d=document.getElementById('listaEmpresas');d.innerHTML=empresas.map((e,i)=>`<div style="display:flex;justify-content:space-between;padding:8px;border:1px solid #E5E7EB;border-radius:8px;margin:4px 0;font-size:12px"><span>${e.nome}</span><div><button onclick="editEmpresa(${i})" style="background:none;border:none;color:#6D5BFF;font-weight:700;font-size:10px;margin-right:8px">Editar</button><button onclick="delEmpresa(${i})" style="background:none;border:none;color:#9CA3AF;font-size:10px">✕</button></div></div>`).join('')||'<small style="font-size:11px;color:#9CA3AF">Nenhuma empresa</small>'}
-async function addEmpresa(){let nome=document.getElementById('empNome').value.trim();if(!nome)return;empresas.push({nome});await salvaTudo();document.getElementById('empNome').value='';renderEmpresas();}
+function delCasa(i){if(!confirm('Excluir?'))return;casas.splice(i,1);salvaTudo();renderCasas();}
+function openCadastroEmpresas(){renderEmpresas();document.getElementById('modEmpresas').classList.add('open')}
+function renderEmpresas(){let d=document.getElementById('listaEmpresas');let html='';empresas.forEach((e,i)=>{html+='<div style="display:flex;justify-content:space-between;padding:8px;border:1px solid #E5E7EB;border-radius:8px;margin:4px 0;font-size:12px"><span>'+e.nome+'</span><div><button onclick="editEmpresa('+i+')" style="background:none;border:none;color:#6D5BFF;font-weight:700;font-size:10px;margin-right:8px">Editar</button><button onclick="delEmpresa('+i+')" style="background:none;border:none;color:#9CA3AF;font-size:10px">✕</button></div></div>'});d.innerHTML=html||'<small style="font-size:11px;color:#9CA3AF">Nenhuma empresa</small>'}
+function addEmpresa(){let nome=document.getElementById('empNome').value.trim();if(!nome)return;empresas.push({nome});salvaTudo();document.getElementById('empNome').value='';renderEmpresas();}
 function editEmpresa(i){let e=empresas[i];let novo=prompt('Editar:', e.nome);if(novo===null)return;e.nome=novo.trim()||e.nome;salvaTudo();renderEmpresas();}
-async function delEmpresa(i){if(!confirm('Excluir?'))return;empresas.splice(i,1);await salvaTudo();renderEmpresas();}
-function openRelatorios(){let total=eventos.reduce((s,e)=>s+(e.valor||0),0);let qtd=eventos.reduce((s,e)=>s+(e.slots?e.slots.length:1),0);let porMusico={};eventos.forEach(ev=>{(ev.musicos||[]).forEach(m=>{let q=ev.slots?ev.slots.length:1;if(!porMusico[m.nome])porMusico[m.nome]={valor:0,shows:0};porMusico[m.nome].valor+=(parseFloat(m.valor)||0)*q;porMusico[m.nome].shows+=q})});let html=`<div style="background:#F9FAFB;padding:10px;border-radius:8px;margin-bottom:10px;border:1px solid #E5E7EB"><b style="font-size:13px">Total: R$ ${total.toFixed(2).replace('.',',')} • ${qtd} shows</b></div>`;html+=`<b style="font-size:11px;color:#6B7280">POR MÚSICO:</b>`;Object.keys(porMusico).sort().forEach(k=>{html+=`<div style="display:flex;justify-content:space-between;padding:8px;border-bottom:1px solid #F3F4F6;font-size:12px"><span>${k} • ${porMusico[k].shows} shows</span><b>R$ ${porMusico[k].valor.toFixed(2).replace('.',',')}</b></div>`});document.getElementById('relBody').innerHTML=html;document.getElementById('modRel').classList.add('open')}
+function delEmpresa(i){if(!confirm('Excluir?'))return;empresas.splice(i,1);salvaTudo();renderEmpresas();}
+function openRelatorios(){let total=eventos.reduce((s,e)=>s+(e.valor||0),0);let qtd=eventos.reduce((s,e)=>s+(e.slots?e.slots.length:1),0);let porMusico={};eventos.forEach(ev=>{(ev.musicos||[]).forEach(m=>{let q=ev.slots?ev.slots.length:1;if(!porMusico[m.nome])porMusico[m.nome]={valor:0,shows:0};porMusico[m.nome].valor+=(parseFloat(m.valor)||0)*q;porMusico[m.nome].shows+=q})});let html='<div style="background:#F9FAFB;padding:10px;border-radius:8px;margin-bottom:10px;border:1px solid #E5E7EB"><b style="font-size:13px">Total: R$ '+total.toFixed(2).replace('.',',')+' • '+qtd+' shows</b></div>';html+='<b style="font-size:11px;color:#6B7280">POR MÚSICO:</b>';Object.keys(porMusico).sort().forEach(k=>{html+='<div style="display:flex;justify-content:space-between;padding:8px;border-bottom:1px solid #F3F4F6;font-size:12px"><span>'+k+' • '+porMusico[k].shows+' shows</span><b>R$ '+porMusico[k].valor.toFixed(2).replace('.',',')+'</b></div>'});document.getElementById('relBody').innerHTML=html;document.getElementById('modRel').classList.add('open')}
 function bkpExportImport(){document.getElementById('modBkp').classList.add('open')}
-function exportBkpAgenda(){let data={eventos,casas,musicos,empresas,date:new Date().toISOString()};let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`TAKI-BKP-${new Date().toISOString().slice(0,10)}.json`;a.click();}
-function importBkpAgenda(input){let f=input.files[0];if(!f)return;let r=new FileReader();r.onload=async e=>{try{let d=JSON.parse(e.target.result);if(d.eventos)eventos=d.eventos;if(d.casas)casas=d.casas;if(d.musicos)musicos=d.musicos;if(d.empresas)empresas=d.empresas;await salvaTudo();alert('✅ Importado');render();closeModal('modBkp')}catch{alert('Inválido')}};r.readAsText(f)}
-function openRecuperar(){let html='';for(let i=1;i<=3;i++){let bkp=JSON.parse(localStorage.getItem('taki_bkp_'+i)||'null');if(bkp&&bkp.eventos){html+=`<div class="bkpItem"><div><b style="font-size:12px">Backup ${i}</b><br><small>${new Date(bkp.ts||bkp.date).toLocaleString('pt-BR')} • ${bkp.eventos.length} dias</small></div><button class="btnEdit" style="color:var(--purple)" onclick="restauraBkp('taki_bkp_${i}')">Recuperar</button></div>`}}let auto=JSON.parse(localStorage.getItem('taki_bkp_auto')||'null');if(auto&&auto.eventos){html+=`<div class="bkpItem"><div><b style="font-size:12px">Automático</b><br><small>${new Date(auto.ts||auto.date).toLocaleString('pt-BR')} • ${auto.eventos.length} dias</small></div><button class="btnEdit" style="color:var(--purple)" onclick="restauraBkp('taki_bkp_auto')">Recuperar</button></div>`}if(!html)html='<p style="font-size:11px;color:#9CA3AF;padding:8px">Nenhum backup ainda.</p>';document.getElementById('listaBkps').innerHTML=html;document.getElementById('modRecup').classList.add('open')}
-async function restauraBkp(key){let bkp=JSON.parse(localStorage.getItem(key)||'null');if(!bkp||!bkp.eventos)return;if(!confirm(`Recuperar backup de ${new Date(bkp.ts||bkp.date).toLocaleString('pt-BR')}?`))return;eventos=bkp.eventos||[];casas=bkp.casas||[];musicos=bkp.musicos||[];empresas=bkp.empresas||[];await salvaTudo();alert('✅ Recuperado');closeModal('modRecup');render()}
+function exportBkpAgenda(){let data={eventos,casas,musicos,empresas,date:new Date().toISOString()};let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='TAKI-BKP-'+new Date().toISOString().slice(0,10)+'.json';a.click();}
+function importBkpAgenda(input){let f=input.files[0];if(!f)return;let r=new FileReader();r.onload=e=>{try{let d=JSON.parse(e.target.result);if(d.eventos)eventos=d.eventos;if(d.casas)casas=d.casas;if(d.musicos)musicos=d.musicos;if(d.empresas)empresas=d.empresas;salvaTudo();alert('✅ Importado');render();closeModal('modBkp')}catch{alert('Inválido')}};r.readAsText(f)}
+function openRecuperar(){let html='';for(let i=1;i<=3;i++){let bkp=JSON.parse(localStorage.getItem('taki_bkp_'+i)||'null');if(bkp&&bkp.eventos){html+='<div class="bkpItem"><div><b style="font-size:12px">Backup '+i+'</b><br><small>'+new Date(bkp.ts).toLocaleString('pt-BR')+' • '+bkp.eventos.length+' dias</small></div><button class="btnEdit" style="color:var(--purple)" onclick="restauraBkp(\'taki_bkp_'+i+'\')">Recuperar</button></div>'}}let auto=JSON.parse(localStorage.getItem('taki_bkp_auto')||'null');if(auto&&auto.eventos){html+='<div class="bkpItem"><div><b style="font-size:12px">Automático</b><br><small>'+new Date(auto.ts).toLocaleString('pt-BR')+' • '+auto.eventos.length+' dias</small></div><button class="btnEdit" style="color:var(--purple)" onclick="restauraBkp(\'taki_bkp_auto\')">Recuperar</button></div>'}if(!html)html='<p style="font-size:11px;color:#9CA3AF;padding:8px">Nenhum backup ainda.</p>';document.getElementById('listaBkps').innerHTML=html;document.getElementById('modRecup').classList.add('open')}
+function restauraBkp(key){let bkp=JSON.parse(localStorage.getItem(key)||'null');if(!bkp||!bkp.eventos)return;if(!confirm('Recuperar backup de '+new Date(bkp.ts).toLocaleString('pt-BR')+'?'))return;eventos=bkp.eventos||[];casas=bkp.casas||[];musicos=bkp.musicos||[];empresas=bkp.empresas||[];salvaTudo();alert('✅ Recuperado');closeModal('modRecup');render()}
 function escolheZap(){document.getElementById('modZapEscolha').classList.add('open')}
-function getTextoFiltrado(comValor=true){
+function getTextoFiltrado(comValor){
   let filtrados=eventos.filter(ev=>{let d=new Date(ev.data+'T00:00:00');return d.getMonth()===mesAtual.getMonth()&&d.getFullYear()===mesAtual.getFullYear()}).sort((a,b)=>a.data.localeCompare(b.data));
   let texto='';let grupos={};filtrados.forEach(ev=>{if(!grupos[ev.data])grupos[ev.data]=[];grupos[ev.data].push(ev)});
-  Object.keys(grupos).sort().forEach(data=>{let d=new Date(data+'T00:00:00');texto+=`${d.toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long',year:'numeric'}).toUpperCase()}\n`;
+  Object.keys(grupos).sort().forEach(data=>{let d=new Date(data+'T00:00:00');texto+=d.toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long',year:'numeric'}).toUpperCase()+'\n';
   grupos[data].forEach(ev=>{
     (ev.slots||[]).forEach(s=>{
       let label=s.tipo==='almoco'?'ALMOÇO':'JANTA';
       let musicosTxt=(ev.musicos||[]).map(m=>m.nome).join(' + ');
       if(comValor){
-        let musValorTxt=(ev.musicos||[]).map(m=>`${m.nome} R$${m.valor}`).join(' + ');
-        texto+=`${label}: ${ev.projeto} - ${s.inicio}-${s.fim} [${ev.casa}] - ${musValorTxt} = R$ ${ev.musicos? ev.musicos.reduce((a,b)=>a+(parseFloat(b.valor)||0),0) : ev.valor}\n`;
+        let musValorTxt=(ev.musicos||[]).map(m=>m.nome+' R$'+m.valor).join(' + ');
+        texto+=label+': '+ev.projeto+' - '+s.inicio+'-'+s.fim+' ['+ev.casa+'] - '+musValorTxt+' = R$ '+(ev.musicos?ev.musicos.reduce((a,b)=>a+(parseFloat(b.valor)||0),0):ev.valor)+'\n';
       }else{
-        texto+=`${label}: ${ev.casa} - ${musicosTxt} - ${s.inicio}-${s.fim}\n`;
+        texto+=label+': '+ev.casa+' - '+musicosTxt+' - '+s.inicio+'-'+s.fim+'\n';
       }
     });
-    if(comValor) texto+=`Total dia: R$ ${ev.valor}\n\n`; else texto+=`\n`;
+    if(comValor)texto+='Total dia: R$ '+ev.valor+'\n\n';else texto+='\n';
   })});
   return texto||'Sem eventos';
 }
-function exportZap(comValor=true){
+function exportZap(comValor){
   let t=getTextoFiltrado(comValor);
-  let titulo=comValor?`*AGENDA TAKI SOM - ${mesAtual.toLocaleDateString('pt-BR',{month:'long',year:'numeric'}).toUpperCase()} - COM VALOR*`:`*CRONOGRAMA MÚSICO - ${mesAtual.toLocaleDateString('pt-BR',{month:'long',year:'numeric'}).toUpperCase()} - SEM VALOR*\n_Casa, nome e horário_`;
-  let msg=`${titulo}\n\n`+t;
+  let titulo=comValor?'*AGENDA TAKI SOM - '+mesAtual.toLocaleDateString('pt-BR',{month:'long',year:'numeric'}).toUpperCase()+' - COM VALOR*':'*CRONOGRAMA MÚSICO - '+mesAtual.toLocaleDateString('pt-BR',{month:'long',year:'numeric'}).toUpperCase()+' - SEM VALOR*';
+  let msg=titulo+'\n\n'+t;
   window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
 }
-function exportNormal(comValor=true){let w=window.open('','','width=800,height=600');w.document.write('<pre style="font-family:Inter,Arial;padding:20px;font-size:12px">'+getTextoFiltrado(comValor)+'</pre>');w.document.close();w.print()}
-function exportFolha(){let html='<table border=1 cellpadding=8 style="width:100%;border-collapse:collapse;font-family:Inter,Arial;font-size:11px"><tr><th>DATA</th><th>TURNO</th><th>PROJETO</th><th>HORÁRIO</th><th>CASA</th><th>MÚSICOS</th><th>VALOR</th></tr>';eventos.forEach(ev=>{(ev.slots||[{tipo:'unico',inicio:ev.inicio,fim:ev.fim}]).forEach(s=>{let musTxt=(ev.musicos||[]).map(m=>`${m.nome} R$${m.valor}`).join(', ');html+=`<tr><td>${ev.data}</td><td>${s.tipo}</td><td>${ev.projeto}</td><td>${s.inicio}-${s.fim}</td><td>${ev.casa}</td><td>${musTxt}</td><td>R$ ${ev.musicos? (ev.musicos.reduce((a,b)=>a+(parseFloat(b.valor)||0),0)).toFixed(2) : ev.valor}</td></tr>`})});html+=`<tr><td colspan=6><b>TOTAL GERAL</b></td><td><b>R$ ${eventos.reduce((a,b)=>a+(b.valor||0),0).toFixed(2)}</b></td></tr></table>`;let w=window.open('','','width=900,height=600');w.document.write(html);w.document.close();w.print()}
-function exportPdf(){exportNormal(true)}
-(async()=>{await openDB();await carregaDados();await ativaPersistencia();await salvaTudo();render();})();
+function exportNormal(){let w=window.open('','','width=800,height=600');w.document.write('<pre style="font-family:Inter,Arial;padding:20px;font-size:12px">'+getTextoFiltrado(true)+'</pre>');w.document.close();w.print()}
+function exportFolha(){let html='<table border=1 cellpadding=8 style="width:100%;border-collapse:collapse;font-family:Inter,Arial;font-size:11px"><tr><th>DATA</th><th>TURNO</th><th>PROJETO</th><th>HORÁRIO</th><th>CASA</th><th>MÚSICOS</th><th>VALOR</th></tr>';eventos.forEach(ev=>{(ev.slots||[{tipo:'unico',inicio:ev.inicio,fim:ev.fim}]).forEach(s=>{let musTxt=(ev.musicos||[]).map(m=>m.nome+' R$'+m.valor).join(', ');html+='<tr><td>'+ev.data+'</td><td>'+s.tipo+'</td><td>'+ev.projeto+'</td><td>'+s.inicio+'-'+s.fim+'</td><td>'+ev.casa+'</td><td>'+musTxt+'</td><td>R$ '+(ev.musicos?ev.musicos.reduce((a,b)=>a+(parseFloat(b.valor)||0),0).toFixed(2):ev.valor)+'</td></tr>'})});html+='<tr><td colspan=6><b>TOTAL GERAL</b></td><td><b>R$ '+eventos.reduce((a,b)=>a+(b.valor||0),0).toFixed(2)+'</b></td></tr></table>';let w=window.open('','','width=900,height=600');w.document.write(html);w.document.close();w.print()}
+function exportPdf(){exportNormal()}
+function instalarApp(){alert('Para instalar: Chrome > 3 pontinhos > Adicionar à tela inicial / Instalar app')}
+
+render();
 </script>
 </body>
 </html>
