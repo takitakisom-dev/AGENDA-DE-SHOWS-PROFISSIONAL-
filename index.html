@@ -1,7 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TAKI v62.5 FINAL</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--dark:#111827;--purple:#6D5BFF;--bg:#F6F7FB;--border:#E5E7EB}
+*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);font-family:Inter,sans-serif;color:#111827;padding-bottom:92px}
+.top{position:sticky;top:0;z-index:100;background:var(--dark);color:#fff;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;height:60px}
+.topLeft{display:flex;align-items:center;gap:10px}.topTitle b{font-size:13px;font-weight:800}.topTitle small{font-size:11px;color:#FBBF24}
+.btnHome{background:var(--purple);color:#fff;border:none;padding:7px 14px;border-radius:20px;font-weight:700;font-size:11px;cursor:pointer}
+.dot{font-size:10px;color:#22C55E;display:flex;align-items:center;gap:6px}.dot i{width:6px;height:6px;background:#22C55E;border-radius:50%;display:inline-block}
+#takiMenu{position:fixed;inset:0;z-index:999;display:none}#takiMenu.open{display:block}#takiMenuBg{position:absolute;inset:0;background:rgba(0,0,0,.5)}
+#takiMenuPanel{position:absolute;top:0;left:0;bottom:0;width:84%;max-width:340px;background:#fff;overflow-y:auto}
+.takiMenuHead{padding:18px 16px;font-weight:800;font-size:14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;background:#F9FAFB}
+.takiMenuSection{padding:10px 16px 4px;font-size:10px;font-weight:800;color:#9CA3AF;letter-spacing:.8px}
+.takiMenuItem{padding:13px 16px;border-bottom:1px solid #F3F4F6;cursor:pointer;font-weight:600;font-size:13px;display:flex;gap:10px}
+.takiMenuItem.recup{background:#FEF2F2;color:#991B1B;font-weight:800;margin:8px;border-radius:10px;border:1px solid #FECACA}
+.takiMenuItem.inst{background:#EEF2FF;color:#4338CA;font-weight:800;margin:8px;border-radius:10px;border:1px solid #C7D2FE}
+.cardMes{background:#fff;margin:10px;border:1px solid var(--border);border-radius:18px;padding:16px;text-align:center}
+.cardMes b{font-size:18px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:14px}
+.arrow{width:44px;height:44px;background:#F9FAFB;border:1px solid var(--border);border-radius:12px;font-size:26px;cursor:pointer;font-weight:800}
+.dataRow{display:flex;gap:8px;justify-content:center;margin-top:14px}
+.dataChip{border:1px solid var(--border);background:#F9FAFB;border-radius:12px;padding:10px 14px;min-width:88px;text-align:center}
+.dataChip b{font-size:10px;color:#6B7280;display:block}.dataChip span{font-size:14px;font-weight:800;display:block;margin-top:2px}
+.filters{display:flex;gap:6px;justify-content:center;margin:12px;flex-wrap:wrap}.filters button{border:1px solid var(--border);background:#fff;color:#6B7280;padding:8px 14px;border-radius:20px;font-weight:600;font-size:12px;cursor:pointer}
+.filters button.active{background:var(--purple);color:#fff;border-color:var(--purple)}
+.contador{margin:0 10px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:10px;text-align:center;font-size:11px;color:#6B7280}
+.dayHeader{background:#111827;color:#fff;padding:10px 14px;border-radius:10px;margin:16px 10px 10px;font-weight:700;font-size:12px}
+.eventCard{background:#fff;margin:0 10px 14px;border:1px solid var(--border);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px;position:relative}
+.badgeShows{background:var(--purple);color:#fff;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700;position:absolute;top:12px;right:12px}
+.eventTitle{font-weight:800;font-size:18px}
+.slot{display:flex;justify-content:space-between;font-size:13px;background:#F9FAFB;padding:10px 12px;border-radius:10px;border:1px solid #F3F4F6}
+.eventSub{font-size:13px;font-weight:700;background:#F5F3FF;padding:12px;border-radius:10px;border:1px solid #EDE9FE}
+.eventSub small{color:#6B7280;font-size:11px;font-weight:500}
+.eventActions{display:flex;gap:10px}.btnEdit,.btnDel{flex:1;border:1px solid #E5E7EB;background:#fff;padding:10px;border-radius:10px;font-weight:700;font-size:12px;cursor:pointer}
+.plus{position:fixed;bottom:86px;right:14px;width:56px;height:56px;background:var(--purple);color:#fff;border:none;border-radius:16px;font-size:28px;box-shadow:0 6px 18px rgba(109,91,255,.4);z-index:90;cursor:pointer}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;gap:8px;padding:12px;border-top:1px solid var(--border);z-index:200;border-radius:20px 20px 0 0}
+.bottom button{flex:1;border:1px solid var(--border);padding:12px;border-radius:12px;font-weight:700;font-size:11px;cursor:pointer;background:#fff;color:#6B7280}
+.bottom button.btnZap{background:#111827;color:#fff}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:500;padding:14px}.modal.open{display:flex}
+.modalBox{background:#fff;border-radius:16px;width:100%;max-width:440px;padding:18px;max-height:92vh;overflow-y:auto;border:1px solid var(--border)}
+.inp{width:100%;padding:12px;border:1px solid var(--border);border-radius:10px;margin:6px 0;font-size:13px}
+.btnPrimary{width:100%;padding:13px;border:none;border-radius:10px;font-weight:800;background:var(--purple);color:#fff;cursor:pointer;margin-top:8px}
+.btnGhost{width:100%;padding:11px;border:1px solid var(--border);border-radius:10px;font-weight:600;background:#fff;color:#6B7280;cursor:pointer;margin-top:6px}
+.projGroup{display:flex;gap:8px;margin:8px 0;flex-wrap:wrap}.projBtn{flex:1;min-width:70px;padding:12px 6px;border:1px solid var(--border);border-radius:10px;background:#fff;font-weight:700;font-size:11px;cursor:pointer;text-align:center}
+.projBtn.active{background:var(--purple);color:#fff;border-color:var(--purple)}
+.musCheck{display:flex;justify-content:space-between;padding:11px 12px;border:1px solid var(--border);border-radius:10px;margin:5px 0;cursor:pointer;background:#fff}
+.musCheck.on{border-color:var(--purple);background:#F5F3FF}
+.turnoCard{border:1px solid var(--border);border-radius:12px;padding:12px;margin:8px 0;background:#F9FAFB}
+.timeRow{display:flex;gap:8px;margin-top:6px}.timeRow input{flex:1}
+.totalBox{background:#111827;color:#fff;padding:12px 14px;border-radius:12px;margin-top:10px;display:flex;justify-content:space-between;font-weight:800}
+.bkpItem{background:#fff;border:1px solid var(--border);border-radius:10px;padding:10px;margin:8px 0;display:flex;justify-content:space-between;align-items:center}
+</style>
+</head>
+<body>
+<div class="top"><div class="topLeft"><span onclick="openMenu()" style="font-size:26px;cursor:pointer">☰</span><div class="topTitle"><b>AGENDA DO MES</b><br><small>TAKI SOM</small><div class="dot"><i></i><span>v62.5 - Horário fixo por casa</span></div></div></div><button class="btnHome" onclick="location.href='index.html'">HOME</button></div>
+<div id="takiMenu"><div id="takiMenuBg" onclick="closeMenu()"></div><div id="takiMenuPanel">
+<div class="takiMenuHead"><span>TAKI — MENU COMPLETO</span><span onclick="closeMenu()" style="cursor:pointer;background:#fff;padding:6px 10px;border-radius:8px;border:1px solid #E5E7EB">✕</span></div>
+<div class="takiMenuSection">AGENDAS</div>
+<div class="takiMenuItem" onclick="setView('dia');closeMenu()">📋 Agenda do dia</div>
+<div class="takiMenuItem" onclick="setView('semana');closeMenu()">🗓️ Agenda da semana</div>
+<div class="takiMenuItem" onclick="setView('mes');closeMenu()">📅 Agenda do mês</div>
+<div class="takiMenuItem" onclick="setView('ano');closeMenu()">🗓️ Agenda do ano</div>
+<div class="takiMenuSection">ENVIAR ZAP</div>
+<div class="takiMenuItem" onclick="exportZap(true);closeMenu()">🏠 Enviar COM valor</div>
+<div class="takiMenuItem" onclick="exportZap(false);closeMenu()">🎤 Enviar SEM valor</div>
+<div class="takiMenuSection">CADASTROS</div>
+<div class="takiMenuItem" onclick="openCasas();closeMenu()">🏠 Cadastrar casas com horário fixo</div>
+<div class="takiMenuItem" onclick="openMusicos();closeMenu()">🎤 Cadastrar músicos</div>
+<div class="takiMenuItem" onclick="openEmpresas();closeMenu()">🏢 Cadastrar empresas</div>
+<div class="takiMenuSection">BACKUP E SISTEMA</div>
+<div class="takiMenuItem" onclick="openBkp();closeMenu()">💾 BKP exportar / importar</div>
+<div class="takiMenuItem recup" onclick="openRecuperar();closeMenu()">🛡️ Recuperar dados</div>
+<div class="takiMenuItem" onclick="openRelatorios();closeMenu()">📊 Relatórios financeiros</div>
+<div class="takiMenuItem inst" onclick="instalarApp();closeMenu()">📲 Instalar app</div>
+<div class="takiMenuItem" onclick="closeMenu()" style="justify-content:center;font-weight:800;color:#6B7280">🚪 Fechar menu</div>
+</div></div>
+<div class="cardMes">
+<b><button class="arrow" onclick="mudaMes(-1)">‹</button><span id="labelMes">MES DE OUTUBRO<br>DE 2026</span><button class="arrow" onclick="mudaMes(1)">›</button></b>
+<div class="dataRow">
+<div class="dataChip"><b>DIA</b><span id="chipDia">19</span></div>
+<div class="dataChip"><b>MÊS</b><span id="chipMes">OUTUBRO</span></div>
+<div class="dataChip"><b>ANO</b><span id="chipAno">2026</span></div>
+</div>
+</div>
+<div class="filters">
+<button onclick="setView('hoje')" id="fHoje">Hoje</button>
+<button onclick="setView('dia')" id="fDia">Dia</button>
+<button class="active" onclick="setView('semana')" id="fSemana">Semana</button>
+<button onclick="setView('mes')" id="fMes">Mês</button>
+<button onclick="setView('ano')" id="fAno">Ano</button>
+</div>
+<div class="contador" id="contador"></div>
+<div id="lista"></div>
+<button class="plus" onclick="abreNovo()">+</button>
+<div class="bottom">
+<button class="btnZap" onclick="escolheZap()">💬 ZAP</button>
+<button onclick="escolheFolha()">📋 FOLHA</button>
+<button onclick="escolheNormal()">📄 NORMAL</button>
+<button onclick="escolhePdf()">📑 PDF</button>
+</div>
+<div class="modal" id="modZap"><div class="modalBox">
+<b>💬 Enviar por ZAP</b><br><br>
+<button class="btnPrimary" onclick="exportZap(true);closeM('modZap')">🏠 COM VALOR</button>
+<button class="btnPrimary" style="background:#111827;margin-top:8px" onclick="exportZap(false);closeM('modZap')">🎤 SEM VALOR - CASA, NOME, DATA, HORÁRIO, PERÍODO</button>
+<button class="btnGhost" onclick="closeM('modZap')">Cancelar</button>
+</div></div>
+<div class="modal" id="modFolha"><div class="modalBox">
+<b>📋 Imprimir em FOLHA</b><br><small style="color:#6B7280">Ordem: CASA, NOME, DATA, HORÁRIO, PERÍODO</small><br><br>
+<button class="btnPrimary" onclick="exportFolha(true);closeM('modFolha')">🏠 FOLHA COM VALOR</button>
+<button class="btnPrimary" style="background:#111827;margin-top:8px" onclick="exportFolha(false);closeM('modFolha')">🎤 FOLHA SEM VALOR - CASA, NOME, DATA, HORÁRIO, PERÍODO</button>
+<button class="btnGhost" onclick="closeM('modFolha')">Cancelar</button>
+</div></div>
+<div class="modal" id="modNormal"><div class="modalBox"><b>📄 NORMAL</b><br><br><button class="btnPrimary" onclick="exportNormal(true);closeM('modNormal')">🏠 COM VALOR</button><button class="btnPrimary" style="background:#111827;margin-top:8px" onclick="exportNormal(false);closeM('modNormal')">🎤 SEM VALOR</button><button class="btnGhost" onclick="closeM('modNormal')">Cancelar</button></div></div>
+<div class="modal" id="modPdf"><div class="modalBox"><b>📑 PDF</b><br><br><button class="btnPrimary" onclick="exportPdf(true);closeM('modPdf')">🏠 COM VALOR</button><button class="btnPrimary" style="background:#111827;margin-top:8px" onclick="exportPdf(false);closeM('modPdf')">🎤 SEM VALOR</button><button class="btnGhost" onclick="closeM('modPdf')">Cancelar</button></div></div>
+<div class="modal" id="modEdit"><div class="modalBox">
+<b id="modTitle">Novo cronograma</b><br><br>
+<label style="font-size:11px;font-weight:800;color:#6B7280">DATA</label>
+<input id="eData" type="date" class="inp">
+<label style="font-size:11px;font-weight:800;color:#6B7280;margin-top:8px;display:block">CASA - P1 é só P1 (horário já vem automático)</label>
+<div class="projGroup">
+<button class="projBtn active" id="btnP1" onclick="setProjeto('P1')">P1</button>
+<button class="projBtn" id="btnP2" onclick="setProjeto('P2')">P2</button>
+<button class="projBtn" id="btnP3" onclick="setProjeto('P3')">P3</button>
+<button class="projBtn" id="btnP4" onclick="setProjeto('P4')">P4</button>
+<button class="projBtn" id="btnEDILL" onclick="setProjeto('EDILL')">EDILL</button>
+<button class="projBtn" id="btnTAKI" onclick="setProjeto('TAKI SOM')">TAKI SOM</button>
+</div>
+<select id="eCasa" class="inp"><option value="">Ou escolha Casa / Empresa cadastrada</option></select>
+<div class="turnoCard"><label><input type="checkbox" id="chkAlmoco" onchange="calc()"> ☀️ Almoço</label><div class="timeRow"><input id="eIniA" type="time" class="inp" value="12:30"><input id="eFimA" type="time" class="inp" value="15:30"></div></div>
+<div class="turnoCard"><label><input type="checkbox" id="chkJanta" checked onchange="calc()"> 🌙 Janta</label><div class="timeRow"><input id="eIniJ" type="time" class="inp" value="19:00"><input id="eFimJ" type="time" class="inp" value="22:00"></div></div>
+<div id="listaMusicosEvento" style="max-height:160px;overflow-y:auto;margin:10px 0"></div>
+<div class="totalBox"><span id="txtShows">1 show</span><span id="totalCache">R$ 0</span></div>
+<div style="display:flex;gap:8px;margin-top:12px"><button class="btnPrimary" style="flex:1" onclick="salva()">Salvar</button><button class="btnGhost" style="flex:1" onclick="closeM('modEdit')">Cancelar</button></div>
+</div></div>
+<div class="modal" id="modMusicos"><div class="modalBox"><b>🎤 Músicos</b><input id="musNome" class="inp" placeholder="Nome"><input id="musValor" type="number" class="inp" placeholder="Cachê R$"><button class="btnPrimary" onclick="addMusico()">+ Salvar</button><div id="listaMusicos" style="margin-top:12px"></div><button class="btnGhost" onclick="closeM('modMusicos')">Fechar</button></div></div>
 <div class="modal" id="modCasas"><div class="modalBox">
 <b>🏠 Cadastrar casas com horário fixo</b>
 <p style="font-size:11px;color:#6B7280;margin:6px 0 10px">Cadastre uma vez o horário de cada casa. Depois quando criar P1, P2, já vem automático.</p>
-<input id="casaNome" class="inp" placeholder="Nome: P1, P2, P4, EDILL">
+<input id="casaNome" class="inp" placeholder="Nome: P1, P2, P4, EDILL" style="text-transform:uppercase">
 <div style="display:flex;gap:8px;margin-top:8px">
 <div style="flex:1"><label style="font-size:10px;font-weight:800;color:#6B7280">ALMOÇO INÍCIO</label><input id="casaIniA" type="time" class="inp" value="12:30"></div>
 <div style="flex:1"><label style="font-size:10px;font-weight:800;color:#6B7280">ALMOÇO FIM</label><input id="casaFimA" type="time" class="inp" value="15:30"></div>
@@ -10,7 +148,7 @@
 <div style="flex:1"><label style="font-size:10px;font-weight:800;color:#6B7280">JANTA INÍCIO</label><input id="casaIniJ" type="time" class="inp" value="19:00"></div>
 <div style="flex:1"><label style="font-size:10px;font-weight:800;color:#6B7280">JANTA FIM</label><input id="casaFimJ" type="time" class="inp" value="22:00"></div>
 </div>
-<div style="display:flex;gap:8px;margin-top:8px">
+<div style="display:flex;gap:12px;margin-top:10px">
 <label style="font-size:11px"><input type="checkbox" id="casaTemAlmoco"> Tem almoço</label>
 <label style="font-size:11px"><input type="checkbox" id="casaTemJanta" checked> Tem janta</label>
 </div>
@@ -18,68 +156,50 @@
 <div id="listaCasas" style="margin-top:12px"></div>
 <button class="btnGhost" onclick="closeM('modCasas')">Fechar</button>
 </div></div>
-
+<div class="modal" id="modEmpresas"><div class="modalBox"><b>🏢 Empresas</b><input id="empNome" class="inp" placeholder="Nome empresa"><button class="btnPrimary" onclick="addEmpresa()">+ Salvar</button><div id="listaEmpresas" style="margin-top:12px"></div><button class="btnGhost" onclick="closeM('modEmpresas')">Fechar</button></div></div>
+<div class="modal" id="modBkp"><div class="modalBox"><b>💾 BKP</b><div style="margin-top:12px;display:flex;flex-direction:column;gap:8px"><button class="btnPrimary" onclick="exportBackup()">📤 Exportar backup</button><label style="padding:12px;background:#EEF2FF;color:#4338CA;border-radius:10px;font-weight:700;text-align:center;cursor:pointer;border:1px solid #C7D2FE">📥 Importar backup<input type="file" id="importBkp" hidden accept=".json" onchange="importBackup(this)"></label></div><button class="btnGhost" onclick="closeM('modBkp')">Fechar</button></div></div>
+<div class="modal" id="modRecup"><div class="modalBox"><b>🛡️ Recuperar dados</b><div id="listaBkps" style="margin-top:10px"></div><button class="btnGhost" onclick="closeM('modRecup')">Fechar</button></div></div>
+<div class="modal" id="modRel"><div class="modalBox"><b>📊 Relatórios</b><div id="relBody" style="margin-top:12px"></div><button class="btnGhost" onclick="closeM('modRel')">Fechar</button></div></div>
 <script>
-// SUBSTITUI as funções de casa por essas:
-
-function renderCasas(){
-  var d=document.getElementById('listaCasas');var h='';
-  casas.forEach(function(c,i){
-    var horarios='';
-    if(c.temAlmoco) horarios+='☀️ '+c.iniA+'-'+c.fimA+' ';
-    if(c.temJanta) horarios+='🌙 '+c.iniJ+'-'+c.fimJ;
-    h+='<div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #E5E7EB;border-radius:10px;margin:5px 0"><div><b>'+c.nome+'</b><br><small style="color:#6B7280;font-size:10px">'+horarios+'</small></div><div><button onclick="editCasa('+i+')" style="border:none;background:#EEF2FF;color:#4338CA;padding:6px 10px;border-radius:6px;font-weight:700;font-size:11px;margin-right:4px">Editar</button><button onclick="delCasa('+i+')" style="border:none;background:none;color:#999">✕</button></div></div>';
-  });
-  d.innerHTML=h||'<small style="color:#999">Nenhuma casa. Cadastre P1, P2 com horário.</small>';
+var DB_KEY='taki_v62_5_final';
+var projetoAtual='P1';
+function carregaDB(){
+  var keys=[DB_KEY,'taki_v62_final','taki_v62_p1fix','taki_final_v9_db'];
+  for(var k of keys){var b=JSON.parse(localStorage.getItem(k)||'null');if(b&&b.eventos&&b.eventos.length>0)return b;}
+  return {
+    eventos:[
+      {id:1,data:"2026-10-19",projeto:"P1",casa:"P1",slots:[{tipo:"janta",inicio:"19:00",fim:"22:00"}],musicos:[{id:1,nome:"DOUGLAS",valor:300}],valor:300},
+      {id:2,data:"2026-10-19",projeto:"P2",casa:"P2",slots:[{tipo:"janta",inicio:"19:00",fim:"22:00"}],musicos:[{id:2,nome:"LUCIANO",valor:300}],valor:300},
+      {id:3,data:"2026-10-19",projeto:"P4",casa:"P4",slots:[{tipo:"janta",inicio:"20:30",fim:"23:30"}],musicos:[{id:3,nome:"ANDRE",valor:300}],valor:300},
+      {id:4,data:"2026-10-19",projeto:"EDILL",casa:"EDILL",slots:[{tipo:"janta",inicio:"19:30",fim:"22:30"}],musicos:[{id:4,nome:"ISRAEL",valor:300}],valor:300},
+      {id:5,data:"2026-10-19",projeto:"EDILL",casa:"EDILL",slots:[{tipo:"janta",inicio:"18:30",fim:"21:30"}],musicos:[{id:5,nome:"MARTIN",valor:300}],valor:300}
+    ],
+    casas:[
+      {nome:"P1",iniA:"12:30",fimA:"15:30",iniJ:"19:00",fimJ:"22:00",temAlmoco:false,temJanta:true},
+      {nome:"P2",iniA:"12:30",fimA:"15:30",iniJ:"19:00",fimJ:"22:00",temAlmoco:false,temJanta:true},
+      {nome:"P4",iniA:"12:30",fimA:"15:30",iniJ:"20:30",fimJ:"23:30",temAlmoco:false,temJanta:true},
+      {nome:"EDILL",iniA:"12:00",fimA:"15:00",iniJ:"19:30",fimJ:"22:30",temAlmoco:false,temJanta:true}
+    ],
+    musicos:[{id:1,nome:"DOUGLAS",valor:300},{id:2,nome:"LUCIANO",valor:300},{id:3,nome:"ANDRE",valor:300},{id:4,nome:"ISRAEL",valor:300},{id:5,nome:"MARTIN",valor:300}],
+    empresas:[]
+  };
 }
-
-function addCasa(){
-  var nome=document.getElementById('casaNome').value.trim().toUpperCase();
-  if(!nome){alert('Nome da casa');return}
-  var iniA=document.getElementById('casaIniA').value||'12:30';
-  var fimA=document.getElementById('casaFimA').value||'15:30';
-  var iniJ=document.getElementById('casaIniJ').value||'19:00';
-  var fimJ=document.getElementById('casaFimJ').value||'22:00';
-  var temA=document.getElementById('casaTemAlmoco').checked;
-  var temJ=document.getElementById('casaTemJanta').checked;
-  
-  // Se já existe, atualiza
-  var idx=casas.findIndex(function(c){return c.nome==nome});
-  if(idx>=0){
-    casas[idx]={nome:nome,iniA:iniA,fimA:fimA,iniJ:iniJ,fimJ:fimJ,temAlmoco:temA,temJanta:temJ};
-  }else{
-    casas.push({nome:nome,iniA:iniA,fimA:fimA,iniJ:iniJ,fimJ:fimJ,temAlmoco:temA,temJanta:temJ});
-  }
-  save();
-  document.getElementById('casaNome').value='';
-  renderCasas();
-  render();
+var db=carregaDB();
+var eventos=db.eventos;var casas=db.casas;var musicos=db.musicos;var empresas=db.empresas;
+var mesAtual=new Date(2026,9,19);var view='semana';var editId=null;var selMusicos=[];
+function save(){
+  var data={eventos:eventos,casas:casas,musicos:musicos,empresas:empresas,ts:Date.now()};
+  localStorage.setItem(DB_KEY,JSON.stringify(data));
+  localStorage.setItem('taki_agenda',JSON.stringify(eventos));
+  localStorage.setItem('taki_casas',JSON.stringify(casas));
+  localStorage.setItem('taki_musicos',JSON.stringify(musicos));
+  localStorage.setItem('taki_empresas',JSON.stringify(empresas));
 }
-
-function editCasa(i){
-  var c=casas[i];
-  document.getElementById('casaNome').value=c.nome;
-  document.getElementById('casaIniA').value=c.iniA||'12:30';
-  document.getElementById('casaFimA').value=c.fimA||'15:30';
-  document.getElementById('casaIniJ').value=c.iniJ||'19:00';
-  document.getElementById('casaFimJ').value=c.fimJ||'22:00';
-  document.getElementById('casaTemAlmoco').checked=!!c.temAlmoco;
-  document.getElementById('casaTemJanta').checked=!!c.temJanta;
-}
-
-function delCasa(i){
-  if(!confirm('Excluir casa '+casas[i].nome+'?'))return;
-  casas.splice(i,1);save();renderCasas();render();
-}
-
-// Quando seleciona projeto, já puxa horário da casa
 function setProjeto(p){
   projetoAtual=p;
   document.querySelectorAll('.projBtn').forEach(function(b){b.classList.remove('active')});
   var map={'P1':'btnP1','P2':'btnP2','P3':'btnP3','P4':'btnP4','EDILL':'btnEDILL','TAKI SOM':'btnTAKI'};
-  if(map[p]) document.getElementById(map[p]).classList.add('active');
-  
-  // PUXA HORÁRIO AUTOMÁTICO DA CASA
+  if(map[p])document.getElementById(map[p]).classList.add('active');
   var casa=casas.find(function(c){return c.nome==p});
   if(casa){
     document.getElementById('chkAlmoco').checked=!!casa.temAlmoco;
@@ -91,4 +211,152 @@ function setProjeto(p){
     calc();
   }
 }
+function openMenu(){document.getElementById('takiMenu').classList.add('open')}
+function closeMenu(){document.getElementById('takiMenu').classList.remove('open')}
+function closeM(id){document.getElementById(id).classList.remove('open')}
+function setView(v){view=v;document.querySelectorAll('.filters button').forEach(function(b){b.classList.remove('active')});var m={hoje:'fHoje',dia:'fDia',semana:'fSemana',mes:'fMes',ano:'fAno'};if(m[v])document.getElementById(m[v]).classList.add('active');render();}
+function getNomeCurto(ev){return ev.casa||ev.projeto||'P1';}
+function render(){
+  var mes=mesAtual.getMonth(),ano=mesAtual.getFullYear(),dia=mesAtual.getDate();
+  document.getElementById('labelMes').innerHTML='MES DE '+mesAtual.toLocaleDateString('pt-BR',{month:'long'}).toUpperCase()+'<br>DE '+ano;
+  document.getElementById('chipDia').innerText=dia;document.getElementById('chipMes').innerText=mesAtual.toLocaleDateString('pt-BR',{month:'long'}).toUpperCase();document.getElementById('chipAno').innerText=ano;
+  var lista=document.getElementById('lista');lista.innerHTML='';
+  var filtrados=eventos.filter(function(ev){var d=new Date(ev.data+'T00:00:00');if(view=='mes')return d.getMonth()==mes&&d.getFullYear()==ano;if(view=='dia'||view=='hoje'){var alvo=view=='hoje'?new Date():mesAtual;return ev.data==alvo.toISOString().slice(0,10)}if(view=='semana'){var ini=new Date(mesAtual);ini.setDate(mesAtual.getDate()-mesAtual.getDay());var fim=new Date(ini);fim.setDate(ini.getDate()+6);return d>=ini&&d<=fim}if(view=='ano')return d.getFullYear()==ano;return true}).sort(function(a,b){return a.data.localeCompare(b.data)});
+  var grupos={};filtrados.forEach(function(ev){if(!grupos[ev.data])grupos[ev.data]=[];grupos[ev.data].push(ev)});
+  Object.keys(grupos).sort().forEach(function(data){
+    var d=new Date(data+'T00:00:00');var titulo=d.toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long',year:'numeric'}).toUpperCase();
+    lista.innerHTML+='<div class="dayHeader">'+titulo+'</div>';
+    grupos[data].forEach(function(ev){
+      var slotsHtml='';(ev.slots||[]).forEach(function(s){var ico=s.tipo=='almoco'?'☀️':'🌙';var label=s.tipo=='almoco'?'Almoço':'Janta';slotsHtml+='<div class="slot"><b>'+ico+' '+label+'</b><span>'+s.inicio+' - '+s.fim+'</span></div>'});
+      var qtd=ev.slots?ev.slots.length:1;var nomeCurto=getNomeCurto(ev);var nomes=(ev.musicos||[]).map(function(m){return m.nome}).join(' + ')||'Sem músico';var detalhe=(ev.musicos||[]).map(function(m){return m.nome+' (R$'+m.valor+')'}).join(' + ');var txt='';if(ev.musicos&&ev.musicos.length>0){if(qtd>1)txt=nomes+'<br><small>'+detalhe+' x'+qtd+' shows = Total R$'+ev.valor+'</small>';else txt=nomes+'<br><small>'+detalhe+' • Total R$'+ev.valor+'</small>';}else txt='Total R$'+ev.valor;
+      lista.innerHTML+='<div class="eventCard"><span class="badgeShows">'+qtd+' shows</span><div class="eventTitle">'+nomeCurto+'</div><div>'+slotsHtml+'</div><div class="eventSub">'+txt+'</div><div class="eventActions"><button class="btnEdit" onclick="edita('+ev.id+')">✏️ Editar</button><button class="btnDel" onclick="exclui('+ev.id+')">🗑️ Excluir</button></div></div>';
+    });
+  });
+  if(filtrados.length==0)lista.innerHTML='<p style="text-align:center;padding:32px;color:#9CA3AF;font-size:12px">Nenhum evento<br>Clique no + para criar<br><br>📅 DIA '+dia+' / '+mesAtual.toLocaleDateString('pt-BR',{month:'long'}).toUpperCase()+' / '+ano+'</p>';
+  var sel=document.getElementById('eCasa');sel.innerHTML='<option value="">Casa / Empresa (opcional)</option>';var todas=[].concat(casas).concat(empresas);todas.forEach(function(c){var opt=document.createElement('option');opt.value=c.nome;opt.textContent=c.nome;sel.appendChild(opt)});
+  document.getElementById('contador').innerText=eventos.length+' dias • '+(eventos.reduce(function(s,e){return s+(e.slots?e.slots.length:1)},0))+' shows • '+musicos.length+' músicos • salvo';
+}
+function mudaMes(dir){mesAtual.setMonth(mesAtual.getMonth()+dir);render();}
+function abreNovo(){editId=null;selMusicos=[];setProjeto('P1');document.getElementById('modTitle').innerText='Novo cronograma';document.getElementById('eData').value=mesAtual.toISOString().slice(0,10);document.getElementById('chkAlmoco').checked=false;document.getElementById('chkJanta').checked=true;renderMusEvento();document.getElementById('modEdit').classList.add('open');}
+function edita(id){var ev=eventos.find(function(e){return e.id==id});if(!ev)return;editId=id;selMusicos=ev.musicos?ev.musicos.map(function(m){return m.id}):[];setProjeto(getNomeCurto(ev));document.getElementById('eData').value=ev.data;if(ev.slots){var alm=ev.slots.find(function(s){return s.tipo=='almoco'});var jan=ev.slots.find(function(s){return s.tipo=='janta'});document.getElementById('chkAlmoco').checked=!!alm;document.getElementById('chkJanta').checked=!!jan;if(alm){document.getElementById('eIniA').value=alm.inicio;document.getElementById('eFimA').value=alm.fim}if(jan){document.getElementById('eIniJ').value=jan.inicio;document.getElementById('eFimJ').value=jan.fim}}renderMusEvento();document.getElementById('modEdit').classList.add('open');}
+function renderMusEvento(){var div=document.getElementById('listaMusicosEvento');if(musicos.length==0){div.innerHTML='<small style="color:#9CA3AF">Nenhum músico - cadastre em ☰ > Músicos</small>';calc();return}var html='';musicos.forEach(function(m){var ch=selMusicos.includes(m.id)?'checked':'';var on=selMusicos.includes(m.id)?'on':'';html+='<label class="musCheck '+on+'"><div><input type="checkbox" '+ch+' onchange="toggleM('+m.id+')"><span style="margin-left:6px;font-weight:700">'+m.nome+'</span></div><span style="color:#6D5BFF;font-weight:800">R$ '+m.valor+'</span></label>'});div.innerHTML=html;calc();}
+function toggleM(id){if(selMusicos.includes(id))selMusicos=selMusicos.filter(function(x){return x!=id});else selMusicos.push(id);renderMusEvento();}
+function calc(){var qtd=(document.getElementById('chkAlmoco').checked?1:0)+(document.getElementById('chkJanta').checked?1:0);if(qtd==0)qtd=1;var total=0;selMusicos.forEach(function(id){var m=musicos.find(function(x){return x.id==id});if(m)total+=parseFloat(m.valor)||0});var geral=total*qtd;document.getElementById('txtShows').innerText=qtd+' shows';document.getElementById('totalCache').innerText='R$ '+geral;return {geral:geral}}
+function salva(){
+  var data=document.getElementById('eData').value;
+  var casaSel=document.getElementById('eCasa').value;
+  var casaFinal=casaSel||projetoAtual;
+  if(!data){alert('Escolhe DATA');return}
+  var slots=[];
+  if(document.getElementById('chkAlmoco').checked)slots.push({tipo:'almoco',inicio:document.getElementById('eIniA').value||'12:30',fim:document.getElementById('eFimA').value||'15:30'});
+  if(document.getElementById('chkJanta').checked)slots.push({tipo:'janta',inicio:document.getElementById('eIniJ').value||'19:00',fim:document.getElementById('eFimJ').value||'22:00'});
+  if(slots.length==0){alert('Marca almoço ou janta');return}
+  var c=calc();var geral=c.geral;var listaMus=[];selMusicos.forEach(function(id){var m=musicos.find(function(x){return x.id==id});if(m)listaMus.push(m)});
+  if(editId){
+    var ev=eventos.find(function(e){return e.id==editId});
+    ev.data=data;ev.projeto=casaFinal;ev.casa=casaFinal;ev.slots=slots;ev.valor=geral;ev.musicos=listaMus;
+  }else{
+    eventos.push({id:Date.now(),data:data,projeto:casaFinal,casa:casaFinal,slots:slots,valor:geral,musicos:listaMus});
+  }
+  save();closeM('modEdit');render();
+}
+function exclui(id){if(!confirm('Excluir?'))return;eventos=eventos.filter(function(e){return e.id!=id});save();render();}
+function openMusicos(){renderMus();document.getElementById('modMusicos').classList.add('open');}
+function renderMus(){var d=document.getElementById('listaMusicos');var h='';musicos.forEach(function(m,i){h+='<div style="display:flex;justify-content:space-between;padding:10px;border:1px solid #E5E7EB;border-radius:10px;margin:5px 0"><span><b>'+m.nome+'</b> - R$'+m.valor+'</span><button onclick="delMus('+i+')" style="border:none;background:none;color:#999">✕</button></div>'});d.innerHTML=h||'<small style="color:#999">Nenhum</small>';}
+function addMusico(){var n=document.getElementById('musNome').value.trim().toUpperCase();var v=parseFloat(document.getElementById('musValor').value)||0;if(!n||!v){alert('Nome e cachê');return}musicos.push({id:Date.now(),nome:n,valor:v});save();document.getElementById('musNome').value='';document.getElementById('musValor').value='';renderMus();render();}
+function delMus(i){if(!confirm('Excluir '+musicos[i].nome+'?'))return;musicos.splice(i,1);save();renderMus();render();}
+function openCasas(){renderCasas();document.getElementById('modCasas').classList.add('open');}
+function renderCasas(){var d=document.getElementById('listaCasas');var h='';casas.forEach(function(c,i){var horarios='';if(c.temAlmoco)horarios+='☀️ '+c.iniA+'-'+c.fimA+' ';if(c.temJanta)horarios+='🌙 '+c.iniJ+'-'+c.fimJ;h+='<div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #E5E7EB;border-radius:10px;margin:5px 0"><div><b>'+c.nome+'</b><br><small style="color:#6B7280;font-size:10px">'+horarios+'</small></div><div><button onclick="editCasa('+i+')" style="border:none;background:#EEF2FF;color:#4338CA;padding:6px 10px;border-radius:6px;font-weight:700;font-size:11px;margin-right:4px">Editar</button><button onclick="delCasa('+i+')" style="border:none;background:none;color:#999">✕</button></div></div>';});d.innerHTML=h||'<small style="color:#999">Nenhuma casa</small>';}
+function addCasa(){
+  var nome=document.getElementById('casaNome').value.trim().toUpperCase();
+  if(!nome){alert('Nome da casa');return}
+  var iniA=document.getElementById('casaIniA').value||'12:30';
+  var fimA=document.getElementById('casaFimA').value||'15:30';
+  var iniJ=document.getElementById('casaIniJ').value||'19:00';
+  var fimJ=document.getElementById('casaFimJ').value||'22:00';
+  var temA=document.getElementById('casaTemAlmoco').checked;
+  var temJ=document.getElementById('casaTemJanta').checked;
+  var idx=casas.findIndex(function(c){return c.nome==nome});
+  if(idx>=0){casas[idx]={nome:nome,iniA:iniA,fimA:fimA,iniJ:iniJ,fimJ:fimJ,temAlmoco:temA,temJanta:temJ};}
+  else{casas.push({nome:nome,iniA:iniA,fimA:fimA,iniJ:iniJ,fimJ:fimJ,temAlmoco:temA,temJanta:temJ});}
+  save();document.getElementById('casaNome').value='';renderCasas();render();
+}
+function editCasa(i){var c=casas[i];document.getElementById('casaNome').value=c.nome;document.getElementById('casaIniA').value=c.iniA||'12:30';document.getElementById('casaFimA').value=c.fimA||'15:30';document.getElementById('casaIniJ').value=c.iniJ||'19:00';document.getElementById('casaFimJ').value=c.fimJ||'22:00';document.getElementById('casaTemAlmoco').checked=!!c.temAlmoco;document.getElementById('casaTemJanta').checked=!!c.temJanta;}
+function delCasa(i){if(!confirm('Excluir casa '+casas[i].nome+'?'))return;casas.splice(i,1);save();renderCasas();render();}
+function openEmpresas(){renderEmpresas();document.getElementById('modEmpresas').classList.add('open');}
+function renderEmpresas(){var d=document.getElementById('listaEmpresas');var h='';empresas.forEach(function(e,i){h+='<div style="display:flex;justify-content:space-between;padding:10px;border:1px solid #E5E7EB;border-radius:10px;margin:5px 0"><span>'+e.nome+'</span><button onclick="delEmpresa('+i+')" style="border:none;background:none;color:#999">✕</button></div>'});d.innerHTML=h||'<small style="color:#999">Nenhuma</small>';}
+function addEmpresa(){var n=document.getElementById('empNome').value.trim();if(!n)return;empresas.push({nome:n});save();document.getElementById('empNome').value='';renderEmpresas();}
+function delEmpresa(i){empresas.splice(i,1);save();renderEmpresas();}
+function openBkp(){document.getElementById('modBkp').classList.add('open');}
+function exportBackup(){var blob=new Blob([JSON.stringify({eventos:eventos,casas:casas,musicos:musicos,empresas:empresas,date:new Date().toISOString()},null,2)],{type:'application/json'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='TAKI-BKP-'+new Date().toISOString().slice(0,10)+'.json';a.click();}
+function importBackup(input){var f=input.files[0];if(!f)return;var r=new FileReader();r.onload=function(e){try{var d=JSON.parse(e.target.result);if(d.eventos)eventos=d.eventos;if(d.casas)casas=d.casas;if(d.musicos)musicos=d.musicos;if(d.empresas)empresas=d.empresas;save();alert('✅ Importado!');closeM('modBkp');render();}catch{alert('Arquivo inválido')}};r.readAsText(f);}
+function openRecuperar(){var html='';for(var i=1;i<=3;i++){var bkp=JSON.parse(localStorage.getItem('taki_bkp_'+i)||'null');if(bkp&&bkp.eventos){html+='<div class="bkpItem"><div><b>Backup '+i+'</b><br><small>'+new Date(bkp.ts).toLocaleString('pt-BR')+' • '+bkp.eventos.length+' dias</small></div><button onclick="restauraBkp(\'taki_bkp_'+i+'\')" style="background:var(--purple);color:#fff;border:none;padding:8px 12px;border-radius:8px;font-weight:700">Recuperar</button></div>'}}if(!html)html='<p style="font-size:12px;color:#9CA3AF;padding:10px">Nenhum backup</p>';document.getElementById('listaBkps').innerHTML=html;document.getElementById('modRecup').classList.add('open');}
+function restauraBkp(key){var bkp=JSON.parse(localStorage.getItem(key)||'null');if(!bkp)return;if(!confirm('Recuperar?'))return;eventos=bkp.eventos||[];casas=bkp.casas||[];musicos=bkp.musicos||[];empresas=bkp.empresas||[];save();alert('✅ Recuperado!');closeM('modRecup');render();}
+function openRelatorios(){var total=eventos.reduce(function(s,e){return s+(e.valor||0)},0);var qtd=eventos.reduce(function(s,e){return s+(e.slots?e.slots.length:1)},0);var porMusico={};eventos.forEach(function(ev){(ev.musicos||[]).forEach(function(m){var q=ev.slots?ev.slots.length:1;if(!porMusico[m.nome])porMusico[m.nome]={valor:0,shows:0};porMusico[m.nome].valor+=(parseFloat(m.valor)||0)*q;porMusico[m.nome].shows+=q})});var html='<div style="background:#F9FAFB;padding:12px;border-radius:10px;margin-bottom:12px;border:1px solid #E5E7EB"><b>Total: R$ '+total+' • '+qtd+' shows</b></div>';html+='<b style="font-size:11px;color:#6B7280">POR MÚSICO:</b>';Object.keys(porMusico).sort().forEach(function(k){html+='<div style="display:flex;justify-content:space-between;padding:10px;border-bottom:1px solid #F3F4F6;font-size:13px"><span>'+k+' • '+porMusico[k].shows+' shows</span><b>R$ '+porMusico[k].valor+'</b></div>'});document.getElementById('relBody').innerHTML=html;document.getElementById('modRel').classList.add('open');}
+function escolheZap(){document.getElementById('modZap').classList.add('open');}
+function escolheFolha(){document.getElementById('modFolha').classList.add('open');}
+function escolheNormal(){document.getElementById('modNormal').classList.add('open');}
+function escolhePdf(){document.getElementById('modPdf').classList.add('open');}
+function getTexto(comValor){
+  var filtrados=eventos.filter(function(ev){var d=new Date(ev.data+'T00:00:00');return d.getMonth()==mesAtual.getMonth()&&d.getFullYear()==mesAtual.getFullYear()}).sort(function(a,b){return a.data.localeCompare(b.data)});
+  var txt='';var grupos={};filtrados.forEach(function(ev){if(!grupos[ev.data])grupos[ev.data]=[];grupos[ev.data].push(ev)});
+  Object.keys(grupos).sort().forEach(function(data){
+    var d=new Date(data+'T00:00:00');txt+=d.toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long',year:'numeric'}).toUpperCase()+'\n';
+    grupos[data].forEach(function(ev){
+      var nomeCurto=getNomeCurto(ev);
+      (ev.slots||[]).forEach(function(s){
+        var label=s.tipo=='almoco'?'ALMOÇO':'JANTA';
+        var musTxt=(ev.musicos||[]).map(function(m){return m.nome}).join(' + ');
+        if(comValor){var mv=(ev.musicos||[]).map(function(m){return m.nome+' R$'+m.valor}).join(' + ');txt+=label+': '+nomeCurto+' '+s.inicio+'-'+s.fim+' '+mv+' = R$'+(ev.musicos?ev.musicos.reduce(function(a,b){return a+(parseFloat(b.valor)||0)},0):ev.valor)+'\n';}
+        else{txt+=label+': '+nomeCurto+' - '+musTxt+' - '+s.inicio+'-'+s.fim+'\n';}
+      });
+      if(comValor)txt+='Total dia R$'+ev.valor+'\n\n';else txt+='\n';
+    });
+  });return txt||'Sem eventos';
+}
+function exportZap(comValor){var t=getTexto(comValor);var titulo=comValor?'*AGENDA TAKI SOM - COM VALOR*':'*CRONOGRAMA MÚSICO - SEM VALOR - CASA, NOME, DATA, HORÁRIO, PERÍODO*';var msg=titulo+'\n\n'+t;window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');}
+function exportNormal(comValor){var t=getTexto(comValor);var titulo=comValor?'CRONOGRAMA COM VALOR':'CRONOGRAMA SEM VALOR - CASA, NOME, DATA, HORÁRIO, PERÍODO';var w=window.open('','','width=800,height=700');w.document.write('<html><head><meta charset="UTF-8"><title>'+titulo+'</title><style>body{font-family:Arial;padding:24px;font-size:13px;line-height:1.6}h2{text-align:center}pre{white-space:pre-wrap;font-family:Arial}@media print{button{display:none}}</style></head><body><h2>'+titulo+'</h2><pre>'+t+'</pre><button onclick="window.print()" style="margin-top:20px;padding:12px 20px;background:#111827;color:#fff;border:none;border-radius:8px;font-weight:700">🖨️ IMPRIMIR</button></body></html>');w.document.close();}
+function exportFolha(comValor){
+  var filtrados=eventos.filter(function(ev){var d=new Date(ev.data+'T00:00:00');return d.getMonth()==mesAtual.getMonth()&&d.getFullYear()==mesAtual.getFullYear()}).sort(function(a,b){return a.data.localeCompare(b.data)});
+  var titulo=comValor?'FOLHA - COM VALOR':'FOLHA - SEM VALOR - CASA, NOME, DATA, HORÁRIO, PERÍODO';
+  var html='<html><head><meta charset="UTF-8"><title>'+titulo+'</title><style>';
+  html+='@page{size:landscape;margin:10mm} body{font-family:Inter,Arial,sans-serif;padding:12px;color:#111827}';
+  html+='h2{text-align:center;font-size:18px;font-weight:800;margin-bottom:4px} .sub{text-align:center;font-size:11px;color:#6B7280;margin-bottom:14px}';
+  html+='table{width:100%;border-collapse:collapse;font-size:12px} th,td{border:1px solid #111827;padding:8px 10px;text-align:left}';
+  html+='th{background:#111827;color:#fff;font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase}';
+  html+='td{font-size:12px} tr:nth-child(even){background:#F9FAFB}';
+  html+='.casa{font-weight:800;font-size:13px} .musico{font-weight:700} .periodo{font-weight:700;padding:4px 8px;border-radius:6px;display:inline-block;font-size:10px}';
+  html+='.periodo.janta{background:#111827;color:#fff} .periodo.almoco{background:#FBBF24;color:#111827}';
+  html+='.total{background:#FEF3C7;font-weight:800} @media print{button{display:none}}';
+  html+='</style></head><body>';
+  html+='<h2>CRONOGRAMA - '+mesAtual.toLocaleDateString('pt-BR',{month:'long',year:'numeric'}).toUpperCase()+(comValor?' - COM VALOR':' - SEM VALOR')+'</h2>';
+  html+='<div class="sub">CASA • NOME • DATA • HORÁRIO • PERÍODO | Impresso em '+new Date().toLocaleString('pt-BR')+'</div>';
+  html+='<table><tr><th>CASA</th><th>MÚSICOS / NOME</th><th>DATA</th><th>HORÁRIO</th><th>PERÍODO</th>';
+  if(comValor) html+='<th>VALOR</th>';
+  html+='</tr>';
+  filtrados.forEach(function(ev){
+    var nomeCurto=getNomeCurto(ev);
+    (ev.slots||[]).forEach(function(s){
+      var label=s.tipo=='almoco'?'ALMOÇO':'JANTA';
+      var classe=s.tipo=='almoco'?'almoco':'janta';
+      var musTxt=(ev.musicos||[]).map(function(m){return m.nome}).join(' + ')||'-';
+      html+='<tr>';
+      html+='<td class="casa">'+nomeCurto+'</td>';
+      html+='<td class="musico">'+musTxt+'</td>';
+      html+='<td>'+ev.data.split('-').reverse().join('/')+'</td>';
+      html+='<td><b>'+s.inicio+' - '+s.fim+'</b></td>';
+      html+='<td><span class="periodo '+classe+'">'+label+'</span></td>';
+      if(comValor){var v=(ev.musicos||[]).reduce(function(a,b){return a+(parseFloat(b.valor)||0)},0);html+='<td>R$ '+v.toFixed(2).replace('.',',')+'</td>';}
+      html+='</tr>';
+    });
+  });
+  html+='<tr class="total"><td colspan="2"><b>TOTAL: '+filtrados.reduce(function(s,e){return s+(e.slots?e.slots.length:1)},0)+' shows</b></td><td colspan="'+(comValor?4:3)+'"><b>'+filtrados.length+' dias • '+mesAtual.toLocaleDateString('pt-BR',{month:'long',year:'numeric'}).toUpperCase()+'</b></td></tr>';
+  html+='</table><br><div style="display:flex;gap:12px;justify-content:center"><button onclick="window.print()" style="padding:14px 24px;background:#111827;color:#fff;border:none;border-radius:10px;font-weight:800;font-size:13px;cursor:pointer">🖨️ IMPRIMIR - '+(comValor?'COM VALOR':'SEM VALOR - CASA, NOME, DATA, HORÁRIO, PERÍODO')+'</button></div></body></html>';
+  var w=window.open('','','width=1100,height=700');w.document.write(html);w.document.close();
+}
+function exportPdf(comValor){exportFolha(comValor);}
+function instalarApp(){alert('Para instalar: Chrome > 3 pontinhos > Instalar app');}
+render();
 </script>
+</body>
+</html>
