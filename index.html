@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TAKI v62.8 AZUL BONITO</title>
+<title>TAKI v62.9 AZUL IMPRIMIR BONITO</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--dark:#1E3A8A;--purple:#2563EB;--bg:#F1F5F9;--border:#E2E8F0}
@@ -52,10 +52,11 @@
 .timeRow{display:flex;gap:8px;margin-top:6px}.timeRow input{flex:1}
 .totalBox{background:linear-gradient(135deg,#1E3A8A,#2563EB);color:#fff;padding:12px 14px;border-radius:12px;margin-top:10px;display:flex;justify-content:space-between;font-weight:800}
 .bkpItem{background:#fff;border:1px solid var(--border);border-radius:10px;padding:10px;margin:8px 0;display:flex;justify-content:space-between;align-items:center}
+@media print{.noPrint{display:none!important}}
 </style>
 </head>
 <body>
-<div class="top"><div class="topLeft"><span onclick="openMenu()" style="font-size:26px;cursor:pointer">☰</span><div class="topTitle"><b>AGENDA DO MES</b><br><small>TAKI SOM • AZUL</small><div class="dot"><i></i><span>v62.8 - Azul bonito</span></div></div></div><button class="btnHome" onclick="location.href='index.html'">HOME</button></div>
+<div class="top"><div class="topLeft"><span onclick="openMenu()" style="font-size:26px;cursor:pointer">☰</span><div class="topTitle"><b>AGENDA DO MES</b><br><small>TAKI SOM • AZUL</small><div class="dot"><i></i><span>v62.9 - Imprimir azul bonito</span></div></div></div><button class="btnHome" onclick="location.href='index.html'">HOME</button></div>
 <div id="takiMenu"><div id="takiMenuBg" onclick="closeMenu()"></div><div id="takiMenuPanel">
 <div class="takiMenuHead"><span>TAKI — MENU COMPLETO</span><span onclick="closeMenu()" style="cursor:pointer;background:#fff;padding:6px 10px;border-radius:8px;border:1px solid #E5E7EB">✕</span></div>
 <div class="takiMenuSection">AGENDAS</div>
@@ -101,7 +102,7 @@
 <button onclick="escolheNormal()">📄 NORMAL</button>
 <button onclick="escolhePdf()">📑 PDF</button>
 </div>
-<div class="modal" id="modZap"><div class="modalBox"><b>💬 Enviar por ZAP</b><br><br><button class="btnPrimary" onclick="exportZap(true);closeM('modZap')">🏠 COM VALOR</button><button class="btnPrimary" style="background:#1E3A8A;margin-top:8px" onclick="exportZap(false);closeM('modZap')">🎤 SEM VALOR - CASA, NOME, DATA, HORÁRIO, PERÍODO</button><button class="btnGhost" onclick="closeM('modZap')">Cancelar</button></div></div>
+<div class="modal" id="modZap"><div class="modalBox"><b>💬 Enviar por ZAP</b><br><br><button class="btnPrimary" onclick="exportZap(true);closeM('modZap')">🏠 COM VALOR</button><button class="btnPrimary" style="background:#1E3A8A;margin-top:8px" onclick="exportZap(false);closeM('modZap')">🎤 SEM VALOR</button><button class="btnGhost" onclick="closeM('modZap')">Cancelar</button></div></div>
 <div class="modal" id="modFolha"><div class="modalBox"><b>📋 Imprimir em FOLHA</b><br><small style="color:#64748B">Ordem: CASA, NOME, DATA, HORÁRIO, PERÍODO</small><br><br><button class="btnPrimary" onclick="exportFolha(true);closeM('modFolha')">🏠 FOLHA COM VALOR</button><button class="btnPrimary" style="background:#1E3A8A;margin-top:8px" onclick="exportFolha(false);closeM('modFolha')">🎤 FOLHA SEM VALOR</button><button class="btnGhost" onclick="closeM('modFolha')">Cancelar</button></div></div>
 <div class="modal" id="modNormal"><div class="modalBox"><b>📄 NORMAL</b><br><br><button class="btnPrimary" onclick="exportNormal(true);closeM('modNormal')">🏠 COM VALOR</button><button class="btnPrimary" style="background:#1E3A8A;margin-top:8px" onclick="exportNormal(false);closeM('modNormal')">🎤 SEM VALOR</button><button class="btnGhost" onclick="closeM('modNormal')">Cancelar</button></div></div>
 <div class="modal" id="modPdf"><div class="modalBox"><b>📑 PDF</b><br><br><button class="btnPrimary" onclick="exportPdf(true);closeM('modPdf')">🏠 COM VALOR</button><button class="btnPrimary" style="background:#1E3A8A;margin-top:8px" onclick="exportPdf(false);closeM('modPdf')">🎤 SEM VALOR</button><button class="btnGhost" onclick="closeM('modPdf')">Cancelar</button></div></div>
@@ -150,20 +151,30 @@
 <div class="modal" id="modEmpresas"><div class="modalBox"><b>🏢 Empresas</b><input id="empNome" class="inp" placeholder="Nome empresa"><button class="btnPrimary" onclick="addEmpresa()">+ Salvar</button><div id="listaEmpresas" style="margin-top:12px"></div><button class="btnGhost" onclick="closeM('modEmpresas')">Fechar</button></div></div>
 <div class="modal" id="modBkp"><div class="modalBox"><b>💾 BKP</b><div style="margin-top:12px;display:flex;flex-direction:column;gap:8px"><button class="btnPrimary" onclick="exportBackup()">📤 Exportar backup</button><label style="padding:12px;background:#EFF6FF;color:#1E40AF;border-radius:10px;font-weight:700;text-align:center;cursor:pointer;border:1px solid #BFDBFE">📥 Importar backup<input type="file" id="importBkp" hidden accept=".json" onchange="importBackup(this)"></label></div><button class="btnGhost" onclick="closeM('modBkp')">Fechar</button></div></div>
 <div class="modal" id="modRecup"><div class="modalBox"><b>🛡️ Recuperar dados</b><div id="listaBkps" style="margin-top:10px"></div><button class="btnGhost" onclick="closeM('modRecup')">Fechar</button></div></div>
-<div class="modal" id="modRel"><div class="modalBox"><b style="color:#1E3A8A">📊 Relatórios - AZUL BONITO</b><div id="relBody" style="margin-top:12px"></div><button class="btnGhost" onclick="closeM('modRel')">Fechar</button></div></div>
+<div class="modal" id="modRel"><div class="modalBox" style="max-width:520px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><b style="color:#1E3A8A">📊 Relatórios - AZUL BONITO</b><span onclick="closeM('modRel')" style="cursor:pointer;background:#F1F5F9;padding:6px 10px;border-radius:8px;font-size:12px">✕</span></div>
+<div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:10px;padding:10px;display:flex;gap:8px;margin:12px 0">
+<button onclick="imprimirRelatorioAzul()" style="flex:1;background:linear-gradient(135deg,#1E3A8A,#2563EB);color:#fff;border:none;padding:12px;border-radius:10px;font-weight:800;font-size:12px;cursor:pointer;box-shadow:0 3px 8px rgba(37,99,235,.3)">🖨️ IMPRIMIR BONITÃO AZUL</button>
+<button onclick="exportRelatorioZap()" style="flex:1;background:#fff;color:#1E3A8A;border:1px solid #BFDBFE;padding:12px;border-radius:10px;font-weight:700;font-size:12px;cursor:pointer">💬 ENVIAR ZAP</button>
+</div>
+<div id="relBody" style="margin-top:12px"></div>
+<div style="display:flex;gap:8px;margin-top:16px" class="noPrint">
+<button onclick="imprimirRelatorioAzul()" style="flex:2;background:linear-gradient(135deg,#1E3A8A,#2563EB);color:#fff;border:none;padding:14px;border-radius:12px;font-weight:800;font-size:13px;cursor:pointer">🖨️ IMPRIMIR ESSE AZUL BONITÃO</button>
+<button class="btnGhost" style="flex:1;margin-top:0" onclick="closeM('modRel')">Fechar</button>
+</div>
+</div></div>
 <script>
-var DB_KEY='taki_v62_8_azul';
+var DB_KEY='taki_v62_9_azul_imprimir';
 var projetoAtual='P1';
 function carregaDB(){
-  var keys=[DB_KEY,'taki_v62_7_final','taki_v62_6_final','taki_v62_5_final','taki_v62_final','taki_v62_p1fix','taki_final_v9_db'];
+  var keys=[DB_KEY,'taki_v62_8_azul','taki_v62_7_final','taki_v62_6_final','taki_v62_5_final','taki_v62_final','taki_v62_p1fix','taki_final_v9_db'];
   for(var k of keys){var b=JSON.parse(localStorage.getItem(k)||'null');if(b&&b.eventos&&b.eventos.length>0)return b;}
   return {
     eventos:[
-      {id:1,data:"2026-10-19",projeto:"P1",casa:"P1",slots:[{tipo:"janta",inicio:"19:00",fim:"22:00"}],musicos:[{id:1,nome:"ANDERSON VAT 60 DUO",valor:400}],valor:400},
-      {id:2,data:"2026-10-19",projeto:"P1",casa:"P1",slots:[{tipo:"janta",inicio:"19:00",fim:"22:00"}],musicos:[{id:2,nome:"ANDERSON VAT 60 TRIO",valor:450}],valor:450},
-      {id:3,data:"2026-10-20",projeto:"P2",casa:"P2",slots:[{tipo:"janta",inicio:"19:00",fim:"22:00"}],musicos:[{id:10,nome:"RICK DUO",valor:400}],valor:400},
-      {id:4,data:"2026-10-20",projeto:"P2",casa:"P2",slots:[{tipo:"janta",inicio:"19:00",fim:"22:00"}],musicos:[{id:11,nome:"RICK SOLO",valor:300}],valor:300},
-      {id:5,data:"2026-10-21",projeto:"P3",casa:"P3",slots:[{tipo:"janta",inicio:"20:00",fim:"23:00"}],musicos:[{id:12,nome:"RICK TRIO",valor:450}],valor:450}
+      {id:1,data:"2026-10-19",[STRIPPED] VAT 60 DUO",valor:400}],valor:400},
+      {id:2,data:"2026-10-19",[STRIPPED] VAT 60 TRIO",valor:450}],valor:450},
+      {id:3,data:"2026-10-20",[STRIPPED] DUO",valor:400}],valor:400},
+      {id:4,data:"2026-10-20",[STRIPPED] SOLO",valor:300}],valor:300},
+      {id:5,data:"2026-10-21",[STRIPPED] TRIO",valor:450}],valor:450}
     ],
     casas:[
       {nome:"P1",iniA:"12:30",fimA:"15:30",iniJ:"19:00",fimJ:"22:00",temAlmoco:false,temJanta:true},
@@ -356,8 +367,8 @@ function openRelatorios(){
       detalhesPorBase[base][m.nome].shows += q;
     });
   });
-  var html='<div style="background:linear-gradient(135deg,#1E40AF 0%,#3B82F6 100%);color:#fff;padding:16px;border-radius:16px;margin-bottom:16px;box-shadow:0 4px 12px rgba(37,99,235,.3)">';
-  html+='<div style="display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:11px;opacity:.9;letter-spacing:.5px;font-weight:600">RESUMO DO MÊS</div><div style="font-size:22px;font-weight:800;margin-top:2px">R$ '+total.toLocaleString('pt-BR')+'</div><div style="font-size:11px;opacity:.9;margin-top:2px">'+qtd+' shows • '+totalDias+' dias • '+Object.keys(porBase).length+' músicos</div></div><div style="background:rgba(255,255,255,.2);width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px">📊</div></div></div>';
+  var html='<div id="printArea"><div style="background:linear-gradient(135deg,#1E40AF 0%,#3B82F6 100%);color:#fff;padding:16px;border-radius:16px;margin-bottom:16px;box-shadow:0 4px 12px rgba(37,99,235,.3)">';
+  html+='<div style="display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:11px;opacity:.9;letter-spacing:.5px;font-weight:600">RESUMO DO MÊS • '+mesAtual.toLocaleDateString('pt-BR',{month:'long',year:'numeric'}).toUpperCase()+'</div><div style="font-size:22px;font-weight:800;margin-top:2px">R$ '+total.toLocaleString('pt-BR')+'</div><div style="font-size:11px;opacity:.9;margin-top:2px">'+qtd+' shows • '+totalDias+' dias • '+Object.keys(porBase).length+' músicos</div></div><div style="background:rgba(255,255,255,.2);width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px">📊</div></div></div>';
   html+='<div style="display:flex;align-items:center;gap:8px;margin:16px 0 12px"><div style="width:4px;height:18px;background:#3B82F6;border-radius:4px"></div><b style="font-size:12px;color:#1E40AF;letter-spacing:.5px">POR NOME • DUO / TRIO / SOLO SOMADOS</b></div>';
   Object.keys(porBase).sort(function(a,b){return a.localeCompare(b)}).forEach(function(base){
     var info=porBase[base];
@@ -381,9 +392,47 @@ function openRelatorios(){
   Object.keys(porMusico).sort().forEach(function(k){
     html+='<div style="display:flex;justify-content:space-between;padding:8px 10px;font-size:11px;color:#475569;border-bottom:1px solid #F1F5F9"><span>• '+k+' • '+porMusico[k].shows+' shows</span><span style="font-weight:700">R$ '+porMusico[k].valor+'</span></div>';
   });
-  html+='</div>';
+  html+='</div></div>';
   document.getElementById('relBody').innerHTML=html;
   document.getElementById('modRel').classList.add('open');
+}
+function imprimirRelatorioAzul(){
+  var conteudo = document.getElementById('relBody').innerHTML;
+  var mes = mesAtual.toLocaleDateString('pt-BR',{month:'long',year:'numeric'}).toUpperCase();
+  var w = window.open('','','width=900,height=800');
+  w.document.write('<html><head><meta charset="UTF-8"><title>Relatório Azul Bonito - '+mes+'</title>');
+  w.document.write('<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&display=swap" rel="stylesheet">');
+  w.document.write('<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,Arial,sans-serif;padding:20px;background:#F1F5F9;color:#111827}');
+  w.document.write('h1{text-align:center;color:#1E3A8A;font-size:20px;margin-bottom:4px} .sub{text-align:center;color:#64748B;font-size:11px;margin-bottom:16px}');
+  w.document.write('@media print{button{display:none} body{background:#fff}}');
+  w.document.write('</style></head><body>');
+  w.document.write('<h1>📊 RELATÓRIO FINANCEIRO - TAKI SOM</h1>');
+  w.document.write('<div class="sub">'+mes+' • Impresso em '+new Date().toLocaleString('pt-BR')+'</div>');
+  w.document.write(conteudo);
+  w.document.write('<br><div style="text-align:center;margin-top:20px"><button onclick="window.print()" style="background:linear-gradient(135deg,#1E3A8A,#2563EB);color:#fff;border:none;padding:14px 28px;border-radius:12px;font-weight:800;font-size:14px;cursor:pointer;box-shadow:0 4px 12px rgba(37,99,235,.3)">🖨️ IMPRIMIR ESSE AZUL BONITÃO</button></div>');
+  w.document.write('</body></html>');
+  w.document.close();
+  setTimeout(function(){w.print();},500);
+}
+function exportRelatorioZap(){
+  var total=eventos.reduce(function(s,e){return s+(e.valor||0)},0);
+  var qtd=eventos.reduce(function(s,e){return s+(e.slots?e.slots.length:1)},0);
+  var porBase={};
+  eventos.forEach(function(ev){
+    var q = ev.slots?ev.slots.length:1;
+    (ev.musicos||[]).forEach(function(m){
+      var base = m.nome.split(' ')[0].toUpperCase();
+      if(!porBase[base]) porBase[base]={valor:0,shows:0};
+      porBase[base].valor += (parseFloat(m.valor)||0)*q;
+      porBase[base].shows += q;
+    });
+  });
+  var txt='*📊 RELATÓRIO TAKI SOM - '+mesAtual.toLocaleDateString('pt-BR',{month:'long',year:'numeric'}).toUpperCase()+'*\n\n';
+  txt+='Total: R$ '+total+' • '+qtd+' shows\n\n';
+  Object.keys(porBase).sort().forEach(function(k){
+    txt+='*'+k+'* • '+porBase[k].shows+' shows • R$ '+porBase[k].valor+'\n';
+  });
+  window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');
 }
 function escolheZap(){document.getElementById('modZap').classList.add('open');}
 function escolheFolha(){document.getElementById('modFolha').classList.add('open');}
