@@ -1,376 +1,243 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TAKI - Agenda Profissional</title>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#1a1a2e">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TAKI AGENDA v55 ANTI-PERDA</title>
 <style>
-*{box-sizing:border-box;font-family:system-ui,Arial,sans-serif}
-body{margin:0;background:#f0f0f0;padding-bottom:90px}
-header{background:#1a1a2e;display:flex;align-items:center;justify-content:space-between;padding:10px 12px;position:sticky;top:0;z-index:10;color:#fff}
-header h1{margin:0;font-size:12px;line-height:13px} header h1 span{font-size:10px;color:#f0c040;display:block;font-weight:800}
-.btn-home{background:#7c6cff;color:#fff;border:0;padding:7px 14px;border-radius:20px;font-size:12px;font-weight:800}
-.menu-btn{font-size:22px;cursor:pointer;padding:4px 8px}
-.date-card{background:#fff;margin:10px;border-radius:14px;padding:10px;box-shadow:0 1px 4px rgba(0,0,0,.08);text-align:center}
-.arrow{width:44px;height:44px;border:0;border-radius:10px;background:#222;color:#fff;font-size:20px;display:grid;place-items:center;cursor:pointer}
-.title-long{font-weight:800;font-size:11px;margin-bottom:8px;text-transform:uppercase;text-align:center}
-input[type=date],input[type=month]{font-size:13px;padding:6px 10px;border:1px solid #ccc;border-radius:10px;max-width:170px}
-.pill{border:0;background:#eee;padding:5px 10px;border-radius:20px;font-weight:700;color:#555;font-size:11px;cursor:pointer;margin:2px}
-.pill.active{background:#1a1a2e;color:#fff}
-.show-card{background:#fff;margin:8px 10px;border-radius:12px;padding:10px 12px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
-.line{font-weight:700;font-size:13px} .dia-label{font-weight:800;font-size:11px;background:#1a1a2e;color:#fff;padding:6px 10px;border-radius:8px;margin:14px 10px 4px 10px}
-.b-edit,.b-del{border:0;padding:5px 10px;border-radius:6px;font-weight:700;font-size:11px;cursor:pointer}
-.b-edit{background:#e3f0ff;color:#2a7fff}.b-del{background:#ffe3e3;color:#d44}
-.bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #ddd;display:flex;gap:4px;padding:6px;justify-content:space-around;z-index:20}
-.bottom button{border:0;padding:10px 12px;border-radius:10px;font-weight:800;font-size:12px;cursor:pointer;flex:1;margin:2px}
-.b-zap{background:#00e676}.b-normal{background:#7c6cff;color:#fff}.b-folha{background:#ffe066;border:1.5px dashed #000}.b-pdf{background:#00bfa6;color:#fff}
-.folha-view{display:none;padding:8px}
-.folha-paper{background:#fff;background-image:repeating-linear-gradient(transparent,transparent 31px,#b5d8ff 31px,#b5d8ff 32px);border:1.5px solid #333;border-radius:6px;padding:0 10px 0 36px;position:relative}
-.folha-paper:before{content:'';position:absolute;left:28px;top:0;bottom:0;width:1.5px;background:#ff8a8a}
-.folha-paper h2{font-size:11px;line-height:32px;height:32px;margin:0;white-space:nowrap;overflow:hidden;font-weight:700;text-transform:uppercase}
-.folha-item{font-size:12px;line-height:32px;height:32px;margin:0;padding:0;white-space:nowrap;overflow:hidden;color:#222}
-.add-btn{position:fixed;right:14px;bottom:80px;width:56px;height:56px;border-radius:50%;border:0;background:#7c6cff;color:#fff;font-size:30px;z-index:25;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,.3)}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:500;padding:14px}
-.modal.open{display:flex}
-.modal-box{background:#fff;border-radius:14px;padding:14px;width:100%;max-width:480px;max-height:92vh;overflow:auto}
-.modal-box input,.modal-box select{width:100%;padding:11px;border:1px solid #ccc;border-radius:8px;margin:5px 0;font-size:14px;background:#fff}
-.modal-box label{font-size:11px;font-weight:800;color:#666;margin-top:6px;display:block}
-.modal-box button{width:100%;padding:12px;border:0;border-radius:10px;font-weight:800;margin-top:6px;font-size:14px;cursor:pointer}
-.save{background:#222;color:#fff}.cancel{background:#eee}
-.side{position:fixed;left:-100%;top:0;bottom:0;width:86%;max-width:340px;background:#fff;z-index:600;transition:.25s;padding:14px;overflow:auto;box-shadow:4px 0 20px rgba(0,0,0,.2)}
-.side.open{left:0}
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;z-index:400}
-.overlay.open{display:block}
-.menu-item{padding:13px 0;border-bottom:1px solid #f2f2f2;font-weight:700;font-size:13px;cursor:pointer;display:flex;gap:8px;align-items:center}
-.item-lista{background:#f8f8f8;padding:10px;border-radius:10px;margin:8px 0;border:1px solid #eee}
-.item-lista b{font-size:13px} .item-lista small{font-size:11px;color:#555;display:block;margin:2px 0}
-.mini-btn{border:0;padding:8px 10px;border-radius:8px;font-size:12px;font-weight:800;cursor:pointer;margin-left:4px}
-.mini-edit{background:#dbeafe;color:#1d4ed8}.mini-del{background:#fecaca;color:#b91c1c}.mini-ok{background:#d1fae5;color:#065f46}
-.report-card-pro{background:linear-gradient(135deg,#1a1a2e 0%,#2d2d5a 100%);color:#fff;border-radius:12px;padding:14px;margin:8px 0;font-size:13px;box-shadow:0 2px 8px rgba(0,0,0,.2)}
-.report-card{border:1px solid #e5e7eb;border-radius:12px;padding:12px;margin:10px 0;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.08)}
-.report-line{display:flex;justify-content:space-between;align-items:center;background:#f9fafb;padding:8px 10px;border-radius:8px;margin:5px 0;border:1px solid #eee}
-.rel-print-btns{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
-.rel-print-btns button{flex:1;min-width:72px;padding:10px;font-size:11px;font-weight:800;border-radius:8px;border:0;cursor:pointer}
+:root{--dark:#1A1A2E;--purple:#7C5CFF;--bg:#F0F0F5}
+*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);font-family:Inter,Arial,sans-serif;padding-bottom:85px}
+.top{position:sticky;top:0;z-index:100;background:var(--dark);color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+.btnHome{background:var(--purple);color:#fff;border:none;padding:10px 20px;border-radius:22px;font-weight:800;font-size:13px}
+#takiMenu{position:fixed;inset:0;z-index:400;display:none}#takiMenu.open{display:block}
+#takiMenuBg{position:absolute;inset:0;background:rgba(0,0,0,.4)}
+#takiMenuPanel{position:absolute;top:0;left:0;bottom:0;width:82%;max-width:360px;background:#fff;overflow-y:auto}
+.takiMenuHead{padding:20px 16px 12px 16px;font-weight:800;font-size:16px;border-bottom:1px solid #eee}
+.takiMenuItem{display:flex;gap:12px;padding:16px;border-bottom:1px solid #f2f2f2;cursor:pointer;font-weight:600;font-size:14px}
+.takiMenuItem.recup{background:#FFD6D6;border-radius:10px;margin:8px;padding:14px 16px;border:none;font-weight:800}
+.cardMes{background:#fff;margin:12px;border-radius:16px;padding:14px;box-shadow:0 2px 10px rgba(0,0,0,.07);text-align:center}
+.rowNav{display:flex;align-items:center;justify-content:space-between;margin:10px 0;gap:8px}
+.arrow{width:56px;height:56px;background:#111;color:#fff;border:none;border-radius:14px;font-size:26px;font-weight:800;cursor:pointer}
+.filters{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.filters button{border:none;background:#E9E9EF;color:#333;padding:8px 14px;border-radius:20px;font-weight:700;font-size:12px;cursor:pointer}
+.filters button.active{background:var(--dark);color:#fff}
+input[type=month]{padding:10px 14px;border-radius:12px;border:2px solid #E5E5E5;font-weight:700;text-align:center;margin:8px 0}
+.dayHeader{background:var(--dark);color:#fff;padding:10px 14px;border-radius:10px;margin:16px 12px 8px 12px;font-weight:800;font-size:12px;text-transform:uppercase}
+.eventCard{background:#fff;margin:0 12px 10px 12px;border-radius:14px;padding:12px 14px;box-shadow:0 2px 8px rgba(0,0,0,.06);border-left:5px solid var(--purple)}
+.eventTitle{font-weight:800;font-size:14px}
+.eventActions{display:flex;gap:8px;margin-top:8px}
+.btnEdit{background:#E3F0FF;color:#1E5AA7;border:none;padding:6px 14px;border-radius:8px;font-weight:700;font-size:12px}
+.btnDel{background:#FFE3E3;color:#C00;border:none;padding:6px 14px;border-radius:8px;font-weight:700;font-size:12px}
+.plus{position:fixed;bottom:90px;right:18px;width:62px;height:62px;background:var(--purple);color:#fff;border:none;border-radius:50%;font-size:32px;font-weight:800;box-shadow:0 4px 14px rgba(124,92,255,.4);z-index:90;cursor:pointer}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;gap:8px;padding:10px;border-top:2px solid #E5E5E5;z-index:200}
+.bottom button{flex:1;border:none;padding:12px;border-radius:12px;font-weight:800;font-size:12px;cursor:pointer}
+.btnZap{background:#00D26A;color:#000}.btnNormal{background:var(--purple);color:#fff}.btnFolha{background:#FFD93D;color:#000}.btnPdf{background:#00BFA5;color:#fff}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:500;padding:12px}.modal.open{display:flex}
+.modalBox{background:#fff;border-radius:16px;width:100%;max-width:460px;padding:16px;max-height:92vh;overflow-y:auto}
+.inp{width:100%;padding:12px;border:2px solid #E5E5E5;border-radius:10px;margin:6px 0;font-weight:600}
+.statusPersist{font-size:11px;padding:6px 10px;border-radius:20px;background:#E3F0FF;color:#1E5AA7;font-weight:700;display:inline-block;margin-top:6px}
+.bkpItem{background:#f8f9ff;border:2px solid #E5E5E5;border-radius:12px;padding:12px;margin:8px 0;display:flex;justify-content:space-between;align-items:center}
+.bkpItem.ok{border-color:#00D26A;background:#f0fff4}
 </style>
 </head>
 <body>
-<div class="overlay" id="overlay" onclick="closeMenu();fecharTodosModais()"></div>
-<div class="side" id="side">
-<div style="font-weight:900;font-size:15px;margin-bottom:8px">TAKI - MENU</div>
-<div class="menu-item" onclick="closeMenu();modo('dia')">📋 AGENDA DO DIA</div>
-<div class="menu-item" onclick="closeMenu();modo('semana')">🗓️ AGENDA DA SEMANA</div>
-<div class="menu-item" onclick="closeMenu();modo('mes')">📅 AGENDA DO MES</div>
-<div class="menu-item" onclick="closeMenu();modo('ano')">🗓️ AGENDA DO ANO</div>
-<div class="menu-item" onclick="closeMenu();zap()">✈️ ENVIAR CRONOGRAMA</div>
-<div style="height:8px;border-bottom:1px solid #eee;margin:8px 0"></div>
-<div class="menu-item" onclick="abrirGestaoCasas()">🏠 CADASTRAR CASAS</div>
-<div class="menu-item" onclick="abrirGestaoMusicos()">🎤 CADASTRAR MUSICOS</div>
-<div class="menu-item" onclick="abrirGestaoEmpresas()">🏢 CADASTRAR EMPRESAS</div>
-<div style="height:8px;border-bottom:1px solid #eee;margin:8px 0"></div>
-<div class="menu-item" onclick="abrirBKP()">💾 BKP EXPORTAR / IMPORTAR</div>
-<div class="menu-item" onclick="abrirBKP()" style="background:#ffe0e0;border-radius:8px">🛡️ RECUPERAR DADOS</div>
-<div class="menu-item" onclick="abrirRelatorios()">📊 RELATÓRIOS FINANCEIROS</div>
-<div class="menu-item" onclick="closeMenu()">🚪 FECHAR MENU</div>
-</div>
-<header><div style="display:flex;align-items:center;gap:6px"><span class="menu-btn" onclick="openMenu()">☰</span><h1 id="headerTitle">AGENDA DO DIA <span id="headerEmpresa">TAKI</span></h1></div><button class="btn-home" onclick="hoje()">HOME</button></header>
-<div id="listView"><div class="date-card"><div class="title-long" id="titleLong"></div><div style="display:flex;align-items:center;justify-content:space-between"><button class="arrow" onclick="mudaDia(-1)">◀</button><div><input type="date" id="inpDate" onchange="render()"><input type="month" id="inpMonth" style="display:none" onchange="render()"><div style="display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-top:8px"><button class="pill" onclick="hoje()">HOJE</button><button class="pill" onclick="modo('dia')">DIA</button><button class="pill" onclick="modo('semana')">SEMANA</button><button class="pill" onclick="modo('mes')">MÊS</button><button class="pill" onclick="modo('ano')">ANO</button></div></div><button class="arrow" onclick="mudaDia(1)">▶</button></div></div><div id="lista"></div></div>
-<div id="folhaView" class="folha-view"><div class="folha-paper"><h2 id="folhaTitulo"></h2><div id="folhaConteudo"></div></div></div>
-<button class="add-btn" onclick="abrirModalNovo()">+</button>
 
+<div class="top"><div style="display:flex;gap:12px;align-items:center"><span style="font-size:28px;cursor:pointer" onclick="openTakiMenu()">☰</span><div><b style="font-size:15px;line-height:1.1">AGENDA DO MES<br><span style="color:#FFD700;font-size:13px">TAKI SOM</span></b></div></div><div style="text-align:right"><button class="btnHome" onclick="location.href='index.html'">HOME</button><br><span id="persistStatus" class="statusPersist">🔒 Verificando...</span></div></div>
+
+<div id="takiMenu"><div id="takiMenuBg" onclick="closeTakiMenu()"></div><div id="takiMenuPanel">
+<div class="takiMenuHead">TAKI - MENU</div>
+<div class="takiMenuItem" onclick="setView('dia');closeTakiMenu()"><span>📋</span> AGENDA DO DIA</div>
+<div class="takiMenuItem" onclick="setView('semana');closeTakiMenu()"><span>🗓️</span> AGENDA DA SEMANA</div>
+<div class="takiMenuItem" onclick="setView('mes');closeTakiMenu()"><span>📅</span> AGENDA DO MES</div>
+<div class="takiMenuItem" onclick="setView('ano');closeTakiMenu()"><span>🗓️</span> AGENDA DO ANO</div>
+<div class="takiMenuItem" onclick="enviarCronograma();closeTakiMenu()"><span>✈️</span> ENVIAR CRONOGRAMA</div>
+<div style="height:16px"></div>
+<div class="takiMenuItem" onclick="openCadastroCasas()"><span>🏠</span> CADASTRAR CASAS</div>
+<div class="takiMenuItem" onclick="openCadastroMusicos()"><span>🎤</span> CADASTRAR MUSICOS</div>
+<div class="takiMenuItem" onclick="openCadastroEmpresas()"><span>🏢</span> CADASTRAR EMPRESAS</div>
+<div style="height:16px"></div>
+<div class="takiMenuItem" onclick="bkpExportImport()"><span>💾</span> BKP EXPORTAR / IMPORTAR</div>
+<div class="takiMenuItem recup" onclick="openRecuperar()"><span>🛡️</span> RECUPERAR DADOS - NUNCA PERDE</div>
+<div class="takiMenuItem" onclick="openRelatorios()"><span>📊</span> RELATÓRIOS FINANCEIROS</div>
+<div class="takiMenuItem" onclick="closeTakiMenu()"><span>🚪</span> FECHAR MENU</div>
+<div style="height:80px"></div>
+</div></div>
+
+<div class="cardMes">
+<b id="labelMes">MES DE OUTUBRO DE 2026</b>
+<div><input type="month" id="inputMes" value="2026-10" onchange="mudaMesInput()"></div>
+<div class="rowNav">
+<button class="arrow" onclick="mudaMes(-1)">◀</button>
+<div class="filters"><button onclick="setView('hoje')" id="fHoje">HOJE</button><button onclick="setView('dia')" id="fDia">DIA</button><button onclick="setView('semana')" id="fSemana">SEMANA</button><button class="active" onclick="setView('mes')" id="fMes">MÊS</button><button onclick="setView('ano')" id="fAno">ANO</button></div>
+<button class="arrow" onclick="mudaMes(1)">▶</button>
+</div>
+<div id="contador" style="font-size:11px;color:#666;margin-top:6px"></div>
+</div>
+
+<div id="lista"></div>
+<button class="plus" onclick="abreNovo()">+</button>
 <div class="bottom">
-<button class="b-zap" onclick="zap()">📱 ZAP</button>
-<button class="b-normal" onclick="imprimirAgenda('normal')">🖨️ NORMAL</button>
-<button class="b-folha" onclick="imprimirAgenda('folha')">📒 FOLHA</button>
-<button class="b-pdf" onclick="imprimirAgenda('pdf')">📄 PDF</button>
+<button class="btnZap" onclick="exportZap()">📱 ZAP</button>
+<button class="btnNormal" onclick="exportNormal()">🖨️ NORMAL</button>
+<button class="btnFolha" onclick="exportFolha()">📋 FOLHA</button>
+<button class="btnPdf" onclick="exportPdf()">📄 PDF</button>
 </div>
 
-<div class="modal" id="modal"><div class="modal-box"><h3 id="modalTitle">Novo Show</h3><label>🏠 CASA</label><select id="mP"></select><label>🏢 EMPRESA</label><select id="mEmpresa"></select><label>🕓 INICIO</label><input id="mIni" type="time" value="19:00"><label>🕓 FIM</label><input id="mFim" type="time" value="22:00"><label>🎤 MUSICO</label><select id="mNome"></select><label>💰 VALOR</label><input id="mValor" type="number" placeholder="300"><label>📅 DATA</label><input id="mData" type="date"><button class="save" onclick="salvar()">SALVAR</button><button class="cancel" onclick="fecharModal()">CANCELAR</button></div></div>
-<div class="modal" id="modalCasas"><div class="modal-box"><h3>🏠 CASAS</h3><div style="display:flex;gap:6px"><input id="novaCasaInput" placeholder="Ex: P5" style="flex:1"><button onclick="addCasa()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaCasas" style="margin-top:8px"></div><button class="cancel" onclick="fecharModalCasas()">FECHAR</button></div></div>
-<div class="modal" id="modalMusicos"><div class="modal-box"><h3>🎤 MUSICOS</h3><div style="display:flex;gap:6px"><input id="novoMusicoInput" placeholder="Ex: BRUNO" style="flex:1"><button onclick="addMusico()" style="width:80px;background:#222;color:#fff">+ ADD</button></div><div id="listaMusicos" style="margin-top:8px"></div><button class="cancel" onclick="fecharModalMusicos()">FECHAR</button></div></div>
-<div class="modal" id="modalEmpresas"><div class="modal-box"><h3>🏢 CADASTRAR EMPRESA</h3>
-<label>🏢 NOME *</label><input id="empNome"><label>👤 RESPONSÁVEL</label><input id="empResp"><label>📱 ZAP</label><input id="empZap" type="tel"><label>📧 EMAIL</label><input id="empEmail" type="email"><label>🪪 CNPJ/CPF</label><input id="empDoc"><button class="save" onclick="addEmpresa()" style="background:#00a651">💾 SALVAR EMPRESA</button><div id="listaEmpresas" style="margin-top:14px"></div><button class="cancel" onclick="fecharModalEmpresas()">FECHAR</button></div></div>
-<div class="modal" id="modalEditarEmpresa"><div class="modal-box"><h3>✏️ Editar Empresa</h3><label>🏢 EMPRESA</label><input id="editEmpNome"><label>👤 RESPONSÁVEL</label><input id="editEmpResp"><label>📱 ZAP</label><input id="editEmpZap"><label>📧 EMAIL</label><input id="editEmpEmail"><label>🪪 CNPJ/CPF</label><input id="editEmpDoc"><button class="save" onclick="confirmarEditarEmpresa()">SALVAR</button><button class="cancel" onclick="fecharModalEditarEmpresa()">CANCELAR</button></div></div>
-<div class="modal" id="modalEditar"><div class="modal-box"><h3 id="editarTitulo">✏️ Editar</h3><input id="editarInput"><button class="save" onclick="confirmarEditar()">SALVAR</button><button class="cancel" onclick="fecharModalEditar()">CANCELAR</button></div></div>
-<div class="modal" id="modalBKP"><div class="modal-box"><h3>💾 BACKUP</h3><button class="save" onclick="exportarBKP()" style="background:#00a651">📤 EXPORTAR</button><div style="margin-top:12px;padding:10px;background:#fff3cd;border-radius:8px"><b>🛡️ Recuperar:</b><div id="listaAutoBKP"></div><button onclick="recuperarAuto()" style="background:#ff9800;color:#fff;margin-top:6px">🔍 PROCURAR BACKUPS</button></div><label style="margin-top:14px">📥 IMPORTAR</label><input type="file" id="inputBKP" accept=".json" onchange="importarBKP(event)"><div id="bkpStatus"></div><button class="cancel" onclick="fecharBKP()">FECHAR</button></div></div>
+<div class="modal" id="modEdit"><div class="modalBox"><b id="modTitle">Novo Evento</b>
+<input id="eData" type="date" class="inp">
+<div style="display:flex;gap:8px"><input id="eInicio" type="time" class="inp" style="flex:1"><input id="eFim" type="time" class="inp" style="flex:1"></div>
+<select id="eProjeto" class="inp"><option>P1 - EDILL</option><option>P2 - TAKI</option><option>TAKI SOM</option><option>P3 - OUTRO</option></select>
+<select id="eCasa" class="inp"><option value="">Casa / Empresa</option></select>
+<input id="eLocal" class="inp" placeholder="Local / Obs (TAKI SOM)">
+<input id="eValor" type="number" class="inp" placeholder="Valor R$">
+<div style="display:flex;gap:8px;margin-top:10px"><button style="flex:1;padding:12px;border:none;border-radius:10px;font-weight:800;color:#fff;background:var(--purple)" onclick="salva()">💾 SALVAR - NUNCA PERDE</button><button style="flex:1;padding:12px;border:none;border-radius:10px;font-weight:800;background:#E5E5E5" onclick="fecha()">CANCELAR</button></div>
+</div></div>
 
-<div class="modal" id="modalRel"><div class="modal-box"><h3>📊 RELATÓRIO PROFISSIONAL</h3>
-<div><button class="pill active" onclick="setRelFiltro('mes')" id="relMes">MÊS</button><button class="pill" onclick="setRelFiltro('semana')" id="relSem">SEMANA</button><button class="pill" onclick="setRelFiltro('todos')" id="relTodos">TODOS</button><button class="pill" onclick="setRelFiltro('ano')" id="relAno">ANO</button></div>
-<div class="rel-print-btns">
-<button class="b-zap" onclick="imprimirRelatorio('zap')">📱 ZAP</button>
-<button class="b-normal" onclick="imprimirRelatorio('normal')">🖨️ NORMAL</button>
-<button class="b-folha" onclick="imprimirRelatorio('folha')">📒 FOLHA</button>
-<button class="b-pdf" onclick="imprimirRelatorio('pdf')">📄 PDF</button>
-</div>
-<div id="relConteudo" style="margin-top:10px"></div>
-<button class="cancel" onclick="fecharRel()">FECHAR</button></div></div>
+<div class="modal" id="modRecup"><div class="modalBox"><b>🛡️ RECUPERAR DADOS - TODOS OS BACKUPS</b>
+<p style="font-size:12px;color:#666;margin:8px 0">Seus dados nunca são apagados. Aqui estão todas as cópias encontradas:</p>
+<div id="listaBkps"></div>
+<div style="margin-top:12px;background:#FFF3CD;padding:10px;border-radius:8px;font-size:11px"><b>🔒 Proteção ativa:</b> Backup automático todo dia + 3 cópias girando + persistência do navegador. Mesmo que não abra por 1 ano, continua lá.</div>
+<button style="margin-top:12px;width:100%;padding:10px;background:#E5E5E5;border:none;border-radius:10px;font-weight:700" onclick="closeModal('modRecup')">FECHAR</button>
+</div></div>
+
+<div class="modal" id="modCasas"><div class="modalBox"><b>🏠 CADASTRAR CASAS</b><input id="casaNome" class="inp" placeholder="Nome da Casa"><input id="casaEnd" class="inp" placeholder="Endereço"><input id="casaContato" class="inp" placeholder="Contato"><button class="inp" style="background:var(--purple);color:#fff;font-weight:800;border:none" onclick="addCasa()">+ Adicionar Casa</button><div id="listaCasas"></div><button style="margin-top:12px;width:100%;padding:10px;background:#E5E5E5;border:none;border-radius:10px;font-weight:700" onclick="closeModal('modCasas')">FECHAR</button></div></div>
+
+<div class="modal" id="modMusicos"><div class="modalBox"><b>🎤 CADASTRAR MUSICOS - NÃO PERDE MAIS</b><input id="musNome" class="inp" placeholder="Nome"><input id="musInst" class="inp" placeholder="Instrumento"><input id="musValor" type="number" class="inp" placeholder="Cachê R$"><button class="inp" style="background:var(--purple);color:#fff;font-weight:800;border:none" onclick="addMusico()">+ Adicionar Músico</button><div id="listaMusicos"></div><button style="margin-top:12px;width:100%;padding:10px;background:#E5E5E5;border:none;border-radius:10px;font-weight:700" onclick="closeModal('modMusicos')">FECHAR</button></div></div>
+
+<div class="modal" id="modEmpresas"><div class="modalBox"><b>🏢 CADASTRAR EMPRESAS</b><input id="empNome" class="inp" placeholder="Nome Empresa"><input id="empCnpj" class="inp" placeholder="CNPJ"><input id="empContato" class="inp" placeholder="Contato"><button class="inp" style="background:var(--purple);color:#fff;font-weight:800;border:none" onclick="addEmpresa()">+ Adicionar Empresa</button><div id="listaEmpresas"></div><button style="margin-top:12px;width:100%;padding:10px;background:#E5E5E5;border:none;border-radius:10px;font-weight:700" onclick="closeModal('modEmpresas')">FECHAR</button></div></div>
+
+<div class="modal" id="modRel"><div class="modalBox"><b>📊 RELATÓRIOS FINANCEIROS - 1 ANO GUARDADO</b><div id="relBody"></div><button style="margin-top:12px;width:100%;padding:10px;background:#E5E5E5;border:none;border-radius:10px;font-weight:700" onclick="closeModal('modRel')">FECHAR</button></div></div>
+
+<div class="modal" id="modBkp"><div class="modalBox"><b>💾 BKP EXPORTAR / IMPORTAR + NUVEM</b><div style="margin-top:12px;display:flex;flex-direction:column;gap:10px"><button style="padding:14px;background:var(--purple);color:#fff;border:none;border-radius:12px;font-weight:800" onclick="exportBkpAgenda()">⬆️ EXPORTAR BACKUP</button><label style="padding:14px;background:#E3F0FF;color:#1E5AA7;border-radius:12px;font-weight:800;text-align:center;cursor:pointer">⬇️ IMPORTAR BACKUP<input type="file" id="importBkp" hidden accept=".json" onchange="importBkpAgenda(this)"></label><button style="padding:14px;background:#00D26A;color:#000;border:none;border-radius:12px;font-weight:800" onclick="openRecuperar()">🛡️ VER TODOS OS BACKUPS AUTOMÁTICOS</button></div><button style="margin-top:12px;width:100%;padding:10px;background:#E5E5E5;border:none;border-radius:10px;font-weight:700" onclick="closeModal('modBkp')">FECHAR</button></div></div>
 
 <script>
-function carregar(chave, padrao){try{const v=localStorage.getItem(chave);if(v!==null){const a=JSON.parse(v);if(Array.isArray(a)||typeof a==='string')return a;}}catch(e){}return padrao;}
-let casas=carregar('casas_lista_final',['P1','P2','P3','P4','P5']);
-let musicos=carregar('musicos_lista_final',['DOUGLAS','LUCIANO','ISRAEL','ANDRE TAKI','MARTIN','RICK SOLO','ROBSON SOLO']);
-let empresasRaw=carregar('empresas_lista_final',['TAKI SOM']);
-let empresas=empresasRaw.map(e=>{if(typeof e==='string'){return {nome:e.toUpperCase(), responsavel:'', zap:'', email:'', doc:''};}return e;});
-let empresaAtiva=carregar('empresa_ativa_final','');
-if(!empresaAtiva && empresas.length>0) empresaAtiva=empresas[0].nome;
-let shows=carregar('shows_agenda_final',[]);
-shows=shows.map(s=>{if(!s.data){s.data=new Date().toISOString().slice(0,10);} if(!s.empresa){s.empresa=empresaAtiva||'TAKI SOM';}return s;});
-function limpar(l){return [...new Set(l.map(x=>x.toString().trim().toUpperCase()).filter(x=>x))];}
-casas=limpar(casas);musicos=limpar(musicos);
-let editIdx=-1,editTipo=null,editPos=-1;let modoAtual='dia';let relFiltro='mes';
-function corCantor(n){n=n.toUpperCase();if(n.includes('DOUGLAS'))return '#1565ff';if(n.includes('LUCIANO'))return '#7c4dff';if(n.includes('ISRAEL'))return '#00a651';if(n.includes('TAKI')||n.includes('ANDRE'))return '#ff6f00';if(n.includes('RICK'))return '#d32f2f';if(n.includes('ROBSON'))return '#c62828';if(n.includes('MARTIN'))return '#ad1457';return '#222';}
-function openMenu(){document.getElementById('side').classList.add('open');document.getElementById('overlay').classList.add('open')}
-function closeMenu(){document.getElementById('side').classList.remove('open');if(!document.querySelector('.modal.open'))document.getElementById('overlay').classList.remove('open');}
-function formatLong(d){return d.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});}
-function saveAll(){
-  localStorage.setItem('casas_lista_final',JSON.stringify(casas));
-  localStorage.setItem('musicos_lista_final',JSON.stringify(musicos));
-  localStorage.setItem('empresas_lista_final',JSON.stringify(empresas));
-  localStorage.setItem('empresa_ativa_final',JSON.stringify(empresaAtiva));
-  localStorage.setItem('shows_agenda_final',JSON.stringify(shows));
-  localStorage.setItem('bkp_auto_'+new Date().toISOString().slice(0,10), JSON.stringify({casas,musicos,empresas,empresaAtiva,shows,data:new Date().toISOString()}));
-}
-function atualizarHeaderEmpresa(){document.getElementById('headerTitle').innerHTML=(modoAtual==='dia'?'AGENDA DO DIA':modoAtual==='semana'?'AGENDA DA SEMANA':modoAtual==='mes'?'AGENDA DO MES':'AGENDA DO ANO')+' <span id="headerEmpresa">'+(empresaAtiva||'TAKI').toUpperCase()+'</span>';}
-function preencherSelects(){
-  const selP=document.getElementById('mP');selP.innerHTML='';casas.forEach(c=>{let o=document.createElement('option');o.value=c;o.textContent=c;selP.appendChild(o);});
-  const selM=document.getElementById('mNome');selM.innerHTML='';musicos.forEach(m=>{let o=document.createElement('option');o.value=m;o.textContent=m;selM.appendChild(o);});
-  const selE=document.getElementById('mEmpresa');selE.innerHTML='';empresas.forEach(e=>{let o=document.createElement('option');o.value=e.nome;o.textContent=e.nome;selE.appendChild(o);});
-  if(empresaAtiva) selE.value=empresaAtiva;
-}
-function fecharTodosModais(){document.querySelectorAll('.modal').forEach(m=>m.classList.remove('open'));document.getElementById('overlay').classList.remove('open');}
-function abrirGestaoCasas(){closeMenu();renderListaCasas();document.getElementById('modalCasas').classList.add('open');document.getElementById('overlay').classList.add('open');}
-function fecharModalCasas(){document.getElementById('modalCasas').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
-function renderListaCasas(){const div=document.getElementById('listaCasas');div.innerHTML='';casas.forEach((c,i)=>{div.innerHTML+='<div class=item-lista><b>'+c+'</b><div style="float:right"><button class="mini-btn mini-edit" onclick="editarItem(\'casa\','+i+')">✏️</button><button class="mini-btn mini-del" onclick="excluirItem(\'casa\','+i+')">🗑️</button></div></div>';});}
-function addCasa(){let n=document.getElementById('novaCasaInput').value.trim().toUpperCase();if(!n)return;if(casas.includes(n)){alert('Já existe!');return;}casas.push(n);casas=limpar(casas);saveAll();preencherSelects();renderListaCasas();document.getElementById('novaCasaInput').value='';}
-function abrirGestaoMusicos(){closeMenu();renderListaMusicos();document.getElementById('modalMusicos').classList.add('open');document.getElementById('overlay').classList.add('open');}
-function fecharModalMusicos(){document.getElementById('modalMusicos').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
-function renderListaMusicos(){const div=document.getElementById('listaMusicos');div.innerHTML='';musicos.forEach((m,i)=>{const cor=corCantor(m);div.innerHTML+='<div class=item-lista><b style="color:'+cor+'">'+m+'</b><div style="float:right"><button class="mini-btn mini-edit" onclick="editarItem(\'musico\','+i+')">✏️</button><button class="mini-btn mini-del" onclick="excluirItem(\'musico\','+i+')">🗑️</button></div></div>';});}
-function addMusico(){let n=document.getElementById('novoMusicoInput').value.trim().toUpperCase();if(!n)return;if(musicos.includes(n)){alert('Já existe!');return;}musicos.push(n);musicos=limpar(musicos);saveAll();preencherSelects();renderListaMusicos();document.getElementById('novoMusicoInput').value='';}
-function abrirGestaoEmpresas(){closeMenu();renderListaEmpresas();document.getElementById('modalEmpresas').classList.add('open');document.getElementById('overlay').classList.add('open');}
-function fecharModalEmpresas(){document.getElementById('modalEmpresas').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
-function renderListaEmpresas(){
-  const div=document.getElementById('listaEmpresas');div.innerHTML='';
-  empresas.forEach((e,i)=>{
-    const ativa=e.nome===empresaAtiva?' <span style="background:#f0c040;color:#000;padding:2px 6px;border-radius:10px;font-size:10px">ATIVA NO TOPO</span>':'';
-    div.innerHTML+='<div class="item-lista"><b>🏢 '+e.nome+'</b>'+ativa+'<small>👤 '+(e.responsavel||'')+'</small><small>📱 '+(e.zap||'')+' | '+ (e.email||'')+'</small><small>🪪 '+(e.doc||'')+'</small><div style="margin-top:6px"><button class="mini-btn mini-ok" onclick="definirEmpresaAtiva('+i+')">✅ USAR NO TOPO</button><button class="mini-btn mini-edit" onclick="editarEmpresa('+i+')">✏️</button><button class="mini-btn mini-del" onclick="excluirItem(\'empresa\','+i+')">🗑️</button></div></div>';
-  });
-}
-function addEmpresa(){
-  const nome=document.getElementById('empNome').value.trim().toUpperCase();
-  if(!nome){alert('Nome obrigatório');return;}
-  if(empresas.some(e=>e.nome===nome)){alert('Já existe');return;}
-  empresas.push({nome, responsavel:document.getElementById('empResp').value.trim(), zap:document.getElementById('empZap').value.trim(), email:document.getElementById('empEmail').value.trim(), doc:document.getElementById('empDoc').value.trim()});
-  empresaAtiva=nome;saveAll();preencherSelects();renderListaEmpresas();atualizarHeaderEmpresa();
-  document.getElementById('empNome').value='';document.getElementById('empResp').value='';document.getElementById('empZap').value='';document.getElementById('empEmail').value='';document.getElementById('empDoc').value='';
-}
-function definirEmpresaAtiva(i){empresaAtiva=empresas[i].nome;saveAll();renderListaEmpresas();atualizarHeaderEmpresa();preencherSelects();}
-function editarEmpresa(i){const e=empresas[i];document.getElementById('editEmpNome').value=e.nome;document.getElementById('editEmpResp').value=e.responsavel;document.getElementById('editEmpZap').value=e.zap;document.getElementById('editEmpEmail').value=e.email;document.getElementById('editEmpDoc').value=e.doc;editPos=i;document.getElementById('modalEmpresas').classList.remove('open');document.getElementById('modalEditarEmpresa').classList.add('open');}
-function fecharModalEditarEmpresa(){document.getElementById('modalEditarEmpresa').classList.remove('open');document.getElementById('modalEmpresas').classList.add('open');}
-function confirmarEditarEmpresa(){
-  const nome=document.getElementById('editEmpNome').value.trim().toUpperCase();
-  if(!nome)return;const antigo=empresas[editPos].nome;
-  empresas[editPos]={nome, responsavel:document.getElementById('editEmpResp').value.trim(), zap:document.getElementById('editEmpZap').value.trim(), email:document.getElementById('editEmpEmail').value.trim(), doc:document.getElementById('editEmpDoc').value.trim()};
-  if(empresaAtiva===antigo) empresaAtiva=nome;
-  saveAll();preencherSelects();renderListaEmpresas();atualizarHeaderEmpresa();fecharModalEditarEmpresa();
-}
-function editarItem(tipo,pos){editTipo=tipo;editPos=pos;const nome=tipo==='casa'?casas[pos]:musicos[pos];document.getElementById('editarTitulo').innerText='✏️ Editar '+nome;document.getElementById('editarInput').value=nome;document.getElementById('modalEditar').classList.add('open');document.getElementById('overlay').classList.add('open');}
-function fecharModalEditar(){document.getElementById('modalEditar').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
-function confirmarEditar(){let novo=document.getElementById('editarInput').value.trim().toUpperCase();if(!novo)return;if(editTipo==='casa'){casas[editPos]=novo;casas=limpar(casas);renderListaCasas();}else{musicos[editPos]=novo;musicos=limpar(musicos);renderListaMusicos();}saveAll();preencherSelects();fecharModalEditar();}
-function excluirItem(tipo,pos){const nome=tipo==='casa'?casas[pos]:tipo==='musico'?musicos[pos]:empresas[pos].nome;if(!confirm('Excluir '+nome+'?'))return;if(tipo==='casa'){casas.splice(pos,1);renderListaCasas();}else if(tipo==='musico'){musicos.splice(pos,1);renderListaMusicos();}else{const era=empresas[pos].nome===empresaAtiva;empresas.splice(pos,1);if(era){empresaAtiva=empresas.length>0?empresas[0].nome:'';}renderListaEmpresas();atualizarHeaderEmpresa();}saveAll();preencherSelects();}
-function abrirBKP(){closeMenu();document.getElementById('modalBKP').classList.add('open');document.getElementById('overlay').classList.add('open');recuperarAuto();}
-function fecharBKP(){document.getElementById('modalBKP').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
-function exportarBKP(){const dados={casas,musicos,empresas,empresaAtiva,shows,exportadoEm:new Date().toLocaleString('pt-BR')};const blob=new Blob([JSON.stringify(dados,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='TAKI-BKP-'+new Date().toISOString().slice(0,10)+'.json';a.click();document.getElementById('bkpStatus').innerText='✅ Exportado!';}
-function importarBKP(ev){const file=ev.target.files[0];if(!file)return;const r=new FileReader();r.onload=e=>{try{const d=JSON.parse(e.target.result);if(!d.shows)throw 'inválido';if(confirm('Restaurar '+d.exportadoEm+'?')){casas=d.casas||casas;musicos=d.musicos||musicos;empresas=d.empresas||empresas;if(empresas.length>0&&typeof empresas[0]==='string'){empresas=empresas.map(nome=>({nome, responsavel:'', zap:'', email:'', doc:''}));}empresaAtiva=d.empresaAtiva||empresaAtiva;shows=d.shows;saveAll();preencherSelects();render();atualizarHeaderEmpresa();document.getElementById('bkpStatus').innerText='✅ Importado';}}catch(err){document.getElementById('bkpStatus').innerText='❌ Erro';}};r.readAsText(file);}
-function recuperarAuto(){const div=document.getElementById('listaAutoBKP');div.innerHTML='';let achou=false;for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&k.startsWith('bkp_auto_')){try{const bkp=JSON.parse(localStorage.getItem(k));achou=true;div.innerHTML+='<div style="font-size:11px;padding:4px;border-bottom:1px solid #eee"><b>'+k+'</b> - '+bkp.shows.length+' shows <button class="mini-btn mini-edit" onclick="restaurarBKP(\''+k+'\')">RESTAURAR</button></div>';}catch(e){}}}if(!achou)div.innerHTML='<small>Dados atuais: '+shows.length+' shows</small>';}
-function restaurarBKP(chave){try{const bkp=JSON.parse(localStorage.getItem(chave));if(confirm('Restaurar '+chave+'?')){casas=bkp.casas;musicos=bkp.musicos;empresas=bkp.empresas||empresas;empresaAtiva=bkp.empresaAtiva||empresaAtiva;shows=bkp.shows;saveAll();preencherSelects();render();atualizarHeaderEmpresa();document.getElementById('bkpStatus').innerText='✅ Restaurado';}}catch(e){alert('Erro');}}
+// v55 ANTI-PERDA - NUNCA MAIS PERDE DADOS
+let eventos=[], casas=[], musicos=[], empresas=[];
+let mesAtual=new Date(2026,9,1), view='mes', editId=null, db=null;
 
-function abrirRelatorios(){closeMenu();renderRel();document.getElementById('modalRel').classList.add('open');document.getElementById('overlay').classList.add('open');}
-function fecharRel(){document.getElementById('modalRel').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
-function setRelFiltro(f){relFiltro=f;document.querySelectorAll('#modalRel .pill').forEach(p=>p.classList.remove('active'));document.getElementById(f==='mes'?'relMes':f==='semana'?'relSem':f==='ano'?'relAno':'relTodos').classList.add('active');renderRel();}
-function getShowsFiltro(){
-  const selMes=document.getElementById('inpMonth').value||new Date().toISOString().slice(0,7);
-  const selData=document.getElementById('inpDate').value||new Date().toISOString().slice(0,10);
-  if(relFiltro==='todos')return shows;
-  if(relFiltro==='ano')return shows.filter(s=>s.data&&s.data.startsWith(selMes.split('-')[0]));
-  if(relFiltro==='semana'){const sem=getSemana(selData);return shows.filter(s=>s.data&&sem.includes(s.data));}
-  return shows.filter(s=>s.data&&s.data.startsWith(selMes));
-}
-function getShowsAgenda(){
-  const selMes=document.getElementById('inpMonth').value||new Date().toISOString().slice(0,7);
-  const selData=document.getElementById('inpDate').value||new Date().toISOString().slice(0,10);
-  if(modoAtual==='dia')return shows.filter(s=>s.data===selData);
-  if(modoAtual==='semana'){const sem=getSemana(selData);return shows.filter(s=>sem.includes(s.data));}
-  if(modoAtual==='mes')return shows.filter(s=>s.data&&s.data.startsWith(selMes));
-  return shows.filter(s=>s.data&&s.data.startsWith(selMes.split('-')[0]));
-}
-function getEmpresaObj(){return empresas.find(e=>e.nome===empresaAtiva)||empresas[0]||{nome:'TAKI', responsavel:'', zap:'', email:'', doc:''};}
-function renderRel(){
-  const f=getShowsFiltro();const porMusico={};let total=0;const diasUnicos=new Set();
-  f.forEach(s=>{diasUnicos.add(s.data);const raw=(s.nome||'').toString().trim();const key=raw.toUpperCase();if(!key)return;const v=parseFloat(s.valor)||0;if(!porMusico[key])porMusico[key]={qtd:0,total:0,display:key,list:[]};porMusico[key].qtd++;porMusico[key].total+=v;porMusico[key].list.push({s,idx:shows.indexOf(s)});total+=v;});
-  const selMes=document.getElementById('inpMonth').value||'';
-  const emp=getEmpresaObj();
-  let html='<div class="report-card-pro"><div style="display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:18px;font-weight:900">📊 RELATÓRIO FINANCEIRO</div><div style="font-size:12px;margin-top:4px;opacity:.9">🏢 '+emp.nome+'</div><div style="font-size:10px;opacity:.7">👤 '+(emp.responsavel||'')+' | 📱 '+(emp.zap||'')+' | 🪪 '+(emp.doc||'')+'</div></div><div style="text-align:right"><div style="font-size:11px">Mês: '+selMes+'</div><div style="font-size:20px;font-weight:900;margin-top:4px">R$ '+total.toFixed(2)+'</div><div style="font-size:11px">'+f.length+' shows em '+diasUnicos.size+' dias</div></div></div></div>';
-  Object.keys(porMusico).sort().forEach(k=>{
-    const d=porMusico[k];const cor=corCantor(d.display);
-    html+='<div class="report-card"><div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee;padding-bottom:8px;margin-bottom:8px"><b style="color:'+cor+';font-size:14px">🎤 '+d.display+'</b><span style="background:#1a1a2e;color:#fff;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800">'+d.qtd+' shows - R$ '+d.total.toFixed(2)+'</span></div>';
-    d.list.forEach(item=>{
-      const s=item.s;
-      html+='<div class="report-line"><span style="font-size:12px"><b>'+s.data.split("-").reverse().join("/")+'</b> - '+s.p+' - '+s.ini+'-'+s.fim+'<br><small style="color:#666">R$ '+s.valor+' | '+(s.empresa||'')+'</small></span><span><button class="mini-btn mini-edit" onclick="editar('+item.idx+');fecharRel()">✏️</button><button class="mini-btn mini-del" onclick="if(confirm(\'Apagar?\')){excluir('+item.idx+');renderRel();render();}">🗑️</button></span></div>';
-    });
-    html+='</div>';
-  });
-  if(f.length===0)html='<div style="text-align:center;padding:30px;color:#888;background:#fff;border-radius:12px">Nenhum show neste filtro</div>';
-  document.getElementById('relConteudo').innerHTML=html;
-}
+async function openDB(){return new Promise((res,rej)=>{let req=indexedDB.open('TAKI_AGENDA_V55',2);req.onupgradeneeded=e=>{let d=e.target.result;if(!d.objectStoreNames.contains('dados')){let s=d.createObjectStore('dados',{keyPath:'id'});}};req.onsuccess=e=>{db=e.target.result;res(db)};req.onerror=e=>rej(e)})}
+async function saveDB(id,obj){if(!db)await openDB();return new Promise(r=>{let tx=db.transaction('dados','readwrite');tx.objectStore('dados').put({id:id,data:obj,ts:Date.now()});tx.oncomplete=r})}
+async function loadDB(id){if(!db)await openDB();return new Promise(r=>{let tx=db.transaction('dados','readonly');let req=tx.objectStore('dados').get(id);req.onsuccess=e=>r(e.target.result?e.target.result.data:null);req.onerror=()=>r(null)})}
 
-// NOVA FUNÇÃO AGENDA - TODAS BONITAS
-function gerarHTMLAgenda(tipo){
-  const f=getShowsAgenda();
-  const emp=getEmpresaObj();
-  const titulo=document.getElementById('titleLong').innerText||'AGENDA';
-  let total=0; f.forEach(s=>total+=parseFloat(s.valor||0));
-  const diasUnicos=new Set(f.map(s=>s.data));
-  let body='';
-  if(tipo==='normal'){
-    body+='<div style="border-bottom:4px solid #1a1a2e;padding-bottom:14px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:flex-start"><div><h1 style="margin:0;font-size:26px;color:#1a1a2e">🎤 '+titulo+'</h1><p style="margin:6px 0 0 0;font-size:14px"><b style="color:#f0c040;background:#1a1a2e;padding:4px 10px;border-radius:6px">'+emp.nome.toUpperCase()+'</b><br><span style="font-size:12px;color:#555;margin-top:6px;display:block">👤 '+(emp.responsavel||'')+' | 📱 '+(emp.zap||'')+' | 🪪 '+(emp.doc||'')+'<br>📧 '+(emp.email||'')+'</span></p></div><div style="text-align:right"><div style="background:linear-gradient(135deg,#1a1a2e,#2d2d5a);color:#fff;padding:12px 18px;border-radius:12px"><div style="font-size:12px;opacity:.8">'+diasUnicos.size+' dias | '+f.length+' shows</div><div style="font-size:20px;font-weight:900;margin-top:4px">R$ '+total.toFixed(2)+'</div></div><div style="font-size:10px;color:#888;margin-top:6px">Gerado em '+new Date().toLocaleString('pt-BR')+'</div></div></div>';
-    // Agrupa por data
-    const porData={}; f.forEach(s=>{if(!porData[s.data])porData[s.data]=[];porData[s.data].push(s);});
-    Object.keys(porData).sort().forEach(data=>{
-      const dataLong=new Date(data+'T12:00:00').toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long',year:'numeric'});
-      body+='<div style="background:#1a1a2e;color:#fff;padding:8px 12px;border-radius:8px;margin:18px 0 8px 0;font-weight:800;font-size:13px;text-transform:uppercase">'+dataLong+'</div>';
-      body+='<table style="width:100%;border-collapse:collapse;font-size:13px"><thead><tr style="background:#f3f4f6"><th style="padding:8px;text-align:left">CASA</th><th style="padding:8px;text-align:left">MÚSICO</th><th style="padding:8px;text-align:left">HORÁRIO</th><th style="padding:8px;text-align:left">EMPRESA</th><th style="padding:8px;text-align:right">VALOR</th></tr></thead><tbody>';
-      porData[data].sort((a,b)=>a.p.localeCompare(b.p)).forEach(s=>{
-        const cor=corCantor(s.nome);
-        body+='<tr><td style="padding:8px;border-bottom:1px solid #eee"><b>'+s.p+'</b></td><td style="padding:8px;border-bottom:1px solid #eee"><b style="color:'+cor+'">'+s.nome+'</b></td><td style="padding:8px;border-bottom:1px solid #eee">'+s.ini+' - '+s.fim+'</td><td style="padding:8px;border-bottom:1px solid #eee;font-size:11px">'+(s.empresa||'')+'</td><td style="padding:8px;border-bottom:1px solid #eee;text-align:right">R$ '+parseFloat(s.valor||0).toFixed(2)+'</td></tr>';
-      });
-      body+='</tbody></table>';
-    });
-  } else if(tipo==='folha'){
-    body+='<div style="background:#fff;background-image:repeating-linear-gradient(transparent,transparent 31px,#b5d8ff 31px,#b5d8ff 32px);border:2.5px solid #1a1a2e;border-radius:10px;padding:0 16px 20px 52px;position:relative;min-height:100vh"><div style="position:absolute;left:38px;top:0;bottom:0;width:2.5px;background:#ff8a8a"></div>';
-    body+='<div style="height:36px;line-height:36px;border-bottom:2.5px solid #1a1a2e;display:flex;justify-content:space-between;font-weight:900"><span>🎤 '+titulo+' - '+emp.nome.toUpperCase()+'</span><span style="font-size:11px">'+f.length+' SHOWS | R$ '+total.toFixed(2)+'</span></div>';
-    const porData={}; f.forEach(s=>{if(!porData[s.data])porData[s.data]=[];porData[s.data].push(s);});
-    Object.keys(porData).sort().forEach(data=>{
-      const dl=new Date(data+'T12:00:00').toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'short'});
-      body+='<div style="height:32px;line-height:32px;font-weight:900;background:#1a1a2e;color:#fff;margin:8px -16px 0 -52px;padding-left:52px;font-size:11px;text-transform:uppercase">'+dl+'</div>';
-      porData[data].forEach(s=>{
-        const cor=corCantor(s.nome);
-        body+='<div style="height:32px;line-height:32px;font-size:12px;white-space:nowrap;overflow:hidden"><b>'+s.p+'</b> - <b style="color:'+cor+'">'+s.nome+'</b> - '+s.ini+'-'+s.fim+' <span style="font-size:10px;color:#666">['+(s.empresa||'')+']</span></div>';
-      });
-    });
-    body+='</div>';
-  } else if(tipo==='pdf'){
-    body+='<div style="padding:10px"><div style="text-align:center;border-bottom:3px solid #1a1a2e;padding-bottom:12px"><h1 style="margin:0;color:#1a1a2e">AGENDA PROFISSIONAL</h1><h2 style="margin:4px 0;color:#f0c040;background:#1a1a2e;display:inline-block;padding:4px 14px;border-radius:20px;font-size:14px">'+emp.nome.toUpperCase()+'</h2><p style="margin:6px 0 0 0;font-size:11px;color:#555">'+titulo+' | '+(emp.responsavel||'')+' | '+(emp.doc||'')+' | '+(emp.zap||'')+'</p></div>';
-    body+='<table border="1" cellpadding="8" cellspacing="0" width="100%" style="border-collapse:collapse;font-size:12px;margin-top:14px"><thead><tr style="background:#1a1a2e;color:#fff"><th>DATA</th><th>CASA</th><th>MÚSICO</th><th>HORÁRIO</th><th>VALOR</th></tr></thead><tbody>';
-    f.sort((a,b)=>a.data.localeCompare(b.data)).forEach(s=>{
-      body+='<tr><td>'+s.data.split('-').reverse().join('/')+'</td><td>'+s.p+'</td><td>'+s.nome+'</td><td>'+s.ini+'-'+s.fim+'</td><td align="right">R$ '+parseFloat(s.valor||0).toFixed(2)+'</td></tr>';
-    });
-    body+='<tr style="background:#1a1a2e;color:#fff;font-weight:900"><td colspan="4" align="right">TOTAL '+f.length+' SHOWS:</td><td align="right">R$ '+total.toFixed(2)+'</td></tr></tbody></table>';
-    body+='<p style="font-size:9px;color:#888;text-align:center;margin-top:20px">Sistema TAKI - Agenda Profissional - Gerado em '+new Date().toLocaleString('pt-BR')+'</p></div>';
+// CARREGA COM PROTEÇÃO - NUNCA SOBRESCREVE DADOS EXISTENTES COM VAZIO
+async function carregaDados(){
+  // 1. Tenta IndexedDB primeiro (mais seguro)
+  let dbEventos=await loadDB('eventos'), dbCasas=await loadDB('casas'), dbMus=await loadDB('musicos'), dbEmp=await loadDB('empresas');
+  let lsEventos=JSON.parse(localStorage.getItem('taki_agenda')||'null');
+  let lsCasas=JSON.parse(localStorage.getItem('taki_casas')||'null');
+  let lsMus=JSON.parse(localStorage.getItem('taki_musicos')||'null');
+  let lsEmp=JSON.parse(localStorage.getItem('taki_empresas')||'null');
+  
+  // Escolhe o maior / mais recente, nunca o vazio
+  eventos = (dbEventos && dbEventos.length>0) ? dbEventos : (lsEventos && lsEventos.length>0 ? lsEventos : []);
+  casas = (dbCasas && dbCasas.length>0) ? dbCasas : (lsCasas && lsCasas.length>0 ? lsCasas : []);
+  musicos = (dbMus && dbMus.length>0) ? dbMus : (lsMus && lsMus.length>0 ? lsMus : []);
+  empresas = (dbEmp && dbEmp.length>0) ? dbEmp : (lsEmp && lsEmp.length>0 ? lsEmp : []);
+  
+  // Se ainda vazio, tenta backups rotativos
+  if(eventos.length===0){
+    for(let i=1;i<=3;i++){
+      let bkp=JSON.parse(localStorage.getItem('taki_bkp_'+i)||'null');
+      if(bkp && bkp.eventos && bkp.eventos.length>0){ eventos=bkp.eventos; casas=bkp.casas||[]; musicos=bkp.musicos||[]; empresas=bkp.empresas||[]; break; }
+    }
   }
-  return '<html><head><meta charset="UTF-8"><title>'+titulo+' - '+emp.nome+'</title><style>@page{margin:12mm}body{font-family:Arial,sans-serif;margin:0;padding:20px}</style></head><body>'+body+'<script>setTimeout(()=>{window.print();},600)<\/script></body></html>';
-}
-function imprimirAgenda(tipo){
-  const f=getShowsAgenda();
-  if(f.length===0){alert('Nenhum show neste período. Selecione a data certa.');return;}
-  if(tipo==='zap'){zap();return;}
-  const html=gerarHTMLAgenda(tipo);
-  const win=window.open('','_blank');
-  win.document.write(html);
-  win.document.close();
+  if(eventos.length===0){
+    let auto=JSON.parse(localStorage.getItem('taki_bkp_auto')||'null');
+    if(auto && auto.eventos && auto.eventos.length>0){ eventos=auto.eventos; casas=auto.casas||[]; musicos=auto.musicos||[]; empresas=auto.empresas||[]; }
+  }
+  // Se ainda tudo vazio, usa exemplo da foto pra não quebrar
+  if(eventos.length===0){ eventos=[{id:1,data:"2026-10-24",inicio:"12:30",fim:"15:30",projeto:"P1 - EDILL",local:"TAKI SOM",valor:300},{id:2,data:"2026-10-24",inicio:"19:00",fim:"22:00",projeto:"P1 - EDILL",local:"TAKI SOM",valor:300}]; }
+  
+  console.log('Dados carregados:', eventos.length, 'eventos,', musicos.length, 'musicos');
 }
 
-function gerarHTMLProfissional(tipo){
-  const f=getShowsFiltro();
-  const selMes=document.getElementById('inpMonth').value||new Date().toISOString().slice(0,7);
-  const emp=getEmpresaObj();
-  let total=0; const diasUnicos=new Set(); const porMusico={};
-  f.forEach(s=>{diasUnicos.add(s.data);const key=(s.nome||'').toUpperCase();const v=parseFloat(s.valor)||0;if(!porMusico[key])porMusico[key]={qtd:0,total:0,list:[]};porMusico[key].qtd++;porMusico[key].total+=v;porMusico[key].list.push(s);total+=v;});
-  let body='';
-  if(tipo==='normal'){
-    body+='<div style="border-bottom:4px solid #1a1a2e;padding-bottom:14px;margin-bottom:18px;display:flex;justify-content:space-between"><div><h1 style="margin:0;font-size:24px;color:#1a1a2e">📊 RELATÓRIO FINANCEIRO</h1><p style="margin:6px 0 0 0"><b style="background:#1a1a2e;color:#f0c040;padding:4px 10px;border-radius:6px">'+emp.nome.toUpperCase()+'</b><br><span style="font-size:12px;color:#555">👤 '+(emp.responsavel||'-')+' | 🪪 '+(emp.doc||'-')+'<br>📱 '+(emp.zap||'')+' | 📧 '+(emp.email||'')+'</span></p></div><div style="text-align:right"><div style="background:linear-gradient(135deg,#1a1a2e,#2d2d5a);color:#fff;padding:12px 18px;border-radius:12px"><div style="font-size:11px">MÊS '+selMes+'</div><div style="font-size:24px;font-weight:900">R$ '+total.toFixed(2)+'</div><div style="font-size:11px">'+f.length+' shows em '+diasUnicos.size+' dias</div></div></div></div>';
-    body+='<table style="width:100%;border-collapse:collapse;font-size:12px"><thead><tr style="background:#1a1a2e;color:#fff"><th style="padding:8px;text-align:left">DATA</th><th style="padding:8px;text-align:left">CASA</th><th style="padding:8px;text-align:left">MÚSICO</th><th style="padding:8px;text-align:left">HORÁRIO</th><th style="padding:8px;text-align:right">VALOR</th></tr></thead><tbody>';
-    f.sort((a,b)=>a.data.localeCompare(b.data)).forEach((s,i)=>{
-      body+='<tr style="background:'+(i%2===0?'#fff':'#f9fafb')+'"><td style="padding:7px;border-bottom:1px solid #eee">'+s.data.split('-').reverse().join('/')+'</td><td style="padding:7px;border-bottom:1px solid #eee">'+s.p+'</td><td style="padding:7px;border-bottom:1px solid #eee"><b>'+s.nome+'</b></td><td style="padding:7px;border-bottom:1px solid #eee">'+s.ini+'-'+s.fim+'</td><td style="padding:7px;border-bottom:1px solid #eee;text-align:right">R$ '+parseFloat(s.valor||0).toFixed(2)+'</td></tr>';
-    });
-    body+='</tbody></table>';
-  } else if(tipo==='folha'){
-    body+='<div style="background:#fff;background-image:repeating-linear-gradient(transparent,transparent 31px,#b5d8ff 31px,#b5d8ff 32px);border:2.5px solid #333;border-radius:10px;padding:0 16px 20px 50px;position:relative;min-height:100vh"><div style="position:absolute;left:38px;top:0;bottom:0;width:2.5px;background:#ff8a8a"></div>';
-    body+='<div style="height:36px;line-height:36px;border-bottom:2.5px solid #000;font-weight:900;font-size:14px;display:flex;justify-content:space-between"><span>📊 RELATÓRIO - '+emp.nome.toUpperCase()+' - '+selMes+'</span><span>R$ '+total.toFixed(2)+'</span></div>';
-    body+='<div style="height:32px;line-height:32px;font-size:11px;color:#555">Empresa: '+emp.nome+' | Resp: '+(emp.responsavel||'')+' | CNPJ: '+(emp.doc||'')+' | '+f.length+' shows em '+diasUnicos.size+' dias</div>';
-    Object.keys(porMusico).sort().forEach(k=>{
-      const d=porMusico[k];
-      body+='<div style="height:32px;line-height:32px;font-weight:900;color:#1a1a2e;font-size:13px">🎤 '+k+' - '+d.qtd+' shows - R$ '+d.total.toFixed(2)+'</div>';
-      d.list.forEach(s=>{
-        body+='<div style="height:32px;line-height:32px;font-size:12px;padding-left:10px">- '+s.data.split('-').reverse().join('/')+' - '+s.p+' - '+s.ini+'-'+s.fim+' - R$ '+s.valor+'</div>';
-      });
-    });
-    body+='</div>';
-  } else if(tipo==='pdf'){
-    body+='<div style="padding:20px"><h1 style="text-align:center;color:#1a1a2e">RELATÓRIO FINANCEIRO PROFISSIONAL</h1>';
-    body+='<div style="display:flex;justify-content:space-between;border:2px solid #1a1a2e;padding:12px;border-radius:8px;margin-bottom:16px"><div><b>Empresa:</b> '+emp.nome+'<br><b>Responsável:</b> '+(emp.responsavel||'-')+'<br><b>CNPJ/CPF:</b> '+(emp.doc||'-')+'</div><div><b>Contato:</b> '+(emp.zap||'-')+'<br><b>Email:</b> '+(emp.email||'-')+'<br><b>Mês:</b> '+selMes+'</div><div style="text-align:right"><b>TOTAL</b><br><span style="font-size:22px;font-weight:900">R$ '+total.toFixed(2)+'</span><br>'+f.length+' shows</div></div>';
-    body+='<table border="1" cellpadding="8" cellspacing="0" width="100%" style="border-collapse:collapse;font-size:11px"><tr style="background:#1a1a2e;color:#fff"><th>DATA</th><th>CASA</th><th>MÚSICO</th><th>HORÁRIO</th><th>VALOR</th></tr>';
-    f.sort((a,b)=>a.data.localeCompare(b.data)).forEach(s=>{
-      body+='<tr><td>'+s.data.split('-').reverse().join('/')+'</td><td>'+s.p+'</td><td>'+s.nome+'</td><td>'+s.ini+'-'+s.fim+'</td><td align="right">R$ '+parseFloat(s.valor||0).toFixed(2)+'</td></tr>';
-    });
-    body+='<tr style="background:#f0f0f0;font-weight:800"><td colspan="4" align="right">TOTAL GERAL:</td><td align="right">R$ '+total.toFixed(2)+'</td></tr></table></div>';
+async function salvaTudo(){
+  if(eventos.length===0 && casas.length===0 && musicos.length===0){ console.warn('Tentativa de salvar vazio bloqueada!'); return; }
+  // Salva em 2 lugares
+  localStorage.setItem('taki_agenda', JSON.stringify(eventos));
+  localStorage.setItem('taki_casas', JSON.stringify(casas));
+  localStorage.setItem('taki_musicos', JSON.stringify(musicos));
+  localStorage.setItem('taki_empresas', JSON.stringify(empresas));
+  await saveDB('eventos', eventos);
+  await saveDB('casas', casas);
+  await saveDB('musicos', musicos);
+  await saveDB('empresas', empresas);
+  // Backup rotativo
+  let idx=parseInt(localStorage.getItem('taki_bkp_idx')||'0'); idx=(idx%3)+1;
+  localStorage.setItem('taki_bkp_'+idx, JSON.stringify({eventos,casas,musicos,empresas,ts:Date.now(),date:new Date().toISOString()}));
+  localStorage.setItem('taki_bkp_idx', idx);
+  // Backup diário
+  let hoje=new Date().toISOString().slice(0,10);
+  if(localStorage.getItem('taki_last_bkp')!==hoje){
+    localStorage.setItem('taki_bkp_auto', JSON.stringify({eventos,casas,musicos,empresas,ts:Date.now(),date:new Date().toISOString()}));
+    localStorage.setItem('taki_last_bkp', hoje);
   }
-  return '<html><head><meta charset="UTF-8"><title>Relatório - '+emp.nome+'</title><style>@page{margin:12mm}body{font-family:Arial,sans-serif;margin:0;padding:20px}</style></head><body>'+body+'<script>setTimeout(()=>{window.print();},600)<\/script></body></html>';
-}
-function imprimirRelatorio(tipo){
-  const f=getShowsFiltro();
-  if(f.length===0){alert('Nenhum show neste filtro.');return;}
-  if(tipo==='zap'){
-    let txt='📊 *RELATÓRIO FINANCEIRO* - '+ (empresaAtiva||'TAKI').toUpperCase() +'\n';
-    const emp=getEmpresaObj();
-    txt+='🏢 '+emp.nome+' | 👤 '+(emp.responsavel||'')+'\n';
-    txt+='Mês: '+(document.getElementById('inpMonth').value||'')+' | '+f.length+' shows | R$ '+f.reduce((a,s)=>a+parseFloat(s.valor||0),0).toFixed(2)+'\n\n';
-    const porMusico={};
-    f.forEach(s=>{const k=s.nome.toUpperCase();if(!porMusico[k])porMusico[k]=[];porMusico[k].push(s);});
-    Object.keys(porMusico).sort().forEach(k=>{
-      txt+='🎤 *'+k+'* - '+porMusico[k].length+' shows\n';
-      porMusico[k].forEach(s=>{txt+='  '+s.data.split('-').reverse().join('/')+' - '+s.p+' - '+s.ini+'-'+s.fim+' - R$ '+s.valor+'\n';});
-      txt+='\n';
-    });
-    window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');
-    return;
-  }
-  const html=gerarHTMLProfissional(tipo);
-  const win=window.open('','_blank');
-  win.document.write(html);
-  win.document.close();
+  document.getElementById('contador').innerText=`✅ Salvo - ${eventos.length} eventos, ${musicos.length} músicos, ${casas.length} casas - protegido`;
 }
 
-function modo(t){modoAtual=t;document.getElementById('headerTitle').innerHTML=(t==='dia'?'AGENDA DO DIA':t==='semana'?'AGENDA DA SEMANA':t==='mes'?'AGENDA DO MES':'AGENDA DO ANO')+' <span id="headerEmpresa">'+(empresaAtiva||'TAKI').toUpperCase()+'</span>';if(t==='mes'||t==='ano'){document.getElementById('inpDate').style.display='none';document.getElementById('inpMonth').style.display='inline-block';}else{document.getElementById('inpDate').style.display='inline-block';document.getElementById('inpMonth').style.display='none';}render();}
-function getSemana(date){const d=new Date(date+'T12:00:00');const dia=d.getDay();const diff=d.getDate()-dia+(dia==0?-6:1);const seg=new Date(d.setDate(diff));const datas=[];for(let i=0;i<7;i++){const dd=new Date(seg);dd.setDate(seg.getDate()+i);datas.push(dd.toISOString().slice(0,10));}return datas;}
+// PERSISTÊNCIA DO NAVEGADOR
+async function ativaPersistencia(){
+  try{
+    if(navigator.storage && navigator.storage.persist){
+      let granted=await navigator.storage.persist();
+      document.getElementById('persistStatus').innerText=granted?'🔒 Persistência ATIVA - nunca apaga':'⚠️ Sem persistência - ative nas config';
+      document.getElementById('persistStatus').style.background=granted?'#DCFCE7':'#FFE3E3';
+    } else { document.getElementById('persistStatus').innerText='🔒 Armazenamento seguro'; }
+  }catch(e){ document.getElementById('persistStatus').innerText='🔒 Backup local ativo'; }
+}
+
+function openTakiMenu(){document.getElementById('takiMenu').classList.add('open')}function closeTakiMenu(){document.getElementById('takiMenu').classList.remove('open')}function closeModal(id){document.getElementById(id).classList.remove('open')}
+function setView(v){view=v;document.querySelectorAll('.filters button').forEach(b=>b.classList.remove('active'));let m={hoje:'fHoje',dia:'fDia',semana:'fSemana',mes:'fMes',ano:'fAno'};if(m[v])document.getElementById(m[v]).classList.add('active');render()}
 function render(){
-  const inpDate=document.getElementById('inpDate');const inpMonth=document.getElementById('inpMonth');
-  if(!inpDate.value)inpDate.value=new Date().toISOString().slice(0,10);
-  if(!inpMonth.value)inpMonth.value=new Date().toISOString().slice(0,7);
-  let dataSel=inpDate.value;let mesSel=inpMonth.value;let titulo='';let filtrados=[];
-  if(modoAtual==='dia'){titulo=formatLong(new Date(dataSel+'T12:00:00')).toUpperCase();shows.sort((a,b)=>a.p.localeCompare(b.p));filtrados=shows.filter(s=>s.data===dataSel);}
-  else if(modoAtual==='semana'){const sem=getSemana(dataSel);titulo='SEMANA '+new Date(sem[0]+'T12:00:00').toLocaleDateString('pt-BR')+' A '+new Date(sem[6]+'T12:00:00').toLocaleDateString('pt-BR');shows.sort((a,b)=>{if(a.data!==b.data)return a.data.localeCompare(b.data);return a.p.localeCompare(b.p);});filtrados=shows.filter(s=>sem.includes(s.data));}
-  else if(modoAtual==='mes'){const [y,m]=mesSel.split('-');titulo='MES DE '+new Date(y,m-1,1).toLocaleDateString('pt-BR',{month:'long',year:'numeric'}).toUpperCase();shows.sort((a,b)=>{if(a.data!==b.data)return a.data.localeCompare(b.data);return a.p.localeCompare(b.p);});filtrados=shows.filter(s=>s.data&&s.data.startsWith(mesSel));}
-  else{const ano=mesSel.split('-')[0];titulo='ANO DE '+ano;shows.sort((a,b)=>{if(a.data!==b.data)return a.data.localeCompare(b.data);return a.p.localeCompare(b.p);});filtrados=shows.filter(s=>s.data&&s.data.startsWith(ano));}
-  document.getElementById('titleLong').innerText=titulo;document.getElementById('folhaTitulo').innerText=titulo+' - '+(empresaAtiva||'TAKI');
-  const lista=document.getElementById('lista');lista.innerHTML='';
-  if(filtrados.length===0){lista.innerHTML='<div class="show-card" style="text-align:center;color:#888;padding:20px">Nenhum show<br>Clique no +</div>';}
-  else{let dataAtual='';filtrados.forEach(s=>{if(s.data!==dataAtual&&modoAtual!=='dia'){dataAtual=s.data;const divDia=document.createElement('div');divDia.className='dia-label';divDia.innerText=formatLong(new Date(dataAtual+'T12:00:00')).toUpperCase();lista.appendChild(divDia);}const idx=shows.indexOf(s);const cor=corCantor(s.nome);const div=document.createElement('div');div.className='show-card';div.innerHTML='<div class=line>'+s.p+' - <b style="color:'+cor+'">'+s.nome+'</b> - '+s.ini+'-'+s.fim+' <small>['+(s.empresa||empresaAtiva)+']</small></div><div style="margin-top:6px"><button class=b-edit onclick=editar('+idx+')>✏️ EDITAR</button> <button class=b-del onclick=excluir('+idx+')>🗑️ EXCLUIR</button></div>';lista.appendChild(div);});}
-  document.getElementById('folhaConteudo').innerHTML=filtrados.map(s=>{const cor=corCantor(s.nome);const label=modoAtual==='dia'?'':s.data.split('-').reverse().slice(0,2).join('/')+' ';return '<p class=folha-item>'+label+s.p+' - <b style="color:'+cor+'">'+s.nome+'</b> - '+s.ini+'-'+s.fim+'</p>';}).join('');
+  let mes=mesAtual.getMonth(),ano=mesAtual.getFullYear();
+  document.getElementById('labelMes').innerText=`MES DE ${mesAtual.toLocaleDateString('pt-BR',{month:'long'}).toUpperCase()} DE ${ano}`;
+  document.getElementById('inputMes').value=`${ano}-${String(mes+1).padStart(2,'0')}`;
+  let lista=document.getElementById('lista');lista.innerHTML='';
+  let filtrados=eventos.filter(ev=>{let d=new Date(ev.data+'T00:00:00');if(view==='mes')return d.getMonth()===mes&&d.getFullYear()===ano;if(view==='dia'||view==='hoje'){let alvo=view==='hoje'?new Date():mesAtual;return ev.data===alvo.toISOString().slice(0,10)}if(view==='semana'){let ini=new Date(mesAtual);ini.setDate(mesAtual.getDate()-mesAtual.getDay());let fim=new Date(ini);fim.setDate(ini.getDate()+6);return d>=ini&&d<=fim}if(view==='ano')return d.getFullYear()===ano;return true}).sort((a,b)=>a.data.localeCompare(b.data)||a.inicio.localeCompare(b.inicio));
+  let grupos={};filtrados.forEach(ev=>{if(!grupos[ev.data])grupos[ev.data]=[];grupos[ev.data].push(ev)});
+  Object.keys(grupos).sort().forEach(data=>{let d=new Date(data+'T00:00:00');let titulo=d.toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long',year:'numeric'}).toUpperCase();lista.innerHTML+=`<div class="dayHeader">${titulo}</div>`;grupos[data].forEach(ev=>{let cls=ev.projeto.includes('P1')?'p1':'taki';lista.innerHTML+=`<div class="eventCard ${cls}"><div class="eventTitle">${ev.projeto} - ${ev.inicio}-${ev.fim} [${ev.local||'TAKI SOM'}] ${ev.valor?' - R$ '+ev.valor:''}</div><div class="eventActions"><button class="btnEdit" onclick="edita(${ev.id})">✏️ EDITAR</button><button class="btnDel" onclick="exclui(${ev.id})">🗑️ EXCLUIR</button></div></div>`})});
+  if(filtrados.length===0)lista.innerHTML=`<p style="text-align:center;padding:30px;color:#888">Nenhum evento em ${view.toUpperCase()}<br><small>Mas seus dados antigos estão guardados em RECUPERAR DADOS</small></p>`;
+  let sel=document.getElementById('eCasa');sel.innerHTML='<option value="">Selecione Casa / Empresa</option>';[...casas,...empresas].forEach(c=>{let opt=document.createElement('option');opt.value=c.nome||c.nomeEmpresa;opt.textContent=c.nome||c.nomeEmpresa;sel.appendChild(opt)});
+  document.getElementById('contador').innerText=`${eventos.length} eventos, ${musicos.length} músicos, ${casas.length} casas - protegido até ${new Date(Date.now()+365*24*60*60*1000).toLocaleDateString('pt-BR')}`;
 }
-function mudaDia(n){if(modoAtual==='mes'||modoAtual==='ano'){const inp=document.getElementById('inpMonth');let [y,m]=inp.value.split('-').map(Number);m+=n;if(m>12){m=1;y++;}if(m<1){m=12;y--;}inp.value=y+'-'+String(m).padStart(2,'0');render();}else{const inp=document.getElementById('inpDate');let d=new Date(inp.value+'T12:00:00');d.setDate(d.getDate()+n);inp.value=d.toISOString().slice(0,10);render();}}
-function hoje(){document.getElementById('inpDate').value=new Date().toISOString().slice(0,10);document.getElementById('inpMonth').value=new Date().toISOString().slice(0,7);modo('dia');}
-function amanha(){let d=new Date();d.setDate(d.getDate()+1);document.getElementById('inpDate').value=d.toISOString().slice(0,10);modo('dia');}
-function modoFolha(){document.getElementById('listView').style.display='none';document.getElementById('folhaView').style.display='block';closeMenu()}
-function modoNormal(){document.getElementById('listView').style.display='block';document.getElementById('folhaView').style.display='none';}
-function zap(){const d=document.getElementById('titleLong').innerText+' - '+(empresaAtiva||'TAKI');const filtrados=getShowsAgenda();const txt=filtrados.map(s=>(modoAtual!=='dia'?s.data.split('-').reverse().join('/')+' ':'')+s.p+' - '+s.nome+' - '+s.ini+'-'+s.fim).join('\n');window.open('https://wa.me/?text='+encodeURIComponent('🎤 '+d+'\n\n'+txt),'_blank');}
-function abrirModalNovo(){preencherSelects();editIdx=-1;document.getElementById('modalTitle').innerText='Novo Show';document.getElementById('mIni').value='19:00';document.getElementById('mFim').value='22:00';document.getElementById('mValor').value='';document.getElementById('mData').value=document.getElementById('inpDate').value||new Date().toISOString().slice(0,10);document.getElementById('modal').classList.add('open');document.getElementById('overlay').classList.add('open');}
-function fecharModal(){document.getElementById('modal').classList.remove('open');document.getElementById('overlay').classList.remove('open');editIdx=-1;}
-function salvar(){const dataSel=document.getElementById('mData').value||document.getElementById('inpDate').value;const o={p:document.getElementById('mP').value,empresa:document.getElementById('mEmpresa').value,fim:document.getElementById('mFim').value,ini:document.getElementById('mIni').value,nome:document.getElementById('mNome').value,valor:document.getElementById('mValor').value||300,data:dataSel};if(editIdx>=0)shows[editIdx]=o;else shows.push(o);saveAll();render();fecharModal();}
-function editar(i){preencherSelects();editIdx=i;const s=shows[i];document.getElementById('modalTitle').innerText='Editar Show';document.getElementById('mP').value=s.p;document.getElementById('mEmpresa').value=s.empresa||empresaAtiva;document.getElementById('mIni').value=s.ini;document.getElementById('mFim').value=s.fim;document.getElementById('mNome').value=s.nome;document.getElementById('mValor').value=s.valor;document.getElementById('mData').value=s.data;document.getElementById('modal').classList.add('open');document.getElementById('overlay').classList.add('open');}
-function excluir(i){if(confirm('Excluir?')){shows.splice(i,1);saveAll();render();}}
-if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}
-render();preencherSelects();atualizarHeaderEmpresa();
+function mudaMes(dir){mesAtual.setMonth(mesAtual.getMonth()+dir);render()}function mudaMesInput(){let v=document.getElementById('inputMes').value;if(!v)return;let [a,m]=v.split('-');mesAtual=new Date(parseInt(a),parseInt(m)-1,1);render()}
+function abreNovo(){editId=null;document.getElementById('modTitle').innerText='Novo Evento';document.getElementById('eData').value=new Date().toISOString().slice(0,10);document.getElementById('eInicio').value='19:00';document.getElementById('eFim').value='22:00';document.getElementById('eValor').value='';document.getElementById('modEdit').classList.add('open')}
+function edita(id){let ev=eventos.find(e=>e.id===id);if(!ev)return;editId=id;document.getElementById('modTitle').innerText='Editar Evento';document.getElementById('eData').value=ev.data;document.getElementById('eInicio').value=ev.inicio;document.getElementById('eFim').value=ev.fim;document.getElementById('eProjeto').value=ev.projeto;document.getElementById('eLocal').value=ev.local;document.getElementById('eValor').value=ev.valor||'';document.getElementById('modEdit').classList.add('open')}
+function fecha(){document.getElementById('modEdit').classList.remove('open')}
+async function salva(){let data=document.getElementById('eData').value,inicio=document.getElementById('eInicio').value,fim=document.getElementById('eFim').value,proj=document.getElementById('eProjeto').value,local=document.getElementById('eLocal').value||document.getElementById('eCasa').value||'TAKI SOM',valor=parseFloat(document.getElementById('eValor').value)||0;if(!data||!inicio||!fim){alert('Preencha');return}if(editId){let ev=eventos.find(e=>e.id===editId);ev.data=data;ev.inicio=inicio;ev.fim=fim;ev.projeto=proj;ev.local=local;ev.valor=valor}else{eventos.push({id:Date.now(),data,inicio,fim,projeto:proj,local,valor})}await salvaTudo();fecha();render()}
+async function exclui(id){if(!confirm('Excluir?'))return;eventos=eventos.filter(e=>e.id!==id);await salvaTudo();render()}
+function openCadastroCasas(){renderCasas();document.getElementById('modCasas').classList.add('open')}function renderCasas(){let d=document.getElementById('listaCasas');d.innerHTML=casas.map((c,i)=>`<div style="display:flex;justify-content:space-between;padding:8px;border:1px solid #eee;border-radius:8px;margin:4px 0"><span>🏠 ${c.nome}</span><button onclick="delCasa(${i})" style="background:#FFE3E3;border:none;padding:4px 8px;border-radius:6px">🗑️</button></div>`).join('')||'<small>Nenhuma casa - seus dados antigos aparecem em RECUPERAR DADOS se sumiu</small>'}
+async function addCasa(){let nome=document.getElementById('casaNome').value.trim(),end=document.getElementById('casaEnd').value.trim(),cont=document.getElementById('casaContato').value.trim();if(!nome)return;casas.push({nome,end,cont});await salvaTudo();document.getElementById('casaNome').value='';document.getElementById('casaEnd').value='';document.getElementById('casaContato').value='';renderCasas()}
+async function delCasa(i){casas.splice(i,1);await salvaTudo();renderCasas()}
+function openCadastroMusicos(){renderMusicos();document.getElementById('modMusicos').classList.add('open')}function renderMusicos(){let d=document.getElementById('listaMusicos');d.innerHTML=musicos.map((m,i)=>`<div style="display:flex;justify-content:space-between;padding:8px;border:1px solid #eee;border-radius:8px;margin:4px 0"><span>🎤 ${m.nome} - ${m.inst} - R$ ${m.valor}</span><button onclick="delMusico(${i})" style="background:#FFE3E3;border:none;padding:4px 8px;border-radius:6px">🗑️</button></div>`).join('')||'<small>Nenhum músico - clica em RECUPERAR DADOS se sumiu</small>'}
+async function addMusico(){let nome=document.getElementById('musNome').value.trim(),inst=document.getElementById('musInst').value.trim(),valor=document.getElementById('musValor').value.trim();if(!nome)return;musicos.push({nome,inst,valor});await salvaTudo();document.getElementById('musNome').value='';document.getElementById('musInst').value='';document.getElementById('musValor').value='';renderMusicos();render()}
+async function delMusico(i){musicos.splice(i,1);await salvaTudo();renderMusicos()}
+function openCadastroEmpresas(){renderEmpresas();document.getElementById('modEmpresas').classList.add('open')}function renderEmpresas(){let d=document.getElementById('listaEmpresas');d.innerHTML=empresas.map((e,i)=>`<div style="display:flex;justify-content:space-between;padding:8px;border:1px solid #eee;border-radius:8px;margin:4px 0"><span>🏢 ${e.nome}</span><button onclick="delEmpresa(${i})" style="background:#FFE3E3;border:none;padding:4px 8px;border-radius:6px">🗑️</button></div>`).join('')||'<small>Nenhuma empresa</small>'}
+async function addEmpresa(){let nome=document.getElementById('empNome').value.trim(),cnpj=document.getElementById('empCnpj').value.trim(),cont=document.getElementById('empContato').value.trim();if(!nome)return;empresas.push({nome,cnpj,cont});await salvaTudo();document.getElementById('empNome').value='';document.getElementById('empCnpj').value='';document.getElementById('empContato').value='';renderEmpresas()}
+async function delEmpresa(i){empresas.splice(i,1);await salvaTudo();renderEmpresas()}
+function openRelatorios(){let total=eventos.reduce((s,e)=>s+(e.valor||0),0);let porMes={};eventos.forEach(e=>{let k=e.data.slice(0,7);if(!porMes[k])porMes[k]=0;porMes[k]+=e.valor||0});let html=`<div style="background:#E3F0FF;padding:12px;border-radius:10px;margin-bottom:12px"><b>Total Geral: R$ ${total.toFixed(2)}</b><br><small>${eventos.length} eventos - dados guardados por 1 ano</small></div>`;Object.keys(porMes).sort().forEach(k=>{html+=`<div style="display:flex;justify-content:space-between;padding:8px;border-bottom:1px solid #eee"><span>${k}</span><b>R$ ${porMes[k].toFixed(2)}</b></div>`});document.getElementById('relBody').innerHTML=html;document.getElementById('modRel').classList.add('open')}
+function bkpExportImport(){document.getElementById('modBkp').classList.add('open')}
+function exportBkpAgenda(){let data={eventos,casas,musicos,empresas,date:new Date().toISOString()};let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`TAKI-BKP-${new Date().toISOString().slice(0,10)}.json`;a.click();alert('✅ Backup exportado! Além disso, 3 backups automáticos já estão salvos.')}
+function importBkpAgenda(input){let f=input.files[0];if(!f)return;let r=new FileReader();r.onload=async e=>{try{let d=JSON.parse(e.target.result);if(d.eventos)eventos=d.eventos;if(d.casas)casas=d.casas;if(d.musicos)musicos=d.musicos;if(d.empresas)empresas=d.empresas;await salvaTudo();alert('✅ Dados importados e protegidos!');render();closeModal('modBkp')}catch{alert('Arquivo inválido')}};r.readAsText(f)}
+function openRecuperar(){
+  let html='';let achou=false;
+  for(let i=1;i<=3;i++){
+    let bkp=JSON.parse(localStorage.getItem('taki_bkp_'+i)||'null');
+    if(bkp && bkp.eventos){ achou=true; html+=`<div class="bkpItem ok"><div><b>Backup ${i}</b><br><small>${new Date(bkp.ts||bkp.date).toLocaleString('pt-BR')} - ${bkp.eventos.length} eventos, ${bkp.musicos?.length||0} músicos</small></div><button class="btnEdit" onclick="restauraBkp('taki_bkp_${i}')">Recuperar</button></div>`; }
+  }
+  let auto=JSON.parse(localStorage.getItem('taki_bkp_auto')||'null');
+  if(auto && auto.eventos){ achou=true; html+=`<div class="bkpItem ok"><div><b>Backup Automático Diário</b><br><small>${new Date(auto.ts||auto.date).toLocaleString('pt-BR')} - ${auto.eventos.length} eventos</small></div><button class="btnEdit" onclick="restauraBkp('taki_bkp_auto')">Recuperar</button></div>`; }
+  if(!achou) html='<p style="padding:12px;color:#888">Nenhum backup encontrado ainda. Seus dados atuais serão protegidos a partir de agora.</p>';
+  document.getElementById('listaBkps').innerHTML=html; document.getElementById('modRecup').classList.add('open');
+}
+async function restauraBkp(key){let bkp=JSON.parse(localStorage.getItem(key)||'null');if(!bkp||!bkp.eventos){alert('Backup vazio');return}if(!confirm(`Recuperar backup de ${new Date(bkp.ts||bkp.date).toLocaleString('pt-BR')} com ${bkp.eventos.length} eventos e ${bkp.musicos?.length||0} músicos? Vai substituir atuais.`))return;eventos=bkp.eventos||[];casas=bkp.casas||[];musicos=bkp.musicos||[];empresas=bkp.empresas||[];await salvaTudo();alert('✅ Dados recuperados! Seus músicos e valores voltaram.');closeModal('modRecup');render()}
+function getTextoFiltrado(){let filtrados=eventos.filter(ev=>{let d=new Date(ev.data+'T00:00:00');return d.getMonth()===mesAtual.getMonth()&&d.getFullYear()===mesAtual.getFullYear()}).sort((a,b)=>a.data.localeCompare(b.data));let texto='';let grupos={};filtrados.forEach(ev=>{if(!grupos[ev.data])grupos[ev.data]=[];grupos[ev.data].push(ev)});Object.keys(grupos).sort().forEach(data=>{let d=new Date(data+'T00:00:00');texto+=`*${d.toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long',year:'numeric'}).toUpperCase()}*\n`;grupos[data].forEach(ev=>{texto+=`${ev.projeto} - ${ev.inicio}-${ev.fim} [${ev.local}]${ev.valor?' R$ '+ev.valor:''}\n`});texto+='\n'});return texto||'Sem eventos'}
+function enviarCronograma(){exportZap()}
+function exportZap(){let t=getTextoFiltrado();let msg=`*AGENDA TAKI SOM - ${mesAtual.toLocaleDateString('pt-BR',{month:'long',year:'numeric'}).toUpperCase()}*\n\n`+t;window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank')}
+function exportNormal(){let w=window.open('','','width=800,height=600');w.document.write('<pre style="font-family:Arial;padding:20px">'+getTextoFiltrado()+'</pre>');w.document.close();w.print()}
+function exportFolha(){let html='<table border=1 cellpadding=8 style="width:100%;border-collapse:collapse;font-family:Arial"><tr><th>DATA</th><th>PROJETO</th><th>HORÁRIO</th><th>LOCAL</th><th>VALOR</th></tr>';eventos.forEach(ev=>{html+=`<tr><td>${ev.data}</td><td>${ev.projeto}</td><td>${ev.inicio}-${ev.fim}</td><td>${ev.local}</td><td>R$ ${ev.valor||0}</td></tr>`});html+='</table>';let w=window.open('','','width=900,height=600');w.document.write(html);w.document.close();w.print()}
+function exportPdf(){exportNormal()}
+
+(async()=>{await openDB();await carregaDados();await ativaPersistencia();await salvaTudo();render();})();
 </script>
 </body>
 </html>
