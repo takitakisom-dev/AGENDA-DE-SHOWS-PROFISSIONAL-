@@ -2,12 +2,12 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TAKI AGENDA v61.3 FIX EXCLUSAO PERMANENTE</title>
+<title>TAKI AGENDA v61.5 DATA MES ANO</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--dark:#111827;--purple:#6D5BFF;--bg:#F6F7FB;--border:#E5E7EB}
 *{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);font-family:Inter,sans-serif;color:#111827;padding-bottom:90px}
-.top{position:sticky;top:0;z-index:100;background:var(--dark);color:#fff;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;height:56px}
+.top{position:sticky;top:0;z-index:100;background:var(--dark);color:#fff;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;height:60px}
 .topLeft{display:flex;align-items:center;gap:10px}.topTitle b{font-size:13px;font-weight:700}.topTitle small{font-size:11px;color:#FBBF24;font-weight:600}
 .btnHome{background:var(--purple);color:#fff;border:none;padding:7px 14px;border-radius:20px;font-weight:700;font-size:11px;cursor:pointer}
 .persistDot{font-size:10px;color:#22C55E;display:flex;align-items:center;gap:6px}.persistDot i{width:6px;height:6px;background:#22C55E;border-radius:50%;display:inline-block}
@@ -17,47 +17,54 @@
 .takiMenuItem{display:flex;gap:10px;padding:13px 16px;border-bottom:1px solid #F3F4F6;cursor:pointer;font-weight:500;font-size:12.5px;color:#374151}
 .takiMenuItem.recup{background:#FEF2F2;color:#991B1B;font-weight:700;margin:8px;border-radius:8px;border:1px solid #FECACA}
 .takiMenuItem.inst{background:#EEF2FF;color:#4338CA;font-weight:700;margin:8px;border-radius:8px;border:1px solid #C7D2FE}
-.cardMes{background:#fff;margin:10px;border:1px solid var(--border);border-radius:16px;padding:14px;text-align:center}
-.cardMes b{font-size:12px;font-weight:700}.rowNav{display:flex;align-items:center;justify-content:space-between;margin:10px 0 4px;gap:8px}
-.arrow{width:36px;height:36px;background:#fff;border:1px solid var(--border);border-radius:10px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.filters{display:flex;gap:4px;flex-wrap:wrap;justify-content:center}.filters button{border:1px solid var(--border);background:#fff;color:#6B7280;padding:6px 11px;border-radius:20px;font-weight:600;font-size:11px;cursor:pointer}
-.filters button.active{background:var(--dark);color:#fff;border-color:var(--dark)}
-input[type=month]{padding:8px 14px;border-radius:10px;border:1px solid var(--border);font-weight:600;font-size:12px;text-align:center;margin:8px 0;background:#F9FAFB}
-.dayHeader{background:#111827;color:#fff;padding:8px 12px;border-radius:8px;margin:14px 10px 6px 10px;font-weight:600;font-size:11px}
-.eventCard{background:#fff;margin:0 10px 10px 10px;border:1px solid var(--border);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px;border-left:3px solid var(--purple)}
+.cardMes{background:#fff;margin:10px;border:1px solid var(--border);border-radius:18px;padding:16px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.cardMes b{font-size:18px;font-weight:800;letter-spacing:.2px;line-height:1.2;display:flex;align-items:center;justify-content:center;gap:16px}
+.arrow{width:44px;height:44px;background:#F9FAFB;border:1px solid var(--border);border-radius:12px;font-size:28px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:700}
+.dataRow{display:flex;gap:8px;justify-content:center;margin-top:14px}
+.dataChip{border:1px solid var(--border);background:#F9FAFB;border-radius:12px;padding:10px 14px;min-width:88px;text-align:center}
+.dataChip b{font-size:10px;color:#6B7280;font-weight:600;display:block;letter-spacing:.5px}
+.dataChip span{font-size:14px;font-weight:800;color:#111827;display:block;margin-top:2px}
+.rowNav{display:flex;align-items:center;justify-content:center;margin:12px 0 4px;gap:12px}
+.filters{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:12px 10px}.filters button{border:1px solid var(--border);background:#fff;color:#6B7280;padding:8px 14px;border-radius:20px;font-weight:600;font-size:12px;cursor:pointer}
+.filters button.active{background:var(--purple);color:#fff;border-color:var(--purple)}
+.contador{margin:0 10px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:10px;text-align:center;font-size:11px;color:#6B7280;font-weight:500}
+.dayHeader{background:#111827;color:#fff;padding:10px 14px;border-radius:10px;margin:16px 10px 10px 10px;font-weight:700;font-size:12px;letter-spacing:.3px}
+.eventCard{background:#fff;margin:0 10px 14px 10px;border:1px solid var(--border);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px;box-shadow:0 2px 8px rgba(0,0,0,.06);position:relative}
 .eventHead{display:flex;justify-content:space-between;align-items:center}
-.eventTitle{font-weight:700;font-size:12px}
-.eventSlots{display:flex;flex-direction:column;gap:5px}
-.slot{display:flex;justify-content:space-between;align-items:center;font-size:11px;background:#F9FAFB;padding:7px 10px;border-radius:8px;border:1px solid #F3F4F6}
-.eventSub{font-size:11px;color:#374151;font-weight:500;line-height:1.4;background:#F5F3FF;padding:9px 10px;border-radius:8px;border:1px solid #EDE9FE}
-.eventSub small{color:#6B7280;font-size:10.5px}
-.eventActions{display:flex;gap:10px;margin-top:4px}
-.btnEdit,.btnDel{border:1px solid #E5E7EB;background:#fff;padding:6px 12px;border-radius:8px;font-weight:700;font-size:11px;cursor:pointer}
-.btnEdit{color:var(--purple);border-color:#DDD6FE}.btnDel{color:#9CA3AF}
-.plus{position:fixed;bottom:86px;right:14px;width:48px;height:48px;background:var(--purple);color:#fff;border:none;border-radius:14px;font-size:22px;font-weight:600;box-shadow:0 4px 14px rgba(109,91,255,.35);z-index:90;cursor:pointer}
-.bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;gap:6px;padding:10px;border-top:1px solid var(--border);z-index:200}
-.bottom button{flex:1;border:1px solid var(--border);padding:11px 8px;border-radius:10px;font-weight:700;font-size:11px;cursor:pointer;background:#fff;color:#374151}
-.bottom button.btnZap{background:#111827;color:#fff;border-color:#111827}
+.eventTitle{font-weight:800;font-size:15px;letter-spacing:.2px}
+.badgeShows{background:var(--purple);color:#fff;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700;position:absolute;top:12px;right:12px}
+.eventSlots{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.slot{display:flex;justify-content:space-between;align-items:center;font-size:13px;background:#F9FAFB;padding:10px 12px;border-radius:10px;border:1px solid #F3F4F6}
+.slot b{font-weight:700}.slot span{font-weight:600;color:#374151}
+.eventSub{font-size:13px;color:#111827;font-weight:700;line-height:1.4;background:#F5F3FF;padding:12px 12px;border-radius:10px;border:1px solid #EDE9FE}
+.eventSub small{color:#6B7280;font-size:11px;font-weight:500}
+.eventActions{display:flex;gap:10px;margin-top:6px}
+.btnEdit,.btnDel{flex:1;border:1px solid #E5E7EB;background:#fff;padding:10px 12px;border-radius:10px;font-weight:700;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
+.btnEdit{color:#374151;border-color:#D1D5DB}.btnDel{color:#DC2626;border-color:#FECACA;background:#FEF2F2}
+.plus{position:fixed;bottom:86px;right:14px;width:56px;height:56px;background:var(--purple);color:#fff;border:none;border-radius:16px;font-size:28px;font-weight:600;box-shadow:0 6px 18px rgba(109,91,255,.4);z-index:90;cursor:pointer}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;gap:8px;padding:12px;border-top:1px solid var(--border);z-index:200;border-radius:20px 20px 0 0}
+.bottom button{flex:1;border:1px solid var(--border);padding:12px 8px;border-radius:12px;font-weight:700;font-size:11px;cursor:pointer;background:#fff;color:#6B7280;display:flex;align-items:center;justify-content:center;gap:6px}
+.bottom button.btnZap{background:#fff;color:var(--purple);border-color:#DDD6FE}
 .modal{position:fixed;inset:0;background:rgba(17,24,39,.45);display:none;align-items:center;justify-content:center;z-index:500;padding:14px}.modal.open{display:flex}
-.modalBox{background:#fff;border-radius:12px;width:100%;max-width:420px;padding:16px;max-height:92vh;overflow-y:auto;border:1px solid var(--border)}
-.modalBox b{font-size:13px;font-weight:700}.inp{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:8px;margin:6px 0;font-weight:500;font-size:12.5px}
-.btnPrimary{width:100%;padding:11px;border:none;border-radius:8px;font-weight:700;font-size:12px;background:var(--purple);color:#fff;cursor:pointer;margin-top:8px}
-.btnGhost{width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;font-weight:600;font-size:12px;background:#fff;color:#6B7280;cursor:pointer;margin-top:6px}
-.btnDanger{width:100%;padding:11px;border:1px solid #FECACA;border-radius:8px;font-weight:700;font-size:12px;background:#FEF2F2;color:#991B1B;cursor:pointer;margin-top:8px}
-.musCheck{display:flex;align-items:center;justify-content:space-between;padding:9px 10px;border:1px solid var(--border);border-radius:8px;margin:4px 0;cursor:pointer;background:#fff}
+.modalBox{background:#fff;border-radius:16px;width:100%;max-width:420px;padding:18px;max-height:92vh;overflow-y:auto;border:1px solid var(--border)}
+.modalBox b{font-size:14px;font-weight:800}.inp{width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:10px;margin:6px 0;font-weight:500;font-size:13px}
+.btnPrimary{width:100%;padding:12px;border:none;border-radius:10px;font-weight:700;font-size:13px;background:var(--purple);color:#fff;cursor:pointer;margin-top:8px}
+.btnGhost{width:100%;padding:11px;border:1px solid var(--border);border-radius:10px;font-weight:600;font-size:12px;background:#fff;color:#6B7280;cursor:pointer;margin-top:6px}
+.btnDanger{width:100%;padding:11px;border:1px solid #FECACA;border-radius:10px;font-weight:700;font-size:12px;background:#FEF2F2;color:#991B1B;cursor:pointer;margin-top:8px}
+.musCheck{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border:1px solid var(--border);border-radius:10px;margin:5px 0;cursor:pointer;background:#fff}
 .musCheck.on{border-color:var(--purple);background:#F5F3FF}
-.turnoCard{border:1px solid var(--border);border-radius:10px;padding:10px;margin:6px 0;background:#fff}
-.turnoHead{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:12px;margin-bottom:6px}
-.timeRow{display:flex;gap:8px;margin-top:4px}.timeRow input{flex:1}
-.totalBox{background:#111827;color:#fff;padding:10px 12px;border-radius:10px;margin-top:8px;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:12px}
-.bkpItem{background:#fff;border:1px solid var(--border);border-radius:10px;padding:10px;margin:8px 0;display:flex;justify-content:space-between;align-items:center}
+.turnoCard{border:1px solid var(--border);border-radius:12px;padding:12px;margin:8px 0;background:#fff}
+.turnoHead{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:13px;margin-bottom:6px}
+.timeRow{display:flex;gap:8px;margin-top:6px}.timeRow input{flex:1}
+.totalBox{background:#111827;color:#fff;padding:12px 14px;border-radius:12px;margin-top:10px;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:13px}
+.bkpItem{background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px;margin:8px 0;display:flex;justify-content:space-between;align-items:center}
 </style>
 </head>
 <body>
-<div class="top"><div class="topLeft"><span onclick="openTakiMenu()" style="font-size:24px;cursor:pointer;padding:4px 8px 4px 0">☰</span><div class="topTitle"><b>AGENDA DO MES</b><br><small>TAKI SOM</small><div class="persistDot"><i></i><span>Permanente</span></div></div></div><button class="btnHome" onclick="location.href='index.html'">HOME</button></div>
+<div class="top"><div class="topLeft"><span onclick="openTakiMenu()" style="font-size:26px;cursor:pointer;padding:4px 8px 4px 0">☰</span><div class="topTitle"><b>AGENDA DO MES</b><br><small>TAKI SOM</small><div class="persistDot"><i></i><span>Permanente</span></div></div></div><button class="btnHome" onclick="location.href='index.html'">HOME</button></div>
 
 <div id="takiMenu"><div id="takiMenuBg" onclick="closeTakiMenu()"></div><div id="takiMenuPanel">
-<div class="takiMenuHead"><span>TAKI — MENU</span><span onclick="closeTakiMenu()" style="cursor:pointer;padding:4px 8px;background:#F3F4F6;border-radius:6px;font-size:14px">✕</span></div>
+<div class="takiMenuHead"><span>TAKI — MENU</span><span onclick="closeTakiMenu()" style="cursor:pointer;padding:6px 10px;background:#F3F4F6;border-radius:8px;font-size:16px">✕</span></div>
 <div class="takiMenuItem" onclick="setView('dia');closeTakiMenu()">📋 Agenda do dia</div>
 <div class="takiMenuItem" onclick="setView('semana');closeTakiMenu()">🗓 Agenda da semana</div>
 <div class="takiMenuItem" onclick="setView('mes');closeTakiMenu()">📅 Agenda do mês</div>
@@ -77,75 +84,68 @@ input[type=month]{padding:8px 14px;border-radius:10px;border:1px solid var(--bor
 </div></div>
 
 <div class="cardMes">
-<b id="labelMes">MES DE OUTUBRO DE 2026</b>
-<div><input type="month" id="inputMes" value="2026-10" onchange="mudaMesInput()"></div>
-<div class="rowNav"><button class="arrow" onclick="mudaMes(-1)">‹</button><div class="filters"><button onclick="setView('hoje')" id="fHoje">Hoje</button><button onclick="setView('dia')" id="fDia">Dia</button><button onclick="setView('semana')" id="fSemana">Semana</button><button class="active" onclick="setView('mes')" id="fMes">Mês</button><button onclick="setView('ano')" id="fAno">Ano</button></div><button class="arrow" onclick="mudaMes(1)">›</button></div>
-<div id="contador" style="font-size:11px;color:#6B7280;margin-top:6px"></div>
+<b><button class="arrow" onclick="mudaMes(-1)">‹</button><span id="labelMes">MES DE OUTUBRO<br>DE 2026</span><button class="arrow" onclick="mudaMes(1)">›</button></b>
+<div class="dataRow">
+<div class="dataChip"><b>📅 DIA</b><span id="chipDia">24</span></div>
+<div class="dataChip"><b>📅 MÊS</b><span id="chipMes">OUTUBRO</span></div>
+<div class="dataChip"><b>📅 ANO</b><span id="chipAno">2026</span></div>
 </div>
+</div>
+
+<div class="filters"><button onclick="setView('hoje')" id="fHoje">Hoje</button><button onclick="setView('dia')" id="fDia">Dia</button><button onclick="setView('semana')" id="fSemana">Semana</button><button class="active" onclick="setView('mes')" id="fMes">Mes</button><button onclick="setView('ano')" id="fAno">Ano</button></div>
+<div class="contador" id="contador"></div>
 
 <div id="lista"></div>
 <button class="plus" onclick="abreNovo()">+</button>
 
 <div class="bottom">
-<button class="btnZap" onclick="escolheZap()">ZAP</button>
-<button onclick="exportNormal()">NORMAL</button>
-<button onclick="exportFolha()">FOLHA</button>
-<button onclick="exportPdf()">PDF</button>
+<button class="btnZap" onclick="escolheZap()">💬 ZAP</button>
+<button onclick="exportNormal()">📄 NORMAL</button>
+<button onclick="exportFolha()">📋 FOLHA</button>
+<button onclick="exportPdf()">📑 PDF</button>
 </div>
 
 <div class="modal" id="modZapEscolha"><div class="modalBox">
 <b>Enviar cronograma</b>
-<p style="font-size:11px;color:#6B7280;margin:6px 0 10px">Escolha o formato:</p>
+<p style="font-size:12px;color:#6B7280;margin:8px 0 12px">Escolha o formato:</p>
 <button class="btnPrimary" onclick="exportZap(true);closeModal('modZapEscolha')">🏠 ZAP COM VALOR (para casa)</button>
-<button class="btnPrimary" style="background:#111827;margin-top:6px" onclick="exportZap(false);closeModal('modZapEscolha')">🎤 ZAP SEM VALOR (músico - só casa, nome e horário)</button>
+<button class="btnPrimary" style="background:#111827;margin-top:8px" onclick="exportZap(false);closeModal('modZapEscolha')">🎤 ZAP SEM VALOR (músico - só casa, nome e horário)</button>
 <button class="btnGhost" onclick="closeModal('modZapEscolha')">Cancelar</button>
 </div></div>
 
 <div class="modal" id="modEdit"><div class="modalBox">
 <b id="modTitle">Novo cronograma</b>
+<label style="font-size:11px;color:#6B7280;font-weight:700;margin-top:8px;display:block">DATA - Dia / Mês / Ano</label>
 <input id="eData" type="date" class="inp">
 <select id="eProjeto" class="inp"><option>P1 - EDILL</option><option>P2 - TAKI</option><option>TAKI SOM</option><option>P3 - OUTRO</option></select>
 <select id="eCasa" class="inp"><option value="">Casa / Empresa</option></select>
 <div class="turnoCard"><div class="turnoHead"><label><input type="checkbox" id="chkAlmoco" checked onchange="toggleTurno()"> ☀️ Almoço</label></div><div id="rowAlmoco" class="timeRow"><input id="eInicioAlmoco" type="time" class="inp" value="12:30"><input id="eFimAlmoco" type="time" class="inp" value="15:30"></div></div>
 <div class="turnoCard"><div class="turnoHead"><label><input type="checkbox" id="chkJanta" checked onchange="toggleTurno()"> 🌙 Janta</label></div><div id="rowJanta" class="timeRow"><input id="eInicioJanta" type="time" class="inp" value="19:00"><input id="eFimJanta" type="time" class="inp" value="22:00"></div></div>
 <b style="font-size:11px;color:#6B7280;margin-top:8px;display:block">Músicos (cachê fixo):</b>
-<div id="listaMusicosEvento" style="max-height:140px;overflow-y:auto;margin:6px 0"></div>
+<div id="listaMusicosEvento" style="max-height:150px;overflow-y:auto;margin:8px 0"></div>
 <div class="totalBox"><div><span id="txtShows">2 shows</span><br><small style="font-size:10px;color:#9CA3AF" id="txtDetalhe"></small></div><span id="totalCache">R$ 0,00</span></div>
-<div style="display:flex;gap:8px;margin-top:10px"><button class="btnPrimary" style="flex:1" onclick="salva()">Salvar</button><button class="btnGhost" style="flex:1" onclick="fecha()">Cancelar</button></div>
+<div style="display:flex;gap:8px;margin-top:12px"><button class="btnPrimary" style="flex:1" onclick="salva()">Salvar</button><button class="btnGhost" style="flex:1" onclick="fecha()">Cancelar</button></div>
 </div></div>
 
-<div class="modal" id="modMusicos"><div class="modalBox">
-<b>🎤 Cadastrar músicos</b>
-<input id="musNome" class="inp" placeholder="Nome">
-<input id="musValor" type="number" class="inp" placeholder="Cachê por show R$ - Ex: 150">
-<button class="btnPrimary" onclick="addMusico()">+ Adicionar</button>
-<div id="listaMusicos" style="margin-top:10px"></div>
-<button class="btnDanger" onclick="limparMusicos()">🗑️ Apagar TODOS músicos permanentemente</button>
-<button class="btnGhost" onclick="closeModal('modMusicos')">Fechar</button>
-</div></div>
-
+<div class="modal" id="modMusicos"><div class="modalBox"><b>🎤 Cadastrar músicos</b><input id="musNome" class="inp" placeholder="Nome"><input id="musValor" type="number" class="inp" placeholder="Cachê por show R$"><button class="btnPrimary" onclick="addMusico()">+ Adicionar</button><div id="listaMusicos" style="margin-top:12px"></div><button class="btnDanger" onclick="limparMusicos()">🗑️ Apagar TODOS permanentemente</button><button class="btnGhost" onclick="closeModal('modMusicos')">Fechar</button></div></div>
 <div class="modal" id="modCasas"><div class="modalBox"><b>🏠 Cadastrar casas</b><input id="casaNome" class="inp" placeholder="Nome - P1 - EDILL"><button class="btnPrimary" onclick="addCasa()">Adicionar</button><div id="listaCasas" style="margin-top:10px"></div><button class="btnGhost" onclick="closeModal('modCasas')">Fechar</button></div></div>
 <div class="modal" id="modEmpresas"><div class="modalBox"><b>🏢 Cadastrar empresas</b><input id="empNome" class="inp" placeholder="Nome"><button class="btnPrimary" onclick="addEmpresa()">Adicionar</button><div id="listaEmpresas" style="margin-top:10px"></div><button class="btnGhost" onclick="closeModal('modEmpresas')">Fechar</button></div></div>
 <div class="modal" id="modRel"><div class="modalBox"><b>📊 Relatórios</b><div id="relBody" style="margin-top:10px"></div><button class="btnGhost" onclick="closeModal('modRel')">Fechar</button></div></div>
-<div class="modal" id="modBkp"><div class="modalBox"><b>💾 Backup</b><div style="margin-top:10px;display:flex;flex-direction:column;gap:8px"><button class="btnPrimary" onclick="exportBkpAgenda()">Exportar backup</button><label style="padding:11px;background:#EEF2FF;color:#4338CA;border-radius:8px;font-weight:700;font-size:12px;text-align:center;cursor:pointer;border:1px solid #C7D2FE">Importar backup<input type="file" id="importBkp" hidden accept=".json" onchange="importBkpAgenda(this)"></label><button class="btnGhost" onclick="openRecuperar()">Ver backups</button><button class="btnDanger" onclick="limparTodosBackups()">🗑️ Limpar todos backups antigos (pra não voltar o que excluiu)</button></div><button class="btnGhost" onclick="closeModal('modBkp')">Fechar</button></div></div>
+<div class="modal" id="modBkp"><div class="modalBox"><b>💾 Backup</b><div style="margin-top:10px;display:flex;flex-direction:column;gap:8px"><button class="btnPrimary" onclick="exportBkpAgenda()">Exportar backup</button><label style="padding:12px;background:#EEF2FF;color:#4338CA;border-radius:10px;font-weight:700;font-size:12px;text-align:center;cursor:pointer;border:1px solid #C7D2FE">Importar backup<input type="file" id="importBkp" hidden accept=".json" onchange="importBkpAgenda(this)"></label><button class="btnGhost" onclick="openRecuperar()">Ver backups</button><button class="btnDanger" onclick="limparTodosBackups()">🗑️ Limpar backups antigos</button></div><button class="btnGhost" onclick="closeModal('modBkp')">Fechar</button></div></div>
 <div class="modal" id="modRecup"><div class="modalBox"><b>🛡️ Recuperar dados</b><div id="listaBkps"></div><button class="btnGhost" onclick="closeModal('modRecup')">Fechar</button></div></div>
 
 <script>
-// CORREÇÃO PERMANENTE - SEM RECRIAR O QUE FOI EXCLUÍDO
 let eventos, casas, musicos, empresas;
-let mesAtual = new Date(2026,9,1);
+let mesAtual = new Date(2026,9,24);
 let view = 'mes';
 let editId = null;
 let musicosSelecionados = [];
 
-// Carrega - SE O USUÁRIO EXCLUIU, FICA EXCLUÍDO. Não restaura do backup automaticamente
 function carregaDadosCorrigido(){
   let rawEventos = localStorage.getItem('taki_agenda');
   let rawCasas = localStorage.getItem('taki_casas');
   let rawMusicos = localStorage.getItem('taki_musicos');
   let rawEmpresas = localStorage.getItem('taki_empresas');
-
-  // Se nunca salvou nada (null), tenta restaurar do backup UMA VEZ SÓ
   if(rawEventos === null){
     let restaurado = false;
     for(let i=1;i<=3;i++){
@@ -157,36 +157,29 @@ function carregaDadosCorrigido(){
       if(auto && auto.eventos){eventos=auto.eventos; casas=auto.casas||[]; musicos=auto.musicos||[]; empresas=auto.empresas||[]; restaurado=true;}
     }
     if(!restaurado){
-      // Primeira vez instalando - começa vazio, sem criar Ediu automaticamente
       eventos=[]; casas=[]; musicos=[]; empresas=[];
-      // Cria UM exemplo só na primeira instalação, depois nunca mais
       if(localStorage.getItem('taki_primeira_vez')===null){
-        eventos=[{id:1,data:"2026-10-24",projeto:"P1 - EDILL",casa:"P1 - EDILL",slots:[{tipo:"almoco",inicio:"12:30",fim:"15:30"},{tipo:"janta",inicio:"19:00",fim:"22:00"}],musicos:[{id:1,nome:"Ediu",valor:150}],valor:300}];
+        eventos=[{id:1,data:"2026-10-24",[STRIPPED] - EDILL",casa:"P1 - EDILL",slots:[{tipo:"almoco",inicio:"12:30",fim:"15:30"},{tipo:"janta",inicio:"19:00",fim:"22:00"}],musicos:[{id:1,nome:"Ediu",valor:150}],valor:300}];
         musicos=[{id:1,nome:"Ediu",valor:150}];
         localStorage.setItem('taki_primeira_vez','1');
       }
     }
   }else{
-    // Já existe save - usa exatamente o que tá salvo, mesmo se for array vazio []
     eventos = JSON.parse(rawEventos||'[]');
     casas = JSON.parse(rawCasas||'[]');
     musicos = JSON.parse(rawMusicos||'[]');
     empresas = JSON.parse(rawEmpresas||'[]');
   }
-  
-  // Garante que slots existem
   eventos = eventos.map(ev=>{
     if(!ev.slots){return {...ev, slots:[{tipo:'janta',inicio:ev.inicio||'19:00',fim:ev.fim||'22:00'}], casa:ev.casa||ev.local||'TAKI SOM', projeto:ev.projeto||'P1 - EDILL'}}
     return ev;
   });
 }
-
 function salvaTudo(){
   localStorage.setItem('taki_agenda',JSON.stringify(eventos));
   localStorage.setItem('taki_casas',JSON.stringify(casas));
   localStorage.setItem('taki_musicos',JSON.stringify(musicos));
   localStorage.setItem('taki_empresas',JSON.stringify(empresas));
-  // Atualiza backups com o estado ATUAL (se excluiu, backup também exclui)
   let idx = parseInt(localStorage.getItem('taki_bkp_idx')||'0'); idx=(idx%3)+1;
   localStorage.setItem('taki_bkp_'+idx,JSON.stringify({eventos,casas,musicos,empresas,ts:Date.now()}));
   localStorage.setItem('taki_bkp_idx',idx);
@@ -195,46 +188,20 @@ function salvaTudo(){
     localStorage.setItem('taki_bkp_auto',JSON.stringify({eventos,casas,musicos,empresas,ts:Date.now()}));
     localStorage.setItem('taki_last_bkp',hoje);
   }
-  // Marca que já salvou uma vez - nunca mais auto-restaura
   localStorage.setItem('taki_primeira_vez','1');
 }
-
-function limparTodosBackups(){
-  if(!confirm('Tem certeza? Isso vai apagar todos os backups antigos pra não voltar mais o que você excluiu. O que tá agora vai continuar.'))return;
-  for(let i=1;i<=3;i++) localStorage.removeItem('taki_bkp_'+i);
-  localStorage.removeItem('taki_bkp_auto');
-  localStorage.removeItem('taki_bkp_idx');
-  localStorage.removeItem('taki_last_bkp');
-  alert('✅ Backups antigos apagados. Agora o que você excluir não volta mais.');
-  closeModal('modBkp');
-}
-
-function limparMusicos(){
-  if(!confirm('Apagar TODOS os músicos permanentemente? Não vai voltar quando atualizar.'))return;
-  musicos=[];
-  salvaTudo();
-  // Limpa backups também pra não voltar
-  for(let i=1;i<=3;i++) localStorage.removeItem('taki_bkp_'+i);
-  localStorage.removeItem('taki_bkp_auto');
-  renderMusicos();
-  render();
-  alert('✅ Todos músicos apagados permanentemente');
-}
-
+function limparTodosBackups(){if(!confirm('Apagar backups antigos?'))return;for(let i=1;i<=3;i++) localStorage.removeItem('taki_bkp_'+i);localStorage.removeItem('taki_bkp_auto');localStorage.removeItem('taki_bkp_idx');localStorage.removeItem('taki_last_bkp');alert('✅ Backups apagados');closeModal('modBkp');}
+function limparMusicos(){if(!confirm('Apagar TODOS músicos permanentemente?'))return;musicos=[];salvaTudo();for(let i=1;i<=3;i++) localStorage.removeItem('taki_bkp_'+i);localStorage.removeItem('taki_bkp_auto');renderMusicos();render();alert('✅ Apagados');}
 function openTakiMenu(){document.getElementById('takiMenu').classList.add('open')}
 function closeTakiMenu(){document.getElementById('takiMenu').classList.remove('open')}
 function closeModal(id){document.getElementById(id).classList.remove('open')}
-function setView(v){
-  view=v;
-  document.querySelectorAll('.filters button').forEach(b=>b.classList.remove('active'));
-  let m={hoje:'fHoje',dia:'fDia',semana:'fSemana',mes:'fMes',ano:'fAno'};
-  if(m[v]) document.getElementById(m[v]).classList.add('active');
-  render();
-}
+function setView(v){view=v;document.querySelectorAll('.filters button').forEach(b=>b.classList.remove('active'));let m={hoje:'fHoje',dia:'fDia',semana:'fSemana',mes:'fMes',ano:'fAno'};if(m[v]) document.getElementById(m[v]).classList.add('active');render();}
 function render(){
-  let mes=mesAtual.getMonth(),ano=mesAtual.getFullYear();
-  document.getElementById('labelMes').innerText='MES DE '+mesAtual.toLocaleDateString('pt-BR',{month:'long'}).toUpperCase()+' DE '+ano;
-  document.getElementById('inputMes').value=ano+'-'+String(mes+1).padStart(2,'0');
+  let mes=mesAtual.getMonth(),ano=mesAtual.getFullYear(),dia=mesAtual.getDate();
+  document.getElementById('labelMes').innerHTML='MES DE '+mesAtual.toLocaleDateString('pt-BR',{month:'long'}).toUpperCase()+'<br>DE '+ano;
+  document.getElementById('chipDia').innerText=dia;
+  document.getElementById('chipMes').innerText=mesAtual.toLocaleDateString('pt-BR',{month:'long'}).toUpperCase();
+  document.getElementById('chipAno').innerText=ano;
   let lista=document.getElementById('lista');lista.innerHTML='';
   let filtrados=eventos.filter(ev=>{
     let d=new Date(ev.data+'T00:00:00');
@@ -244,11 +211,9 @@ function render(){
     if(view==='ano')return d.getFullYear()===ano;
     return true
   }).sort((a,b)=>a.data.localeCompare(b.data));
-  let grupos={};
-  filtrados.forEach(ev=>{if(!grupos[ev.data])grupos[ev.data]=[];grupos[ev.data].push(ev)});
+  let grupos={};filtrados.forEach(ev=>{if(!grupos[ev.data])grupos[ev.data]=[];grupos[ev.data].push(ev)});
   Object.keys(grupos).sort().forEach(data=>{
-    let d=new Date(data+'T00:00:00');
-    let titulo=d.toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long',year:'numeric'}).toUpperCase();
+    let d=new Date(data+'T00:00:00');let titulo=d.toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long',year:'numeric'}).toUpperCase();
     lista.innerHTML+='<div class="dayHeader">'+titulo+'</div>';
     grupos[data].forEach(ev=>{
       let slotsHtml=''; (ev.slots||[]).forEach(s=>{let ico=s.tipo==='almoco'?'☀️':'🌙';let label=s.tipo==='almoco'?'Almoço':'Janta';slotsHtml+='<div class="slot"><b>'+ico+' '+label+'</b><span>'+s.inicio+' - '+s.fim+'</span></div>'});
@@ -256,48 +221,44 @@ function render(){
       let nomes=(ev.musicos||[]).map(m=>m.nome).join(' + ')||'Sem músico';
       let detalhe=(ev.musicos||[]).map(m=>m.nome+' (R$'+m.valor+')').join(' + ');
       let txt='';
-      if(ev.musicos&&ev.musicos.length>0){
-        if(qtd>1){txt=nomes+'<br><small>'+detalhe+' x'+qtd+' shows = Total R$'+ev.valor+'</small>'}
-        else{txt=nomes+'<br><small>'+detalhe+' • '+qtd+' show • Total R$'+ev.valor+'</small>'}
-      }else{txt='Total R$'+(ev.valor||0)+' • '+qtd+' show'}
-      lista.innerHTML+='<div class="eventCard"><div class="eventHead"><div class="eventTitle">'+ev.projeto+' — '+ev.casa+'</div><div style="font-size:11px;color:#6B7280">'+qtd+' show'+(qtd>1?'s':'')+'</div></div><div class="eventSlots">'+slotsHtml+'</div><div class="eventSub">'+txt+'</div><div class="eventActions"><button class="btnEdit" onclick="edita('+ev.id+')">Editar</button><button class="btnDel" onclick="exclui('+ev.id+')">Excluir</button></div></div>';
+      if(ev.musicos&&ev.musicos.length>0){if(qtd>1){txt=nomes+'<br><small>'+detalhe+' x'+qtd+' shows = Total R$'+ev.valor+'</small>'}else{txt=nomes+'<br><small>'+detalhe+' • '+qtd+' show • Total R$'+ev.valor+'</small>'}}else{txt='Total R$'+(ev.valor||0)+' • '+qtd+' show'}
+      lista.innerHTML+='<div class="eventCard"><span class="badgeShows">'+qtd+' shows</span><div class="eventHead"><div class="eventTitle">'+ev.projeto+' - '+ev.casa+'</div><div style="font-size:11px;color:transparent">'+qtd+' shows</div></div><div class="eventSlots">'+slotsHtml+'</div><div class="eventSub">'+txt+'</div><div class="eventActions"><button class="btnEdit" onclick="edita('+ev.id+')">✏️ Editar</button><button class="btnDel" onclick="exclui('+ev.id+')">🗑️ Excluir</button></div></div>';
     });
   });
-  if(filtrados.length===0)lista.innerHTML='<p style="text-align:center;padding:28px;color:#9CA3AF;font-size:12px">Nenhum evento neste mês.<br>Clique no + para criar.</p>';
+  if(filtrados.length===0)lista.innerHTML='<p style="text-align:center;padding:32px;color:#9CA3AF;font-size:12px">Nenhum evento neste mês.<br>Clique no <b>+</b> roxo para criar.<br><br>DATA: DIA '+dia+' / MÊS '+mesAtual.toLocaleDateString('pt-BR',{month:'long'}).toUpperCase()+' / ANO '+ano+'</p>';
   let sel=document.getElementById('eCasa');sel.innerHTML='<option value="">Casa / Empresa</option>';[...casas,...empresas].forEach(c=>{let opt=document.createElement('option');opt.value=c.nome;opt.textContent=c.nome;sel.appendChild(opt)});
-  document.getElementById('contador').innerText=eventos.length+' dias • '+eventos.reduce((s,e)=>s+(e.slots?e.slots.length:1),0)+' shows • '+musicos.length+' músicos • permanente';
+  document.getElementById('contador').innerText='📅 '+eventos.length+' dias • 🎤 '+eventos.reduce((s,e)=>s+(e.slots?e.slots.length:1),0)+' shows • 👥 '+musicos.length+' músicos • permanente';
 }
 function mudaMes(dir){mesAtual.setMonth(mesAtual.getMonth()+dir);render()}
-function mudaMesInput(){let v=document.getElementById('inputMes').value;if(!v)return;let parts=v.split('-');mesAtual=new Date(parseInt(parts[0]),parseInt(parts[1])-1,1);render()}
 function toggleTurno(){document.getElementById('rowAlmoco').style.display=document.getElementById('chkAlmoco').checked?'flex':'none';document.getElementById('rowJanta').style.display=document.getElementById('chkJanta').checked?'flex':'none';calcTotal()}
-function abreNovo(){editId=null;musicosSelecionados=[];document.getElementById('modTitle').innerText='Novo cronograma';document.getElementById('eData').value=new Date().toISOString().slice(0,10);document.getElementById('chkAlmoco').checked=true;document.getElementById('chkJanta').checked=true;document.getElementById('eInicioAlmoco').value='12:30';document.getElementById('eFimAlmoco').value='15:30';document.getElementById('eInicioJanta').value='19:00';document.getElementById('eFimJanta').value='22:00';toggleTurno();renderMusicosEvento();document.getElementById('modEdit').classList.add('open')}
+function abreNovo(){editId=null;musicosSelecionados=[];document.getElementById('modTitle').innerText='Novo cronograma - DATA, MÊS, ANO';document.getElementById('eData').value=mesAtual.toISOString().slice(0,10);document.getElementById('chkAlmoco').checked=true;document.getElementById('chkJanta').checked=true;document.getElementById('eInicioAlmoco').value='12:30';document.getElementById('eFimAlmoco').value='15:30';document.getElementById('eInicioJanta').value='19:00';document.getElementById('eFimJanta').value='22:00';toggleTurno();renderMusicosEvento();document.getElementById('modEdit').classList.add('open')}
 function edita(id){let ev=eventos.find(e=>e.id===id);if(!ev)return;editId=id;musicosSelecionados=ev.musicos?ev.musicos.map(m=>m.id):[];document.getElementById('modTitle').innerText='Editar cronograma';document.getElementById('eData').value=ev.data;document.getElementById('eProjeto').value=ev.projeto;document.getElementById('eCasa').value=ev.casa||'';if(ev.slots){let alm=ev.slots.find(s=>s.tipo==='almoco');let jan=ev.slots.find(s=>s.tipo==='janta');document.getElementById('chkAlmoco').checked=!!alm;document.getElementById('chkJanta').checked=!!jan;if(alm){document.getElementById('eInicioAlmoco').value=alm.inicio;document.getElementById('eFimAlmoco').value=alm.fim}if(jan){document.getElementById('eInicioJanta').value=jan.inicio;document.getElementById('eFimJanta').value=jan.fim}}toggleTurno();renderMusicosEvento();document.getElementById('modEdit').classList.add('open')}
 function fecha(){document.getElementById('modEdit').classList.remove('open')}
-function renderMusicosEvento(){let div=document.getElementById('listaMusicosEvento');if(musicos.length===0){div.innerHTML='<small style="font-size:11px;color:#9CA3AF">Nenhum músico cadastrado. Cadastre em ☰ > Cadastrar músicos</small>';calcTotal();return;}let html='';musicos.forEach(m=>{let ch=musicosSelecionados.includes(m.id)?'checked':'';let on=musicosSelecionados.includes(m.id)?'on':'';html+='<label class="musCheck '+on+'"><div style="display:flex;align-items:center"><input type="checkbox" value="'+m.id+'" '+ch+' onchange="toggleMusico('+m.id+')"><span style="font-size:11.5px;font-weight:600">'+m.nome+'</span></div><span style="font-size:11px;font-weight:700;color:#6D5BFF">R$ '+m.valor+'</span></label>'});div.innerHTML=html;calcTotal();}
+function renderMusicosEvento(){let div=document.getElementById('listaMusicosEvento');if(musicos.length===0){div.innerHTML='<small style="font-size:11px;color:#9CA3AF">Nenhum músico cadastrado</small>';calcTotal();return;}let html='';musicos.forEach(m=>{let ch=musicosSelecionados.includes(m.id)?'checked':'';let on=musicosSelecionados.includes(m.id)?'on':'';html+='<label class="musCheck '+on+'"><div style="display:flex;align-items:center"><input type="checkbox" value="'+m.id+'" '+ch+' onchange="toggleMusico('+m.id+')"><span style="font-size:11.5px;font-weight:600">'+m.nome+'</span></div><span style="font-size:11px;font-weight:700;color:#6D5BFF">R$ '+m.valor+'</span></label>'});div.innerHTML=html;calcTotal();}
 function toggleMusico(id){if(musicosSelecionados.includes(id)){musicosSelecionados=musicosSelecionados.filter(x=>x!==id)}else{musicosSelecionados.push(id)}renderMusicosEvento()}
 function calcTotal(){let qtd=(document.getElementById('chkAlmoco').checked?1:0)+(document.getElementById('chkJanta').checked?1:0);if(qtd===0)qtd=1;let total=0,lista=[];musicosSelecionados.forEach(id=>{let m=musicos.find(x=>x.id===id);if(m){total+=parseFloat(m.valor)||0;lista.push(m)}});let geral=total*qtd;document.getElementById('txtShows').innerText=qtd+' show'+(qtd>1?'s':'');document.getElementById('txtDetalhe').innerText=lista.length>0?lista.map(m=>m.nome+' R$'+m.valor).join(' + ')+' x'+qtd:'0 músicos';document.getElementById('totalCache').innerText='R$ '+geral.toFixed(2).replace('.',',');return {totalGeral:geral,lista}}
 function salva(){let data=document.getElementById('eData').value,proj=document.getElementById('eProjeto').value,casa=document.getElementById('eCasa').value||proj||'TAKI SOM';if(!data){alert('Data obrigatória');return}let slots=[];if(document.getElementById('chkAlmoco').checked)slots.push({tipo:'almoco',inicio:document.getElementById('eInicioAlmoco').value||'12:30',fim:document.getElementById('eFimAlmoco').value||'15:30'});if(document.getElementById('chkJanta').checked)slots.push({tipo:'janta',inicio:document.getElementById('eInicioJanta').value||'19:00',fim:document.getElementById('eFimJanta').value||'22:00'});if(slots.length===0){alert('Marque almoço ou janta');return}let calc=calcTotal();let totalGeral=calc.totalGeral,lista=calc.lista;if(editId){let ev=eventos.find(e=>e.id===editId);ev.data=data;ev.projeto=proj;ev.casa=casa;ev.slots=slots;ev.valor=totalGeral;ev.musicos=lista}else{eventos.push({id:Date.now(),data,projeto:proj,casa,slots,valor:totalGeral,musicos:lista})}salvaTudo();fecha();render()}
-function exclui(id){if(!confirm('Excluir este evento permanentemente? Não volta quando atualizar.'))return;eventos=eventos.filter(e=>e.id!==id);salvaTudo();render()}
+function exclui(id){if(!confirm('Excluir permanentemente?'))return;eventos=eventos.filter(e=>e.id!==id);salvaTudo();render()}
 function openCadastroMusicos(){renderMusicos();document.getElementById('modMusicos').classList.add('open')}
-function renderMusicos(){let d=document.getElementById('listaMusicos');let html='';musicos.forEach((m,i)=>{html+='<div style="display:flex;justify-content:space-between;padding:8px;border:1px solid #E5E7EB;border-radius:8px;margin:4px 0;font-size:11.5px"><span><b>'+m.nome+'</b> • <b style="color:#6D5BFF">R$ '+m.valor+'/show</b></span><span><button onclick="editMusicoValor('+i+')" style="color:#6D5BFF;background:none;border:none;font-weight:700;font-size:10px;margin-right:6px">Editar</button><button onclick="delMusico('+i+')" style="background:none;border:none;color:#9CA3AF;font-size:10px">✕ Excluir</button></span></div>'});d.innerHTML=html||'<small style="font-size:11px;color:#9CA3AF">Nenhum músico - cadastre um novo acima</small>'}
+function renderMusicos(){let d=document.getElementById('listaMusicos');let html='';musicos.forEach((m,i)=>{html+='<div style="display:flex;justify-content:space-between;padding:10px;border:1px solid #E5E7EB;border-radius:10px;margin:5px 0;font-size:12px"><span><b>'+m.nome+'</b> • <b style="color:#6D5BFF">R$ '+m.valor+'/show</b></span><span><button onclick="editMusicoValor('+i+')" style="color:#6D5BFF;background:none;border:none;font-weight:700;font-size:11px;margin-right:8px">Editar</button><button onclick="delMusico('+i+')" style="background:none;border:none;color:#9CA3AF;font-size:11px">✕</button></span></div>'});d.innerHTML=html||'<small style="font-size:11px;color:#9CA3AF">Nenhum músico</small>'}
 function addMusico(){let nome=document.getElementById('musNome').value.trim(),valor=parseFloat(document.getElementById('musValor').value)||0;if(!nome||!valor){alert('Nome e cachê obrigatório');return}musicos.push({id:Date.now(),nome,valor});salvaTudo();document.getElementById('musNome').value='';document.getElementById('musValor').value='';renderMusicos();render();}
 function editMusicoValor(i){let m=musicos[i];let novo=prompt('Editar cachê de '+m.nome+':', m.valor);if(novo===null)return;let v=parseFloat(novo);if(!v)return;m.valor=v;salvaTudo();renderMusicos();render();}
-function delMusico(i){if(!confirm('Excluir '+musicos[i].nome+' permanentemente? Não volta quando atualizar.'))return;musicos.splice(i,1);salvaTudo();renderMusicos();render();}
+function delMusico(i){if(!confirm('Excluir '+musicos[i].nome+' permanentemente?'))return;musicos.splice(i,1);salvaTudo();renderMusicos();render();}
 function openCadastroCasas(){renderCasas();document.getElementById('modCasas').classList.add('open')}
-function renderCasas(){let d=document.getElementById('listaCasas');let html='';casas.forEach((c,i)=>{html+='<div style="display:flex;justify-content:space-between;padding:8px;border:1px solid #E5E7EB;border-radius:8px;margin:4px 0;font-size:12px"><span>'+c.nome+'</span><div><button onclick="editCasa('+i+')" style="background:none;border:none;color:#6D5BFF;font-weight:700;font-size:10px;margin-right:8px">Editar</button><button onclick="delCasa('+i+')" style="background:none;border:none;color:#9CA3AF;font-size:10px">✕</button></div></div>'});d.innerHTML=html||'<small style="font-size:11px;color:#9CA3AF">Nenhuma casa</small>'}
+function renderCasas(){let d=document.getElementById('listaCasas');let html='';casas.forEach((c,i)=>{html+='<div style="display:flex;justify-content:space-between;padding:10px;border:1px solid #E5E7EB;border-radius:10px;margin:5px 0;font-size:12px"><span>'+c.nome+'</span><div><button onclick="editCasa('+i+')" style="background:none;border:none;color:#6D5BFF;font-weight:700;font-size:11px;margin-right:8px">Editar</button><button onclick="delCasa('+i+')" style="background:none;border:none;color:#9CA3AF;font-size:11px">✕</button></div></div>'});d.innerHTML=html||'<small style="font-size:11px;color:#9CA3AF">Nenhuma casa</small>'}
 function addCasa(){let nome=document.getElementById('casaNome').value.trim();if(!nome)return;casas.push({nome});salvaTudo();document.getElementById('casaNome').value='';renderCasas();}
 function editCasa(i){let c=casas[i];let novo=prompt('Editar casa:', c.nome);if(novo===null)return;c.nome=novo.trim()||c.nome;salvaTudo();renderCasas();}
-function delCasa(i){if(!confirm('Excluir permanentemente?'))return;casas.splice(i,1);salvaTudo();renderCasas();}
+function delCasa(i){if(!confirm('Excluir?'))return;casas.splice(i,1);salvaTudo();renderCasas();}
 function openCadastroEmpresas(){renderEmpresas();document.getElementById('modEmpresas').classList.add('open')}
-function renderEmpresas(){let d=document.getElementById('listaEmpresas');let html='';empresas.forEach((e,i)=>{html+='<div style="display:flex;justify-content:space-between;padding:8px;border:1px solid #E5E7EB;border-radius:8px;margin:4px 0;font-size:12px"><span>'+e.nome+'</span><div><button onclick="editEmpresa('+i+')" style="background:none;border:none;color:#6D5BFF;font-weight:700;font-size:10px;margin-right:8px">Editar</button><button onclick="delEmpresa('+i+')" style="background:none;border:none;color:#9CA3AF;font-size:10px">✕</button></div></div>'});d.innerHTML=html||'<small style="font-size:11px;color:#9CA3AF">Nenhuma empresa</small>'}
+function renderEmpresas(){let d=document.getElementById('listaEmpresas');let html='';empresas.forEach((e,i)=>{html+='<div style="display:flex;justify-content:space-between;padding:10px;border:1px solid #E5E7EB;border-radius:10px;margin:5px 0;font-size:12px"><span>'+e.nome+'</span><div><button onclick="editEmpresa('+i+')" style="background:none;border:none;color:#6D5BFF;font-weight:700;font-size:11px;margin-right:8px">Editar</button><button onclick="delEmpresa('+i+')" style="background:none;border:none;color:#9CA3AF;font-size:11px">✕</button></div></div>'});d.innerHTML=html||'<small style="font-size:11px;color:#9CA3AF">Nenhuma empresa</small>'}
 function addEmpresa(){let nome=document.getElementById('empNome').value.trim();if(!nome)return;empresas.push({nome});salvaTudo();document.getElementById('empNome').value='';renderEmpresas();}
 function editEmpresa(i){let e=empresas[i];let novo=prompt('Editar:', e.nome);if(novo===null)return;e.nome=novo.trim()||e.nome;salvaTudo();renderEmpresas();}
 function delEmpresa(i){if(!confirm('Excluir?'))return;empresas.splice(i,1);salvaTudo();renderEmpresas();}
-function openRelatorios(){let total=eventos.reduce((s,e)=>s+(e.valor||0),0);let qtd=eventos.reduce((s,e)=>s+(e.slots?e.slots.length:1),0);let porMusico={};eventos.forEach(ev=>{(ev.musicos||[]).forEach(m=>{let q=ev.slots?ev.slots.length:1;if(!porMusico[m.nome])porMusico[m.nome]={valor:0,shows:0};porMusico[m.nome].valor+=(parseFloat(m.valor)||0)*q;porMusico[m.nome].shows+=q})});let html='<div style="background:#F9FAFB;padding:10px;border-radius:8px;margin-bottom:10px;border:1px solid #E5E7EB"><b style="font-size:13px">Total: R$ '+total.toFixed(2).replace('.',',')+' • '+qtd+' shows</b></div>';html+='<b style="font-size:11px;color:#6B7280">POR MÚSICO:</b>';Object.keys(porMusico).sort().forEach(k=>{html+='<div style="display:flex;justify-content:space-between;padding:8px;border-bottom:1px solid #F3F4F6;font-size:12px"><span>'+k+' • '+porMusico[k].shows+' shows</span><b>R$ '+porMusico[k].valor.toFixed(2).replace('.',',')+'</b></div>'});document.getElementById('relBody').innerHTML=html;document.getElementById('modRel').classList.add('open')}
+function openRelatorios(){let total=eventos.reduce((s,e)=>s+(e.valor||0),0);let qtd=eventos.reduce((s,e)=>s+(e.slots?e.slots.length:1),0);let porMusico={};eventos.forEach(ev=>{(ev.musicos||[]).forEach(m=>{let q=ev.slots?ev.slots.length:1;if(!porMusico[m.nome])porMusico[m.nome]={valor:0,shows:0};porMusico[m.nome].valor+=(parseFloat(m.valor)||0)*q;porMusico[m.nome].shows+=q})});let html='<div style="background:#F9FAFB;padding:12px;border-radius:10px;margin-bottom:12px;border:1px solid #E5E7EB"><b style="font-size:14px">Total: R$ '+total.toFixed(2).replace('.',',')+' • '+qtd+' shows</b></div>';html+='<b style="font-size:11px;color:#6B7280">POR MÚSICO:</b>';Object.keys(porMusico).sort().forEach(k=>{html+='<div style="display:flex;justify-content:space-between;padding:10px;border-bottom:1px solid #F3F4F6;font-size:13px"><span>'+k+' • '+porMusico[k].shows+' shows</span><b>R$ '+porMusico[k].valor.toFixed(2).replace('.',',')+'</b></div>'});document.getElementById('relBody').innerHTML=html;document.getElementById('modRel').classList.add('open')}
 function bkpExportImport(){document.getElementById('modBkp').classList.add('open')}
 function exportBkpAgenda(){let data={eventos,casas,musicos,empresas,date:new Date().toISOString()};let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='TAKI-BKP-'+new Date().toISOString().slice(0,10)+'.json';a.click();}
 function importBkpAgenda(input){let f=input.files[0];if(!f)return;let r=new FileReader();r.onload=e=>{try{let d=JSON.parse(e.target.result);if(d.eventos)eventos=d.eventos;if(d.casas)casas=d.casas;if(d.musicos)musicos=d.musicos;if(d.empresas)empresas=d.empresas;salvaTudo();alert('✅ Importado');render();closeModal('modBkp')}catch{alert('Inválido')}};r.readAsText(f)}
-function openRecuperar(){let html='';for(let i=1;i<=3;i++){let bkp=JSON.parse(localStorage.getItem('taki_bkp_'+i)||'null');if(bkp&&bkp.eventos){html+='<div class="bkpItem"><div><b style="font-size:12px">Backup '+i+'</b><br><small>'+new Date(bkp.ts).toLocaleString('pt-BR')+' • '+bkp.eventos.length+' dias</small></div><button class="btnEdit" style="color:var(--purple)" onclick="restauraBkp(\'taki_bkp_'+i+'\')">Recuperar</button></div>'}}let auto=JSON.parse(localStorage.getItem('taki_bkp_auto')||'null');if(auto&&auto.eventos){html+='<div class="bkpItem"><div><b style="font-size:12px">Automático</b><br><small>'+new Date(auto.ts).toLocaleString('pt-BR')+' • '+auto.eventos.length+' dias</small></div><button class="btnEdit" style="color:var(--purple)" onclick="restauraBkp(\'taki_bkp_auto\')">Recuperar</button></div>'}if(!html)html='<p style="font-size:11px;color:#9CA3AF;padding:8px">Nenhum backup.</p>';document.getElementById('listaBkps').innerHTML=html;document.getElementById('modRecup').classList.add('open')}
+function openRecuperar(){let html='';for(let i=1;i<=3;i++){let bkp=JSON.parse(localStorage.getItem('taki_bkp_'+i)||'null');if(bkp&&bkp.eventos){html+='<div class="bkpItem"><div><b style="font-size:12px">Backup '+i+'</b><br><small>'+new Date(bkp.ts).toLocaleString('pt-BR')+' • '+bkp.eventos.length+' dias</small></div><button class="btnEdit" style="color:var(--purple)" onclick="restauraBkp(\'taki_bkp_'+i+'\')">Recuperar</button></div>'}}let auto=JSON.parse(localStorage.getItem('taki_bkp_auto')||'null');if(auto&&auto.eventos){html+='<div class="bkpItem"><div><b style="font-size:12px">Automático</b><br><small>'+new Date(auto.ts).toLocaleString('pt-BR')+' • '+auto.eventos.length+' dias</small></div><button class="btnEdit" style="color:var(--purple)" onclick="restauraBkp(\'taki_bkp_auto\')">Recuperar</button></div>'}if(!html)html='<p style="font-size:11px;color:#9CA3AF;padding:10px">Nenhum backup.</p>';document.getElementById('listaBkps').innerHTML=html;document.getElementById('modRecup').classList.add('open')}
 function restauraBkp(key){let bkp=JSON.parse(localStorage.getItem(key)||'null');if(!bkp||!bkp.eventos)return;if(!confirm('Recuperar backup de '+new Date(bkp.ts).toLocaleString('pt-BR')+'?'))return;eventos=bkp.eventos||[];casas=bkp.casas||[];musicos=bkp.musicos||[];empresas=bkp.empresas||[];salvaTudo();alert('✅ Recuperado');closeModal('modRecup');render()}
 function escolheZap(){document.getElementById('modZapEscolha').classList.add('open')}
 function getTextoFiltrado(comValor){
