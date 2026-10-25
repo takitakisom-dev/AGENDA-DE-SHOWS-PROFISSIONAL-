@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TAKI v62.6 FINAL COMPLETO</title>
+<title>TAKI v62.7 FINAL AGRUPADO</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--dark:#111827;--purple:#6D5BFF;--bg:#F6F7FB;--border:#E5E7EB}
@@ -55,7 +55,7 @@
 </style>
 </head>
 <body>
-<div class="top"><div class="topLeft"><span onclick="openMenu()" style="font-size:26px;cursor:pointer">☰</span><div class="topTitle"><b>AGENDA DO MES</b><br><small>TAKI SOM</small><div class="dot"><i></i><span>v62.6 - Horario fixo OK</span></div></div></div><button class="btnHome" onclick="location.href='index.html'">HOME</button></div>
+<div class="top"><div class="topLeft"><span onclick="openMenu()" style="font-size:26px;cursor:pointer">☰</span><div class="topTitle"><b>AGENDA DO MES</b><br><small>TAKI SOM</small><div class="dot"><i></i><span>v62.7 - Agrupado por nome</span></div></div></div><button class="btnHome" onclick="location.href='index.html'">HOME</button></div>
 <div id="takiMenu"><div id="takiMenuBg" onclick="closeMenu()"></div><div id="takiMenuPanel">
 <div class="takiMenuHead"><span>TAKI — MENU COMPLETO</span><span onclick="closeMenu()" style="cursor:pointer;background:#fff;padding:6px 10px;border-radius:8px;border:1px solid #E5E7EB">✕</span></div>
 <div class="takiMenuSection">AGENDAS</div>
@@ -126,7 +126,7 @@
 <div class="totalBox"><span id="txtShows">1 show</span><span id="totalCache">R$ 0</span></div>
 <div style="display:flex;gap:8px;margin-top:12px"><button class="btnPrimary" style="flex:1" onclick="salva()">Salvar</button><button class="btnGhost" style="flex:1" onclick="closeM('modEdit')">Cancelar</button></div>
 </div></div>
-<div class="modal" id="modMusicos"><div class="modalBox"><b>🎤 Músicos</b><input id="musNome" class="inp" placeholder="Nome"><input id="musValor" type="number" class="inp" placeholder="Cachê R$"><button class="btnPrimary" onclick="addMusico()">+ Salvar</button><div id="listaMusicos" style="margin-top:12px"></div><button class="btnGhost" onclick="closeM('modMusicos')">Fechar</button></div></div>
+<div class="modal" id="modMusicos"><div class="modalBox"><b>🎤 Músicos (ordem alfabética)</b><input id="musNome" class="inp" placeholder="Nome"><input id="musValor" type="number" class="inp" placeholder="Cachê R$"><button class="btnPrimary" onclick="addMusico()">+ Salvar</button><div id="listaMusicos" style="margin-top:12px"></div><button class="btnGhost" onclick="closeM('modMusicos')">Fechar</button></div></div>
 <div class="modal" id="modCasas"><div class="modalBox">
 <b>🏠 Cadastrar casas com horário fixo</b>
 <p style="font-size:11px;color:#6B7280;margin:6px 0 10px">Cadastre uma vez o horário de cada casa. Depois quando criar P1, P2, já vem automático.</p>
@@ -150,20 +150,20 @@
 <div class="modal" id="modEmpresas"><div class="modalBox"><b>🏢 Empresas</b><input id="empNome" class="inp" placeholder="Nome empresa"><button class="btnPrimary" onclick="addEmpresa()">+ Salvar</button><div id="listaEmpresas" style="margin-top:12px"></div><button class="btnGhost" onclick="closeM('modEmpresas')">Fechar</button></div></div>
 <div class="modal" id="modBkp"><div class="modalBox"><b>💾 BKP</b><div style="margin-top:12px;display:flex;flex-direction:column;gap:8px"><button class="btnPrimary" onclick="exportBackup()">📤 Exportar backup</button><label style="padding:12px;background:#EEF2FF;color:#4338CA;border-radius:10px;font-weight:700;text-align:center;cursor:pointer;border:1px solid #C7D2FE">📥 Importar backup<input type="file" id="importBkp" hidden accept=".json" onchange="importBackup(this)"></label></div><button class="btnGhost" onclick="closeM('modBkp')">Fechar</button></div></div>
 <div class="modal" id="modRecup"><div class="modalBox"><b>🛡️ Recuperar dados</b><div id="listaBkps" style="margin-top:10px"></div><button class="btnGhost" onclick="closeM('modRecup')">Fechar</button></div></div>
-<div class="modal" id="modRel"><div class="modalBox"><b>📊 Relatórios</b><div id="relBody" style="margin-top:12px"></div><button class="btnGhost" onclick="closeM('modRel')">Fechar</button></div></div>
+<div class="modal" id="modRel"><div class="modalBox"><b>📊 Relatórios - Agrupado por nome</b><div id="relBody" style="margin-top:12px"></div><button class="btnGhost" onclick="closeM('modRel')">Fechar</button></div></div>
 <script>
-var DB_KEY='taki_v62_6_final';
+var DB_KEY='taki_v62_7_final';
 var projetoAtual='P1';
 function carregaDB(){
-  var keys=[DB_KEY,'taki_v62_5_final','taki_v62_final','taki_v62_p1fix','taki_final_v9_db'];
+  var keys=[DB_KEY,'taki_v62_6_final','taki_v62_5_final','taki_v62_final','taki_v62_p1fix','taki_final_v9_db'];
   for(var k of keys){var b=JSON.parse(localStorage.getItem(k)||'null');if(b&&b.eventos&&b.eventos.length>0)return b;}
   return {
     eventos:[
-      {id:1,data:"2026-10-19",projeto:"P1",casa:"P1",slots:[{tipo:"janta",inicio:"19:00",fim:"22:00"}],valor:300,musicos:[{id:1,nome:"DOUGLAS",valor:300}]},
-      {id:2,data:"2026-10-19",projeto:"P2",casa:"P2",slots:[{tipo:"janta",inicio:"19:00",fim:"22:00"}],valor:300,musicos:[{id:2,nome:"LUCIANO",valor:300}]},
-      {id:3,data:"2026-10-19",projeto:"P3",casa:"P3",slots:[{tipo:"janta",inicio:"20:00",fim:"23:00"}],valor:300,musicos:[{id:3,nome:"ANDRE",valor:300}]},
-      {id:4,data:"2026-10-19",projeto:"P4",casa:"P4",slots:[{tipo:"janta",inicio:"20:30",fim:"23:30"}],valor:300,musicos:[{id:4,nome:"ISRAEL",valor:300}]},
-      {id:5,data:"2026-10-19",projeto:"EDILL",casa:"EDILL",slots:[{tipo:"janta",inicio:"19:30",fim:"22:30"}],valor:300,musicos:[{id:5,nome:"MARTIN",valor:300}]}
+      {id:1,data:"2026-10-19",projeto:"P1",casa:"P1",slots:[{tipo:"janta",inicio:"20:30",fim:"23:30"}],musicos:[{id:1,nome:"ANDERSON VAT 60 DUO",valor:400}],valor:400},
+      {id:2,data:"2026-10-19",projeto:"P1",casa:"P1",slots:[{tipo:"janta",inicio:"20:30",fim:"23:30"}],musicos:[{id:2,nome:"ANDERSON VAT 60 TRIO",valor:450}],valor:450},
+      {id:3,data:"2026-10-20",projeto:"P1",casa:"P1",slots:[{tipo:"janta",inicio:"20:30",fim:"23:30"}],musicos:[{id:10,nome:"RICK DUO",valor:400}],valor:400},
+      {id:4,data:"2026-10-20",projeto:"P1",casa:"P1",slots:[{tipo:"janta",inicio:"20:30",fim:"23:30"}],musicos:[{id:11,nome:"RICK SOLO",valor:300}],valor:300},
+      {id:5,data:"2026-10-21",projeto:"P1",casa:"P1",slots:[{tipo:"janta",inicio:"20:30",fim:"23:30"}],musicos:[{id:12,nome:"RICK TRIO",valor:450}],valor:450}
     ],
     casas:[
       {nome:"P1",iniA:"12:30",fimA:"15:30",iniJ:"19:00",fimJ:"22:00",temAlmoco:false,temJanta:true},
@@ -172,12 +172,29 @@ function carregaDB(){
       {nome:"P4",iniA:"12:30",fimA:"15:30",iniJ:"20:30",fimJ:"23:30",temAlmoco:false,temJanta:true},
       {nome:"EDILL",iniA:"12:00",fimA:"15:00",iniJ:"19:30",fimJ:"22:30",temAlmoco:false,temJanta:true}
     ],
-    musicos:[{id:1,nome:"DOUGLAS",valor:300},{id:2,nome:"LUCIANO",valor:300},{id:3,nome:"ANDRE",valor:300},{id:4,nome:"ISRAEL",valor:300},{id:5,nome:"MARTIN",valor:300}],
+    musicos:[
+      {id:1,nome:"ANDERSON VAT 60 DUO",valor:400},
+      {id:2,nome:"ANDERSON VAT 60 TRIO",valor:450},
+      {id:3,nome:"ANDRÉ",valor:300},
+      {id:4,nome:"DOUGLAS",valor:300},
+      {id:5,nome:"EDILL",valor:300},
+      {id:6,nome:"GERVÁSIO",valor:200},
+      {id:7,nome:"ISRAEL",valor:300},
+      {id:8,nome:"LUCIANO",valor:300},
+      {id:9,nome:"MARTIN",valor:300},
+      {id:10,nome:"RICK DUO",valor:400},
+      {id:11,nome:"RICK SOLO",valor:300},
+      {id:12,nome:"RICK TRIO",valor:450},
+      {id:13,nome:"ROBSON SOLO",valor:300},
+      {id:14,nome:"YGOR",valor:300}
+    ],
     empresas:[]
   };
 }
 var db=carregaDB();
 var eventos=db.eventos;var casas=db.casas;var musicos=db.musicos;var empresas=db.empresas;
+musicos.sort(function(a,b){return a.nome.localeCompare(b.nome)});
+casas.sort(function(a,b){return a.nome.localeCompare(b.nome)});
 var mesAtual=new Date(2026,9,19);var view='semana';var editId=null;var selMusicos=[];
 function save(){
   var data={eventos:eventos,casas:casas,musicos:musicos,empresas:empresas,ts:Date.now()};
@@ -255,13 +272,13 @@ function render(){
     });
   });
   if(filtrados.length==0)lista.innerHTML='<p style="text-align:center;padding:32px;color:#9CA3AF;font-size:12px">Nenhum evento<br>Clique no + para criar<br><br>📅 DIA '+dia+' / '+mesAtual.toLocaleDateString('pt-BR',{month:'long'}).toUpperCase()+' / '+ano+'</p>';
-  var sel=document.getElementById('eCasa');var currentVal=sel.value;sel.innerHTML='<option value="">Casa / Empresa (opcional)</option>';var todas=[].concat(casas).concat(empresas);todas.forEach(function(c){var opt=document.createElement('option');opt.value=c.nome;opt.textContent=c.nome;sel.appendChild(opt)});if(currentVal) sel.value=currentVal;
+  var sel=document.getElementById('eCasa');var currentVal=sel.value;sel.innerHTML='<option value="">Casa / Empresa (opcional)</option>';var todas=[].concat(casas).concat(empresas);todas.sort(function(a,b){return a.nome.localeCompare(b.nome)});todas.forEach(function(c){var opt=document.createElement('option');opt.value=c.nome;opt.textContent=c.nome;sel.appendChild(opt)});if(currentVal) sel.value=currentVal;
   document.getElementById('contador').innerText=eventos.length+' dias • '+(eventos.reduce(function(s,e){return s+(e.slots?e.slots.length:1)},0))+' shows • '+musicos.length+' músicos • salvo';
 }
 function mudaMes(dir){mesAtual.setMonth(mesAtual.getMonth()+dir);render();}
 function abreNovo(){editId=null;selMusicos=[];setProjeto('P1');document.getElementById('modTitle').innerText='Novo cronograma';document.getElementById('eData').value=mesAtual.toISOString().slice(0,10);document.getElementById('avisoHorario').style.display='none';renderMusEvento();document.getElementById('modEdit').classList.add('open');aplicarHorarioDaCasa('P1');}
 function edita(id){var ev=eventos.find(function(e){return e.id==id});if(!ev)return;editId=id;selMusicos=ev.musicos?ev.musicos.map(function(m){return m.id}):[];setProjeto(getNomeCurto(ev));document.getElementById('eData').value=ev.data;if(ev.slots){var alm=ev.slots.find(function(s){return s.tipo=='almoco'});var jan=ev.slots.find(function(s){return s.tipo=='janta'});document.getElementById('chkAlmoco').checked=!!alm;document.getElementById('chkJanta').checked=!!jan;if(alm){document.getElementById('eIniA').value=alm.inicio;document.getElementById('eFimA').value=alm.fim}if(jan){document.getElementById('eIniJ').value=jan.inicio;document.getElementById('eFimJ').value=jan.fim}}renderMusEvento();document.getElementById('modEdit').classList.add('open');}
-function renderMusEvento(){var div=document.getElementById('listaMusicosEvento');if(musicos.length==0){div.innerHTML='<small style="color:#9CA3AF">Nenhum músico - cadastre em ☰ > Músicos</small>';calc();return}var html='';musicos.forEach(function(m){var ch=selMusicos.includes(m.id)?'checked':'';var on=selMusicos.includes(m.id)?'on':'';html+='<label class="musCheck '+on+'"><div><input type="checkbox" '+ch+' onchange="toggleM('+m.id+')"><span style="margin-left:6px;font-weight:700">'+m.nome+'</span></div><span style="color:#6D5BFF;font-weight:800">R$ '+m.valor+'</span></label>'});div.innerHTML=html;calc();}
+function renderMusEvento(){musicos.sort(function(a,b){return a.nome.localeCompare(b.nome)});var div=document.getElementById('listaMusicosEvento');if(musicos.length==0){div.innerHTML='<small style="color:#9CA3AF">Nenhum músico - cadastre em ☰ > Músicos</small>';calc();return}var html='';musicos.forEach(function(m){var ch=selMusicos.includes(m.id)?'checked':'';var on=selMusicos.includes(m.id)?'on':'';html+='<label class="musCheck '+on+'"><div><input type="checkbox" '+ch+' onchange="toggleM('+m.id+')"><span style="margin-left:6px;font-weight:700">'+m.nome+'</span></div><span style="color:#6D5BFF;font-weight:800">R$ '+m.valor+'</span></label>'});div.innerHTML=html;calc();}
 function toggleM(id){if(selMusicos.includes(id))selMusicos=selMusicos.filter(function(x){return x!=id});else selMusicos.push(id);renderMusEvento();}
 function calc(){var qtd=(document.getElementById('chkAlmoco').checked?1:0)+(document.getElementById('chkJanta').checked?1:0);if(qtd==0)qtd=1;var total=0;selMusicos.forEach(function(id){var m=musicos.find(function(x){return x.id==id});if(m)total+=parseFloat(m.valor)||0});var geral=total*qtd;document.getElementById('txtShows').innerText=qtd+' shows';document.getElementById('totalCache').innerText='R$ '+geral;return {geral:geral}}
 function salva(){
@@ -284,11 +301,11 @@ function salva(){
 }
 function exclui(id){if(!confirm('Excluir?'))return;eventos=eventos.filter(function(e){return e.id!=id});save();render();}
 function openMusicos(){renderMus();document.getElementById('modMusicos').classList.add('open');}
-function renderMus(){var d=document.getElementById('listaMusicos');var h='';musicos.forEach(function(m,i){h+='<div style="display:flex;justify-content:space-between;padding:10px;border:1px solid #E5E7EB;border-radius:10px;margin:5px 0"><span><b>'+m.nome+'</b> - R$'+m.valor+'</span><button onclick="delMus('+i+')" style="border:none;background:none;color:#999">✕</button></div>'});d.innerHTML=h||'<small style="color:#999">Nenhum</small>';}
-function addMusico(){var n=document.getElementById('musNome').value.trim().toUpperCase();var v=parseFloat(document.getElementById('musValor').value)||0;if(!n||!v){alert('Nome e cachê');return}musicos.push({id:Date.now(),nome:n,valor:v});save();document.getElementById('musNome').value='';document.getElementById('musValor').value='';renderMus();render();}
+function renderMus(){musicos.sort(function(a,b){return a.nome.localeCompare(b.nome)});var d=document.getElementById('listaMusicos');var h='';musicos.forEach(function(m,i){h+='<div style="display:flex;justify-content:space-between;padding:10px;border:1px solid #E5E7EB;border-radius:10px;margin:5px 0"><span><b>'+m.nome+'</b> - R$'+m.valor+'</span><button onclick="delMus('+i+')" style="border:none;background:none;color:#999">✕</button></div>'});d.innerHTML=h||'<small style="color:#999">Nenhum</small>';}
+function addMusico(){var n=document.getElementById('musNome').value.trim().toUpperCase();var v=parseFloat(document.getElementById('musValor').value)||0;if(!n||!v){alert('Nome e cachê');return}musicos.push({id:Date.now(),nome:n,valor:v});musicos.sort(function(a,b){return a.nome.localeCompare(b.nome)});save();document.getElementById('musNome').value='';document.getElementById('musValor').value='';renderMus();render();}
 function delMus(i){if(!confirm('Excluir '+musicos[i].nome+'?'))return;musicos.splice(i,1);save();renderMus();render();}
 function openCasas(){renderCasas();document.getElementById('modCasas').classList.add('open');}
-function renderCasas(){var d=document.getElementById('listaCasas');var h='';casas.forEach(function(c,i){var horarios='';if(c.temAlmoco)horarios+='☀️ '+c.iniA+'-'+c.fimA+' ';if(c.temJanta)horarios+='🌙 '+c.iniJ+'-'+c.fimJ;h+='<div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #E5E7EB;border-radius:10px;margin:5px 0"><div><b>'+c.nome+'</b><br><small style="color:#6B7280;font-size:10px">'+horarios+'</small></div><div><button onclick="editCasa('+i+')" style="border:none;background:#EEF2FF;color:#4338CA;padding:6px 10px;border-radius:6px;font-weight:700;font-size:11px;margin-right:4px">Editar</button><button onclick="delCasa('+i+')" style="border:none;background:none;color:#999">✕</button></div></div>';});d.innerHTML=h||'<small style="color:#999">Nenhuma casa</small>';}
+function renderCasas(){casas.sort(function(a,b){return a.nome.localeCompare(b.nome)});var d=document.getElementById('listaCasas');var h='';casas.forEach(function(c,i){var horarios='';if(c.temAlmoco)horarios+='☀️ '+c.iniA+'-'+c.fimA+' ';if(c.temJanta)horarios+='🌙 '+c.iniJ+'-'+c.fimJ;h+='<div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #E5E7EB;border-radius:10px;margin:5px 0"><div><b>'+c.nome+'</b><br><small style="color:#6B7280;font-size:10px">'+horarios+'</small></div><div><button onclick="editCasa('+i+')" style="border:none;background:#EEF2FF;color:#4338CA;padding:6px 10px;border-radius:6px;font-weight:700;font-size:11px;margin-right:4px">Editar</button><button onclick="delCasa('+i+')" style="border:none;background:none;color:#999">✕</button></div></div>';});d.innerHTML=h||'<small style="color:#999">Nenhuma casa</small>';}
 function addCasa(){
   var nome=document.getElementById('casaNome').value.trim().toUpperCase();
   if(!nome){alert('Nome da casa');return}
@@ -301,20 +318,64 @@ function addCasa(){
   var idx=casas.findIndex(function(c){return c.nome.trim().toUpperCase()===nome});
   if(idx>=0){casas[idx]={nome:nome,iniA:iniA,fimA:fimA,iniJ:iniJ,fimJ:fimJ,temAlmoco:temA,temJanta:temJ};}
   else{casas.push({nome:nome,iniA:iniA,fimA:fimA,iniJ:iniJ,fimJ:fimJ,temAlmoco:temA,temJanta:temJ});}
+  casas.sort(function(a,b){return a.nome.localeCompare(b.nome)});
   save();document.getElementById('casaNome').value='';renderCasas();render();
 }
 function editCasa(i){var c=casas[i];document.getElementById('casaNome').value=c.nome;document.getElementById('casaIniA').value=c.iniA||'12:30';document.getElementById('casaFimA').value=c.fimA||'15:30';document.getElementById('casaIniJ').value=c.iniJ||'19:00';document.getElementById('casaFimJ').value=c.fimJ||'22:00';document.getElementById('casaTemAlmoco').checked=!!c.temAlmoco;document.getElementById('casaTemJanta').checked=!!c.temJanta;}
 function delCasa(i){if(!confirm('Excluir casa '+casas[i].nome+'?'))return;casas.splice(i,1);save();renderCasas();render();}
 function openEmpresas(){renderEmpresas();document.getElementById('modEmpresas').classList.add('open');}
-function renderEmpresas(){var d=document.getElementById('listaEmpresas');var h='';empresas.forEach(function(e,i){h+='<div style="display:flex;justify-content:space-between;padding:10px;border:1px solid #E5E7EB;border-radius:10px;margin:5px 0"><span>'+e.nome+'</span><button onclick="delEmpresa('+i+')" style="border:none;background:none;color:#999">✕</button></div>'});d.innerHTML=h||'<small style="color:#999">Nenhuma</small>';}
-function addEmpresa(){var n=document.getElementById('empNome').value.trim();if(!n)return;empresas.push({nome:n});save();document.getElementById('empNome').value='';renderEmpresas();}
+function renderEmpresas(){empresas.sort(function(a,b){return a.nome.localeCompare(b.nome)});var d=document.getElementById('listaEmpresas');var h='';empresas.forEach(function(e,i){h+='<div style="display:flex;justify-content:space-between;padding:10px;border:1px solid #E5E7EB;border-radius:10px;margin:5px 0"><span>'+e.nome+'</span><button onclick="delEmpresa('+i+')" style="border:none;background:none;color:#999">✕</button></div>'});d.innerHTML=h||'<small style="color:#999">Nenhuma</small>';}
+function addEmpresa(){var n=document.getElementById('empNome').value.trim();if(!n)return;empresas.push({nome:n});empresas.sort(function(a,b){return a.nome.localeCompare(b.nome)});save();document.getElementById('empNome').value='';renderEmpresas();}
 function delEmpresa(i){empresas.splice(i,1);save();renderEmpresas();}
 function openBkp(){document.getElementById('modBkp').classList.add('open');}
 function exportBackup(){var blob=new Blob([JSON.stringify({eventos:eventos,casas:casas,musicos:musicos,empresas:empresas,date:new Date().toISOString()},null,2)],{type:'application/json'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='TAKI-BKP-'+new Date().toISOString().slice(0,10)+'.json';a.click();}
 function importBackup(input){var f=input.files[0];if(!f)return;var r=new FileReader();r.onload=function(e){try{var d=JSON.parse(e.target.result);if(d.eventos)eventos=d.eventos;if(d.casas)casas=d.casas;if(d.musicos)musicos=d.musicos;if(d.empresas)empresas=d.empresas;save();alert('✅ Importado!');closeM('modBkp');render();}catch{alert('Arquivo inválido')}};r.readAsText(f);}
 function openRecuperar(){var html='';for(var i=1;i<=3;i++){var bkp=JSON.parse(localStorage.getItem('taki_bkp_'+i)||'null');if(bkp&&bkp.eventos){html+='<div class="bkpItem"><div><b>Backup '+i+'</b><br><small>'+new Date(bkp.ts).toLocaleString('pt-BR')+' • '+bkp.eventos.length+' dias</small></div><button onclick="restauraBkp(\'taki_bkp_'+i+'\')" style="background:var(--purple);color:#fff;border:none;padding:8px 12px;border-radius:8px;font-weight:700">Recuperar</button></div>'}}if(!html)html='<p style="font-size:12px;color:#9CA3AF;padding:10px">Nenhum backup</p>';document.getElementById('listaBkps').innerHTML=html;document.getElementById('modRecup').classList.add('open');}
 function restauraBkp(key){var bkp=JSON.parse(localStorage.getItem(key)||'null');if(!bkp)return;if(!confirm('Recuperar?'))return;eventos=bkp.eventos||[];casas=bkp.casas||[];musicos=bkp.musicos||[];empresas=bkp.empresas||[];save();alert('✅ Recuperado!');closeM('modRecup');render();}
-function openRelatorios(){var total=eventos.reduce(function(s,e){return s+(e.valor||0)},0);var qtd=eventos.reduce(function(s,e){return s+(e.slots?e.slots.length:1)},0);var porMusico={};eventos.forEach(function(ev){(ev.musicos||[]).forEach(function(m){var q=ev.slots?ev.slots.length:1;if(!porMusico[m.nome])porMusico[m.nome]={valor:0,shows:0};porMusico[m.nome].valor+=(parseFloat(m.valor)||0)*q;porMusico[m.nome].shows+=q})});var html='<div style="background:#F9FAFB;padding:12px;border-radius:10px;margin-bottom:12px;border:1px solid #E5E7EB"><b>Total: R$ '+total+' • '+qtd+' shows</b></div>';html+='<b style="font-size:11px;color:#6B7280">POR MÚSICO:</b>';Object.keys(porMusico).sort().forEach(function(k){html+='<div style="display:flex;justify-content:space-between;padding:10px;border-bottom:1px solid #F3F4F6;font-size:13px"><span>'+k+' • '+porMusico[k].shows+' shows</span><b>R$ '+porMusico[k].valor+'</b></div>'});document.getElementById('relBody').innerHTML=html;document.getElementById('modRel').classList.add('open');}
+function getNomeBase(nome){
+  nome = nome.trim().toUpperCase();
+  var primeira = nome.split(' ')[0];
+  return primeira;
+}
+function openRelatorios(){
+  var total=eventos.reduce(function(s,e){return s+(e.valor||0)},0);
+  var qtd=eventos.reduce(function(s,e){return s+(e.slots?e.slots.length:1)},0);
+  var porBase={};
+  var detalhesPorBase={};
+  eventos.forEach(function(ev){
+    var q = ev.slots?ev.slots.length:1;
+    (ev.musicos||[]).forEach(function(m){
+      var base = getNomeBase(m.nome);
+      if(!porBase[base]) porBase[base]={valor:0,shows:0};
+      porBase[base].valor += (parseFloat(m.valor)||0)*q;
+      porBase[base].shows += q;
+      if(!detalhesPorBase[base]) detalhesPorBase[base]={};
+      if(!detalhesPorBase[base][m.nome]) detalhesPorBase[base][m.nome]={valor:0,shows:0};
+      detalhesPorBase[base][m.nome].valor += (parseFloat(m.valor)||0)*q;
+      detalhesPorBase[base][m.nome].shows += q;
+    });
+  });
+  var html='<div style="background:#F9FAFB;padding:12px;border-radius:10px;margin-bottom:12px;border:1px solid #E5E7EB"><b>Total: R$ '+total+' • '+qtd+' shows</b></div>';
+  html+='<b style="font-size:11px;color:#6B7280">POR NOME (AGRUPADO - DUO/TRIO/SOLO SOMADOS):</b>';
+  Object.keys(porBase).sort(function(a,b){return a.localeCompare(b)}).forEach(function(base){
+    var info=porBase[base];
+    html+='<div style="background:#111827;color:#fff;padding:10px 12px;border-radius:10px;margin:8px 0 4px;display:flex;justify-content:space-between;font-weight:800"><span>'+base+' • '+info.shows+' shows</span><span>R$ '+info.valor+'</span></div>';
+    var variacoes=Object.keys(detalhesPorBase[base]||{});
+    if(variacoes.length>1){
+      variacoes.sort().forEach(function(nomeCompleto){
+        var det=detalhesPorBase[base][nomeCompleto];
+        var resto = nomeCompleto.replace(base,'').trim()||'SOLO';
+        html+='<div style="display:flex;justify-content:space-between;padding:6px 12px 6px 24px;font-size:12px;color:#4B5563;border-bottom:1px dashed #E5E7EB"><span>↳ '+resto+' • '+det.shows+' shows</span><span>R$ '+det.valor+'</span></div>';
+      });
+    }
+  });
+  html+='<br><div style="height:1px;background:#E5E7EB;margin:12px 0"></div><b style="font-size:11px;color:#6B7280">DETALHADO ORIGINAL:</b>';
+  var porMusico={};
+  eventos.forEach(function(ev){(ev.musicos||[]).forEach(function(m){var q=ev.slots?ev.slots.length:1;if(!porMusico[m.nome])porMusico[m.nome]={valor:0,shows:0};porMusico[m.nome].valor+=(parseFloat(m.valor)||0)*q;porMusico[m.nome].shows+=q})});
+  Object.keys(porMusico).sort().forEach(function(k){html+='<div style="display:flex;justify-content:space-between;padding:8px 12px;font-size:11px;color:#9CA3AF"><span>'+k+' • '+porMusico[k].shows+' shows</span><span>R$ '+porMusico[k].valor+'</span></div>'});
+  document.getElementById('relBody').innerHTML=html;
+  document.getElementById('modRel').classList.add('open');
+}
 function escolheZap(){document.getElementById('modZap').classList.add('open');}
 function escolheFolha(){document.getElementById('modFolha').classList.add('open');}
 function escolheNormal(){document.getElementById('modNormal').classList.add('open');}
