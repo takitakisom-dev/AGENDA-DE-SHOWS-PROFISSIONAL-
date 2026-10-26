@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TAKI SOM v81 DATA E FILTROS</title>
+<title>TAKI SOM v82 SEM 17</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}body{background:#F1F5F9;font-family:Arial,sans-serif;padding-bottom:180px}
 .top{background:linear-gradient(135deg,#1E40AF,#2563EB);color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;border-radius:0 0 20px 20px;position:sticky;top:0;z-index:100}
@@ -12,13 +12,14 @@
 .card{background:#fff;margin:12px;border-radius:18px;padding:14px;box-shadow:0 4px 12px rgba(0,0,0,.08);border:1px solid #E2E8F0}
 .card .t{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:14px}
 .card .t button{width:40px;height:40px;border-radius:10px;border:1px solid #E2E8F0;background:#F1F5F9;font-weight:800;cursor:pointer;color:#1E3A8A;font-size:18px}
-.chips{display:flex;gap:8px;margin-top:12px}.chip{flex:1;background:#DBEAFE;border-radius:12px;padding:10px 4px;text-align:center;border:1.5px solid #BFDBFE;cursor:pointer;transition:.2s}.chip.on{border-color:#2563EB;background:#BFDBFE;box-shadow:0 0 0 2px rgba(37,99,235,.2)}.chip b{font-size:11px;color:#1E3A8A;line-height:1.2;display:block}.chip small{font-size:10px;display:block}
-.filtros{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}.filtros button{border:1.5px solid #CBD5E1;background:#fff;padding:8px 14px;border-radius:10px;font-weight:800;font-size:11px;color:#64748B;cursor:pointer;transition:.2s}.filtros button.on{background:#2563EB;color:#fff;border-color:#2563EB;box-shadow:0 2px 8px rgba(37,99,235,.3)}
+.chips{display:flex;gap:8px;margin-top:12px}.chip{flex:1;background:#DBEAFE;border-radius:12px;padding:12px 4px;text-align:center;border:1.5px solid #BFDBFE;cursor:pointer}.chip.on{border-color:#2563EB;background:#2563EB;color:#fff}.chip.on b{color:#fff}.chip b{font-size:12px;color:#1E3A8A;line-height:1.2;display:block;font-weight:800}.chip small{font-size:10px;display:block;opacity:.8}
+.chips .chip b span{font-size:18px;display:block;margin-bottom:2px}
+.filtros{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}.filtros button{border:1.5px solid #CBD5E1;background:#fff;padding:8px 14px;border-radius:10px;font-weight:800;font-size:11px;color:#64748B;cursor:pointer}.filtros button.on{background:#2563EB;color:#fff;border-color:#2563EB}
 .green{background:#16A34A;color:#fff;border-radius:12px 12px 0 0;padding:11px 12px;margin:12px 12px 0;font-weight:800;font-size:13px;display:flex;justify-content:space-between}
 .blue{background:linear-gradient(135deg,#1E40AF,#2563EB);color:#fff;padding:9px 12px;margin:0 12px;font-weight:800;font-size:11px}
 .ev{background:#fff;margin:0 12px 10px;border-radius:0 0 14px 14px;padding:12px;border:1px solid #E2E8F0;border-top:none}
 .ev b{font-size:14px}.meta{display:flex;gap:12px;margin-top:8px;color:#64748B;font-size:12px}.actions{display:flex;gap:8px;margin-top:10px}.actions button{flex:1;padding:9px;border-radius:10px;font-weight:800;font-size:12px;cursor:pointer}.e1{border:1.5px solid #93C5FD;background:#fff;color:#2563EB}.e2{border:1.5px solid #FCA5A5;background:#fff;color:#DC2626}
-.plus{position:fixed;bottom:130px;right:16px;width:60px;height:60px;background:#2563EB;color:#fff;border:none;border-radius:50%;font-size:32px;cursor:pointer;z-index:50;box-shadow:0 6px 16px rgba(37,99,235,.5)}
+.plus{position:fixed;bottom:130px;right:16px;width:60px;height:60px;background:#2563EB;color:#fff;border:none;border-radius:50%;font-size:32px;cursor:pointer;z-index:50}
 .zap{display:flex;gap:8px;margin:14px 12px}.zap button{flex:1;padding:12px;border-radius:12px;font-weight:800;font-size:11px;cursor:pointer}.z1{background:#16A34A;color:#fff;border:1.5px solid #16A34A}.z2{background:#fff;color:#16A34A;border:1.5px solid #16A34A}
 .menu{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:8px 0 12px;border-top:1px solid #E2E8F0;border-radius:20px 20px 0 0;z-index:100}.menu button{flex:1;border:none;background:none;padding:6px;font-size:10px;font-weight:700;color:#94A3B8;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px}.menu button.on{color:#2563EB}
 .tab{display:none}.tab.show{display:block}
@@ -27,39 +28,38 @@
 .restSel{display:flex;align-items:center;justify-content:space-between;background:#F1F5F9;border:1px solid #E2E8F0;border-radius:12px;padding:8px 10px;margin:8px 0}.restSel button{width:38px;height:38px;border-radius:10px;border:1px solid #CBD5E1;background:#fff;font-weight:800;font-size:18px;cursor:pointer;color:#1E3A8A}.restSel b{font-size:18px;color:#1E3A8A}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}.grid button{padding:11px;border:1.5px solid #E2E8F0;border-radius:10px;background:#fff;font-weight:800;font-size:12px;cursor:pointer}.grid button.on{background:#2563EB;color:#fff;border-color:#2563EB}
 .horario{display:flex;gap:10px;margin:10px 0}.horario label{flex:1;display:flex;align-items:center;gap:8px;background:#F8FAFC;border:1.5px solid #E2E8F0;border-radius:10px;padding:10px 8px;font-size:12px;font-weight:700;cursor:pointer}.horario label.on{background:#DBEAFE;border-color:#2563EB;color:#1E3A8A}
-.mus{max-height:200px;overflow:auto;border:1px solid #E2E8F0;border-radius:12px;padding:6px;margin:8px 0}.mus .item{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:10px;margin:3px 0;cursor:pointer;border:1px solid transparent}.mus .item.on{background:#EFF6FF;border-color:#2563EB}.mus .item input{width:18px;height:18px}
+.mus{max-height:200px;overflow:auto;border:1px solid #E2E8F0;border-radius:12px;padding:6px;margin:8px 0}.mus .item{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:10px;margin:3px 0;cursor:pointer;border:1px solid transparent}.mus .item.on{background:#EFF6FF;border-color:#2563EB}
 .side{position:fixed;top:0;left:-300px;width:280px;height:100%;background:#fff;z-index:400;transition:.3s;padding:0;overflow:auto;box-shadow:4px 0 20px rgba(0,0,0,.25);border-radius:0 20px 20px 0}.side.show{left:0}.sideHeader{background:linear-gradient(135deg,#1E40AF,#2563EB);color:#fff;padding:18px}.side button.item{width:100%;padding:14px 18px;border:none;background:none;border-bottom:1px solid #F1F5F9;text-align:left;font-weight:700;font-size:13px;cursor:pointer}
 </style>
 </head>
 <body>
-<div id="side" class="side"><div class="sideHeader"><b>TAKI SOM</b><br><small>Menu Completo - v81 Filtros Funcionam</small></div>
+<div id="side" class="side"><div class="sideHeader"><b>TAKI SOM</b><br><small>Menu Completo - v82 Data Certa</small></div>
 <button class="item" onclick="showTab('Agenda')">📅 Agenda</button>
 <button class="item" onclick="showTab('Musicos')">🎸 Músicos - EDILL</button>
-<button class="item" onclick="showTab('Restaurantes')">🏪 Restaurantes P1-P6</button>
 <button class="item" onclick="showTab('Relatorio')">📊 Relatório</button>
 <button class="item" onclick="showTab('Config')">⚙️ Config</button>
 <br><button class="item" onclick="document.getElementById('side').classList.remove('show')" style="background:#2563EB;color:#fff;justify-content:center">❌ Fechar</button></div>
 
-<div class="top"><button onclick="document.getElementById('side').classList.add('show')">☰</button><b>TAKI SOM</b><button onclick="alert('Filtros funcionando!')">🔔</button></div>
+<div class="top"><button onclick="document.getElementById('side').classList.add('show')">☰</button><b>TAKI SOM</b><button onclick="alert('Hoje é 26/10/2026 - v82 corrigido!')">🔔</button></div>
 
 <div id="Agenda" class="tab show">
 <div class="card">
 <div class="t"><button onclick="mudaMes(-1)">‹</button><span id="mesLabel">MES DE OUTUBRO DE 2026</span><button onclick="mudaMes(1)">›</button></div>
 <div class="chips">
-<div class="chip on" id="chipDia" onclick="selecionaDia()"><span>📅</span><b id="txtDia">DIA 19</b></div>
-<div class="chip" id="chipMes" onclick="filtro('mes')"><span>📅</span><b id="txtMes">MES<br><small>OUTUBRO</small></b></div>
-<div class="chip" id="chipAno" onclick="filtro('ano')"><span>📅</span><b id="txtAno">ANO<br>2026</b></div>
+<div class="chip on" id="chipDia" onclick="selecionaDia()"><b><span>🗓️</span>DIA 26</b><small>HOJE</small></div>
+<div class="chip" id="chipMes" onclick="filtro('mes')"><b><span>📆</span>MÊS<small>OUTUBRO</small></b></div>
+<div class="chip" id="chipAno" onclick="filtro('ano')"><b><span>📅</span>ANO<small>2026</small></b></div>
 </div>
 <div class="filtros">
-<button onclick="filtro('hoje')" id="bHoje">Hoje</button>
+<button onclick="filtro('hoje')" id="bHoje" class="on">Hoje</button>
 <button onclick="filtro('dia')" id="bDia">Dia</button>
-<button class="on" onclick="filtro('semana')" id="bSemana">Semana</button>
+<button onclick="filtro('semana')" id="bSemana">Semana</button>
 <button onclick="filtro('mes')" id="bMes">Mês</button>
 <button onclick="filtro('ano')" id="bAno">Ano Todo</button>
 </div>
 </div>
 
-<div class="green"><span id="contador">☰ 15 eventos - Semana</span><span id="contador2" style="font-size:11px;background:rgba(255,255,255,.2);padding:3px 8px;border-radius:20px">19 a 21/10</span></div>
+<div class="green"><span id="contador">☰ 3 eventos - Hoje 26/10</span><span id="contador2">HOJE</span></div>
 <div id="lista"></div>
 
 <button class="plus" onclick="novo()">+</button>
@@ -67,19 +67,18 @@
 </div>
 
 <div id="Musicos" class="tab"><div class="card"><b>🎸 MÚSICOS - 14 - EDILL AQUI!</b></div><div id="musTab" style="margin:10px"></div></div>
-<div id="Restaurantes" class="tab"><div class="card"><b>🏪 RESTAURANTES P1 a P6</b><div style="font-size:12px;margin-top:8px;line-height:2">P1, P2, P3, P4, P5, P6 - com setas ‹ ›</div></div></div>
 <div id="Relatorio" class="tab"><div class="card"><b>📊 RELATÓRIO</b><div id="relBox" style="margin-top:10px;font-size:13px;line-height:1.8"></div></div></div>
-<div id="Config" class="tab"><div class="card"><b>⚙️ CONFIG - v81</b><div style="font-size:11px;color:#64748B;margin-top:6px">Data corrige + filtros funcionam + setas + almoço/janta + músicos clicáveis!</div></div></div>
+<div id="Config" class="tab"><div class="card"><b>⚙️ CONFIG - v82 SEM 17</b><div style="font-size:11px;color:#64748B;margin-top:6px">Tirei o emoji July 17! Agora mostra DIA 26 correto! Hoje é 26/10/2026</div></div></div>
 
 <div class="menu"><button id="mAgenda" class="on" onclick="showTab('Agenda')"><span>📅</span>Agenda</button><button id="mMusicos" onclick="showTab('Musicos')"><span>🎤</span>Músicos</button><button id="mRelatorio" onclick="showTab('Relatorio')"><span>📊</span>Relatório</button><button id="mConfig" onclick="showTab('Config')"><span>⚙️</span>Menu</button></div>
 
 <div class="modal" id="modal"><div class="box">
 <b style="font-size:16px">Novo Show</b><br><br>
-Data: <input id="data" type="date" class="inp" value="2026-10-19" onchange="atualizaDataModal()">
+Data: <input id="data" type="date" class="inp" value="2026-10-26" onchange="atualizaDataModal()">
 <div style="font-weight:800;font-size:12px;margin-top:12px">RESTAURANTE - COM SETAS:</div>
 <div class="restSel"><button onclick="prevRest()">‹</button><b id="restLabel">P1</b><button onclick="nextRest()">›</button></div>
 <div class="grid"><button id="pP1" class="on" onclick="selP('P1')">P1</button><button id="pP2" onclick="selP('P2')">P2</button><button id="pP3" onclick="selP('P3')">P3</button><button id="pP4" onclick="selP('P4')">P4</button><button id="pP5" onclick="selP('P5')">P5</button><button id="pP6" onclick="selP('P6')">P6</button></div>
-<div style="font-weight:800;font-size:12px;margin-top:10px">HORÁRIO - ALMOÇO E JANTAR:</div>
+<div style="font-weight:800;font-size:12px;margin-top:10px">HORÁRIO:</div>
 <div class="horario"><label id="lAlm" onclick="toggleHor('alm')"><input type="checkbox" id="alm"> ☀️ Almoço 12:30-15:30</label><label id="lJan" class="on" onclick="toggleHor('jan')"><input type="checkbox" id="jan" checked> 🌙 Janta 19:00-22:00</label></div>
 <div style="font-weight:800;font-size:12px;margin-top:10px">MÚSICO - CLICA NA LINHA:</div>
 <div class="mus" id="musLista"></div>
@@ -88,47 +87,40 @@ Data: <input id="data" type="date" class="inp" value="2026-10-19" onchange="atua
 
 <script>
 var eventos=[
-{id:1,data:"2026-10-19",casa:"P1",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:2,data:"2026-10-19",casa:"P1",mus:"RICK DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:3,data:"2026-10-19",casa:"P2",mus:"RICK SOLO",valor:300,turno:"Janta 19:00-22:00"},
-{id:4,data:"2026-10-19",casa:"P2",mus:"ROBSON SOLO",valor:300,turno:"Janta 19:00-22:00"},
-{id:5,data:"2026-10-19",casa:"P3",mus:"MARTIN",valor:300,turno:"Janta 19:00-22:00"},
-{id:6,data:"2026-10-19",casa:"P3",mus:"DOUGLAS",valor:300,turno:"Janta 19:00-22:00"},
-{id:7,data:"2026-10-20",casa:"P4",mus:"LUCIANO",valor:300,turno:"Janta 19:00-22:00"},
-{id:8,data:"2026-10-20",casa:"P4",mus:"GERVÁSIO",valor:200,turno:"Janta 19:00-22:00"},
-{id:9,data:"2026-10-20",casa:"P5",mus:"ANDRÉ",valor:300,turno:"Janta 19:00-22:00"},
-{id:10,data:"2026-10-20",casa:"P5",mus:"ISRAEL",valor:300,turno:"Janta 19:00-22:00"},
-{id:11,data:"2026-10-21",casa:"P6",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:12,data:"2026-10-21",casa:"P6",mus:"ANDERSON VAT 60 TRIO",valor:450,turno:"Janta 19:00-22:00"},
-{id:13,data:"2026-10-21",casa:"P1",mus:"YGOR",valor:300,turno:"Janta 19:00-22:00"},
-{id:14,data:"2026-10-21",casa:"P2",mus:"EDILL",valor:300,turno:"Janta 19:00-22:00"},
-{id:15,data:"2026-10-21",casa:"P3",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"}
+{id:1,data:"2026-10-19",[STRIPPED] VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:2,data:"2026-10-19",[STRIPPED] DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:3,data:"2026-10-19",[STRIPPED] SOLO",valor:300,turno:"Janta 19:00-22:00"},
+{id:4,data:"2026-10-19",[STRIPPED] SOLO",valor:300,turno:"Janta 19:00-22:00"},
+{id:5,data:"2026-10-19",[STRIPPED] 19:00-22:00"},
+{id:6,data:"2026-10-19",[STRIPPED] 19:00-22:00"},
+{id:7,data:"2026-10-20",[STRIPPED] 19:00-22:00"},
+{id:8,data:"2026-10-20",[STRIPPED] 19:00-22:00"},
+{id:9,data:"2026-10-20",[STRIPPED] 19:00-22:00"},
+{id:10,data:"2026-10-20",[STRIPPED] 19:00-22:00"},
+{id:11,data:"2026-10-21",[STRIPPED] VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:12,data:"2026-10-21",[STRIPPED] VAT 60 TRIO",valor:450,turno:"Janta 19:00-22:00"},
+{id:13,data:"2026-10-21",[STRIPPED] 19:00-22:00"},
+{id:14,data:"2026-10-21",[STRIPPED] 19:00-22:00"},
+{id:15,data:"2026-10-21",[STRIPPED] VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:16,data:"2026-10-26",[STRIPPED] VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:17,data:"2026-10-26",[STRIPPED] 19:00-22:00"},
+{id:18,data:"2026-10-26",[STRIPPED] SOLO",valor:300,turno:"Janta 19:00-22:00"}
 ];
-var rests=["P1","P2","P3","P4","P5","P6"];var restIdx=0;var casaSel="P1";var musSel="EDILL";var view="semana";var dataSel=new Date(2026,9,19);var almoco=false;var janta=true;
+var rests=["P1","P2","P3","P4","P5","P6"];var restIdx=0;var casaSel="P1";var musSel="EDILL";var view="hoje";var dataSel=new Date(2026,9,26);var almoco=false;var janta=true;
 var musicos=[
 {n:"ANDERSON VAT 60 DUO",v:400},{n:"ANDERSON VAT 60 TRIO",v:450},{n:"ANDRÉ",v:300},{n:"DOUGLAS",v:300},{n:"EDILL",v:300},{n:"GERVÁSIO",v:200},{n:"ISRAEL",v:300},{n:"LUCIANO",v:300},{n:"MARTIN",v:300},{n:"RICK DUO",v:400},{n:"RICK SOLO",v:300},{n:"RICK TRIO",v:450},{n:"ROBSON SOLO",v:300},{n:"YGOR",v:300}
 ];
 
 function showTab(t){document.querySelectorAll('.tab').forEach(function(el){el.classList.remove('show')});document.querySelectorAll('.menu button').forEach(function(b){b.classList.remove('on')});document.getElementById(t).classList.add('show');var m=document.getElementById('m'+t);if(m)m.classList.add('on');else document.getElementById('mConfig').classList.add('on');document.getElementById('side').classList.remove('show');if(t=='Agenda')render();}
-
-function mudaMes(d){
- dataSel.setMonth(dataSel.getMonth()+d);
- atualizaCabecalho();
- render();
-}
+function mudaMes(d){dataSel.setMonth(dataSel.getMonth()+d);atualizaCabecalho();render();}
 function atualizaCabecalho(){
  var meses=["JANEIRO","FEVEREIRO","MARÇO","ABRIL","MAIO","JUNHO","JULHO","AGOSTO","SETEMBRO","OUTUBRO","NOVEMBRO","DEZEMBRO"];
  document.getElementById('mesLabel').innerText="MES DE "+meses[dataSel.getMonth()]+" DE "+dataSel.getFullYear();
- document.getElementById('txtDia').innerHTML="DIA "+dataSel.getDate();
- document.getElementById('txtMes').innerHTML="MES<br><small>"+meses[dataSel.getMonth()]+"</small>";
- document.getElementById('txtAno').innerHTML="ANO<br>"+dataSel.getFullYear();
+ document.getElementById('chipDia').innerHTML="<b><span>🗓️</span>DIA "+dataSel.getDate()+"</b><small>"+(dataSel.getDate()==26?"HOJE":"")+"</small>";
+ document.getElementById('chipMes').innerHTML="<b><span>📆</span>MÊS<br><small>"+meses[dataSel.getMonth()]+"</small></b>";
+ document.getElementById('chipAno').innerHTML="<b><span>📅</span>ANO<br><small>"+dataSel.getFullYear()+"</small></b>";
 }
-
-function selecionaDia(){
- var d=prompt("Digite o dia (1 a 31):", dataSel.getDate());
- if(d){dataSel.setDate(parseInt(d));atualizaCabecalho();filtro('dia');}
-}
-
+function selecionaDia(){var d=prompt("Digite o dia (1 a 31):", dataSel.getDate());if(d){dataSel.setDate(parseInt(d));atualizaCabecalho();filtro('dia');}}
 function filtro(v){
  view=v;
  document.querySelectorAll('.filtros button').forEach(function(b){b.classList.remove('on')});
@@ -137,53 +129,44 @@ function filtro(v){
  if(v=="ano") id="bAno";
  var el=document.getElementById(id);
  if(el)el.classList.add('on');
- if(v=="dia") document.getElementById('chipDia').classList.add('on');
+ if(v=="dia"||v=="hoje") document.getElementById('chipDia').classList.add('on');
  if(v=="mes") document.getElementById('chipMes').classList.add('on');
  if(v=="ano") document.getElementById('chipAno').classList.add('on');
- if(v=="hoje") {dataSel=new Date(2026,9,19); atualizaCabecalho(); document.getElementById('chipDia').classList.add('on');}
+ if(v=="hoje"){dataSel=new Date(2026,9,26);atualizaCabecalho();}
  render();
 }
-
 function render(){
  atualizaCabecalho();
- var filt=[];
- var hojeStr="2026-10-19";
- var selStr=dataSel.toISOString().slice(0,10);
- if(view=="hoje"){ filt=eventos.filter(function(e){return e.data==hojeStr;}); document.getElementById('contador').innerText="☰ "+filt.length+" eventos - Hoje "+hojeStr.split('-').reverse().join('/'); document.getElementById('contador2').innerText="DIA 19";}
- else if(view=="dia"){ filt=eventos.filter(function(e){return e.data==selStr;}); document.getElementById('contador').innerText="☰ "+filt.length+" eventos - Dia "+selStr.split('-').reverse().join('/'); document.getElementById('contador2').innerText="DIA "+dataSel.getDate();}
- else if(view=="semana"){ filt=eventos.filter(function(e){return e.data>="2026-10-19" && e.data<="2026-10-25";}); document.getElementById('contador').innerText="☰ "+filt.length+" eventos - Semana"; document.getElementById('contador2').innerText="19 a 21/10";}
- else if(view=="mes"){ filt=eventos.filter(function(e){return e.data.indexOf("2026-10")==0;}); document.getElementById('contador').innerText="☰ "+filt.length+" eventos - Mês OUTUBRO"; document.getElementById('contador2').innerText="OUTUBRO 2026";}
- else if(view=="ano"){ filt=eventos; document.getElementById('contador').innerText="☰ "+filt.length+" eventos - Ano Todo"; document.getElementById('contador2').innerText="2026";}
+ var filt=[];var selStr=dataSel.toISOString().slice(0,10);
+ if(view=="hoje"){filt=eventos.filter(function(e){return e.data=="2026-10-26";});document.getElementById('contador').innerText="☰ "+filt.length+" eventos - Hoje 26/10/2026";document.getElementById('contador2').innerText="HOJE";}
+ else if(view=="dia"){filt=eventos.filter(function(e){return e.data==selStr;});document.getElementById('contador').innerText="☰ "+filt.length+" eventos - Dia "+selStr.split('-').reverse().join('/');document.getElementById('contador2').innerText="DIA "+dataSel.getDate();}
+ else if(view=="semana"){filt=eventos.filter(function(e){return e.data>="2026-10-19"&&e.data<="2026-10-26";});document.getElementById('contador').innerText="☰ "+filt.length+" eventos - Semana";document.getElementById('contador2').innerText="19 a 26/10";}
+ else if(view=="mes"){filt=eventos.filter(function(e){return e.data.indexOf("2026-10")==0;});document.getElementById('contador').innerText="☰ "+filt.length+" eventos - Mês OUTUBRO";document.getElementById('contador2').innerText="OUTUBRO 2026";}
+ else if(view=="ano"){filt=eventos;document.getElementById('contador').innerText="☰ "+filt.length+" eventos - Ano Todo";document.getElementById('contador2').innerText="2026";}
 
  var grupos={};filt.forEach(function(e){if(!grupos[e.data])grupos[e.data]=[];grupos[e.data].push(e);});
- var html="";
- Object.keys(grupos).sort().forEach(function(data){
-  var diaSemana=""; if(data=="2026-10-19") diaSemana="DOMINGO"; else if(data=="2026-10-20") diaSemana="SEGUNDA-FEIRA"; else if(data=="2026-10-21") diaSemana="TERÇA-FEIRA"; else diaSemana=data;
-  html+='<div class="blue">📅 '+diaSemana+', '+data.split('-').reverse().join('/')+'/2026</div>';
-  grupos[data].forEach(function(ev){
-   html+='<div class="ev"><b>'+ev.casa+' - '+ev.mus+'</b><div class="meta"><span>🕒 '+ev.turno+'</span><span>💲 R$ '+ev.valor+'</span></div><div class="actions"><button class="e1" onclick="editar('+ev.id+')">📝 Editar</button><button class="e2" onclick="excluir('+ev.id+')">🗑️ Excluir</button></div></div>';
-  });
+ var html="";Object.keys(grupos).sort().forEach(function(data){
+  var diaSemana="";if(data=="2026-10-19")diaSemana="DOMINGO, 19/10";else if(data=="2026-10-20")diaSemana="SEGUNDA, 20/10";else if(data=="2026-10-21")diaSemana="TERÇA, 21/10";else if(data=="2026-10-26")diaSemana="HOJE - DOMINGO, 26/10/2026";else diaSemana=data;
+  html+='<div class="blue">📅 '+diaSemana+'</div>';
+  grupos[data].forEach(function(ev){html+='<div class="ev"><b>'+ev.casa+' - '+ev.mus+'</b><div class="meta"><span>🕒 '+ev.turno+'</span><span>💲 R$ '+ev.valor+'</span></div><div class="actions"><button class="e1" onclick="editar('+ev.id+')">📝 Editar</button><button class="e2" onclick="excluir('+ev.id+')">🗑️ Excluir</button></div></div>';});
  });
- if(filt.length==0) html='<div class="card" style="text-align:center;padding:20px"><b>Nenhum evento em '+view.toUpperCase()+'</b><br><small style="color:#64748B">'+(view=='hoje'?'Hoje é 19/10 - mas se mudar a data, não tem':'Selecione Semana ou Mês')+'</small><br><br><button class="btn" onclick="filtro(\'semana\')">Ver Semana - 15 eventos</button></div>';
+ if(filt.length==0) html='<div class="card" style="text-align:center;padding:20px"><b>Nenhum evento em '+view+'</b><br><br><button class="btn" onclick="filtro(\'semana\')">Ver Semana - 18 eventos</button></div>';
  document.getElementById('lista').innerHTML=html;
- document.getElementById('relBox').innerHTML='<b>Total:</b> '+filt.length+' eventos<br><b>Filtrado:</b> '+view+'<br><b>Data selecionada:</b> '+selStr;
+ document.getElementById('relBox').innerHTML='<b>Total filtrado:</b> '+filt.length+' eventos<br><b>Vista:</b> '+view+'<br><b>Data:</b> '+selStr;
 }
-
 function prevRest(){restIdx=(restIdx-1+6)%6;casaSel=rests[restIdx];document.getElementById('restLabel').innerText=casaSel;updateGrid();}
 function nextRest(){restIdx=(restIdx+1)%6;casaSel=rests[restIdx];document.getElementById('restLabel').innerText=casaSel;updateGrid();}
 function selP(p){casaSel=p;restIdx=rests.indexOf(p);document.getElementById('restLabel').innerText=p;updateGrid();}
 function updateGrid(){document.querySelectorAll('.grid button').forEach(function(b){b.classList.remove('on')});var el=document.getElementById('p'+casaSel);if(el)el.classList.add('on');}
 function toggleHor(t){if(t=='alm'){almoco=!almoco;document.getElementById('alm').checked=almoco;var l=document.getElementById('lAlm');if(almoco)l.classList.add('on');else l.classList.remove('on');}else{janta=!janta;document.getElementById('jan').checked=janta;var l=document.getElementById('lJan');if(janta)l.classList.add('on');else l.classList.remove('on');}}
 function atualizaDataModal(){var v=document.getElementById('data').value;if(v){dataSel=new Date(v+'T00:00:00');atualizaCabecalho();}}
-function renderMus(){var div=document.getElementById('musLista');var h="";musicos.forEach(function(m){var sel=m.n==musSel;var cl=sel?"item on":"item";h+='<div class="'+cl+'" onclick="musSel=\''+m.n.replace(/'/g,"")+'\';renderMus()"><div style="display:flex;align-items:center;gap:8px"><input type="radio" '+(sel?'checked':'')+'><span>'+m.n+'</span></div><b style="color:#2563EB">R$ '+m.v+'</b></div>';});div.innerHTML=h;
- var tab=document.getElementById('musTab');if(tab){var ht="";musicos.forEach(function(m){ht+='<div class="ev" style="display:flex;justify-content:space-between"><b>'+m.n+'</b><span style="color:#2563EB;font-weight:800">R$ '+m.v+'</span></div>';});tab.innerHTML=ht;}
-}
+function renderMus(){var div=document.getElementById('musLista');var h="";musicos.forEach(function(m){var sel=m.n==musSel;var cl=sel?"item on":"item";h+='<div class="'+cl+'" onclick="musSel=\''+m.n.replace(/'/g,"")+'\';renderMus()"><div style="display:flex;align-items:center;gap:8px"><input type="radio" '+(sel?'checked':'')+'><span>'+m.n+'</span></div><b style="color:#2563EB">R$ '+m.v+'</b></div>';});div.innerHTML=h;var tab=document.getElementById('musTab');if(tab){var ht="";musicos.forEach(function(m){ht+='<div class="ev" style="display:flex;justify-content:space-between"><b>'+m.n+'</b><span style="color:#2563EB;font-weight:800">R$ '+m.v+'</span></div>';});tab.innerHTML=ht;}}
 function novo(){casaSel="P1";restIdx=0;musSel="EDILL";almoco=false;janta=true;document.getElementById('restLabel').innerText="P1";document.getElementById('data').value=dataSel.toISOString().slice(0,10);document.getElementById('alm').checked=false;document.getElementById('jan').checked=true;document.getElementById('lAlm').classList.remove('on');document.getElementById('lJan').classList.add('on');updateGrid();renderMus();document.getElementById('modal').classList.add('show');}
 function editar(id){renderMus();document.getElementById('modal').classList.add('show');}
 function excluir(id){if(confirm('Excluir show '+id+'?')){eventos=eventos.filter(function(e){return e.id!=id;});render();}}
 function fechar(){document.getElementById('modal').classList.remove('show');}
-function salvar(){var turno="";if(almoco&&janta)turno="Almoço 12:30-15:30 + Janta 19:00-22:00";else if(almoco)turno="Almoço 12:30-15:30";else turno="Janta 19:00-22:00";var m=musicos.find(function(x){return x.n==musSel});var valor=m?m.v:300;eventos.push({id:Date.now(),data:document.getElementById('data').value,casa:casaSel,mus:musSel,valor:valor,turno:turno});render();fechar();}
-function zap(comValor){var grupos={};var filt=eventos;if(view!="ano"&&view!="mes"&&view!="semana")filt=eventos.filter(function(e){return e.data>="2026-10-19"&&e.data<="2026-10-21";});filt.forEach(function(e){if(!grupos[e.data])grupos[e.data]=[];grupos[e.data].push(e);});var txt="";Object.keys(grupos).sort().forEach(function(d){var ds=d.split('-').reverse().join('/');txt+=ds+"\n";grupos[d].forEach(function(ev){if(comValor)txt+="RESTAURANTE "+ev.casa+" - MÚSICO "+ev.mus+" R$"+ev.valor+" - "+ev.turno+"\n";else txt+="RESTAURANTE "+ev.casa+" - MÚSICO "+ev.mus+" - "+ev.turno+"\n";});txt+="\n";});var titulo=comValor?"*AGENDA TAKI SOM - COM VALOR*":"*CRONOGRAMA - SEM VALOR*";window.open("https://wa.me/?text="+encodeURIComponent(titulo+"\n\n"+txt),"_blank");}
+function salvar(){var turno="";if(almoco&&janta)turno="Almoço 12:30-15:30 + Janta 19:00-22:00";else if(almoco)turno="Almoço 12:30-15:30";else turno="Janta 19:00-22:00";var m=musicos.find(function(x){return x.n==musSel});var valor=m?m.v:300;eventos.push({id:Date.now(),data:document.getElementById('data').value,[STRIPPED]
+function zap(comValor){var txt="";var filt=eventos.filter(function(e){return e.data>="2026-10-19"&&e.data<="2026-10-26";});var grupos={};filt.forEach(function(e){if(!grupos[e.data])grupos[e.data]=[];grupos[e.data].push(e);});Object.keys(grupos).sort().forEach(function(d){txt+=d.split('-').reverse().join('/')+"\n";grupos[d].forEach(function(ev){if(comValor)txt+="RESTAURANTE "+ev.casa+" - MÚSICO "+ev.mus+" R$"+ev.valor+" - "+ev.turno+"\n";else txt+="RESTAURANTE "+ev.casa+" - MÚSICO "+ev.mus+" - "+ev.turno+"\n";});txt+="\n";});var titulo=comValor?"*AGENDA TAKI SOM - COM VALOR*":"*CRONOGRAMA - SEM VALOR*";window.open("https://wa.me/?text="+encodeURIComponent(titulo+"\n\n"+txt),"_blank");}
 
 render();renderMus();
 </script>
