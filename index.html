@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TAKI SOM v91 ORDEM ALFABETICA</title>
+<title>TAKI SOM v92 CORRIGIDA SEM 2 NOMES</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}body{background:#F1F5F9;font-family:Arial,sans-serif;padding-bottom:190px}
+*{box-sizing:border-box;margin:0;padding:0}body{background:#F1F5F9;font-family:Arial,sans-serif;padding-bottom:110px}
 .top{background:linear-gradient(135deg,#1E40AF,#2563EB);color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;border-radius:0 0 20px 20px}
 .top button{background:none;border:none;color:#fff;font-size:22px;cursor:pointer}
 .top b{font-size:20px;font-weight:800}
@@ -18,9 +18,11 @@
 .blue{background:#2563EB;color:#fff;padding:9px 12px;margin:12px 12px 0;font-weight:800;font-size:11px}
 .ev{background:#fff;margin:0 12px 10px;border-radius:0 0 14px 14px;padding:12px;border:1px solid #E2E8F0;border-top:none}
 .ev b{font-size:14px}.meta{display:flex;gap:12px;margin-top:8px;color:#64748B;font-size:12px}.actions{display:flex;gap:8px;margin-top:10px}.actions button{flex:1;padding:10px;border-radius:10px;font-weight:800;font-size:12px;cursor:pointer}.e1{border:1.5px solid #93C5FD;background:#fff;color:#2563EB}.e2{border:1.5px solid #FCA5A5;background:#fff;color:#DC2626}
-.plus{position:fixed;bottom:130px;right:16px;width:60px;height:60px;background:#2563EB;color:#fff;border:none;border-radius:50%;font-size:32px;cursor:pointer;z-index:50;box-shadow:0 6px 16px rgba(37,99,235,.5)}
+.plus{position:fixed;bottom:90px;right:16px;width:60px;height:60px;background:#2563EB;color:#fff;border:none;border-radius:50%;font-size:32px;cursor:pointer;z-index:50;box-shadow:0 6px 16px rgba(37,99,235,.5)}
 .zap{display:flex;gap:8px;margin:14px 12px}.zap button{flex:1;padding:12px;border-radius:12px;font-weight:800;font-size:11px;cursor:pointer}.z1{background:#16A34A;color:#fff;border:1.5px solid #16A34A}.z2{background:#fff;color:#16A34A;border:1.5px solid #16A34A}
-.menu{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:8px 0 12px;border-top:1px solid #E2E8F0;border-radius:20px 20px 0 0;z-index:100}.menu button{flex:1;border:none;background:none;padding:6px;font-size:10px;font-weight:700;color:#94A3B8;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px}.menu button.on{color:#2563EB}
+.menuBottom{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:12px 0;border-top:1px solid #E2E8F0;border-radius:20px 20px 0 0;z-index:100}
+.menuBottom button{flex:1;border:none;background:none;padding:10px;font-size:13px;font-weight:800;color:#94A3B8;cursor:pointer}
+.menuBottom button.on{color:#2563EB}
 .tab{display:none}.tab.show{display:block}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:200;padding:12px}.modal.show{display:flex}.box{background:#fff;border-radius:16px;padding:16px;width:100%;max-width:430px;max-height:90vh;overflow:auto}
 .inp{width:100%;padding:11px;border:1px solid #E2E8F0;border-radius:10px;margin:6px 0}.btn{width:100%;padding:12px;border:none;border-radius:10px;font-weight:800;background:#2563EB;color:#fff;margin-top:10px;cursor:pointer}
@@ -29,7 +31,7 @@
 .horario{display:flex;gap:10px;margin:10px 0}.horario label{flex:1;display:flex;align-items:center;gap:8px;background:#F8FAFC;border:1.5px solid #E2E8F0;border-radius:10px;padding:10px 8px;font-size:12px;font-weight:700;cursor:pointer}.horario label.on{background:#DBEAFE;border-color:#2563EB;color:#1E3A8A}
 .mus{max-height:200px;overflow:auto;border:1px solid #E2E8F0;border-radius:12px;padding:6px;margin:8px 0}.mus .item{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:10px;margin:3px 0;cursor:pointer;border:1px solid transparent}.mus .item.on{background:#EFF6FF;border-color:#2563EB}
 .musCard{background:#fff;margin:0 12px 10px;border-radius:14px;padding:14px;border:1px solid #E2E8F0;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
-.side{position:fixed;top:0;left:-320px;width:310px;height:100%;background:#fff;z-index:400;transition:.3s;padding:0;overflow:auto;box-shadow:4px 0 20px rgba(0,0,0,.25);border-radius:0 20px 20px 0}.side.show{left:0}.sideHeader{background:linear-gradient(135deg,#1E40AF,#2563EB);color:#fff;padding:22px 18px;font-size:20px;font-weight:800;letter-spacing:1px}.side button.item{width:100%;padding:15px 18px;border:none;background:none;border-bottom:1px solid #F1F5F9;text-align:left;font-weight:700;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:10px}
+.side{position:fixed;top:0;left:-320px;width:310px;height:100%;background:#fff;z-index:400;transition:.3s;padding:0;overflow:auto;box-shadow:4px 0 20px rgba(0,0,0,.25);border-radius:0 20px 20px 0}.side.show{left:0}.sideHeader{background:linear-gradient(135deg,#1E40AF,#2563EB);color:#fff;padding:22px 18px;font-size:20px;font-weight:800;letter-spacing:1px}.side button.item{width:100%;padding:15px 18px;border:none;background:none;border-bottom:1px solid #F1F5F9;text-align:left;font-weight:700;font-size:13px;cursor:pointer}
 .badge{background:#DC2626;color:#fff;font-size:10px;padding:2px 6px;border-radius:10px;position:absolute;top:6px;right:6px;font-weight:800}
 .bellWrap{position:relative}
 </style>
@@ -76,7 +78,7 @@
 </div>
 
 <div id="Musicos" class="tab">
-<div class="card" style="padding:12px"><b style="font-size:16px">MÚSICOS</b><br><small style="color:#64748B">Ordem alfabetica A-Z - Toque pra editar</small></div>
+<div class="card" style="padding:12px"><b style="font-size:16px">MÚSICOS</b><br><small style="color:#64748B">Ordem alfabetica A-Z</small></div>
 <div id="musTab" style="margin:10px"></div>
 <div style="margin:14px 12px">
 <button class="btn" onclick="novoMusico()" style="background:#16A34A">+ Novo Musico</button>
@@ -84,24 +86,29 @@
 </div>
 </div>
 
-<div id="Restaurantes" class="tab"><div class="card"><b>RESTAURANTES - ORDEM ALFABETICA</b><div style="font-size:13px;line-height:2.2;margin-top:8px"><b>P1</b> - Restaurante 1<br><b>P2</b> - Restaurante 2<br><b>P3</b> - Restaurante 3<br><b>P4</b> - Restaurante 4<br><b>P5</b> - Restaurante 5<br><b>P6</b> - Restaurante 6<br><br><small style="color:#64748B">Ja em ordem P1 a P6 - A-Z</small></div></div></div>
-<div id="Valores" class="tab"><div class="card"><b>VALORES - DO MAIOR PARA O MENOR</b><br><small style="color:#64748B">Maior valor primeiro - R$450, R$400, R$300, R$200</small><div id="valoresBox" style="margin-top:10px"></div></div></div>
-<div id="Relatorio" class="tab"><div class="card"><b>RELATORIO MENSAL - FINANCEIRO MAIOR PARA MENOR</b><div id="relBox" style="margin-top:10px;font-size:13px;line-height:1.8"></div></div></div>
-<div id="Anual" class="tab"><div class="card"><b>RELATORIO ANUAL 2026 - MAIOR PARA MENOR</b><div id="anualBox" style="margin-top:10px;font-size:13px;line-height:1.8"></div></div></div>
-<div id="Horarios" class="tab"><div class="card"><b>HORARIOS</b><div style="font-size:13px;margin-top:10px;line-height:2"><b>Almoco:</b> 12:30-15:30<br><b>Janta:</b> 19:00-22:00</div></div></div>
-<div id="Config" class="tab"><div class="card"><b>CONFIG v91</b><br><small>Ordem alfabetica + Financeiro maior-menor + Menu so MENU</small><br><br><button class="btn" onclick="abrirSino()">Notificacoes</button><br><br><button class="btn" onclick="restaurar()">Restaurar 18 eventos</button></div></div>
+<div id="Restaurantes" class="tab"><div class="card"><b>RESTAURANTES - A-Z</b><div style="font-size:13px;line-height:2.2;margin-top:8px">P1 - Restaurante 1<br>P2 - Restaurante 2<br>P3 - Restaurante 3<br>P4 - Restaurante 4<br>P5 - Restaurante 5<br>P6 - Restaurante 6</div></div></div>
+<div id="Valores" class="tab"><div class="card"><b>VALORES - MAIOR PARA MENOR</b><div id="valoresBox" style="margin-top:10px"></div></div></div>
+<div id="Relatorio" class="tab"><div class="card"><b>RELATORIO MENSAL - MAIOR PARA MENOR</b><div id="relBox" style="margin-top:10px;font-size:13px;line-height:1.8"></div></div></div>
+<div id="Anual" class="tab"><div class="card"><b>RELATORIO ANUAL 2026</b><div id="anualBox" style="margin-top:10px;font-size:13px;line-height:1.8"></div></div></div>
+<div id="Horarios" class="tab"><div class="card"><b>HORARIOS</b><div style="font-size:13px;margin-top:10px;line-height:2">Almoco: 12:30-15:30<br>Janta: 19:00-22:00</div></div></div>
+<div id="Config" class="tab"><div class="card"><b>CONFIG v92</b><br><small>Corrigida - 1 botao pra cada nome - Lista volta - Botoes funcionando</small><br><br><button class="btn" onclick="abrirSino()">Notificacoes</button><br><br><button class="btn" onclick="restaurar()">Restaurar 18 eventos</button></div></div>
 
-<div class="menu"><button id="mAgenda" class="on" onclick="abrir('Agenda')"><span>Agenda</span>Agenda</button><button id="mMusicos" onclick="abrir('Musicos')"><span>Musicos</span>Músicos</button><button id="mRelatorio" onclick="abrir('Relatorio')"><span>Relatorio</span>Relatório</button><button id="mConfig" onclick="abrir('Config')"><span>Menu</span>Menu</button></div>
+<div class="menuBottom">
+<button id="mAgenda" class="on" onclick="abrir('Agenda')">Agenda</button>
+<button id="mMusicos" onclick="abrir('Musicos')">Músicos</button>
+<button id="mRelatorio" onclick="abrir('Relatorio')">Relatório</button>
+<button id="mConfig" onclick="abrir('Config')">Menu</button>
+</div>
 
 <div class="modal" id="modal"><div class="box">
 <b id="modalTitulo">Novo Show</b><br><br>
 Data: <input id="data" type="date" class="inp" value="2026-10-26">
-<div style="font-weight:800;font-size:12px;margin-top:12px">RESTAURANTE - A-Z - COM SETAS:</div>
+<div style="font-weight:800;font-size:12px;margin-top:12px">RESTAURANTE - A-Z:</div>
 <div class="restSel"><button onclick="prevRest()">‹</button><b id="restLabel">P1</b><button onclick="nextRest()">›</button></div>
 <div class="grid"><button id="pP1" class="on" onclick="selP('P1')">P1</button><button id="pP2" onclick="selP('P2')">P2</button><button id="pP3" onclick="selP('P3')">P3</button><button id="pP4" onclick="selP('P4')">P4</button><button id="pP5" onclick="selP('P5')">P5</button><button id="pP6" onclick="selP('P6')">P6</button></div>
-<div style="font-weight:800;font-size:12px;margin-top:10px">HORARIO - ALMOCO E JANTAR:</div>
+<div style="font-weight:800;font-size:12px;margin-top:10px">HORARIO:</div>
 <div class="horario"><label id="lAlm" onclick="toggleHor('alm')"><input type="checkbox" id="alm"> Almoco 12:30-15:30</label><label id="lJan" class="on" onclick="toggleHor('jan')"><input type="checkbox" id="jan" checked> Janta 19:00-22:00</label></div>
-<div style="font-weight:800;font-size:12px;margin-top:10px">MUSICO - ORDEM ALFABETICA A-Z:</div>
+<div style="font-weight:800;font-size:12px;margin-top:10px">MUSICO - A-Z:</div>
 <div class="mus" id="musLista"></div>
 <button class="btn" onclick="salvar()">Salvar - vai pra tela!</button><button class="btn" style="background:#fff;color:#64748B;border:1px solid #E2E8F0" onclick="fechar()">Cancelar</button>
 </div></div>
@@ -109,7 +116,7 @@ Data: <input id="data" type="date" class="inp" value="2026-10-26">
 <div class="modal" id="modalMusico"><div class="box">
 <b id="modalMusicoTitulo">Novo Musico</b><br><br>
 Nome: <input id="musNome" class="inp" placeholder="Ex: EDILL">
-Valor R$: <input id="musValor" type="number" class="inp" placeholder="300" value="300">
+Valor R$: <input id="musValor" type="number" class="inp" value="300">
 <br><br>
 <button class="btn" onclick="salvarMusico()">Salvar Musico</button>
 <button class="btn" style="background:#fff;color:#DC2626;border:1.5px solid #FCA5A5" onclick="excluirMusico()" id="btnExcluirMusico">Excluir Musico</button>
@@ -117,7 +124,7 @@ Valor R$: <input id="musValor" type="number" class="inp" placeholder="300" value
 </div></div>
 
 <div class="modal" id="modalSino"><div class="box">
-<b>NOTIFICACOES - SINO</b><br><small style="color:#64748B">Hoje 26/10/2026 - Ordem maior-menor</small><br><br>
+<b>NOTIFICACOES - SINO</b><br><small>Hoje 26/10/2026</small><br><br>
 <div id="sinoLista"></div>
 <br>
 <button class="btn" onclick="filtro('hoje');fecharSino();abrir('Agenda')">Ver Agenda de Hoje</button>
@@ -127,32 +134,32 @@ Valor R$: <input id="musValor" type="number" class="inp" placeholder="300" value
 
 <script>
 var eventosPadrao=[
-{id:1,data:"2026-10-19",[STRIPPED] VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:2,data:"2026-10-19",[STRIPPED] DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:3,data:"2026-10-19",[STRIPPED] SOLO",valor:300,turno:"Janta 19:00-22:00"},
-{id:4,data:"2026-10-19",[STRIPPED] SOLO",valor:300,turno:"Janta 19:00-22:00"},
-{id:5,data:"2026-10-19",[STRIPPED] 19:00-22:00"},
-{id:6,data:"2026-10-19",[STRIPPED] 19:00-22:00"},
-{id:7,data:"2026-10-20",[STRIPPED] 19:00-22:00"},
-{id:8,data:"2026-10-20",[STRIPPED] 19:00-22:00"},
-{id:9,data:"2026-10-20",[STRIPPED] 19:00-22:00"},
-{id:10,data:"2026-10-20",[STRIPPED] 19:00-22:00"},
-{id:11,data:"2026-10-21",[STRIPPED] VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:12,data:"2026-10-21",[STRIPPED] VAT 60 TRIO",valor:450,turno:"Janta 19:00-22:00"},
-{id:13,data:"2026-10-21",[STRIPPED] 19:00-22:00"},
-{id:14,data:"2026-10-21",[STRIPPED] 19:00-22:00"},
-{id:15,data:"2026-10-21",[STRIPPED] VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:16,data:"2026-10-26",[STRIPPED] VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:17,data:"2026-10-26",[STRIPPED] 19:00-22:00"},
-{id:18,data:"2026-10-26",[STRIPPED] SOLO",valor:300,turno:"Janta 19:00-22:00"}
+{id:1,data:"2026-10-19",casa:"P1",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:2,data:"2026-10-19",casa:"P2",mus:"RICK DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:3,data:"2026-10-19",casa:"P3",mus:"ANDRE",valor:300,turno:"Janta 19:00-22:00"},
+{id:4,data:"2026-10-19",casa:"P4",mus:"GERVASIO",valor:200,turno:"Janta 19:00-22:00"},
+{id:5,data:"2026-10-19",casa:"P5",mus:"DOUGLAS",valor:300,turno:"Janta 19:00-22:00"},
+{id:6,data:"2026-10-19",casa:"P6",mus:"EDILL",valor:300,turno:"Janta 19:00-22:00"},
+{id:7,data:"2026-10-20",casa:"P1",mus:"ISRAEL",valor:300,turno:"Janta 19:00-22:00"},
+{id:8,data:"2026-10-20",casa:"P2",mus:"LUCIANO",valor:300,turno:"Janta 19:00-22:00"},
+{id:9,data:"2026-10-20",casa:"P3",mus:"MARTIN",valor:300,turno:"Janta 19:00-22:00"},
+{id:10,data:"2026-10-20",casa:"P4",mus:"ROBSON SOLO",valor:300,turno:"Janta 19:00-22:00"},
+{id:11,data:"2026-10-21",casa:"P1",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:12,data:"2026-10-21",casa:"P2",mus:"ANDERSON VAT 60 TRIO",valor:450,turno:"Janta 19:00-22:00"},
+{id:13,data:"2026-10-21",casa:"P3",mus:"RICK TRIO",valor:450,turno:"Janta 19:00-22:00"},
+{id:14,data:"2026-10-21",casa:"P4",mus:"YGOR",valor:300,turno:"Janta 19:00-22:00"},
+{id:15,data:"2026-10-21",casa:"P5",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:16,data:"2026-10-26",casa:"P1",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:17,data:"2026-10-26",casa:"P2",mus:"RICK DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:18,data:"2026-10-26",casa:"P3",mus:"ANDRE",valor:300,turno:"Janta 19:00-22:00"}
 ];
 var musicosPadrao=[
 {n:"ANDERSON VAT 60 DUO",v:400},{n:"ANDERSON VAT 60 TRIO",v:450},{n:"ANDRE",v:300},{n:"DOUGLAS",v:300},{n:"EDILL",v:300},{n:"GERVASIO",v:200},{n:"ISRAEL",v:300},{n:"LUCIANO",v:300},{n:"MARTIN",v:300},{n:"RICK DUO",v:400},{n:"RICK SOLO",v:300},{n:"RICK TRIO",v:450},{n:"ROBSON SOLO",v:300},{n:"YGOR",v:300}
 ];
 var eventos=[];var musicos=[];
 try{
-  var s1=localStorage.getItem('takisom_v91_eventos');
-  var s2=localStorage.getItem('takisom_v91_musicos');
+  var s1=localStorage.getItem('takisom_v92_eventos');
+  var s2=localStorage.getItem('takisom_v92_musicos');
   eventos=s1?JSON.parse(s1):eventosPadrao;
   musicos=s2?JSON.parse(s2):musicosPadrao;
   if(!Array.isArray(eventos)||eventos.length==0) eventos=eventosPadrao;
@@ -162,19 +169,19 @@ try{
 var rests=["P1","P2","P3","P4","P5","P6"];var restIdx=0;var casaSel="P1";var musSel="EDILL";var almoco=false;var janta=true;var view="hoje";var editId=null;var editMusicoIdx=null;
 
 function ordenaMusicosAZ(){musicos.sort(function(a,b){return a.n.localeCompare(b.n);});}
-function saveEventos(){localStorage.setItem('takisom_v91_eventos',JSON.stringify(eventos));}
-function saveMusicos(){ordenaMusicosAZ();localStorage.setItem('takisom_v91_musicos',JSON.stringify(musicos));}
-function restaurar(){localStorage.clear();eventos=eventosPadrao;musicos=musicosPadrao;ordenaMusicosAZ();saveEventos();saveMusicos();render();renderMusTab();alert('Restaurado 18 eventos - Ordem A-Z!');fecharSide();}
-function restaurarMusicos(){if(!confirm('Restaurar musicos A-Z?'))return;localStorage.removeItem('takisom_v91_musicos');musicos=musicosPadrao;ordenaMusicosAZ();saveMusicos();renderMusTab();renderMus();}
+function saveEventos(){localStorage.setItem('takisom_v92_eventos',JSON.stringify(eventos));}
+function saveMusicos(){ordenaMusicosAZ();localStorage.setItem('takisom_v92_musicos',JSON.stringify(musicos));}
+function restaurar(){localStorage.clear();eventos=eventosPadrao;musicos=musicosPadrao;ordenaMusicosAZ();saveEventos();saveMusicos();render();renderMusTab();alert('Restaurado 18 eventos!');fecharSide();}
+function restaurarMusicos(){if(!confirm('Restaurar musicos A-Z?'))return;localStorage.removeItem('takisom_v92_musicos');musicos=musicosPadrao;ordenaMusicosAZ();saveMusicos();renderMusTab();renderMus();}
 function abrirSide(){document.getElementById('side').classList.add('show');}
 function fecharSide(){document.getElementById('side').classList.remove('show');}
 function abrir(t){
  fecharSide();
  document.querySelectorAll('.tab').forEach(function(el){el.classList.remove('show')});
- document.querySelectorAll('.menu button').forEach(function(b){b.classList.remove('on')});
+ document.querySelectorAll('.menuBottom button').forEach(function(b){b.classList.remove('on')});
  document.getElementById(t).classList.add('show');
  var m=document.getElementById('m'+t);
- if(m) m.classList.add('on'); else document.getElementById('mConfig').classList.add('on');
+ if(m) m.classList.add('on');
  if(t=='Musicos') renderMusTab();
  if(t=='Relatorio'||t=='Valores'||t=='Anual') render();
 }
@@ -187,7 +194,7 @@ function abrirSino(){
  semana.sort(function(a,b){return b.valor-a.valor;});
  var html='';
  html+='<div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:12px;padding:12px;margin:8px 0"><b>Hoje 26/10 - '+hoje.length+' shows - Maior para Menor</b><br><small>'+hoje.map(function(e){return 'R$'+e.valor+' - '+e.casa+' - '+e.mus;}).join('<br>')+'</small></div>';
- html+='<div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:12px;padding:12px;margin:8px 0"><b>Semana - Total: R$ '+semana.reduce(function(s,e){return s+e.valor;},0)+' - Maior para Menor</b></div>';
+ html+='<div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:12px;padding:12px;margin:8px 0"><b>Semana - Total: R$ '+semana.reduce(function(s,e){return s+e.valor;},0)+'</b></div>';
  document.getElementById('sinoLista').innerHTML=html;
  document.getElementById('modalSino').classList.add('show');
 }
@@ -224,7 +231,7 @@ function render(){
   });
  });
  if(filt.length==0){
-  html='<div class="card" style="text-align:center;padding:20px"><b>Nenhum evento</b><br><br><button class="btn" onclick="restaurar()">Restaurar 18 eventos</button></div>';
+  html='<div class="card" style="text-align:center;padding:20px"><b>Nenhum evento em '+view.toUpperCase()+'</b><br><br><button class="btn" onclick="restaurar()">Restaurar 18 eventos</button></div>';
  }
  document.getElementById('lista').innerHTML=html;
  var top=document.getElementById('contadorTop');
@@ -237,11 +244,11 @@ function render(){
 
  var relEventos=[].concat(eventos);
  relEventos.sort(function(a,b){return b.valor-a.valor;});
- var relHtml='<b style="color:#2563EB">FINANCEIRO - DO MAIOR PARA O MENOR:</b><br><br>';
+ var relHtml='<b style="color:#2563EB">FINANCEIRO - MAIOR PARA MENOR:</b><br><br>';
  relEventos.forEach(function(ev){
    relHtml+= '<div style="display:flex;justify-content:space-between;padding:6px;border-bottom:1px solid #F1F5F9"><span>R$ '+ev.valor+' - '+ev.casa+' - '+ev.mus+'</span><small>'+ev.data.split('-').reverse().join('/')+'</small></div>';
  });
- relHtml+='<br><b>Total hoje 26/10:</b> '+eventos.filter(function(e){return e.data=='2026-10-26';}).length+' eventos<br>';
+ relHtml+='<br><b>Total hoje 26/10:</b> '+eventos.filter(function(e){return e.data=='2026-10-26';}).length+'<br>';
  relHtml+='<b>Total semana:</b> '+eventos.filter(function(e){return e.data>='2026-10-19';}).length+'<br>';
  relHtml+='<b>Total mes:</b> '+eventos.length+'<br>';
  relHtml+='<b style="color:#16A34A">Valor total mes: R$ '+eventos.reduce(function(s,e){return s+e.valor;},0)+'</b>';
@@ -276,7 +283,7 @@ function renderMus(){
  var div=document.getElementById('musLista');var h='';
  musicos.forEach(function(m){
    var sel=m.n==musSel;var cl=sel?'item on':'item';
-   h+='<div class="'+cl+'" onclick="musSel=\''+m.n.replace(/'/g,'')+'\';renderMus()"><div><input type="radio" '+(sel?'checked':'')+'> '+m.n+'</div><b>R$ '+m.v+'</b></div>';
+   h+='<div class="'+cl+'" onclick="musSel=\''+m.n.replace(/\'/g,'')+'\';renderMus()"><div><input type="radio" '+(sel?'checked':'')+'> '+m.n+'</div><b>R$ '+m.v+'</b></div>';
  });
  div.innerHTML=h;
 }
@@ -284,7 +291,7 @@ function renderMusTab(){
  ordenaMusicosAZ();
  var tab=document.getElementById('musTab');var html='';
  musicos.forEach(function(m,idx){
-  html+='<div class="musCard" onclick="editarMusico('+idx+')"><div><b>'+m.n+'</b><div style="font-size:11px;color:#64748B">Toque pra editar - A-Z</div></div><div style="text-align:right"><b style="color:#2563EB">R$ '+m.v+'</b><div style="font-size:10px;color:#16A34A">Editar</div></div></div>';
+  html+='<div class="musCard" onclick="editarMusico('+idx+')"><div><b>'+m.n+'</b><div style="font-size:11px;color:#64748B">A-Z - Toque pra editar</div></div><div style="text-align:right"><b style="color:#2563EB">R$ '+m.v+'</b><div style="font-size:10px;color:#16A34A">Editar</div></div></div>';
  });
  tab.innerHTML=html;
 }
@@ -318,7 +325,7 @@ function salvar(){
    var ev=eventos.find(function(e){return e.id==editId;});
    if(ev){ev.data=data;ev.casa=casaSel;ev.mus=musSel;ev.valor=valor;ev.turno=turno;}
  }else{
-   var novoEv={id:Date.now(),data:data,[STRIPPED]
+   var novoEv={id:Date.now(),data:data,casa:casaSel,mus:musSel,valor:valor,turno:turno};
    eventos.push(novoEv);
  }
  saveEventos();
@@ -376,7 +383,7 @@ function zap(comValor){
    if(comValor) txt+=ev.data.split('-').reverse().join('/')+' - RESTAURANTE '+ev.casa+' - MUSICO '+ev.mus+' R$'+ev.valor+' - '+ev.turno+'\n';
    else txt+=ev.data.split('-').reverse().join('/')+' - RESTAURANTE '+ev.casa+' - MUSICO '+ev.mus+' - '+ev.turno+'\n';
  });
- var titulo=comValor?'*AGENDA TAKI SOM - COM VALOR - MAIOR PARA MENOR*':'*CRONOGRAMA - SEM VALOR*';
+ var titulo=comValor?'*AGENDA TAKI SOM - MAIOR PARA MENOR*':'*CRONOGRAMA - SEM VALOR*';
  window.open('https://wa.me/?text='+encodeURIComponent(titulo+'\n\n'+txt),'_blank');
 }
 ordenaMusicosAZ();
