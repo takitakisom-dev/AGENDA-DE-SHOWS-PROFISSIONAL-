@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TAKI SOM v88 SINO FUNCIONA</title>
+<title>TAKI SOM v89 SO MUSICOS</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}body{background:#F1F5F9;font-family:Arial,sans-serif;padding-bottom:190px}
 .top{background:linear-gradient(135deg,#1E40AF,#2563EB);color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;border-radius:0 0 20px 20px}
@@ -30,25 +30,23 @@
 .mus{max-height:200px;overflow:auto;border:1px solid #E2E8F0;border-radius:12px;padding:6px;margin:8px 0}.mus .item{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:10px;margin:3px 0;cursor:pointer;border:1px solid transparent}.mus .item.on{background:#EFF6FF;border-color:#2563EB}
 .musCard{background:#fff;margin:0 12px 10px;border-radius:14px;padding:14px;border:1px solid #E2E8F0;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
 .side{position:fixed;top:0;left:-310px;width:300px;height:100%;background:#fff;z-index:400;transition:.3s;padding:0;overflow:auto;box-shadow:4px 0 20px rgba(0,0,0,.25);border-radius:0 20px 20px 0}.side.show{left:0}.sideHeader{background:linear-gradient(135deg,#1E40AF,#2563EB);color:#fff;padding:18px}.side button.item{width:100%;padding:14px 18px;border:none;background:none;border-bottom:1px solid #F1F5F9;text-align:left;font-weight:700;font-size:13px;cursor:pointer;display:flex;gap:10px;align-items:center}
-.notifItem{background:#F8FAFC;border:1px solid #E2E8F0;border-radius:12px;padding:12px;margin:8px 0;display:flex;gap:10px;align-items:center}
-.notifItem.today{background:#EFF6FF;border-color:#2563EB}
 .badge{background:#DC2626;color:#fff;font-size:10px;padding:2px 6px;border-radius:10px;position:absolute;top:6px;right:6px;font-weight:800}
 .bellWrap{position:relative}
 </style>
 </head>
 <body>
 <div id="side" class="side">
-<div class="sideHeader"><b>TAKI SOM</b><br><small>v88 - SINO FUNCIONA!</small></div>
+<div class="sideHeader"><b>TAKI SOM</b><br><small>v89 - Só MÚSICOS - Limpo</small></div>
 <button class="item" onclick="showTab('Agenda')">📅 Agenda - Hoje 26/10</button>
-<button class="item" onclick="showTab('Musicos')">🎸 Músicos - COM BOTAO ADD - EDILL</button>
+<button class="item" onclick="showTab('Musicos')">🎸 Músicos</button>
 <button class="item" onclick="showTab('Restaurantes')">🏪 Restaurantes P1-P6</button>
-<button class="item" onclick="showTab('Valores')">💲 Valores por Músico</button>
+<button class="item" onclick="showTab('Valores')">💲 Valores</button>
 <button class="item" onclick="showTab('Relatorio')">📊 Relatório Mensal</button>
 <button class="item" onclick="showTab('Anual')">📈 Relatório Anual</button>
-<button class="item" onclick="showTab('Horarios')">🕒 Horários Almoço/Janta</button>
-<button class="item" onclick="sino()">🔔 Notificações - SINO FUNCIONA</button>
+<button class="item" onclick="showTab('Horarios')">🕒 Horários</button>
+<button class="item" onclick="sino()">🔔 Notificações</button>
 <button class="item" onclick="restaurar()" style="background:#FEF3C7;font-weight:800">♻️ Restaurar 18 eventos</button>
-<br><button class="item" onclick="document.getElementById('side').classList.remove('show')" style="background:#2563EB;color:#fff;justify-content:center">❌ Fechar Menu</button>
+<br><button class="item" onclick="document.getElementById('side').classList.remove('show')" style="background:#2563EB;color:#fff;justify-content:center">❌ Fechar</button>
 </div>
 
 <div class="top"><button onclick="document.getElementById('side').classList.add('show')">☰</button><b>TAKI SOM</b><div class="bellWrap"><button onclick="sino()" style="font-size:24px">🔔</button><span class="badge" id="badge">3</span></div></div>
@@ -78,24 +76,23 @@
 </div>
 
 <div id="Musicos" class="tab">
-<div class="card"><b>MUSICOS - <span id="musCount">14</span> - EDILL É MUSICO! - TOQUE NO MUSICO PRA EDITAR</b><br><small style="color:#64748B">Toque no músico pra editar valor</small></div>
+<div class="card" style="padding:12px"><b style="font-size:16px">MÚSICOS</b><br><small style="color:#64748B">Toque no músico pra editar valor</small></div>
 <div id="musTab" style="margin:10px"></div>
 <div style="margin:14px 12px">
-<button class="btn" onclick="novoMusico()" style="background:#16A34A">+ Novo Músico - Adicionar</button>
-<button class="btn" style="background:#fff;color:#2563EB;border:1.5px solid #2563EB" onclick="restaurarMusicos()">Restaurar músicos originais</button>
+<button class="btn" onclick="novoMusico()" style="background:#16A34A">+ Novo Músico</button>
+<button class="btn" style="background:#fff;color:#2563EB;border:1.5px solid #2563EB" onclick="restaurarMusicos()">Restaurar músicos</button>
 </div>
 </div>
 
 <div id="Restaurantes" class="tab"><div class="card"><b>RESTAURANTES P1 a P6</b><div style="font-size:13px;line-height:2;margin-top:8px"><b>P1</b> - Restaurante 1<br><b>P2</b> - Restaurante 2<br><b>P3</b> - Restaurante 3<br><b>P4</b> - Restaurante 4<br><b>P5</b> - Restaurante 5<br><b>P6</b> - Restaurante 6</div></div></div>
-<div id="Valores" class="tab"><div class="card"><b>VALORES POR MUSICO</b><div id="valoresBox" style="margin-top:10px"></div></div></div>
-<div id="Relatorio" class="tab"><div class="card"><b>RELATORIO MENSAL - OUTUBRO 2026</b><div id="relBox" style="margin-top:10px;font-size:13px;line-height:1.8"></div></div></div>
-<div id="Anual" class="tab"><div class="card"><b>RELATORIO ANUAL 2026</b><div style="margin-top:10px;font-size:13px">Outubro: 18 eventos - Valor total: R$ 5.850</div></div></div>
-<div id="Horarios" class="tab"><div class="card"><b>HORARIOS - ALMOCO E JANTA</b><div style="font-size:13px;margin-top:10px;line-height:2"><b>Almoço:</b> 12:30 às 15:30<br><b>Janta:</b> 19:00 às 22:00</div></div></div>
-<div id="Config" class="tab"><div class="card"><b>CONFIG v88 SINO FUNCIONA</b><br><small>Sino com notificações funcionando!</small><br><br><button class="btn" onclick="sino()">🔔 Abrir Notificações do Sino</button><br><br><button class="btn" onclick="restaurar()">Restaurar 18 eventos</button></div></div>
+<div id="Valores" class="tab"><div class="card"><b>VALORES</b><div id="valoresBox" style="margin-top:10px"></div></div></div>
+<div id="Relatorio" class="tab"><div class="card"><b>RELATÓRIO MENSAL</b><div id="relBox" style="margin-top:10px;font-size:13px;line-height:1.8"></div></div></div>
+<div id="Anual" class="tab"><div class="card"><b>RELATÓRIO ANUAL 2026</b><div style="margin-top:10px;font-size:13px">Outubro: 18 eventos - R$ 5.850</div></div></div>
+<div id="Horarios" class="tab"><div class="card"><b>HORÁRIOS</b><div style="font-size:13px;margin-top:10px;line-height:2"><b>Almoço:</b> 12:30-15:30<br><b>Janta:</b> 19:00-22:00</div></div></div>
+<div id="Config" class="tab"><div class="card"><b>CONFIG v89</b><br><small>Só MÚSICOS - limpo e simples!</small><br><br><button class="btn" onclick="sino()">🔔 Notificações</button><br><br><button class="btn" onclick="restaurar()">Restaurar 18 eventos</button></div></div>
 
 <div class="menu"><button id="mAgenda" class="on" onclick="showTab('Agenda')"><span>Agenda</span>Agenda</button><button id="mMusicos" onclick="showTab('Musicos')"><span>Musicos</span>Músicos</button><button id="mRelatorio" onclick="showTab('Relatorio')"><span>Relatorio</span>Relatório</button><button id="mConfig" onclick="showTab('Config')"><span>Menu</span>Menu</button></div>
 
-<!-- MODAL SHOW -->
 <div class="modal" id="modal"><div class="box">
 <b id="modalTitulo">Novo Show</b><br><br>
 Data: <input id="data" type="date" class="inp" value="2026-10-26">
@@ -109,10 +106,9 @@ Data: <input id="data" type="date" class="inp" value="2026-10-26">
 <button class="btn" onclick="salvar()">Salvar - vai pra tela!</button><button class="btn" style="background:#fff;color:#64748B;border:1px solid #E2E8F0" onclick="fechar()">Cancelar</button>
 </div></div>
 
-<!-- MODAL MUSICO -->
 <div class="modal" id="modalMusico"><div class="box">
 <b id="modalMusicoTitulo">Novo Músico</b><br><br>
-Nome do Músico: <input id="musNome" class="inp" placeholder="Ex: EDILL">
+Nome: <input id="musNome" class="inp" placeholder="Ex: EDILL">
 Valor R$: <input id="musValor" type="number" class="inp" placeholder="300" value="300">
 <br><br>
 <button class="btn" onclick="salvarMusico()">Salvar Músico</button>
@@ -120,44 +116,43 @@ Valor R$: <input id="musValor" type="number" class="inp" placeholder="300" value
 <button class="btn" style="background:#fff;color:#64748B;border:1px solid #E2E8F0" onclick="fecharMusico()">Cancelar</button>
 </div></div>
 
-<!-- MODAL SINO - NOVO - FUNCIONA -->
 <div class="modal" id="modalSino"><div class="box">
-<b>🔔 NOTIFICAÇÕES - SINO</b><br><small style="color:#64748B">Hoje é 26/10/2026 - Você tem shows hoje!</small><br><br>
+<b>🔔 NOTIFICAÇÕES</b><br><small style="color:#64748B">Hoje 26/10/2026</small><br><br>
 <div id="sinoLista"></div>
 <br>
-<button class="btn" onclick="filtro('hoje');fecharSino();showTab('Agenda')">📅 Ver Agenda de Hoje</button>
-<button class="btn" style="background:#16A34A" onclick="zap(true);fecharSino()">💬 Enviar ZAP Hoje</button>
+<button class="btn" onclick="filtro('hoje');fecharSino();showTab('Agenda')">Ver Agenda de Hoje</button>
+<button class="btn" style="background:#16A34A" onclick="zap(true);fecharSino()">Enviar ZAP Hoje</button>
 <button class="btn" style="background:#fff;color:#64748B;border:1px solid #E2E8F0" onclick="fecharSino()">Fechar</button>
 </div></div>
 
 <script>
 var eventosPadrao=[
-{id:1,data:"2026-10-19",casa:"P1",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:2,data:"2026-10-19",casa:"P1",mus:"RICK DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:3,data:"2026-10-19",casa:"P2",mus:"RICK SOLO",valor:300,turno:"Janta 19:00-22:00"},
-{id:4,data:"2026-10-19",casa:"P2",mus:"ROBSON SOLO",valor:300,turno:"Janta 19:00-22:00"},
-{id:5,data:"2026-10-19",casa:"P3",mus:"MARTIN",valor:300,turno:"Janta 19:00-22:00"},
-{id:6,data:"2026-10-19",casa:"P3",mus:"DOUGLAS",valor:300,turno:"Janta 19:00-22:00"},
-{id:7,data:"2026-10-20",casa:"P4",mus:"LUCIANO",valor:300,turno:"Janta 19:00-22:00"},
-{id:8,data:"2026-10-20",casa:"P4",mus:"GERVASIO",valor:200,turno:"Janta 19:00-22:00"},
-{id:9,data:"2026-10-20",casa:"P5",mus:"ANDRE",valor:300,turno:"Janta 19:00-22:00"},
-{id:10,data:"2026-10-20",casa:"P5",mus:"ISRAEL",valor:300,turno:"Janta 19:00-22:00"},
-{id:11,data:"2026-10-21",casa:"P6",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:12,data:"2026-10-21",casa:"P6",mus:"ANDERSON VAT 60 TRIO",valor:450,turno:"Janta 19:00-22:00"},
-{id:13,data:"2026-10-21",casa:"P1",mus:"YGOR",valor:300,turno:"Janta 19:00-22:00"},
-{id:14,data:"2026-10-21",casa:"P2",mus:"EDILL",valor:300,turno:"Janta 19:00-22:00"},
-{id:15,data:"2026-10-21",casa:"P3",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:16,data:"2026-10-26",casa:"P1",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:17,data:"2026-10-26",casa:"P2",mus:"EDILL",valor:300,turno:"Janta 19:00-22:00"},
-{id:18,data:"2026-10-26",casa:"P3",mus:"RICK SOLO",valor:300,turno:"Janta 19:00-22:00"}
+{id:1,data:"2026-10-19",[STRIPPED] VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:2,data:"2026-10-19",[STRIPPED] DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:3,data:"2026-10-19",[STRIPPED] SOLO",valor:300,turno:"Janta 19:00-22:00"},
+{id:4,data:"2026-10-19",[STRIPPED] SOLO",valor:300,turno:"Janta 19:00-22:00"},
+{id:5,data:"2026-10-19",[STRIPPED] 19:00-22:00"},
+{id:6,data:"2026-10-19",[STRIPPED] 19:00-22:00"},
+{id:7,data:"2026-10-20",[STRIPPED] 19:00-22:00"},
+{id:8,data:"2026-10-20",[STRIPPED] 19:00-22:00"},
+{id:9,data:"2026-10-20",[STRIPPED] 19:00-22:00"},
+{id:10,data:"2026-10-20",[STRIPPED] 19:00-22:00"},
+{id:11,data:"2026-10-21",[STRIPPED] VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:12,data:"2026-10-21",[STRIPPED] VAT 60 TRIO",valor:450,turno:"Janta 19:00-22:00"},
+{id:13,data:"2026-10-21",[STRIPPED] 19:00-22:00"},
+{id:14,data:"2026-10-21",[STRIPPED] 19:00-22:00"},
+{id:15,data:"2026-10-21",[STRIPPED] VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:16,data:"2026-10-26",[STRIPPED] VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:17,data:"2026-10-26",[STRIPPED] 19:00-22:00"},
+{id:18,data:"2026-10-26",[STRIPPED] SOLO",valor:300,turno:"Janta 19:00-22:00"}
 ];
 var musicosPadrao=[
 {n:"ANDERSON VAT 60 DUO",v:400},{n:"ANDERSON VAT 60 TRIO",v:450},{n:"ANDRE",v:300},{n:"DOUGLAS",v:300},{n:"EDILL",v:300},{n:"GERVASIO",v:200},{n:"ISRAEL",v:300},{n:"LUCIANO",v:300},{n:"MARTIN",v:300},{n:"RICK DUO",v:400},{n:"RICK SOLO",v:300},{n:"RICK TRIO",v:450},{n:"ROBSON SOLO",v:300},{n:"YGOR",v:300}
 ];
 var eventos=[];var musicos=[];
 try{
-  var s1=localStorage.getItem('takisom_v88_eventos');
-  var s2=localStorage.getItem('takisom_v88_musicos');
+  var s1=localStorage.getItem('takisom_v89_eventos');
+  var s2=localStorage.getItem('takisom_v89_musicos');
   eventos=s1?JSON.parse(s1):eventosPadrao;
   musicos=s2?JSON.parse(s2):musicosPadrao;
   if(!Array.isArray(eventos)||eventos.length==0) eventos=eventosPadrao;
@@ -166,10 +161,10 @@ try{
 
 var rests=["P1","P2","P3","P4","P5","P6"];var restIdx=0;var casaSel="P1";var musSel="EDILL";var almoco=false;var janta=true;var view="hoje";var editId=null;var editMusicoIdx=null;
 
-function saveEventos(){localStorage.setItem('takisom_v88_eventos',JSON.stringify(eventos));}
-function saveMusicos(){localStorage.setItem('takisom_v88_musicos',JSON.stringify(musicos));}
-function restaurar(){localStorage.clear();eventos=eventosPadrao;musicos=musicosPadrao;saveEventos();saveMusicos();render();renderMusTab();alert('Tudo restaurado!');document.getElementById('side').classList.remove('show');}
-function restaurarMusicos(){if(!confirm('Restaurar músicos?'))return;localStorage.removeItem('takisom_v88_musicos');musicos=musicosPadrao;saveMusicos();renderMusTab();renderMus();}
+function saveEventos(){localStorage.setItem('takisom_v89_eventos',JSON.stringify(eventos));}
+function saveMusicos(){localStorage.setItem('takisom_v89_musicos',JSON.stringify(musicos));}
+function restaurar(){localStorage.clear();eventos=eventosPadrao;musicos=musicosPadrao;saveEventos();saveMusicos();render();renderMusTab();alert('Restaurado!');document.getElementById('side').classList.remove('show');}
+function restaurarMusicos(){if(!confirm('Restaurar músicos?'))return;localStorage.removeItem('takisom_v89_musicos');musicos=musicosPadrao;saveMusicos();renderMusTab();renderMus();}
 function showTab(t){document.querySelectorAll('.tab').forEach(function(el){el.classList.remove('show')});document.querySelectorAll('.menu button').forEach(function(b){b.classList.remove('on')});document.getElementById(t).classList.add('show');var m=document.getElementById('m'+t);if(m)m.classList.add('on');else document.getElementById('mConfig').classList.add('on');document.getElementById('side').classList.remove('show');if(t=='Musicos')renderMusTab();}
 function mudaMes(d){var el=document.getElementById('mesLabel');if(el.innerText.indexOf('SETEMBRO')>=0) el.innerText='MES DE OUTUBRO DE 2026'; else el.innerText='MES DE SETEMBRO DE 2026';}
 function filtro(v){
@@ -220,9 +215,8 @@ function sino(){
  var hoje=eventos.filter(function(e){return e.data=='2026-10-26';});
  var semana=eventos.filter(function(e){return e.data>='2026-10-19';});
  var html='';
- html+='<div class="notifItem today"><span style="font-size:20px">🔔</span><div><b>Hoje 26/10/2026 - '+hoje.length+' shows</b><br><small>'+hoje.map(function(e){return e.casa+' - '+e.mus;}).join('<br>')+'</small></div></div>';
- html+='<div class="notifItem"><span style="font-size:20px">📅</span><div><b>Semana 19 a 26/10 - '+semana.length+' shows</b><br><small>Valor total semana: R$ '+semana.reduce(function(s,e){return s+e.valor;},0)+'</small></div></div>';
- html+='<div class="notifItem"><span style="font-size:20px">💲</span><div><b>Financeiro Hoje</b><br><small>Total hoje: R$ '+hoje.reduce(function(s,e){return s+e.valor;},0)+'</small></div></div>';
+ html+='<div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:12px;padding:12px;margin:8px 0"><b>Hoje 26/10/2026 - '+hoje.length+' shows</b><br><small>'+hoje.map(function(e){return e.casa+' - '+e.mus;}).join('<br>')+'</small></div>';
+ html+='<div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:12px;padding:12px;margin:8px 0"><b>Semana - '+semana.length+' shows</b><br><small>Total: R$ '+semana.reduce(function(s,e){return s+e.valor;},0)+'</small></div>';
  document.getElementById('sinoLista').innerHTML=html;
  document.getElementById('modalSino').classList.add('show');
 }
@@ -238,7 +232,6 @@ function renderMusTab(){
  musicos.forEach(function(m,idx){
   html+='<div class="musCard" onclick="editarMusico('+idx+')"><div><b>'+m.n+'</b><div style="font-size:11px;color:#64748B">Toque pra editar</div></div><div style="text-align:right"><b style="color:#2563EB">R$ '+m.v+'</b><div style="font-size:10px;color:#16A34A">Editar</div></div></div>';
  });
- document.getElementById('musCount').innerText=musicos.length;
  tab.innerHTML=html;
 }
 function novo(){editId=null;document.getElementById('modalTitulo').innerText='Novo Show';casaSel='P1';restIdx=0;musSel=musicos[0]?musicos[0].n:'EDILL';almoco=false;janta=true;document.getElementById('data').value='2026-10-26';document.getElementById('restLabel').innerText='P1';document.getElementById('alm').checked=false;document.getElementById('jan').checked=true;document.getElementById('lAlm').classList.remove('on');document.getElementById('lJan').classList.add('on');updateGrid();renderMus();document.getElementById('modal').classList.add('show');}
@@ -271,7 +264,7 @@ function salvar(){
    var ev=eventos.find(function(e){return e.id==editId;});
    if(ev){ev.data=data;ev.casa=casaSel;ev.mus=musSel;ev.valor=valor;ev.turno=turno;}
  }else{
-   var novoEv={id:Date.now(),data:data,casa:casaSel,mus:musSel,valor:valor,turno:turno};
+   var novoEv={id:Date.now(),data:data,[STRIPPED]
    eventos.push(novoEv);
  }
  saveEventos();
@@ -289,7 +282,7 @@ function novoMusico(){
 function editarMusico(idx){
  editMusicoIdx=idx;
  var m=musicos[idx];
- document.getElementById('modalMusicoTitulo').innerText='Editar Músico - '+m.n;
+ document.getElementById('modalMusicoTitulo').innerText='Editar - '+m.n;
  document.getElementById('musNome').value=m.n;
  document.getElementById('musValor').value=m.v;
  document.getElementById('btnExcluirMusico').style.display='block';
