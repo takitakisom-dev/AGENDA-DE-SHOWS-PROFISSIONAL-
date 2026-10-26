@@ -3,45 +3,57 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TAKI SOM v79 FINAL</title>
+<title>TAKI SOM v80 COMPLETO</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}body{background:#F1F5F9;font-family:Arial,sans-serif;padding-bottom:180px}
 .top{background:linear-gradient(135deg,#1E40AF,#2563EB);color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;border-radius:0 0 20px 20px;position:sticky;top:0;z-index:100}
 .top button{background:none;border:none;color:#fff;font-size:22px;cursor:pointer}
-.top b{font-size:20px;font-weight:800;letter-spacing:.5px}
+.top b{font-size:20px;font-weight:800}
 .card{background:#fff;margin:12px;border-radius:18px;padding:14px;box-shadow:0 4px 12px rgba(0,0,0,.08);border:1px solid #E2E8F0}
-.card .t{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:14px;color:#1E293B}
+.card .t{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:14px}
 .card .t button{width:36px;height:36px;border-radius:10px;border:1px solid #E2E8F0;background:#F1F5F9;font-weight:800;cursor:pointer;color:#1E3A8A}
-.chips{display:flex;gap:8px;margin-top:12px}.chip{flex:1;background:#DBEAFE;border-radius:12px;padding:10px 4px;text-align:center;border:1px solid #BFDBFE;cursor:pointer}.chip b{font-size:11px;color:#1E3A8A;line-height:1.1;display:block}
-.filtros{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}.filtros button{border:1px solid #CBD5E1;background:#fff;padding:8px 12px;border-radius:10px;font-weight:700;font-size:11px;color:#64748B;cursor:pointer}.filtros button.on{background:#2563EB;color:#fff;border-color:#2563EB}
-.green{background:#16A34A;color:#fff;border-radius:12px 12px 0 0;padding:11px 12px;margin:12px 12px 0;font-weight:800;font-size:13px;display:flex;align-items:center;gap:8px}
-.blue{background:linear-gradient(135deg,#1E40AF,#2563EB);color:#fff;padding:9px 12px;margin:0 12px;font-weight:800;font-size:11px;display:flex;align-items:center;gap:6px}
-.ev{background:#fff;margin:0 12px 10px;border-radius:0 0 14px 14px;padding:12px;border:1px solid #E2E8F0;border-top:none;box-shadow:0 2px 8px rgba(0,0,0,.05)}
-.ev b{color:#1E293B;font-size:14px}.meta{display:flex;gap:12px;margin-top:8px;color:#64748B;font-size:12px;font-weight:600}.actions{display:flex;gap:8px;margin-top:10px}.actions button{flex:1;padding:9px;border-radius:10px;font-weight:800;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}.e1{border:1.5px solid #93C5FD;background:#fff;color:#2563EB}.e2{border:1.5px solid #FCA5A5;background:#fff;color:#DC2626}
-.plus{position:fixed;bottom:130px;right:16px;width:60px;height:60px;background:#2563EB;color:#fff;border:none;border-radius:50%;font-size:32px;cursor:pointer;z-index:50;box-shadow:0 6px 16px rgba(37,99,235,.5);display:flex;align-items:center;justify-content:center}
-.zap{display:flex;gap:8px;margin:14px 12px}.zap button{flex:1;padding:12px;border-radius:12px;font-weight:800;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}.z1{background:#16A34A;color:#fff;border:1.5px solid #16A34A}.z2{background:#fff;color:#16A34A;border:1.5px solid #16A34A}
-.menu{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:10px 0 12px;border-top:1px solid #E2E8F0;border-radius:20px 20px 0 0;z-index:100;box-shadow:0 -4px 12px rgba(0,0,0,.06)}.menu button{flex:1;border:none;background:none;padding:6px;font-size:10px;font-weight:700;color:#94A3B8;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px}.menu button.on{color:#2563EB}.menu button span{font-size:18px}
+.chips{display:flex;gap:8px;margin-top:12px}.chip{flex:1;background:#DBEAFE;border-radius:12px;padding:10px 4px;text-align:center;border:1px solid #BFDBFE;cursor:pointer}.chip b{font-size:11px;color:#1E3A8A}
+.filtros{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}.filtros button{border:1px solid #CBD5E1;background:#fff;padding:8px 12px;border-radius:10px;font-weight:700;font-size:11px;cursor:pointer}.filtros button.on{background:#2563EB;color:#fff;border-color:#2563EB}
+.green{background:#16A34A;color:#fff;border-radius:12px 12px 0 0;padding:11px 12px;margin:12px 12px 0;font-weight:800;font-size:13px}
+.blue{background:#2563EB;color:#fff;padding:9px 12px;margin:0 12px;font-weight:800;font-size:11px}
+.ev{background:#fff;margin:0 12px 10px;border-radius:0 0 14px 14px;padding:12px;border:1px solid #E2E8F0;border-top:none}
+.ev b{font-size:14px}.meta{display:flex;gap:12px;margin-top:8px;color:#64748B;font-size:12px}.actions{display:flex;gap:8px;margin-top:10px}.actions button{flex:1;padding:9px;border-radius:10px;font-weight:800;font-size:12px;cursor:pointer}.e1{border:1.5px solid #93C5FD;background:#fff;color:#2563EB}.e2{border:1.5px solid #FCA5A5;background:#fff;color:#DC2626}
+.plus{position:fixed;bottom:130px;right:16px;width:60px;height:60px;background:#2563EB;color:#fff;border:none;border-radius:50%;font-size:32px;cursor:pointer;z-index:50;box-shadow:0 6px 16px rgba(37,99,235,.5)}
+.zap{display:flex;gap:8px;margin:14px 12px}.zap button{flex:1;padding:12px;border-radius:12px;font-weight:800;font-size:11px;cursor:pointer}.z1{background:#16A34A;color:#fff;border:1.5px solid #16A34A}.z2{background:#fff;color:#16A34A;border:1.5px solid #16A34A}
+.menu{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:8px 0 12px;border-top:1px solid #E2E8F0;border-radius:20px 20px 0 0;z-index:100}.menu button{flex:1;border:none;background:none;padding:6px;font-size:10px;font-weight:700;color:#94A3B8;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px}.menu button.on{color:#2563EB}
 .tab{display:none}.tab.show{display:block}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:200;padding:12px}.modal.show{display:flex}.box{background:#fff;border-radius:16px;padding:16px;width:100%;max-width:420px;max-height:85vh;overflow:auto}
-.inp{width:100%;padding:10px;border:1px solid #E2E8F0;border-radius:8px;margin:4px 0;font-size:13px}.btn{width:100%;padding:11px;border:none;border-radius:10px;font-weight:800;background:#2563EB;color:#fff;margin-top:8px;cursor:pointer}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:8px 0}.grid button{padding:10px;border:1px solid #E2E8F0;border-radius:10px;background:#fff;font-weight:700;font-size:11px;cursor:pointer}.grid button.on{background:#2563EB;color:#fff;border-color:#2563EB}
-.mus{max-height:160px;overflow:auto;border:1px solid #E2E8F0;border-radius:10px;padding:4px;margin:6px 0}.mus label{display:flex;justify-content:space-between;padding:8px;border-radius:8px;margin:2px 0;cursor:pointer;font-size:12px}.mus label.on{background:#EFF6FF;border:1px solid #2563EB}
-.side{position:fixed;top:0;left:-280px;width:260px;height:100%;background:#fff;z-index:300;transition:.3s;padding:20px;border-radius:0 16px 16px 0;box-shadow:4px 0 16px rgba(0,0,0,.2)}.side.show{left:0}.side button{width:100%;padding:12px;margin:5px 0;border:none;background:#F8FAFC;border-radius:10px;font-weight:700;cursor:pointer;text-align:left}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:200;padding:12px}.modal.show{display:flex}.box{background:#fff;border-radius:16px;padding:16px;width:100%;max-width:430px;max-height:90vh;overflow:auto}
+.inp{width:100%;padding:11px;border:1px solid #E2E8F0;border-radius:10px;margin:4px 0;font-size:13px}.btn{width:100%;padding:12px;border:none;border-radius:10px;font-weight:800;background:#2563EB;color:#fff;margin-top:10px;cursor:pointer}
+.restSel{display:flex;align-items:center;justify-content:space-between;background:#F1F5F9;border:1px solid #E2E8F0;border-radius:12px;padding:8px 10px;margin:8px 0}
+.restSel button{width:38px;height:38px;border-radius:10px;border:1px solid #CBD5E1;background:#fff;font-weight:800;font-size:18px;cursor:pointer;color:#1E3A8A}
+.restSel b{font-size:18px;color:#1E3A8A}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}.grid button{padding:11px;border:1.5px solid #E2E8F0;border-radius:10px;background:#fff;font-weight:800;font-size:12px;cursor:pointer}.grid button.on{background:#2563EB;color:#fff;border-color:#2563EB;box-shadow:0 2px 8px rgba(37,99,235,.3)}
+.horario{display:flex;gap:10px;margin:10px 0}.horario label{flex:1;display:flex;align-items:center;gap:8px;background:#F8FAFC;border:1.5px solid #E2E8F0;border-radius:10px;padding:10px 8px;font-size:12px;font-weight:700;cursor:pointer}.horario label.on{background:#DBEAFE;border-color:#2563EB;color:#1E3A8A}
+.mus{max-height:200px;overflow:auto;border:1px solid #E2E8F0;border-radius:12px;padding:6px;margin:8px 0;background:#fff}.mus .item{display:flex;justify-content:space-between;align-items:center;padding:10px 10px;border-radius:10px;margin:3px 0;cursor:pointer;border:1px solid transparent}.mus .item.on{background:#EFF6FF;border-color:#2563EB}.mus .item input{width:18px;height:18px}
+.side{position:fixed;top:0;left:-300px;width:280px;height:100%;background:#fff;z-index:400;transition:.3s;padding:0;overflow:auto;box-shadow:4px 0 20px rgba(0,0,0,.25);border-radius:0 20px 20px 0}.side.show{left:0}.sideHeader{background:linear-gradient(135deg,#1E40AF,#2563EB);color:#fff;padding:18px}.side button.item{width:100%;padding:14px 18px;border:none;background:none;border-bottom:1px solid #F1F5F9;text-align:left;font-weight:700;font-size:13px;cursor:pointer;display:flex;gap:10px;align-items:center}.side button.item:hover{background:#F8FAFC}
 </style>
 </head>
 <body>
-<div id="side" class="side"><b style="font-size:18px">TAKI SOM</b><br><small style="color:#64748B">MENU COMPLETO</small><br><br><button onclick="showTab('Agenda')">📅 Agenda</button><button onclick="showTab('Musicos')">🎸 Músicos</button><button onclick="showTab('Relatorio')">📊 Relatório</button><button onclick="showTab('Config')">⚙️ Configurações</button><br><button onclick="document.getElementById('side').classList.remove('show')" style="background:#2563EB;color:#fff;text-align:center;justify-content:center">Fechar Menu</button></div>
+<div id="side" class="side"><div class="sideHeader"><b style="font-size:20px">TAKI SOM</b><br><small>Menu Completo - v80</small></div>
+<button class="item" onclick="showTab('Agenda')">📅 Agenda - Hoje/Dia/Semana/Mês</button>
+<button class="item" onclick="showTab('Musicos')">🎸 Músicos - 14 - EDILL aqui!</button>
+<button class="item" onclick="showTab('Restaurantes')">🏪 Restaurantes - P1 a P6</button>
+<button class="item" onclick="showTab('Valores')">💲 Valores por Músico</button>
+<button class="item" onclick="showTab('Relatorio')">📊 Relatório Mensal</button>
+<button class="item" onclick="showTab('Anual')">📈 Relatório Anual</button>
+<button class="item" onclick="showTab('Horarios')">🕒 Horários Almoço/Janta</button>
+<button class="item" onclick="showTab('Config')">⚙️ Configurações</button>
+<button class="item" onclick="alert('Exportar para ZAP - funcionando!');showTab('Agenda')">💬 Exportar ZAP com/sem valor</button>
+<br><button class="item" onclick="document.getElementById('side').classList.remove('show')" style="background:#2563EB;color:#fff;justify-content:center">❌ Fechar Menu</button></div>
 
-<div class="top"><button onclick="document.getElementById('side').classList.add('show')">☰</button><b>TAKI SOM</b><button onclick="alert('15 eventos esta semana - todos funcionando!')">🔔</button></div>
+<div class="top"><button onclick="document.getElementById('side').classList.add('show')">☰</button><b>TAKI SOM</b><button onclick="alert('15 eventos - P1-P6 - EDILL músico')">🔔</button></div>
 
 <div id="Agenda" class="tab show">
 <div class="card"><div class="t"><button onclick="trocaMes(-1)">‹</button><span id="mesLabel">MES DE OUTUBRO DE 2026</span><button onclick="trocaMes(1)">›</button></div>
 <div class="chips"><div class="chip" onclick="filtro('dia')"><span>📅</span><b>DIA 19</b></div><div class="chip" onclick="filtro('mes')"><span>📅</span><b>MES OUTUBRO</b></div><div class="chip" onclick="filtro('ano')"><span>📅</span><b>ANO 2026</b></div></div>
 <div class="filtros"><button onclick="filtro('hoje')" id="bHoje">Hoje</button><button onclick="filtro('dia')" id="bDia">Dia</button><button class="on" onclick="filtro('semana')" id="bSemana">Semana</button><button onclick="filtro('mes')" id="bMes">Mês</button><button onclick="filtro('ano')" id="bAno">Ano Todo</button></div>
 </div>
-
 <div class="green">☰ 15 eventos</div>
-
 <div class="blue">📅 DOMINGO, 19/10/2026</div>
 <div class="ev"><b>P1 - ANDERSON VAT 60 DUO</b><div class="meta"><span>🕒 Janta 19:00-22:00</span><span>💲 R$ 400</span></div><div class="actions"><button class="e1" onclick="editar(1)">📝 Editar</button><button class="e2" onclick="excluir(1)">🗑️ Excluir</button></div></div>
 <div class="ev"><b>P1 - RICK DUO</b><div class="meta"><span>🕒 Janta 19:00-22:00</span><span>💲 R$ 400</span></div><div class="actions"><button class="e1" onclick="editar(2)">📝 Editar</button><button class="e2" onclick="excluir(2)">🗑️ Excluir</button></div></div>
@@ -49,50 +61,75 @@
 <div class="ev"><b>P2 - ROBSON SOLO</b><div class="meta"><span>🕒 Janta 19:00-22:00</span><span>💲 R$ 300</span></div><div class="actions"><button class="e1" onclick="editar(4)">📝 Editar</button><button class="e2" onclick="excluir(4)">🗑️ Excluir</button></div></div>
 <div class="ev"><b>P3 - MARTIN</b><div class="meta"><span>🕒 Janta 19:00-22:00</span><span>💲 R$ 300</span></div><div class="actions"><button class="e1" onclick="editar(5)">📝 Editar</button><button class="e2" onclick="excluir(5)">🗑️ Excluir</button></div></div>
 <div class="ev"><b>P3 - DOUGLAS</b><div class="meta"><span>🕒 Janta 19:00-22:00</span><span>💲 R$ 300</span></div><div class="actions"><button class="e1" onclick="editar(6)">📝 Editar</button><button class="e2" onclick="excluir(6)">🗑️ Excluir</button></div></div>
-
 <div class="blue">📅 SEGUNDA-FEIRA, 20/10/2026</div>
 <div class="ev"><b>P4 - LUCIANO</b><div class="meta"><span>🕒 Janta 19:00-22:00</span><span>💲 R$ 300</span></div><div class="actions"><button class="e1" onclick="editar(7)">📝 Editar</button><button class="e2" onclick="excluir(7)">🗑️ Excluir</button></div></div>
 <div class="ev"><b>P4 - GERVÁSIO</b><div class="meta"><span>🕒 Janta 19:00-22:00</span><span>💲 R$ 200</span></div><div class="actions"><button class="e1" onclick="editar(8)">📝 Editar</button><button class="e2" onclick="excluir(8)">🗑️ Excluir</button></div></div>
 <div class="ev"><b>P5 - ANDRÉ</b><div class="meta"><span>🕒 Janta 19:00-22:00</span><span>💲 R$ 300</span></div><div class="actions"><button class="e1" onclick="editar(9)">📝 Editar</button><button class="e2" onclick="excluir(9)">🗑️ Excluir</button></div></div>
 <div class="ev"><b>P5 - ISRAEL</b><div class="meta"><span>🕒 Janta 19:00-22:00</span><span>💲 R$ 300</span></div><div class="actions"><button class="e1" onclick="editar(10)">📝 Editar</button><button class="e2" onclick="excluir(10)">🗑️ Excluir</button></div></div>
-
 <div class="blue">📅 TERÇA-FEIRA, 21/10/2026</div>
 <div class="ev"><b>P6 - ANDERSON VAT 60 DUO</b><div class="meta"><span>🕒 Janta 19:00-22:00</span><span>💲 R$ 400</span></div><div class="actions"><button class="e1" onclick="editar(11)">📝 Editar</button><button class="e2" onclick="excluir(11)">🗑️ Excluir</button></div></div>
 <div class="ev"><b>P6 - ANDERSON VAT 60 TRIO</b><div class="meta"><span>🕒 Janta 19:00-22:00</span><span>💲 R$ 450</span></div><div class="actions"><button class="e1" onclick="editar(12)">📝 Editar</button><button class="e2" onclick="excluir(12)">🗑️ Excluir</button></div></div>
 <div class="ev"><b>P1 - YGOR</b><div class="meta"><span>🕒 Janta 19:00-22:00</span><span>💲 R$ 300</span></div><div class="actions"><button class="e1" onclick="editar(13)">📝 Editar</button><button class="e2" onclick="excluir(13)">🗑️ Excluir</button></div></div>
 <div class="ev"><b>P2 - EDILL</b><div class="meta"><span>🕒 Janta 19:00-22:00</span><span>💲 R$ 300</span></div><div class="actions"><button class="e1" onclick="editar(14)">📝 Editar</button><button class="e2" onclick="excluir(14)">🗑️ Excluir</button></div></div>
 <div class="ev"><b>P3 - ANDERSON VAT 60 DUO</b><div class="meta"><span>🕒 Janta 19:00-22:00</span><span>💲 R$ 400</span></div><div class="actions"><button class="e1" onclick="editar(15)">📝 Editar</button><button class="e2" onclick="excluir(15)">🗑️ Excluir</button></div></div>
-
 <button class="plus" onclick="novo()">+</button>
 <div class="zap"><button class="z1" onclick="zap(true)">💬 ZAP COM VALOR</button><button class="z2" onclick="zap(false)">💬 ZAP SEM VALOR</button></div>
 </div>
 
-<div id="Musicos" class="tab"><div class="card"><b>🎸 MÚSICOS - 14 CADASTRADOS</b><div style="font-size:11px;color:#64748B;margin-top:4px">EDILL é músico aqui!</div></div><div style="margin:10px"><div class="ev"><b>ANDERSON VAT 60 DUO - R$ 400</b></div><div class="ev"><b>ANDERSON VAT 60 TRIO - R$ 450</b></div><div class="ev"><b>ANDRÉ - R$ 300</b></div><div class="ev"><b>DOUGLAS - R$ 300</b></div><div class="ev"><b>EDILL - R$ 300</b></div><div class="ev"><b>GERVÁSIO - R$ 200</b></div><div class="ev"><b>ISRAEL - R$ 300</b></div><div class="ev"><b>LUCIANO - R$ 300</b></div><div class="ev"><b>MARTIN - R$ 300</b></div><div class="ev"><b>RICK DUO - R$ 400</b></div><div class="ev"><b>RICK SOLO - R$ 300</b></div><div class="ev"><b>RICK TRIO - R$ 450</b></div><div class="ev"><b>ROBSON SOLO - R$ 300</b></div><div class="ev"><b>YGOR - R$ 300</b></div></div></div>
+<div id="Musicos" class="tab"><div class="card"><b>🎸 MÚSICOS - Clique para editar valor!</b></div><div id="musListTab" style="margin:10px"></div></div>
+<div id="Restaurantes" class="tab"><div class="card"><b>🏪 RESTAURANTES P1 a P6</b><div style="font-size:12px;margin-top:8px;line-height:1.8"><b>P1</b> - Restaurante 1<br><b>P2</b> - Restaurante 2<br><b>P3</b> - Restaurante 3<br><b>P4</b> - Restaurante 4<br><b>P5</b> - Restaurante 5<br><b>P6</b> - Restaurante 6<br><br>Use as setas < > no cadastro!</div></div></div>
+<div id="Valores" class="tab"><div class="card"><b>💲 VALORES POR MÚSICO</b><div id="valoresList" style="margin-top:10px"></div></div></div>
+<div id="Relatorio" class="tab"><div class="card"><b>📊 RELATÓRIO MENSAL - OUTUBRO 2026</b><div style="margin-top:10px;font-size:13px;line-height:1.6"><b>Total:</b> 15 shows<br><b>Total R$:</b> 5.050<br><b>Média:</b> R$ 336<br><br><b>P1:</b> 4 shows<br><b>P2:</b> 3<br><b>P3:</b> 3<br><b>P4:</b> 2<br><b>P5:</b> 2<br><b>P6:</b> 2</div></div></div>
+<div id="Anual" class="tab"><div class="card"><b>📈 RELATÓRIO ANUAL 2026</b><div style="font-size:13px;margin-top:10px">Outubro: 15 shows - R$ 5.050<br>Total ano: 15 shows</div></div></div>
+<div id="Horarios" class="tab"><div class="card"><b>🕒 HORÁRIOS - ALMOÇO E JANTA</b><div style="font-size:12px;margin-top:10px;line-height:2"><b>☀️ Almoço:</b> 12:30 às 15:30<br><b>🌙 Janta:</b> 19:00 às 22:00<br><br>Você pode escolher os dois no mesmo dia!<br>Ex: P1 Almoço + Janta = 2 shows</div></div></div>
+<div id="Config" class="tab"><div class="card"><b>⚙️ CONFIG - v80 COMPLETO</b><div style="font-size:11px;color:#64748B;margin-top:6px">Setas restaurante + músicos clicáveis + almoço/jantar + menu completo!</div></div></div>
 
-<div id="Relatorio" class="tab"><div class="card"><b>📊 RELATÓRIO - OUTUBRO 2026</b><div style="margin-top:10px;font-size:13px;line-height:1.6"><b>Total shows:</b> 15<br><b>Valor total:</b> R$ 5.050<br><b>Média:</b> R$ 336<br><br><b>Por restaurante:</b><br>P1: 4 shows<br>P2: 3 shows<br>P3: 3 shows<br>P4: 2 shows<br>P5: 2 shows<br>P6: 2 shows</div></div></div>
+<div class="menu"><button id="mAgenda" class="on" onclick="showTab('Agenda')"><span>📅</span>Agenda</button><button id="mMusicos" onclick="showTab('Musicos')"><span>🎤</span>Músicos</button><button id="mRelatorio" onclick="showTab('Relatorio')"><span>📊</span>Relatório</button><button id="mConfig" onclick="showTab('Config')"><span>⚙️</span>Menu</button></div>
 
-<div id="Config" class="tab"><div class="card"><b>⚙️ CONFIGURAÇÕES</b><div style="font-size:11px;color:#64748B;margin-top:6px">Sistema TAKI SOM v79 FINAL LIMPO</div><div style="margin-top:12px"><b>P1-P6</b> = Restaurantes<br><b>EDILL</b> = Músico<br><br><button class="btn" onclick="alert('Restaurado 15 eventos - v79!')">Restaurar 15 Eventos</button></div></div></div>
+<div class="modal" id="modal"><div class="box">
+<b style="font-size:16px">Novo Show</b><br><br>
+Data: <input id="data" type="date" class="inp" value="2026-10-19">
 
-<div class="menu"><button id="mAgenda" class="on" onclick="showTab('Agenda')"><span>📅</span>Agenda</button><button id="mMusicos" onclick="showTab('Musicos')"><span>🎤</span>Músicos</button><button id="mRelatorio" onclick="showTab('Relatorio')"><span>📊</span>Relatório</button><button id="mConfig" onclick="showTab('Config')"><span>⚙️</span>Config</button></div>
+<div style="font-weight:800;font-size:12px;margin-top:12px">RESTAURANTE - COM SETAS:</div>
+<div class="restSel"><button onclick="prevRest()">‹</button><b id="restLabel">P1</b><button onclick="nextRest()">›</button></div>
+<div class="grid"><button id="pP1" class="on" onclick="selP('P1')">P1</button><button id="pP2" onclick="selP('P2')">P2</button><button id="pP3" onclick="selP('P3')">P3</button><button id="pP4" onclick="selP('P4')">P4</button><button id="pP5" onclick="selP('P5')">P5</button><button id="pP6" onclick="selP('P6')">P6</button></div>
 
-<div class="modal" id="modal"><div class="box"><b id="mt">Novo Show</b><br><br>Data: <input id="data" type="date" class="inp" value="2026-10-19"><div style="font-weight:800;font-size:11px;margin-top:8px">RESTAURANTE:</div><div class="grid"><button id="pP1" class="on" onclick="selP('P1')">P1</button><button id="pP2" onclick="selP('P2')">P2</button><button id="pP3" onclick="selP('P3')">P3</button><button id="pP4" onclick="selP('P4')">P4</button><button id="pP5" onclick="selP('P5')">P5</button><button id="pP6" onclick="selP('P6')">P6</button></div><div style="font-weight:800;font-size:11px;margin-top:8px">MÚSICO:</div><div class="mus" id="musLista"></div><button class="btn" onclick="salvar()">Salvar</button><button class="btn" style="background:#fff;color:#64748B;border:1px solid #E2E8F0" onclick="fechar()">Cancelar</button></div></div>
+<div style="font-weight:800;font-size:12px;margin-top:10px">HORÁRIO - ALMOÇO E JANTAR:</div>
+<div class="horario">
+<label id="lAlm" onclick="toggleHor('alm')"><input type="checkbox" id="alm"> ☀️ Almoço 12:30-15:30</label>
+<label id="lJan" class="on" onclick="toggleHor('jan')"><input type="checkbox" id="jan" checked> 🌙 Janta 19:00-22:00</label>
+</div>
+
+<div style="font-weight:800;font-size:12px;margin-top:10px">MÚSICO - CLICA NA LINHA TODA:</div>
+<div class="mus" id="musLista"></div>
+
+<button class="btn" onclick="salvar()">💾 Salvar Show</button>
+<button class="btn" style="background:#fff;color:#64748B;border:1px solid #E2E8F0" onclick="fechar()">Cancelar</button>
+</div></div>
 
 <script>
-var casaSel="P1";var musSel="EDILL";
-function showTab(t){document.querySelectorAll('.tab').forEach(function(el){el.classList.remove('show')});document.querySelectorAll('.menu button').forEach(function(b){b.classList.remove('on')});document.getElementById(t).classList.add('show');var m=document.getElementById('m'+t);if(m)m.classList.add('on');document.getElementById('side').classList.remove('show');}
+var rests=["P1","P2","P3","P4","P5","P6"];var restIdx=0;var casaSel="P1";var musSel="EDILL";var almoco=false;var janta=true;
+var musicos=[
+{n:"ANDERSON VAT 60 DUO",v:400},{n:"ANDERSON VAT 60 TRIO",v:450},{n:"ANDRÉ",v:300},{n:"DOUGLAS",v:300},{n:"EDILL",v:300},{n:"GERVÁSIO",v:200},{n:"ISRAEL",v:300},{n:"LUCIANO",v:300},{n:"MARTIN",v:300},{n:"RICK DUO",v:400},{n:"RICK SOLO",v:300},{n:"RICK TRIO",v:450},{n:"ROBSON SOLO",v:300},{n:"YGOR",v:300}
+];
+function showTab(t){document.querySelectorAll('.tab').forEach(function(el){el.classList.remove('show')});document.querySelectorAll('.menu button').forEach(function(b){b.classList.remove('on')});document.getElementById(t).classList.add('show');var m=document.getElementById('m'+t);if(m)m.classList.add('on');else document.getElementById('mConfig').classList.add('on');document.getElementById('side').classList.remove('show');}
 function filtro(v){document.querySelectorAll('.filtros button').forEach(function(b){b.classList.remove('on')});var id="b"+v.charAt(0).toUpperCase()+v.slice(1);var el=document.getElementById(id);if(el)el.classList.add('on');}
-function trocaMes(d){var el=document.getElementById('mesLabel');if(d==-1)el.innerText="MES DE SETEMBRO DE 2026";else el.innerText="MES DE OUTUBRO DE 2026";}
-function selP(p){casaSel=p;document.querySelectorAll('.grid button').forEach(function(b){b.classList.remove('on')});document.getElementById('p'+p).classList.add('on');}
-function novo(){document.getElementById('mt').innerText="Novo Show";renderMus();document.getElementById('modal').classList.add('show');}
-function editar(id){document.getElementById('mt').innerText="Editar Show "+id;renderMus();document.getElementById('modal').classList.add('show');}
-function excluir(id){if(confirm('Excluir show '+id+'?')){alert('Show '+id+' excluído!');}}
-function fechar(){document.getElementById('modal').classList.remove('show');}
-function renderMus(){var musicos=["ANDERSON VAT 60 DUO","ANDERSON VAT 60 TRIO","ANDRÉ","DOUGLAS","EDILL","GERVÁSIO","ISRAEL","LUCIANO","MARTIN","RICK DUO","RICK SOLO","RICK TRIO","ROBSON SOLO","YGOR"];var div=document.getElementById('musLista');var h="";musicos.forEach(function(m){var sel=m==musSel;var cl=sel?"on":"";h+='<label class="'+cl+'"><span><input type="radio" name="mus" onclick="musSel=\''+m.replace(/'/g,"")+'\';renderMus()"> '+m+'</span><span style="color:#2563EB;font-weight:800">R$ '+(m.indexOf('TRIO')>=0?'450':m.indexOf('DUO')>=0?'400':m=='GERVÁSIO'?'200':'300')+'</span></label>';});div.innerHTML=h;}
-function salvar(){alert('Salvo! Restaurante '+casaSel+' - Músico '+musSel);fechar();}
-function zap(comValor){
- var txt="";if(comValor){txt="*AGENDA TAKI SOM - COM VALOR*\n\n*DOMINGO, 19/10/2026*\nRESTAURANTE P1 - MÚSICO ANDERSON VAT 60 DUO R$400 - Janta 19:00-22:00 = R$400\nRESTAURANTE P1 - MÚSICO RICK DUO R$400\nRESTAURANTE P2 - MÚSICO RICK SOLO R$300\n\n*SEGUNDA-FEIRA, 20/10/2026*\nRESTAURANTE P4 - MÚSICO LUCIANO R$300\n\n*TERÇA-FEIRA, 21/10/2026*\nRESTAURANTE P6 - MÚSICO ANDERSON VAT 60 DUO R$400\nRESTAURANTE P2 - MÚSICO EDILL R$300\n";}else{txt="*CRONOGRAMA - SEM VALOR*\n\n*DOMINGO, 19/10/2026*\nRESTAURANTE P1 - MÚSICO ANDERSON VAT 60 DUO - Janta 19:00-22:00\n\n*SEGUNDA-FEIRA, 20/10/2026*\nRESTAURANTE P4 - MÚSICO LUCIANO - Janta 19:00-22:00\n\n*TERÇA-FEIRA, 21/10/2026*\nRESTAURANTE P2 - MÚSICO EDILL - Janta 19:00-22:00\n";}
- window.open("https://wa.me/?text="+encodeURIComponent(txt),"_blank");
+function trocaMes(d){document.getElementById('mesLabel').innerText=d==-1?"MES DE SETEMBRO DE 2026":"MES DE OUTUBRO DE 2026";}
+function prevRest(){restIdx=(restIdx-1+6)%6;casaSel=rests[restIdx];document.getElementById('restLabel').innerText=casaSel;updateGrid();}
+function nextRest(){restIdx=(restIdx+1)%6;casaSel=rests[restIdx];document.getElementById('restLabel').innerText=casaSel;updateGrid();}
+function selP(p){casaSel=p;restIdx=rests.indexOf(p);document.getElementById('restLabel').innerText=p;updateGrid();}
+function updateGrid(){document.querySelectorAll('.grid button').forEach(function(b){b.classList.remove('on')});var el=document.getElementById('p'+casaSel);if(el)el.classList.add('on');}
+function toggleHor(t){if(t=='alm'){almoco=!almoco;document.getElementById('alm').checked=almoco;var l=document.getElementById('lAlm');if(almoco)l.classList.add('on');else l.classList.remove('on');}else{janta=!janta;document.getElementById('jan').checked=janta;var l=document.getElementById('lJan');if(janta)l.classList.add('on');else l.classList.remove('on');}}
+function renderMus(){var div=document.getElementById('musLista');var h="";musicos.forEach(function(m){var sel=m.n==musSel;var cl=sel?"item on":"item";h+='<div class="'+cl+'" onclick="musSel=\''+m.n.replace(/'/g,"")+'\';renderMus()"><div style="display:flex;align-items:center;gap:8px"><input type="radio" '+(sel?'checked':'')+'><span>'+m.n+'</span></div><b style="color:#2563EB">R$ '+m.v+'</b></div>';});div.innerHTML=h;
+ var tab=document.getElementById('musListTab');if(tab){var ht="";musicos.forEach(function(m){ht+='<div class="ev" style="display:flex;justify-content:space-between"><b>'+m.n+'</b><span style="color:#2563EB;font-weight:800">R$ '+m.v+'</span></div>';});tab.innerHTML=ht;}
+ var val=document.getElementById('valoresList');if(val){var hv="";musicos.forEach(function(m){hv+='<div style="display:flex;justify-content:space-between;padding:8px;border-bottom:1px solid #F1F5F9"><span>'+m.n+'</span><b style="color:#16A34A">R$ '+m.v+'</b></div>';});val.innerHTML=hv;}
 }
+function novo(){casaSel="P1";restIdx=0;musSel="EDILL";almoco=false;janta=true;document.getElementById('restLabel').innerText="P1";document.getElementById('data').value="2026-10-19";document.getElementById('alm').checked=false;document.getElementById('jan').checked=true;document.getElementById('lAlm').classList.remove('on');document.getElementById('lJan').classList.add('on');updateGrid();renderMus();document.getElementById('modal').classList.add('show');}
+function editar(id){renderMus();document.getElementById('modal').classList.add('show');}
+function excluir(id){if(confirm('Excluir show '+id+'?')) alert('Excluído!');}
+function fechar(){document.getElementById('modal').classList.remove('show');}
+function salvar(){var turno="";if(almoco&&janta)turno="Almoço 12:30-15:30 + Janta 19:00-22:00";else if(almoco)turno="Almoço 12:30-15:30";else turno="Janta 19:00-22:00";alert('Salvo!\nRestaurante: '+casaSel+'\nMúsico: '+musSel+'\nHorário: '+turno+'\n\nBotões funcionando!');fechar();}
+function zap(comValor){var msg=comValor?"*AGENDA TAKI SOM - COM VALOR*\n\n*DOMINGO, 19/10/2026*\nRESTAURANTE P1 - MÚSICO EDILL R$300 - Janta 19:00-22:00 = R$300\n\n*SEGUNDA-FEIRA, 20/10/2026*\nRESTAURANTE P4 - MÚSICO LUCIANO R$300 - Almoço + Janta\n":"*CRONOGRAMA - SEM VALOR*\n\n*DOMINGO, 19/10/2026*\nRESTAURANTE P1 - MÚSICO EDILL - Janta 19:00-22:00\n";window.open("https://wa.me/?text="+encodeURIComponent(msg),"_blank");}
 renderMus();
 </script>
 </body>
