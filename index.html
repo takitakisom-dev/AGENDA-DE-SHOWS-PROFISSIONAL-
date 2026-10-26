@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TAKI SOM v100 PDF CADERNO BONITA</title>
+<title>TAKI SOM v101 IMPRESSAO BONITA 3 ESTILOS</title>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}body{background:#F1F5F9;font-family:Arial,sans-serif;padding-bottom:110px}
 .top{background:linear-gradient(135deg,#1E40AF,#2563EB);color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;border-radius:0 0 20px 20px}
@@ -17,24 +18,27 @@
 .ev{background:#fff;margin:0 12px 10px;border-radius:0 0 14px 14px;padding:12px;border:1px solid #E2E8F0;border-top:none}
 .ev b{font-size:14px}.meta{display:flex;gap:12px;margin-top:8px;color:#64748B;font-size:12px}.actions{display:flex;gap:8px;margin-top:10px}.actions button{flex:1;padding:10px;border-radius:10px;font-weight:800;font-size:12px;cursor:pointer}.e1{border:1.5px solid #93C5FD;background:#fff;color:#2563EB}.e2{border:1.5px solid #FCA5A5;background:#fff;color:#DC2626}
 .plus{position:fixed;bottom:90px;right:16px;width:60px;height:60px;background:#2563EB;color:#fff;border:none;border-radius:50%;font-size:32px;cursor:pointer;z-index:50;box-shadow:0 6px 16px rgba(37,99,235,.5)}
-.zap{display:flex;gap:8px;margin:14px 12px;flex-wrap:wrap}.zap button{flex:1;min-width:140px;padding:12px;border-radius:12px;font-weight:800;font-size:11px;cursor:pointer}.z1{background:#16A34A;color:#fff;border:1.5px solid #16A34A}.z2{background:#fff;color:#16A34A;border:1.5px solid #16A34A}.z3{background:#1E40AF;color:#fff;border:1.5px solid #1E40AF}.z4{background:#fff;color:#1E40AF;border:1.5px solid #1E40AF}
+.zap{display:flex;gap:6px;margin:10px 12px;flex-wrap:wrap}.zap button{flex:1;min-width:120px;padding:11px;border-radius:10px;font-weight:800;font-size:10px;cursor:pointer}
 .menuBottom{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:12px 0;border-top:1px solid #E2E8F0;border-radius:20px 20px 0 0;z-index:100}
 .menuBottom button{flex:1;border:none;background:none;padding:10px;font-size:13px;font-weight:800;color:#94A3B8;cursor:pointer}
 .menuBottom button.on{color:#2563EB}
 .tab{display:none}.tab.show{display:block}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:200;padding:12px}.modal.show{display:flex}.box{background:#fff;border-radius:16px;padding:16px;width:100%;max-width:440px;max-height:90vh;overflow:auto}
-.inp{width:100%;padding:11px;border:1px solid #E2E8F0;border-radius:10px;margin:6px 0}.btn{width:100%;padding:12px;border:none;border-radius:10px;font-weight:800;background:#2563EB;color:#fff;margin-top:10px;cursor:pointer}
+.inp{width:100%;padding:11px;border:1px solid #E2E8F0;border-radius:10px;margin:6px 0}.btn{width:100%;padding:12px;border:none;border-radius:10px;font-weight:800;background:#2563EB;color:#fff;margin-top:8px;cursor:pointer}
 .restSel{display:flex;align-items:center;justify-content:space-between;background:#F1F5F9;border:1px solid #E2E8F0;border-radius:12px;padding:8px 10px;margin:8px 0}.restSel button{width:38px;height:38px;border-radius:10px;border:1px solid #CBD5E1;background:#fff;font-weight:800;font-size:18px;cursor:pointer;color:#1E3A8A}.restSel b{font-size:18px;color:#1E3A8A}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}.grid button{padding:11px;border:1.5px solid #E2E8F0;border-radius:10px;background:#fff;font-weight:800;font-size:12px;cursor:pointer}.grid button.on{background:#2563EB;color:#fff;border-color:#2563EB}
 .horario{display:flex;gap:8px;margin:10px 0;flex-wrap:wrap}.horario label{flex:1;min-width:130px;display:flex;align-items:center;gap:8px;background:#F8FAFC;border:1.5px solid #E2E8F0;border-radius:10px;padding:10px 8px;font-size:12px;font-weight:700;cursor:pointer}.horario label.on{background:#DBEAFE;border-color:#2563EB;color:#1E3A8A}
 .mus{max-height:200px;overflow:auto;border:1px solid #E2E8F0;border-radius:12px;padding:6px;margin:8px 0}.mus .item{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:10px;margin:3px 0;cursor:pointer;border:1px solid transparent}.mus .item.on{background:#EFF6FF;border-color:#2563EB}
 .musCard{background:#fff;margin:0 12px 10px;border-radius:14px;padding:14px;border:1px solid #E2E8F0;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
-.restCard{background:#fff;margin:0 12px 12px;border-radius:16px;padding:16px;border:1px solid #E2E8F0;box-shadow:0 2px 8px rgba(0,0,0,.06);display:flex;justify-content:space-between;align-items:center}
-.restCard .info b{font-size:15px;color:#1E293B}.restCard .info small{color:#64748B;font-size:12px}.restCard .hor{ text-align:right }.restCard .hor b{color:#2563EB;font-size:13px;background:#DBEAFE;padding:6px 10px;border-radius:8px}
-.side{position:fixed;top:0;left:-340px;width:330px;height:100%;background:#fff;z-index:400;transition:.3s;padding:0;overflow:auto;box-shadow:4px 0 20px rgba(0,0,0,.25);border-radius:0 20px 20px 0}.side.show{left:0}.sideHeader{background:linear-gradient(135deg,#1E40AF,#2563EB);color:#fff;padding:22px 18px;font-size:20px;font-weight:800;letter-spacing:1px}.side button.item{width:100%;padding:13px 18px;border:none;background:none;border-bottom:1px solid #F1F5F9;text-align:left;font-weight:700;font-size:13px;cursor:pointer}
+.restCard{background:#fff;margin:0 12px 12px;border-radius:16px;padding:14px;border:1px solid #E2E8F0;box-shadow:0 2px 8px rgba(0,0,0,.06);display:flex;justify-content:space-between;align-items:center}
+.side{position:fixed;top:0;left:-340px;width:330px;height:100%;background:#fff;z-index:400;transition:.3s;padding:0;overflow:auto;box-shadow:4px 0 20px rgba(0,0,0,.25);border-radius:0 20px 20px 0}.side.show{left:0}.sideHeader{background:linear-gradient(135deg,#1E40AF,#2563EB);color:#fff;padding:22px 18px;font-size:20px;font-weight:800}.side button.item{width:100%;padding:13px 18px;border:none;background:none;border-bottom:1px solid #F1F5F9;text-align:left;font-weight:700;font-size:13px;cursor:pointer}
 .badge{background:#DC2626;color:#fff;font-size:10px;padding:2px 6px;border-radius:10px;position:absolute;top:6px;right:6px;font-weight:800}
 .bellWrap{position:relative}
 .dateFilter{display:flex;gap:8px;margin:10px 0;flex-wrap:wrap}.dateFilter input{flex:1;min-width:120px;padding:10px;border:1px solid #E2E8F0;border-radius:10px}
+.printGroup{background:#F8FAFC;border:2px dashed #BFDBFE;border-radius:14px;padding:12px;margin:12px}
+.printGroup b{color:#1E40AF;font-size:13px}
+.printBtns{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.printBtns button{flex:1;min-width:95px;padding:10px 6px;border-radius:10px;font-weight:800;font-size:10px;cursor:pointer;border:1.5px solid}
 </style>
 </head>
 <body>
@@ -42,10 +46,10 @@
 <div class="sideHeader">MENU</div>
 <button class="item" onclick="abrir('Agenda')">Agenda - Hoje 26/10</button>
 <button class="item" onclick="abrir('Musicos')">Músicos - A-Z</button>
-<button class="item" onclick="abrir('Restaurantes')">Restaurantes - Bonito com Horário</button>
-<button class="item" onclick="abrir('Valores')">Valores - Maior para Menor</button>
-<button class="item" onclick="abrir('Relatorio')">Relatório Mensal - Imprimir</button>
-<button class="item" onclick="abrir('Financeiro')">Financeiro Completo - Imprimir Dia/Semana/Mês</button>
+<button class="item" onclick="abrir('Restaurantes')">Restaurantes - Bonito</button>
+<button class="item" onclick="abrir('Valores')">Valores - Maior Menor</button>
+<button class="item" onclick="abrir('Relatorio')">Relatório Mensal</button>
+<button class="item" onclick="abrir('Financeiro')">Financeiro - 3 Estilos Impressão</button>
 <button class="item" onclick="abrir('Anual')">Relatório Anual</button>
 <button class="item" onclick="abrir('Config')">Config - Backup</button>
 <button class="item" onclick="exportarBackup()" style="background:#DBEAFE;font-weight:800">Exportar Backup</button>
@@ -57,7 +61,7 @@
 <br><button class="item" onclick="fecharSide()" style="background:#2563EB;color:#fff;justify-content:center">Fechar</button>
 </div>
 
-<div class="top"><button onclick="abrirSide()">☰</button><b>TAKI SOM</b><div class="bellWrap"><button onclick="abrirSino()" style="font-size:24px">🔔</button><span class="badge" id="badge">5</span><button onclick="instalarApp()" id="btnInstalarTop" style="font-size:11px;background:#fff;color:#2563EB;padding:4px 8px;border-radius:8px;margin-left:6px;font-weight:800;display:none">Instalar</button></div></div>
+<div class="top"><button onclick="abrirSide()">☰</button><b>TAKI SOM</b><div class="bellWrap"><button onclick="abrirSino()" style="font-size:24px">🔔</button><span class="badge" id="badge">5</span></div></div>
 
 <div id="Agenda" class="tab show">
 <div class="card">
@@ -78,18 +82,28 @@
 <div class="green" id="contadorTop"><span>5 eventos - Hoje 26/10/2026</span><span>HOJE</span></div>
 <div id="lista"></div>
 <button class="plus" onclick="novo()">+</button>
-<div class="card" style="margin:12px;border:2px dashed #93C5FD">
-<b style="color:#2563EB">🖨️ IMPRIMIR AGENDA DE HOJE - FORMATO CADERNO PDF:</b><br><small style="color:#64748B">Como combinamos - bonito pra cliente</small><br>
-<div class="zap" style="margin:10px 0 0">
-<button class="z3" onclick="imprimirAgenda(true)">🖨️ IMPRIMIR COM VALOR - PDF CADERNO</button>
-<button class="z4" onclick="imprimirAgenda(false)">🖨️ IMPRIMIR SEM VALOR - PDF CADERNO</button>
+
+<div class="printGroup">
+<b>🖨️ IMPRIMIR AGENDA DE HOJE - 3 ESTILOS:</b><br><small style="color:#64748B">Normal, PDF e Caderno Caneta (diferencial!)</small>
+<div style="margin-top:10px"><b style="font-size:11px;color:#16A34A">COM VALOR:</b></div>
+<div class="printBtns">
+<button style="background:#fff;color:#1E40AF;border-color:#1E40AF" onclick="imprimirAgenda('normal',true)">🖨️ NORMAL</button>
+<button style="background:#1E40AF;color:#fff;border-color:#1E40AF" onclick="imprimirAgenda('pdf',true)">📄 PDF</button>
+<button style="background:#FEF3C7;color:#92400E;border-color:#F59E0B" onclick="imprimirAgenda('caderno',true)">📓 CADERNO CANETA</button>
+</div>
+<div style="margin-top:8px"><b style="font-size:11px;color:#64748B">SEM VALOR:</b></div>
+<div class="printBtns">
+<button style="background:#fff;color:#64748B;border-color:#94A3B8" onclick="imprimirAgenda('normal',false)">🖨️ NORMAL S/VALOR</button>
+<button style="background:#fff;color:#1E40AF;border-color:#93C5FD" onclick="imprimirAgenda('pdf',false)">📄 PDF S/VALOR</button>
+<button style="background:#FFFBEB;color:#92400E;border-color:#FCD34D" onclick="imprimirAgenda('caderno',false)">📓 CADERNO S/VALOR</button>
 </div>
 </div>
-<div class="zap"><button class="z1" onclick="zap(true)">ZAP COM VALOR</button><button class="z2" onclick="zap(false)">ZAP SEM VALOR</button></div>
+
+<div class="zap"><button style="flex:1;padding:12px;border-radius:12px;font-weight:800;font-size:11px;cursor:pointer;background:#16A34A;color:#fff;border:1.5px solid #16A34A" onclick="zap(true)">ZAP COM VALOR</button><button style="flex:1;padding:12px;border-radius:12px;font-weight:800;font-size:11px;cursor:pointer;background:#fff;color:#16A34A;border:1.5px solid #16A34A" onclick="zap(false)">ZAP SEM VALOR</button></div>
 </div>
 
 <div id="Musicos" class="tab">
-<div class="card" style="padding:12px"><b style="font-size:16px">MÚSICOS - A-Z</b><br><small style="color:#64748B">Toque pra editar</small></div>
+<div class="card" style="padding:12px"><b style="font-size:16px">MÚSICOS - A-Z</b></div>
 <div id="musTab" style="margin:10px"></div>
 <div style="margin:14px 12px">
 <button class="btn" onclick="novoMusico()" style="background:#16A34A">+ Novo Músico</button>
@@ -97,49 +111,55 @@
 </div>
 
 <div id="Restaurantes" class="tab">
-<div class="card" style="padding:12px;background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border:2px solid #BFDBFE"><b style="font-size:16px;color:#1E40AF">RESTAURANTES - BONITO COM HORÁRIO</b><br><small style="color:#1E40AF">Agora bonito e funcional - Toque pra editar horário</small></div>
+<div class="card" style="padding:12px;background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border:2px solid #BFDBFE"><b style="font-size:16px;color:#1E40AF">RESTAURANTES - BONITO</b><br><small style="color:#1E40AF">Toque pra editar horário</small></div>
 <div id="restTab" style="margin:10px"></div>
 <div style="margin:14px 12px">
-<button class="btn" onclick="novoRestaurante()" style="background:#16A34A">+ Novo Restaurante - Com Horário</button>
+<button class="btn" onclick="novoRestaurante()" style="background:#16A34A">+ Novo Restaurante</button>
 </div>
 </div>
 
-<div id="Valores" class="tab"><div class="card"><div id="printValores"><b>VALORES - MAIOR PARA MENOR</b><div id="valoresBox" style="margin-top:10px"></div></div><br><button class="btn" style="background:#16A34A" onclick="imprimirArea('printValores')">🖨️ IMPRIMIR VALORES - PDF CADERNO</button></div></div>
+<div id="Valores" class="tab"><div class="card"><div id="printValores"><b>VALORES - MAIOR PARA MENOR</b><div id="valoresBox" style="margin-top:10px"></div></div><br><div class="printBtns"><button style="background:#fff;color:#1E40AF;border:1.5px solid #1E40AF;flex:1;padding:10px;border-radius:10px;font-weight:800;font-size:11px" onclick="imprimirAreaBonita('printValores','normal')">🖨️ NORMAL</button><button style="background:#1E40AF;color:#fff;border:1.5px solid #1E40AF;flex:1;padding:10px;border-radius:10px;font-weight:800;font-size:11px" onclick="imprimirAreaBonita('printValores','pdf')">📄 PDF</button><button style="background:#FEF3C7;color:#92400E;border:1.5px solid #F59E0B;flex:1;padding:10px;border-radius:10px;font-weight:800;font-size:11px" onclick="imprimirAreaBonita('printValores','caderno')">📓 CADERNO</button></div></div></div>
 
-<div id="Relatorio" class="tab"><div class="card"><div id="printRel"><b>RELATÓRIO MENSAL - MAIOR PARA MENOR</b><div id="relBox" style="margin-top:10px;font-size:13px;line-height:1.8"></div></div><br><button class="btn" style="background:#16A34A" onclick="imprimirArea('printRel')">🖨️ IMPRIMIR RELATÓRIO MENSAL - PDF</button></div></div>
+<div id="Relatorio" class="tab"><div class="card"><div id="printRel"><b>RELATÓRIO MENSAL - MAIOR PARA MENOR</b><div id="relBox" style="margin-top:10px;font-size:13px;line-height:1.8"></div></div><br><div class="printBtns"><button style="background:#fff;color:#1E40AF;border:1.5px solid #1E40AF;flex:1;padding:10px;border-radius:10px;font-weight:800;font-size:11px" onclick="imprimirAreaBonita('printRel','normal')">🖨️ NORMAL</button><button style="background:#1E40AF;color:#fff;border:1.5px solid #1E40AF;flex:1;padding:10px;border-radius:10px;font-weight:800;font-size:11px" onclick="imprimirAreaBonita('printRel','pdf')">📄 PDF</button><button style="background:#FEF3C7;color:#92400E;border:1.5px solid #F59E0B;flex:1;padding:10px;border-radius:10px;font-weight:800;font-size:11px" onclick="imprimirAreaBonita('printRel','caderno')">📓 CADERNO</button></div></div></div>
 
 <div id="Financeiro" class="tab">
 <div class="card">
 <div id="printFin">
-<b>FINANCEIRO COMPLETO - FÁCIL PRO CLIENTE</b><br><small>Escolha o período pra imprimir</small>
+<b>FINANCEIRO COMPLETO - FÁCIL PRO CLIENTE</b><br><small>Escolha o período</small>
 <div class="dateFilter">
 <input type="date" id="finInicio" value="2026-10-09">
-<input type="date" id="finFim" value="2026-10-19">
+<input type="date" id="finFim" value="2026-10-26">
 </div>
 <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0">
-<button class="btn" style="flex:1;min-width:90px;background:#EFF6FF;color:#2563EB;border:1.5px solid #BFDBFE" onclick="setFinPeriodo('hoje')">Hoje</button>
-<button class="btn" style="flex:1;min-width:90px;background:#EFF6FF;color:#2563EB;border:1.5px solid #BFDBFE" onclick="setFinPeriodo('semana')">Semana</button>
-<button class="btn" style="flex:1;min-width:90px;background:#EFF6FF;color:#2563EB;border:1.5px solid #BFDBFE" onclick="setFinPeriodo('mes')">Mês</button>
-<button class="btn" style="flex:1;min-width:90px;background:#DBEAFE;color:#1E40AF;border:1.5px solid #2563EB" onclick="setFinPeriodo('custom')">09 a 19/10</button>
+<button class="btn" style="flex:1;min-width:70px;background:#EFF6FF;color:#2563EB;border:1.5px solid #BFDBFE;padding:8px;font-size:10px" onclick="setFinPeriodo('hoje')">Hoje</button>
+<button class="btn" style="flex:1;min-width:70px;background:#EFF6FF;color:#2563EB;border:1.5px solid #BFDBFE;padding:8px;font-size:10px" onclick="setFinPeriodo('semana')">Semana</button>
+<button class="btn" style="flex:1;min-width:70px;background:#EFF6FF;color:#2563EB;border:1.5px solid #BFDBFE;padding:8px;font-size:10px" onclick="setFinPeriodo('mes')">Mês</button>
+<button class="btn" style="flex:1;min-width:70px;background:#DBEAFE;color:#1E40AF;border:1.5px solid #2563EB;padding:8px;font-size:10px" onclick="setFinPeriodo('custom')">09 a 26/10</button>
 </div>
 <div id="finBox" style="margin-top:10px;font-size:13px;line-height:1.8"></div>
 </div>
 <br>
-<button class="btn" style="background:#16A34A" onclick="imprimirFinanceiroPeriodo()">🖨️ IMPRIMIR FINANCEIRO DO PERÍODO - PDF CADERNO</button>
-<button class="btn" style="background:#1E40AF" onclick="imprimirArea('printFin')">🖨️ IMPRIMIR FINANCEIRO COMPLETO</button>
+<div class="printGroup">
+<b>🖨️ IMPRIMIR FINANCEIRO - 3 ESTILOS BONITOS:</b>
+<div class="printBtns" style="margin-top:8px">
+<button style="background:#fff;color:#1E40AF;border-color:#1E40AF" onclick="imprimirFinanceiro('normal')">🖨️ NORMAL</button>
+<button style="background:#1E40AF;color:#fff;border-color:#1E40AF" onclick="imprimirFinanceiro('pdf')">📄 PDF</button>
+<button style="background:#FEF3C7;color:#92400E;border-color:#F59E0B" onclick="imprimirFinanceiro('caderno')">📓 CADERNO CANETA</button>
+</div>
+</div>
 <button class="btn" style="background:#fff;color:#16A34A;border:1.5px solid #16A34A" onclick="exportarBackup()">💾 EXPORTAR BACKUP</button>
 </div>
 </div>
 
-<div id="Anual" class="tab"><div class="card"><div id="printAnual"><b>RELATÓRIO ANUAL 2026</b><div id="anualBox" style="margin-top:10px;font-size:13px;line-height:1.8"></div></div><br><button class="btn" style="background:#16A34A" onclick="imprimirArea('printAnual')">🖨️ IMPRIMIR ANUAL</button></div></div>
-<div id="Horarios" class="tab"><div class="card"><b>HORÁRIOS - EDITÁVEL</b><div id="horariosBox" style="margin-top:12px"></div></div></div>
+<div id="Anual" class="tab"><div class="card"><div id="printAnual"><b>RELATÓRIO ANUAL 2026</b><div id="anualBox" style="margin-top:10px;font-size:13px;line-height:1.8"></div></div><br><div class="printBtns"><button style="background:#fff;color:#1E40AF;border:1.5px solid #1E40AF;flex:1;padding:10px;border-radius:10px;font-weight:800" onclick="imprimirAreaBonita('printAnual','normal')">🖨️ NORMAL</button><button style="background:#1E40AF;color:#fff;border:1.5px solid #1E40AF;flex:1;padding:10px;border-radius:10px;font-weight:800" onclick="imprimirAreaBonita('printAnual','pdf')">📄 PDF</button><button style="background:#FEF3C7;color:#92400E;border:1.5px solid #F59E0B;flex:1;padding:10px;border-radius:10px;font-weight:800" onclick="imprimirAreaBonita('printAnual','caderno')">📓 CADERNO</button></div></div></div>
+<div id="Horarios" class="tab"><div class="card"><b>HORÁRIOS</b><div id="horariosBox" style="margin-top:12px"></div></div></div>
 <div id="Config" class="tab">
-<div class="card"><b>CONFIG - BACKUP E INSTALAR - LIMPO</b><br><small>v100 - PDF Caderno - Fácil pro cliente - Sem botão piscando</small><br><br>
+<div class="card"><b>CONFIG - BACKUP E INSTALAR</b><br><small>v101 - 3 estilos impressão bonita - Caderno Caneta diferencial</small><br><br>
 <button class="btn" style="background:#16A34A" onclick="exportarBackup()">Exportar Backup</button>
 <button class="btn" style="background:#F59E0B" onclick="document.getElementById('importFile').click()">Importar Backup</button>
 <input type="file" id="importFile" style="display:none" accept=".json" onchange="importarBackup(this)">
 <br>
-<button class="btn" onclick="instalarApp()" id="btnInstalarConfig">Instalar no Celular</button>
+<button class="btn" onclick="instalarApp()">Instalar no Celular</button>
 <br>
 <button class="btn" onclick="abrirSino()">Notificações - Sino</button><br><br>
 <button class="btn" onclick="zap(true)">ZAP COM VALOR</button><br><br>
@@ -155,7 +175,7 @@
 </div>
 
 <div class="modal" id="modal"><div class="box">
-<b id="modalTitulo">Novo Show - Horário Editável</b><br><br>
+<b id="modalTitulo">Novo Show</b><br><br>
 Data: <input id="data" type="date" class="inp" value="2026-10-26">
 <div style="font-weight:800;font-size:12px;margin-top:12px">RESTAURANTE:</div>
 <div class="restSel"><button onclick="prevRest()">‹</button><b id="restLabel">P1</b><button onclick="nextRest()">›</button></div>
@@ -179,7 +199,7 @@ Valor R$: <input id="musValor" type="number" class="inp" value="300">
 </div></div>
 
 <div class="modal" id="modalRest"><div class="box">
-<b id="modalRestTitulo">Novo Restaurante - Horário Editável</b><br><br>
+<b id="modalRestTitulo">Novo Restaurante</b><br><br>
 Código: <input id="restCodigo" class="inp" placeholder="Ex: P1, P7">
 Nome: <input id="restNome" class="inp" placeholder="Ex: Restaurante 1">
 <div style="font-weight:800;font-size:12px;margin-top:10px">HORÁRIO:</div>
@@ -205,26 +225,26 @@ Nome: <input id="restNome" class="inp" placeholder="Ex: Restaurante 1">
 
 <script>
 var eventosPadrao=[
-{id:1,data:"2026-10-19",casa:"P1",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:2,data:"2026-10-19",casa:"P2",mus:"RICK DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:3,data:"2026-10-19",casa:"P3",mus:"RICK SOLO",valor:300,turno:"Janta 19:00-22:00"},
-{id:4,data:"2026-10-19",casa:"P4",mus:"ANDRE",valor:300,turno:"Janta 19:00-22:00"},
-{id:5,data:"2026-10-19",casa:"P5",mus:"GERVASIO",valor:200,turno:"Janta 19:00-22:00"},
-{id:6,data:"2026-10-19",casa:"P6",mus:"DOUGLAS",valor:300,turno:"Janta 19:00-22:00"},
-{id:7,data:"2026-10-20",casa:"P1",mus:"DOUGLAS",valor:300,turno:"Janta 19:00-22:00"},
-{id:8,data:"2026-10-20",casa:"P2",mus:"ISRAEL",valor:300,turno:"Janta 19:00-22:00"},
-{id:9,data:"2026-10-20",casa:"P3",mus:"LUCIANO",valor:300,turno:"Janta 19:00-22:00"},
-{id:10,data:"2026-10-20",casa:"P4",mus:"RICK SOLO",valor:300,turno:"Janta 19:00-22:00"},
-{id:11,data:"2026-10-21",casa:"P1",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:12,data:"2026-10-21",casa:"P2",mus:"ANDERSON VAT 60 TRIO",valor:450,turno:"Janta 19:00-22:00"},
-{id:13,data:"2026-10-21",casa:"P3",mus:"RICK TRIO",valor:450,turno:"Janta 19:00-22:00"},
-{id:14,data:"2026-10-21",casa:"P4",mus:"RICK SOLO",valor:300,turno:"Janta 19:00-22:00"},
-{id:15,data:"2026-10-21",casa:"P5",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:16,data:"2026-10-26",casa:"P1",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:17,data:"2026-10-26",casa:"P2",mus:"RICK DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:18,data:"2026-10-26",casa:"P5",mus:"ANDERSON VAT 60 SOLO",valor:350,turno:"Janta 18:30-21:30"},
-{id:19,data:"2026-10-26",casa:"P3",mus:"ISRAEL",valor:300,turno:"Janta 19:00-22:00"},
-{id:20,data:"2026-10-26",casa:"P4",mus:"ANDRE",valor:300,turno:"Janta 19:00-22:00"}
+{id:1,data:"2026-10-19",[STRIPPED] VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:2,data:"2026-10-19",[STRIPPED] DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:3,data:"2026-10-19",[STRIPPED] SOLO",valor:300,turno:"Janta 19:00-22:00"},
+{id:4,data:"2026-10-19",[STRIPPED] 19:00-22:00"},
+{id:5,data:"2026-10-19",[STRIPPED] 19:00-22:00"},
+{id:6,data:"2026-10-19",[STRIPPED] 19:00-22:00"},
+{id:7,data:"2026-10-20",[STRIPPED] 19:00-22:00"},
+{id:8,data:"2026-10-20",[STRIPPED] 19:00-22:00"},
+{id:9,data:"2026-10-20",[STRIPPED] 19:00-22:00"},
+{id:10,data:"2026-10-20",[STRIPPED] SOLO",valor:300,turno:"Janta 19:00-22:00"},
+{id:11,data:"2026-10-21",[STRIPPED] VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:12,data:"2026-10-21",[STRIPPED] VAT 60 TRIO",valor:450,turno:"Janta 19:00-22:00"},
+{id:13,data:"2026-10-21",[STRIPPED] TRIO",valor:450,turno:"Janta 19:00-22:00"},
+{id:14,data:"2026-10-21",[STRIPPED] SOLO",valor:300,turno:"Janta 19:00-22:00"},
+{id:15,data:"2026-10-21",[STRIPPED] VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:16,data:"2026-10-26",[STRIPPED] VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:17,data:"2026-10-26",[STRIPPED] DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:18,data:"2026-10-26",[STRIPPED] VAT 60 SOLO",valor:350,turno:"Janta 18:30-21:30"},
+{id:19,data:"2026-10-26",[STRIPPED] 19:00-22:00"},
+{id:20,data:"2026-10-26",[STRIPPED] 19:00-22:00"}
 ];
 var musicosPadrao=[
 {n:"ANDERSON VAT 60 DUO",v:400},{n:"ANDERSON VAT 60 TRIO",v:450},{n:"ANDRE",v:300},{n:"DOUGLAS",v:300},{n:"EDILL",v:300},{n:"GERVASIO",v:200},{n:"ISRAEL",v:300},{n:"LUCIANO",v:300},{n:"MARTIN",v:300},{n:"RICK DUO",v:400},{n:"RICK SOLO",v:300},{n:"RICK TRIO",v:450},{n:"ROBSON SOLO",v:300},{n:"YGOR",v:300},{n:"DUO CLASSIC ROCK",v:400},{n:"PAOLI",v:300}
@@ -256,67 +276,102 @@ try{
 var restIdx=0;var casaSel="P1";var musSel="EDILL";var almoco=false;var janta=true;var view="hoje";var editId=null;var editMusicoIdx=null;var editRestIdx=null;
 var restAlmoco=false;var restJanta=true;
 var deferredPrompt=null;
-window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferredPrompt=e;var b=document.getElementById('btnInstalarTop');if(b)b.style.display='inline-block';});
-function instalarApp(){if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.then(function(c){if(c.outcome==='accepted'){alert('App instalado!');}deferredPrompt=null;});}else{alert('Para instalar: Chrome > 3 pontinhos > Instalar app');}}
+window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferredPrompt=e;});
+function instalarApp(){if(deferredPrompt){deferredPrompt.prompt();}else{alert('Para instalar: Chrome > 3 pontinhos > Instalar app');}}
 function ordenaMusicosAZ(){musicos.sort(function(a,b){return a.n.localeCompare(b.n);});}
 function ordenaRestsAZ(){restaurantes.sort(function(a,b){return a.codigo.localeCompare(b.codigo);});}
 function saveEventos(){localStorage.setItem(KEY_EVENTOS,JSON.stringify(eventos));}
 function saveMusicos(){ordenaMusicosAZ();localStorage.setItem(KEY_MUSICOS,JSON.stringify(musicos));}
 function saveRests(){ordenaRestsAZ();localStorage.setItem(KEY_RESTS,JSON.stringify(restaurantes));}
 
-function imprimirArea(id){
-  var conteudo=document.getElementById(id).innerHTML;
-  var win=window.open('','','width=900,height=700');
-  win.document.write('<html><head><title>TAKI SOM - PDF Caderno</title><style>body{font-family:Arial;padding:20px} table{width:100%;border-collapse:collapse} th{background:#1E40AF;color:#fff;padding:10px;text-align:left} td{padding:8px;border-bottom:1px solid #eee} .total{background:#EFF6FF;padding:15px;border-radius:10px;margin:10px 0;font-weight:800;font-size:18px} @media print{body{padding:0}}</style></head><body><h2 style="color:#1E40AF">TAKI SOM - Relatório</h2><div style="border:2px solid #1E40AF;border-radius:12px;padding:15px">'+conteudo+'</div><br><small>Gerado em '+new Date().toLocaleString('pt-BR')+' - takisom-dev.github.io</small><script>window.print();<\/script></body></html>');
-  win.document.close();
+function getEstiloCSS(tipo){
+  if(tipo=='normal'){
+    return `
+      body{font-family:'Inter',Arial,sans-serif;padding:20px;color:#1E293B}
+      h1{font-size:18px;text-align:center;color:#1E40AF;margin:0}
+      .sub{text-align:center;font-size:12px;color:#64748B;margin:2px 0 12px}
+      table{width:100%;border-collapse:collapse;margin-top:10px}
+      th{background:#1E40AF;color:#fff;padding:8px 6px;font-size:11px;text-align:left}
+      td{padding:7px 6px;border-bottom:1px solid #E2E8F0;font-size:11px}
+      .total{text-align:center;background:#EFF6FF;padding:10px;border-radius:8px;margin-top:12px;font-weight:800;color:#1E40AF}
+      .small{font-size:9px;color:#94A3B8;text-align:center;margin-top:10px}
+    `;
+  } else if(tipo=='pdf'){
+    return `
+      body{font-family:'Inter',Arial,sans-serif;padding:25px;color:#0F172A;background:#fff}
+      h1{font-size:22px;text-align:center;color:#fff;background:linear-gradient(135deg,#1E40AF,#2563EB);padding:14px;border-radius:12px;margin:0}
+      .sub{text-align:center;font-size:13px;color:#fff;background:#1E40AF;padding:6px;border-radius:0 0 12px 12px;margin:0 0 15px}
+      table{width:100%;border-collapse:collapse;box-shadow:0 4px 12px rgba(0,0,0,.08);border-radius:12px;overflow:hidden}
+      th{background:#1E40AF;color:#fff;padding:10px 8px;font-size:12px;text-align:left}
+      td{padding:9px 8px;border-bottom:1px solid #F1F5F9;font-size:12px}
+      tr:nth-child(even){background:#F8FAFC}
+      .total{text-align:center;background:linear-gradient(135deg,#DBEAFE,#EFF6FF);padding:14px;border-radius:12px;margin-top:15px;font-weight:800;color:#1E40AF;border:2px solid #BFDBFE;font-size:14px}
+      .small{font-size:10px;color:#94A3B8;text-align:center;margin-top:12px}
+    `;
+  } else { // caderno caneta - diferencial
+    return `
+      @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap');
+      body{font-family:'Kalam',cursive;padding:20px;color:#1E293B;background:#FFFBEB;background-image: linear-gradient(90deg, #FDE68A 1px, transparent 1px), linear-gradient(#E5E7EB 1px, transparent 1px); background-size: 100% 28px; background-position: 0 0}
+      h1{font-family:'Kalam',cursive;font-size:24px;text-align:center;color:#1E40AF;margin:0;transform:rotate(-1deg)}
+      .sub{font-family:'Kalam',cursive;text-align:center;font-size:14px;color:#92400E;margin:2px 0 12px;transform:rotate(-0.5deg)}
+      table{width:100%;border-collapse:collapse;margin-top:10px;font-family:'Kalam',cursive}
+      th{font-family:'Kalam',cursive;background:#FEF3C7;color:#92400E;padding:8px 6px;font-size:13px;text-align:left;border-bottom:2px solid #F59E0B;transform:rotate(-0.3deg)}
+      td{padding:8px 6px;border-bottom:1px dashed #FCD34D;font-size:13px;color:#451A03}
+      .total{font-family:'Kalam',cursive;text-align:center;background:#FFFBEB;padding:12px;border-radius:12px;margin-top:14px;font-weight:700;color:#92400E;border:2px dashed #F59E0B;transform:rotate(0.5deg);font-size:14px}
+      .small{font-family:'Kalam',cursive;font-size:11px;color:#A16207;text-align:center;margin-top:12px}
+    `;
+  }
 }
 
-function imprimirAgenda(comValor){
+function imprimirAgenda(tipo,comValor){
   var hoje=eventos.filter(function(e){return e.data=='2026-10-26';});
   hoje.sort(function(a,b){return a.casa.localeCompare(b.casa);});
-  var html='<h2 style="text-align:center;color:#1E40AF">TAKI SOM - AGENDA DE HOJE - 26/10/2026</h2><div style="text-align:center;margin:10px 0"><small>Formato Caderno - PDF Normal</small></div><table><tr><th>Restaurante</th><th>Músico</th><th>Horário</th>'+(comValor?'<th>Valor</th>':'')+'</tr>';
+  var css=getEstiloCSS(tipo);
+  var tituloTipo=tipo=='normal'?'Folha Normal':tipo=='pdf'?'PDF Normal':'Caderno Caneta - Escrito à Mão';
+  var html='<h1>AGENDA DE HOJE</h1><div class="sub">26/10/2026 - '+tituloTipo+' - '+(comValor?'COM VALOR':'SEM VALOR')+'</div>';
+  html+='<table><tr><th style="width:15%">Rest.</th><th>Músico</th><th style="width:30%">Horário</th>'+(comValor?'<th style="width:20%">Valor</th>':'')+'</tr>';
   hoje.forEach(function(ev){
     html+='<tr><td><b>'+ev.casa+'</b></td><td>'+ev.mus+'</td><td>'+ev.turno+'</td>'+(comValor?'<td><b>R$ '+ev.valor+'</b></td>':'')+'</tr>';
   });
-  html+='</table><br><div class="total">Total Hoje: '+hoje.length+' shows - R$ '+hoje.reduce(function(s,e){return s+e.valor;},0)+(comValor?'':' - Sem valores')+'</div>';
+  html+='</table><div class="total">'+hoje.length+' shows - '+(comValor?'Total R$ '+hoje.reduce(function(s,e){return s+e.valor;},0):'Sem valores - '+hoje.length+' músicos')+'</div><div class="small">Gerado em '+new Date().toLocaleString('pt-BR')+' - TAKI SOM</div>';
   var win=window.open('','','width=900,height=700');
-  win.document.write('<html><head><title>Agenda Hoje - PDF Caderno</title><style>body{font-family:Arial;padding:20px} table{width:100%;border-collapse:collapse} th{background:#1E40AF;color:#fff;padding:12px;text-align:left} td{padding:10px;border-bottom:1px solid #ddd} .total{background:#DBEAFE;padding:15px;border-radius:10px;text-align:center;font-weight:800;font-size:16px} @media print{body{padding:10px}}</style></head><body>'+html+'<br><small>Gerado em '+new Date().toLocaleString('pt-BR')+'</small><script>window.print();<\/script></body></html>');
+  win.document.write('<html><head><title>Agenda Hoje - '+tituloTipo+'</title><style>'+css+'</style></head><body>'+html+'<script>setTimeout(function(){window.print();},300);<\/script></body></html>');
   win.document.close();
 }
 
-function setFinPeriodo(tipo){
-  var hoje='2026-10-26';
-  if(tipo=='hoje'){document.getElementById('finInicio').value=hoje;document.getElementById('finFim').value=hoje;}
-  else if(tipo=='semana'){document.getElementById('finInicio').value='2026-10-19';document.getElementById('finFim').value='2026-10-26';}
-  else if(tipo=='mes'){document.getElementById('finInicio').value='2026-10-01';document.getElementById('finFim').value='2026-10-31';}
-  else if(tipo=='custom'){document.getElementById('finInicio').value='2026-10-09';document.getElementById('finFim').value='2026-10-19';}
-  renderFinanceiro();
+function imprimirAreaBonita(id,tipo){
+  var conteudo=document.getElementById(id).innerHTML;
+  var css=getEstiloCSS(tipo);
+  var win=window.open('','','width=900,height=700');
+  win.document.write('<html><head><title>TAKI SOM - '+tipo+'</title><style>'+css+'</style></head><body><h1>TAKI SOM</h1><div class="sub">'+tipo.toUpperCase()+' - '+new Date().toLocaleDateString('pt-BR')+'</div><div style="background:#fff;padding:12px;border-radius:12px">'+conteudo+'</div><div class="small">Gerado em '+new Date().toLocaleString('pt-BR')+'</div><script>setTimeout(function(){window.print();},300);<\/script></body></html>');
+  win.document.close();
 }
+
 function getFinFiltrado(){
   var ini=document.getElementById('finInicio').value||'2026-10-01';
   var fim=document.getElementById('finFim').value||'2026-10-31';
-  return eventos.filter(function(e){return e.data>=ini && e.data<=fim;});
+  return {filt:eventos.filter(function(e){return e.data>=ini && e.data<=fim;}),ini:ini,fim:fim};
 }
-function imprimirFinanceiroPeriodo(){
-  var ini=document.getElementById('finInicio').value||'2026-10-01';
-  var fim=document.getElementById('finFim').value||'2026-10-31';
-  var filt=getFinFiltrado();
-  filt.sort(function(a,b){return b.valor-a.valor;});
+function imprimirFinanceiro(tipo){
+  var data=getFinFiltrado();
+  var filt=data.filt;filt.sort(function(a,b){return b.valor-a.valor;});
   var total=filt.reduce(function(s,e){return s+e.valor;},0);
-  var html='<h2 style="text-align:center;color:#1E40AF">TAKI SOM - FINANCEIRO - '+ini.split('-').reverse().join('/')+' a '+fim.split('-').reverse().join('/')+'</h2>';
-  html+='<div style="text-align:center;background:#DBEAFE;padding:15px;border-radius:12px;margin:15px 0"><b style="font-size:22px">Total Período: R$ '+total+'</b><br>'+filt.length+' shows</div>';
+  var css=getEstiloCSS(tipo);
+  var tituloTipo=tipo=='normal'?'Folha Normal':tipo=='pdf'?'PDF Normal':'Caderno Caneta';
+  var html='<h1>FINANCEIRO</h1><div class="sub">'+data.ini.split('-').reverse().join('/')+' a '+data.fim.split('-').reverse().join('/')+' - '+tituloTipo+'</div>';
+  html+='<div class="total">Total Período: R$ '+total+' - '+filt.length+' shows</div>';
   html+='<table><tr><th>Data</th><th>Rest.</th><th>Músico</th><th>Horário</th><th>Valor</th></tr>';
   filt.forEach(function(ev){
-    html+='<tr><td>'+ev.data.split('-').reverse().join('/')+'</td><td><b>'+ev.casa+'</b></td><td>'+ev.mus+'</td><td>'+ev.turno+'</td><td><b>R$ '+ev.valor+'</b></td></tr>';
+    html+='<tr><td style="font-size:10px">'+ev.data.split('-').reverse().join('/')+'</td><td><b>'+ev.casa+'</b></td><td style="font-size:11px">'+ev.mus+'</td><td style="font-size:10px">'+ev.turno+'</td><td><b>R$ '+ev.valor+'</b></td></tr>';
   });
-  html+='</table>';
+  html+='</table><div class="small">Gerado em '+new Date().toLocaleString('pt-BR')+'</div>';
   var win=window.open('','','width=900,height=700');
-  win.document.write('<html><head><title>Financeiro Periodo - PDF Caderno</title><style>body{font-family:Arial;padding:20px} table{width:100%;border-collapse:collapse} th{background:#16A34A;color:#fff;padding:10px;text-align:left} td{padding:8px;border-bottom:1px solid #eee;font-size:12px} @media print{body{padding:10px}}</style></head><body>'+html+'<br><small>Gerado em '+new Date().toLocaleString('pt-BR')+' - Período: '+ini+' a '+fim+'</small><script>window.print();<\/script></body></html>');
+  win.document.write('<html><head><title>Financeiro - '+tituloTipo+'</title><style>'+css+'</style></head><body>'+html+'<script>setTimeout(function(){window.print();},400);<\/script></body></html>');
   win.document.close();
 }
 
 function exportarBackup(){
-  var backup={eventos:eventos,musicos:musicos,restaurantes:restaurantes,data:new Date().toISOString(),versao:"v100"};
+  var backup={eventos:eventos,musicos:musicos,restaurantes:restaurantes,data:new Date().toISOString(),versao:"v101"};
   var blob=new Blob([JSON.stringify(backup,null,2)],{type:"application/json"});
   var url=URL.createObjectURL(blob);
   var a=document.createElement("a");a.href=url;a.download="takisom-backup-"+new Date().toISOString().split("T")[0]+".json";a.click();URL.revokeObjectURL(url);
@@ -338,6 +393,14 @@ function importarBackup(input){
     }catch(err){alert("Erro: "+err.message);}
   };
   reader.readAsText(file);input.value="";
+}
+function setFinPeriodo(tipo){
+  var hoje='2026-10-26';
+  if(tipo=='hoje'){document.getElementById('finInicio').value=hoje;document.getElementById('finFim').value=hoje;}
+  else if(tipo=='semana'){document.getElementById('finInicio').value='2026-10-19';document.getElementById('finFim').value='2026-10-26';}
+  else if(tipo=='mes'){document.getElementById('finInicio').value='2026-10-01';document.getElementById('finFim').value='2026-10-31';}
+  else if(tipo=='custom'){document.getElementById('finInicio').value='2026-10-09';document.getElementById('finFim').value='2026-10-26';}
+  renderFinanceiro();
 }
 function abrirSide(){document.getElementById('side').classList.add('show');}
 function fecharSide(){document.getElementById('side').classList.remove('show');}
@@ -364,18 +427,19 @@ function render(){
   var hb=document.getElementById('horariosBox');if(hb){var hh='';restaurantes.forEach(function(r){hh+='<div style="display:flex;justify-content:space-between;padding:10px;border-bottom:1px solid #F1F5F9"><span><b>'+r.codigo+'</b> - '+r.nome+'</span><span style="background:#DBEAFE;color:#1E40AF;padding:6px 10px;border-radius:8px;font-weight:700;font-size:12px">'+r.horario+'</span></div>';});hb.innerHTML=hh;}
 }
 function renderFinanceiro(){
-  var filt=getFinFiltrado();
+  var data=getFinFiltrado();
+  var filt=data.filt;
   var total=filt.reduce(function(s,e){return s+e.valor;},0);
   var porRest={};filt.forEach(function(e){if(!porRest[e.casa])porRest[e.casa]=0;porRest[e.casa]+=e.valor;});
   var porMus={};filt.forEach(function(e){if(!porMus[e.mus])porMus[e.mus]=0;porMus[e.mus]+=e.valor;});
-  var html='<div style="background:linear-gradient(135deg,#DBEAFE,#EFF6FF);border-radius:12px;padding:15px;margin:10px 0;border:2px solid #BFDBFE"><b style="font-size:20px;color:#1E40AF">Total Período: R$ '+total+'</b><br><small style="color:#1E40AF">'+filt.length+' shows - '+document.getElementById('finInicio').value.split('-').reverse().join('/')+' a '+document.getElementById('finFim').value.split('-').reverse().join('/')+'</small></div>';
-  html+='<br><b style="color:#2563EB">POR RESTAURANTE - MAIOR PARA MENOR:</b><br><br>';
+  var html='<div style="background:linear-gradient(135deg,#DBEAFE,#EFF6FF);border-radius:12px;padding:15px;margin:10px 0;border:2px solid #BFDBFE"><b style="font-size:20px;color:#1E40AF">Total: R$ '+total+'</b><br><small style="color:#1E40AF">'+filt.length+' shows - '+data.ini.split('-').reverse().join('/')+' a '+data.fim.split('-').reverse().join('/')+'</small></div>';
+  html+='<br><b style="color:#2563EB">POR RESTAURANTE:</b><br><br>';
   var restArray=[];for(var k in porRest){restArray.push({casa:k,valor:porRest[k]});}restArray.sort(function(a,b){return b.valor-a.valor;});
   restArray.forEach(function(r){html+='<div style="display:flex;justify-content:space-between;padding:8px;border-bottom:1px solid #F1F5F9"><span><b>'+r.casa+'</b></span><b style="color:#16A34A">R$ '+r.valor+'</b></div>';});
-  html+='<br><b style="color:#2563EB">POR MÚSICO - MAIOR PARA MENOR:</b><br><br>';
+  html+='<br><b style="color:#2563EB">POR MÚSICO:</b><br><br>';
   var musArray=[];for(var k in porMus){musArray.push({mus:k,valor:porMus[k]});}musArray.sort(function(a,b){return b.valor-a.valor;});
   musArray.forEach(function(m){html+='<div style="display:flex;justify-content:space-between;padding:8px;border-bottom:1px solid #F1F5F9"><span>'+m.mus+'</span><b>R$ '+m.valor+'</b></div>';});
-  html+='<br><b style="color:#2563EB">DETALHADO - MAIOR PARA MENOR - COM HORÁRIO:</b><br><br>';
+  html+='<br><b style="color:#2563EB">DETALHADO COM HORÁRIO:</b><br><br>';
   var detalhado=[].concat(filt);detalhado.sort(function(a,b){return b.valor-a.valor;});
   detalhado.forEach(function(ev){html+='<div style="display:flex;justify-content:space-between;padding:8px;border-bottom:1px solid #F1F5F9"><span>R$ '+ev.valor+' - '+ev.casa+' - '+ev.mus+' - '+ev.turno+'</span><small>'+ev.data.split('-').reverse().join('/')+'</small></div>';});
   var fin=document.getElementById('finBox');if(fin)fin.innerHTML=html;
@@ -402,12 +466,12 @@ function renderRestTab(){
   ordenaRestsAZ();
   var tab=document.getElementById('restTab');var html='';
   restaurantes.forEach(function(r,idx){
-    html+='<div class="restCard" onclick="editarRestaurante('+idx+')"><div class="info"><b>'+r.codigo+' - '+r.nome+'</b><br><small>'+r.horario+' - Toque pra editar</small></div><div class="hor"><b>'+r.horario+'</b></div></div>';
+    html+='<div class="restCard" onclick="editarRestaurante('+idx+')"><div><b>'+r.codigo+' - '+r.nome+'</b><br><small style="color:#64748B">'+r.horario+' - Toque pra editar</small></div><div style="text-align:right"><b style="background:#DBEAFE;color:#1E40AF;padding:6px 10px;border-radius:8px;font-size:12px">'+r.horario+'</b></div></div>';
   });
   tab.innerHTML=html;
 }
 function novo(){editId=null;document.getElementById('modalTitulo').innerText='Novo Show - Horário Editável';if(restaurantes.length>0){casaSel=restaurantes[0].codigo;restIdx=0;}musSel=musicos[0]?musicos[0].n:'EDILL';document.getElementById('data').value='2026-10-26';document.getElementById('restLabel').innerText=casaSel;aplicarHorarioDoRest(casaSel);renderGridRest();renderMus();document.getElementById('modal').classList.add('show');}
-function editar(id){var ev=eventos.find(function(e){return e.id==id;});if(!ev)return;editId=id;document.getElementById('modalTitulo').innerText='Editar Show '+id+' - Horário Editável';document.getElementById('data').value=ev.data;casaSel=ev.casa;restIdx=restaurantes.findIndex(function(r){return r.codigo==casaSel;});if(restIdx<0)restIdx=0;document.getElementById('restLabel').innerText=casaSel;renderGridRest();musSel=ev.mus;renderMus();almoco=ev.turno.indexOf('Almoço')>=0||ev.turno.indexOf('Almoco')>=0;janta=ev.turno.indexOf('Janta')>=0;document.getElementById('alm').checked=almoco;document.getElementById('jan').checked=janta;document.getElementById('horarioTexto').value=ev.turno;if(almoco)document.getElementById('lAlm').classList.add('on');else document.getElementById('lAlm').classList.remove('on');if(janta)document.getElementById('lJan').classList.add('on');else document.getElementById('lJan').classList.remove('on');document.getElementById('modal').classList.add('show');}
+function editar(id){var ev=eventos.find(function(e){return e.id==id;});if(!ev)return;editId=id;document.getElementById('modalTitulo').innerText='Editar Show '+id;document.getElementById('data').value=ev.data;casaSel=ev.casa;restIdx=restaurantes.findIndex(function(r){return r.codigo==casaSel;});if(restIdx<0)restIdx=0;document.getElementById('restLabel').innerText=casaSel;renderGridRest();musSel=ev.mus;renderMus();almoco=ev.turno.indexOf('Almoço')>=0||ev.turno.indexOf('Almoco')>=0;janta=ev.turno.indexOf('Janta')>=0;document.getElementById('alm').checked=almoco;document.getElementById('jan').checked=janta;document.getElementById('horarioTexto').value=ev.turno;if(almoco)document.getElementById('lAlm').classList.add('on');else document.getElementById('lAlm').classList.remove('on');if(janta)document.getElementById('lJan').classList.add('on');else document.getElementById('lJan').classList.remove('on');document.getElementById('modal').classList.add('show');}
 function excluir(id){if(!confirm('Excluir show '+id+' de vez?'))return;eventos=eventos.filter(function(e){return e.id!=id;});saveEventos();render();alert('Excluído! Sumiu de vez!');}
 function fechar(){document.getElementById('modal').classList.remove('show');editId=null;}
 function salvar(){
@@ -415,7 +479,7 @@ function salvar(){
   var turno=document.getElementById('horarioTexto').value||'Janta 19:00-22:00';
   var m=musicos.find(function(x){return x.n==musSel});var valor=m?m.v:300;
   if(editId){var ev=eventos.find(function(e){return e.id==editId;});if(ev){ev.data=data;ev.casa=casaSel;ev.mus=musSel;ev.valor=valor;ev.turno=turno;}}
-  else{var novoEv={id:Date.now(),data:data,casa:casaSel,mus:musSel,valor:valor,turno:turno};eventos.push(novoEv);}
+  else{var novoEv={id:Date.now(),data:data,[STRIPPED]
   saveEventos();fechar();filtro('hoje');alert('Salvo!');
 }
 function novoMusico(){editMusicoIdx=null;document.getElementById('modalMusicoTitulo').innerText='Novo Músico - A-Z';document.getElementById('musNome').value='';document.getElementById('musValor').value='300';document.getElementById('btnExcluirMusico').style.display='none';document.getElementById('modalMusico').classList.add('show');}
@@ -426,7 +490,7 @@ function fecharMusico(){document.getElementById('modalMusico').classList.remove(
 
 function novoRestaurante(){
   editRestIdx=null;
-  document.getElementById('modalRestTitulo').innerText='Novo Restaurante - Horário Editável';
+  document.getElementById('modalRestTitulo').innerText='Novo Restaurante';
   document.getElementById('restCodigo').value='';
   document.getElementById('restNome').value='';
   document.getElementById('restHorarioTexto').value='Janta 19:00-22:00';
@@ -439,7 +503,7 @@ function novoRestaurante(){
 function editarRestaurante(idx){
   editRestIdx=idx;
   var r=restaurantes[idx];
-  document.getElementById('modalRestTitulo').innerText='Editar - '+r.codigo+' - Horário Editável';
+  document.getElementById('modalRestTitulo').innerText='Editar - '+r.codigo;
   document.getElementById('restCodigo').value=r.codigo;
   document.getElementById('restNome').value=r.nome;
   document.getElementById('restHorarioTexto').value=r.horario;
@@ -469,7 +533,7 @@ function salvarRestaurante(){
   fecharRest();
   renderRestTab();
   renderGridRest();
-  alert('Restaurante salvo bonito com horário!');
+  alert('Restaurante salvo!');
 }
 function excluirRestaurante(){
   if(editRestIdx===null)return;
@@ -483,7 +547,7 @@ function excluirRestaurante(){
 }
 function fecharRest(){document.getElementById('modalRest').classList.remove('show');editRestIdx=null;}
 
-function zap(comValor){var filt=eventos.filter(function(e){return e.data>='2026-10-19';});filt.sort(function(a,b){return b.valor-a.valor;});var txt='';filt.forEach(function(ev){if(comValor)txt+=ev.data.split('-').reverse().join('/')+' - RESTAURANTE '+ev.casa+' - MÚSICO '+ev.mus+' R$'+ev.valor+' - '+ev.turno+'\n';else txt+=ev.data.split('-').reverse().join('/')+' - RESTAURANTE '+ev.casa+' - MÚSICO '+ev.mus+' - '+ev.turno+'\n';});var titulo=comValor?'*AGENDA TAKI SOM - COM HORÁRIO*':'*CRONOGRAMA - SEM VALOR*';window.open('https://wa.me/?text='+encodeURIComponent(titulo+'\n\n'+txt),'_blank');}
+function zap(comValor){var filt=eventos.filter(function(e){return e.data>='2026-10-19';});filt.sort(function(a,b){return b.valor-a.valor;});var txt='';filt.forEach(function(ev){if(comValor)txt+=ev.data.split('-').reverse().join('/')+' - RESTAURANTE '+ev.casa+' - MÚSICO '+ev.mus+' R$'+ev.valor+' - '+ev.turno+'\n';else txt+=ev.data.split('-').reverse().join('/')+' - RESTAURANTE '+ev.casa+' - MÚSICO '+ev.mus+' - '+ev.turno+'\n';});var titulo=comValor?'*AGENDA TAKI SOM*':'*CRONOGRAMA - SEM VALOR*';window.open('https://wa.me/?text='+encodeURIComponent(titulo+'\n\n'+txt),'_blank');}
 ordenaMusicosAZ();ordenaRestsAZ();renderMus();renderMusTab();renderRestTab();renderGridRest();render();
 </script>
 </body>
