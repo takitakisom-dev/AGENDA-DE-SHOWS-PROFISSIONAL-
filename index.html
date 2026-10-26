@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TAKI SOM v102 TUDO FUNCIONANDO</title>
+<title>TAKI SOM v103 ESPACO CORRIGIDO</title>
 <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}body{background:#F1F5F9;font-family:Arial,sans-serif;padding-bottom:110px}
@@ -44,7 +44,7 @@
 <button class="item" onclick="abrir('Agenda')">Agenda - Hoje 26/10</button>
 <button class="item" onclick="abrir('Musicos')">Músicos - A-Z</button>
 <button class="item" onclick="abrir('Restaurantes')">Restaurantes - Com Horário</button>
-<button class="item" onclick="abrir('Valores')">Valores - Maior Menor</button>
+<button class="item" onclick="abrir('Valores')">Valores</button>
 <button class="item" onclick="abrir('Relatorio')">Relatório Mensal</button>
 <button class="item" onclick="abrir('Financeiro')">Financeiro - 3 Estilos</button>
 <button class="item" onclick="abrir('Anual')">Relatório Anual</button>
@@ -53,8 +53,7 @@
 <button class="item" onclick="document.getElementById('importFile').click()" style="background:#FEF3C7;font-weight:800">Importar Backup</button>
 <button class="item" onclick="zap(true)">ZAP COM VALOR</button>
 <button class="item" onclick="zap(false)">ZAP SEM VALOR</button>
-<button class="item" onclick="abrirSino()">Notificações - Sino</button>
-<button class="item" onclick="instalarApp()" style="background:#D1FAE5;font-weight:800">Instalar no Celular</button>
+<button class="item" onclick="abrirSino()">Notificações</button>
 <br><button class="item" onclick="fecharSide()" style="background:#2563EB;color:#fff;justify-content:center">Fechar</button>
 </div>
 
@@ -81,7 +80,7 @@
 <button class="plus" onclick="novo()">+</button>
 
 <div class="printGroup">
-<b>🖨️ IMPRIMIR AGENDA DE HOJE - 3 ESTILOS BONITOS:</b><br><small>Normal, PDF e Caderno Caneta (diferencial!)</small>
+<b>🖨️ IMPRIMIR AGENDA DE HOJE - SEM ESPAÇO ENORME:</b><br><small>Agora compacto e bonito, sem buraco no meio!</small>
 <div style="margin-top:10px"><b style="font-size:11px;color:#16A34A">COM VALOR:</b></div>
 <div class="printBtns">
 <button style="background:#fff;color:#1E40AF;border-color:#1E40AF" onclick="imprimirAgenda('normal',true)">🖨️ NORMAL</button>
@@ -111,7 +110,7 @@
 </div>
 
 <div id="Restaurantes" class="tab">
-<div class="card" style="padding:12px;background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border:2px solid #BFDBFE"><b style="font-size:16px;color:#1E40AF">RESTAURANTES - COM HORÁRIO EDITÁVEL</b><br><small style="color:#1E40AF">Bonito - Toque pra editar</small></div>
+<div class="card" style="padding:12px;background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border:2px solid #BFDBFE"><b style="font-size:16px;color:#1E40AF">RESTAURANTES - COM HORÁRIO CORRETO</b><br><small style="color:#1E40AF">Quando cadastrar já com horário correto</small></div>
 <div id="restTab" style="margin:10px"></div>
 <div style="margin:14px 12px">
 <button class="btn" onclick="novoRestaurante()" style="background:#16A34A">+ Novo Restaurante - Com Horário Correto</button>
@@ -140,30 +139,25 @@
 </div>
 <br>
 <div class="printGroup">
-<b>🖨️ IMPRIMIR FINANCEIRO - 3 ESTILOS:</b>
+<b>🖨️ IMPRIMIR FINANCEIRO - SEM ESPAÇO ENORME:</b>
 <div class="printBtns" style="margin-top:8px">
 <button style="background:#fff;color:#1E40AF;border-color:#1E40AF" onclick="imprimirFinanceiro('normal')">🖨️ NORMAL</button>
 <button style="background:#1E40AF;color:#fff;border-color:#1E40AF" onclick="imprimirFinanceiro('pdf')">📄 PDF</button>
 <button style="background:#FEF3C7;color:#92400E;border-color:#F59E0B" onclick="imprimirFinanceiro('caderno')">📓 CADERNO</button>
 </div>
 </div>
-<button class="btn" style="background:#fff;color:#16A34A;border:1.5px solid #16A34A" onclick="exportarBackup()">💾 EXPORTAR BACKUP</button>
 </div>
 </div>
 
 <div id="Anual" class="tab"><div class="card"><div id="printAnual"><b>RELATÓRIO ANUAL 2026</b><div id="anualBox" style="margin-top:10px;font-size:13px;line-height:1.8"></div></div><br><div class="printBtns"><button style="background:#fff;color:#1E40AF;border:1.5px solid #1E40AF;flex:1;padding:10px;border-radius:10px;font-weight:800" onclick="imprimirAreaBonita('printAnual','normal')">🖨️ NORMAL</button><button style="background:#1E40AF;color:#fff;border:1.5px solid #1E40AF;flex:1;padding:10px;border-radius:10px;font-weight:800" onclick="imprimirAreaBonita('printAnual','pdf')">📄 PDF</button><button style="background:#FEF3C7;color:#92400E;border:1.5px solid #F59E0B;flex:1;padding:10px;border-radius:10px;font-weight:800" onclick="imprimirAreaBonita('printAnual','caderno')">📓 CADERNO</button></div></div></div>
 <div id="Horarios" class="tab"><div class="card"><b>HORÁRIOS</b><div id="horariosBox" style="margin-top:12px"></div></div></div>
 <div id="Config" class="tab">
-<div class="card"><b>CONFIG - BACKUP</b><br><small>v102 - Tudo funcionando - 3 estilos impressão</small><br><br>
+<div class="card"><b>CONFIG</b><br><small>v103 - Espaço corrigido - Tudo junto e bonito</small><br><br>
 <button class="btn" style="background:#16A34A" onclick="exportarBackup()">Exportar Backup</button>
 <button class="btn" style="background:#F59E0B" onclick="document.getElementById('importFile').click()">Importar Backup</button>
 <input type="file" id="importFile" style="display:none" accept=".json" onchange="importarBackup(this)">
 <br>
 <button class="btn" onclick="instalarApp()">Instalar no Celular</button>
-<br>
-<button class="btn" onclick="abrirSino()">Notificações - Sino</button><br><br>
-<button class="btn" onclick="zap(true)">ZAP COM VALOR</button><br><br>
-<button class="btn" style="background:#fff;color:#16A34A;border:1.5px solid #16A34A" onclick="zap(false)">ZAP SEM VALOR</button>
 </div>
 </div>
 
@@ -177,7 +171,7 @@
 <div class="modal" id="modal"><div class="box">
 <b id="modalTitulo">Novo Show</b><br><br>
 Data: <input id="data" type="date" class="inp" value="2026-10-26">
-<div style="font-weight:800;font-size:12px;margin-top:12px">RESTAURANTE:</div>
+<div style="font-weight:800;font-size:12px;margin-top:12px">RESTAURANTE - Já com horário correto:</div>
 <div class="restSel"><button onclick="prevRest()">‹</button><b id="restLabel">P1</b><button onclick="nextRest()">›</button></div>
 <div class="grid" id="gridRest"></div>
 <div style="font-weight:800;font-size:12px;margin-top:10px">HORÁRIO - Editável:</div>
@@ -199,17 +193,18 @@ Valor R$: <input id="musValor" type="number" class="inp" value="300">
 </div></div>
 
 <div class="modal" id="modalRest"><div class="box">
-<b id="modalRestTitulo">Novo Restaurante</b><br><br>
+<b id="modalRestTitulo">Novo Restaurante - Com Horário Correto</b><br><br>
 Código: <input id="restCodigo" class="inp" placeholder="Ex: P1, P7">
 Nome: <input id="restNome" class="inp" placeholder="Ex: Restaurante 1">
-<div style="font-weight:800;font-size:12px;margin-top:10px">HORÁRIO:</div>
+<div style="font-weight:800;font-size:12px;margin-top:10px">HORÁRIO CORRETO:</div>
 <div class="horario">
 <label id="lRestAlm" onclick="toggleRestHor('alm')"><input type="checkbox" id="restAlm"> Almoço</label>
 <label id="lRestJan" class="on" onclick="toggleRestHor('jan')"><input type="checkbox" id="restJan" checked> Janta</label>
 </div>
 <input id="restHorarioTexto" class="inp" placeholder="Ex: Janta 19:00-22:00" value="Janta 19:00-22:00">
+<small style="color:#2563EB">Quando cadastrar o restaurante já com horário correto, quando criar show já puxa automático!</small>
 <br><br>
-<button class="btn" onclick="salvarRestaurante()">Salvar Restaurante</button>
+<button class="btn" onclick="salvarRestaurante()">Salvar Restaurante - fica pra sempre</button>
 <button class="btn" style="background:#fff;color:#DC2626;border:1.5px solid #FCA5A5" onclick="excluirRestaurante()" id="btnExcluirRest">Excluir</button>
 <button class="btn" style="background:#fff;color:#64748B;border:1px solid #E2E8F0" onclick="fecharRest()">Cancelar</button>
 </div></div>
@@ -228,17 +223,17 @@ var eventosPadrao=[
 {id:1,data:"2026-10-19",casa:"P1",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
 {id:2,data:"2026-10-19",casa:"P2",mus:"RICK DUO",valor:400,turno:"Janta 19:00-22:00"},
 {id:3,data:"2026-10-19",casa:"P3",mus:"RICK SOLO",valor:300,turno:"Janta 19:00-22:00"},
-{id:4,data:"2026-10-19",casa:"P4",mus:"ANDRE",valor:300,turno:"Janta 19:00-22:00"},
+{id:4,data:"2026-10-19",casa:"P4",mus:"ANDRE",valor:300,turno:"Janta 20:30-23:30"},
 {id:5,data:"2026-10-19",casa:"P5",mus:"ANDERSON VAT 60 SOLO",valor:350,turno:"Janta 18:30-21:30"},
-{id:6,data:"2026-10-19",casa:"P6",mus:"GERVASIO",valor:200,turno:"Janta 19:30-22:00"},
+{id:6,data:"2026-10-19",casa:"P6",mus:"GERVASIO",valor:200,turno:"Janta 19:30-22:30"},
 {id:7,data:"2026-10-20",casa:"P1",mus:"DOUGLAS",valor:300,turno:"Janta 19:00-22:00"},
 {id:8,data:"2026-10-20",casa:"P2",mus:"ISRAEL",valor:300,turno:"Janta 19:00-22:00"},
 {id:9,data:"2026-10-20",casa:"P3",mus:"LUCIANO",valor:300,turno:"Janta 19:00-22:00"},
-{id:10,data:"2026-10-20",casa:"P4",mus:"RICK SOLO",valor:300,turno:"Janta 19:00-22:00"},
+{id:10,data:"2026-10-20",casa:"P4",mus:"ROBSON SOLO",valor:300,turno:"Janta 19:00-22:00"},
 {id:11,data:"2026-10-21",casa:"P1",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
 {id:12,data:"2026-10-21",casa:"P2",mus:"ANDERSON VAT 60 TRIO",valor:450,turno:"Janta 19:00-22:00"},
 {id:13,data:"2026-10-21",casa:"P3",mus:"RICK TRIO",valor:450,turno:"Janta 19:00-22:00"},
-{id:14,data:"2026-10-21",casa:"P4",mus:"ROBSON SOLO",valor:300,turno:"Janta 19:00-22:00"},
+{id:14,data:"2026-10-21",casa:"P4",mus:"EDILL",valor:300,turno:"Janta 19:00-22:00"},
 {id:15,data:"2026-10-21",casa:"P5",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
 {id:16,data:"2026-10-26",casa:"P1",mus:"ISRAEL",valor:300,turno:"Janta 19:00-22:00"},
 {id:17,data:"2026-10-26",casa:"P2",mus:"YGOR",valor:300,turno:"Janta 19:00-22:00"},
@@ -276,7 +271,7 @@ try{
 var restIdx=0;var casaSel="P1";var musSel="EDILL";var almoco=false;var janta=true;var view="hoje";var editId=null;var editMusicoIdx=null;var editRestIdx=null;
 var restAlmoco=false;var restJanta=true;
 
-function instalarApp(){alert('Para instalar: Chrome > 3 pontinhos > Instalar app ou Adicionar a tela inicial');}
+function instalarApp(){alert('Para instalar: Chrome > 3 pontinhos > Instalar app');}
 function ordenaMusicosAZ(){musicos.sort(function(a,b){return a.n.localeCompare(b.n);});}
 function ordenaRestsAZ(){restaurantes.sort(function(a,b){return a.codigo.localeCompare(b.codigo);});}
 function saveEventos(){localStorage.setItem(KEY_EVENTOS,JSON.stringify(eventos));}
@@ -285,11 +280,11 @@ function saveRests(){ordenaRestsAZ();localStorage.setItem(KEY_RESTS,JSON.stringi
 
 function getEstiloCSS(tipo){
   if(tipo=='normal'){
-    return 'body{font-family:Arial,sans-serif;padding:20px;color:#1E293B} h1{font-size:18px;text-align:center;color:#1E40AF;margin:0} .sub{text-align:center;font-size:12px;color:#64748B;margin:2px 0 12px} table{width:100%;border-collapse:collapse;margin-top:10px} th{background:#1E40AF;color:#fff;padding:8px 6px;font-size:11px;text-align:left} td{padding:7px 6px;border-bottom:1px solid #E2E8F0;font-size:11px} .total{text-align:center;background:#EFF6FF;padding:10px;border-radius:8px;margin-top:12px;font-weight:800;color:#1E40AF} .small{font-size:9px;color:#94A3B8;text-align:center;margin-top:10px}';
+    return 'body{font-family:Arial,sans-serif;padding:15px;color:#111} h1{font-size:18px;text-align:center;color:#1E40AF;margin:0;line-height:1.1} .sub{text-align:center;font-size:12px;color:#333;margin:2px 0 10px;line-height:1.1} table{width:100%;border-collapse:collapse;table-layout:fixed} th{background:#1E40AF;color:#fff;padding:6px 4px;font-size:11px;text-align:left} td{padding:6px 4px;border-bottom:1px solid #ddd;font-size:11px;word-wrap:break-word} th:nth-child(1),td:nth-child(1){width:12%} th:nth-child(2),td:nth-child(2){width:48%} th:nth-child(3),td:nth-child(3){width:40%} .total{text-align:center;background:#EFF6FF;padding:8px;border-radius:6px;margin-top:10px;font-weight:800;color:#1E40AF;font-size:12px} .small{font-size:8px;color:#888;text-align:center;margin-top:8px}';
   } else if(tipo=='pdf'){
-    return 'body{font-family:Arial,sans-serif;padding:25px;color:#0F172A;background:#fff} h1{font-size:22px;text-align:center;color:#fff;background:linear-gradient(135deg,#1E40AF,#2563EB);padding:14px;border-radius:12px;margin:0} .sub{text-align:center;font-size:13px;color:#fff;background:#1E40AF;padding:6px;border-radius:0 0 12px 12px;margin:0 0 15px} table{width:100%;border-collapse:collapse;box-shadow:0 4px 12px rgba(0,0,0,.08);border-radius:12px;overflow:hidden} th{background:#1E40AF;color:#fff;padding:10px 8px;font-size:12px;text-align:left} td{padding:9px 8px;border-bottom:1px solid #F1F5F9;font-size:12px} tr:nth-child(even){background:#F8FAFC} .total{text-align:center;background:linear-gradient(135deg,#DBEAFE,#EFF6FF);padding:14px;border-radius:12px;margin-top:15px;font-weight:800;color:#1E40AF;border:2px solid #BFDBFE;font-size:14px} .small{font-size:10px;color:#94A3B8;text-align:center;margin-top:12px}';
+    return 'body{font-family:Arial,sans-serif;padding:15px;color:#111;background:#fff} h1{font-size:20px;text-align:center;color:#fff;background:#1E40AF;padding:10px;border-radius:8px;margin:0;line-height:1.1} .sub{text-align:center;font-size:12px;color:#fff;background:#2563EB;padding:5px;border-radius:0 0 8px 8px;margin:0 0 10px;line-height:1.1} table{width:100%;border-collapse:collapse;table-layout:fixed} th{background:#1E40AF;color:#fff;padding:7px 4px;font-size:11px;text-align:left} td{padding:6px 4px;border-bottom:1px solid #eee;font-size:11px;word-wrap:break-word} th:nth-child(1),td:nth-child(1){width:12%} th:nth-child(2),td:nth-child(2){width:48%} th:nth-child(3),td:nth-child(3){width:40%} .total{text-align:center;background:#DBEAFE;padding:10px;border-radius:8px;margin-top:10px;font-weight:800;color:#1E40AF;font-size:12px;border:1px solid #93C5FD} .small{font-size:8px;color:#888;text-align:center;margin-top:8px}';
   } else {
-    return "body{font-family:'Kalam',cursive;padding:20px;color:#1E293B;background:#FFFBEB;background-image:linear-gradient(90deg,#FDE68A 1px,transparent 1px),linear-gradient(#E5E7EB 1px,transparent 1px);background-size:100% 28px} h1{font-family:'Kalam',cursive;font-size:24px;text-align:center;color:#1E40AF;margin:0;transform:rotate(-1deg)} .sub{font-family:'Kalam',cursive;text-align:center;font-size:14px;color:#92400E;margin:2px 0 12px;transform:rotate(-0.5deg)} table{width:100%;border-collapse:collapse;margin-top:10px;font-family:'Kalam',cursive} th{font-family:'Kalam',cursive;background:#FEF3C7;color:#92400E;padding:8px 6px;font-size:13px;text-align:left;border-bottom:2px solid #F59E0B} td{padding:8px 6px;border-bottom:1px dashed #FCD34D;font-size:13px;color:#451A03} .total{font-family:'Kalam',cursive;text-align:center;background:#FFFBEB;padding:12px;border-radius:12px;margin-top:14px;font-weight:700;color:#92400E;border:2px dashed #F59E0B;transform:rotate(0.5deg);font-size:14px} .small{font-family:'Kalam',cursive;font-size:11px;color:#A16207;text-align:center;margin-top:12px}";
+    return "body{font-family:'Kalam',cursive;padding:15px;color:#111;background:#FFFBEB} h1{font-family:'Kalam',cursive;font-size:22px;text-align:center;color:#1E40AF;margin:0;line-height:1.1;transform:rotate(-0.5deg)} .sub{font-family:'Kalam',cursive;text-align:center;font-size:12px;color:#92400E;margin:2px 0 10px;line-height:1.1} table{width:100%;border-collapse:collapse;table-layout:fixed;font-family:'Kalam',cursive} th{font-family:'Kalam',cursive;background:#FEF3C7;color:#92400E;padding:6px 4px;font-size:11px;text-align:left;border-bottom:2px solid #F59E0B} td{padding:6px 4px;border-bottom:1px dashed #FCD34D;font-size:11px;color:#451A03;word-wrap:break-word} th:nth-child(1),td:nth-child(1){width:12%} th:nth-child(2),td:nth-child(2){width:48%} th:nth-child(3),td:nth-child(3){width:40%} .total{font-family:'Kalam',cursive;text-align:center;background:#FFFBEB;padding:8px;border-radius:8px;margin-top:10px;font-weight:700;color:#92400E;border:2px dashed #F59E0B;font-size:12px} .small{font-family:'Kalam',cursive;font-size:8px;color:#A16207;text-align:center;margin-top:8px}";
   }
 }
 
@@ -297,15 +292,24 @@ function imprimirAgenda(tipo,comValor){
   var hoje=eventos.filter(function(e){return e.data=='2026-10-26';});
   hoje.sort(function(a,b){return a.casa.localeCompare(b.casa);});
   var css=getEstiloCSS(tipo);
-  var tituloTipo=tipo=='normal'?'Folha Normal':tipo=='pdf'?'PDF Normal':'Caderno Caneta - Escrito a Mao';
+  var tituloTipo=tipo=='normal'?'Folha Normal':tipo=='pdf'?'PDF Normal':'Caderno Caneta';
+  var colValor=comValor?'<th style="width:18%">Valor</th>':'';
   var html='<h1>AGENDA DE HOJE</h1><div class="sub">26/10/2026 - '+tituloTipo+' - '+(comValor?'COM VALOR':'SEM VALOR')+'</div>';
-  html+='<table><tr><th style="width:15%">Rest.</th><th>Musico</th><th style="width:30%">Horario</th>'+(comValor?'<th style="width:20%">Valor</th>':'')+'</tr>';
+  if(comValor){
+    html+='<table><tr><th>Rest.</th><th>Musico</th><th>Horario</th>'+colValor+'</tr>';
+  } else {
+    html+='<table><tr><th>Rest.</th><th>Musico</th><th>Horario</th></tr>';
+  }
   hoje.forEach(function(ev){
-    html+='<tr><td><b>'+ev.casa+'</b></td><td>'+ev.mus+'</td><td>'+ev.turno+'</td>'+(comValor?'<td><b>R$ '+ev.valor+'</b></td>':'')+'</tr>';
+    if(comValor){
+      html+='<tr><td><b>'+ev.casa+'</b></td><td>'+ev.mus+'</td><td>'+ev.turno+'</td><td><b>R$ '+ev.valor+'</b></td></tr>';
+    } else {
+      html+='<tr><td><b>'+ev.casa+'</b></td><td>'+ev.mus+'</td><td>'+ev.turno+'</td></tr>';
+    }
   });
-  html+='</table><div class="total">'+hoje.length+' shows - '+(comValor?'Total R$ '+hoje.reduce(function(s,e){return s+e.valor;},0):'Sem valores - '+hoje.length+' musicos')+'</div><div class="small">Gerado em '+new Date().toLocaleString('pt-BR')+' - TAKI SOM</div>';
+  html+='</table><div class="total">'+hoje.length+' shows - '+(comValor?'Total R$ '+hoje.reduce(function(s,e){return s+e.valor;},0):'Sem valores')+'</div><div class="small">TAKI SOM - '+new Date().toLocaleString('pt-BR')+'</div>';
   var win=window.open('','','width=900,height=700');
-  win.document.write('<html><head><title>Agenda Hoje - '+tituloTipo+'</title><style>'+css+'</style></head><body>'+html+'<script>setTimeout(function(){window.print();},300);<\/script></body></html>');
+  win.document.write('<html><head><title>Agenda - '+tituloTipo+'</title><style>'+css+'</style></head><body>'+html+'<script>setTimeout(function(){window.print();},300);<\/script></body></html>');
   win.document.close();
 }
 
@@ -313,7 +317,7 @@ function imprimirAreaBonita(id,tipo){
   var conteudo=document.getElementById(id).innerHTML;
   var css=getEstiloCSS(tipo);
   var win=window.open('','','width=900,height=700');
-  win.document.write('<html><head><title>TAKI SOM - '+tipo+'</title><style>'+css+'</style></head><body><h1>TAKI SOM</h1><div class="sub">'+tipo.toUpperCase()+' - '+new Date().toLocaleDateString('pt-BR')+'</div><div style="background:#fff;padding:12px;border-radius:12px">'+conteudo+'</div><div class="small">Gerado em '+new Date().toLocaleString('pt-BR')+'</div><script>setTimeout(function(){window.print();},300);<\/script></body></html>');
+  win.document.write('<html><head><title>TAKI SOM - '+tipo+'</title><style>'+css+'</style></head><body><h1>TAKI SOM</h1><div class="sub">'+tipo.toUpperCase()+' - '+new Date().toLocaleDateString('pt-BR')+'</div><div style="background:#fff;padding:10px;border-radius:8px">'+conteudo+'</div><div class="small">Gerado em '+new Date().toLocaleString('pt-BR')+'</div><script>setTimeout(function(){window.print();},300);<\/script></body></html>');
   win.document.close();
 }
 
@@ -334,7 +338,7 @@ function imprimirFinanceiro(tipo){
   html+='<div class="total">Total Periodo: R$ '+total+' - '+filt.length+' shows</div>';
   html+='<table><tr><th>Data</th><th>Rest.</th><th>Musico</th><th>Horario</th><th>Valor</th></tr>';
   filt.forEach(function(ev){
-    html+='<tr><td style="font-size:10px">'+ev.data.split('-').reverse().join('/')+'</td><td><b>'+ev.casa+'</b></td><td style="font-size:11px">'+ev.mus+'</td><td style="font-size:10px">'+ev.turno+'</td><td><b>R$ '+ev.valor+'</b></td></tr>';
+    html+='<tr><td style="font-size:9px">'+ev.data.split('-').reverse().join('/')+'</td><td><b>'+ev.casa+'</b></td><td style="font-size:10px">'+ev.mus+'</td><td style="font-size:9px">'+ev.turno+'</td><td><b>R$ '+ev.valor+'</b></td></tr>';
   });
   html+='</table><div class="small">Gerado em '+new Date().toLocaleString('pt-BR')+'</div>';
   var win=window.open('','','width=900,height=700');
@@ -343,7 +347,7 @@ function imprimirFinanceiro(tipo){
 }
 
 function exportarBackup(){
-  var backup={eventos:eventos,musicos:musicos,restaurantes:restaurantes,data:new Date().toISOString(),versao:"v102"};
+  var backup={eventos:eventos,musicos:musicos,restaurantes:restaurantes,data:new Date().toISOString(),versao:"v103"};
   var blob=new Blob([JSON.stringify(backup,null,2)],{type:"application/json"});
   var url=URL.createObjectURL(blob);
   var a=document.createElement("a");a.href=url;a.download="takisom-backup-"+new Date().toISOString().split("T")[0]+".json";a.click();URL.revokeObjectURL(url);
@@ -490,7 +494,6 @@ function renderGridRest(){
   var h='';
   restaurantes.forEach(function(r){
     var on=r.codigo==casaSel?'on':'';
-    var safeId=r.codigo.replace(/\s/g,'_').replace(/[^A-Z0-9_]/g,'');
     h+='<button class="'+on+'" onclick="selP(\''+r.codigo.replace(/'/g,"\\'")+'\')">'+r.codigo+'</button>';
   });
   grid.innerHTML=h;
@@ -513,7 +516,7 @@ function renderRestTab(){
   });
   tab.innerHTML=html;
 }
-function novo(){editId=null;var mt=document.getElementById('modalTitulo');if(mt)mt.innerText='Novo Show';if(restaurantes.length>0){casaSel=restaurantes[0].codigo;restIdx=0;}musSel=musicos[0]?musicos[0].n:'EDILL';var dataEl=document.getElementById('data');if(dataEl)dataEl.value='2026-10-26';var rl=document.getElementById('restLabel');if(rl)rl.innerText=casaSel;aplicarHorarioDoRest(casaSel);renderGridRest();renderMus();var modal=document.getElementById('modal');if(modal)modal.classList.add('show');}
+function novo(){editId=null;var mt=document.getElementById('modalTitulo');if(mt)mt.innerText='Novo Show - Horário já vem do restaurante';if(restaurantes.length>0){casaSel=restaurantes[0].codigo;restIdx=0;}musSel=musicos[0]?musicos[0].n:'EDILL';var dataEl=document.getElementById('data');if(dataEl)dataEl.value='2026-10-26';var rl=document.getElementById('restLabel');if(rl)rl.innerText=casaSel;aplicarHorarioDoRest(casaSel);renderGridRest();renderMus();var modal=document.getElementById('modal');if(modal)modal.classList.add('show');}
 function editar(id){var ev=eventos.find(function(e){return e.id==id;});if(!ev)return;editId=id;var mt=document.getElementById('modalTitulo');if(mt)mt.innerText='Editar Show '+id;var dataEl=document.getElementById('data');if(dataEl)dataEl.value=ev.data;casaSel=ev.casa;restIdx=restaurantes.findIndex(function(r){return r.codigo==casaSel;});if(restIdx<0)restIdx=0;var rl=document.getElementById('restLabel');if(rl)rl.innerText=casaSel;renderGridRest();musSel=ev.mus;renderMus();almoco=ev.turno.indexOf('Almoco')>=0||ev.turno.indexOf('Almoço')>=0;janta=ev.turno.indexOf('Janta')>=0;var alm=document.getElementById('alm');var jan=document.getElementById('jan');var ht=document.getElementById('horarioTexto');if(alm)alm.checked=almoco;if(jan)jan.checked=janta;if(ht)ht.value=ev.turno;var lAlm=document.getElementById('lAlm');var lJan=document.getElementById('lJan');if(lAlm){if(almoco)lAlm.classList.add('on');else lAlm.classList.remove('on');}if(lJan){if(janta)lJan.classList.add('on');else lJan.classList.remove('on');}var modal=document.getElementById('modal');if(modal)modal.classList.add('show');}
 function excluir(id){if(!confirm('Excluir show '+id+' de vez?'))return;eventos=eventos.filter(function(e){return e.id!=id;});saveEventos();render();alert('Excluido!');}
 function fechar(){var m=document.getElementById('modal');if(m)m.classList.remove('show');editId=null;}
@@ -525,7 +528,7 @@ function salvar(){
   var m=musicos.find(function(x){return x.n==musSel});var valor=m?m.v:300;
   if(editId){var ev=eventos.find(function(e){return e.id==editId;});if(ev){ev.data=data;ev.casa=casaSel;ev.mus=musSel;ev.valor=valor;ev.turno=turno;}}
   else{var novoEv={id:Date.now(),data:data,casa:casaSel,mus:musSel,valor:valor,turno:turno};eventos.push(novoEv);}
-  saveEventos();fechar();filtro('hoje');alert('Salvo!');
+  saveEventos();fechar();filtro('hoje');alert('Salvo! Horário correto!');
 }
 function novoMusico(){editMusicoIdx=null;var t=document.getElementById('modalMusicoTitulo');if(t)t.innerText='Novo Musico';var mn=document.getElementById('musNome');var mv=document.getElementById('musValor');if(mn)mn.value='';if(mv)mv.value='300';var be=document.getElementById('btnExcluirMusico');if(be)be.style.display='none';var mod=document.getElementById('modalMusico');if(mod)mod.classList.add('show');}
 function editarMusico(idx){editMusicoIdx=idx;var m=musicos[idx];var t=document.getElementById('modalMusicoTitulo');if(t)t.innerText='Editar - '+m.n;var mn=document.getElementById('musNome');var mv=document.getElementById('musValor');if(mn)mn.value=m.n;if(mv)mv.value=m.v;var be=document.getElementById('btnExcluirMusico');if(be)be.style.display='block';var mod=document.getElementById('modalMusico');if(mod)mod.classList.add('show');}
@@ -535,7 +538,7 @@ function fecharMusico(){var m=document.getElementById('modalMusico');if(m)m.clas
 
 function novoRestaurante(){
   editRestIdx=null;
-  var t=document.getElementById('modalRestTitulo');if(t)t.innerText='Novo Restaurante - Com Horario Correto';
+  var t=document.getElementById('modalRestTitulo');if(t)t.innerText='Novo Restaurante - Já com Horário Correto';
   var rc=document.getElementById('restCodigo');var rn=document.getElementById('restNome');var rh=document.getElementById('restHorarioTexto');
   if(rc)rc.value='';if(rn)rn.value='';if(rh)rh.value='Janta 19:00-22:00';
   restAlmoco=false;restJanta=true;
@@ -549,7 +552,7 @@ function novoRestaurante(){
 function editarRestaurante(idx){
   editRestIdx=idx;
   var r=restaurantes[idx];
-  var t=document.getElementById('modalRestTitulo');if(t)t.innerText='Editar - '+r.codigo;
+  var t=document.getElementById('modalRestTitulo');if(t)t.innerText='Editar - '+r.codigo+' - Com Horário Correto';
   var rc=document.getElementById('restCodigo');var rn=document.getElementById('restNome');var rh=document.getElementById('restHorarioTexto');
   if(rc)rc.value=r.codigo;if(rn)rn.value=r.nome;if(rh)rh.value=r.horario;
   restAlmoco=r.almoco;restJanta=r.janta;
@@ -582,7 +585,7 @@ function salvarRestaurante(){
   fecharRest();
   renderRestTab();
   renderGridRest();
-  alert('Restaurante salvo com horario correto!');
+  alert('Restaurante salvo com horário correto! Quando criar show já puxa automático!');
 }
 function excluirRestaurante(){
   if(editRestIdx===null)return;
