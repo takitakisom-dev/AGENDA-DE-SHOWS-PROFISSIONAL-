@@ -3,16 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TAKI SOM v95 BACKUP NUNCA SOME</title>
+<title>TAKI SOM v96 FINAL</title>
+<link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiVEFLSSBTT00iLCJzaG9ydF9uYW1lIjoiVEFLSSBTT00iLCJkaXNwbGF5Ijoic3RhbmRhbG9uZSJ9">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}body{background:#F1F5F9;font-family:Arial,sans-serif;padding-bottom:110px}
 .top{background:linear-gradient(135deg,#1E40AF,#2563EB);color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;border-radius:0 0 20px 20px}
-.top button{background:none;border:none;color:#fff;font-size:22px;cursor:pointer}
+.top button{background:none;border:none;color:#fff;font-size:20px;cursor:pointer}
 .top b{font-size:20px;font-weight:800}
 .card{background:#fff;margin:12px;border-radius:18px;padding:14px;box-shadow:0 4px 12px rgba(0,0,0,.08);border:1px solid #E2E8F0}
-.card .t{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:14px}
-.card .t button{width:40px;height:40px;border-radius:10px;border:1px solid #E2E8F0;background:#F1F5F9;font-weight:800;cursor:pointer;color:#1E3A8A;font-size:18px}
-.chips{display:flex;gap:8px;margin-top:12px}.chip{flex:1;background:#DBEAFE;border-radius:12px;padding:14px 4px;text-align:center;border:2px solid #BFDBFE;cursor:pointer}.chip.on{background:#2563EB;border-color:#2563EB;color:#fff}.chip b{font-size:12px;line-height:1.2;display:block;font-weight:800}
+.chips{display:flex;gap:8px;margin-top:12px}.chip{flex:1;background:#DBEAFE;border-radius:12px;padding:14px 4px;text-align:center;border:2px solid #BFDBFE;cursor:pointer}.chip.on{background:#2563EB;border-color:#2563EB;color:#fff}.chip b{font-size:12px;display:block;font-weight:800}
 .filtros{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}.filtros button{border:1.5px solid #CBD5E1;background:#fff;padding:9px 14px;border-radius:10px;font-weight:800;font-size:11px;color:#64748B;cursor:pointer}.filtros button.on{background:#2563EB;color:#fff;border-color:#2563EB}
 .green{background:#16A34A;color:#fff;border-radius:12px 12px 0 0;padding:11px 12px;margin:12px 12px 0;font-weight:800;font-size:13px;display:flex;justify-content:space-between}
 .blue{background:#2563EB;color:#fff;padding:9px 12px;margin:12px 12px 0;font-weight:800;font-size:11px}
@@ -40,27 +39,28 @@
 <div id="side" class="side">
 <div class="sideHeader">MENU</div>
 <button class="item" onclick="abrir('Agenda')">Agenda - Hoje 26/10</button>
-<button class="item" onclick="abrir('Musicos')">Musicos - A-Z - 14 - EDILL</button>
+<button class="item" onclick="abrir('Musicos')">Musicos - A-Z</button>
 <button class="item" onclick="abrir('Restaurantes')">Restaurantes P1-P6 - A-Z</button>
 <button class="item" onclick="abrir('Valores')">Valores - Maior para Menor</button>
-<button class="item" onclick="abrir('Relatorio')">Relatorio Mensal - Maior para Menor</button>
+<button class="item" onclick="abrir('Relatorio')">Relatorio Mensal</button>
 <button class="item" onclick="abrir('Anual')">Relatorio Anual</button>
-<button class="item" onclick="abrir('Horarios')">Horarios - Almoco e Janta</button>
-<button class="item" onclick="abrir('Config')">Configuracoes - Backup Exportar/Importar</button>
-<button class="item" onclick="exportarBackup()" style="background:#DBEAFE;font-weight:800">BACKUP - Exportar Arquivo</button>
-<button class="item" onclick="document.getElementById('importFile').click()" style="background:#FEF3C7;font-weight:800">BACKUP - Importar Arquivo</button>
-<button class="item" onclick="zap(true);fecharSide()">ZAP COM VALOR</button>
-<button class="item" onclick="zap(false);fecharSide()">ZAP SEM VALOR</button>
+<button class="item" onclick="abrir('Horarios')">Horarios</button>
+<button class="item" onclick="abrir('Config')">Configuracoes - Backup</button>
+<button class="item" onclick="exportarBackup()" style="background:#DBEAFE;font-weight:800">BACKUP - Exportar Arquivo JSON</button>
+<button class="item" onclick="document.getElementById('importFile').click()" style="background:#FEF3C7;font-weight:800">BACKUP - Importar Arquivo JSON</button>
+<button class="item" onclick="zap(true)">ZAP COM VALOR</button>
+<button class="item" onclick="zap(false)">ZAP SEM VALOR</button>
 <button class="item" onclick="abrirSino()">Notificacoes - Sino</button>
-<button class="item" onclick="restaurar()" style="background:#FEE2E2;font-weight:800;color:#DC2626">Restaurar 18 eventos originais</button>
+<button class="item" onclick="instalarApp()" id="btnInstalarSide" style="background:#D1FAE5;font-weight:800">Instalar no Celular - APP</button>
+<button class="item" onclick="restaurar()" style="background:#FEE2E2;color:#DC2626">Restaurar 18 originais</button>
 <br><button class="item" onclick="fecharSide()" style="background:#2563EB;color:#fff;justify-content:center">Fechar</button>
 </div>
 
-<div class="top"><button onclick="abrirSide()">☰</button><b>TAKI SOM</b><div class="bellWrap"><button onclick="abrirSino()" style="font-size:24px">🔔</button><span class="badge" id="badge">3</span></div></div>
+<div class="top"><button onclick="abrirSide()">☰</button><b>TAKI SOM</b><div class="bellWrap"><button onclick="abrirSino()" style="font-size:24px">🔔</button><span class="badge" id="badge">3</span><button onclick="instalarApp()" id="btnInstalarTop" style="font-size:12px;background:#fff;color:#2563EB;padding:4px 8px;border-radius:8px;margin-left:6px;font-weight:800;display:none">Instalar</button></div></div>
 
 <div id="Agenda" class="tab show">
 <div class="card">
-<div class="t"><button onclick="mudaMes(-1)">‹</button><span id="mesLabel">MES DE OUTUBRO DE 2026</span><button onclick="mudaMes(1)">›</button></div>
+<div style="display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:14px"><button onclick="mudaMes(-1)" style="width:40px;height:40px;border-radius:10px;border:1px solid #E2E8F0;background:#F1F5F9;font-weight:800;cursor:pointer;color:#1E3A8A;font-size:18px">‹</button><span id="mesLabel">MES DE OUTUBRO DE 2026</span><button onclick="mudaMes(1)" style="width:40px;height:40px;border-radius:10px;border:1px solid #E2E8F0;background:#F1F5F9;font-weight:800;cursor:pointer;color:#1E3A8A;font-size:18px">›</button></div>
 <div class="chips">
 <div class="chip on" id="chipDia" onclick="filtro('hoje')"><b>DIA 26<br><small>HOJE</small></b></div>
 <div class="chip" id="chipMes" onclick="filtro('mes')"><b>MES<br>OUTUBRO</b></div>
@@ -81,7 +81,7 @@
 </div>
 
 <div id="Musicos" class="tab">
-<div class="card" style="padding:12px"><b style="font-size:16px">MÚSICOS</b><br><small style="color:#64748B">A-Z - Toque pra editar - Excluir some de vez</small></div>
+<div class="card" style="padding:12px"><b style="font-size:16px">MÚSICOS</b><br><small style="color:#64748B">A-Z - Toque pra editar</small></div>
 <div id="musTab" style="margin:10px"></div>
 <div style="margin:14px 12px">
 <button class="btn" onclick="novoMusico()" style="background:#16A34A">+ Novo Musico</button>
@@ -95,16 +95,17 @@
 <div id="Anual" class="tab"><div class="card"><b>RELATORIO ANUAL 2026</b><div id="anualBox" style="margin-top:10px;font-size:13px;line-height:1.8"></div></div></div>
 <div id="Horarios" class="tab"><div class="card"><b>HORARIOS</b><div style="font-size:13px;margin-top:10px;line-height:2">Almoco: 12:30-15:30<br>Janta: 19:00-22:00</div></div></div>
 <div id="Config" class="tab">
-<div class="card"><b>CONFIGURACOES - BACKUP EXPORTAR/IMPORTAR</b><br><small>v95 - Excluir some de vez - Salvo nunca some - Chave fixa final</small><br><br>
+<div class="card"><b>CONFIGURACOES - BACKUP E INSTALAR</b><br><small>v96 FINAL - Excluir some de vez - Salvo fica pra sempre</small><br><br>
 <button class="btn" style="background:#16A34A" onclick="exportarBackup()">BACKUP - Exportar Arquivo JSON</button>
 <button class="btn" style="background:#F59E0B" onclick="document.getElementById('importFile').click()">BACKUP - Importar Arquivo JSON</button>
 <input type="file" id="importFile" style="display:none" accept=".json" onchange="importarBackup(this)">
 <br>
+<button class="btn" onclick="instalarApp()" id="btnInstalarConfig">Instalar APP no Celular</button>
+<br>
 <button class="btn" onclick="abrirSino()">Notificacoes - Sino</button><br><br>
 <button class="btn" onclick="zap(true)">ZAP COM VALOR</button><br><br>
 <button class="btn" style="background:#fff;color:#16A34A;border:1.5px solid #16A34A" onclick="zap(false)">ZAP SEM VALOR</button><br><br>
-<button class="btn" style="background:#fff;color:#DC2626;border:1.5px solid #FCA5A5" onclick="restaurar()">Restaurar 18 eventos originais - CUIDADO apaga tudo</button>
-<br><br><small style="color:#64748B">Agora o que voce salvar fica pra sempre. O que voce excluir some de vez. Chave fixa final - nunca mais muda.</small>
+<button class="btn" style="background:#fff;color:#DC2626;border:1.5px solid #FCA5A5" onclick="restaurar()">Restaurar 18 originais</button>
 </div>
 </div>
 
@@ -133,8 +134,8 @@ Data: <input id="data" type="date" class="inp" value="2026-10-26">
 Nome: <input id="musNome" class="inp" placeholder="Ex: EDILL">
 Valor R$: <input id="musValor" type="number" class="inp" value="300">
 <br><br>
-<button class="btn" onclick="salvarMusico()">Salvar - fica pra sempre</button>
-<button class="btn" style="background:#fff;color:#DC2626;border:1.5px solid #FCA5A5" onclick="excluirMusico()" id="btnExcluirMusico">Excluir Musico - some de vez</button>
+<button class="btn" onclick="salvarMusico()">Salvar</button>
+<button class="btn" style="background:#fff;color:#DC2626;border:1.5px solid #FCA5A5" onclick="excluirMusico()" id="btnExcluirMusico">Excluir - some de vez</button>
 <button class="btn" style="background:#fff;color:#64748B;border:1px solid #E2E8F0" onclick="fecharMusico()">Cancelar</button>
 </div></div>
 
@@ -149,32 +150,30 @@ Valor R$: <input id="musValor" type="number" class="inp" value="300">
 
 <script>
 var eventosPadrao=[
-{id:1,data:"2026-10-19",[STRIPPED] VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:2,data:"2026-10-19",[STRIPPED] DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:3,data:"2026-10-19",[STRIPPED] 19:00-22:00"},
-{id:4,data:"2026-10-19",[STRIPPED] 19:00-22:00"},
-{id:5,data:"2026-10-19",[STRIPPED] 19:00-22:00"},
-{id:6,data:"2026-10-19",[STRIPPED] 19:00-22:00"},
-{id:7,data:"2026-10-20",[STRIPPED] 19:00-22:00"},
-{id:8,data:"2026-10-20",[STRIPPED] 19:00-22:00"},
-{id:9,data:"2026-10-20",[STRIPPED] 19:00-22:00"},
-{id:10,data:"2026-10-20",[STRIPPED] SOLO",valor:300,turno:"Janta 19:00-22:00"},
-{id:11,data:"2026-10-21",[STRIPPED] VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:12,data:"2026-10-21",[STRIPPED] VAT 60 TRIO",valor:450,turno:"Janta 19:00-22:00"},
-{id:13,data:"2026-10-21",[STRIPPED] TRIO",valor:450,turno:"Janta 19:00-22:00"},
-{id:14,data:"2026-10-21",[STRIPPED] 19:00-22:00"},
-{id:15,data:"2026-10-21",[STRIPPED] VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:16,data:"2026-10-26",[STRIPPED] VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:17,data:"2026-10-26",[STRIPPED] DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:18,data:"2026-10-26",[STRIPPED] 19:00-22:00"}
+{id:1,data:"2026-10-19",casa:"P1",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:2,data:"2026-10-19",casa:"P2",mus:"RICK DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:3,data:"2026-10-19",casa:"P3",mus:"RICK SOLO",valor:300,turno:"Janta 19:00-22:00"},
+{id:4,data:"2026-10-19",casa:"P4",mus:"ROBSON SOLO",valor:300,turno:"Janta 19:00-22:00"},
+{id:5,data:"2026-10-19",casa:"P5",mus:"EDILL",valor:300,turno:"Janta 19:00-22:00"},
+{id:6,data:"2026-10-19",casa:"P6",mus:"GERVASIO",valor:200,turno:"Janta 19:00-22:00"},
+{id:7,data:"2026-10-20",casa:"P1",mus:"DOUGLAS",valor:300,turno:"Janta 19:00-22:00"},
+{id:8,data:"2026-10-20",casa:"P2",mus:"ISRAEL",valor:300,turno:"Janta 19:00-22:00"},
+{id:9,data:"2026-10-20",casa:"P3",mus:"LUCIANO",valor:300,turno:"Janta 19:00-22:00"},
+{id:10,data:"2026-10-20",casa:"P4",mus:"RICK SOLO",valor:300,turno:"Janta 19:00-22:00"},
+{id:11,data:"2026-10-21",casa:"P1",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:12,data:"2026-10-21",casa:"P2",mus:"ANDERSON VAT 60 TRIO",valor:450,turno:"Janta 19:00-22:00"},
+{id:13,data:"2026-10-21",casa:"P3",mus:"RICK TRIO",valor:450,turno:"Janta 19:00-22:00"},
+{id:14,data:"2026-10-21",casa:"P4",mus:"MARTIN",valor:300,turno:"Janta 19:00-22:00"},
+{id:15,data:"2026-10-21",casa:"P5",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:16,data:"2026-10-26",casa:"P1",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:17,data:"2026-10-26",casa:"P2",mus:"RICK DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:18,data:"2026-10-26",casa:"P3",mus:"EDILL",valor:300,turno:"Janta 19:00-22:00"}
 ];
 var musicosPadrao=[
 {n:"ANDERSON VAT 60 DUO",v:400},{n:"ANDERSON VAT 60 TRIO",v:450},{n:"ANDRE",v:300},{n:"DOUGLAS",v:300},{n:"EDILL",v:300},{n:"GERVASIO",v:200},{n:"ISRAEL",v:300},{n:"LUCIANO",v:300},{n:"MARTIN",v:300},{n:"RICK DUO",v:400},{n:"RICK SOLO",v:300},{n:"RICK TRIO",v:450},{n:"ROBSON SOLO",v:300},{n:"YGOR",v:300}
 ];
-// CHAVE FIXA FINAL - NUNCA MAIS MUDA - O QUE VOCE SALVAR FICA PRA SEMPRE
 var KEY_EVENTOS='takisom_final_eventos';
 var KEY_MUSICOS='takisom_final_musicos';
-
 var eventos=[];var musicos=[];
 try{
   var s1=localStorage.getItem(KEY_EVENTOS);
@@ -184,15 +183,15 @@ try{
   if(!Array.isArray(eventos)||eventos.length==0) eventos=eventosPadrao;
   if(!Array.isArray(musicos)||musicos.length==0) musicos=musicosPadrao;
 }catch(e){eventos=eventosPadrao;musicos=musicosPadrao;}
-
 var rests=["P1","P2","P3","P4","P5","P6"];var restIdx=0;var casaSel="P1";var musSel="EDILL";var almoco=false;var janta=true;var view="hoje";var editId=null;var editMusicoIdx=null;
-
+var deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferredPrompt=e;document.getElementById('btnInstalarTop').style.display='inline-block';});
+function instalarApp(){if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.then(function(c){if(c.outcome==='accepted'){alert('App instalado! Procure TAKI SOM na tela inicial');}deferredPrompt=null;});}else{alert('Para instalar: No Chrome clique nos 3 pontinhos > Instalar app ou Adicionar a tela inicial');}}
 function ordenaMusicosAZ(){musicos.sort(function(a,b){return a.n.localeCompare(b.n);});}
 function saveEventos(){localStorage.setItem(KEY_EVENTOS,JSON.stringify(eventos));}
 function saveMusicos(){ordenaMusicosAZ();localStorage.setItem(KEY_MUSICOS,JSON.stringify(musicos));}
-
 function exportarBackup(){
-  var backup={eventos:eventos,musicos:musicos,data:new Date().toISOString(),versao:"v95"};
+  var backup={eventos:eventos,musicos:musicos,data:new Date().toISOString(),versao:"v96"};
   var blob=new Blob([JSON.stringify(backup,null,2)],{type:"application/json"});
   var url=URL.createObjectURL(blob);
   var a=document.createElement("a");
@@ -200,207 +199,68 @@ function exportarBackup(){
   a.download="takisom-backup-"+new Date().toISOString().split("T")[0]+".json";
   a.click();
   URL.revokeObjectURL(url);
-  alert("Backup exportado! Arquivo salvo - guarda ele!");
+  alert("Backup exportado! Arquivo salvo!");
 }
 function importarBackup(input){
-  var file=input.files[0];
-  if(!file){return;}
+  var file=input.files[0];if(!file)return;
   var reader=new FileReader();
   reader.onload=function(e){
     try{
       var backup=JSON.parse(e.target.result);
       if(backup.eventos && Array.isArray(backup.eventos)){
-        if(!confirm("Importar backup com "+backup.eventos.length+" eventos? Isso vai substituir tudo que ta hoje!")) return;
-        eventos=backup.eventos;
-        musicos=backup.musicos||musicosPadrao;
-        saveEventos();
-        saveMusicos();
-        render();
-        renderMusTab();
-        alert("Backup importado! "+eventos.length+" eventos carregados - fica pra sempre agora!");
+        if(!confirm("Importar backup com "+backup.eventos.length+" eventos? Vai substituir tudo!")) return;
+        eventos=backup.eventos;musicos=backup.musicos||musicosPadrao;
+        saveEventos();saveMusicos();render();renderMusTab();
+        alert("Backup importado! "+eventos.length+" eventos - fica pra sempre!");
         fecharSide();
       } else {alert("Arquivo invalido!");}
-    }catch(err){alert("Erro ao ler backup: "+err.message);}
+    }catch(err){alert("Erro: "+err.message);}
   };
-  reader.readAsText(file);
-  input.value="";
+  reader.readAsText(file);input.value="";
 }
-
-function restaurar(){
-  if(!confirm("ATENCAO! Restaurar os 18 eventos originais? Isso vai APAGAR tudo que voce salvou e trazer de volta os 18! Quer mesmo?")) return;
-  eventos=eventosPadrao;
-  musicos=musicosPadrao;
-  ordenaMusicosAZ();
-  saveEventos();
-  saveMusicos();
-  render();
-  renderMusTab();
-  alert("Restaurado 18 eventos originais! Agora salva de novo que fica pra sempre!");
-  fecharSide();
-}
-function restaurarMusicos(){if(!confirm('Restaurar musicos A-Z? Vai apagar os que voce adicionou!'))return;musicos=musicosPadrao;ordenaMusicosAZ();saveMusicos();renderMusTab();renderMus();}
+function restaurar(){if(!confirm("Restaurar 18 originais? Vai APAGAR tudo que voce salvou!")) return;eventos=eventosPadrao;musicos=musicosPadrao;ordenaMusicosAZ();saveEventos();saveMusicos();render();renderMusTab();alert("Restaurado 18!");fecharSide();}
+function restaurarMusicos(){if(!confirm('Restaurar musicos?'))return;musicos=musicosPadrao;ordenaMusicosAZ();saveMusicos();renderMusTab();renderMus();}
 function abrirSide(){document.getElementById('side').classList.add('show');}
 function fecharSide(){document.getElementById('side').classList.remove('show');}
-function abrir(t){
- fecharSide();
- document.querySelectorAll('.tab').forEach(function(el){el.classList.remove('show')});
- document.querySelectorAll('.menuBottom button').forEach(function(b){b.classList.remove('on')});
- document.getElementById(t).classList.add('show');
- var m=document.getElementById('m'+t);
- if(m) m.classList.add('on');
- if(t=='Musicos') renderMusTab();
- render();
-}
-function abrirSino(){
- fecharSide();
- try{if(navigator.vibrate) navigator.vibrate(100);}catch(e){}
- var hoje=eventos.filter(function(e){return e.data=='2026-10-26';});
- hoje.sort(function(a,b){return b.valor-a.valor;});
- var html='<div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:12px;padding:12px;margin:8px 0"><b>Hoje 26/10 - '+hoje.length+' shows - Maior para Menor</b><br><small>'+hoje.map(function(e){return 'R$'+e.valor+' - '+e.casa+' - '+e.mus;}).join('<br>')+'</small></div>';
- document.getElementById('sinoLista').innerHTML=html;
- document.getElementById('modalSino').classList.add('show');
-}
+function abrir(t){fecharSide();document.querySelectorAll('.tab').forEach(function(el){el.classList.remove('show')});document.querySelectorAll('.menuBottom button').forEach(function(b){b.classList.remove('on')});document.getElementById(t).classList.add('show');var m=document.getElementById('m'+t);if(m)m.classList.add('on');if(t=='Musicos')renderMusTab();render();}
+function abrirSino(){fecharSide();try{if(navigator.vibrate)navigator.vibrate(100);}catch(e){}var hoje=eventos.filter(function(e){return e.data=='2026-10-26';});hoje.sort(function(a,b){return b.valor-a.valor;});var html='<div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:12px;padding:12px;margin:8px 0"><b>Hoje 26/10 - '+hoje.length+' shows</b><br><small>'+hoje.map(function(e){return 'R$'+e.valor+' - '+e.casa+' - '+e.mus;}).join('<br>')+'</small></div>';document.getElementById('sinoLista').innerHTML=html;document.getElementById('modalSino').classList.add('show');}
 function fecharSino(){document.getElementById('modalSino').classList.remove('show');}
-function mudaMes(d){var el=document.getElementById('mesLabel');if(el.innerText.indexOf('SETEMBRO')>=0) el.innerText='MES DE OUTUBRO DE 2026'; else el.innerText='MES DE SETEMBRO DE 2026';}
-function filtro(v){
- view=v;
- document.querySelectorAll('.filtros button').forEach(function(b){b.classList.remove('on')});
- document.querySelectorAll('.chips .chip').forEach(function(b){b.classList.remove('on')});
- var map={hoje:'bHoje',dia:'bDia',semana:'bSemana',mes:'bMes',ano:'bAno'};
- var el=document.getElementById(map[v]); if(el) el.classList.add('on');
- if(v=='hoje'||v=='dia') document.getElementById('chipDia').classList.add('on');
- else if(v=='mes') document.getElementById('chipMes').classList.add('on');
- else if(v=='ano') document.getElementById('chipAno').classList.add('on');
- else document.getElementById('chipDia').classList.add('on');
- render();
-}
+function mudaMes(d){var el=document.getElementById('mesLabel');if(el.innerText.indexOf('SETEMBRO')>=0)el.innerText='MES DE OUTUBRO DE 2026';else el.innerText='MES DE SETEMBRO DE 2026';}
+function filtro(v){view=v;document.querySelectorAll('.filtros button').forEach(function(b){b.classList.remove('on')});document.querySelectorAll('.chips .chip').forEach(function(b){b.classList.remove('on')});var map={hoje:'bHoje',dia:'bDia',semana:'bSemana',mes:'bMes',ano:'bAno'};var el=document.getElementById(map[v]);if(el)el.classList.add('on');if(v=='hoje'||v=='dia')document.getElementById('chipDia').classList.add('on');else if(v=='mes')document.getElementById('chipMes').classList.add('on');else if(v=='ano')document.getElementById('chipAno').classList.add('on');else document.getElementById('chipDia').classList.add('on');render();}
 function render(){
- ordenaMusicosAZ();
- var filt=[];
- if(view=='hoje') filt=eventos.filter(function(e){return e.data=='2026-10-26';});
- else if(view=='dia') filt=eventos.filter(function(e){return e.data=='2026-10-26';});
- else if(view=='semana') filt=eventos.filter(function(e){return e.data>='2026-10-19';});
- else if(view=='mes') filt=eventos.filter(function(e){return e.data.indexOf('2026-10')==0;});
- else filt=eventos;
- filt.sort(function(a,b){if(a.data!=b.data) return a.data.localeCompare(b.data); return a.casa.localeCompare(b.casa);});
- var grupos={};filt.forEach(function(e){if(!grupos[e.data])grupos[e.data]=[];grupos[e.data].push(e);});
- var html='';
- Object.keys(grupos).sort().forEach(function(data){
-  var nome='';if(data=='2026-10-26') nome='HOJE - DOMINGO, 26/10/2026'; else if(data=='2026-10-21') nome='TERCA, 21/10/2026'; else if(data=='2026-10-20') nome='SEGUNDA, 20/10/2026'; else if(data=='2026-10-19') nome='DOMINGO, 19/10/2026'; else nome=data;
-  html+='<div class="blue">'+nome+'</div>';
-  grupos[data].forEach(function(ev){
-   html+='<div class="ev"><b>'+ev.casa+' - '+ev.mus+'</b><div class="meta"><span>'+ev.turno+'</span><span>R$ '+ev.valor+'</span></div><div class="actions"><button class="e1" onclick="editar('+ev.id+')">Editar</button><button class="e2" onclick="excluir('+ev.id+')">Excluir</button></div></div>';
-  });
- });
- if(filt.length==0){html='<div class="card" style="text-align:center;padding:20px"><b>Nenhum evento em '+view.toUpperCase()+'</b><br><small>O que voce excluiu sumiu de vez mesmo! Pra trazer de volta use Restaurar</small><br><br><button class="btn" onclick="restaurar()">Restaurar 18 eventos</button></div>';}
- document.getElementById('lista').innerHTML=html;
- document.getElementById('contadorTop').innerHTML='<span>'+filt.length+' eventos - Hoje 26/10/2026</span><span>HOJE</span>';
- document.getElementById('badge').innerText=eventos.filter(function(e){return e.data=='2026-10-26';}).length;
-
- var relEventos=[].concat(eventos);relEventos.sort(function(a,b){return b.valor-a.valor;});
- var relHtml='<b style="color:#2563EB">FINANCEIRO - MAIOR PARA MENOR:</b><br><br>';
- relEventos.forEach(function(ev){relHtml+='<div style="display:flex;justify-content:space-between;padding:6px;border-bottom:1px solid #F1F5F9"><span>R$ '+ev.valor+' - '+ev.casa+' - '+ev.mus+'</span><small>'+ev.data.split('-').reverse().join('/')+'</small></div>';});
- relHtml+='<br><b style="color:#16A34A">Total: R$ '+eventos.reduce(function(s,e){return s+e.valor;},0)+'</b>';
- document.getElementById('relBox').innerHTML=relHtml;
-
- var anualHtml='<b style="color:#2563EB">FINANCEIRO ANUAL - MAIOR PARA MENOR:</b><br><br>';
- var porValor=[].concat(eventos);porValor.sort(function(a,b){return b.valor-a.valor;});
- porValor.forEach(function(ev){anualHtml+='<div style="display:flex;justify-content:space-between;padding:6px;border-bottom:1px solid #F1F5F9"><span>'+ev.casa+' - '+ev.mus+'</span><b>R$ '+ev.valor+'</b></div>';});
- anualHtml+='<br><b>Total ano: '+eventos.length+' eventos - R$ '+eventos.reduce(function(s,e){return s+e.valor;},0)+'</b>';
- document.getElementById('anualBox').innerHTML=anualHtml;
-
- var vb=document.getElementById('valoresBox');
- if(vb){
-   var porValorMus=[].concat(musicos);porValorMus.sort(function(a,b){return b.v-a.v;});
-   var hv='<b style="font-size:11px;color:#64748B">MAIOR PARA MENOR:</b><br><br>';
-   porValorMus.forEach(function(m){hv+='<div style="display:flex;justify-content:space-between;padding:8px;border-bottom:1px solid #F1F5F9"><span>'+m.n+'</span><b style="color:#16A34A">R$ '+m.v+'</b></div>';});
-   vb.innerHTML=hv;
- }
+  ordenaMusicosAZ();
+  var filt=[];if(view=='hoje')filt=eventos.filter(function(e){return e.data=='2026-10-26';});else if(view=='dia')filt=eventos.filter(function(e){return e.data=='2026-10-26';});else if(view=='semana')filt=eventos.filter(function(e){return e.data>='2026-10-19';});else if(view=='mes')filt=eventos.filter(function(e){return e.data.indexOf('2026-10')==0;});else filt=eventos;
+  filt.sort(function(a,b){if(a.data!=b.data)return a.data.localeCompare(b.data);return a.casa.localeCompare(b.casa);});
+  var grupos={};filt.forEach(function(e){if(!grupos[e.data])grupos[e.data]=[];grupos[e.data].push(e);});
+  var html='';Object.keys(grupos).sort().forEach(function(data){var nome='';if(data=='2026-10-26')nome='HOJE - DOMINGO, 26/10/2026';else if(data=='2026-10-21')nome='TERCA, 21/10/2026';else if(data=='2026-10-20')nome='SEGUNDA, 20/10/2026';else if(data=='2026-10-19')nome='DOMINGO, 19/10/2026';else nome=data;html+='<div class="blue">'+nome+'</div>';grupos[data].forEach(function(ev){html+='<div class="ev"><b>'+ev.casa+' - '+ev.mus+'</b><div class="meta"><span>'+ev.turno+'</span><span>R$ '+ev.valor+'</span></div><div class="actions"><button class="e1" onclick="editar('+ev.id+')">Editar</button><button class="e2" onclick="excluir('+ev.id+')">Excluir</button></div></div>';});});
+  if(filt.length==0){html='<div class="card" style="text-align:center;padding:20px"><b>Nenhum evento - o que voce excluiu sumiu de vez!</b><br><br><button class="btn" onclick="restaurar()">Restaurar 18</button></div>';}
+  document.getElementById('lista').innerHTML=html;
+  document.getElementById('contadorTop').innerHTML='<span>'+filt.length+' eventos - Hoje 26/10/2026</span><span>HOJE</span>';
+  document.getElementById('badge').innerText=eventos.filter(function(e){return e.data=='2026-10-26';}).length;
+  var relEventos=[].concat(eventos);relEventos.sort(function(a,b){return b.valor-a.valor;});
+  var relHtml='<b style="color:#2563EB">FINANCEIRO - MAIOR PARA MENOR:</b><br><br>';relEventos.forEach(function(ev){relHtml+='<div style="display:flex;justify-content:space-between;padding:6px;border-bottom:1px solid #F1F5F9"><span>R$ '+ev.valor+' - '+ev.casa+' - '+ev.mus+'</span><small>'+ev.data.split('-').reverse().join('/')+'</small></div>';});relHtml+='<br><b style="color:#16A34A">Total: R$ '+eventos.reduce(function(s,e){return s+e.valor;},0)+'</b>';document.getElementById('relBox').innerHTML=relHtml;
+  var anualHtml='<b style="color:#2563EB">FINANCEIRO ANUAL - MAIOR PARA MENOR:</b><br><br>';var porValor=[].concat(eventos);porValor.sort(function(a,b){return b.valor-a.valor;});porValor.forEach(function(ev){anualHtml+='<div style="display:flex;justify-content:space-between;padding:6px;border-bottom:1px solid #F1F5F9"><span>'+ev.casa+' - '+ev.mus+'</span><b>R$ '+ev.valor+'</b></div>';});anualHtml+='<br><b>Total ano: '+eventos.length+' eventos - R$ '+eventos.reduce(function(s,e){return s+e.valor;},0)+'</b>';document.getElementById('anualBox').innerHTML=anualHtml;
+  var vb=document.getElementById('valoresBox');if(vb){var porValorMus=[].concat(musicos);porValorMus.sort(function(a,b){return b.v-a.v;});var hv='<b style="font-size:11px;color:#64748B">MAIOR PARA MENOR:</b><br><br>';porValorMus.forEach(function(m){hv+='<div style="display:flex;justify-content:space-between;padding:8px;border-bottom:1px solid #F1F5F9"><span>'+m.n+'</span><b style="color:#16A34A">R$ '+m.v+'</b></div>';});vb.innerHTML=hv;}
 }
 function prevRest(){restIdx=(restIdx-1+6)%6;casaSel=rests[restIdx];document.getElementById('restLabel').innerText=casaSel;updateGrid();}
 function nextRest(){restIdx=(restIdx+1)%6;casaSel=rests[restIdx];document.getElementById('restLabel').innerText=casaSel;updateGrid();}
 function selP(p){casaSel=p;restIdx=rests.indexOf(p);document.getElementById('restLabel').innerText=p;updateGrid();}
 function updateGrid(){document.querySelectorAll('.grid button').forEach(function(b){b.classList.remove('on')});var el=document.getElementById('p'+casaSel);if(el)el.classList.add('on');}
 function toggleHor(t){if(t=='alm'){almoco=!almoco;document.getElementById('alm').checked=almoco;var l=document.getElementById('lAlm');if(almoco)l.classList.add('on');else l.classList.remove('on');}else{janta=!janta;document.getElementById('jan').checked=janta;var l=document.getElementById('lJan');if(janta)l.classList.add('on');else l.classList.remove('on');}}
-function renderMus(){
- ordenaMusicosAZ();
- var div=document.getElementById('musLista');var h='';
- musicos.forEach(function(m){
-   var sel=m.n==musSel;var cl=sel?'item on':'item';
-   h+='<div class="'+cl+'" onclick="musSel=\''+m.n.replace(/\'/g,'')+'\';renderMus()"><div><input type="radio" '+(sel?'checked':'')+'> '+m.n+'</div><b>R$ '+m.v+'</b></div>';
- });
- div.innerHTML=h;
-}
-function renderMusTab(){
- ordenaMusicosAZ();
- var tab=document.getElementById('musTab');var html='';
- musicos.forEach(function(m,idx){
-  html+='<div class="musCard" onclick="editarMusico('+idx+')"><div><b>'+m.n+'</b><div style="font-size:11px;color:#64748B">A-Z - Toque pra editar</div></div><div style="text-align:right"><b style="color:#2563EB">R$ '+m.v+'</b><div style="font-size:10px;color:#16A34A">Editar</div></div></div>';
- });
- tab.innerHTML=html;
-}
+function renderMus(){ordenaMusicosAZ();var div=document.getElementById('musLista');var h='';musicos.forEach(function(m){var sel=m.n==musSel;var cl=sel?'item on':'item';h+='<div class="'+cl+'" onclick="musSel=\''+m.n.replace(/\'/g,'')+'\';renderMus()"><div><input type="radio" '+(sel?'checked':'')+'> '+m.n+'</div><b>R$ '+m.v+'</b></div>';});div.innerHTML=h;}
+function renderMusTab(){ordenaMusicosAZ();var tab=document.getElementById('musTab');var html='';musicos.forEach(function(m,idx){html+='<div class="musCard" onclick="editarMusico('+idx+')"><div><b>'+m.n+'</b><div style="font-size:11px;color:#64748B">A-Z - Toque pra editar</div></div><div style="text-align:right"><b style="color:#2563EB">R$ '+m.v+'</b><div style="font-size:10px;color:#16A34A">Editar</div></div></div>';});tab.innerHTML=html;}
 function novo(){editId=null;document.getElementById('modalTitulo').innerText='Novo Show - fica pra sempre';casaSel='P1';restIdx=0;musSel=musicos[0]?musicos[0].n:'EDILL';almoco=false;janta=true;document.getElementById('data').value='2026-10-26';document.getElementById('restLabel').innerText='P1';document.getElementById('alm').checked=false;document.getElementById('jan').checked=true;document.getElementById('lAlm').classList.remove('on');document.getElementById('lJan').classList.add('on');updateGrid();renderMus();document.getElementById('modal').classList.add('show');}
-function editar(id){
- var ev=eventos.find(function(e){return e.id==id;});
- if(!ev)return;
- editId=id;
- document.getElementById('modalTitulo').innerText='Editar Show '+id+' - fica pra sempre';
- document.getElementById('data').value=ev.data;
- casaSel=ev.casa;restIdx=rests.indexOf(casaSel);document.getElementById('restLabel').innerText=casaSel;updateGrid();
- musSel=ev.mus;renderMus();
- almoco=ev.turno.indexOf('Almoco')>=0; janta=ev.turno.indexOf('Janta')>=0;
- document.getElementById('alm').checked=almoco;document.getElementById('jan').checked=janta;
- if(almoco) document.getElementById('lAlm').classList.add('on'); else document.getElementById('lAlm').classList.remove('on');
- if(janta) document.getElementById('lJan').classList.add('on'); else document.getElementById('lJan').classList.remove('on');
- document.getElementById('modal').classList.add('show');
-}
-function excluir(id){
-  if(!confirm('Excluir show '+id+' de vez? Vai sumir pra sempre mesmo! Tem certeza?')) return;
-  eventos=eventos.filter(function(e){return e.id!=id;});
-  saveEventos();
-  render();
-  alert('Excluido! Sumiu de vez mesmo!');
-}
+function editar(id){var ev=eventos.find(function(e){return e.id==id;});if(!ev)return;editId=id;document.getElementById('modalTitulo').innerText='Editar Show '+id;document.getElementById('data').value=ev.data;casaSel=ev.casa;restIdx=rests.indexOf(casaSel);document.getElementById('restLabel').innerText=casaSel;updateGrid();musSel=ev.mus;renderMus();almoco=ev.turno.indexOf('Almoco')>=0;janta=ev.turno.indexOf('Janta')>=0;document.getElementById('alm').checked=almoco;document.getElementById('jan').checked=janta;if(almoco)document.getElementById('lAlm').classList.add('on');else document.getElementById('lAlm').classList.remove('on');if(janta)document.getElementById('lJan').classList.add('on');else document.getElementById('lJan').classList.remove('on');document.getElementById('modal').classList.add('show');}
+function excluir(id){if(!confirm('Excluir show '+id+' de vez? Vai sumir pra sempre!'))return;eventos=eventos.filter(function(e){return e.id!=id;});saveEventos();render();alert('Excluido! Sumiu de vez!');}
 function fechar(){document.getElementById('modal').classList.remove('show');editId=null;}
-function salvar(){
- var data=document.getElementById('data').value||'2026-10-26';
- var turno='';if(almoco&&janta) turno='Almoco 12:30-15:30 + Janta 19:00-22:00'; else if(almoco) turno='Almoco 12:30-15:30'; else turno='Janta 19:00-22:00';
- var m=musicos.find(function(x){return x.n==musSel});var valor=m?m.v:300;
- if(editId){var ev=eventos.find(function(e){return e.id==editId;});if(ev){ev.data=data;ev.casa=casaSel;ev.mus=musSel;ev.valor=valor;ev.turno=turno;}}
- else{var novoEv={id:Date.now(),data:data,[STRIPPED] valor:valor,turno:turno};eventos.push(novoEv);}
- saveEventos();fechar();filtro('hoje');alert('Salvo! Fica pra sempre agora - nunca mais some!');
-}
-function novoMusico(){editMusicoIdx=null;document.getElementById('modalMusicoTitulo').innerText='Novo Musico - A-Z - fica pra sempre';document.getElementById('musNome').value='';document.getElementById('musValor').value='300';document.getElementById('btnExcluirMusico').style.display='none';document.getElementById('modalMusico').classList.add('show');}
-function editarMusico(idx){editMusicoIdx=idx;var m=musicos[idx];document.getElementById('modalMusicoTitulo').innerText='Editar - '+m.n+' - fica pra sempre';document.getElementById('musNome').value=m.n;document.getElementById('musValor').value=m.v;document.getElementById('btnExcluirMusico').style.display='block';document.getElementById('modalMusico').classList.add('show');}
-function salvarMusico(){
- var nome=document.getElementById('musNome').value.trim().toUpperCase();
- var valor=parseInt(document.getElementById('musValor').value)||300;
- if(!nome){alert('Digite o nome!');return;}
- if(editMusicoIdx!==null){musicos[editMusicoIdx].n=nome;musicos[editMusicoIdx].v=valor;}else{musicos.push({n:nome,v:valor});}
- saveMusicos();fecharMusico();renderMusTab();renderMus();render();alert('Musico salvo! Fica pra sempre!');
-}
-function excluirMusico(){
-  if(editMusicoIdx===null) return;
-  if(!confirm('Excluir musico '+musicos[editMusicoIdx].n+' de vez? Vai sumir pra sempre!')) return;
-  musicos.splice(editMusicoIdx,1);
-  saveMusicos();
-  fecharMusico();
-  renderMusTab();
-  renderMus();
-  render();
-  alert('Musico excluido! Sumiu de vez!');
-}
+function salvar(){var data=document.getElementById('data').value||'2026-10-26';var turno='';if(almoco&&janta)turno='Almoco 12:30-15:30 + Janta 19:00-22:00';else if(almoco)turno='Almoco 12:30-15:30';else turno='Janta 19:00-22:00';var m=musicos.find(function(x){return x.n==musSel});var valor=m?m.v:300;if(editId){var ev=eventos.find(function(e){return e.id==editId;});if(ev){ev.data=data;ev.casa=casaSel;ev.mus=musSel;ev.valor=valor;ev.turno=turno;}}else{var novoEv={id:Date.now(),data:data,casa:casaSel,mus:musSel,valor:valor,turno:turno};eventos.push(novoEv);}saveEventos();fechar();filtro('hoje');alert('Salvo! Fica pra sempre!');}
+function novoMusico(){editMusicoIdx=null;document.getElementById('modalMusicoTitulo').innerText='Novo Musico - A-Z';document.getElementById('musNome').value='';document.getElementById('musValor').value='300';document.getElementById('btnExcluirMusico').style.display='none';document.getElementById('modalMusico').classList.add('show');}
+function editarMusico(idx){editMusicoIdx=idx;var m=musicos[idx];document.getElementById('modalMusicoTitulo').innerText='Editar - '+m.n;document.getElementById('musNome').value=m.n;document.getElementById('musValor').value=m.v;document.getElementById('btnExcluirMusico').style.display='block';document.getElementById('modalMusico').classList.add('show');}
+function salvarMusico(){var nome=document.getElementById('musNome').value.trim().toUpperCase();var valor=parseInt(document.getElementById('musValor').value)||300;if(!nome){alert('Digite o nome!');return;}if(editMusicoIdx!==null){musicos[editMusicoIdx].n=nome;musicos[editMusicoIdx].v=valor;}else{musicos.push({n:nome,v:valor});}saveMusicos();fecharMusico();renderMusTab();renderMus();render();alert('Salvo! Fica pra sempre!');}
+function excluirMusico(){if(editMusicoIdx===null)return;if(!confirm('Excluir musico '+musicos[editMusicoIdx].n+' de vez?'))return;musicos.splice(editMusicoIdx,1);saveMusicos();fecharMusico();renderMusTab();renderMus();render();alert('Musico excluido! Sumiu de vez!');}
 function fecharMusico(){document.getElementById('modalMusico').classList.remove('show');editMusicoIdx=null;}
-function zap(comValor){
- var filt=eventos.filter(function(e){return e.data>='2026-10-19';});filt.sort(function(a,b){return b.valor-a.valor;});
- var txt='';filt.forEach(function(ev){if(comValor) txt+=ev.data.split('-').reverse().join('/')+' - RESTAURANTE '+ev.casa+' - MUSICO '+ev.mus+' R$'+ev.valor+' - '+ev.turno+'\n';else txt+=ev.data.split('-').reverse().join('/')+' - RESTAURANTE '+ev.casa+' - MUSICO '+ev.mus+' - '+ev.turno+'\n';});
- var titulo=comValor?'*AGENDA TAKI SOM - MAIOR PARA MENOR*':'*CRONOGRAMA - SEM VALOR*';
- window.open('https://wa.me/?text='+encodeURIComponent(titulo+'\n\n'+txt),'_blank');
-}
-ordenaMusicosAZ();
-renderMus();
-renderMusTab();
-render();
+function zap(comValor){var filt=eventos.filter(function(e){return e.data>='2026-10-19';});filt.sort(function(a,b){return b.valor-a.valor;});var txt='';filt.forEach(function(ev){if(comValor)txt+=ev.data.split('-').reverse().join('/')+' - RESTAURANTE '+ev.casa+' - MUSICO '+ev.mus+' R$'+ev.valor+' - '+ev.turno+'\n';else txt+=ev.data.split('-').reverse().join('/')+' - RESTAURANTE '+ev.casa+' - MUSICO '+ev.mus+' - '+ev.turno+'\n';});var titulo=comValor?'*AGENDA TAKI SOM - MAIOR PARA MENOR*':'*CRONOGRAMA - SEM VALOR*';window.open('https://wa.me/?text='+encodeURIComponent(titulo+'\n\n'+txt),'_blank');}
+ordenaMusicosAZ();renderMus();renderMusTab();render();
 </script>
 </body>
 </html>
