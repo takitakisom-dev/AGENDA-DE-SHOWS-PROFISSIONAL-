@@ -3,33 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TAKI SOM v74 MENU COMPLETO</title>
+<title>TAKI SOM - DESIGN DA IMAGEM</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&display=swap">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}body{background:#F1F5F9;font-family:Arial,sans-serif;padding-bottom:160px}
-.top{position:sticky;top:0;z-index:100;background:linear-gradient(135deg,#1E3A8A,#2563EB);color:#fff;padding:14px;text-align:center;font-weight:800;font-size:18px}
-.cardMes{background:#fff;margin:10px;border:1px solid #E2E8F0;border-radius:18px;padding:16px;text-align:center}
-.cardMes b{font-size:16px;display:flex;justify-content:center;align-items:center;gap:12px}
-.arrow{width:42px;height:42px;border:1px solid #E2E8F0;background:#F8FAFC;border-radius:10px;font-size:22px;font-weight:800;color:#1E3A8A;cursor:pointer}
-.chips{display:flex;gap:8px;justify-content:center;margin-top:12px}
-.chip{border:1px solid #E2E8F0;background:#F8FAFC;border-radius:10px;padding:8px 12px;min-width:76px;text-align:center}
-.chip b{font-size:9px;color:#64748B;display:block}.chip span{font-size:13px;font-weight:800;color:#1E3A8A;display:block;margin-top:2px}
-.filtros{display:flex;gap:6px;justify-content:center;margin:12px;flex-wrap:wrap}
-.filtros button{border:1px solid #E2E8F0;background:#fff;padding:8px 14px;border-radius:20px;font-weight:700;font-size:12px;cursor:pointer}
+*{box-sizing:border-box;margin:0;padding:0}body{background:#F1F5F9;font-family:'Inter',Arial,sans-serif;padding-bottom:180px}
+.top{position:sticky;top:0;z-index:100;background:linear-gradient(135deg,#1E40AF,#2563EB);color:#fff;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;border-radius:0 0 24px 24px;box-shadow:0 4px 12px rgba(30,64,175,.3)}
+.top b{font-size:22px;font-weight:800;letter-spacing:.5px}
+.top .icons{display:flex;gap:12px;align-items:center;font-size:20px}
+.cardMes{background:#fff;margin:14px 12px 10px;border-radius:20px;padding:16px;box-shadow:0 4px 16px rgba(0,0,0,.08);border:1px solid #E2E8F0}
+.cardMes .title{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:15px;color:#1E293B}
+.cardMes .title button{width:36px;height:36px;border-radius:10px;border:1px solid #E2E8F0;background:#F1F5F9;font-size:18px;font-weight:800;color:#1E3A8A;cursor:pointer}
+.chips{display:flex;gap:8px;margin-top:14px}
+.chip{flex:1;background:#DBEAFE;border-radius:12px;padding:10px 6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:1px solid #BFDBFE}
+.chip i{font-size:16px}.chip b{font-size:11px;font-weight:800;color:#1E3A8A;line-height:1.1;text-align:center}.chip b small{font-size:10px;display:block}
+.filtros{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap}
+.filtros button{border:1px solid #CBD5E1;background:#fff;padding:8px 12px;border-radius:10px;font-weight:700;font-size:12px;color:#64748B;cursor:pointer}
 .filtros button.ativo{background:#2563EB;color:#fff;border-color:#2563EB}
-.cont{margin:0 10px;background:#10B981;color:#fff;border-radius:10px;padding:10px;text-align:center;font-weight:800;font-size:12px}
-.dia{background:linear-gradient(135deg,#1E3A8A,#2563EB);color:#fff;padding:9px 12px;border-radius:8px;margin:14px 10px 8px;font-weight:800;font-size:12px}
-.ev{background:#fff;margin:0 10px 10px;border:1px solid #E2E8F0;border-radius:12px;padding:12px;position:relative}
-.ev b{color:#1E3A8A}.badge{position:absolute;top:10px;right:10px;background:#2563EB;color:#fff;padding:3px 8px;border-radius:20px;font-size:10px;font-weight:700}
-.turno{font-size:11px;background:#F8FAFC;border:1px solid #F1F5F9;padding:6px 8px;border-radius:6px;margin:4px 0;display:flex;justify-content:space-between}
-.acoes{display:flex;gap:6px;margin-top:8px}.acoes button{flex:1;padding:7px;border:1px solid #E2E8F0;border-radius:6px;font-size:11px;font-weight:700;background:#fff;cursor:pointer}
-.plus{position:fixed;bottom:132px;right:12px;width:56px;height:56px;background:#2563EB;color:#fff;border:none;border-radius:16px;font-size:28px;cursor:pointer;z-index:50}
-.zapBar{position:fixed;bottom:72px;left:0;right:0;background:#fff;display:flex;gap:8px;padding:10px;border-top:1px solid #E2E8F0;z-index:90}
-.zapBar button{flex:1;padding:10px;border:none;border-radius:8px;font-weight:800;font-size:11px;color:#fff;cursor:pointer}.b1{background:#1E3A8A}.b2{background:#059669}
-.menuCompleto{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:8px 0 10px;border-top:1px solid #E2E8F0;z-index:100;border-radius:16px 16px 0 0}
-.menuCompleto button{flex:1;border:none;background:none;padding:6px;font-size:10px;font-weight:700;color:#64748B;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px}
-.menuCompleto button.ativo{color:#2563EB}.menuCompleto button span{font-size:18px}
+.contGreen{background:linear-gradient(135deg,#16A34A,#22C55E);color:#fff;border-radius:14px 14px 0 0;padding:12px 14px;margin:14px 12px 0;font-weight:800;font-size:13px;display:flex;align-items:center;gap:8px}
+.dayBlue{background:linear-gradient(135deg,#1E40AF,#2563EB);color:#fff;border-radius:12px;padding:10px 12px;margin:0 12px;font-weight:800;font-size:11px;display:flex;align-items:center;gap:8px;letter-spacing:.2px}
+.evCard{background:#fff;margin:0 12px 12px;border-radius:0 0 18px 18px;padding:14px;box-shadow:0 4px 12px rgba(0,0,0,.08);border:1px solid #E2E8F0;border-top:none}
+.evTitle{font-weight:800;font-size:16px;color:#1E293B;line-height:1.3}
+.evMeta{display:flex;gap:14px;margin-top:10px;color:#64748B;font-size:13px;font-weight:600;align-items:center}
+.evMeta span{display:flex;align-items:center;gap:6px}
+.evActions{display:flex;gap:10px;margin-top:14px}
+.btnEdit{flex:1;border:1.5px solid #93C5FD;background:#fff;color:#2563EB;padding:10px;border-radius:10px;font-weight:800;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
+.btnDel{flex:1;border:1.5px solid #FCA5A5;background:#fff;color:#DC2626;padding:10px;border-radius:10px;font-weight:800;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
+.plus{position:fixed;bottom:138px;right:16px;width:60px;height:60px;background:#2563EB;color:#fff;border:none;border-radius:50%;font-size:32px;cursor:pointer;z-index:50;box-shadow:0 6px 16px rgba(37,99,235,.5);display:flex;align-items:center;justify-content:center}
+.zapBar{display:flex;gap:10px;margin:14px 12px}
+.zapBar button{flex:1;padding:12px;border-radius:12px;font-weight:800;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;border:1.5px solid}
+.z1{background:#16A34A;color:#fff;border-color:#16A34A}.z2{background:#fff;color:#16A34A;border-color:#16A34A}
+.menuBottom{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:10px 0 12px;border-top:1px solid #E2E8F0;z-index:100;border-radius:20px 20px 0 0;box-shadow:0 -4px 12px rgba(0,0,0,.06)}
+.menuBottom button{flex:1;border:none;background:none;padding:6px;font-size:11px;font-weight:700;color:#94A3B8;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px}
+.menuBottom button.ativo{color:#2563EB}.menuBottom button span{font-size:18px}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:200;padding:12px}.modal.aberto{display:flex}
-.box{background:#fff;border-radius:14px;padding:14px;width:100%;max-width:440px;max-height:88vh;overflow:auto}
+.box{background:#fff;border-radius:16px;padding:14px;width:100%;max-width:440px;max-height:88vh;overflow:auto}
 .inp{width:100%;padding:10px;border:1px solid #E2E8F0;border-radius:8px;margin:4px 0;font-size:13px}.btn{width:100%;padding:11px;border:none;border-radius:8px;font-weight:800;background:#2563EB;color:#fff;margin-top:8px;cursor:pointer}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:6px 0}.grid button{padding:9px;border:1px solid #E2E8F0;border-radius:8px;background:#fff;font-weight:700;font-size:11px;cursor:pointer}.grid button.on{background:#2563EB;color:#fff;border-color:#2563EB}
 .mus{max-height:160px;overflow:auto;border:1px solid #E2E8F0;border-radius:8px;padding:4px;margin:6px 0}.mus label{display:flex;justify-content:space-between;padding:7px;border-radius:6px;margin:2px 0;cursor:pointer;font-size:12px}.mus label.on{background:#EFF6FF;border:1px solid #2563EB}
@@ -37,28 +44,45 @@
 </style>
 </head>
 <body>
-<script>
-// LIMPA TUDO QUE TAVA QUEBRADO - NÃO DEIXA SUMIR!
-try{localStorage.clear();}catch(e){}
-</script>
-<div class="top">TAKI SOM</div>
+<script>try{localStorage.clear();}catch(e){}</script>
+<div class="top"><span style="font-size:22px">☰</span><b>TAKI SOM</b><div class="icons"><span>🔔</span><span style="background:#fff;color:#2563EB;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px">👤</span></div></div>
 
 <div id="tabAgenda" class="tab ativo">
-<div class="cardMes"><b><button class="arrow" onclick="mudaMes(-1)">‹</button><span id="mesLabel">MES DE OUTUBRO DE 2026</span><button class="arrow" onclick="mudaMes(1)">›</button></b><div class="chips"><div class="chip"><b>DIA</b><span>19</span></div><div class="chip"><b>MÊS</b><span>OUTUBRO</span></div><div class="chip"><b>ANO</b><span>2026</span></div></div></div>
-<div class="filtros"><button onclick="setV('hoje')" id="vHoje">Hoje</button><button onclick="setV('dia')" id="vDia">Dia</button><button class="ativo" onclick="setV('semana')" id="vSemana">Semana</button><button onclick="setV('mes')" id="vMes">Mês</button><button onclick="setV('ano')" id="vAno">Ano Todo</button></div>
-<div class="cont" id="cont">15 eventos - P1 a P6 - EDILL MÚSICO - v74 FUNCIONA</div>
-<div id="lista"></div>
-<button class="plus" onclick="novo()">+</button>
-<div class="zapBar"><button class="b1" onclick="zap(true)">ZAP COM VALOR - NEGRITO TOTAL</button><button class="b2" onclick="zap(false)">ZAP SEM VALOR - NEGRITO TOTAL</button></div>
+<div class="cardMes">
+<div class="title"><button onclick="mudaMes(-1)">‹</button><span>MES DE OUTUBRO DE 2026</span><button onclick="mudaMes(1)">›</button></div>
+<div class="chips">
+<div class="chip"><span>📅</span><b>DIA 19</b></div>
+<div class="chip"><span>📅</span><b>MES<br><small>OUTUBRO</small></b></div>
+<div class="chip"><span>📅</span><b>ANO<br>2026</b></div>
+</div>
+<div class="filtros">
+<button onclick="setV('hoje')" id="vHoje">Hoje</button>
+<button onclick="setV('dia')" id="vDia">Dia</button>
+<button class="ativo" onclick="setV('semana')" id="vSemana">Semana</button>
+<button onclick="setV('mes')" id="vMes">Mês</button>
+<button onclick="setV('ano')" id="vAno">Ano Todo</button>
+</div>
 </div>
 
-<div id="tabMusicos" class="tab"><div class="cardMes"><b>MÚSICOS - 14</b><div style="font-size:11px;color:#64748B;margin-top:4px">EDILL está aqui como músico!</div></div><div id="listaMusicosTab" style="margin:10px"></div></div>
-<div id="tabRelatorio" class="tab"><div class="cardMes"><b>RELATÓRIO OUTUBRO 2026</b></div><div class="cont" id="relatorioBox" style="margin:10px;background:#fff;color:#334155;border:1px solid #E2E8F0"></div></div>
-<div id="tabConfig" class="tab"><div class="cardMes"><b>CONFIG</b></div><div class="cont" style="margin:10px;background:#fff;color:#334155;border:1px solid #E2E8F0;text-align:left"><b>P1-P6</b> = Restaurantes<br><b>EDILL</b> = Músico<br><br>v74 - Lista não some mais!</div></div>
+<div class="contGreen">☰ 15 eventos</div>
+<div class="dayBlue">📅 SEGUNDA-FEIRA, 20 DE OUTUBRO DE 2026</div>
+<div id="lista"></div>
 
-<div class="menuCompleto">
+<button class="plus" onclick="novo()">+</button>
+
+<div class="zapBar">
+<button class="z1" onclick="zap(true)">💬 ZAP COM VALOR</button>
+<button class="z2" onclick="zap(false)">💬 ZAP SEM VALOR</button>
+</div>
+</div>
+
+<div id="tabMusicos" class="tab"><div class="cardMes"><b>MÚSICOS - 14 - EDILL AQUI!</b></div><div id="listaMusicosTab" style="margin:10px"></div></div>
+<div id="tabRelatorio" class="tab"><div class="cardMes"><b>RELATÓRIO</b></div><div id="relatorioBox" style="margin:10px;background:#fff;padding:14px;border-radius:12px;border:1px solid #E2E8F0"></div></div>
+<div id="tabConfig" class="tab"><div class="cardMes"><b>CONFIG - v75 DESIGN DA IMAGEM</b><div style="font-size:11px;color:#64748B;margin-top:4px">P1-P6 restaurante | EDILL músico</div></div></div>
+
+<div class="menuBottom">
 <button id="mAgenda" class="ativo" onclick="trocaTab('Agenda')"><span>📅</span>Agenda</button>
-<button id="mMusicos" onclick="trocaTab('Musicos')"><span>🎸</span>Músicos</button>
+<button id="mMusicos" onclick="trocaTab('Musicos')"><span>🎤</span>Músicos</button>
 <button id="mRelatorio" onclick="trocaTab('Relatorio')"><span>📊</span>Relatório</button>
 <button id="mConfig" onclick="trocaTab('Config')"><span>⚙️</span>Config</button>
 </div>
@@ -66,11 +90,11 @@ try{localStorage.clear();}catch(e){}
 <div class="modal" id="modal"><div class="box">
 <b id="mt">Novo Show</b><br><br>
 Data: <input id="data" type="date" class="inp" value="2026-10-19">
-<div style="font-weight:800;font-size:11px;margin-top:8px">RESTAURANTE P1 a P6:</div>
+<div style="font-weight:800;font-size:11px;margin-top:8px">RESTAURANTE P1-P6:</div>
 <div class="grid"><button id="pP1" class="on" onclick="selP('P1')">P1</button><button id="pP2" onclick="selP('P2')">P2</button><button id="pP3" onclick="selP('P3')">P3</button><button id="pP4" onclick="selP('P4')">P4</button><button id="pP5" onclick="selP('P5')">P5</button><button id="pP6" onclick="selP('P6')">P6</button></div>
 <div style="font-weight:800;font-size:11px">TURNO:</div>
-<label><input type="checkbox" id="alm"> Almoço</label> <label><input type="checkbox" id="jan" checked> Janta</label>
-<div style="font-weight:800;font-size:11px;margin-top:6px">MÚSICO:</div>
+<label><input type="checkbox" id="alm"> Almoço</label> <label><input type="checkbox" id="jan" checked> Janta 19:00-22:00</label>
+<div style="font-weight:800;font-size:11px;margin-top:6px">MÚSICO - EDILL AQUI:</div>
 <div class="mus" id="musLista"></div>
 <button class="btn" onclick="salvar()">Salvar</button><button class="btn" style="background:#fff;color:#64748B;border:1px solid #E2E8F0" onclick="fechar()">Cancelar</button>
 </div></div>
@@ -97,36 +121,33 @@ var musicos=[
 {nome:"ANDERSON VAT 60 DUO",valor:400},{nome:"ANDERSON VAT 60 TRIO",valor:450},{nome:"ANDRÉ",valor:300},{nome:"DOUGLAS",valor:300},{nome:"EDILL",valor:300},{nome:"GERVÁSIO",valor:200},{nome:"ISRAEL",valor:300},{nome:"LUCIANO",valor:300},{nome:"MARTIN",valor:300},{nome:"RICK DUO",valor:400},{nome:"RICK SOLO",valor:300},{nome:"RICK TRIO",valor:450},{nome:"ROBSON SOLO",valor:300},{nome:"YGOR",valor:300}
 ];
 var view="semana";var casaSel="P1";var musSel="";var editId=null;
-function selP(p){casaSel=p;document.querySelectorAll('.grid button').forEach(function(b){b.classList.remove('on')});var el=document.getElementById('p'+p);if(el)el.classList.add('on');}
-function setV(v){view=v;document.querySelectorAll('.filtros button').forEach(function(b){b.classList.remove('ativo')});var el=document.getElementById('v'+v.charAt(0).toUpperCase()+v.slice(1));if(el)el.classList.add('ativo');render();}
+function selP(p){casaSel=p;document.querySelectorAll('.grid button').forEach(function(b){b.classList.remove('on')});document.getElementById('p'+p).classList.add('on');}
+function setV(v){view=v;document.querySelectorAll('.filtros button').forEach(function(b){b.classList.remove('ativo')});document.getElementById('v'+v.charAt(0).toUpperCase()+v.slice(1)).classList.add('ativo');render();}
 function mudaMes(d){render();}
 function render(){
  var filt=eventos;
  if(view=="semana") filt=eventos.filter(function(e){return e.data>="2026-10-19"&&e.data<="2026-10-25";});
  else if(view=="mes") filt=eventos.filter(function(e){return e.data.indexOf("2026-10")==0;});
- else if(view=="dia") filt=eventos.filter(function(e){return e.data=="2026-10-19";});
- else if(view=="hoje") filt=eventos.filter(function(e){return e.data=="2026-10-19";});
+ else if(view=="dia"||view=="hoje") filt=eventos.filter(function(e){return e.data=="2026-10-19";});
  var grupos={};filt.forEach(function(e){if(!grupos[e.data])grupos[e.data]=[];grupos[e.data].push(e);});
  var html="";Object.keys(grupos).sort().forEach(function(d){
-  html+='<div class="dia">'+d.split('-').reverse().join('/')+' - '+d+'</div>';
   grupos[d].forEach(function(ev){
-   html+='<div class="ev"><span class="badge">1 show</span><b>'+ev.casa+' - '+ev.mus+'</b><div class="turno"><span>'+ev.turno+'</span><span>R$ '+ev.valor+'</span></div><div class="acoes"><button onclick="editar('+ev.id+')">Editar</button><button onclick="excluir('+ev.id+')">Excluir</button></div></div>';
+   html+='<div class="evCard"><div class="evTitle">'+ev.casa+' - '+ev.mus+'</div><div class="evMeta"><span>🕒 '+ev.turno+'</span><span>💲 R$ '+ev.valor+'</span></div><div class="evActions"><button class="btnEdit" onclick="editar('+ev.id+')">📝 Editar</button><button class="btnDel" onclick="excluir('+ev.id+')">🗑️ Excluir</button></div></div>';
   });
  });
- if(filt.length==0) html='<div class="cardMes" style="padding:20px"><b>0 eventos em '+view+'</b><br><br><button onclick="setV(\'ano\')" style="padding:10px 16px;background:#2563EB;color:#fff;border:none;border-radius:8px;font-weight:800">Ver Ano Todo - '+eventos.length+' eventos</button></div>';
+ if(filt.length==0) html='<div class="cardMes" style="text-align:center;padding:20px"><b>Nenhum evento em '+view+'</b><br><br><button onclick="setV(\'ano\')" style="padding:10px 16px;background:#2563EB;color:#fff;border:none;border-radius:8px;font-weight:800">Ver Ano Todo - '+eventos.length+' eventos</button></div>';
  document.getElementById('lista').innerHTML=html;
- document.getElementById('cont').innerText=filt.length+' eventos em '+view.toUpperCase()+' | Total '+eventos.length+' eventos - P1-P6 - EDILL MUSICO - v74 LISTA APARECE!';
- var musHtml="";musicos.forEach(function(m){musHtml+='<div class="ev" style="display:flex;justify-content:space-between"><b>'+m.nome+'</b><span style="color:#2563EB;font-weight:800">R$ '+m.valor+'</span></div>';});
+ var musHtml="";musicos.forEach(function(m){musHtml+='<div style="background:#fff;margin:0 0 8px;border:1px solid #E2E8F0;border-radius:12px;padding:12px;display:flex;justify-content:space-between"><b>'+m.nome+'</b><span style="color:#2563EB;font-weight:800">R$ '+m.valor+'</span></div>';});
  document.getElementById('listaMusicosTab').innerHTML=musHtml;
  var total=0;eventos.forEach(function(e){total+=e.valor;});
- document.getElementById('relatorioBox').innerHTML='<b>Total:</b> '+eventos.length+' shows<br><b>Valor total:</b> R$ '+total+'<br><b>Média:</b> R$ '+Math.round(total/eventos.length);
+ document.getElementById('relatorioBox').innerHTML='<b>Total:</b> '+eventos.length+' shows<br><b>Valor:</b> R$ '+total;
 }
-function trocaTab(t){document.querySelectorAll('.tab').forEach(function(el){el.classList.remove('ativo')});document.querySelectorAll('.menuCompleto button').forEach(function(b){b.classList.remove('ativo')});var tab=document.getElementById('tab'+t);if(tab)tab.classList.add('ativo');var btn=document.getElementById('m'+t);if(btn)btn.classList.add('ativo');if(t=='Agenda')render();}
+function trocaTab(t){document.querySelectorAll('.tab').forEach(function(el){el.classList.remove('ativo')});document.querySelectorAll('.menuBottom button').forEach(function(b){b.classList.remove('ativo')});document.getElementById('tab'+t).classList.add('ativo');document.getElementById('m'+t).classList.add('ativo');if(t=='Agenda')render();}
 function novo(){editId=null;musSel="";casaSel="P1";selP("P1");document.getElementById('data').value="2026-10-19";document.getElementById('mt').innerText="Novo Show";renderMus();document.getElementById('modal').classList.add('aberto');}
 function editar(id){var ev=eventos.find(function(e){return e.id==id;});if(!ev)return;editId=id;casaSel=ev.casa;musSel=ev.mus;selP(ev.casa);document.getElementById('data').value=ev.data;document.getElementById('mt').innerText="Editar Show";renderMus();document.getElementById('modal').classList.add('aberto');}
 function renderMus(){var div=document.getElementById('musLista');var h="";musicos.forEach(function(m){var sel=m.nome==musSel;var cl=sel?"on":"";var ch=sel?"checked":"";h+='<label class="'+cl+'"><span><input type="radio" name="mus" '+ch+' onchange="musSel=\''+m.nome.replace(/'/g,"\\'")+'\';renderMus()"> '+m.nome+'</span><span style="color:#2563EB;font-weight:800">R$ '+m.valor+'</span></label>';});div.innerHTML=h;}
 function fechar(){document.getElementById('modal').classList.remove('aberto');}
-function salvar(){var data=document.getElementById('data').value;if(!data){alert('Data');return;}if(!musSel){alert('Escolhe músico!');return;}var m=musicos.find(function(x){return x.nome==musSel;});var valor=m?m.valor:300;var turno=document.getElementById('jan').checked?"Janta 19:00-22:00":"Almoço 12:30-15:30";if(editId){var ev=eventos.find(function(e){return e.id==editId;});ev.data=data;ev.casa=casaSel;ev.mus=musSel;ev.valor=valor;ev.turno=turno;}else{eventos.push({id:Date.now(),data:data,[STRIPPED]
+function salvar(){var data=document.getElementById('data').value;if(!data){alert('Data');return;}if(!musSel){alert('Escolhe músico - EDILL tá na lista!');return;}var m=musicos.find(function(x){return x.nome==musSel;});var valor=m?m.valor:300;var turno=document.getElementById('jan').checked?"Janta 19:00-22:00":"Almoço 12:30-15:30";if(editId){var ev=eventos.find(function(e){return e.id==editId;});ev.data=data;ev.casa=casaSel;ev.mus=musSel;ev.valor=valor;ev.turno=turno;}else{eventos.push({id:Date.now(),data:data,[STRIPPED]
 function excluir(id){if(!confirm('Excluir?'))return;eventos=eventos.filter(function(e){return e.id!=id;});render();}
 function isDataLine(l){var u=l.toUpperCase();return (u.indexOf("-FEIRA")>=0||u.indexOf("SÁBADO")>=0||u.indexOf("SABADO")>=0||u.indexOf("DOMINGO")>=0)&&u.indexOf(" DE ")>=0;}
 function zap(comValor){
@@ -134,8 +155,7 @@ function zap(comValor){
  var txt="";Object.keys(grupos).sort().forEach(function(d){txt+=d+"\n";grupos[d].forEach(function(ev){if(comValor)txt+="RESTAURANTE "+ev.casa+" - MÚSICO "+ev.mus+" R$"+ev.valor+" - "+ev.turno+"\n";else txt+="RESTAURANTE "+ev.casa+" - MÚSICO "+ev.mus+" - "+ev.turno+"\n";});txt+="\n";});
  var linhas=txt.split("\n");var bold="";linhas.forEach(function(l){if(isDataLine(l))bold+="*"+l+"*\n";else bold+=l+"\n";});
  var titulo=comValor?"*AGENDA TAKI SOM - COM VALOR*":"*CRONOGRAMA - SEM VALOR*";
- var msg=titulo+"\n\n"+bold;
- window.open("https://wa.me/?text="+encodeURIComponent(msg),"_blank");
+ window.open("https://wa.me/?text="+encodeURIComponent(titulo+"\n\n"+bold),"_blank");
 }
 render();
 </script>
