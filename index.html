@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TAKI SOM v97 RESTAURANTES COM HORARIO</title>
+<title>TAKI SOM v98 BOTAO FUNCIONANDO</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}body{background:#F1F5F9;font-family:Arial,sans-serif;padding-bottom:110px}
 .top{background:linear-gradient(135deg,#1E40AF,#2563EB);color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;border-radius:0 0 20px 20px}
-.top button{background:none;border:none;color:#fff;font-size:20px;cursor:pointer}
+.top button{background:none;border:none;color:#fff;font-size:22px;cursor:pointer}
 .top b{font-size:20px;font-weight:800}
 .card{background:#fff;margin:12px;border-radius:18px;padding:14px;box-shadow:0 4px 12px rgba(0,0,0,.08);border:1px solid #E2E8F0}
 .chips{display:flex;gap:8px;margin-top:12px}.chip{flex:1;background:#DBEAFE;border-radius:12px;padding:14px 4px;text-align:center;border:2px solid #BFDBFE;cursor:pointer}.chip.on{background:#2563EB;border-color:#2563EB;color:#fff}.chip b{font-size:12px;display:block;font-weight:800}
@@ -26,7 +26,7 @@
 .inp{width:100%;padding:11px;border:1px solid #E2E8F0;border-radius:10px;margin:6px 0}.btn{width:100%;padding:12px;border:none;border-radius:10px;font-weight:800;background:#2563EB;color:#fff;margin-top:10px;cursor:pointer}
 .restSel{display:flex;align-items:center;justify-content:space-between;background:#F1F5F9;border:1px solid #E2E8F0;border-radius:12px;padding:8px 10px;margin:8px 0}.restSel button{width:38px;height:38px;border-radius:10px;border:1px solid #CBD5E1;background:#fff;font-weight:800;font-size:18px;cursor:pointer;color:#1E3A8A}.restSel b{font-size:18px;color:#1E3A8A}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}.grid button{padding:11px;border:1.5px solid #E2E8F0;border-radius:10px;background:#fff;font-weight:800;font-size:12px;cursor:pointer}.grid button.on{background:#2563EB;color:#fff;border-color:#2563EB}
-.horario{display:flex;gap:10px;margin:10px 0;flex-wrap:wrap}.horario label{flex:1;min-width:140px;display:flex;align-items:center;gap:8px;background:#F8FAFC;border:1.5px solid #E2E8F0;border-radius:10px;padding:10px 8px;font-size:12px;font-weight:700;cursor:pointer}.horario label.on{background:#DBEAFE;border-color:#2563EB;color:#1E3A8A}
+.horario{display:flex;gap:10px;margin:10px 0;flex-wrap:wrap}.horario label{flex:1;min-width:130px;display:flex;align-items:center;gap:8px;background:#F8FAFC;border:1.5px solid #E2E8F0;border-radius:10px;padding:10px 8px;font-size:12px;font-weight:700;cursor:pointer}.horario label.on{background:#DBEAFE;border-color:#2563EB;color:#1E3A8A}
 .mus{max-height:200px;overflow:auto;border:1px solid #E2E8F0;border-radius:12px;padding:6px;margin:8px 0}.mus .item{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:10px;margin:3px 0;cursor:pointer;border:1px solid transparent}.mus .item.on{background:#EFF6FF;border-color:#2563EB}
 .musCard{background:#fff;margin:0 12px 10px;border-radius:14px;padding:14px;border:1px solid #E2E8F0;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
 .restCard{background:#fff;margin:0 12px 10px;border-radius:14px;padding:14px;border:1px solid #E2E8F0;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
@@ -40,12 +40,12 @@
 <div class="sideHeader">MENU</div>
 <button class="item" onclick="abrir('Agenda')">Agenda - Hoje 26/10</button>
 <button class="item" onclick="abrir('Musicos')">Musicos - A-Z</button>
-<button class="item" onclick="abrir('Restaurantes')">Restaurantes P1-P6 - Com Horario</button>
+<button class="item" onclick="abrir('Restaurantes')">Restaurantes - Com Horario</button>
 <button class="item" onclick="abrir('Valores')">Valores - Maior para Menor</button>
 <button class="item" onclick="abrir('Relatorio')">Relatorio Mensal</button>
 <button class="item" onclick="abrir('Anual')">Relatorio Anual</button>
 <button class="item" onclick="abrir('Horarios')">Horarios</button>
-<button class="item" onclick="abrir('Config')">Config - Backup Exportar/Importar</button>
+<button class="item" onclick="abrir('Config')">Config - Backup</button>
 <button class="item" onclick="exportarBackup()" style="background:#DBEAFE;font-weight:800">BACKUP - Exportar</button>
 <button class="item" onclick="document.getElementById('importFile').click()" style="background:#FEF3C7;font-weight:800">BACKUP - Importar</button>
 <button class="item" onclick="zap(true)">ZAP COM VALOR</button>
@@ -90,20 +90,20 @@
 </div>
 
 <div id="Restaurantes" class="tab">
-<div class="card" style="padding:12px"><b style="font-size:16px">RESTAURANTES P1-P6 - A-Z</b><br><small style="color:#64748B">Com horario correto - Toque pra editar - Excluir some de vez</small></div>
+<div class="card" style="padding:12px"><b style="font-size:16px">RESTAURANTES P1-P6 - A-Z - COM HORARIO</b><br><small style="color:#64748B">Toque pra editar - Com horario correto</small></div>
 <div id="restTab" style="margin:10px"></div>
 <div style="margin:14px 12px">
-<button class="btn" onclick="novoRestaurante()" style="background:#16A34A">+ Novo Restaurante - Com Horario</button>
-<button class="btn" style="background:#fff;color:#2563EB;border:1.5px solid #2563EB" onclick="restaurarRestaurantes()">Restaurar restaurantes P1-P6</button>
+<button class="btn" onclick="novoRestaurante()" style="background:#16A34A">+ Novo Restaurante - Com Horario Correto</button>
+<button class="btn" style="background:#fff;color:#2563EB;border:1.5px solid #2563EB" onclick="restaurarRestaurantes()">Restaurar P1-P6</button>
 </div>
 </div>
 
 <div id="Valores" class="tab"><div class="card"><b>VALORES - MAIOR PARA MENOR</b><div id="valoresBox" style="margin-top:10px"></div></div></div>
 <div id="Relatorio" class="tab"><div class="card"><b>RELATORIO MENSAL - MAIOR PARA MENOR</b><div id="relBox" style="margin-top:10px;font-size:13px;line-height:1.8"></div></div></div>
 <div id="Anual" class="tab"><div class="card"><b>RELATORIO ANUAL 2026</b><div id="anualBox" style="margin-top:10px;font-size:13px;line-height:1.8"></div></div></div>
-<div id="Horarios" class="tab"><div class="card"><b>HORARIOS</b><div style="font-size:13px;margin-top:10px;line-height:2">Almoco: 12:30-15:30<br>Janta: 19:00-22:00<br><br>Cadastre no Restaurante o horario correto!</div></div></div>
+<div id="Horarios" class="tab"><div class="card"><b>HORARIOS</b><div style="font-size:13px;margin-top:10px;line-height:2">Almoco: 12:30-15:30<br>Janta: 19:00-22:00<br><br>Cadastre o horario no Restaurante!</div></div></div>
 <div id="Config" class="tab">
-<div class="card"><b>CONFIG - BACKUP E INSTALAR</b><br><small>v97 - Restaurantes com horario - Nao apaga nada que voce fez</small><br><br>
+<div class="card"><b>CONFIG - BACKUP E INSTALAR</b><br><small>v98 - Botoes funcionando - Nao apaga nada</small><br><br>
 <button class="btn" style="background:#16A34A" onclick="exportarBackup()">BACKUP - Exportar JSON</button>
 <button class="btn" style="background:#F59E0B" onclick="document.getElementById('importFile').click()">BACKUP - Importar JSON</button>
 <input type="file" id="importFile" style="display:none" accept=".json" onchange="importarBackup(this)">
@@ -149,17 +149,17 @@ Valor R$: <input id="musValor" type="number" class="inp" value="300">
 
 <div class="modal" id="modalRest"><div class="box">
 <b id="modalRestTitulo">Novo Restaurante - Com Horario Correto</b><br><br>
-Codigo: <input id="restCodigo" class="inp" placeholder="Ex: P1, P7, RESTAURANTE NOVO">
-Nome: <input id="restNome" class="inp" placeholder="Ex: Restaurante 1 - Nome real">
-<div style="font-weight:800;font-size:12px;margin-top:10px">HORARIO CORRETO DO RESTAURANTE:</div>
+Codigo: <input id="restCodigo" class="inp" placeholder="Ex: P1, P7">
+Nome: <input id="restNome" class="inp" placeholder="Ex: Restaurante 1">
+<div style="font-weight:800;font-size:12px;margin-top:10px">HORARIO CORRETO:</div>
 <div class="horario">
 <label id="lRestAlm" onclick="toggleRestHor('alm')"><input type="checkbox" id="restAlm"> Almoco 12:30-15:30</label>
 <label id="lRestJan" class="on" onclick="toggleRestHor('jan')"><input type="checkbox" id="restJan" checked> Janta 19:00-22:00</label>
 </div>
-<small style="color:#64748B">Escolha o horario que esse restaurante sempre toca. Quando criar o show, ja vem com esse horario automatico!</small>
+<small style="color:#64748B">Quando criar show, ja vem com esse horario!</small>
 <br><br>
-<button class="btn" onclick="salvarRestaurante()">Salvar Restaurante - fica pra sempre</button>
-<button class="btn" style="background:#fff;color:#DC2626;border:1.5px solid #FCA5A5" onclick="excluirRestaurante()" id="btnExcluirRest">Excluir Restaurante - some de vez</button>
+<button class="btn" onclick="salvarRestaurante()">Salvar Restaurante</button>
+<button class="btn" style="background:#fff;color:#DC2626;border:1.5px solid #FCA5A5" onclick="excluirRestaurante()" id="btnExcluirRest">Excluir - some de vez</button>
 <button class="btn" style="background:#fff;color:#64748B;border:1px solid #E2E8F0" onclick="fecharRest()">Cancelar</button>
 </div></div>
 
@@ -174,24 +174,24 @@ Nome: <input id="restNome" class="inp" placeholder="Ex: Restaurante 1 - Nome rea
 
 <script>
 var eventosPadrao=[
-{id:1,data:"2026-10-19",[STRIPPED] VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:2,data:"2026-10-19",[STRIPPED] DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:3,data:"2026-10-19",[STRIPPED] SOLO",valor:300,turno:"Janta 19:00-22:00"},
-{id:4,data:"2026-10-19",[STRIPPED] SOLO",valor:300,turno:"Janta 19:00-22:00"},
-{id:5,data:"2026-10-19",[STRIPPED] 19:00-22:00"},
-{id:6,data:"2026-10-19",[STRIPPED] 19:00-22:00"},
-{id:7,data:"2026-10-20",[STRIPPED] 19:00-22:00"},
-{id:8,data:"2026-10-20",[STRIPPED] 19:00-22:00"},
-{id:9,data:"2026-10-20",[STRIPPED] 19:00-22:00"},
-{id:10,data:"2026-10-20",[STRIPPED] SOLO",valor:300,turno:"Janta 19:00-22:00"},
-{id:11,data:"2026-10-21",[STRIPPED] VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:12,data:"2026-10-21",[STRIPPED] VAT 60 TRIO",valor:450,turno:"Janta 19:00-22:00"},
-{id:13,data:"2026-10-21",[STRIPPED] TRIO",valor:450,turno:"Janta 19:00-22:00"},
-{id:14,data:"2026-10-21",[STRIPPED] 19:00-22:00"},
-{id:15,data:"2026-10-21",[STRIPPED] VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:16,data:"2026-10-26",[STRIPPED] VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:17,data:"2026-10-26",[STRIPPED] DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:18,data:"2026-10-26",[STRIPPED] 19:00-22:00"}
+{id:1,data:"2026-10-19",casa:"P1",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:2,data:"2026-10-19",casa:"P2",mus:"RICK DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:3,data:"2026-10-19",casa:"P3",mus:"RICK SOLO",valor:300,turno:"Janta 19:00-22:00"},
+{id:4,data:"2026-10-19",casa:"P4",mus:"ANDRE SOLO",valor:300,turno:"Janta 19:00-22:00"},
+{id:5,data:"2026-10-19",casa:"P5",mus:"GERVASIO",valor:200,turno:"Janta 19:00-22:00"},
+{id:6,data:"2026-10-19",casa:"P6",mus:"DOUGLAS",valor:300,turno:"Janta 19:00-22:00"},
+{id:7,data:"2026-10-20",casa:"P1",mus:"DOUGLAS",valor:300,turno:"Janta 19:00-22:00"},
+{id:8,data:"2026-10-20",casa:"P2",mus:"LUCIANO",valor:300,turno:"Janta 19:00-22:00"},
+{id:9,data:"2026-10-20",casa:"P3",mus:"MARTIN",valor:300,turno:"Janta 19:00-22:00"},
+{id:10,data:"2026-10-20",casa:"P4",mus:"RICK SOLO",valor:300,turno:"Janta 19:00-22:00"},
+{id:11,data:"2026-10-21",casa:"P1",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:12,data:"2026-10-21",casa:"P2",mus:"ANDERSON VAT 60 TRIO",valor:450,turno:"Janta 19:00-22:00"},
+{id:13,data:"2026-10-21",casa:"P3",mus:"RICK TRIO",valor:450,turno:"Janta 19:00-22:00"},
+{id:14,data:"2026-10-21",casa:"P4",mus:"ISRAEL",valor:300,turno:"Janta 19:00-22:00"},
+{id:15,data:"2026-10-21",casa:"P5",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:16,data:"2026-10-26",casa:"P1",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:17,data:"2026-10-26",casa:"P2",mus:"RICK DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:18,data:"2026-10-26",casa:"P3",mus:"EDILL",valor:300,turno:"Janta 19:00-22:00"}
 ];
 var musicosPadrao=[
 {n:"ANDERSON VAT 60 DUO",v:400},{n:"ANDERSON VAT 60 TRIO",v:450},{n:"ANDRE",v:300},{n:"DOUGLAS",v:300},{n:"EDILL",v:300},{n:"GERVASIO",v:200},{n:"ISRAEL",v:300},{n:"LUCIANO",v:300},{n:"MARTIN",v:300},{n:"RICK DUO",v:400},{n:"RICK SOLO",v:300},{n:"RICK TRIO",v:450},{n:"ROBSON SOLO",v:300},{n:"YGOR",v:300}
@@ -207,7 +207,6 @@ var restaurantesPadrao=[
 var KEY_EVENTOS='takisom_final_eventos';
 var KEY_MUSICOS='takisom_final_musicos';
 var KEY_RESTS='takisom_final_restaurantes';
-
 var eventos=[];var musicos=[];var restaurantes=[];
 try{
   var s1=localStorage.getItem(KEY_EVENTOS);
@@ -225,18 +224,18 @@ var restIdx=0;var casaSel="P1";var musSel="EDILL";var almoco=false;var janta=tru
 var restAlmoco=false;var restJanta=true;
 var deferredPrompt=null;
 window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferredPrompt=e;var b=document.getElementById('btnInstalarTop');if(b)b.style.display='inline-block';});
-function instalarApp(){if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.then(function(c){if(c.outcome==='accepted'){alert('App instalado!');}deferredPrompt=null;});}else{alert('Para instalar: No Chrome clique nos 3 pontinhos > Instalar app ou Adicionar a tela inicial');}}
+function instalarApp(){if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.then(function(c){if(c.outcome==='accepted'){alert('App instalado!');}deferredPrompt=null;});}else{alert('Para instalar: Chrome > 3 pontinhos > Instalar app');}}
 function ordenaMusicosAZ(){musicos.sort(function(a,b){return a.n.localeCompare(b.n);});}
 function ordenaRestsAZ(){restaurantes.sort(function(a,b){return a.codigo.localeCompare(b.codigo);});}
 function saveEventos(){localStorage.setItem(KEY_EVENTOS,JSON.stringify(eventos));}
 function saveMusicos(){ordenaMusicosAZ();localStorage.setItem(KEY_MUSICOS,JSON.stringify(musicos));}
 function saveRests(){ordenaRestsAZ();localStorage.setItem(KEY_RESTS,JSON.stringify(restaurantes));}
 function exportarBackup(){
-  var backup={eventos:eventos,musicos:musicos,restaurantes:restaurantes,data:new Date().toISOString(),versao:"v97"};
+  var backup={eventos:eventos,musicos:musicos,restaurantes:restaurantes,data:new Date().toISOString(),versao:"v98"};
   var blob=new Blob([JSON.stringify(backup,null,2)],{type:"application/json"});
   var url=URL.createObjectURL(blob);
   var a=document.createElement("a");a.href=url;a.download="takisom-backup-"+new Date().toISOString().split("T")[0]+".json";a.click();URL.revokeObjectURL(url);
-  alert("Backup exportado com restaurantes e horarios!");
+  alert("Backup exportado!");
 }
 function importarBackup(input){
   var file=input.files[0];if(!file)return;
@@ -245,19 +244,19 @@ function importarBackup(input){
     try{
       var backup=JSON.parse(e.target.result);
       if(backup.eventos && Array.isArray(backup.eventos)){
-        if(!confirm("Importar backup com "+backup.eventos.length+" eventos e "+(backup.restaurantes?backup.restaurantes.length:0)+" restaurantes? Vai substituir tudo!")) return;
+        if(!confirm("Importar backup com "+backup.eventos.length+" eventos? Vai substituir tudo!")) return;
         eventos=backup.eventos;musicos=backup.musicos||musicosPadrao;restaurantes=backup.restaurantes||restaurantesPadrao;
         saveEventos();saveMusicos();saveRests();render();renderMusTab();renderRestTab();renderGridRest();
-        alert("Backup importado! Fica pra sempre!");
+        alert("Backup importado!");
         fecharSide();
       } else {alert("Arquivo invalido!");}
     }catch(err){alert("Erro: "+err.message);}
   };
   reader.readAsText(file);input.value="";
 }
-function restaurar(){if(!confirm("Restaurar 18 originais? Vai APAGAR o que voce salvou!"))return;eventos=eventosPadrao;saveEventos();render();alert("Restaurado 18!");fecharSide();}
+function restaurar(){if(!confirm("Restaurar 18 originais? Vai apagar o que salvou!"))return;eventos=eventosPadrao;saveEventos();render();alert("Restaurado!");fecharSide();}
 function restaurarMusicos(){if(!confirm('Restaurar musicos?'))return;musicos=musicosPadrao;ordenaMusicosAZ();saveMusicos();renderMusTab();renderMus();}
-function restaurarRestaurantes(){if(!confirm('Restaurar restaurantes P1-P6 com horarios?'))return;localStorage.removeItem(KEY_RESTS);restaurantes=restaurantesPadrao;saveRests();renderRestTab();renderGridRest();}
+function restaurarRestaurantes(){if(!confirm('Restaurar P1-P6?'))return;localStorage.removeItem(KEY_RESTS);restaurantes=restaurantesPadrao;saveRests();renderRestTab();renderGridRest();}
 function abrirSide(){document.getElementById('side').classList.add('show');}
 function fecharSide(){document.getElementById('side').classList.remove('show');}
 function abrir(t){fecharSide();document.querySelectorAll('.tab').forEach(function(el){el.classList.remove('show')});document.querySelectorAll('.menuBottom button').forEach(function(b){b.classList.remove('on')});document.getElementById(t).classList.add('show');var m=document.getElementById('m'+t);if(m)m.classList.add('on');if(t=='Musicos')renderMusTab();if(t=='Restaurantes')renderRestTab();render();}
@@ -285,11 +284,13 @@ function renderGridRest(){
   var grid=document.getElementById('gridRest');if(!grid)return;
   var h='';restaurantes.forEach(function(r){
     var on=r.codigo==casaSel?'on':'';
-    h+='<button class="'+on+'" id="p'+r.codigo.replace(/\s/g,'')+'" onclick="selP(\''+r.codigo+'\')">'+r.codigo+'</button>';
+    var safeId=r.codigo.replace(/\s/g,'_').replace(/[^A-Z0-9_]/g,'');
+    h+='<button class="'+on+'" id="p'+safeId+'" onclick="selP(\''+r.codigo.replace(/'/g,"\\'")+'\')">'+r.codigo+'</button>';
   });
   grid.innerHTML=h;
 }
 function prevRest(){
+  if(restaurantes.length==0)return;
   restIdx=(restIdx-1+restaurantes.length)%restaurantes.length;
   casaSel=restaurantes[restIdx].codigo;
   document.getElementById('restLabel').innerText=casaSel;
@@ -297,6 +298,7 @@ function prevRest(){
   renderGridRest();
 }
 function nextRest(){
+  if(restaurantes.length==0)return;
   restIdx=(restIdx+1)%restaurantes.length;
   casaSel=restaurantes[restIdx].codigo;
   document.getElementById('restLabel').innerText=casaSel;
@@ -306,6 +308,7 @@ function nextRest(){
 function selP(codigo){
   casaSel=codigo;
   restIdx=restaurantes.findIndex(function(r){return r.codigo==codigo;});
+  if(restIdx<0)restIdx=0;
   document.getElementById('restLabel').innerText=codigo;
   aplicarHorarioDoRest(codigo);
   renderGridRest();
@@ -322,7 +325,7 @@ function aplicarHorarioDoRest(codigo){
 }
 function toggleHor(t){if(t=='alm'){almoco=!almoco;document.getElementById('alm').checked=almoco;var l=document.getElementById('lAlm');if(almoco)l.classList.add('on');else l.classList.remove('on');}else{janta=!janta;document.getElementById('jan').checked=janta;var l=document.getElementById('lJan');if(janta)l.classList.add('on');else l.classList.remove('on');}}
 function toggleRestHor(t){if(t=='alm'){restAlmoco=!restAlmoco;document.getElementById('restAlm').checked=restAlmoco;var l=document.getElementById('lRestAlm');if(restAlmoco)l.classList.add('on');else l.classList.remove('on');}else{restJanta=!restJanta;document.getElementById('restJan').checked=restJanta;var l=document.getElementById('lRestJan');if(restJanta)l.classList.add('on');else l.classList.remove('on');}}
-function renderMus(){ordenaMusicosAZ();var div=document.getElementById('musLista');var h='';musicos.forEach(function(m){var sel=m.n==musSel;var cl=sel?'item on':'item';h+='<div class="'+cl+'" onclick="musSel=\''+m.n.replace(/\'/g,'')+'\';renderMus()"><div><input type="radio" '+(sel?'checked':'')+'> '+m.n+'</div><b>R$ '+m.v+'</b></div>';});div.innerHTML=h;}
+function renderMus(){ordenaMusicosAZ();var div=document.getElementById('musLista');var h='';musicos.forEach(function(m){var sel=m.n==musSel;var cl=sel?'item on':'item';h+='<div class="'+cl+'" onclick="musSel=\''+m.n.replace(/\'/g,"\\'")+'\';renderMus()"><div><input type="radio" '+(sel?'checked':'')+'> '+m.n+'</div><b>R$ '+m.v+'</b></div>';});div.innerHTML=h;}
 function renderMusTab(){ordenaMusicosAZ();var tab=document.getElementById('musTab');var html='';musicos.forEach(function(m,idx){html+='<div class="musCard" onclick="editarMusico('+idx+')"><div><b>'+m.n+'</b><div style="font-size:11px;color:#64748B">A-Z - Toque pra editar</div></div><div style="text-align:right"><b style="color:#2563EB">R$ '+m.v+'</b><div style="font-size:10px;color:#16A34A">Editar</div></div></div>';});tab.innerHTML=html;}
 function renderRestTab(){
   ordenaRestsAZ();
@@ -336,7 +339,7 @@ function novo(){editId=null;document.getElementById('modalTitulo').innerText='No
 function editar(id){var ev=eventos.find(function(e){return e.id==id;});if(!ev)return;editId=id;document.getElementById('modalTitulo').innerText='Editar Show '+id;document.getElementById('data').value=ev.data;casaSel=ev.casa;restIdx=restaurantes.findIndex(function(r){return r.codigo==casaSel;});if(restIdx<0)restIdx=0;document.getElementById('restLabel').innerText=casaSel;renderGridRest();musSel=ev.mus;renderMus();almoco=ev.turno.indexOf('Almoco')>=0;janta=ev.turno.indexOf('Janta')>=0;document.getElementById('alm').checked=almoco;document.getElementById('jan').checked=janta;if(almoco)document.getElementById('lAlm').classList.add('on');else document.getElementById('lAlm').classList.remove('on');if(janta)document.getElementById('lJan').classList.add('on');else document.getElementById('lJan').classList.remove('on');document.getElementById('modal').classList.add('show');}
 function excluir(id){if(!confirm('Excluir show '+id+' de vez?'))return;eventos=eventos.filter(function(e){return e.id!=id;});saveEventos();render();alert('Excluido! Sumiu de vez!');}
 function fechar(){document.getElementById('modal').classList.remove('show');editId=null;}
-function salvar(){var data=document.getElementById('data').value||'2026-10-26';var turno='';if(almoco&&janta)turno='Almoco 12:30-15:30 + Janta 19:00-22:00';else if(almoco)turno='Almoco 12:30-15:30';else turno='Janta 19:00-22:00';var m=musicos.find(function(x){return x.n==musSel});var valor=m?m.v:300;if(editId){var ev=eventos.find(function(e){return e.id==editId;});if(ev){ev.data=data;ev.casa=casaSel;ev.mus=musSel;ev.valor=valor;ev.turno=turno;}}else{var novoEv={id:Date.now(),data:data,[STRIPPED] Fica pra sempre!');}
+function salvar(){var data=document.getElementById('data').value||'2026-10-26';var turno='';if(almoco&&janta)turno='Almoco 12:30-15:30 + Janta 19:00-22:00';else if(almoco)turno='Almoco 12:30-15:30';else turno='Janta 19:00-22:00';var m=musicos.find(function(x){return x.n==musSel});var valor=m?m.v:300;if(editId){var ev=eventos.find(function(e){return e.id==editId;});if(ev){ev.data=data;ev.casa=casaSel;ev.mus=musSel;ev.valor=valor;ev.turno=turno;}}else{var novoEv={id:Date.now(),data:data,casa:casaSel,mus:musSel,valor:valor,turno:turno};eventos.push(novoEv);}saveEventos();fechar();filtro('hoje');alert('Salvo! Fica pra sempre!');}
 function novoMusico(){editMusicoIdx=null;document.getElementById('modalMusicoTitulo').innerText='Novo Musico - A-Z';document.getElementById('musNome').value='';document.getElementById('musValor').value='300';document.getElementById('btnExcluirMusico').style.display='none';document.getElementById('modalMusico').classList.add('show');}
 function editarMusico(idx){editMusicoIdx=idx;var m=musicos[idx];document.getElementById('modalMusicoTitulo').innerText='Editar - '+m.n;document.getElementById('musNome').value=m.n;document.getElementById('musValor').value=m.v;document.getElementById('btnExcluirMusico').style.display='block';document.getElementById('modalMusico').classList.add('show');}
 function salvarMusico(){var nome=document.getElementById('musNome').value.trim().toUpperCase();var valor=parseInt(document.getElementById('musValor').value)||300;if(!nome){alert('Digite o nome!');return;}if(editMusicoIdx!==null){musicos[editMusicoIdx].n=nome;musicos[editMusicoIdx].v=valor;}else{musicos.push({n:nome,v:valor});}saveMusicos();fecharMusico();renderMusTab();renderMus();render();alert('Salvo! Fica pra sempre!');}
@@ -370,7 +373,7 @@ function editarRestaurante(idx){
 function salvarRestaurante(){
   var codigo=document.getElementById('restCodigo').value.trim().toUpperCase();
   var nome=document.getElementById('restNome').value.trim();
-  if(!codigo){alert('Digite o codigo! Ex: P1, P7, RESTAURANTE NOVO');return;}
+  if(!codigo){alert('Digite o codigo! Ex: P1, P7');return;}
   if(!nome){alert('Digite o nome do restaurante!');return;}
   if(!restAlmoco && !restJanta){alert('Escolha pelo menos um horario! Almoco ou Janta');return;}
   var horario='';if(restAlmoco&&restJanta)horario='Almoco 12:30-15:30 + Janta 19:00-22:00';else if(restAlmoco)horario='Almoco 12:30-15:30';else horario='Janta 19:00-22:00';
@@ -387,11 +390,11 @@ function salvarRestaurante(){
   fecharRest();
   renderRestTab();
   renderGridRest();
-  alert('Restaurante salvo com horario! Fica pra sempre! Agora quando criar show ja vem com esse horario!');
+  alert('Restaurante salvo com horario! Agora quando criar show ja vem com esse horario!');
 }
 function excluirRestaurante(){
   if(editRestIdx===null)return;
-  if(!confirm('Excluir restaurante '+restaurantes[editRestIdx].codigo+' - '+restaurantes[editRestIdx].nome+' de vez? Vai sumir pra sempre!'))return;
+  if(!confirm('Excluir restaurante '+restaurantes[editRestIdx].codigo+' - '+restaurantes[editRestIdx].nome+' de vez?'))return;
   restaurantes.splice(editRestIdx,1);
   saveRests();
   fecharRest();
