@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TAKI SOM v106 DATA NO VERDE</title>
+<title>TAKI SOM v107 SO AGENDA E DATA</title>
 <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}body{background:#F1F5F9;font-family:Arial,sans-serif;padding-bottom:110px}
@@ -46,7 +46,7 @@
 <button class="item" onclick="abrir('Restaurantes')">Restaurantes - Com Horário Correto</button>
 <button class="item" onclick="abrir('Valores')">Valores</button>
 <button class="item" onclick="abrir('Relatorio')">Relatório Mensal</button>
-<button class="item" onclick="abrir('Financeiro')">Financeiro - 3 Estilos</button>
+<button class="item" onclick="abrir('Financeiro')">Financeiro</button>
 <button class="item" onclick="abrir('Anual')">Relatório Anual</button>
 <button class="item" onclick="abrir('Config')">Config</button>
 <button class="item" onclick="exportarBackup()" style="background:#DBEAFE;font-weight:800">Exportar Backup</button>
@@ -80,7 +80,7 @@
 <button class="plus" onclick="novo()">+</button>
 
 <div class="printGroup">
-<b>🖨️ IMPRIMIR AGENDA DE HOJE - DATA ONDE VOCÊ PINTOU DE VERDE:</b><br><small>Data embaixo do título à esquerda, sem espaço enorme!</small>
+<b>🖨️ IMPRIMIR AGENDA DE HOJE - SÓ AGENDA E DATA:</b><br><small>Limpo, sem "Folha Normal - SEM VALOR" - onde você pintou de verde!</small>
 <div style="margin-top:10px"><b style="font-size:11px;color:#16A34A">COM VALOR:</b></div>
 <div class="printBtns">
 <button style="background:#fff;color:#1E40AF;border-color:#1E40AF" onclick="imprimirAgenda('normal',true)">🖨️ NORMAL</button>
@@ -110,7 +110,7 @@
 </div>
 
 <div id="Restaurantes" class="tab">
-<div class="card" style="padding:12px;background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border:2px solid #BFDBFE"><b style="font-size:16px;color:#1E40AF">RESTAURANTES - COM HORÁRIO CORRETO</b><br><small style="color:#1E40AF">Quando cadastra já com horário correto, puxa automático</small></div>
+<div class="card" style="padding:12px;background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border:2px solid #BFDBFE"><b style="font-size:16px;color:#1E40AF">RESTAURANTES - COM HORÁRIO CORRETO</b><br><small style="color:#1E40AF">Quando cadastra já com horário correto</small></div>
 <div id="restTab" style="margin:10px"></div>
 <div style="margin:14px 12px">
 <button class="btn" onclick="novoRestaurante()" style="background:#16A34A">+ Novo Restaurante - Com Horário Correto</button>
@@ -139,7 +139,7 @@
 </div>
 <br>
 <div class="printGroup">
-<b>🖨️ IMPRIMIR FINANCEIRO - DATA NO VERDE TAMBÉM:</b>
+<b>🖨️ IMPRIMIR FINANCEIRO:</b>
 <div class="printBtns" style="margin-top:8px">
 <button style="background:#fff;color:#1E40AF;border-color:#1E40AF" onclick="imprimirFinanceiro('normal')">🖨️ NORMAL</button>
 <button style="background:#1E40AF;color:#fff;border-color:#1E40AF" onclick="imprimirFinanceiro('pdf')">📄 PDF</button>
@@ -152,7 +152,7 @@
 <div id="Anual" class="tab"><div class="card"><div id="printAnual"><b>RELATÓRIO ANUAL 2026</b><div id="anualBox" style="margin-top:10px;font-size:13px;line-height:1.8"></div></div><br><div class="printBtns"><button style="background:#fff;color:#1E40AF;border:1.5px solid #1E40AF;flex:1;padding:10px;border-radius:10px;font-weight:800" onclick="imprimirAreaBonita('printAnual','normal')">🖨️ NORMAL</button><button style="background:#1E40AF;color:#fff;border:1.5px solid #1E40AF;flex:1;padding:10px;border-radius:10px;font-weight:800" onclick="imprimirAreaBonita('printAnual','pdf')">📄 PDF</button><button style="background:#FEF3C7;color:#92400E;border:1.5px solid #F59E0B;flex:1;padding:10px;border-radius:10px;font-weight:800" onclick="imprimirAreaBonita('printAnual','caderno')">📓 CADERNO</button></div></div></div>
 <div id="Horarios" class="tab"><div class="card"><b>HORÁRIOS</b><div id="horariosBox" style="margin-top:12px"></div></div></div>
 <div id="Config" class="tab">
-<div class="card"><b>CONFIG</b><br><small>v106 - Data onde pintou de verde - Sem espaço enorme</small><br><br>
+<div class="card"><b>CONFIG</b><br><small>v107 - Só Agenda e Data - Limpo - Sem erro</small><br><br>
 <button class="btn" style="background:#16A34A" onclick="exportarBackup()">Exportar Backup</button>
 <button class="btn" style="background:#F59E0B" onclick="document.getElementById('importFile').click()">Importar Backup</button>
 <input type="file" id="importFile" style="display:none" accept=".json" onchange="importarBackup(this)">
@@ -222,23 +222,23 @@ Nome: <input id="restNome" class="inp" placeholder="Ex: Restaurante 1">
 var eventosPadrao=[
 {id:1,data:"2026-10-19",casa:"P1",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
 {id:2,data:"2026-10-19",casa:"P2",mus:"RICK DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:3,data:"2026-10-19",casa:"P3",mus:"ROBSON SOLO",valor:300,turno:"Janta 19:00-22:00"},
-{id:4,data:"2026-10-19",casa:"P4",mus:"DOUGLAS",valor:300,turno:"Janta 20:30-23:30"},
-{id:5,data:"2026-10-19",casa:"P5",mus:"ANDERSON VAT 60 SOLO",valor:350,turno:"Janta 18:30-21:30"},
+{id:3,data:"2026-10-19",casa:"P3",mus:"RICK SOLO",valor:300,turno:"Janta 19:00-22:00"},
+{id:4,data:"2026-10-19",casa:"P4",mus:"ANDRE",valor:300,turno:"Janta 20:30-23:30"},
+{id:5,data:"2026-10-19",casa:"P5",mus:"ROBSON VAT 60 SOLO",valor:350,turno:"Janta 18:30-21:30"},
 {id:6,data:"2026-10-19",casa:"P6",mus:"EDILL",valor:300,turno:"Janta 19:30-22:30"},
-{id:7,data:"2026-10-20",casa:"P1",mus:"ANDRE",valor:300,turno:"Janta 19:00-22:00"},
-{id:8,data:"2026-10-20",casa:"P2",mus:"GERVASIO",valor:200,turno:"Janta 19:00-22:00"},
-{id:9,data:"2026-10-20",casa:"P3",mus:"ISRAEL",valor:300,turno:"Janta 19:00-22:00"},
-{id:10,data:"2026-10-20",casa:"P5",mus:"RICK SOLO",valor:300,turno:"Janta 19:00-22:00"},
+{id:7,data:"2026-10-20",casa:"P1",mus:"LUCIANO",valor:300,turno:"Janta 19:00-22:00"},
+{id:8,data:"2026-10-20",casa:"P2",mus:"ISRAEL",valor:300,turno:"Janta 19:00-22:00"},
+{id:9,data:"2026-10-20",casa:"P3",mus:"DOUGLAS",valor:300,turno:"Janta 19:00-22:00"},
+{id:10,data:"2026-10-20",casa:"P4",mus:"RICK SOLO",valor:300,turno:"Janta 19:00-22:00"},
 {id:11,data:"2026-10-21",casa:"P1",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
 {id:12,data:"2026-10-21",casa:"P2",mus:"ANDERSON VAT 60 TRIO",valor:450,turno:"Janta 19:00-22:00"},
 {id:13,data:"2026-10-21",casa:"P3",mus:"RICK TRIO",valor:450,turno:"Janta 19:00-22:00"},
-{id:14,data:"2026-10-21",casa:"P4",mus:"LUCIANO",valor:300,turno:"Janta 19:00-22:00"},
-{id:15,data:"2026-10-21",casa:"P5",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
+{id:14,data:"2026-10-21",casa:"P4",mus:"MARTIN",valor:300,turno:"Janta 19:00-22:00"},
+{id:15,data:"2026-10-21",casa:"P5",mus:"ROBSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
 {id:16,data:"2026-10-26",casa:"P1",mus:"ISRAEL",valor:300,turno:"Janta 19:00-22:00"},
-{id:17,data:"2026-10-26",casa:"P2",mus:"DOUGLAS",valor:300,turno:"Janta 19:00-22:00"},
+{id:17,data:"2026-10-26",casa:"P2",mus:"YGOR",valor:300,turno:"Janta 19:00-22:00"},
 {id:18,data:"2026-10-26",casa:"P3",mus:"RICK SOLO",valor:300,turno:"Janta 19:00-22:00"},
-{id:19,data:"2026-10-26",casa:"P4",mus:"MARTIN",valor:300,turno:"Janta 19:00-22:00"},
+{id:19,data:"2026-10-26",casa:"P4",mus:"ANDRE",valor:300,turno:"Janta 19:00-22:00"},
 {id:20,data:"2026-10-26",casa:"P5",mus:"ANDERSON VAT 60 SOLO",valor:350,turno:"Janta 18:30-21:30"}
 ];
 var musicosPadrao=[
@@ -280,11 +280,11 @@ function saveRests(){ordenaRestsAZ();localStorage.setItem(KEY_RESTS,JSON.stringi
 
 function getEstiloCSS(tipo){
   if(tipo=='normal'){
-    return 'body{font-family:Arial,sans-serif;padding:10mm;color:#111} .header{margin-bottom:8px;border-bottom:2px solid #1E40AF;padding-bottom:6px;text-align:left} .header h1{font-size:18px;color:#1E40AF;margin:0;text-align:left} .header .data{font-size:11px;color:#333;font-weight:700;text-align:left;margin-top:3px} table{width:100%;border-collapse:collapse;table-layout:fixed} th{background:#1E40AF;color:#fff;padding:6px 4px;font-size:11px;text-align:left} td{padding:6px 4px;border-bottom:1px solid #ddd;font-size:11px;word-wrap:break-word} th:nth-child(1),td:nth-child(1){width:12%} th:nth-child(2),td:nth-child(2){width:50%} th:nth-child(3),td:nth-child(3){width:38%} .total{text-align:center;background:#EFF6FF;padding:8px;border-radius:6px;margin-top:10px;font-weight:800;color:#1E40AF;font-size:12px} .small{font-size:8px;color:#888;text-align:center;margin-top:8px} @page{margin:10mm}';
+    return 'body{font-family:Arial,sans-serif;padding:10mm;color:#111} .header{margin-bottom:8px;border-bottom:2px solid #1E40AF;padding-bottom:6px;text-align:left} .header h1{font-size:18px;color:#1E40AF;margin:0;text-align:left} .header .data{font-size:12px;color:#111;font-weight:700;text-align:left;margin-top:3px} table{width:100%;border-collapse:collapse;table-layout:fixed} th{background:#1E40AF;color:#fff;padding:6px 4px;font-size:11px;text-align:left} td{padding:6px 4px;border-bottom:1px solid #ddd;font-size:11px;word-wrap:break-word} th:nth-child(1),td:nth-child(1){width:12%} th:nth-child(2),td:nth-child(2){width:50%} th:nth-child(3),td:nth-child(3){width:38%} .total{text-align:center;background:#EFF6FF;padding:8px;border-radius:6px;margin-top:10px;font-weight:800;color:#1E40AF;font-size:12px} .small{font-size:8px;color:#888;text-align:center;margin-top:8px} @page{margin:10mm}';
   } else if(tipo=='pdf'){
-    return 'body{font-family:Arial,sans-serif;padding:10mm;color:#111;background:#fff} .header{margin-bottom:10px;background:#1E40AF;color:#fff;padding:10px 12px;border-radius:8px;text-align:left} .header h1{font-size:20px;margin:0;color:#fff;text-align:left} .header .data{font-size:12px;color:#DBEAFE;font-weight:700;text-align:left;margin-top:3px} table{width:100%;border-collapse:collapse;table-layout:fixed} th{background:#1E40AF;color:#fff;padding:7px 4px;font-size:11px;text-align:left} td{padding:6px 4px;border-bottom:1px solid #eee;font-size:11px} th:nth-child(1),td:nth-child(1){width:12%} th:nth-child(2),td:nth-child(2){width:50%} th:nth-child(3),td:nth-child(3){width:38%} .total{text-align:center;background:#DBEAFE;padding:10px;border-radius:8px;margin-top:10px;font-weight:800;color:#1E40AF;font-size:12px} .small{font-size:8px;color:#888;text-align:center;margin-top:8px} @page{margin:10mm}';
+    return 'body{font-family:Arial,sans-serif;padding:10mm;color:#111;background:#fff} .header{margin-bottom:10px;background:#1E40AF;color:#fff;padding:10px 12px;border-radius:8px;text-align:left} .header h1{font-size:20px;margin:0;color:#fff;text-align:left} .header .data{font-size:12px;color:#fff;font-weight:700;text-align:left;margin-top:3px} table{width:100%;border-collapse:collapse;table-layout:fixed} th{background:#1E40AF;color:#fff;padding:7px 4px;font-size:11px;text-align:left} td{padding:6px 4px;border-bottom:1px solid #eee;font-size:11px} th:nth-child(1),td:nth-child(1){width:12%} th:nth-child(2),td:nth-child(2){width:50%} th:nth-child(3),td:nth-child(3){width:38%} .total{text-align:center;background:#DBEAFE;padding:10px;border-radius:8px;margin-top:10px;font-weight:800;color:#1E40AF;font-size:12px} .small{font-size:8px;color:#888;text-align:center;margin-top:8px} @page{margin:10mm}';
   } else {
-    return "body{font-family:'Kalam',cursive;padding:10mm;color:#111;background:#FFFBEB} .header{margin-bottom:8px;border-bottom:2px dashed #F59E0B;padding-bottom:6px;text-align:left} .header h1{font-family:'Kalam',cursive;font-size:22px;color:#1E40AF;margin:0;text-align:left;transform:rotate(-0.5deg)} .header .data{font-family:'Kalam',cursive;font-size:12px;color:#92400E;font-weight:700;text-align:left;margin-top:3px} table{width:100%;border-collapse:collapse;table-layout:fixed;font-family:'Kalam',cursive} th{font-family:'Kalam',cursive;background:#FEF3C7;color:#92400E;padding:6px 4px;font-size:11px;text-align:left;border-bottom:2px solid #F59E0B} td{padding:6px 4px;border-bottom:1px dashed #FCD34D;font-size:11px;color:#451A03} th:nth-child(1),td:nth-child(1){width:12%} th:nth-child(2),td:nth-child(2){width:50%} th:nth-child(3),td:nth-child(3){width:38%} .total{font-family:'Kalam',cursive;text-align:center;background:#FFFBEB;padding:8px;border-radius:8px;margin-top:10px;font-weight:700;color:#92400E;border:2px dashed #F59E0B;font-size:12px} .small{font-family:'Kalam',cursive;font-size:8px;color:#A16207;text-align:center;margin-top:8px} @page{margin:10mm}";
+    return "body{font-family:'Kalam',cursive;padding:10mm;color:#111;background:#FFFBEB} .header{margin-bottom:8px;border-bottom:2px dashed #F59E0B;padding-bottom:6px;text-align:left} .header h1{font-family:'Kalam',cursive;font-size:22px;color:#1E40AF;margin:0;text-align:left;transform:rotate(-0.5deg)} .header .data{font-family:'Kalam',cursive;font-size:13px;color:#111;font-weight:700;text-align:left;margin-top:3px} table{width:100%;border-collapse:collapse;table-layout:fixed;font-family:'Kalam',cursive} th{font-family:'Kalam',cursive;background:#FEF3C7;color:#92400E;padding:6px 4px;font-size:11px;text-align:left;border-bottom:2px solid #F59E0B} td{padding:6px 4px;border-bottom:1px dashed #FCD34D;font-size:11px;color:#451A03} th:nth-child(1),td:nth-child(1){width:12%} th:nth-child(2),td:nth-child(2){width:50%} th:nth-child(3),td:nth-child(3){width:38%} .total{font-family:'Kalam',cursive;text-align:center;background:#FFFBEB;padding:8px;border-radius:8px;margin-top:10px;font-weight:700;color:#92400E;border:2px dashed #F59E0B;font-size:12px} .small{font-family:'Kalam',cursive;font-size:8px;color:#A16207;text-align:center;margin-top:8px} @page{margin:10mm}";
   }
 }
 
@@ -292,8 +292,7 @@ function imprimirAgenda(tipo,comValor){
   var hoje=eventos.filter(function(e){return e.data=='2026-10-26';});
   hoje.sort(function(a,b){return a.casa.localeCompare(b.casa);});
   var css=getEstiloCSS(tipo);
-  var tituloTipo=tipo=='normal'?'Folha Normal':tipo=='pdf'?'PDF Normal':'Caderno Caneta';
-  var html='<div class="header"><h1>AGENDA DE HOJE</h1><div class="data">26/10/2026 - '+tituloTipo+' - '+(comValor?'COM VALOR':'SEM VALOR')+'</div></div>';
+  var html='<div class="header"><h1>AGENDA DE HOJE</h1><div class="data">26/10/2026</div></div>';
   html+='<table><tr><th>Rest.</th><th>Musico</th><th>Horario</th>'+(comValor?'<th style="width:18%">Valor</th>':'')+'</tr>';
   hoje.forEach(function(ev){
     if(comValor){
@@ -302,9 +301,9 @@ function imprimirAgenda(tipo,comValor){
       html+='<tr><td><b>'+ev.casa+'</b></td><td>'+ev.mus+'</td><td>'+ev.turno+'</td></tr>';
     }
   });
-  html+='</table><div class="total">'+hoje.length+' shows - '+(comValor?'Total R$ '+hoje.reduce(function(s,e){return s+e.valor;},0):'Sem valores')+'</div><div class="small">TAKI SOM - '+new Date().toLocaleString('pt-BR')+'</div>';
+  html+='</table><div class="total">'+hoje.length+' shows</div><div class="small">TAKI SOM - '+new Date().toLocaleString('pt-BR')+'</div>';
   var win=window.open('','','width=900,height=700');
-  win.document.write('<html><head><title>Agenda - '+tituloTipo+'</title><style>'+css+'</style></head><body>'+html+'<script>setTimeout(function(){window.print();},300);<\/script></body></html>');
+  win.document.write('<html><head><title>Agenda Hoje - 26/10/2026</title><style>'+css+'</style></head><body>'+html+'<script>setTimeout(function(){window.print();},300);<\/script></body></html>');
   win.document.close();
 }
 
@@ -312,7 +311,7 @@ function imprimirAreaBonita(id,tipo){
   var conteudo=document.getElementById(id).innerHTML;
   var css=getEstiloCSS(tipo);
   var win=window.open('','','width=900,height=700');
-  win.document.write('<html><head><title>TAKI SOM - '+tipo+'</title><style>'+css+'</style></head><body><div class="header"><h1>TAKI SOM</h1><div class="data">'+new Date().toLocaleDateString('pt-BR')+' - '+tipo.toUpperCase()+'</div></div><div style="background:#fff;padding:10px;border-radius:8px">'+conteudo+'</div><div class="small">Gerado em '+new Date().toLocaleString('pt-BR')+'</div><script>setTimeout(function(){window.print();},300);<\/script></body></html>');
+  win.document.write('<html><head><title>TAKI SOM - '+tipo+'</title><style>'+css+'</style></head><body><div class="header"><h1>TAKI SOM</h1><div class="data">'+new Date().toLocaleDateString('pt-BR')+'</div></div><div style="background:#fff;padding:10px;border-radius:8px">'+conteudo+'</div><div class="small">Gerado em '+new Date().toLocaleString('pt-BR')+'</div><script>setTimeout(function(){window.print();},300);<\/script></body></html>');
   win.document.close();
 }
 
@@ -328,8 +327,7 @@ function imprimirFinanceiro(tipo){
   var filt=data.filt;filt.sort(function(a,b){return b.valor-a.valor;});
   var total=filt.reduce(function(s,e){return s+e.valor;},0);
   var css=getEstiloCSS(tipo);
-  var tituloTipo=tipo=='normal'?'Folha Normal':tipo=='pdf'?'PDF Normal':'Caderno Caneta';
-  var html='<div class="header"><h1>FINANCEIRO</h1><div class="data">'+data.ini.split('-').reverse().join('/')+' a '+data.fim.split('-').reverse().join('/')+' - '+tituloTipo+'</div></div>';
+  var html='<div class="header"><h1>FINANCEIRO</h1><div class="data">'+data.ini.split('-').reverse().join('/')+' a '+data.fim.split('-').reverse().join('/')+'</div></div>';
   html+='<div class="total">Total Periodo: R$ '+total+' - '+filt.length+' shows</div>';
   html+='<table><tr><th>Data</th><th>Rest.</th><th>Musico</th><th>Horario</th><th>Valor</th></tr>';
   filt.forEach(function(ev){
@@ -337,12 +335,12 @@ function imprimirFinanceiro(tipo){
   });
   html+='</table><div class="small">Gerado em '+new Date().toLocaleString('pt-BR')+'</div>';
   var win=window.open('','','width=900,height=700');
-  win.document.write('<html><head><title>Financeiro - '+tituloTipo+'</title><style>'+css+'</style></head><body>'+html+'<script>setTimeout(function(){window.print();},400);<\/script></body></html>');
+  win.document.write('<html><head><title>Financeiro</title><style>'+css+'</style></head><body>'+html+'<script>setTimeout(function(){window.print();},400);<\/script></body></html>');
   win.document.close();
 }
 
 function exportarBackup(){
-  var backup={eventos:eventos,musicos:musicos,restaurantes:restaurantes,data:new Date().toISOString(),versao:"v106"};
+  var backup={eventos:eventos,musicos:musicos,restaurantes:restaurantes,data:new Date().toISOString(),versao:"v107"};
   var blob=new Blob([JSON.stringify(backup,null,2)],{type:"application/json"});
   var url=URL.createObjectURL(blob);
   var a=document.createElement("a");a.href=url;a.download="takisom-backup-"+new Date().toISOString().split("T")[0]+".json";a.click();URL.revokeObjectURL(url);
@@ -523,7 +521,7 @@ function salvar(){
   var m=musicos.find(function(x){return x.n==musSel});var valor=m?m.v:300;
   if(editId){var ev=eventos.find(function(e){return e.id==editId;});if(ev){ev.data=data;ev.casa=casaSel;ev.mus=musSel;ev.valor=valor;ev.turno=turno;}}
   else{var novoEv={id:Date.now(),data:data,casa:casaSel,mus:musSel,valor:valor,turno:turno};eventos.push(novoEv);}
-  saveEventos();fechar();filtro('hoje');alert('Salvo! Horário correto!');
+  saveEventos();fechar();filtro('hoje');alert('Salvo!');
 }
 function novoMusico(){editMusicoIdx=null;var t=document.getElementById('modalMusicoTitulo');if(t)t.innerText='Novo Musico';var mn=document.getElementById('musNome');var mv=document.getElementById('musValor');if(mn)mn.value='';if(mv)mv.value='300';var be=document.getElementById('btnExcluirMusico');if(be)be.style.display='none';var mod=document.getElementById('modalMusico');if(mod)mod.classList.add('show');}
 function editarMusico(idx){editMusicoIdx=idx;var m=musicos[idx];var t=document.getElementById('modalMusicoTitulo');if(t)t.innerText='Editar - '+m.n;var mn=document.getElementById('musNome');var mv=document.getElementById('musValor');if(mn)mn.value=m.n;if(mv)mv.value=m.v;var be=document.getElementById('btnExcluirMusico');if(be)be.style.display='block';var mod=document.getElementById('modalMusico');if(mod)mod.classList.add('show');}
@@ -547,7 +545,7 @@ function novoRestaurante(){
 function editarRestaurante(idx){
   editRestIdx=idx;
   var r=restaurantes[idx];
-  var t=document.getElementById('modalRestTitulo');if(t)t.innerText='Editar - '+r.codigo+' - Com Horário Correto';
+  var t=document.getElementById('modalRestTitulo');if(t)t.innerText='Editar - '+r.codigo;
   var rc=document.getElementById('restCodigo');var rn=document.getElementById('restNome');var rh=document.getElementById('restHorarioTexto');
   if(rc)rc.value=r.codigo;if(rn)rn.value=r.nome;if(rh)rh.value=r.horario;
   restAlmoco=r.almoco;restJanta=r.janta;
@@ -580,7 +578,7 @@ function salvarRestaurante(){
   fecharRest();
   renderRestTab();
   renderGridRest();
-  alert('Restaurante salvo com horário correto! Quando criar show já puxa automático!');
+  alert('Restaurante salvo!');
 }
 function excluirRestaurante(){
   if(editRestIdx===null)return;
