@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TAKI SOM v99 HORARIO EDITAVEL E IMPRIMIR</title>
+<title>TAKI SOM v100 PDF CADERNO BONITA</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}body{background:#F1F5F9;font-family:Arial,sans-serif;padding-bottom:110px}
 .top{background:linear-gradient(135deg,#1E40AF,#2563EB);color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;border-radius:0 0 20px 20px}
@@ -17,7 +17,7 @@
 .ev{background:#fff;margin:0 12px 10px;border-radius:0 0 14px 14px;padding:12px;border:1px solid #E2E8F0;border-top:none}
 .ev b{font-size:14px}.meta{display:flex;gap:12px;margin-top:8px;color:#64748B;font-size:12px}.actions{display:flex;gap:8px;margin-top:10px}.actions button{flex:1;padding:10px;border-radius:10px;font-weight:800;font-size:12px;cursor:pointer}.e1{border:1.5px solid #93C5FD;background:#fff;color:#2563EB}.e2{border:1.5px solid #FCA5A5;background:#fff;color:#DC2626}
 .plus{position:fixed;bottom:90px;right:16px;width:60px;height:60px;background:#2563EB;color:#fff;border:none;border-radius:50%;font-size:32px;cursor:pointer;z-index:50;box-shadow:0 6px 16px rgba(37,99,235,.5)}
-.zap{display:flex;gap:8px;margin:14px 12px}.zap button{flex:1;padding:12px;border-radius:12px;font-weight:800;font-size:11px;cursor:pointer}.z1{background:#16A34A;color:#fff;border:1.5px solid #16A34A}.z2{background:#fff;color:#16A34A;border:1.5px solid #16A34A}
+.zap{display:flex;gap:8px;margin:14px 12px;flex-wrap:wrap}.zap button{flex:1;min-width:140px;padding:12px;border-radius:12px;font-weight:800;font-size:11px;cursor:pointer}.z1{background:#16A34A;color:#fff;border:1.5px solid #16A34A}.z2{background:#fff;color:#16A34A;border:1.5px solid #16A34A}.z3{background:#1E40AF;color:#fff;border:1.5px solid #1E40AF}.z4{background:#fff;color:#1E40AF;border:1.5px solid #1E40AF}
 .menuBottom{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:12px 0;border-top:1px solid #E2E8F0;border-radius:20px 20px 0 0;z-index:100}
 .menuBottom button{flex:1;border:none;background:none;padding:10px;font-size:13px;font-weight:800;color:#94A3B8;cursor:pointer}
 .menuBottom button.on{color:#2563EB}
@@ -29,43 +29,42 @@
 .horario{display:flex;gap:8px;margin:10px 0;flex-wrap:wrap}.horario label{flex:1;min-width:130px;display:flex;align-items:center;gap:8px;background:#F8FAFC;border:1.5px solid #E2E8F0;border-radius:10px;padding:10px 8px;font-size:12px;font-weight:700;cursor:pointer}.horario label.on{background:#DBEAFE;border-color:#2563EB;color:#1E3A8A}
 .mus{max-height:200px;overflow:auto;border:1px solid #E2E8F0;border-radius:12px;padding:6px;margin:8px 0}.mus .item{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:10px;margin:3px 0;cursor:pointer;border:1px solid transparent}.mus .item.on{background:#EFF6FF;border-color:#2563EB}
 .musCard{background:#fff;margin:0 12px 10px;border-radius:14px;padding:14px;border:1px solid #E2E8F0;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
-.restCard{background:#fff;margin:0 12px 10px;border-radius:14px;padding:14px;border:1px solid #E2E8F0;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.restCard{background:#fff;margin:0 12px 12px;border-radius:16px;padding:16px;border:1px solid #E2E8F0;box-shadow:0 2px 8px rgba(0,0,0,.06);display:flex;justify-content:space-between;align-items:center}
+.restCard .info b{font-size:15px;color:#1E293B}.restCard .info small{color:#64748B;font-size:12px}.restCard .hor{ text-align:right }.restCard .hor b{color:#2563EB;font-size:13px;background:#DBEAFE;padding:6px 10px;border-radius:8px}
 .side{position:fixed;top:0;left:-340px;width:330px;height:100%;background:#fff;z-index:400;transition:.3s;padding:0;overflow:auto;box-shadow:4px 0 20px rgba(0,0,0,.25);border-radius:0 20px 20px 0}.side.show{left:0}.sideHeader{background:linear-gradient(135deg,#1E40AF,#2563EB);color:#fff;padding:22px 18px;font-size:20px;font-weight:800;letter-spacing:1px}.side button.item{width:100%;padding:13px 18px;border:none;background:none;border-bottom:1px solid #F1F5F9;text-align:left;font-weight:700;font-size:13px;cursor:pointer}
 .badge{background:#DC2626;color:#fff;font-size:10px;padding:2px 6px;border-radius:10px;position:absolute;top:6px;right:6px;font-weight:800}
 .bellWrap{position:relative}
-@media print{body *{visibility:hidden}#printArea, #printArea *{visibility:visible}#printArea{position:absolute;left:0;top:0;width:100%} .menuBottom, .top, .plus, .zap, .side, .modal{display:none!important}}
+.dateFilter{display:flex;gap:8px;margin:10px 0;flex-wrap:wrap}.dateFilter input{flex:1;min-width:120px;padding:10px;border:1px solid #E2E8F0;border-radius:10px}
 </style>
 </head>
 <body>
 <div id="side" class="side">
 <div class="sideHeader">MENU</div>
 <button class="item" onclick="abrir('Agenda')">Agenda - Hoje 26/10</button>
-<button class="item" onclick="abrir('Musicos')">Musicos - A-Z</button>
-<button class="item" onclick="abrir('Restaurantes')">Restaurantes - Com Horario Editavel</button>
+<button class="item" onclick="abrir('Musicos')">Músicos - A-Z</button>
+<button class="item" onclick="abrir('Restaurantes')">Restaurantes - Bonito com Horário</button>
 <button class="item" onclick="abrir('Valores')">Valores - Maior para Menor</button>
-<button class="item" onclick="abrir('Relatorio')">Relatorio Mensal - Com Imprimir</button>
-<button class="item" onclick="abrir('Financeiro')">Financeiro - Completo - Com Imprimir</button>
-<button class="item" onclick="abrir('Anual')">Relatorio Anual</button>
-<button class="item" onclick="abrir('Horarios')">Horarios - Editavel</button>
+<button class="item" onclick="abrir('Relatorio')">Relatório Mensal - Imprimir</button>
+<button class="item" onclick="abrir('Financeiro')">Financeiro Completo - Imprimir Dia/Semana/Mês</button>
+<button class="item" onclick="abrir('Anual')">Relatório Anual</button>
 <button class="item" onclick="abrir('Config')">Config - Backup</button>
-<button class="item" onclick="exportarBackup()" style="background:#DBEAFE;font-weight:800">BACKUP - Exportar</button>
-<button class="item" onclick="document.getElementById('importFile').click()" style="background:#FEF3C7;font-weight:800">BACKUP - Importar</button>
+<button class="item" onclick="exportarBackup()" style="background:#DBEAFE;font-weight:800">Exportar Backup</button>
+<button class="item" onclick="document.getElementById('importFile').click()" style="background:#FEF3C7;font-weight:800">Importar Backup</button>
 <button class="item" onclick="zap(true)">ZAP COM VALOR</button>
 <button class="item" onclick="zap(false)">ZAP SEM VALOR</button>
-<button class="item" onclick="abrirSino()">Notificacoes - Sino</button>
+<button class="item" onclick="abrirSino()">Notificações - Sino</button>
 <button class="item" onclick="instalarApp()" style="background:#D1FAE5;font-weight:800">Instalar no Celular</button>
-<button class="item" onclick="restaurar()" style="background:#FEE2E2;color:#DC2626">Restaurar 18 originais</button>
 <br><button class="item" onclick="fecharSide()" style="background:#2563EB;color:#fff;justify-content:center">Fechar</button>
 </div>
 
-<div class="top"><button onclick="abrirSide()">☰</button><b>TAKI SOM</b><div class="bellWrap"><button onclick="abrirSino()" style="font-size:24px">🔔</button><span class="badge" id="badge">3</span><button onclick="instalarApp()" id="btnInstalarTop" style="font-size:11px;background:#fff;color:#2563EB;padding:4px 8px;border-radius:8px;margin-left:6px;font-weight:800;display:none">Instalar</button></div></div>
+<div class="top"><button onclick="abrirSide()">☰</button><b>TAKI SOM</b><div class="bellWrap"><button onclick="abrirSino()" style="font-size:24px">🔔</button><span class="badge" id="badge">5</span><button onclick="instalarApp()" id="btnInstalarTop" style="font-size:11px;background:#fff;color:#2563EB;padding:4px 8px;border-radius:8px;margin-left:6px;font-weight:800;display:none">Instalar</button></div></div>
 
 <div id="Agenda" class="tab show">
 <div class="card">
-<div style="display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:14px"><button onclick="mudaMes(-1)" style="width:40px;height:40px;border-radius:10px;border:1px solid #E2E8F0;background:#F1F5F9;font-weight:800;cursor:pointer;color:#1E3A8A;font-size:18px">‹</button><span id="mesLabel">MES DE OUTUBRO DE 2026</span><button onclick="mudaMes(1)" style="width:40px;height:40px;border-radius:10px;border:1px solid #E2E8F0;background:#F1F5F9;font-weight:800;cursor:pointer;color:#1E3A8A;font-size:18px">›</button></div>
+<div style="display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:14px"><button onclick="mudaMes(-1)" style="width:40px;height:40px;border-radius:10px;border:1px solid #E2E8F0;background:#F1F5F9;font-weight:800;cursor:pointer;color:#1E3A8A;font-size:18px">‹</button><span id="mesLabel">MÊS DE OUTUBRO DE 2026</span><button onclick="mudaMes(1)" style="width:40px;height:40px;border-radius:10px;border:1px solid #E2E8F0;background:#F1F5F9;font-weight:800;cursor:pointer;color:#1E3A8A;font-size:18px">›</button></div>
 <div class="chips">
 <div class="chip on" id="chipDia" onclick="filtro('hoje')"><b>DIA 26<br><small>HOJE</small></b></div>
-<div class="chip" id="chipMes" onclick="filtro('mes')"><b>MES<br>OUTUBRO</b></div>
+<div class="chip" id="chipMes" onclick="filtro('mes')"><b>MÊS<br>OUTUBRO</b></div>
 <div class="chip" id="chipAno" onclick="filtro('ano')"><b>ANO<br>2026</b></div>
 </div>
 <div class="filtros">
@@ -76,50 +75,75 @@
 <button onclick="filtro('ano')" id="bAno">Ano Todo</button>
 </div>
 </div>
-<div class="green" id="contadorTop"><span>3 eventos - Hoje 26/10/2026</span><span>HOJE</span></div>
+<div class="green" id="contadorTop"><span>5 eventos - Hoje 26/10/2026</span><span>HOJE</span></div>
 <div id="lista"></div>
 <button class="plus" onclick="novo()">+</button>
+<div class="card" style="margin:12px;border:2px dashed #93C5FD">
+<b style="color:#2563EB">🖨️ IMPRIMIR AGENDA DE HOJE - FORMATO CADERNO PDF:</b><br><small style="color:#64748B">Como combinamos - bonito pra cliente</small><br>
+<div class="zap" style="margin:10px 0 0">
+<button class="z3" onclick="imprimirAgenda(true)">🖨️ IMPRIMIR COM VALOR - PDF CADERNO</button>
+<button class="z4" onclick="imprimirAgenda(false)">🖨️ IMPRIMIR SEM VALOR - PDF CADERNO</button>
+</div>
+</div>
 <div class="zap"><button class="z1" onclick="zap(true)">ZAP COM VALOR</button><button class="z2" onclick="zap(false)">ZAP SEM VALOR</button></div>
 </div>
 
 <div id="Musicos" class="tab">
-<div class="card" style="padding:12px"><b style="font-size:16px">MÚSICOS</b><br><small style="color:#64748B">A-Z - Toque pra editar</small></div>
+<div class="card" style="padding:12px"><b style="font-size:16px">MÚSICOS - A-Z</b><br><small style="color:#64748B">Toque pra editar</small></div>
 <div id="musTab" style="margin:10px"></div>
 <div style="margin:14px 12px">
-<button class="btn" onclick="novoMusico()" style="background:#16A34A">+ Novo Musico</button>
-<button class="btn" style="background:#fff;color:#2563EB;border:1.5px solid #2563EB" onclick="restaurarMusicos()">Restaurar musicos</button>
+<button class="btn" onclick="novoMusico()" style="background:#16A34A">+ Novo Músico</button>
 </div>
 </div>
 
 <div id="Restaurantes" class="tab">
-<div class="card" style="padding:12px"><b style="font-size:16px">RESTAURANTES P1-P6 - COM HORARIO EDITAVEL</b><br><small style="color:#64748B">Agora com horario editavel - Toque pra editar</small></div>
+<div class="card" style="padding:12px;background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border:2px solid #BFDBFE"><b style="font-size:16px;color:#1E40AF">RESTAURANTES - BONITO COM HORÁRIO</b><br><small style="color:#1E40AF">Agora bonito e funcional - Toque pra editar horário</small></div>
 <div id="restTab" style="margin:10px"></div>
 <div style="margin:14px 12px">
-<button class="btn" onclick="novoRestaurante()" style="background:#16A34A">+ Novo Restaurante - Com Horario Editavel</button>
-<button class="btn" style="background:#fff;color:#2563EB;border:1.5px solid #2563EB" onclick="restaurarRestaurantes()">Restaurar P1-P6</button>
+<button class="btn" onclick="novoRestaurante()" style="background:#16A34A">+ Novo Restaurante - Com Horário</button>
 </div>
 </div>
 
-<div id="Valores" class="tab"><div class="card"><b>VALORES - MAIOR PARA MENOR</b><div id="valoresBox" style="margin-top:10px"></div><br><button class="btn" onclick="imprimirArea('valoresBox')">🖨️ IMPRIMIR VALORES</button></div></div>
+<div id="Valores" class="tab"><div class="card"><div id="printValores"><b>VALORES - MAIOR PARA MENOR</b><div id="valoresBox" style="margin-top:10px"></div></div><br><button class="btn" style="background:#16A34A" onclick="imprimirArea('printValores')">🖨️ IMPRIMIR VALORES - PDF CADERNO</button></div></div>
 
-<div id="Relatorio" class="tab"><div class="card"><div id="printAreaRel"><b>RELATORIO MENSAL - MAIOR PARA MENOR</b><div id="relBox" style="margin-top:10px;font-size:13px;line-height:1.8"></div></div><br><button class="btn" style="background:#16A34A" onclick="imprimirArea('printAreaRel')">🖨️ IMPRIMIR RELATORIO MENSAL</button><button class="btn" style="background:#fff;color:#2563EB;border:1.5px solid #2563EB" onclick="zap(true)">ZAP COM VALOR</button></div></div>
+<div id="Relatorio" class="tab"><div class="card"><div id="printRel"><b>RELATÓRIO MENSAL - MAIOR PARA MENOR</b><div id="relBox" style="margin-top:10px;font-size:13px;line-height:1.8"></div></div><br><button class="btn" style="background:#16A34A" onclick="imprimirArea('printRel')">🖨️ IMPRIMIR RELATÓRIO MENSAL - PDF</button></div></div>
 
-<div id="Financeiro" class="tab"><div class="card"><div id="printAreaFin"><b>FINANCEIRO COMPLETO - COM HORARIO</b><div id="finBox" style="margin-top:10px;font-size:13px;line-height:1.8"></div></div><br><button class="btn" style="background:#16A34A" onclick="imprimirArea('printAreaFin')">🖨️ IMPRIMIR FINANCEIRO COMPLETO</button><button class="btn" style="background:#F59E0B" onclick="exportarBackup()">💾 EXPORTAR BACKUP</button></div></div>
+<div id="Financeiro" class="tab">
+<div class="card">
+<div id="printFin">
+<b>FINANCEIRO COMPLETO - FÁCIL PRO CLIENTE</b><br><small>Escolha o período pra imprimir</small>
+<div class="dateFilter">
+<input type="date" id="finInicio" value="2026-10-09">
+<input type="date" id="finFim" value="2026-10-19">
+</div>
+<div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0">
+<button class="btn" style="flex:1;min-width:90px;background:#EFF6FF;color:#2563EB;border:1.5px solid #BFDBFE" onclick="setFinPeriodo('hoje')">Hoje</button>
+<button class="btn" style="flex:1;min-width:90px;background:#EFF6FF;color:#2563EB;border:1.5px solid #BFDBFE" onclick="setFinPeriodo('semana')">Semana</button>
+<button class="btn" style="flex:1;min-width:90px;background:#EFF6FF;color:#2563EB;border:1.5px solid #BFDBFE" onclick="setFinPeriodo('mes')">Mês</button>
+<button class="btn" style="flex:1;min-width:90px;background:#DBEAFE;color:#1E40AF;border:1.5px solid #2563EB" onclick="setFinPeriodo('custom')">09 a 19/10</button>
+</div>
+<div id="finBox" style="margin-top:10px;font-size:13px;line-height:1.8"></div>
+</div>
+<br>
+<button class="btn" style="background:#16A34A" onclick="imprimirFinanceiroPeriodo()">🖨️ IMPRIMIR FINANCEIRO DO PERÍODO - PDF CADERNO</button>
+<button class="btn" style="background:#1E40AF" onclick="imprimirArea('printFin')">🖨️ IMPRIMIR FINANCEIRO COMPLETO</button>
+<button class="btn" style="background:#fff;color:#16A34A;border:1.5px solid #16A34A" onclick="exportarBackup()">💾 EXPORTAR BACKUP</button>
+</div>
+</div>
 
-<div id="Anual" class="tab"><div class="card"><div id="printAreaAnual"><b>RELATORIO ANUAL 2026</b><div id="anualBox" style="margin-top:10px;font-size:13px;line-height:1.8"></div></div><br><button class="btn" style="background:#16A34A" onclick="imprimirArea('printAreaAnual')">🖨️ IMPRIMIR ANUAL</button></div></div>
-<div id="Horarios" class="tab"><div class="card"><b>HORARIOS - EDITAVEL</b><div style="font-size:13px;margin-top:10px;line-height:2">Agora voce edita o horario em cada restaurante!<br>Ex: Almoco 11:00-14:00, Janta 18:30-21:30<br><br>Vá em Restaurantes > Toque pra editar > Mude o horario!</div><div id="horariosBox" style="margin-top:12px"></div></div></div>
+<div id="Anual" class="tab"><div class="card"><div id="printAnual"><b>RELATÓRIO ANUAL 2026</b><div id="anualBox" style="margin-top:10px;font-size:13px;line-height:1.8"></div></div><br><button class="btn" style="background:#16A34A" onclick="imprimirArea('printAnual')">🖨️ IMPRIMIR ANUAL</button></div></div>
+<div id="Horarios" class="tab"><div class="card"><b>HORÁRIOS - EDITÁVEL</b><div id="horariosBox" style="margin-top:12px"></div></div></div>
 <div id="Config" class="tab">
-<div class="card"><b>CONFIG - BACKUP E INSTALAR</b><br><small>v99 - Horario editavel - Imprimir - Financeiro completo</small><br><br>
-<button class="btn" style="background:#16A34A" onclick="exportarBackup()">BACKUP - Exportar JSON</button>
-<button class="btn" style="background:#F59E0B" onclick="document.getElementById('importFile').click()">BACKUP - Importar JSON</button>
+<div class="card"><b>CONFIG - BACKUP E INSTALAR - LIMPO</b><br><small>v100 - PDF Caderno - Fácil pro cliente - Sem botão piscando</small><br><br>
+<button class="btn" style="background:#16A34A" onclick="exportarBackup()">Exportar Backup</button>
+<button class="btn" style="background:#F59E0B" onclick="document.getElementById('importFile').click()">Importar Backup</button>
 <input type="file" id="importFile" style="display:none" accept=".json" onchange="importarBackup(this)">
 <br>
-<button class="btn" onclick="instalarApp()" id="btnInstalarConfig">Instalar APP no Celular</button>
+<button class="btn" onclick="instalarApp()" id="btnInstalarConfig">Instalar no Celular</button>
 <br>
-<button class="btn" onclick="abrirSino()">Notificacoes - Sino</button><br><br>
+<button class="btn" onclick="abrirSino()">Notificações - Sino</button><br><br>
 <button class="btn" onclick="zap(true)">ZAP COM VALOR</button><br><br>
-<button class="btn" style="background:#fff;color:#16A34A;border:1.5px solid #16A34A" onclick="zap(false)">ZAP SEM VALOR</button><br><br>
-<button class="btn" style="background:#fff;color:#DC2626;border:1.5px solid #FCA5A5" onclick="restaurar()">Restaurar 18 originais</button>
+<button class="btn" style="background:#fff;color:#16A34A;border:1.5px solid #16A34A" onclick="zap(false)">ZAP SEM VALOR</button>
 </div>
 </div>
 
@@ -131,22 +155,21 @@
 </div>
 
 <div class="modal" id="modal"><div class="box">
-<b id="modalTitulo">Novo Show - Horario Editavel</b><br><br>
+<b id="modalTitulo">Novo Show - Horário Editável</b><br><br>
 Data: <input id="data" type="date" class="inp" value="2026-10-26">
-<div style="font-weight:800;font-size:12px;margin-top:12px">RESTAURANTE - Puxa horario automatico:</div>
+<div style="font-weight:800;font-size:12px;margin-top:12px">RESTAURANTE:</div>
 <div class="restSel"><button onclick="prevRest()">‹</button><b id="restLabel">P1</b><button onclick="nextRest()">›</button></div>
 <div class="grid" id="gridRest"></div>
-<div style="font-weight:800;font-size:12px;margin-top:10px">HORARIO - Agora editavel! Clique pra mudar:</div>
-<div class="horario"><label id="lAlm" onclick="toggleHor('alm')"><input type="checkbox" id="alm"> Almoco</label><label id="lJan" class="on" onclick="toggleHor('jan')"><input type="checkbox" id="jan" checked> Janta</label></div>
+<div style="font-weight:800;font-size:12px;margin-top:10px">HORÁRIO - Editável:</div>
+<div class="horario"><label id="lAlm" onclick="toggleHor('alm')"><input type="checkbox" id="alm"> Almoço</label><label id="lJan" class="on" onclick="toggleHor('jan')"><input type="checkbox" id="jan" checked> Janta</label></div>
 <input id="horarioTexto" class="inp" placeholder="Ex: Janta 19:00-22:00" value="Janta 19:00-22:00">
-<small style="color:#2563EB;font-weight:700">Você pode editar o horario aqui! Digite como quiser: Ex: 18:30-21:30 ou Almoco 11:00-14:00</small>
-<div style="font-weight:800;font-size:12px;margin-top:10px">MUSICO - A-Z:</div>
+<div style="font-weight:800;font-size:12px;margin-top:10px">MÚSICO - A-Z:</div>
 <div class="mus" id="musLista"></div>
 <button class="btn" onclick="salvar()">Salvar - fica pra sempre!</button><button class="btn" style="background:#fff;color:#64748B;border:1px solid #E2E8F0" onclick="fechar()">Cancelar</button>
 </div></div>
 
 <div class="modal" id="modalMusico"><div class="box">
-<b id="modalMusicoTitulo">Novo Musico</b><br><br>
+<b id="modalMusicoTitulo">Novo Músico</b><br><br>
 Nome: <input id="musNome" class="inp" placeholder="Ex: EDILL">
 Valor R$: <input id="musValor" type="number" class="inp" value="300">
 <br><br>
@@ -156,24 +179,23 @@ Valor R$: <input id="musValor" type="number" class="inp" value="300">
 </div></div>
 
 <div class="modal" id="modalRest"><div class="box">
-<b id="modalRestTitulo">Novo Restaurante - Horario Editavel</b><br><br>
-Codigo: <input id="restCodigo" class="inp" placeholder="Ex: P1, P7">
+<b id="modalRestTitulo">Novo Restaurante - Horário Editável</b><br><br>
+Código: <input id="restCodigo" class="inp" placeholder="Ex: P1, P7">
 Nome: <input id="restNome" class="inp" placeholder="Ex: Restaurante 1">
-<div style="font-weight:800;font-size:12px;margin-top:10px">HORARIO - Editavel:</div>
+<div style="font-weight:800;font-size:12px;margin-top:10px">HORÁRIO:</div>
 <div class="horario">
-<label id="lRestAlm" onclick="toggleRestHor('alm')"><input type="checkbox" id="restAlm"> Almoco</label>
+<label id="lRestAlm" onclick="toggleRestHor('alm')"><input type="checkbox" id="restAlm"> Almoço</label>
 <label id="lRestJan" class="on" onclick="toggleRestHor('jan')"><input type="checkbox" id="restJan" checked> Janta</label>
 </div>
 <input id="restHorarioTexto" class="inp" placeholder="Ex: Janta 19:00-22:00" value="Janta 19:00-22:00">
-<small style="color:#2563EB;font-weight:700">Digite o horario correto: Ex: Almoco 12:30-15:30 ou Janta 18:30-22:00</small>
 <br><br>
-<button class="btn" onclick="salvarRestaurante()">Salvar Restaurante com Horario</button>
+<button class="btn" onclick="salvarRestaurante()">Salvar Restaurante</button>
 <button class="btn" style="background:#fff;color:#DC2626;border:1.5px solid #FCA5A5" onclick="excluirRestaurante()" id="btnExcluirRest">Excluir - some de vez</button>
 <button class="btn" style="background:#fff;color:#64748B;border:1px solid #E2E8F0" onclick="fecharRest()">Cancelar</button>
 </div></div>
 
 <div class="modal" id="modalSino"><div class="box">
-<b>NOTIFICACOES - SINO</b><br><small>Hoje 26/10/2026</small><br><br>
+<b>NOTIFICAÇÕES - SINO</b><br><small>Hoje 26/10/2026</small><br><br>
 <div id="sinoLista"></div>
 <br>
 <button class="btn" onclick="filtro('hoje');fecharSino();abrir('Agenda')">Ver Agenda de Hoje</button>
@@ -186,7 +208,7 @@ var eventosPadrao=[
 {id:1,data:"2026-10-19",casa:"P1",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
 {id:2,data:"2026-10-19",casa:"P2",mus:"RICK DUO",valor:400,turno:"Janta 19:00-22:00"},
 {id:3,data:"2026-10-19",casa:"P3",mus:"RICK SOLO",valor:300,turno:"Janta 19:00-22:00"},
-{id:4,data:"2026-10-19",casa:"P4",mus:"ANDRE SOLO",valor:300,turno:"Janta 19:00-22:00"},
+{id:4,data:"2026-10-19",casa:"P4",mus:"ANDRE",valor:300,turno:"Janta 19:00-22:00"},
 {id:5,data:"2026-10-19",casa:"P5",mus:"GERVASIO",valor:200,turno:"Janta 19:00-22:00"},
 {id:6,data:"2026-10-19",casa:"P6",mus:"DOUGLAS",valor:300,turno:"Janta 19:00-22:00"},
 {id:7,data:"2026-10-20",casa:"P1",mus:"DOUGLAS",valor:300,turno:"Janta 19:00-22:00"},
@@ -200,18 +222,20 @@ var eventosPadrao=[
 {id:15,data:"2026-10-21",casa:"P5",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
 {id:16,data:"2026-10-26",casa:"P1",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
 {id:17,data:"2026-10-26",casa:"P2",mus:"RICK DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:18,data:"2026-10-26",casa:"P4",mus:"RICK SOLO",valor:300,turno:"Janta 19:00-22:00"}
+{id:18,data:"2026-10-26",casa:"P5",mus:"ANDERSON VAT 60 SOLO",valor:350,turno:"Janta 18:30-21:30"},
+{id:19,data:"2026-10-26",casa:"P3",mus:"ISRAEL",valor:300,turno:"Janta 19:00-22:00"},
+{id:20,data:"2026-10-26",casa:"P4",mus:"ANDRE",valor:300,turno:"Janta 19:00-22:00"}
 ];
 var musicosPadrao=[
-{n:"ANDERSON VAT 60 DUO",v:400},{n:"ANDERSON VAT 60 TRIO",v:450},{n:"ANDRE",v:300},{n:"DOUGLAS",v:300},{n:"EDILL",v:300},{n:"GERVASIO",v:200},{n:"ISRAEL",v:300},{n:"LUCIANO",v:300},{n:"MARTIN",v:300},{n:"RICK DUO",v:400},{n:"RICK SOLO",v:300},{n:"RICK TRIO",v:450},{n:"ROBSON SOLO",v:300},{n:"YGOR",v:300}
+{n:"ANDERSON VAT 60 DUO",v:400},{n:"ANDERSON VAT 60 TRIO",v:450},{n:"ANDRE",v:300},{n:"DOUGLAS",v:300},{n:"EDILL",v:300},{n:"GERVASIO",v:200},{n:"ISRAEL",v:300},{n:"LUCIANO",v:300},{n:"MARTIN",v:300},{n:"RICK DUO",v:400},{n:"RICK SOLO",v:300},{n:"RICK TRIO",v:450},{n:"ROBSON SOLO",v:300},{n:"YGOR",v:300},{n:"DUO CLASSIC ROCK",v:400},{n:"PAOLI",v:300}
 ];
 var restaurantesPadrao=[
 {codigo:"P1",nome:"Restaurante 1",horario:"Janta 19:00-22:00",almoco:false,janta:true},
 {codigo:"P2",nome:"Restaurante 2",horario:"Janta 19:00-22:00",almoco:false,janta:true},
-{codigo:"P3",nome:"Restaurante 3",horario:"Janta 19:00-22:00",almoco:false,janta:true},
-{codigo:"P4",nome:"Restaurante 4",horario:"Almoco 12:30-15:30",almoco:true,janta:false},
-{codigo:"P5",nome:"Restaurante 5",horario:"Janta 19:00-22:00",almoco:false,janta:true},
-{codigo:"P6",nome:"Restaurante 6",horario:"Almoco 12:30-15:30 + Janta 19:00-22:00",almoco:true,janta:true}
+{codigo:"P3",nome:"Restaurante 3",horario:"Janta 19:30-22:30",almoco:false,janta:true},
+{codigo:"P4",nome:"Restaurante 4",horario:"20:30 às 23:30",almoco:false,janta:true},
+{codigo:"P5",nome:"Restaurante 5",horario:"Janta 18:30-21:30",almoco:false,janta:true},
+{codigo:"P6",nome:"Restaurante 6",horario:"Almoço 12:00 às 15:00",almoco:true,janta:false}
 ];
 var KEY_EVENTOS='takisom_final_eventos';
 var KEY_MUSICOS='takisom_final_musicos';
@@ -239,9 +263,60 @@ function ordenaRestsAZ(){restaurantes.sort(function(a,b){return a.codigo.localeC
 function saveEventos(){localStorage.setItem(KEY_EVENTOS,JSON.stringify(eventos));}
 function saveMusicos(){ordenaMusicosAZ();localStorage.setItem(KEY_MUSICOS,JSON.stringify(musicos));}
 function saveRests(){ordenaRestsAZ();localStorage.setItem(KEY_RESTS,JSON.stringify(restaurantes));}
-function imprimirArea(id){var conteudo=document.getElementById(id).innerHTML;var win=window.open('','','width=800,height=600');win.document.write('<html><head><title>TAKI SOM - Impressao</title><style>body{font-family:Arial;padding:20px} .item{border-bottom:1px solid #eee;padding:6px}</style></head><body><h2>TAKI SOM - Relatorio</h2>'+conteudo+'<br><small>Gerado em '+new Date().toLocaleString('pt-BR')+'</small><script>window.print();window.close();<\/script></body></html>');win.document.close();}
+
+function imprimirArea(id){
+  var conteudo=document.getElementById(id).innerHTML;
+  var win=window.open('','','width=900,height=700');
+  win.document.write('<html><head><title>TAKI SOM - PDF Caderno</title><style>body{font-family:Arial;padding:20px} table{width:100%;border-collapse:collapse} th{background:#1E40AF;color:#fff;padding:10px;text-align:left} td{padding:8px;border-bottom:1px solid #eee} .total{background:#EFF6FF;padding:15px;border-radius:10px;margin:10px 0;font-weight:800;font-size:18px} @media print{body{padding:0}}</style></head><body><h2 style="color:#1E40AF">TAKI SOM - Relatório</h2><div style="border:2px solid #1E40AF;border-radius:12px;padding:15px">'+conteudo+'</div><br><small>Gerado em '+new Date().toLocaleString('pt-BR')+' - takisom-dev.github.io</small><script>window.print();<\/script></body></html>');
+  win.document.close();
+}
+
+function imprimirAgenda(comValor){
+  var hoje=eventos.filter(function(e){return e.data=='2026-10-26';});
+  hoje.sort(function(a,b){return a.casa.localeCompare(b.casa);});
+  var html='<h2 style="text-align:center;color:#1E40AF">TAKI SOM - AGENDA DE HOJE - 26/10/2026</h2><div style="text-align:center;margin:10px 0"><small>Formato Caderno - PDF Normal</small></div><table><tr><th>Restaurante</th><th>Músico</th><th>Horário</th>'+(comValor?'<th>Valor</th>':'')+'</tr>';
+  hoje.forEach(function(ev){
+    html+='<tr><td><b>'+ev.casa+'</b></td><td>'+ev.mus+'</td><td>'+ev.turno+'</td>'+(comValor?'<td><b>R$ '+ev.valor+'</b></td>':'')+'</tr>';
+  });
+  html+='</table><br><div class="total">Total Hoje: '+hoje.length+' shows - R$ '+hoje.reduce(function(s,e){return s+e.valor;},0)+(comValor?'':' - Sem valores')+'</div>';
+  var win=window.open('','','width=900,height=700');
+  win.document.write('<html><head><title>Agenda Hoje - PDF Caderno</title><style>body{font-family:Arial;padding:20px} table{width:100%;border-collapse:collapse} th{background:#1E40AF;color:#fff;padding:12px;text-align:left} td{padding:10px;border-bottom:1px solid #ddd} .total{background:#DBEAFE;padding:15px;border-radius:10px;text-align:center;font-weight:800;font-size:16px} @media print{body{padding:10px}}</style></head><body>'+html+'<br><small>Gerado em '+new Date().toLocaleString('pt-BR')+'</small><script>window.print();<\/script></body></html>');
+  win.document.close();
+}
+
+function setFinPeriodo(tipo){
+  var hoje='2026-10-26';
+  if(tipo=='hoje'){document.getElementById('finInicio').value=hoje;document.getElementById('finFim').value=hoje;}
+  else if(tipo=='semana'){document.getElementById('finInicio').value='2026-10-19';document.getElementById('finFim').value='2026-10-26';}
+  else if(tipo=='mes'){document.getElementById('finInicio').value='2026-10-01';document.getElementById('finFim').value='2026-10-31';}
+  else if(tipo=='custom'){document.getElementById('finInicio').value='2026-10-09';document.getElementById('finFim').value='2026-10-19';}
+  renderFinanceiro();
+}
+function getFinFiltrado(){
+  var ini=document.getElementById('finInicio').value||'2026-10-01';
+  var fim=document.getElementById('finFim').value||'2026-10-31';
+  return eventos.filter(function(e){return e.data>=ini && e.data<=fim;});
+}
+function imprimirFinanceiroPeriodo(){
+  var ini=document.getElementById('finInicio').value||'2026-10-01';
+  var fim=document.getElementById('finFim').value||'2026-10-31';
+  var filt=getFinFiltrado();
+  filt.sort(function(a,b){return b.valor-a.valor;});
+  var total=filt.reduce(function(s,e){return s+e.valor;},0);
+  var html='<h2 style="text-align:center;color:#1E40AF">TAKI SOM - FINANCEIRO - '+ini.split('-').reverse().join('/')+' a '+fim.split('-').reverse().join('/')+'</h2>';
+  html+='<div style="text-align:center;background:#DBEAFE;padding:15px;border-radius:12px;margin:15px 0"><b style="font-size:22px">Total Período: R$ '+total+'</b><br>'+filt.length+' shows</div>';
+  html+='<table><tr><th>Data</th><th>Rest.</th><th>Músico</th><th>Horário</th><th>Valor</th></tr>';
+  filt.forEach(function(ev){
+    html+='<tr><td>'+ev.data.split('-').reverse().join('/')+'</td><td><b>'+ev.casa+'</b></td><td>'+ev.mus+'</td><td>'+ev.turno+'</td><td><b>R$ '+ev.valor+'</b></td></tr>';
+  });
+  html+='</table>';
+  var win=window.open('','','width=900,height=700');
+  win.document.write('<html><head><title>Financeiro Periodo - PDF Caderno</title><style>body{font-family:Arial;padding:20px} table{width:100%;border-collapse:collapse} th{background:#16A34A;color:#fff;padding:10px;text-align:left} td{padding:8px;border-bottom:1px solid #eee;font-size:12px} @media print{body{padding:10px}}</style></head><body>'+html+'<br><small>Gerado em '+new Date().toLocaleString('pt-BR')+' - Período: '+ini+' a '+fim+'</small><script>window.print();<\/script></body></html>');
+  win.document.close();
+}
+
 function exportarBackup(){
-  var backup={eventos:eventos,musicos:musicos,restaurantes:restaurantes,data:new Date().toISOString(),versao:"v99"};
+  var backup={eventos:eventos,musicos:musicos,restaurantes:restaurantes,data:new Date().toISOString(),versao:"v100"};
   var blob=new Blob([JSON.stringify(backup,null,2)],{type:"application/json"});
   var url=URL.createObjectURL(blob);
   var a=document.createElement("a");a.href=url;a.download="takisom-backup-"+new Date().toISOString().split("T")[0]+".json";a.click();URL.revokeObjectURL(url);
@@ -259,28 +334,25 @@ function importarBackup(input){
         saveEventos();saveMusicos();saveRests();render();renderMusTab();renderRestTab();renderGridRest();
         alert("Backup importado!");
         fecharSide();
-      } else {alert("Arquivo invalido!");}
+      } else {alert("Arquivo inválido!");}
     }catch(err){alert("Erro: "+err.message);}
   };
   reader.readAsText(file);input.value="";
 }
-function restaurar(){if(!confirm("Restaurar 18 originais? Vai apagar o que salvou!"))return;eventos=eventosPadrao;saveEventos();render();alert("Restaurado!");fecharSide();}
-function restaurarMusicos(){if(!confirm('Restaurar musicos?'))return;musicos=musicosPadrao;ordenaMusicosAZ();saveMusicos();renderMusTab();renderMus();}
-function restaurarRestaurantes(){if(!confirm('Restaurar P1-P6?'))return;localStorage.removeItem(KEY_RESTS);restaurantes=restaurantesPadrao;saveRests();renderRestTab();renderGridRest();}
 function abrirSide(){document.getElementById('side').classList.add('show');}
 function fecharSide(){document.getElementById('side').classList.remove('show');}
 function abrir(t){fecharSide();document.querySelectorAll('.tab').forEach(function(el){el.classList.remove('show')});document.querySelectorAll('.menuBottom button').forEach(function(b){b.classList.remove('on')});document.getElementById(t).classList.add('show');var m=document.getElementById('m'+t);if(m)m.classList.add('on');if(t=='Musicos')renderMusTab();if(t=='Restaurantes')renderRestTab();if(t=='Financeiro')renderFinanceiro();render();}
 function abrirSino(){fecharSide();try{if(navigator.vibrate)navigator.vibrate(100);}catch(e){}var hoje=eventos.filter(function(e){return e.data=='2026-10-26';});hoje.sort(function(a,b){return b.valor-a.valor;});var html='<div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:12px;padding:12px;margin:8px 0"><b>Hoje 26/10 - '+hoje.length+' shows</b><br><small>'+hoje.map(function(e){return 'R$'+e.valor+' - '+e.casa+' - '+e.mus;}).join('<br>')+'</small></div>';document.getElementById('sinoLista').innerHTML=html;document.getElementById('modalSino').classList.add('show');}
 function fecharSino(){document.getElementById('modalSino').classList.remove('show');}
-function mudaMes(d){var el=document.getElementById('mesLabel');if(el.innerText.indexOf('SETEMBRO')>=0)el.innerText='MES DE OUTUBRO DE 2026';else el.innerText='MES DE SETEMBRO DE 2026';}
+function mudaMes(d){var el=document.getElementById('mesLabel');if(el.innerText.indexOf('SETEMBRO')>=0)el.innerText='MÊS DE OUTUBRO DE 2026';else el.innerText='MÊS DE SETEMBRO DE 2026';}
 function filtro(v){view=v;document.querySelectorAll('.filtros button').forEach(function(b){b.classList.remove('on')});document.querySelectorAll('.chips .chip').forEach(function(b){b.classList.remove('on')});var map={hoje:'bHoje',dia:'bDia',semana:'bSemana',mes:'bMes',ano:'bAno'};var el=document.getElementById(map[v]);if(el)el.classList.add('on');if(v=='hoje'||v=='dia')document.getElementById('chipDia').classList.add('on');else if(v=='mes')document.getElementById('chipMes').classList.add('on');else if(v=='ano')document.getElementById('chipAno').classList.add('on');else document.getElementById('chipDia').classList.add('on');render();}
 function render(){
   ordenaMusicosAZ();ordenaRestsAZ();
   var filt=[];if(view=='hoje')filt=eventos.filter(function(e){return e.data=='2026-10-26';});else if(view=='dia')filt=eventos.filter(function(e){return e.data=='2026-10-26';});else if(view=='semana')filt=eventos.filter(function(e){return e.data>='2026-10-19';});else if(view=='mes')filt=eventos.filter(function(e){return e.data.indexOf('2026-10')==0;});else filt=eventos;
   filt.sort(function(a,b){if(a.data!=b.data)return a.data.localeCompare(b.data);return a.casa.localeCompare(b.casa);});
   var grupos={};filt.forEach(function(e){if(!grupos[e.data])grupos[e.data]=[];grupos[e.data].push(e);});
-  var html='';Object.keys(grupos).sort().forEach(function(data){var nome='';if(data=='2026-10-26')nome='HOJE - DOMINGO, 26/10/2026';else if(data=='2026-10-21')nome='TERCA, 21/10/2026';else if(data=='2026-10-20')nome='SEGUNDA, 20/10/2026';else if(data=='2026-10-19')nome='DOMINGO, 19/10/2026';else nome=data;html+='<div class="blue">'+nome+'</div>';grupos[data].forEach(function(ev){html+='<div class="ev"><b>'+ev.casa+' - '+ev.mus+'</b><div class="meta"><span>'+ev.turno+'</span><span>R$ '+ev.valor+'</span></div><div class="actions"><button class="e1" onclick="editar('+ev.id+')">Editar</button><button class="e2" onclick="excluir('+ev.id+')">Excluir</button></div></div>';});});
-  if(filt.length==0){html='<div class="card" style="text-align:center;padding:20px"><b>Nenhum evento</b><br><br><button class="btn" onclick="restaurar()">Restaurar 18</button></div>';}
+  var html='';Object.keys(grupos).sort().forEach(function(data){var nome='';if(data=='2026-10-26')nome='HOJE - DOMINGO, 26/10/2026';else if(data=='2026-10-21')nome='TERÇA, 21/10/2026';else if(data=='2026-10-20')nome='SEGUNDA, 20/10/2026';else if(data=='2026-10-19')nome='DOMINGO, 19/10/2026';else nome=data;html+='<div class="blue">'+nome+'</div>';grupos[data].forEach(function(ev){html+='<div class="ev"><b>'+ev.casa+' - '+ev.mus+'</b><div class="meta"><span>'+ev.turno+'</span><span>R$ '+ev.valor+'</span></div><div class="actions"><button class="e1" onclick="editar('+ev.id+')">Editar</button><button class="e2" onclick="excluir('+ev.id+')">Excluir</button></div></div>';});});
+  if(filt.length==0){html='<div class="card" style="text-align:center;padding:20px"><b>Nenhum evento</b></div>';}
   document.getElementById('lista').innerHTML=html;
   document.getElementById('contadorTop').innerHTML='<span>'+filt.length+' eventos - Hoje 26/10/2026</span><span>HOJE</span>';
   document.getElementById('badge').innerText=eventos.filter(function(e){return e.data=='2026-10-26';}).length;
@@ -289,22 +361,23 @@ function render(){
   renderFinanceiro();
   var anualHtml='<b style="color:#2563EB">FINANCEIRO ANUAL - MAIOR PARA MENOR:</b><br><br>';var porValor=[].concat(eventos);porValor.sort(function(a,b){return b.valor-a.valor;});porValor.forEach(function(ev){anualHtml+='<div style="display:flex;justify-content:space-between;padding:6px;border-bottom:1px solid #F1F5F9"><span>'+ev.casa+' - '+ev.mus+'</span><b>R$ '+ev.valor+'</b></div>';});anualHtml+='<br><b>Total ano: '+eventos.length+' eventos - R$ '+eventos.reduce(function(s,e){return s+e.valor;},0)+'</b>';document.getElementById('anualBox').innerHTML=anualHtml;
   var vb=document.getElementById('valoresBox');if(vb){var porValorMus=[].concat(musicos);porValorMus.sort(function(a,b){return b.v-a.v;});var hv='<b style="font-size:11px;color:#64748B">MAIOR PARA MENOR:</b><br><br>';porValorMus.forEach(function(m){hv+='<div style="display:flex;justify-content:space-between;padding:8px;border-bottom:1px solid #F1F5F9"><span>'+m.n+'</span><b style="color:#16A34A">R$ '+m.v+'</b></div>';});vb.innerHTML=hv;}
-  var hb=document.getElementById('horariosBox');if(hb){var hh='';restaurantes.forEach(function(r){hh+='<div style="display:flex;justify-content:space-between;padding:8px;border-bottom:1px solid #F1F5F9"><span><b>'+r.codigo+'</b> - '+r.nome+'</span><span style="color:#2563EB;font-weight:700">'+r.horario+'</span></div>';});hb.innerHTML=hh;}
+  var hb=document.getElementById('horariosBox');if(hb){var hh='';restaurantes.forEach(function(r){hh+='<div style="display:flex;justify-content:space-between;padding:10px;border-bottom:1px solid #F1F5F9"><span><b>'+r.codigo+'</b> - '+r.nome+'</span><span style="background:#DBEAFE;color:#1E40AF;padding:6px 10px;border-radius:8px;font-weight:700;font-size:12px">'+r.horario+'</span></div>';});hb.innerHTML=hh;}
 }
 function renderFinanceiro(){
-  var total=eventos.reduce(function(s,e){return s+e.valor;},0);
-  var porRest={};eventos.forEach(function(e){if(!porRest[e.casa])porRest[e.casa]=0;porRest[e.casa]+=e.valor;});
-  var porMus={};eventos.forEach(function(e){if(!porMus[e.mus])porMus[e.mus]=0;porMus[e.mus]+=e.valor;});
-  var html='<div style="background:#EFF6FF;border-radius:12px;padding:12px;margin:8px 0"><b style="font-size:18px">Total Geral: R$ '+total+'</b><br><small>'+eventos.length+' eventos</small></div>';
+  var filt=getFinFiltrado();
+  var total=filt.reduce(function(s,e){return s+e.valor;},0);
+  var porRest={};filt.forEach(function(e){if(!porRest[e.casa])porRest[e.casa]=0;porRest[e.casa]+=e.valor;});
+  var porMus={};filt.forEach(function(e){if(!porMus[e.mus])porMus[e.mus]=0;porMus[e.mus]+=e.valor;});
+  var html='<div style="background:linear-gradient(135deg,#DBEAFE,#EFF6FF);border-radius:12px;padding:15px;margin:10px 0;border:2px solid #BFDBFE"><b style="font-size:20px;color:#1E40AF">Total Período: R$ '+total+'</b><br><small style="color:#1E40AF">'+filt.length+' shows - '+document.getElementById('finInicio').value.split('-').reverse().join('/')+' a '+document.getElementById('finFim').value.split('-').reverse().join('/')+'</small></div>';
   html+='<br><b style="color:#2563EB">POR RESTAURANTE - MAIOR PARA MENOR:</b><br><br>';
   var restArray=[];for(var k in porRest){restArray.push({casa:k,valor:porRest[k]});}restArray.sort(function(a,b){return b.valor-a.valor;});
-  restArray.forEach(function(r){html+='<div style="display:flex;justify-content:space-between;padding:6px;border-bottom:1px solid #F1F5F9"><span>'+r.casa+'</span><b style="color:#16A34A">R$ '+r.valor+'</b></div>';});
-  html+='<br><b style="color:#2563EB">POR MUSICO - MAIOR PARA MENOR:</b><br><br>';
+  restArray.forEach(function(r){html+='<div style="display:flex;justify-content:space-between;padding:8px;border-bottom:1px solid #F1F5F9"><span><b>'+r.casa+'</b></span><b style="color:#16A34A">R$ '+r.valor+'</b></div>';});
+  html+='<br><b style="color:#2563EB">POR MÚSICO - MAIOR PARA MENOR:</b><br><br>';
   var musArray=[];for(var k in porMus){musArray.push({mus:k,valor:porMus[k]});}musArray.sort(function(a,b){return b.valor-a.valor;});
-  musArray.forEach(function(m){html+='<div style="display:flex;justify-content:space-between;padding:6px;border-bottom:1px solid #F1F5F9"><span>'+m.mus+'</span><b>R$ '+m.valor+'</b></div>';});
-  html+='<br><b style="color:#2563EB">DETALHADO - MAIOR PARA MENOR:</b><br><br>';
-  var detalhado=[].concat(eventos);detalhado.sort(function(a,b){return b.valor-a.valor;});
-  detalhado.forEach(function(ev){html+='<div style="display:flex;justify-content:space-between;padding:6px;border-bottom:1px solid #F1F5F9"><span>R$ '+ev.valor+' - '+ev.casa+' - '+ev.mus+' - '+ev.turno+'</span><small>'+ev.data.split('-').reverse().join('/')+'</small></div>';});
+  musArray.forEach(function(m){html+='<div style="display:flex;justify-content:space-between;padding:8px;border-bottom:1px solid #F1F5F9"><span>'+m.mus+'</span><b>R$ '+m.valor+'</b></div>';});
+  html+='<br><b style="color:#2563EB">DETALHADO - MAIOR PARA MENOR - COM HORÁRIO:</b><br><br>';
+  var detalhado=[].concat(filt);detalhado.sort(function(a,b){return b.valor-a.valor;});
+  detalhado.forEach(function(ev){html+='<div style="display:flex;justify-content:space-between;padding:8px;border-bottom:1px solid #F1F5F9"><span>R$ '+ev.valor+' - '+ev.casa+' - '+ev.mus+' - '+ev.turno+'</span><small>'+ev.data.split('-').reverse().join('/')+'</small></div>';});
   var fin=document.getElementById('finBox');if(fin)fin.innerHTML=html;
 }
 function renderGridRest(){
@@ -317,104 +390,43 @@ function renderGridRest(){
   });
   grid.innerHTML=h;
 }
-function prevRest(){
-  if(restaurantes.length==0)return;
-  restIdx=(restIdx-1+restaurantes.length)%restaurantes.length;
-  casaSel=restaurantes[restIdx].codigo;
-  document.getElementById('restLabel').innerText=casaSel;
-  aplicarHorarioDoRest(casaSel);
-  renderGridRest();
-}
-function nextRest(){
-  if(restaurantes.length==0)return;
-  restIdx=(restIdx+1)%restaurantes.length;
-  casaSel=restaurantes[restIdx].codigo;
-  document.getElementById('restLabel').innerText=casaSel;
-  aplicarHorarioDoRest(casaSel);
-  renderGridRest();
-}
-function selP(codigo){
-  casaSel=codigo;
-  restIdx=restaurantes.findIndex(function(r){return r.codigo==codigo;});
-  if(restIdx<0)restIdx=0;
-  document.getElementById('restLabel').innerText=codigo;
-  aplicarHorarioDoRest(codigo);
-  renderGridRest();
-}
-function aplicarHorarioDoRest(codigo){
-  var r=restaurantes.find(function(x){return x.codigo==codigo;});
-  if(!r)return;
-  almoco=r.almoco;
-  janta=r.janta;
-  document.getElementById('alm').checked=almoco;
-  document.getElementById('jan').checked=janta;
-  document.getElementById('horarioTexto').value=r.horario;
-  if(almoco)document.getElementById('lAlm').classList.add('on');else document.getElementById('lAlm').classList.remove('on');
-  if(janta)document.getElementById('lJan').classList.add('on');else document.getElementById('lJan').classList.remove('on');
-}
-function toggleHor(t){
-  if(t=='alm'){
-    almoco=!almoco;
-    document.getElementById('alm').checked=almoco;
-    var l=document.getElementById('lAlm');
-    if(almoco){l.classList.add('on'); if(!document.getElementById('horarioTexto').value.includes('Almoco')) document.getElementById('horarioTexto').value='Almoco '+document.getElementById('horarioTexto').value;}
-    else l.classList.remove('on');
-  }else{
-    janta=!janta;
-    document.getElementById('jan').checked=janta;
-    var l=document.getElementById('lJan');
-    if(janta){l.classList.add('on'); if(!document.getElementById('horarioTexto').value.includes('Janta')) document.getElementById('horarioTexto').value='Janta 19:00-22:00';}
-    else l.classList.remove('on');
-  }
-}
-function toggleRestHor(t){
-  if(t=='alm'){
-    restAlmoco=!restAlmoco;
-    document.getElementById('restAlm').checked=restAlmoco;
-    var l=document.getElementById('lRestAlm');
-    if(restAlmoco){l.classList.add('on'); document.getElementById('restHorarioTexto').value='Almoco 12:30-15:30';}
-    else l.classList.remove('on');
-  }else{
-    restJanta=!restJanta;
-    document.getElementById('restJan').checked=restJanta;
-    var l=document.getElementById('lRestJan');
-    if(restJanta){l.classList.add('on'); document.getElementById('restHorarioTexto').value='Janta 19:00-22:00';}
-    else l.classList.remove('on');
-  }
-  if(restAlmoco&&restJanta) document.getElementById('restHorarioTexto').value='Almoco 12:30-15:30 + Janta 19:00-22:00';
-}
+function prevRest(){if(restaurantes.length==0)return;restIdx=(restIdx-1+restaurantes.length)%restaurantes.length;casaSel=restaurantes[restIdx].codigo;document.getElementById('restLabel').innerText=casaSel;aplicarHorarioDoRest(casaSel);renderGridRest();}
+function nextRest(){if(restaurantes.length==0)return;restIdx=(restIdx+1)%restaurantes.length;casaSel=restaurantes[restIdx].codigo;document.getElementById('restLabel').innerText=casaSel;aplicarHorarioDoRest(casaSel);renderGridRest();}
+function selP(codigo){casaSel=codigo;restIdx=restaurantes.findIndex(function(r){return r.codigo==codigo;});if(restIdx<0)restIdx=0;document.getElementById('restLabel').innerText=codigo;aplicarHorarioDoRest(codigo);renderGridRest();}
+function aplicarHorarioDoRest(codigo){var r=restaurantes.find(function(x){return x.codigo==codigo;});if(!r)return;almoco=r.almoco;janta=r.janta;document.getElementById('alm').checked=almoco;document.getElementById('jan').checked=janta;document.getElementById('horarioTexto').value=r.horario;if(almoco)document.getElementById('lAlm').classList.add('on');else document.getElementById('lAlm').classList.remove('on');if(janta)document.getElementById('lJan').classList.add('on');else document.getElementById('lJan').classList.remove('on');}
+function toggleHor(t){if(t=='alm'){almoco=!almoco;document.getElementById('alm').checked=almoco;var l=document.getElementById('lAlm');if(almoco)l.classList.add('on');else l.classList.remove('on');}else{janta=!janta;document.getElementById('jan').checked=janta;var l=document.getElementById('lJan');if(janta)l.classList.add('on');else l.classList.remove('on');}}
+function toggleRestHor(t){if(t=='alm'){restAlmoco=!restAlmoco;document.getElementById('restAlm').checked=restAlmoco;var l=document.getElementById('lRestAlm');if(restAlmoco)l.classList.add('on');else l.classList.remove('on');}else{restJanta=!restJanta;document.getElementById('restJan').checked=restJanta;var l=document.getElementById('lRestJan');if(restJanta)l.classList.add('on');else l.classList.remove('on');}if(restAlmoco&&restJanta)document.getElementById('restHorarioTexto').value='Almoço 12:30-15:30 + Janta 19:00-22:00';}
 function renderMus(){ordenaMusicosAZ();var div=document.getElementById('musLista');var h='';musicos.forEach(function(m){var sel=m.n==musSel;var cl=sel?'item on':'item';h+='<div class="'+cl+'" onclick="musSel=\''+m.n.replace(/\'/g,"\\'")+'\';renderMus()"><div><input type="radio" '+(sel?'checked':'')+'> '+m.n+'</div><b>R$ '+m.v+'</b></div>';});div.innerHTML=h;}
 function renderMusTab(){ordenaMusicosAZ();var tab=document.getElementById('musTab');var html='';musicos.forEach(function(m,idx){html+='<div class="musCard" onclick="editarMusico('+idx+')"><div><b>'+m.n+'</b><div style="font-size:11px;color:#64748B">A-Z - Toque pra editar</div></div><div style="text-align:right"><b style="color:#2563EB">R$ '+m.v+'</b><div style="font-size:10px;color:#16A34A">Editar</div></div></div>';});tab.innerHTML=html;}
 function renderRestTab(){
   ordenaRestsAZ();
   var tab=document.getElementById('restTab');var html='';
   restaurantes.forEach(function(r,idx){
-    html+='<div class="restCard" onclick="editarRestaurante('+idx+')"><div><b>'+r.codigo+' - '+r.nome+'</b><div style="font-size:11px;color:#64748B">'+r.horario+' - Toque pra editar</div></div><div style="text-align:right"><b style="color:#2563EB">'+r.horario+'</b><div style="font-size:10px;color:#16A34A">Editar</div></div></div>';
+    html+='<div class="restCard" onclick="editarRestaurante('+idx+')"><div class="info"><b>'+r.codigo+' - '+r.nome+'</b><br><small>'+r.horario+' - Toque pra editar</small></div><div class="hor"><b>'+r.horario+'</b></div></div>';
   });
   tab.innerHTML=html;
 }
-function novo(){editId=null;document.getElementById('modalTitulo').innerText='Novo Show - Horario Editavel';if(restaurantes.length>0){casaSel=restaurantes[0].codigo;restIdx=0;}musSel=musicos[0]?musicos[0].n:'EDILL';document.getElementById('data').value='2026-10-26';document.getElementById('restLabel').innerText=casaSel;aplicarHorarioDoRest(casaSel);renderGridRest();renderMus();document.getElementById('modal').classList.add('show');}
-function editar(id){var ev=eventos.find(function(e){return e.id==id;});if(!ev)return;editId=id;document.getElementById('modalTitulo').innerText='Editar Show '+id+' - Horario Editavel';document.getElementById('data').value=ev.data;casaSel=ev.casa;restIdx=restaurantes.findIndex(function(r){return r.codigo==casaSel;});if(restIdx<0)restIdx=0;document.getElementById('restLabel').innerText=casaSel;renderGridRest();musSel=ev.mus;renderMus();almoco=ev.turno.indexOf('Almoco')>=0;janta=ev.turno.indexOf('Janta')>=0;document.getElementById('alm').checked=almoco;document.getElementById('jan').checked=janta;document.getElementById('horarioTexto').value=ev.turno;if(almoco)document.getElementById('lAlm').classList.add('on');else document.getElementById('lAlm').classList.remove('on');if(janta)document.getElementById('lJan').classList.add('on');else document.getElementById('lJan').classList.remove('on');document.getElementById('modal').classList.add('show');}
-function excluir(id){if(!confirm('Excluir show '+id+' de vez?'))return;eventos=eventos.filter(function(e){return e.id!=id;});saveEventos();render();alert('Excluido! Sumiu de vez!');}
+function novo(){editId=null;document.getElementById('modalTitulo').innerText='Novo Show - Horário Editável';if(restaurantes.length>0){casaSel=restaurantes[0].codigo;restIdx=0;}musSel=musicos[0]?musicos[0].n:'EDILL';document.getElementById('data').value='2026-10-26';document.getElementById('restLabel').innerText=casaSel;aplicarHorarioDoRest(casaSel);renderGridRest();renderMus();document.getElementById('modal').classList.add('show');}
+function editar(id){var ev=eventos.find(function(e){return e.id==id;});if(!ev)return;editId=id;document.getElementById('modalTitulo').innerText='Editar Show '+id+' - Horário Editável';document.getElementById('data').value=ev.data;casaSel=ev.casa;restIdx=restaurantes.findIndex(function(r){return r.codigo==casaSel;});if(restIdx<0)restIdx=0;document.getElementById('restLabel').innerText=casaSel;renderGridRest();musSel=ev.mus;renderMus();almoco=ev.turno.indexOf('Almoço')>=0||ev.turno.indexOf('Almoco')>=0;janta=ev.turno.indexOf('Janta')>=0;document.getElementById('alm').checked=almoco;document.getElementById('jan').checked=janta;document.getElementById('horarioTexto').value=ev.turno;if(almoco)document.getElementById('lAlm').classList.add('on');else document.getElementById('lAlm').classList.remove('on');if(janta)document.getElementById('lJan').classList.add('on');else document.getElementById('lJan').classList.remove('on');document.getElementById('modal').classList.add('show');}
+function excluir(id){if(!confirm('Excluir show '+id+' de vez?'))return;eventos=eventos.filter(function(e){return e.id!=id;});saveEventos();render();alert('Excluído! Sumiu de vez!');}
 function fechar(){document.getElementById('modal').classList.remove('show');editId=null;}
 function salvar(){
   var data=document.getElementById('data').value||'2026-10-26';
   var turno=document.getElementById('horarioTexto').value||'Janta 19:00-22:00';
-  if(!turno){if(almoco&&janta)turno='Almoco 12:30-15:30 + Janta 19:00-22:00';else if(almoco)turno='Almoco 12:30-15:30';else turno='Janta 19:00-22:00';}
   var m=musicos.find(function(x){return x.n==musSel});var valor=m?m.v:300;
   if(editId){var ev=eventos.find(function(e){return e.id==editId;});if(ev){ev.data=data;ev.casa=casaSel;ev.mus=musSel;ev.valor=valor;ev.turno=turno;}}
   else{var novoEv={id:Date.now(),data:data,casa:casaSel,mus:musSel,valor:valor,turno:turno};eventos.push(novoEv);}
-  saveEventos();fechar();filtro('hoje');alert('Salvo com horario editavel! Fica pra sempre!');
+  saveEventos();fechar();filtro('hoje');alert('Salvo!');
 }
-function novoMusico(){editMusicoIdx=null;document.getElementById('modalMusicoTitulo').innerText='Novo Musico - A-Z';document.getElementById('musNome').value='';document.getElementById('musValor').value='300';document.getElementById('btnExcluirMusico').style.display='none';document.getElementById('modalMusico').classList.add('show');}
+function novoMusico(){editMusicoIdx=null;document.getElementById('modalMusicoTitulo').innerText='Novo Músico - A-Z';document.getElementById('musNome').value='';document.getElementById('musValor').value='300';document.getElementById('btnExcluirMusico').style.display='none';document.getElementById('modalMusico').classList.add('show');}
 function editarMusico(idx){editMusicoIdx=idx;var m=musicos[idx];document.getElementById('modalMusicoTitulo').innerText='Editar - '+m.n;document.getElementById('musNome').value=m.n;document.getElementById('musValor').value=m.v;document.getElementById('btnExcluirMusico').style.display='block';document.getElementById('modalMusico').classList.add('show');}
 function salvarMusico(){var nome=document.getElementById('musNome').value.trim().toUpperCase();var valor=parseInt(document.getElementById('musValor').value)||300;if(!nome){alert('Digite o nome!');return;}if(editMusicoIdx!==null){musicos[editMusicoIdx].n=nome;musicos[editMusicoIdx].v=valor;}else{musicos.push({n:nome,v:valor});}saveMusicos();fecharMusico();renderMusTab();renderMus();render();alert('Salvo!');}
-function excluirMusico(){if(editMusicoIdx===null)return;if(!confirm('Excluir musico '+musicos[editMusicoIdx].n+' de vez?'))return;musicos.splice(editMusicoIdx,1);saveMusicos();fecharMusico();renderMusTab();renderMus();render();alert('Excluido!');}
+function excluirMusico(){if(editMusicoIdx===null)return;if(!confirm('Excluir músico '+musicos[editMusicoIdx].n+' de vez?'))return;musicos.splice(editMusicoIdx,1);saveMusicos();fecharMusico();renderMusTab();renderMus();render();alert('Excluído!');}
 function fecharMusico(){document.getElementById('modalMusico').classList.remove('show');editMusicoIdx=null;}
 
 function novoRestaurante(){
   editRestIdx=null;
-  document.getElementById('modalRestTitulo').innerText='Novo Restaurante - Horario Editavel';
+  document.getElementById('modalRestTitulo').innerText='Novo Restaurante - Horário Editável';
   document.getElementById('restCodigo').value='';
   document.getElementById('restNome').value='';
   document.getElementById('restHorarioTexto').value='Janta 19:00-22:00';
@@ -427,7 +439,7 @@ function novoRestaurante(){
 function editarRestaurante(idx){
   editRestIdx=idx;
   var r=restaurantes[idx];
-  document.getElementById('modalRestTitulo').innerText='Editar - '+r.codigo+' - Horario Editavel';
+  document.getElementById('modalRestTitulo').innerText='Editar - '+r.codigo+' - Horário Editável';
   document.getElementById('restCodigo').value=r.codigo;
   document.getElementById('restNome').value=r.nome;
   document.getElementById('restHorarioTexto').value=r.horario;
@@ -442,9 +454,8 @@ function salvarRestaurante(){
   var codigo=document.getElementById('restCodigo').value.trim().toUpperCase();
   var nome=document.getElementById('restNome').value.trim();
   var horarioTexto=document.getElementById('restHorarioTexto').value.trim()||'Janta 19:00-22:00';
-  if(!codigo){alert('Digite o codigo! Ex: P1, P7');return;}
-  if(!nome){alert('Digite o nome do restaurante!');return;}
-  if(!restAlmoco && !restJanta){alert('Escolha pelo menos Almoco ou Janta');return;}
+  if(!codigo){alert('Digite o código!');return;}
+  if(!nome){alert('Digite o nome!');return;}
   if(editRestIdx!==null){
     restaurantes[editRestIdx].codigo=codigo;
     restaurantes[editRestIdx].nome=nome;
@@ -458,7 +469,7 @@ function salvarRestaurante(){
   fecharRest();
   renderRestTab();
   renderGridRest();
-  alert('Restaurante salvo com horario editavel! Agora quando criar show ja vem com esse horario e voce pode editar!');
+  alert('Restaurante salvo bonito com horário!');
 }
 function excluirRestaurante(){
   if(editRestIdx===null)return;
@@ -468,11 +479,11 @@ function excluirRestaurante(){
   fecharRest();
   renderRestTab();
   renderGridRest();
-  alert('Excluido!');
+  alert('Excluído!');
 }
 function fecharRest(){document.getElementById('modalRest').classList.remove('show');editRestIdx=null;}
 
-function zap(comValor){var filt=eventos.filter(function(e){return e.data>='2026-10-19';});filt.sort(function(a,b){return b.valor-a.valor;});var txt='';filt.forEach(function(ev){if(comValor)txt+=ev.data.split('-').reverse().join('/')+' - RESTAURANTE '+ev.casa+' - MUSICO '+ev.mus+' R$'+ev.valor+' - '+ev.turno+'\n';else txt+=ev.data.split('-').reverse().join('/')+' - RESTAURANTE '+ev.casa+' - MUSICO '+ev.mus+' - '+ev.turno+'\n';});var titulo=comValor?'*AGENDA TAKI SOM - COM HORARIO EDITAVEL*':'*CRONOGRAMA - SEM VALOR*';window.open('https://wa.me/?text='+encodeURIComponent(titulo+'\n\n'+txt),'_blank');}
+function zap(comValor){var filt=eventos.filter(function(e){return e.data>='2026-10-19';});filt.sort(function(a,b){return b.valor-a.valor;});var txt='';filt.forEach(function(ev){if(comValor)txt+=ev.data.split('-').reverse().join('/')+' - RESTAURANTE '+ev.casa+' - MÚSICO '+ev.mus+' R$'+ev.valor+' - '+ev.turno+'\n';else txt+=ev.data.split('-').reverse().join('/')+' - RESTAURANTE '+ev.casa+' - MÚSICO '+ev.mus+' - '+ev.turno+'\n';});var titulo=comValor?'*AGENDA TAKI SOM - COM HORÁRIO*':'*CRONOGRAMA - SEM VALOR*';window.open('https://wa.me/?text='+encodeURIComponent(titulo+'\n\n'+txt),'_blank');}
 ordenaMusicosAZ();ordenaRestsAZ();renderMus();renderMusTab();renderRestTab();renderGridRest();render();
 </script>
 </body>
