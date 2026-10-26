@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TAKI SOM v98 BOTAO FUNCIONANDO</title>
+<title>TAKI SOM v99 HORARIO EDITAVEL E IMPRIMIR</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}body{background:#F1F5F9;font-family:Arial,sans-serif;padding-bottom:110px}
 .top{background:linear-gradient(135deg,#1E40AF,#2563EB);color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;border-radius:0 0 20px 20px}
@@ -22,17 +22,18 @@
 .menuBottom button{flex:1;border:none;background:none;padding:10px;font-size:13px;font-weight:800;color:#94A3B8;cursor:pointer}
 .menuBottom button.on{color:#2563EB}
 .tab{display:none}.tab.show{display:block}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:200;padding:12px}.modal.show{display:flex}.box{background:#fff;border-radius:16px;padding:16px;width:100%;max-width:430px;max-height:90vh;overflow:auto}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:200;padding:12px}.modal.show{display:flex}.box{background:#fff;border-radius:16px;padding:16px;width:100%;max-width:440px;max-height:90vh;overflow:auto}
 .inp{width:100%;padding:11px;border:1px solid #E2E8F0;border-radius:10px;margin:6px 0}.btn{width:100%;padding:12px;border:none;border-radius:10px;font-weight:800;background:#2563EB;color:#fff;margin-top:10px;cursor:pointer}
 .restSel{display:flex;align-items:center;justify-content:space-between;background:#F1F5F9;border:1px solid #E2E8F0;border-radius:12px;padding:8px 10px;margin:8px 0}.restSel button{width:38px;height:38px;border-radius:10px;border:1px solid #CBD5E1;background:#fff;font-weight:800;font-size:18px;cursor:pointer;color:#1E3A8A}.restSel b{font-size:18px;color:#1E3A8A}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}.grid button{padding:11px;border:1.5px solid #E2E8F0;border-radius:10px;background:#fff;font-weight:800;font-size:12px;cursor:pointer}.grid button.on{background:#2563EB;color:#fff;border-color:#2563EB}
-.horario{display:flex;gap:10px;margin:10px 0;flex-wrap:wrap}.horario label{flex:1;min-width:130px;display:flex;align-items:center;gap:8px;background:#F8FAFC;border:1.5px solid #E2E8F0;border-radius:10px;padding:10px 8px;font-size:12px;font-weight:700;cursor:pointer}.horario label.on{background:#DBEAFE;border-color:#2563EB;color:#1E3A8A}
+.horario{display:flex;gap:8px;margin:10px 0;flex-wrap:wrap}.horario label{flex:1;min-width:130px;display:flex;align-items:center;gap:8px;background:#F8FAFC;border:1.5px solid #E2E8F0;border-radius:10px;padding:10px 8px;font-size:12px;font-weight:700;cursor:pointer}.horario label.on{background:#DBEAFE;border-color:#2563EB;color:#1E3A8A}
 .mus{max-height:200px;overflow:auto;border:1px solid #E2E8F0;border-radius:12px;padding:6px;margin:8px 0}.mus .item{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:10px;margin:3px 0;cursor:pointer;border:1px solid transparent}.mus .item.on{background:#EFF6FF;border-color:#2563EB}
 .musCard{background:#fff;margin:0 12px 10px;border-radius:14px;padding:14px;border:1px solid #E2E8F0;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
 .restCard{background:#fff;margin:0 12px 10px;border-radius:14px;padding:14px;border:1px solid #E2E8F0;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
 .side{position:fixed;top:0;left:-340px;width:330px;height:100%;background:#fff;z-index:400;transition:.3s;padding:0;overflow:auto;box-shadow:4px 0 20px rgba(0,0,0,.25);border-radius:0 20px 20px 0}.side.show{left:0}.sideHeader{background:linear-gradient(135deg,#1E40AF,#2563EB);color:#fff;padding:22px 18px;font-size:20px;font-weight:800;letter-spacing:1px}.side button.item{width:100%;padding:13px 18px;border:none;background:none;border-bottom:1px solid #F1F5F9;text-align:left;font-weight:700;font-size:13px;cursor:pointer}
 .badge{background:#DC2626;color:#fff;font-size:10px;padding:2px 6px;border-radius:10px;position:absolute;top:6px;right:6px;font-weight:800}
 .bellWrap{position:relative}
+@media print{body *{visibility:hidden}#printArea, #printArea *{visibility:visible}#printArea{position:absolute;left:0;top:0;width:100%} .menuBottom, .top, .plus, .zap, .side, .modal{display:none!important}}
 </style>
 </head>
 <body>
@@ -40,11 +41,12 @@
 <div class="sideHeader">MENU</div>
 <button class="item" onclick="abrir('Agenda')">Agenda - Hoje 26/10</button>
 <button class="item" onclick="abrir('Musicos')">Musicos - A-Z</button>
-<button class="item" onclick="abrir('Restaurantes')">Restaurantes - Com Horario</button>
+<button class="item" onclick="abrir('Restaurantes')">Restaurantes - Com Horario Editavel</button>
 <button class="item" onclick="abrir('Valores')">Valores - Maior para Menor</button>
-<button class="item" onclick="abrir('Relatorio')">Relatorio Mensal</button>
+<button class="item" onclick="abrir('Relatorio')">Relatorio Mensal - Com Imprimir</button>
+<button class="item" onclick="abrir('Financeiro')">Financeiro - Completo - Com Imprimir</button>
 <button class="item" onclick="abrir('Anual')">Relatorio Anual</button>
-<button class="item" onclick="abrir('Horarios')">Horarios</button>
+<button class="item" onclick="abrir('Horarios')">Horarios - Editavel</button>
 <button class="item" onclick="abrir('Config')">Config - Backup</button>
 <button class="item" onclick="exportarBackup()" style="background:#DBEAFE;font-weight:800">BACKUP - Exportar</button>
 <button class="item" onclick="document.getElementById('importFile').click()" style="background:#FEF3C7;font-weight:800">BACKUP - Importar</button>
@@ -90,20 +92,24 @@
 </div>
 
 <div id="Restaurantes" class="tab">
-<div class="card" style="padding:12px"><b style="font-size:16px">RESTAURANTES P1-P6 - A-Z - COM HORARIO</b><br><small style="color:#64748B">Toque pra editar - Com horario correto</small></div>
+<div class="card" style="padding:12px"><b style="font-size:16px">RESTAURANTES P1-P6 - COM HORARIO EDITAVEL</b><br><small style="color:#64748B">Agora com horario editavel - Toque pra editar</small></div>
 <div id="restTab" style="margin:10px"></div>
 <div style="margin:14px 12px">
-<button class="btn" onclick="novoRestaurante()" style="background:#16A34A">+ Novo Restaurante - Com Horario Correto</button>
+<button class="btn" onclick="novoRestaurante()" style="background:#16A34A">+ Novo Restaurante - Com Horario Editavel</button>
 <button class="btn" style="background:#fff;color:#2563EB;border:1.5px solid #2563EB" onclick="restaurarRestaurantes()">Restaurar P1-P6</button>
 </div>
 </div>
 
-<div id="Valores" class="tab"><div class="card"><b>VALORES - MAIOR PARA MENOR</b><div id="valoresBox" style="margin-top:10px"></div></div></div>
-<div id="Relatorio" class="tab"><div class="card"><b>RELATORIO MENSAL - MAIOR PARA MENOR</b><div id="relBox" style="margin-top:10px;font-size:13px;line-height:1.8"></div></div></div>
-<div id="Anual" class="tab"><div class="card"><b>RELATORIO ANUAL 2026</b><div id="anualBox" style="margin-top:10px;font-size:13px;line-height:1.8"></div></div></div>
-<div id="Horarios" class="tab"><div class="card"><b>HORARIOS</b><div style="font-size:13px;margin-top:10px;line-height:2">Almoco: 12:30-15:30<br>Janta: 19:00-22:00<br><br>Cadastre o horario no Restaurante!</div></div></div>
+<div id="Valores" class="tab"><div class="card"><b>VALORES - MAIOR PARA MENOR</b><div id="valoresBox" style="margin-top:10px"></div><br><button class="btn" onclick="imprimirArea('valoresBox')">🖨️ IMPRIMIR VALORES</button></div></div>
+
+<div id="Relatorio" class="tab"><div class="card"><div id="printAreaRel"><b>RELATORIO MENSAL - MAIOR PARA MENOR</b><div id="relBox" style="margin-top:10px;font-size:13px;line-height:1.8"></div></div><br><button class="btn" style="background:#16A34A" onclick="imprimirArea('printAreaRel')">🖨️ IMPRIMIR RELATORIO MENSAL</button><button class="btn" style="background:#fff;color:#2563EB;border:1.5px solid #2563EB" onclick="zap(true)">ZAP COM VALOR</button></div></div>
+
+<div id="Financeiro" class="tab"><div class="card"><div id="printAreaFin"><b>FINANCEIRO COMPLETO - COM HORARIO</b><div id="finBox" style="margin-top:10px;font-size:13px;line-height:1.8"></div></div><br><button class="btn" style="background:#16A34A" onclick="imprimirArea('printAreaFin')">🖨️ IMPRIMIR FINANCEIRO COMPLETO</button><button class="btn" style="background:#F59E0B" onclick="exportarBackup()">💾 EXPORTAR BACKUP</button></div></div>
+
+<div id="Anual" class="tab"><div class="card"><div id="printAreaAnual"><b>RELATORIO ANUAL 2026</b><div id="anualBox" style="margin-top:10px;font-size:13px;line-height:1.8"></div></div><br><button class="btn" style="background:#16A34A" onclick="imprimirArea('printAreaAnual')">🖨️ IMPRIMIR ANUAL</button></div></div>
+<div id="Horarios" class="tab"><div class="card"><b>HORARIOS - EDITAVEL</b><div style="font-size:13px;margin-top:10px;line-height:2">Agora voce edita o horario em cada restaurante!<br>Ex: Almoco 11:00-14:00, Janta 18:30-21:30<br><br>Vá em Restaurantes > Toque pra editar > Mude o horario!</div><div id="horariosBox" style="margin-top:12px"></div></div></div>
 <div id="Config" class="tab">
-<div class="card"><b>CONFIG - BACKUP E INSTALAR</b><br><small>v98 - Botoes funcionando - Nao apaga nada</small><br><br>
+<div class="card"><b>CONFIG - BACKUP E INSTALAR</b><br><small>v99 - Horario editavel - Imprimir - Financeiro completo</small><br><br>
 <button class="btn" style="background:#16A34A" onclick="exportarBackup()">BACKUP - Exportar JSON</button>
 <button class="btn" style="background:#F59E0B" onclick="document.getElementById('importFile').click()">BACKUP - Importar JSON</button>
 <input type="file" id="importFile" style="display:none" accept=".json" onchange="importarBackup(this)">
@@ -125,13 +131,15 @@
 </div>
 
 <div class="modal" id="modal"><div class="box">
-<b id="modalTitulo">Novo Show</b><br><br>
+<b id="modalTitulo">Novo Show - Horario Editavel</b><br><br>
 Data: <input id="data" type="date" class="inp" value="2026-10-26">
-<div style="font-weight:800;font-size:12px;margin-top:12px">RESTAURANTE - Com horario automatico:</div>
+<div style="font-weight:800;font-size:12px;margin-top:12px">RESTAURANTE - Puxa horario automatico:</div>
 <div class="restSel"><button onclick="prevRest()">‹</button><b id="restLabel">P1</b><button onclick="nextRest()">›</button></div>
 <div class="grid" id="gridRest"></div>
-<div style="font-weight:800;font-size:12px;margin-top:10px">HORARIO - Vem do restaurante:</div>
-<div class="horario"><label id="lAlm" onclick="toggleHor('alm')"><input type="checkbox" id="alm"> Almoco 12:30-15:30</label><label id="lJan" class="on" onclick="toggleHor('jan')"><input type="checkbox" id="jan" checked> Janta 19:00-22:00</label></div>
+<div style="font-weight:800;font-size:12px;margin-top:10px">HORARIO - Agora editavel! Clique pra mudar:</div>
+<div class="horario"><label id="lAlm" onclick="toggleHor('alm')"><input type="checkbox" id="alm"> Almoco</label><label id="lJan" class="on" onclick="toggleHor('jan')"><input type="checkbox" id="jan" checked> Janta</label></div>
+<input id="horarioTexto" class="inp" placeholder="Ex: Janta 19:00-22:00" value="Janta 19:00-22:00">
+<small style="color:#2563EB;font-weight:700">Você pode editar o horario aqui! Digite como quiser: Ex: 18:30-21:30 ou Almoco 11:00-14:00</small>
 <div style="font-weight:800;font-size:12px;margin-top:10px">MUSICO - A-Z:</div>
 <div class="mus" id="musLista"></div>
 <button class="btn" onclick="salvar()">Salvar - fica pra sempre!</button><button class="btn" style="background:#fff;color:#64748B;border:1px solid #E2E8F0" onclick="fechar()">Cancelar</button>
@@ -148,17 +156,18 @@ Valor R$: <input id="musValor" type="number" class="inp" value="300">
 </div></div>
 
 <div class="modal" id="modalRest"><div class="box">
-<b id="modalRestTitulo">Novo Restaurante - Com Horario Correto</b><br><br>
+<b id="modalRestTitulo">Novo Restaurante - Horario Editavel</b><br><br>
 Codigo: <input id="restCodigo" class="inp" placeholder="Ex: P1, P7">
 Nome: <input id="restNome" class="inp" placeholder="Ex: Restaurante 1">
-<div style="font-weight:800;font-size:12px;margin-top:10px">HORARIO CORRETO:</div>
+<div style="font-weight:800;font-size:12px;margin-top:10px">HORARIO - Editavel:</div>
 <div class="horario">
-<label id="lRestAlm" onclick="toggleRestHor('alm')"><input type="checkbox" id="restAlm"> Almoco 12:30-15:30</label>
-<label id="lRestJan" class="on" onclick="toggleRestHor('jan')"><input type="checkbox" id="restJan" checked> Janta 19:00-22:00</label>
+<label id="lRestAlm" onclick="toggleRestHor('alm')"><input type="checkbox" id="restAlm"> Almoco</label>
+<label id="lRestJan" class="on" onclick="toggleRestHor('jan')"><input type="checkbox" id="restJan" checked> Janta</label>
 </div>
-<small style="color:#64748B">Quando criar show, ja vem com esse horario!</small>
+<input id="restHorarioTexto" class="inp" placeholder="Ex: Janta 19:00-22:00" value="Janta 19:00-22:00">
+<small style="color:#2563EB;font-weight:700">Digite o horario correto: Ex: Almoco 12:30-15:30 ou Janta 18:30-22:00</small>
 <br><br>
-<button class="btn" onclick="salvarRestaurante()">Salvar Restaurante</button>
+<button class="btn" onclick="salvarRestaurante()">Salvar Restaurante com Horario</button>
 <button class="btn" style="background:#fff;color:#DC2626;border:1.5px solid #FCA5A5" onclick="excluirRestaurante()" id="btnExcluirRest">Excluir - some de vez</button>
 <button class="btn" style="background:#fff;color:#64748B;border:1px solid #E2E8F0" onclick="fecharRest()">Cancelar</button>
 </div></div>
@@ -181,17 +190,17 @@ var eventosPadrao=[
 {id:5,data:"2026-10-19",casa:"P5",mus:"GERVASIO",valor:200,turno:"Janta 19:00-22:00"},
 {id:6,data:"2026-10-19",casa:"P6",mus:"DOUGLAS",valor:300,turno:"Janta 19:00-22:00"},
 {id:7,data:"2026-10-20",casa:"P1",mus:"DOUGLAS",valor:300,turno:"Janta 19:00-22:00"},
-{id:8,data:"2026-10-20",casa:"P2",mus:"LUCIANO",valor:300,turno:"Janta 19:00-22:00"},
-{id:9,data:"2026-10-20",casa:"P3",mus:"MARTIN",valor:300,turno:"Janta 19:00-22:00"},
+{id:8,data:"2026-10-20",casa:"P2",mus:"ISRAEL",valor:300,turno:"Janta 19:00-22:00"},
+{id:9,data:"2026-10-20",casa:"P3",mus:"LUCIANO",valor:300,turno:"Janta 19:00-22:00"},
 {id:10,data:"2026-10-20",casa:"P4",mus:"RICK SOLO",valor:300,turno:"Janta 19:00-22:00"},
 {id:11,data:"2026-10-21",casa:"P1",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
 {id:12,data:"2026-10-21",casa:"P2",mus:"ANDERSON VAT 60 TRIO",valor:450,turno:"Janta 19:00-22:00"},
 {id:13,data:"2026-10-21",casa:"P3",mus:"RICK TRIO",valor:450,turno:"Janta 19:00-22:00"},
-{id:14,data:"2026-10-21",casa:"P4",mus:"ISRAEL",valor:300,turno:"Janta 19:00-22:00"},
+{id:14,data:"2026-10-21",casa:"P4",mus:"RICK SOLO",valor:300,turno:"Janta 19:00-22:00"},
 {id:15,data:"2026-10-21",casa:"P5",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
 {id:16,data:"2026-10-26",casa:"P1",mus:"ANDERSON VAT 60 DUO",valor:400,turno:"Janta 19:00-22:00"},
 {id:17,data:"2026-10-26",casa:"P2",mus:"RICK DUO",valor:400,turno:"Janta 19:00-22:00"},
-{id:18,data:"2026-10-26",casa:"P3",mus:"EDILL",valor:300,turno:"Janta 19:00-22:00"}
+{id:18,data:"2026-10-26",casa:"P4",mus:"RICK SOLO",valor:300,turno:"Janta 19:00-22:00"}
 ];
 var musicosPadrao=[
 {n:"ANDERSON VAT 60 DUO",v:400},{n:"ANDERSON VAT 60 TRIO",v:450},{n:"ANDRE",v:300},{n:"DOUGLAS",v:300},{n:"EDILL",v:300},{n:"GERVASIO",v:200},{n:"ISRAEL",v:300},{n:"LUCIANO",v:300},{n:"MARTIN",v:300},{n:"RICK DUO",v:400},{n:"RICK SOLO",v:300},{n:"RICK TRIO",v:450},{n:"ROBSON SOLO",v:300},{n:"YGOR",v:300}
@@ -230,8 +239,9 @@ function ordenaRestsAZ(){restaurantes.sort(function(a,b){return a.codigo.localeC
 function saveEventos(){localStorage.setItem(KEY_EVENTOS,JSON.stringify(eventos));}
 function saveMusicos(){ordenaMusicosAZ();localStorage.setItem(KEY_MUSICOS,JSON.stringify(musicos));}
 function saveRests(){ordenaRestsAZ();localStorage.setItem(KEY_RESTS,JSON.stringify(restaurantes));}
+function imprimirArea(id){var conteudo=document.getElementById(id).innerHTML;var win=window.open('','','width=800,height=600');win.document.write('<html><head><title>TAKI SOM - Impressao</title><style>body{font-family:Arial;padding:20px} .item{border-bottom:1px solid #eee;padding:6px}</style></head><body><h2>TAKI SOM - Relatorio</h2>'+conteudo+'<br><small>Gerado em '+new Date().toLocaleString('pt-BR')+'</small><script>window.print();window.close();<\/script></body></html>');win.document.close();}
 function exportarBackup(){
-  var backup={eventos:eventos,musicos:musicos,restaurantes:restaurantes,data:new Date().toISOString(),versao:"v98"};
+  var backup={eventos:eventos,musicos:musicos,restaurantes:restaurantes,data:new Date().toISOString(),versao:"v99"};
   var blob=new Blob([JSON.stringify(backup,null,2)],{type:"application/json"});
   var url=URL.createObjectURL(blob);
   var a=document.createElement("a");a.href=url;a.download="takisom-backup-"+new Date().toISOString().split("T")[0]+".json";a.click();URL.revokeObjectURL(url);
@@ -244,7 +254,7 @@ function importarBackup(input){
     try{
       var backup=JSON.parse(e.target.result);
       if(backup.eventos && Array.isArray(backup.eventos)){
-        if(!confirm("Importar backup com "+backup.eventos.length+" eventos? Vai substituir tudo!")) return;
+        if(!confirm("Importar backup com "+backup.eventos.length+" eventos?")) return;
         eventos=backup.eventos;musicos=backup.musicos||musicosPadrao;restaurantes=backup.restaurantes||restaurantesPadrao;
         saveEventos();saveMusicos();saveRests();render();renderMusTab();renderRestTab();renderGridRest();
         alert("Backup importado!");
@@ -259,7 +269,7 @@ function restaurarMusicos(){if(!confirm('Restaurar musicos?'))return;musicos=mus
 function restaurarRestaurantes(){if(!confirm('Restaurar P1-P6?'))return;localStorage.removeItem(KEY_RESTS);restaurantes=restaurantesPadrao;saveRests();renderRestTab();renderGridRest();}
 function abrirSide(){document.getElementById('side').classList.add('show');}
 function fecharSide(){document.getElementById('side').classList.remove('show');}
-function abrir(t){fecharSide();document.querySelectorAll('.tab').forEach(function(el){el.classList.remove('show')});document.querySelectorAll('.menuBottom button').forEach(function(b){b.classList.remove('on')});document.getElementById(t).classList.add('show');var m=document.getElementById('m'+t);if(m)m.classList.add('on');if(t=='Musicos')renderMusTab();if(t=='Restaurantes')renderRestTab();render();}
+function abrir(t){fecharSide();document.querySelectorAll('.tab').forEach(function(el){el.classList.remove('show')});document.querySelectorAll('.menuBottom button').forEach(function(b){b.classList.remove('on')});document.getElementById(t).classList.add('show');var m=document.getElementById('m'+t);if(m)m.classList.add('on');if(t=='Musicos')renderMusTab();if(t=='Restaurantes')renderRestTab();if(t=='Financeiro')renderFinanceiro();render();}
 function abrirSino(){fecharSide();try{if(navigator.vibrate)navigator.vibrate(100);}catch(e){}var hoje=eventos.filter(function(e){return e.data=='2026-10-26';});hoje.sort(function(a,b){return b.valor-a.valor;});var html='<div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:12px;padding:12px;margin:8px 0"><b>Hoje 26/10 - '+hoje.length+' shows</b><br><small>'+hoje.map(function(e){return 'R$'+e.valor+' - '+e.casa+' - '+e.mus;}).join('<br>')+'</small></div>';document.getElementById('sinoLista').innerHTML=html;document.getElementById('modalSino').classList.add('show');}
 function fecharSino(){document.getElementById('modalSino').classList.remove('show');}
 function mudaMes(d){var el=document.getElementById('mesLabel');if(el.innerText.indexOf('SETEMBRO')>=0)el.innerText='MES DE OUTUBRO DE 2026';else el.innerText='MES DE SETEMBRO DE 2026';}
@@ -276,8 +286,26 @@ function render(){
   document.getElementById('badge').innerText=eventos.filter(function(e){return e.data=='2026-10-26';}).length;
   var relEventos=[].concat(eventos);relEventos.sort(function(a,b){return b.valor-a.valor;});
   var relHtml='<b style="color:#2563EB">FINANCEIRO - MAIOR PARA MENOR:</b><br><br>';relEventos.forEach(function(ev){relHtml+='<div style="display:flex;justify-content:space-between;padding:6px;border-bottom:1px solid #F1F5F9"><span>R$ '+ev.valor+' - '+ev.casa+' - '+ev.mus+'</span><small>'+ev.data.split('-').reverse().join('/')+'</small></div>';});relHtml+='<br><b style="color:#16A34A">Total: R$ '+eventos.reduce(function(s,e){return s+e.valor;},0)+'</b>';document.getElementById('relBox').innerHTML=relHtml;
+  renderFinanceiro();
   var anualHtml='<b style="color:#2563EB">FINANCEIRO ANUAL - MAIOR PARA MENOR:</b><br><br>';var porValor=[].concat(eventos);porValor.sort(function(a,b){return b.valor-a.valor;});porValor.forEach(function(ev){anualHtml+='<div style="display:flex;justify-content:space-between;padding:6px;border-bottom:1px solid #F1F5F9"><span>'+ev.casa+' - '+ev.mus+'</span><b>R$ '+ev.valor+'</b></div>';});anualHtml+='<br><b>Total ano: '+eventos.length+' eventos - R$ '+eventos.reduce(function(s,e){return s+e.valor;},0)+'</b>';document.getElementById('anualBox').innerHTML=anualHtml;
   var vb=document.getElementById('valoresBox');if(vb){var porValorMus=[].concat(musicos);porValorMus.sort(function(a,b){return b.v-a.v;});var hv='<b style="font-size:11px;color:#64748B">MAIOR PARA MENOR:</b><br><br>';porValorMus.forEach(function(m){hv+='<div style="display:flex;justify-content:space-between;padding:8px;border-bottom:1px solid #F1F5F9"><span>'+m.n+'</span><b style="color:#16A34A">R$ '+m.v+'</b></div>';});vb.innerHTML=hv;}
+  var hb=document.getElementById('horariosBox');if(hb){var hh='';restaurantes.forEach(function(r){hh+='<div style="display:flex;justify-content:space-between;padding:8px;border-bottom:1px solid #F1F5F9"><span><b>'+r.codigo+'</b> - '+r.nome+'</span><span style="color:#2563EB;font-weight:700">'+r.horario+'</span></div>';});hb.innerHTML=hh;}
+}
+function renderFinanceiro(){
+  var total=eventos.reduce(function(s,e){return s+e.valor;},0);
+  var porRest={};eventos.forEach(function(e){if(!porRest[e.casa])porRest[e.casa]=0;porRest[e.casa]+=e.valor;});
+  var porMus={};eventos.forEach(function(e){if(!porMus[e.mus])porMus[e.mus]=0;porMus[e.mus]+=e.valor;});
+  var html='<div style="background:#EFF6FF;border-radius:12px;padding:12px;margin:8px 0"><b style="font-size:18px">Total Geral: R$ '+total+'</b><br><small>'+eventos.length+' eventos</small></div>';
+  html+='<br><b style="color:#2563EB">POR RESTAURANTE - MAIOR PARA MENOR:</b><br><br>';
+  var restArray=[];for(var k in porRest){restArray.push({casa:k,valor:porRest[k]});}restArray.sort(function(a,b){return b.valor-a.valor;});
+  restArray.forEach(function(r){html+='<div style="display:flex;justify-content:space-between;padding:6px;border-bottom:1px solid #F1F5F9"><span>'+r.casa+'</span><b style="color:#16A34A">R$ '+r.valor+'</b></div>';});
+  html+='<br><b style="color:#2563EB">POR MUSICO - MAIOR PARA MENOR:</b><br><br>';
+  var musArray=[];for(var k in porMus){musArray.push({mus:k,valor:porMus[k]});}musArray.sort(function(a,b){return b.valor-a.valor;});
+  musArray.forEach(function(m){html+='<div style="display:flex;justify-content:space-between;padding:6px;border-bottom:1px solid #F1F5F9"><span>'+m.mus+'</span><b>R$ '+m.valor+'</b></div>';});
+  html+='<br><b style="color:#2563EB">DETALHADO - MAIOR PARA MENOR:</b><br><br>';
+  var detalhado=[].concat(eventos);detalhado.sort(function(a,b){return b.valor-a.valor;});
+  detalhado.forEach(function(ev){html+='<div style="display:flex;justify-content:space-between;padding:6px;border-bottom:1px solid #F1F5F9"><span>R$ '+ev.valor+' - '+ev.casa+' - '+ev.mus+' - '+ev.turno+'</span><small>'+ev.data.split('-').reverse().join('/')+'</small></div>';});
+  var fin=document.getElementById('finBox');if(fin)fin.innerHTML=html;
 }
 function renderGridRest(){
   ordenaRestsAZ();
@@ -320,37 +348,76 @@ function aplicarHorarioDoRest(codigo){
   janta=r.janta;
   document.getElementById('alm').checked=almoco;
   document.getElementById('jan').checked=janta;
+  document.getElementById('horarioTexto').value=r.horario;
   if(almoco)document.getElementById('lAlm').classList.add('on');else document.getElementById('lAlm').classList.remove('on');
   if(janta)document.getElementById('lJan').classList.add('on');else document.getElementById('lJan').classList.remove('on');
 }
-function toggleHor(t){if(t=='alm'){almoco=!almoco;document.getElementById('alm').checked=almoco;var l=document.getElementById('lAlm');if(almoco)l.classList.add('on');else l.classList.remove('on');}else{janta=!janta;document.getElementById('jan').checked=janta;var l=document.getElementById('lJan');if(janta)l.classList.add('on');else l.classList.remove('on');}}
-function toggleRestHor(t){if(t=='alm'){restAlmoco=!restAlmoco;document.getElementById('restAlm').checked=restAlmoco;var l=document.getElementById('lRestAlm');if(restAlmoco)l.classList.add('on');else l.classList.remove('on');}else{restJanta=!restJanta;document.getElementById('restJan').checked=restJanta;var l=document.getElementById('lRestJan');if(restJanta)l.classList.add('on');else l.classList.remove('on');}}
+function toggleHor(t){
+  if(t=='alm'){
+    almoco=!almoco;
+    document.getElementById('alm').checked=almoco;
+    var l=document.getElementById('lAlm');
+    if(almoco){l.classList.add('on'); if(!document.getElementById('horarioTexto').value.includes('Almoco')) document.getElementById('horarioTexto').value='Almoco '+document.getElementById('horarioTexto').value;}
+    else l.classList.remove('on');
+  }else{
+    janta=!janta;
+    document.getElementById('jan').checked=janta;
+    var l=document.getElementById('lJan');
+    if(janta){l.classList.add('on'); if(!document.getElementById('horarioTexto').value.includes('Janta')) document.getElementById('horarioTexto').value='Janta 19:00-22:00';}
+    else l.classList.remove('on');
+  }
+}
+function toggleRestHor(t){
+  if(t=='alm'){
+    restAlmoco=!restAlmoco;
+    document.getElementById('restAlm').checked=restAlmoco;
+    var l=document.getElementById('lRestAlm');
+    if(restAlmoco){l.classList.add('on'); document.getElementById('restHorarioTexto').value='Almoco 12:30-15:30';}
+    else l.classList.remove('on');
+  }else{
+    restJanta=!restJanta;
+    document.getElementById('restJan').checked=restJanta;
+    var l=document.getElementById('lRestJan');
+    if(restJanta){l.classList.add('on'); document.getElementById('restHorarioTexto').value='Janta 19:00-22:00';}
+    else l.classList.remove('on');
+  }
+  if(restAlmoco&&restJanta) document.getElementById('restHorarioTexto').value='Almoco 12:30-15:30 + Janta 19:00-22:00';
+}
 function renderMus(){ordenaMusicosAZ();var div=document.getElementById('musLista');var h='';musicos.forEach(function(m){var sel=m.n==musSel;var cl=sel?'item on':'item';h+='<div class="'+cl+'" onclick="musSel=\''+m.n.replace(/\'/g,"\\'")+'\';renderMus()"><div><input type="radio" '+(sel?'checked':'')+'> '+m.n+'</div><b>R$ '+m.v+'</b></div>';});div.innerHTML=h;}
 function renderMusTab(){ordenaMusicosAZ();var tab=document.getElementById('musTab');var html='';musicos.forEach(function(m,idx){html+='<div class="musCard" onclick="editarMusico('+idx+')"><div><b>'+m.n+'</b><div style="font-size:11px;color:#64748B">A-Z - Toque pra editar</div></div><div style="text-align:right"><b style="color:#2563EB">R$ '+m.v+'</b><div style="font-size:10px;color:#16A34A">Editar</div></div></div>';});tab.innerHTML=html;}
 function renderRestTab(){
   ordenaRestsAZ();
   var tab=document.getElementById('restTab');var html='';
   restaurantes.forEach(function(r,idx){
-    html+='<div class="restCard" onclick="editarRestaurante('+idx+')"><div><b>'+r.codigo+' - '+r.nome+'</b><div style="font-size:11px;color:#64748B">'+r.horario+' - Toque pra editar</div></div><div style="text-align:right"><b style="color:#2563EB">'+(r.almoco&&r.janta?'Almoco+Janta':r.almoco?'Almoco':'Janta')+'</b><div style="font-size:10px;color:#16A34A">Editar</div></div></div>';
+    html+='<div class="restCard" onclick="editarRestaurante('+idx+')"><div><b>'+r.codigo+' - '+r.nome+'</b><div style="font-size:11px;color:#64748B">'+r.horario+' - Toque pra editar</div></div><div style="text-align:right"><b style="color:#2563EB">'+r.horario+'</b><div style="font-size:10px;color:#16A34A">Editar</div></div></div>';
   });
   tab.innerHTML=html;
 }
-function novo(){editId=null;document.getElementById('modalTitulo').innerText='Novo Show - horario vem do restaurante';if(restaurantes.length>0){casaSel=restaurantes[0].codigo;restIdx=0;}musSel=musicos[0]?musicos[0].n:'EDILL';document.getElementById('data').value='2026-10-26';document.getElementById('restLabel').innerText=casaSel;aplicarHorarioDoRest(casaSel);renderGridRest();renderMus();document.getElementById('modal').classList.add('show');}
-function editar(id){var ev=eventos.find(function(e){return e.id==id;});if(!ev)return;editId=id;document.getElementById('modalTitulo').innerText='Editar Show '+id;document.getElementById('data').value=ev.data;casaSel=ev.casa;restIdx=restaurantes.findIndex(function(r){return r.codigo==casaSel;});if(restIdx<0)restIdx=0;document.getElementById('restLabel').innerText=casaSel;renderGridRest();musSel=ev.mus;renderMus();almoco=ev.turno.indexOf('Almoco')>=0;janta=ev.turno.indexOf('Janta')>=0;document.getElementById('alm').checked=almoco;document.getElementById('jan').checked=janta;if(almoco)document.getElementById('lAlm').classList.add('on');else document.getElementById('lAlm').classList.remove('on');if(janta)document.getElementById('lJan').classList.add('on');else document.getElementById('lJan').classList.remove('on');document.getElementById('modal').classList.add('show');}
+function novo(){editId=null;document.getElementById('modalTitulo').innerText='Novo Show - Horario Editavel';if(restaurantes.length>0){casaSel=restaurantes[0].codigo;restIdx=0;}musSel=musicos[0]?musicos[0].n:'EDILL';document.getElementById('data').value='2026-10-26';document.getElementById('restLabel').innerText=casaSel;aplicarHorarioDoRest(casaSel);renderGridRest();renderMus();document.getElementById('modal').classList.add('show');}
+function editar(id){var ev=eventos.find(function(e){return e.id==id;});if(!ev)return;editId=id;document.getElementById('modalTitulo').innerText='Editar Show '+id+' - Horario Editavel';document.getElementById('data').value=ev.data;casaSel=ev.casa;restIdx=restaurantes.findIndex(function(r){return r.codigo==casaSel;});if(restIdx<0)restIdx=0;document.getElementById('restLabel').innerText=casaSel;renderGridRest();musSel=ev.mus;renderMus();almoco=ev.turno.indexOf('Almoco')>=0;janta=ev.turno.indexOf('Janta')>=0;document.getElementById('alm').checked=almoco;document.getElementById('jan').checked=janta;document.getElementById('horarioTexto').value=ev.turno;if(almoco)document.getElementById('lAlm').classList.add('on');else document.getElementById('lAlm').classList.remove('on');if(janta)document.getElementById('lJan').classList.add('on');else document.getElementById('lJan').classList.remove('on');document.getElementById('modal').classList.add('show');}
 function excluir(id){if(!confirm('Excluir show '+id+' de vez?'))return;eventos=eventos.filter(function(e){return e.id!=id;});saveEventos();render();alert('Excluido! Sumiu de vez!');}
 function fechar(){document.getElementById('modal').classList.remove('show');editId=null;}
-function salvar(){var data=document.getElementById('data').value||'2026-10-26';var turno='';if(almoco&&janta)turno='Almoco 12:30-15:30 + Janta 19:00-22:00';else if(almoco)turno='Almoco 12:30-15:30';else turno='Janta 19:00-22:00';var m=musicos.find(function(x){return x.n==musSel});var valor=m?m.v:300;if(editId){var ev=eventos.find(function(e){return e.id==editId;});if(ev){ev.data=data;ev.casa=casaSel;ev.mus=musSel;ev.valor=valor;ev.turno=turno;}}else{var novoEv={id:Date.now(),data:data,casa:casaSel,mus:musSel,valor:valor,turno:turno};eventos.push(novoEv);}saveEventos();fechar();filtro('hoje');alert('Salvo! Fica pra sempre!');}
+function salvar(){
+  var data=document.getElementById('data').value||'2026-10-26';
+  var turno=document.getElementById('horarioTexto').value||'Janta 19:00-22:00';
+  if(!turno){if(almoco&&janta)turno='Almoco 12:30-15:30 + Janta 19:00-22:00';else if(almoco)turno='Almoco 12:30-15:30';else turno='Janta 19:00-22:00';}
+  var m=musicos.find(function(x){return x.n==musSel});var valor=m?m.v:300;
+  if(editId){var ev=eventos.find(function(e){return e.id==editId;});if(ev){ev.data=data;ev.casa=casaSel;ev.mus=musSel;ev.valor=valor;ev.turno=turno;}}
+  else{var novoEv={id:Date.now(),data:data,casa:casaSel,mus:musSel,valor:valor,turno:turno};eventos.push(novoEv);}
+  saveEventos();fechar();filtro('hoje');alert('Salvo com horario editavel! Fica pra sempre!');
+}
 function novoMusico(){editMusicoIdx=null;document.getElementById('modalMusicoTitulo').innerText='Novo Musico - A-Z';document.getElementById('musNome').value='';document.getElementById('musValor').value='300';document.getElementById('btnExcluirMusico').style.display='none';document.getElementById('modalMusico').classList.add('show');}
 function editarMusico(idx){editMusicoIdx=idx;var m=musicos[idx];document.getElementById('modalMusicoTitulo').innerText='Editar - '+m.n;document.getElementById('musNome').value=m.n;document.getElementById('musValor').value=m.v;document.getElementById('btnExcluirMusico').style.display='block';document.getElementById('modalMusico').classList.add('show');}
-function salvarMusico(){var nome=document.getElementById('musNome').value.trim().toUpperCase();var valor=parseInt(document.getElementById('musValor').value)||300;if(!nome){alert('Digite o nome!');return;}if(editMusicoIdx!==null){musicos[editMusicoIdx].n=nome;musicos[editMusicoIdx].v=valor;}else{musicos.push({n:nome,v:valor});}saveMusicos();fecharMusico();renderMusTab();renderMus();render();alert('Salvo! Fica pra sempre!');}
-function excluirMusico(){if(editMusicoIdx===null)return;if(!confirm('Excluir musico '+musicos[editMusicoIdx].n+' de vez?'))return;musicos.splice(editMusicoIdx,1);saveMusicos();fecharMusico();renderMusTab();renderMus();render();alert('Musico excluido! Sumiu de vez!');}
+function salvarMusico(){var nome=document.getElementById('musNome').value.trim().toUpperCase();var valor=parseInt(document.getElementById('musValor').value)||300;if(!nome){alert('Digite o nome!');return;}if(editMusicoIdx!==null){musicos[editMusicoIdx].n=nome;musicos[editMusicoIdx].v=valor;}else{musicos.push({n:nome,v:valor});}saveMusicos();fecharMusico();renderMusTab();renderMus();render();alert('Salvo!');}
+function excluirMusico(){if(editMusicoIdx===null)return;if(!confirm('Excluir musico '+musicos[editMusicoIdx].n+' de vez?'))return;musicos.splice(editMusicoIdx,1);saveMusicos();fecharMusico();renderMusTab();renderMus();render();alert('Excluido!');}
 function fecharMusico(){document.getElementById('modalMusico').classList.remove('show');editMusicoIdx=null;}
 
 function novoRestaurante(){
   editRestIdx=null;
-  document.getElementById('modalRestTitulo').innerText='Novo Restaurante - Com Horario Correto';
+  document.getElementById('modalRestTitulo').innerText='Novo Restaurante - Horario Editavel';
   document.getElementById('restCodigo').value='';
   document.getElementById('restNome').value='';
+  document.getElementById('restHorarioTexto').value='Janta 19:00-22:00';
   restAlmoco=false;restJanta=true;
   document.getElementById('restAlm').checked=false;document.getElementById('restJan').checked=true;
   document.getElementById('lRestAlm').classList.remove('on');document.getElementById('lRestJan').classList.add('on');
@@ -360,9 +427,10 @@ function novoRestaurante(){
 function editarRestaurante(idx){
   editRestIdx=idx;
   var r=restaurantes[idx];
-  document.getElementById('modalRestTitulo').innerText='Editar - '+r.codigo+' - Com Horario';
+  document.getElementById('modalRestTitulo').innerText='Editar - '+r.codigo+' - Horario Editavel';
   document.getElementById('restCodigo').value=r.codigo;
   document.getElementById('restNome').value=r.nome;
+  document.getElementById('restHorarioTexto').value=r.horario;
   restAlmoco=r.almoco;restJanta=r.janta;
   document.getElementById('restAlm').checked=restAlmoco;document.getElementById('restJan').checked=restJanta;
   if(restAlmoco)document.getElementById('lRestAlm').classList.add('on');else document.getElementById('lRestAlm').classList.remove('on');
@@ -373,38 +441,38 @@ function editarRestaurante(idx){
 function salvarRestaurante(){
   var codigo=document.getElementById('restCodigo').value.trim().toUpperCase();
   var nome=document.getElementById('restNome').value.trim();
+  var horarioTexto=document.getElementById('restHorarioTexto').value.trim()||'Janta 19:00-22:00';
   if(!codigo){alert('Digite o codigo! Ex: P1, P7');return;}
   if(!nome){alert('Digite o nome do restaurante!');return;}
-  if(!restAlmoco && !restJanta){alert('Escolha pelo menos um horario! Almoco ou Janta');return;}
-  var horario='';if(restAlmoco&&restJanta)horario='Almoco 12:30-15:30 + Janta 19:00-22:00';else if(restAlmoco)horario='Almoco 12:30-15:30';else horario='Janta 19:00-22:00';
+  if(!restAlmoco && !restJanta){alert('Escolha pelo menos Almoco ou Janta');return;}
   if(editRestIdx!==null){
     restaurantes[editRestIdx].codigo=codigo;
     restaurantes[editRestIdx].nome=nome;
-    restaurantes[editRestIdx].horario=horario;
+    restaurantes[editRestIdx].horario=horarioTexto;
     restaurantes[editRestIdx].almoco=restAlmoco;
     restaurantes[editRestIdx].janta=restJanta;
   }else{
-    restaurantes.push({codigo:codigo,nome:nome,horario:horario,almoco:restAlmoco,janta:restJanta});
+    restaurantes.push({codigo:codigo,nome:nome,horario:horarioTexto,almoco:restAlmoco,janta:restJanta});
   }
   saveRests();
   fecharRest();
   renderRestTab();
   renderGridRest();
-  alert('Restaurante salvo com horario! Agora quando criar show ja vem com esse horario!');
+  alert('Restaurante salvo com horario editavel! Agora quando criar show ja vem com esse horario e voce pode editar!');
 }
 function excluirRestaurante(){
   if(editRestIdx===null)return;
-  if(!confirm('Excluir restaurante '+restaurantes[editRestIdx].codigo+' - '+restaurantes[editRestIdx].nome+' de vez?'))return;
+  if(!confirm('Excluir restaurante '+restaurantes[editRestIdx].codigo+' de vez?'))return;
   restaurantes.splice(editRestIdx,1);
   saveRests();
   fecharRest();
   renderRestTab();
   renderGridRest();
-  alert('Restaurante excluido! Sumiu de vez!');
+  alert('Excluido!');
 }
 function fecharRest(){document.getElementById('modalRest').classList.remove('show');editRestIdx=null;}
 
-function zap(comValor){var filt=eventos.filter(function(e){return e.data>='2026-10-19';});filt.sort(function(a,b){return b.valor-a.valor;});var txt='';filt.forEach(function(ev){if(comValor)txt+=ev.data.split('-').reverse().join('/')+' - RESTAURANTE '+ev.casa+' - MUSICO '+ev.mus+' R$'+ev.valor+' - '+ev.turno+'\n';else txt+=ev.data.split('-').reverse().join('/')+' - RESTAURANTE '+ev.casa+' - MUSICO '+ev.mus+' - '+ev.turno+'\n';});var titulo=comValor?'*AGENDA TAKI SOM - COM HORARIO CORRETO*':'*CRONOGRAMA - SEM VALOR*';window.open('https://wa.me/?text='+encodeURIComponent(titulo+'\n\n'+txt),'_blank');}
+function zap(comValor){var filt=eventos.filter(function(e){return e.data>='2026-10-19';});filt.sort(function(a,b){return b.valor-a.valor;});var txt='';filt.forEach(function(ev){if(comValor)txt+=ev.data.split('-').reverse().join('/')+' - RESTAURANTE '+ev.casa+' - MUSICO '+ev.mus+' R$'+ev.valor+' - '+ev.turno+'\n';else txt+=ev.data.split('-').reverse().join('/')+' - RESTAURANTE '+ev.casa+' - MUSICO '+ev.mus+' - '+ev.turno+'\n';});var titulo=comValor?'*AGENDA TAKI SOM - COM HORARIO EDITAVEL*':'*CRONOGRAMA - SEM VALOR*';window.open('https://wa.me/?text='+encodeURIComponent(titulo+'\n\n'+txt),'_blank');}
 ordenaMusicosAZ();ordenaRestsAZ();renderMus();renderMusTab();renderRestTab();renderGridRest();render();
 </script>
 </body>
