@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#1E40AF">
-<title>TAKI SOM v111 - Sem Perder Dados</title>
+<title>TAKI SOM v112 - Não Perde Mais</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
 body{background:#f1f5f9;padding-bottom:90px}
@@ -12,7 +12,7 @@ body{background:#f1f5f9;padding-bottom:90px}
 .card{background:white;margin:12px;border-radius:18px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,0.06)}
 .month-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .month-nav button{width:44px;height:44px;border-radius:12px;border:1px solid #e2e8f0;background:#f8fafc;font-size:18px;font-weight:bold;color:#1E40AF}
-.month-nav span{font-weight:800;font-size:14px;text-transform:uppercase;text-align:center;flex:1}
+.month-nav span{font-weight:800;font-size:13px;text-transform:uppercase;text-align:center;flex:1}
 .filters-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px}
 .filters-3 button{padding:12px 6px;border-radius:14px;border:1px solid #dbeafe;font-weight:700;font-size:12px;background:#eff6ff;color:#1e293b}
 .filters-3 button.active{background:#2563eb;color:white;border-color:#2563eb}
@@ -29,88 +29,79 @@ body{background:#f1f5f9;padding-bottom:90px}
 .fab{position:fixed;bottom:78px;right:18px;width:56px;height:56px;background:#2563eb;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 4px 12px rgba(37,99,235,0.4);z-index:19;border:none}
 .modal-bg{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:100;padding:16px}
 .modal-bg.show{display:flex}
-.modal{width:100%;max-width:420px;background:white;border-radius:20px;padding:20px;max-height:90vh;overflow-y:auto}
-.modal h2{font-size:18px;font-weight:800;color:#0f172a;margin-bottom:16px;text-align:center}
+.modal{width:100%;max-width:420px;background:white;border-radius:20px;padding:20px}
+.modal h2{font-size:18px;font-weight:800;text-align:center;margin-bottom:16px}
 .modal label{font-size:12px;font-weight:700;color:#475569;margin:12px 0 6px 0;display:block;text-transform:uppercase}
-.modal select,.modal input{width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid #e2e8f0;font-size:15px;font-weight:600;background:#f8fafc;color:#0f172a}
-.chip-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
-.chip{padding:8px 14px;border-radius:20px;border:1.5px solid #e2e8f0;background:white;font-size:13px;font-weight:600;color:#475569}
+.modal select,.modal input{width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid #e2e8f0;font-size:15px;font-weight:600;background:#f8fafc}
+.chip-group{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap}
+.chip{padding:8px 14px;border-radius:20px;border:1.5px solid #e2e8f0;background:white;font-size:13px;font-weight:600}
 .chip.active{background:#2563eb;color:white;border-color:#2563eb}
 .modal-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .modal-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
-.modal-actions button{padding:14px;border-radius:12px;font-weight:800;font-size:14px;border:none}
+.modal-actions button{padding:14px;border-radius:12px;font-weight:800;border:none}
 .btn-cancel{background:#f1f5f9;color:#64748b}
 .btn-save{background:#2563eb;color:white}
 </style>
 </head>
 <body>
-<div class="header"><div>☰</div><h1>TAKI SOM</h1><div style="position:relative">🔔<div style="position:absolute;top:-6px;right:-6px;background:#ef4444;color:white;font-size:11px;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold" id="badgeCount">0</div></div></div>
-<div class="card"><div class="month-nav"><button onclick="mudarMes(-1)">‹</button><span id="mesLabel"></span><button onclick="mudarMes(1)">›</button></div><div class="filters-3"><button id="btnDia" class="active" onclick="irParaHoje()">DIA <span id="diaNum"></span><br>HOJE</button><button onclick="setFiltro('Mes')">MÊS<br><span id="mesNome"></span></button><button onclick="setFiltro('Ano')">ANO<br><span id="anoNum"></span></button></div><div class="filters-row"><button class="active" id="fHoje" onclick="setFiltro('Hoje')">Hoje</button><button id="fDia" onclick="setFiltro('Dia')">Dia</button><button id="fSemana" onclick="setFiltro('Semana')">Semana</button><button id="fMes" onclick="setFiltro('Mes')">Mês</button><button id="fAno" onclick="setFiltro('Ano')">Ano Todo</button></div></div>
-<div class="banner"><span id="bannerCount">0 eventos</span><span id="bannerTipo">HOJE</span></div><div class="banner-blue" id="bannerBlue"></div><div id="listaEventos"></div>
+<div class="header"><div>☰</div><h1>TAKI SOM</h1><div style="position:relative">🔔<div id="badgeCount" style="position:absolute;top:-6px;right:-6px;background:#ef4444;color:white;font-size:11px;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold">0</div></div></div>
+<div class="card"><div class="month-nav"><button onclick="mudarMes(-1)">‹</button><span id="mesLabel"></span><button onclick="mudarMes(1)">›</button></div><div class="filters-3"><button id="btnDia" onclick="irParaHoje()">DIA <span id="diaNum"></span><br>HOJE</button><button id="btnMes" onclick="setFiltro('Mes')">MÊS<br><span id="mesNome"></span></button><button id="btnAno" onclick="setFiltro('Ano')">ANO<br><span id="anoNum"></span></button></div><div class="filters-row"><button id="fHoje" onclick="setFiltro('Hoje')">Hoje</button><button id="fDia" onclick="setFiltro('Dia')">Dia</button><button id="fSemana" onclick="setFiltro('Semana')">Semana</button><button id="fMes" onclick="setFiltro('Mes')">Mês</button><button id="fAno" onclick="setFiltro('Ano')">Ano Todo</button></div></div>
+<div class="banner"><span id="bannerCount"></span><span id="bannerTipo"></span></div><div class="banner-blue" id="bannerBlue"></div><div id="listaEventos"></div>
 <button class="fab" onclick="abrirModal()">+</button>
 <div class="bottom-nav"><span class="active">Agenda</span><span>Músicos</span><span>Relatório</span><span>Menu</span></div>
-
-<div class="modal-bg" id="modalBg" onclick="if(event.target.id==='modalBg') fecharModal()"><div class="modal"><h2 id="modalTitle">Novo Show</h2>
-<label>🏠 Casa / Restaurante</label><select id="inpCasa"><option value="">Selecione a casa</option><option>P1 - ISRAEL</option><option>P2 - YGOR</option><option>P3 - RICK SOLO</option><option>P4 - DUDU</option><option>P5 - LEO</option><option>P6 - GUILHERME</option><option>QUINTAL DO ESPETO</option><option>BAR DO ZÉ</option><option>OUTRO</option></select>
-<label>🎤 Músico / Banda</label><select id="inpMusico"><option value="">Selecione o músico</option><option>ISRAEL</option><option>YGOR</option><option>RICK SOLO</option><option>DUDU</option><option>LEO</option><option>GUILHERME</option><option>MARCOS</option><option>BANDA COMPLETA</option></select>
-<label>🍽️ Período</label><div class="chip-group" id="chipPeriodo"><div class="chip active" data-val="Almoço 12:00-15:00" onclick="selectChip(this)">☀️ Almoço</div><div class="chip" data-val="Janta 19:00-22:00" onclick="selectChip(this)">🌙 Janta</div><div class="chip" data-val="Janta 20:00-23:00" onclick="selectChip(this)">🎶 Janta Late</div></div>
-<div class="modal-row"><div><label>📅 Data</label><input type="date" id="inpData"></div><div><label>💰 Cachê R$</label><input type="number" id="inpValor" placeholder="300"></div></div>
-<div class="modal-actions"><button class="btn-cancel" onclick="fecharModal()">Cancelar</button><button class="btn-save" onclick="salvarEvento()">Salvar Show</button></div></div></div>
+<div class="modal-bg" id="modalBg" onclick="if(event.target.id==='modalBg') fecharModal()"><div class="modal"><h2 id="modalTitle">Novo Show</h2><label>🏠 Casa</label><select id="inpCasa"><option value="">Selecione</option><option>P1 - ISRAEL</option><option>P2 - YGOR</option><option>P3 - RICK SOLO</option><option>P4 - DUDU</option><option>P5 - LEO</option><option>QUINTAL DO ESPETO</option><option>OUTRO</option></select><label>🎤 Músico</label><select id="inpMusico"><option value="">Selecione</option><option>ISRAEL</option><option>YGOR</option><option>RICK SOLO</option><option>DUDU</option><option>LEO</option><option>GUILHERME</option><option>MARCOS</option></select><label>Período</label><div class="chip-group" id="chipPeriodo"><div class="chip active" data-val="Almoço 12:00-15:00" onclick="selectChip(this)">☀️ Almoço</div><div class="chip" data-val="Janta 19:00-22:00" onclick="selectChip(this)">🌙 Janta</div></div><div class="modal-row"><div><label>Data</label><input type="date" id="inpData"></div><div><label>Valor R$</label><input type="number" id="inpValor" placeholder="300"></div></div><div class="modal-actions"><button class="btn-cancel" onclick="fecharModal()">Cancelar</button><button class="btn-save" onclick="salvarEvento()">Salvar</button></div></div></div>
 
 <script>
+// v112 - NÃO PERDE DADOS E NÃO VOLTA PRA SEMANA
 function getHojeReal(){ const a=new Date(); return new Date(a.getFullYear(),a.getMonth(),a.getDate()); }
-let dataSelecionada=getHojeReal();
-let mesVisualizado=new Date(dataSelecionada.getFullYear(),dataSelecionada.getMonth(),1);
-let filtroAtual='Semana';
-let editandoId=null;
+function toISO(d){ return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
+function parseData(ev){ let s=ev.data||''; if(!s) return null; if(s.includes('/')){ const p=s.split('/'); if(p.length===3) return `${p[2]}-${p[1].padStart(2,'0')}-${p[0].padStart(2,'0')}`; } return s.substring(0,10); }
 
-// ===== RECUPERADOR DE DADOS - NUNCA MAIS PERDE =====
-function recuperarTodosEventos(){
-  let todos = [];
-  const chavesPossiveis = ['takisom_final_eventos','takisom_eventos','taki_eventos','taki_som_eventos','eventos','agenda','taki_agenda','takisom'];
-  chavesPossiveis.forEach(chave=>{
+// RECUPERA TUDO - NUNCA APAGA
+function carregarEventos(){
+  let todos=[];
+  const chaves=['takisom_final_eventos','takisom_eventos','taki_eventos','taki_som_eventos','eventos','takisom_backup_geral'];
+  chaves.forEach(k=>{
     try{
-      const v = localStorage.getItem(chave);
+      const v=localStorage.getItem(k);
       if(v){
-        const arr = JSON.parse(v);
-        if(Array.isArray(arr)){
-          arr.forEach(ev=>{
-            if(ev && (ev.nome || ev.musico || ev.casa)){
-              todos.push(ev);
-            }
-          });
-        }
+        const arr=JSON.parse(v);
+        if(Array.isArray(arr)) todos=todos.concat(arr);
       }
     }catch(e){}
   });
-  // Remove duplicado por id ou nome+data
-  const mapa = new Map();
+  // deduplica por id
+  const map=new Map();
   todos.forEach(ev=>{
-    if(!ev.id) ev.id = Date.now()+Math.random();
-    if(!ev.data) ev.data = '2026-10-26'; // se tava sem data, era de ontem
-    const key = ev.id;
-    if(!mapa.has(key)) mapa.set(key, ev);
+    if(!ev || (!ev.nome && !ev.musico && !ev.casa)) return;
+    if(!ev.id) ev.id=Date.now()+Math.random();
+    if(!ev.data) ev.data='2026-10-26';
+    map.set(String(ev.id), ev);
   });
-  let final = Array.from(mapa.values());
-  // Se ainda tá vazio e tem os 5 que você falou, restaura eles
+  const final=Array.from(map.values());
+  // Só cria exemplo se REALMENTE não tem nada em nenhuma chave
   if(final.length===0){
-    final = [
-      {id:101, data:'2026-10-26', nome:'P1 - ISRAEL', casa:'P1 - ISRAEL', musico:'ISRAEL', horario:'Janta 19:00-22:00', valor:300},
-      {id:102, data:'2026-10-26', nome:'P2 - YGOR', casa:'P2 - YGOR', musico:'YGOR', horario:'Janta 19:00-22:00', valor:300},
-      {id:103, data:'2026-10-26', nome:'P3 - RICK SOLO', casa:'P3 - RICK SOLO', musico:'RICK SOLO', horario:'Janta 19:00-22:00', valor:300},
-      {id:104, data:'2026-10-26', nome:'P4 - DUDU', casa:'P4 - DUDU', musico:'DUDU', horario:'Janta 19:00-22:00', valor:300},
-      {id:105, data:'2026-10-26', nome:'P5 - LEO', casa:'P5 - LEO', musico:'LEO', horario:'Janta 19:00-22:00', valor:300},
+    return [
+      {id:101, data:'2026-10-26', nome:'ISRAEL', casa:'P1 - ISRAEL', musico:'ISRAEL', horario:'Janta 19:00-22:00', valor:300},
+      {id:102, data:'2026-10-26', nome:'YGOR', casa:'P2 - YGOR', musico:'YGOR', horario:'Janta 19:00-22:00', valor:300},
+      {id:1, data:'2026-10-27', nome:'ISRAEL', casa:'P1 - ISRAEL', musico:'ISRAEL', horario:'Janta 19:00-22:00', valor:300},
+      {id:2, data:'2026-10-27', nome:'YGOR', casa:'P2 - YGOR', musico:'YGOR', horario:'Janta 19:00-22:00', valor:300},
     ];
   }
-  localStorage.setItem('takisom_final_eventos', JSON.stringify(final));
-  // Salva backup extra
-  localStorage.setItem('takisom_backup_geral', JSON.stringify(final));
   return final;
 }
-let eventos = recuperarTodosEventos();
+let eventos=carregarEventos();
+localStorage.setItem('takisom_final_eventos', JSON.stringify(eventos));
+localStorage.setItem('takisom_backup_geral', JSON.stringify(eventos));
 
-function toISO(d){ return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
-function parseData(ev){ let s=ev.data||''; if(!s) return null; if(s.includes('/')){ const [dd,mm,yyyy]=s.split('/'); return `${yyyy}-${mm.padStart(2,'0')}-${dd.padStart(2,'0')}`; } return s.substring(0,10); }
+// LEMBRA O FILTRO QUE VOCÊ ESCOLHEU
+let filtroSalvo = localStorage.getItem('takisom_filtro_atual');
+let dataSalva = localStorage.getItem('takisom_data_selecionada');
+let dataSelecionada = dataSalva ? new Date(dataSalva+'T12:00:00') : getHojeReal();
+let mesVisualizado = new Date(dataSelecionada.getFullYear(), dataSelecionada.getMonth(), 1);
+let filtroAtual = filtroSalvo || 'Dia'; // Padrão Dia, não Semana
+let editandoId=null;
+
 function formatDateBR(d){ return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`; }
 function formatDiaSemana(d){ return ['DOMINGO','SEGUNDA','TERÇA','QUARTA','QUINTA','SEXTA','SÁBADO'][d.getDay()]; }
 function formatMesExtenso(d){ return ['JANEIRO','FEVEREIRO','MARÇO','ABRIL','MAIO','JUNHO','JULHO','AGOSTO','SETEMBRO','OUTUBRO','NOVEMBRO','DEZEMBRO'][d.getMonth()]; }
@@ -133,9 +124,37 @@ function getEventosFiltrados(){
     return false;
   });
 }
-function irParaHoje(){ dataSelecionada=getHojeReal(); mesVisualizado=new Date(dataSelecionada.getFullYear(),dataSelecionada.getMonth(),1); filtroAtual='Hoje'; render(); }
-function mudarMes(dir){ mesVisualizado.setMonth(mesVisualizado.getMonth()+dir); dataSelecionada=new Date(mesVisualizado.getFullYear(),mesVisualizado.getMonth(),1); if(filtroAtual!=='Mes' && filtroAtual!=='Ano') filtroAtual='Mes'; render(); }
-function setFiltro(f){ filtroAtual=f; if(f==='Hoje') irParaHoje(); else render(); }
+
+function salvarEstado(){
+  localStorage.setItem('takisom_filtro_atual', filtroAtual);
+  localStorage.setItem('takisom_data_selecionada', toISO(dataSelecionada));
+  localStorage.setItem('takisom_final_eventos', JSON.stringify(eventos));
+  localStorage.setItem('takisom_backup_geral', JSON.stringify(eventos));
+}
+
+function irParaHoje(){
+  dataSelecionada=getHojeReal();
+  mesVisualizado=new Date(dataSelecionada.getFullYear(), dataSelecionada.getMonth(), 1);
+  filtroAtual='Hoje';
+  salvarEstado();
+  render();
+}
+function mudarMes(dir){
+  mesVisualizado.setMonth(mesVisualizado.getMonth()+dir);
+  dataSelecionada=new Date(mesVisualizado.getFullYear(), mesVisualizado.getMonth(), 1);
+  filtroAtual='Mes';
+  salvarEstado();
+  render();
+}
+function setFiltro(f){
+  filtroAtual=f;
+  if(f==='Hoje'){
+    dataSelecionada=getHojeReal();
+    mesVisualizado=new Date(dataSelecionada.getFullYear(), dataSelecionada.getMonth(), 1);
+  }
+  salvarEstado();
+  render();
+}
 
 function render(){
   const hojeReal=getHojeReal();
@@ -145,18 +164,26 @@ function render(){
   document.getElementById('mesLabel').innerText=`MÊS DE ${formatMesExtenso(mesVisualizado)} DE ${mesVisualizado.getFullYear()}`;
   document.getElementById('bannerBlue').innerText=`${filtroAtual.toUpperCase()} - ${formatDiaSemana(dataSelecionada)}, ${formatDateBR(dataSelecionada)}`;
   document.getElementById('bannerTipo').innerText=filtroAtual.toUpperCase();
+  
   document.querySelectorAll('.filters-row button').forEach(b=>b.classList.remove('active'));
-  const map={Hoje:'fHoje',Dia:'fDia',Semana:'fSemana',Mes:'fMes',Ano:'fAno'}; if(map[filtroAtual]) document.getElementById(map[filtroAtual]).classList.add('active');
+  document.querySelectorAll('.filters-3 button').forEach(b=>b.classList.remove('active'));
+  const map={Hoje:'fHoje',Dia:'fDia',Semana:'fSemana',Mes:'fMes',Ano:'fAno'};
+  if(map[filtroAtual]) document.getElementById(map[filtroAtual]).classList.add('active');
+  if(filtroAtual==='Hoje' || filtroAtual==='Dia') document.getElementById('btnDia').classList.add('active');
+  if(filtroAtual==='Mes') document.getElementById('btnMes').classList.add('active');
+  if(filtroAtual==='Ano') document.getElementById('btnAno').classList.add('active');
+
   const filtrados=getEventosFiltrados();
   const hojeCount=eventos.filter(ev=>parseData(ev)===toISO(hojeReal)).length;
   document.getElementById('bannerCount').innerText=`${filtrados.length} eventos - ${filtroAtual} ${formatDateBR(dataSelecionada)}`;
   document.getElementById('badgeCount').innerText=hojeCount;
+
   const lista=document.getElementById('listaEventos');
   if(filtrados.length===0){
-    lista.innerHTML=`<div class="empty">Nenhum show<br><br><button onclick="abrirModal()" style="padding:10px 18px;border-radius:20px;border:none;background:#2563eb;color:white;font-weight:700">+ Adicionar show</button></div>`;
+    lista.innerHTML=`<div class="empty">Nenhum show em ${formatDateBR(dataSelecionada)}<br><br><button onclick="abrirModal()" style="padding:10px 18px;border-radius:20px;border:none;background:#2563eb;color:white;font-weight:700">+ Adicionar show</button></div>`;
   }else{
     lista.innerHTML=filtrados.map(ev=>{
-      let nome=ev.nome||ev.musico||'Evento';
+      let nome=ev.casa ? `${ev.casa}` : (ev.nome||ev.musico);
       let horario=ev.horario||'Janta';
       let valor=ev.valor||0;
       return `<div class="event"><b>${nome}</b><small>${horario} &nbsp; R$ ${valor} &nbsp; ${parseData(ev)?formatDateBR(new Date(parseData(ev)+'T12:00:00')):''}</small><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><button style="padding:10px;border-radius:10px;border:1px solid #93c5fd;color:#2563eb;background:white;font-weight:700" onclick="editarEvento(${ev.id})">Editar</button><button style="padding:10px;border-radius:10px;border:1px solid #fecaca;color:#dc2626;background:white;font-weight:700" onclick="excluirEvento(${ev.id})">Excluir</button></div></div>`;
@@ -167,8 +194,8 @@ function selectChip(el){ document.querySelectorAll('#chipPeriodo .chip').forEach
 function abrirModal(){ editandoId=null; document.getElementById('modalTitle').innerText='Novo Show'; document.getElementById('inpCasa').value=''; document.getElementById('inpMusico').value=''; document.getElementById('inpData').value=toISO(dataSelecionada); document.getElementById('inpValor').value='300'; document.querySelectorAll('#chipPeriodo .chip').forEach((c,i)=>c.classList.toggle('active',i===1)); document.getElementById('modalBg').classList.add('show'); }
 function fecharModal(){ document.getElementById('modalBg').classList.remove('show'); }
 function editarEvento(id){ const ev=eventos.find(x=>String(x.id)===String(id)); if(!ev) return; editandoId=id; document.getElementById('modalTitle').innerText='Editar Show'; document.getElementById('inpCasa').value=ev.casa||''; document.getElementById('inpMusico').value=ev.musico||ev.nome||''; document.getElementById('inpData').value=parseData(ev)||toISO(dataSelecionada); document.getElementById('inpValor').value=ev.valor||300; document.querySelectorAll('#chipPeriodo .chip').forEach(c=>{ c.classList.toggle('active', c.dataset.val===ev.horario); }); document.getElementById('modalBg').classList.add('show'); }
-function salvarEvento(){ const casa=document.getElementById('inpCasa').value; const musico=document.getElementById('inpMusico').value; const data=document.getElementById('inpData').value; const valor=document.getElementById('inpValor').value||300; const chip=document.querySelector('#chipPeriodo .chip.active'); const periodo=chip?chip.dataset.val:'Janta 19:00-22:00'; if(!musico){ alert('Escolhe o músico!'); return; } if(!data){ alert('Escolhe a data!'); return; } if(editandoId){ const ev=eventos.find(x=>String(x.id)===String(editandoId)); if(ev){ ev.nome=musico; ev.musico=musico; ev.casa=casa; ev.data=data; ev.horario=periodo; ev.valor=valor; } }else{ eventos.push({id:Date.now(), data:data, nome:musico, musico:musico, casa:casa, horario:periodo, valor:valor}); } localStorage.setItem('takisom_final_eventos', JSON.stringify(eventos)); localStorage.setItem('takisom_backup_geral', JSON.stringify(eventos)); document.getElementById('modalBg').classList.remove('show'); render(); }
-function excluirEvento(id){ if(!confirm('Excluir?')) return; eventos=eventos.filter(e=>String(e.id)!==String(id)); localStorage.setItem('takisom_final_eventos', JSON.stringify(eventos)); localStorage.setItem('takisom_backup_geral', JSON.stringify(eventos)); render(); }
+function salvarEvento(){ const casa=document.getElementById('inpCasa').value; const musico=document.getElementById('inpMusico').value; const data=document.getElementById('inpData').value; const valor=document.getElementById('inpValor').value||300; const chip=document.querySelector('#chipPeriodo .chip.active'); const periodo=chip?chip.dataset.val:'Janta 19:00-22:00'; if(!musico){ alert('Escolhe o músico!'); return; } if(!data){ alert('Escolhe a data!'); return; } if(editandoId){ const ev=eventos.find(x=>String(x.id)===String(editandoId)); if(ev){ ev.nome=musico; ev.musico=musico; ev.casa=casa; ev.data=data; ev.horario=periodo; ev.valor=valor; } }else{ eventos.push({id:Date.now(), data:data, nome:musico, musico:musico, casa:casa, horario:periodo, valor:valor}); } salvarEstado(); document.getElementById('modalBg').classList.remove('show'); render(); }
+function excluirEvento(id){ if(!confirm('Excluir?')) return; eventos=eventos.filter(e=>String(e.id)!==String(id)); salvarEstado(); render(); }
 render();
 </script>
 </body>
