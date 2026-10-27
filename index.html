@@ -4,32 +4,32 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#1E40AF">
-<title>TAKI SOM v108.2 - Data Automática</title>
+<title>TAKI SOM v108.3 - Completo</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
-body{background:#f1f5f9;padding-bottom:80px}
+body{background:#f1f5f9;padding-bottom:85px}
 .header{background:#1E40AF;color:white;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;border-radius:0 0 24px 24px;position:sticky;top:0;z-index:10}
-.header h1{font-size:22px;font-weight:800}
+.header h1{font-size:22px;font-weight:800;letter-spacing:1px}
 .badge{position:absolute;top:-6px;right:-6px;background:#ef4444;color:white;font-size:11px;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold}
 .card{background:white;margin:12px;border-radius:18px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,0.06)}
 .month-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .month-nav button{width:44px;height:44px;border-radius:12px;border:1px solid #e2e8f0;background:#f8fafc;font-size:18px;font-weight:bold;color:#1E40AF}
-.month-nav span{font-weight:800;font-size:15px;text-transform:uppercase}
+.month-nav span{font-weight:800;font-size:14px;text-transform:uppercase;text-align:center}
 .filters-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px}
-.filters-3 button{padding:12px 6px;border-radius:14px;border:1px solid #dbeafe;font-weight:700;font-size:13px;background:#eff6ff;color:#1e293b}
+.filters-3 button{padding:12px 6px;border-radius:14px;border:1px solid #dbeafe;font-weight:700;font-size:12px;background:#eff6ff;color:#1e293b;line-height:1.2}
 .filters-3 button.active{background:#2563eb;color:white;border-color:#2563eb}
-.filters-row{display:flex;gap:6px;overflow-x:auto}
+.filters-row{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}
 .filters-row button{white-space:nowrap;padding:10px 14px;border-radius:20px;border:1px solid #e2e8f0;background:white;font-size:13px;font-weight:600;color:#475569}
 .filters-row button.active{background:#2563eb;color:white;border-color:#2563eb}
-.banner{background:#16a34a;color:white;padding:10px 14px;display:flex;justify-content:space-between;font-weight:700;font-size:14px;margin:12px 12px 0 12px;border-radius:12px 12px 0 0}
+.banner{background:#16a34a;color:white;padding:10px 14px;display:flex;justify-content:space-between;font-weight:700;font-size:13px;margin:12px 12px 0 12px;border-radius:12px 12px 0 0}
 .banner-blue{background:#2563eb;color:white;padding:10px 14px;margin:0 12px;font-weight:700;font-size:13px}
 .event{background:white;margin:0 12px 10px 12px;padding:14px;border-radius:0 0 12px 12px;box-shadow:0 1px 4px rgba(0,0,0,0.05)}
-.event b{font-size:15px}
+.event b{font-size:15px;color:#0f172a}
 .event small{color:#64748b;font-size:13px;display:block;margin:6px 0 10px 0}
 .actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.actions button{padding:10px;border-radius:10px;font-weight:700;font-size:13px;border:1px solid}
-.btn-edit{border-color:#93c5fd!important;color:#2563eb;background:white}
-.btn-del{border-color:#fecaca!important;color:#dc2626;background:white}
+.actions button{padding:10px;border-radius:10px;font-weight:700;font-size:13px;border:1px solid;background:white}
+.btn-edit{border-color:#93c5fd!important;color:#2563eb}
+.btn-del{border-color:#fecaca!important;color:#dc2626}
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid #e2e8f0;display:flex;justify-content:space-around;padding:12px 0 18px 0;z-index:20}
 .bottom-nav span{font-size:14px;font-weight:600;color:#94a3b8}
 .bottom-nav span.active{color:#2563eb}
@@ -37,66 +37,83 @@ body{background:#f1f5f9;padding-bottom:80px}
 </style>
 </head>
 <body>
+
 <div class="header">
-  <div>☰</div>
-  <h1>TAKI SOM</h1>
-  <div style="position:relative">🔔<div class="badge" id="badgeCount">5</div></div>
+<div>☰</div>
+<h1>TAKI SOM</h1>
+<div style="position:relative">🔔<div class="badge" id="badgeCount">0</div></div>
 </div>
+
 <div class="card">
-  <div class="month-nav">
-    <button onclick="mudarMes(-1)">‹</button>
-    <span id="mesLabel"></span>
-    <button onclick="mudarMes(1)">›</button>
-  </div>
-  <div class="filters-3">
-    <button id="btnDia" class="active" onclick="irParaHoje()">DIA <span id="diaNum"></span><br>HOJE</button>
-    <button onclick="filtroMes()">MÊS<br><span id="mesNome"></span></button>
-    <button>ANO<br><span id="anoNum"></span></button>
-  </div>
-  <div class="filters-row">
-    <button class="active" id="fHoje" onclick="setFiltro('Hoje')">Hoje</button>
-    <button id="fDia" onclick="setFiltro('Dia')">Dia</button>
-    <button id="fSemana" onclick="setFiltro('Semana')">Semana</button>
-    <button id="fMes" onclick="setFiltro('Mes')">Mês</button>
-    <button id="fAno" onclick="setFiltro('Ano')">Ano Todo</button>
-  </div>
+<div class="month-nav">
+<button onclick="mudarMes(-1)">‹</button>
+<span id="mesLabel"></span>
+<button onclick="mudarMes(1)">›</button>
 </div>
+<div class="filters-3">
+<button id="btnDia" class="active" onclick="irParaHoje()">DIA <span id="diaNum"></span><br>HOJE</button>
+<button onclick="setFiltro('Mes')">MÊS<br><span id="mesNome"></span></button>
+<button>ANO<br><span id="anoNum"></span></button>
+</div>
+<div class="filters-row">
+<button class="active" id="fHoje" onclick="setFiltro('Hoje')">Hoje</button>
+<button id="fDia" onclick="setFiltro('Dia')">Dia</button>
+<button id="fSemana" onclick="setFiltro('Semana')">Semana</button>
+<button id="fMes" onclick="setFiltro('Mes')">Mês</button>
+<button id="fAno" onclick="setFiltro('Ano')">Ano Todo</button>
+</div>
+</div>
+
 <div class="banner"><span id="bannerCount"></span><span>HOJE</span></div>
 <div class="banner-blue" id="bannerBlue"></div>
 <div id="listaEventos"></div>
-<button class="fab" onclick="alert('Seu modal de novo evento')">+</button>
+
+<button class="fab" onclick="novoEvento()">+</button>
 <div class="bottom-nav"><span class="active">Agenda</span><span>Músicos</span><span>Relatório</span><span>Menu</span></div>
 
 <script>
-// ===== CORREÇÃO DATA AUTOMÁTICA - v108.2 =====
+// ===== v108.3 - DATA AUTOMÁTICA + SEM TRAVAR + SEM UNDEFINED =====
 function getHojeReal(){
   const agora = new Date();
   return new Date(agora.getFullYear(), agora.getMonth(), agora.getDate());
 }
+
 let dataSelecionada = getHojeReal();
 let mesVisualizado = new Date(dataSelecionada.getFullYear(), dataSelecionada.getMonth(), 1);
 let filtroAtual = 'Hoje';
 
-// LIMPA A DATA ANTIGA TRAVADA NO 26
+// LIMPA TRAVAMENTOS ANTIGOS
 localStorage.removeItem('dataSelecionadaSalva');
 localStorage.removeItem('dataSelecionada');
 localStorage.removeItem('taki_data');
+localStorage.removeItem('dataSelecionada_old');
 
-let eventos = [
-  {id:1, nome:'P1 - ISRAEL', horario:'Janta 19:00-22:00', valor:300},
-  {id:2, nome:'P2 - YGOR', horario:'Janta 19:00-22:00', valor:300},
-  {id:3, nome:'P3 - RICK SOLO', horario:'Janta 19:00-22:00', valor:300},
-  {id:4, nome:'P4 - DUDU', horario:'Janta 19:00-22:00', valor:300},
-  {id:5, nome:'P5 - LEO', horario:'Janta 19:00-22:00', valor:300},
-];
+// CARREGA EVENTOS SALVOS - COMPATÍVEL COM TODAS AS VERSÕES
+let eventos = [];
 try{
-  const s = localStorage.getItem('takisom_final_eventos');
-  if(s){const p=JSON.parse(s); if(Array.isArray(p)&&p.length>0) eventos=p;}
-}catch(e){}
+  const salvo = localStorage.getItem('takisom_final_eventos');
+  if(salvo){
+    const parsed = JSON.parse(salvo);
+    if(Array.isArray(parsed) && parsed.length>0){
+      eventos = parsed;
+    }
+  }
+}catch(e){ console.log('erro ao carregar', e); }
 
-function formatDateBR(d){return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;}
-function formatDiaSemana(d){return ['DOMINGO','SEGUNDA','TERÇA','QUARTA','QUINTA','SEXTA','SÁBADO'][d.getDay()];}
-function formatMesExtenso(d){return ['JANEIRO','FEVEREIRO','MARÇO','ABRIL','MAIO','JUNHO','JULHO','AGOSTO','SETEMBRO','OUTUBRO','NOVEMBRO','DEZEMBRO'][d.getMonth()];}
+// Se não tem nada salvo, cria 5 de exemplo
+if(eventos.length===0){
+  eventos = [
+    {id:1, data:'2026-10-27', musico:'P1 - ISRAEL', restaurante:'Restaurante', horario:'Janta 19:00-22:00', valor:300},
+    {id:2, data:'2026-10-27', musico:'P2 - YGOR', restaurante:'Restaurante', horario:'Janta 19:00-22:00', valor:300},
+    {id:3, data:'2026-10-27', musico:'P3 - RICK SOLO', restaurante:'Restaurante', horario:'Janta 19:00-22:00', valor:300},
+    {id:4, data:'2026-10-27', musico:'P4 - DUDU', restaurante:'Restaurante', horario:'Janta 19:00-22:00', valor:300},
+    {id:5, data:'2026-10-27', musico:'P5 - LEO', restaurante:'Restaurante', horario:'Janta 19:00-22:00', valor:300},
+  ];
+}
+
+function formatDateBR(d){ return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`; }
+function formatDiaSemana(d){ return ['DOMINGO','SEGUNDA','TERÇA','QUARTA','QUINTA','SEXTA','SÁBADO'][d.getDay()]; }
+function formatMesExtenso(d){ return ['JANEIRO','FEVEREIRO','MARÇO','ABRIL','MAIO','JUNHO','JULHO','AGOSTO','SETEMBRO','OUTUBRO','NOVEMBRO','DEZEMBRO'][d.getMonth()]; }
 
 function irParaHoje(){
   dataSelecionada = getHojeReal();
@@ -104,33 +121,82 @@ function irParaHoje(){
   filtroAtual='Hoje';
   render();
 }
-function mudarMes(dir){mesVisualizado.setMonth(mesVisualizado.getMonth()+dir); dataSelecionada=new Date(mesVisualizado.getFullYear(), mesVisualizado.getMonth(), dataSelecionada.getDate()); render();}
-function setFiltro(f){filtroAtual=f; if(f==='Hoje') irParaHoje(); else render();}
-function filtroMes(){setFiltro('Mes');}
+function mudarMes(dir){
+  mesVisualizado.setMonth(mesVisualizado.getMonth()+dir);
+  dataSelecionada = new Date(mesVisualizado.getFullYear(), mesVisualizado.getMonth(), Math.min(dataSelecionada.getDate(), 28));
+  render();
+}
+function setFiltro(f){
+  filtroAtual=f;
+  if(f==='Hoje') irParaHoje();
+  else render();
+}
 
 function render(){
-  const hoje=dataSelecionada;
-  document.getElementById('diaNum').innerText=hoje.getDate();
-  document.getElementById('mesNome').innerText=formatMesExtenso(hoje);
-  document.getElementById('anoNum').innerText=hoje.getFullYear();
-  document.getElementById('mesLabel').innerText=`MÊS DE ${formatMesExtenso(hoje)} DE ${hoje.getFullYear()}`;
-  document.getElementById('bannerCount').innerText=`${eventos.length} eventos - Hoje ${formatDateBR(hoje)}`;
-  document.getElementById('bannerBlue').innerText=`HOJE - ${formatDiaSemana(hoje)}, ${formatDateBR(hoje)}`;
-  document.getElementById('badgeCount').innerText=eventos.length;
+  const hoje = dataSelecionada;
+  document.getElementById('diaNum').innerText = hoje.getDate();
+  document.getElementById('mesNome').innerText = formatMesExtenso(hoje);
+  document.getElementById('anoNum').innerText = hoje.getFullYear();
+  document.getElementById('mesLabel').innerText = `MÊS DE ${formatMesExtenso(hoje)} DE ${hoje.getFullYear()}`;
+  document.getElementById('bannerCount').innerText = `${eventos.length} eventos - Hoje ${formatDateBR(hoje)}`;
+  document.getElementById('bannerBlue').innerText = `HOJE - ${formatDiaSemana(hoje)}, ${formatDateBR(hoje)}`;
+  document.getElementById('badgeCount').innerText = eventos.length;
+  
   document.querySelectorAll('.filters-row button').forEach(b=>b.classList.remove('active'));
   const map={Hoje:'fHoje',Dia:'fDia',Semana:'fSemana',Mes:'fMes',Ano:'fAno'};
   if(map[filtroAtual]) document.getElementById(map[filtroAtual]).classList.add('active');
-  document.getElementById('listaEventos').innerHTML=eventos.map(ev=>`
-    <div class="event"><b>${ev.nome}</b><small>${ev.horario} &nbsp; R$ ${ev.valor}</small>
-    <div class="actions"><button class="btn-edit">Editar</button><button class="btn-del">Excluir</button></div></div>`).join('');
+
+  const lista = document.getElementById('listaEventos');
+  lista.innerHTML = eventos.map(ev=>{
+    // AQUI ESTÁ A CORREÇÃO DO UNDEFINED - PEGA QUALQUER CAMPO
+    let nome = ev.nome || ev.musico || ev.cantor || ev.artista || ev.restaurante || ev.local || ev.titulo || ev.nomeRestaurante || '';
+    let restaurante = ev.restaurante || ev.local || '';
+    // Se o nome já tem o restaurante junto, não duplica
+    let tituloFinal = nome;
+    if(!tituloFinal) tituloFinal = restaurante || 'Evento';
+    else if(restaurante && !nome.toLowerCase().includes(restaurante.toLowerCase().substring(0,4)) && restaurante !== nome){
+      // mantém só nome se já for completo tipo "P1 - ISRAEL"
+      tituloFinal = nome;
+    }
+    
+    let horario = ev.horario || ev.hora || ev.periodo || ev.tipo || ev.turno || 'Janta 19:00-22:00';
+    let valor = ev.valor || ev.cache || ev.cachê || ev.preco || ev.valorCache || 0;
+    
+    return `
+    <div class="event">
+      <b>${tituloFinal}</b>
+      <small>${horario} &nbsp; R$ ${valor}</small>
+      <div class="actions">
+        <button class="btn-edit" onclick="editarEvento(${ev.id})">Editar</button>
+        <button class="btn-del" onclick="excluirEvento(${ev.id})">Excluir</button>
+      </div>
+    </div>`;
+  }).join('');
 }
 
-// ATUALIZA SOZINHO SE VIRAR O DIA
+function novoEvento(){
+  const nome = prompt('Nome do músico / evento:');
+  if(!nome) return;
+  const valor = prompt('Valor R$:','300');
+  const novo = {id:Date.now(), data:formatDateBR(dataSelecionada), musico:nome, nome:nome, horario:'Janta 19:00-22:00', valor: valor||300};
+  eventos.push(novo);
+  localStorage.setItem('takisom_final_eventos', JSON.stringify(eventos));
+  render();
+}
+function editarEvento(id){ alert('Editar ID '+id+' - seu modal original aqui'); }
+function excluirEvento(id){
+  if(!confirm('Excluir este evento?')) return;
+  eventos = eventos.filter(e=>e.id!==id);
+  localStorage.setItem('takisom_final_eventos', JSON.stringify(eventos));
+  render();
+}
+
+// ATUALIZA SOZINHO QUANDO VIRAR O DIA - A CADA 1 MIN
 setInterval(()=>{
-  const agoraReal=getHojeReal();
-  if(agoraReal.getTime()!==dataSelecionada.getTime()){
-    dataSelecionada=agoraReal;
-    mesVisualizado=new Date(dataSelecionada.getFullYear(), dataSelecionada.getMonth(), 1);
+  const agoraReal = getHojeReal();
+  if(agoraReal.getTime() !== dataSelecionada.getTime()){
+    dataSelecionada = agoraReal;
+    mesVisualizado = new Date(dataSelecionada.getFullYear(), dataSelecionada.getMonth(), 1);
     render();
   }
 },60000);
