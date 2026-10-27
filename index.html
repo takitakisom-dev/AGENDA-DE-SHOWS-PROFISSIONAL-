@@ -4,19 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#1E40AF">
-<title>TAKI SOM v108.3 - Completo</title>
+<title>TAKI SOM v108.4 - Filtro Real</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
 body{background:#f1f5f9;padding-bottom:85px}
 .header{background:#1E40AF;color:white;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;border-radius:0 0 24px 24px;position:sticky;top:0;z-index:10}
-.header h1{font-size:22px;font-weight:800;letter-spacing:1px}
+.header h1{font-size:22px;font-weight:800}
 .badge{position:absolute;top:-6px;right:-6px;background:#ef4444;color:white;font-size:11px;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold}
 .card{background:white;margin:12px;border-radius:18px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,0.06)}
 .month-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .month-nav button{width:44px;height:44px;border-radius:12px;border:1px solid #e2e8f0;background:#f8fafc;font-size:18px;font-weight:bold;color:#1E40AF}
 .month-nav span{font-weight:800;font-size:14px;text-transform:uppercase;text-align:center}
 .filters-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px}
-.filters-3 button{padding:12px 6px;border-radius:14px;border:1px solid #dbeafe;font-weight:700;font-size:12px;background:#eff6ff;color:#1e293b;line-height:1.2}
+.filters-3 button{padding:12px 6px;border-radius:14px;border:1px solid #dbeafe;font-weight:700;font-size:12px;background:#eff6ff;color:#1e293b}
 .filters-3 button.active{background:#2563eb;color:white;border-color:#2563eb}
 .filters-row{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}
 .filters-row button{white-space:nowrap;padding:10px 14px;border-radius:20px;border:1px solid #e2e8f0;background:white;font-size:13px;font-weight:600;color:#475569}
@@ -34,37 +34,20 @@ body{background:#f1f5f9;padding-bottom:85px}
 .bottom-nav span{font-size:14px;font-weight:600;color:#94a3b8}
 .bottom-nav span.active{color:#2563eb}
 .fab{position:fixed;bottom:78px;right:18px;width:56px;height:56px;background:#2563eb;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 4px 12px rgba(37,99,235,0.4);z-index:19;border:none}
+.empty{background:white;margin:0 12px;padding:30px 14px;text-align:center;border-radius:0 0 12px 12px;color:#64748b}
 </style>
 </head>
 <body>
 
-<div class="header">
-<div>☰</div>
-<h1>TAKI SOM</h1>
-<div style="position:relative">🔔<div class="badge" id="badgeCount">0</div></div>
-</div>
+<div class="header"><div>☰</div><h1>TAKI SOM</h1><div style="position:relative">🔔<div class="badge" id="badgeCount">0</div></div></div>
 
 <div class="card">
-<div class="month-nav">
-<button onclick="mudarMes(-1)">‹</button>
-<span id="mesLabel"></span>
-<button onclick="mudarMes(1)">›</button>
-</div>
-<div class="filters-3">
-<button id="btnDia" class="active" onclick="irParaHoje()">DIA <span id="diaNum"></span><br>HOJE</button>
-<button onclick="setFiltro('Mes')">MÊS<br><span id="mesNome"></span></button>
-<button>ANO<br><span id="anoNum"></span></button>
-</div>
-<div class="filters-row">
-<button class="active" id="fHoje" onclick="setFiltro('Hoje')">Hoje</button>
-<button id="fDia" onclick="setFiltro('Dia')">Dia</button>
-<button id="fSemana" onclick="setFiltro('Semana')">Semana</button>
-<button id="fMes" onclick="setFiltro('Mes')">Mês</button>
-<button id="fAno" onclick="setFiltro('Ano')">Ano Todo</button>
-</div>
+<div class="month-nav"><button onclick="mudarMes(-1)">‹</button><span id="mesLabel"></span><button onclick="mudarMes(1)">›</button></div>
+<div class="filters-3"><button id="btnDia" class="active" onclick="irParaHoje()">DIA <span id="diaNum"></span><br>HOJE</button><button onclick="setFiltro('Mes')">MÊS<br><span id="mesNome"></span></button><button>ANO<br><span id="anoNum"></span></button></div>
+<div class="filters-row"><button class="active" id="fHoje" onclick="setFiltro('Hoje')">Hoje</button><button id="fDia" onclick="setFiltro('Dia')">Dia</button><button id="fSemana" onclick="setFiltro('Semana')">Semana</button><button id="fMes" onclick="setFiltro('Mes')">Mês</button><button id="fAno" onclick="setFiltro('Ano')">Ano Todo</button></div>
 </div>
 
-<div class="banner"><span id="bannerCount"></span><span>HOJE</span></div>
+<div class="banner"><span id="bannerCount"></span><span id="bannerTipo">HOJE</span></div>
 <div class="banner-blue" id="bannerBlue"></div>
 <div id="listaEventos"></div>
 
@@ -72,48 +55,81 @@ body{background:#f1f5f9;padding-bottom:85px}
 <div class="bottom-nav"><span class="active">Agenda</span><span>Músicos</span><span>Relatório</span><span>Menu</span></div>
 
 <script>
-// ===== v108.3 - DATA AUTOMÁTICA + SEM TRAVAR + SEM UNDEFINED =====
+// ===== v108.4 - CORREÇÃO FILTRO REAL POR DATA =====
 function getHojeReal(){
   const agora = new Date();
   return new Date(agora.getFullYear(), agora.getMonth(), agora.getDate());
 }
-
 let dataSelecionada = getHojeReal();
 let mesVisualizado = new Date(dataSelecionada.getFullYear(), dataSelecionada.getMonth(), 1);
 let filtroAtual = 'Hoje';
 
-// LIMPA TRAVAMENTOS ANTIGOS
 localStorage.removeItem('dataSelecionadaSalva');
 localStorage.removeItem('dataSelecionada');
 localStorage.removeItem('taki_data');
-localStorage.removeItem('dataSelecionada_old');
 
-// CARREGA EVENTOS SALVOS - COMPATÍVEL COM TODAS AS VERSÕES
+// Carrega eventos
 let eventos = [];
 try{
   const salvo = localStorage.getItem('takisom_final_eventos');
   if(salvo){
-    const parsed = JSON.parse(salvo);
-    if(Array.isArray(parsed) && parsed.length>0){
-      eventos = parsed;
-    }
+    const p = JSON.parse(salvo);
+    if(Array.isArray(p)) eventos = p;
   }
-}catch(e){ console.log('erro ao carregar', e); }
+}catch(e){}
 
-// Se não tem nada salvo, cria 5 de exemplo
-if(eventos.length===0){
-  eventos = [
-    {id:1, data:'2026-10-27', musico:'P1 - ISRAEL', restaurante:'Restaurante', horario:'Janta 19:00-22:00', valor:300},
-    {id:2, data:'2026-10-27', musico:'P2 - YGOR', restaurante:'Restaurante', horario:'Janta 19:00-22:00', valor:300},
-    {id:3, data:'2026-10-27', musico:'P3 - RICK SOLO', restaurante:'Restaurante', horario:'Janta 19:00-22:00', valor:300},
-    {id:4, data:'2026-10-27', musico:'P4 - DUDU', restaurante:'Restaurante', horario:'Janta 19:00-22:00', valor:300},
-    {id:5, data:'2026-10-27', musico:'P5 - LEO', restaurante:'Restaurante', horario:'Janta 19:00-22:00', valor:300},
-  ];
+function toISO(d){ // transforma Date em YYYY-MM-DD
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 }
-
+function parseData(ev){
+  // aceita vários formatos: 2026-10-26, 27/10/2026, etc
+  let s = ev.data || ev.dataISO || ev.date || '';
+  if(!s) return null;
+  if(s.includes('/')){ // 27/10/2026 -> 2026-10-27
+    const [dd,mm,yyyy] = s.split('/');
+    return `${yyyy}-${mm.padStart(2,'0')}-${dd.padStart(2,'0')}`;
+  }
+  return s.substring(0,10); // YYYY-MM-DD
+}
 function formatDateBR(d){ return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`; }
 function formatDiaSemana(d){ return ['DOMINGO','SEGUNDA','TERÇA','QUARTA','QUINTA','SEXTA','SÁBADO'][d.getDay()]; }
 function formatMesExtenso(d){ return ['JANEIRO','FEVEREIRO','MARÇO','ABRIL','MAIO','JUNHO','JULHO','AGOSTO','SETEMBRO','OUTUBRO','NOVEMBRO','DEZEMBRO'][d.getMonth()]; }
+
+function getEventosFiltrados(){
+  const isoHoje = toISO(dataSelecionada);
+  const mes = mesVisualizado.getMonth();
+  const ano = mesVisualizado.getFullYear();
+
+  return eventos.filter(ev=>{
+    const isoEv = parseData(ev);
+    if(!isoEv) return false; // se não tem data, esconde
+    const dEv = new Date(isoEv+'T12:00:00');
+
+    if(filtroAtual==='Hoje'){
+      return isoEv === toISO(getHojeReal()); // sempre compara com hoje real
+    }
+    if(filtroAtual==='Dia'){
+      return isoEv === toISO(dataSelecionada);
+    }
+    if(filtroAtual==='Semana'){
+      // semana atual (domingo a sábado)
+      const inicioSemana = new Date(dataSelecionada);
+      inicioSemana.setDate(dataSelecionada.getDate() - dataSelecionada.getDay());
+      const fimSemana = new Date(inicioSemana);
+      fimSemana.setDate(inicioSemana.getDate()+6);
+      const isoInicio = toISO(inicioSemana);
+      const isoFim = toISO(fimSemana);
+      return isoEv >= isoInicio && isoEv <= isoFim;
+    }
+    if(filtroAtual==='Mes'){
+      return dEv.getMonth()===mes && dEv.getFullYear()===ano;
+    }
+    if(filtroAtual==='Ano'){
+      return dEv.getFullYear()===ano;
+    }
+    return false;
+  });
+}
 
 function irParaHoje(){
   dataSelecionada = getHojeReal();
@@ -123,7 +139,8 @@ function irParaHoje(){
 }
 function mudarMes(dir){
   mesVisualizado.setMonth(mesVisualizado.getMonth()+dir);
-  dataSelecionada = new Date(mesVisualizado.getFullYear(), mesVisualizado.getMonth(), Math.min(dataSelecionada.getDate(), 28));
+  dataSelecionada = new Date(mesVisualizado.getFullYear(), mesVisualizado.getMonth(), 1);
+  if(filtroAtual!=='Mes' && filtroAtual!=='Ano') filtroAtual='Mes';
   render();
 }
 function setFiltro(f){
@@ -134,56 +151,52 @@ function setFiltro(f){
 
 function render(){
   const hoje = dataSelecionada;
-  document.getElementById('diaNum').innerText = hoje.getDate();
-  document.getElementById('mesNome').innerText = formatMesExtenso(hoje);
-  document.getElementById('anoNum').innerText = hoje.getFullYear();
-  document.getElementById('mesLabel').innerText = `MÊS DE ${formatMesExtenso(hoje)} DE ${hoje.getFullYear()}`;
-  document.getElementById('bannerCount').innerText = `${eventos.length} eventos - Hoje ${formatDateBR(hoje)}`;
-  document.getElementById('bannerBlue').innerText = `HOJE - ${formatDiaSemana(hoje)}, ${formatDateBR(hoje)}`;
-  document.getElementById('badgeCount').innerText = eventos.length;
+  const hojeReal = getHojeReal();
+  document.getElementById('diaNum').innerText = hojeReal.getDate();
+  document.getElementById('mesNome').innerText = formatMesExtenso(mesVisualizado);
+  document.getElementById('anoNum').innerText = mesVisualizado.getFullYear();
+  document.getElementById('mesLabel').innerText = `MÊS DE ${formatMesExtenso(mesVisualizado)} DE ${mesVisualizado.getFullYear()}`;
+  document.getElementById('bannerBlue').innerText = `${filtroAtual.toUpperCase()} - ${formatDiaSemana(hoje)}, ${formatDateBR(hoje)}`;
+  document.getElementById('bannerTipo').innerText = filtroAtual.toUpperCase();
   
   document.querySelectorAll('.filters-row button').forEach(b=>b.classList.remove('active'));
   const map={Hoje:'fHoje',Dia:'fDia',Semana:'fSemana',Mes:'fMes',Ano:'fAno'};
   if(map[filtroAtual]) document.getElementById(map[filtroAtual]).classList.add('active');
 
+  const filtrados = getEventosFiltrados();
+  
+  document.getElementById('bannerCount').innerText = `${filtrados.length} eventos - ${filtroAtual} ${formatDateBR(hoje)}`;
+  document.getElementById('badgeCount').innerText = getEventosFiltradosHoje().length;
+
   const lista = document.getElementById('listaEventos');
-  lista.innerHTML = eventos.map(ev=>{
-    // AQUI ESTÁ A CORREÇÃO DO UNDEFINED - PEGA QUALQUER CAMPO
-    let nome = ev.nome || ev.musico || ev.cantor || ev.artista || ev.restaurante || ev.local || ev.titulo || ev.nomeRestaurante || '';
-    let restaurante = ev.restaurante || ev.local || '';
-    // Se o nome já tem o restaurante junto, não duplica
-    let tituloFinal = nome;
-    if(!tituloFinal) tituloFinal = restaurante || 'Evento';
-    else if(restaurante && !nome.toLowerCase().includes(restaurante.toLowerCase().substring(0,4)) && restaurante !== nome){
-      // mantém só nome se já for completo tipo "P1 - ISRAEL"
-      tituloFinal = nome;
-    }
-    
-    let horario = ev.horario || ev.hora || ev.periodo || ev.tipo || ev.turno || 'Janta 19:00-22:00';
-    let valor = ev.valor || ev.cache || ev.cachê || ev.preco || ev.valorCache || 0;
-    
-    return `
-    <div class="event">
-      <b>${tituloFinal}</b>
-      <small>${horario} &nbsp; R$ ${valor}</small>
-      <div class="actions">
-        <button class="btn-edit" onclick="editarEvento(${ev.id})">Editar</button>
-        <button class="btn-del" onclick="excluirEvento(${ev.id})">Excluir</button>
-      </div>
-    </div>`;
-  }).join('');
+  if(filtrados.length===0){
+    lista.innerHTML = `<div class="empty">Nenhum show para ${filtroAtual.toLowerCase()} ${formatDateBR(hoje)}<br><br>Clique no + para adicionar</div>`;
+  } else {
+    lista.innerHTML = filtrados.map(ev=>{
+      let nome = ev.nome || ev.musico || ev.cantor || ev.restaurante || ev.local || 'Evento';
+      let horario = ev.horario || ev.hora || ev.periodo || 'Janta 19:00-22:00';
+      let valor = ev.valor || ev.cache || ev.cachê || 0;
+      return `<div class="event"><b>${nome}</b><small>${horario} &nbsp; R$ ${valor} &nbsp; ${parseData(ev) ? formatDateBR(new Date(parseData(ev)+'T12:00:00')) : ''}</small><div class="actions"><button class="btn-edit" onclick="editarEvento(${ev.id})">Editar</button><button class="btn-del" onclick="excluirEvento(${ev.id})">Excluir</button></div></div>`;
+    }).join('');
+  }
+}
+
+function getEventosFiltradosHoje(){
+  const isoHoje = toISO(getHojeReal());
+  return eventos.filter(ev=> parseData(ev)===isoHoje);
 }
 
 function novoEvento(){
   const nome = prompt('Nome do músico / evento:');
   if(!nome) return;
   const valor = prompt('Valor R$:','300');
-  const novo = {id:Date.now(), data:formatDateBR(dataSelecionada), musico:nome, nome:nome, horario:'Janta 19:00-22:00', valor: valor||300};
+  const dataISO = toISO(dataSelecionada); // SALVA SEMPRE NA DATA QUE VOCÊ ESTÁ VENDO
+  const novo = {id:Date.now(), data:dataISO, nome:nome, musico:nome, horario:'Janta 19:00-22:00', valor: valor||300};
   eventos.push(novo);
   localStorage.setItem('takisom_final_eventos', JSON.stringify(eventos));
   render();
 }
-function editarEvento(id){ alert('Editar ID '+id+' - seu modal original aqui'); }
+function editarEvento(id){ alert('Editar ID '+id); }
 function excluirEvento(id){
   if(!confirm('Excluir este evento?')) return;
   eventos = eventos.filter(e=>e.id!==id);
@@ -191,10 +204,9 @@ function excluirEvento(id){
   render();
 }
 
-// ATUALIZA SOZINHO QUANDO VIRAR O DIA - A CADA 1 MIN
 setInterval(()=>{
   const agoraReal = getHojeReal();
-  if(agoraReal.getTime() !== dataSelecionada.getTime()){
+  if(toISO(agoraReal)!==toISO(dataSelecionada) && filtroAtual==='Hoje'){
     dataSelecionada = agoraReal;
     mesVisualizado = new Date(dataSelecionada.getFullYear(), dataSelecionada.getMonth(), 1);
     render();
